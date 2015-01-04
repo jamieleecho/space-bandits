@@ -10,3 +10,7 @@ tools/mess64
 tools/mess64d
 tools/mess
 tools/messd
+tools/liblw.a
+tools/lwar
+tools/lwlink
+*~
