@@ -99,7 +99,7 @@ PASS2LIST = $(GENLISTDIR)/dynosprite-pass2.lst
 SYMBOLASM = $(GENASMDIR)/dynosprite-symbols.asm
 
 # retrieve the audio sampling rate
-AUDIORATE = $(shell grep -E "AudioSamplingRate\s+EQU\s+[0-9]+" $(SRCDIR)/globals.asm | grep -oE "[0-9]+")
+AUDIORATE = $(shell grep -E "AudioSamplingRate[[:space:]]+EQU[[:space:]]+[0-9]+" $(SRCDIR)/globals.asm | grep -oE "[0-9]+")
 
 # options
 ifneq ($(RELEASE), 1)
