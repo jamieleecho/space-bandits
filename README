@@ -24,9 +24,13 @@ project:
   - GCC compiler
   - Python 2.x
   - lwasm (available from: http://lwtools.projects.l-w.ca/)
+  - cmoc  (available from: http://perso.b2b2c.ca/~sarrazip/dev/cmoc.html)
   - ffmpeg (available from: https://www.ffmpeg.org/)
     or sox (available from: http://sox.sourceforge.net/)
   - MAME/MESS (optional, available from: http://mamedev.org/)
+  - Ruby
+  - ImageMagick
+  - RMagick
 
 * Linux Build Instructions *
 

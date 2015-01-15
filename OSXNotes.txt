@@ -1,0 +1,13 @@
+OS X 10.6 Install Notes
+sudo env ARCHFLAGS="-arch i386" easy_install PIL
+sudo env ARCHFLAGS="-arch i386" easy_install Image
+cd /Library/Python/2.6/site-packages
+sudo mv PIL-1.1.7-py2.6-macosx-10.6-fat.egg PIL
+
+OS X 10.10 Install Notes
+cd /Library/Python/2.7/site-packages
+sudo easy_install PIL
+sudo easy_install Image
+sudo mv PIL-1.1.7-py2.7-macosx-10.10-intel.egg PIL
+sudo mv image-1.3.4-py2.7.egg image
+

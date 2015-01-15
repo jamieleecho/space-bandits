@@ -13,4 +13,11 @@ tools/messd
 tools/liblw.a
 tools/lwar
 tools/lwlink
-*~
+game/objects/*.hex
+game/objects/*.lst
+game/objects/*.bin
+game/objects/*.i
+game/objects/*.tmp
+game/objects/*.cmd
+*.bak
+game/objects/03-foo.asm
