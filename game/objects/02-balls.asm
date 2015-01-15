@@ -213,20 +213,20 @@ CrashTest_CheckCOTStart
             ldd         COB.globalX,x
             subd        COB.globalX,u
             bmi         >
-            cmpd        #17
+            cmpd        #34
             bgt         BallCrashTest@
             bra         TestY@
-!           cmpd        #-17
+!           cmpd        #-34
             blt         BallCrashTest@
 TestY@
             ldd         COB.globalY,x
             subd        COB.globalY,u
             bmi         >
-            cmpd        #17
+            cmpd        #34
             bgt         BallCrashTest@
             lbsr        BallCollide
             bra         BallCrashTest@
-!           cmpd        #-17
+!           cmpd        #-34
             blt         BallCrashTest@
             lbsr        BallCollide
             bra         BallCrashTest@
@@ -555,8 +555,8 @@ StoreDiffY@
             ldb         ,x
             mul
             stb         <BallDeltaNormY@,PCR
-            * fix the position of the current object 17 pixels away from the older object
-            lda         #68                     * 17 * 4
+            * fix the position of the current object 34 pixels away from the older object
+            lda         #136                     * 34 * 4
             mul
             inca
             lsra
@@ -568,7 +568,7 @@ StoreDiffY@
             addd        COB.globalY,u
             std         COB.globalY,y
             ldb         <BallDeltaNormX@,PCR
-            lda         #68                     * 17 * 4
+            lda         #136                     * 34 * 4
             mul
             inca
             lsra

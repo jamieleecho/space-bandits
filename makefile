@@ -23,7 +23,10 @@ GENDISKDIR = $(BUILDDIR)/disk
 TILEDESC = $(wildcard $(TILEDIR)/??-*.txt)
 LEVELSRC = $(wildcard $(LEVELDIR)/??-*.asm)
 SPRITEDSC = $(wildcard $(SPRITEDIR)/??-*.txt)
-OBJECTSRC = $(wildcard $(OBJECTDIR)/??-*.asm)
+SPRITESRC = $(wildcard $(SPRITEDIR)/??-*.spr)
+OBJECTCSRC = $(wildcard $(OBJECTDIR)/??-*.c)
+OBJECTCSRC2ASM = $(patsubst %.c, %.asm, $(OBJECTCSRC))
+OBJECTSRC = $(wildcard $(OBJECTDIR)/??-*.asm) 
 SOUNDSRC = $(wildcard $(SOUNDDIR)/??-*.wav)
 IMAGESRC = $(wildcard $(IMAGEDIR)/??-*.png)
 LEVELSRC = $(wildcard $(LEVELDIR)/??-*.asm)
@@ -33,8 +36,8 @@ LEVELDSC = $(wildcard $(LEVELDIR)/??-*.txt)
 TILESRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/tileset%.txt, $(TILEDESC))
 PALSRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/palette%.txt, $(TILEDESC))
 SPRITESRC = $(patsubst $(SPRITEDIR)/%.txt, $(GENGFXDIR)/sprite%.txt, $(SPRITEDSC))
-SPRITERAW := $(patsubst $(SPRITEDIR)/%.txt, $(GENOBJDIR)/sprite%.raw, $(SPRITEDSC))
-OBJECTRAW := $(patsubst $(OBJECTDIR)/%.asm, $(GENOBJDIR)/object%.raw, $(OBJECTSRC))
+SPRITERAW := $(patsubst $(SPRITEDIR)/%.spr, $(GENOBJDIR)/sprite%.raw, $(SPRITESRC))
+OBJECTRAW := $(patsubst $(OBJECTDIR)/%.asm, $(GENOBJDIR)/object%.raw, $(OBJECTSRC) $(OBJECTCSRC2ASM))
 SOUNDRAW := $(patsubst $(SOUNDDIR)/%.wav, $(GENOBJDIR)/sound%.raw, $(SOUNDSRC))
 LEVELRAW := $(patsubst $(LEVELDIR)/%.asm, $(GENOBJDIR)/level%.raw, $(LEVELSRC))
 MAPSRC := $(patsubst $(LEVELDIR)/%.txt, $(GENGFXDIR)/tilemap%.txt, $(LEVELDSC))
@@ -46,6 +49,7 @@ SPRITEASMSRC := $(patsubst $(SPRITEDIR)/%.txt, $(GENASMDIR)/sprite%.asm, $(filte
 COCODISKGEN = $(TOOLDIR)/file2dsk
 ASSEMBLER = $(TOOLDIR)/lwasm
 EMULATOR = $(TOOLDIR)/mess64
+CMOC = cmoc
 
 # make sure build products directories exist
 $(shell mkdir -p $(GENASMDIR))
@@ -122,6 +126,7 @@ endif
 ifeq ($(MAMEDBG), 1)
   MAMEFLAGS += -debug
 endif
+CMOCFLAGS = --asm-cmd -c -I. -I../../$(SRCDIR) -I../../$(GENASMDIR) -I../shared
 
 # output disk image filename
 TARGET = DYNO$(CPU).DSK
@@ -147,10 +152,10 @@ SECONDARY: $(SPRITESRC) $(SPRITEASMSRC)
 all: $(TARGET)
 
 clean:
-	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR)
+	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(OBJECTCSRC2ASM)
 
 test:
-	$(EMULATOR) coco3h -flop1 $(TARGET) $(MAMEFLAGS) -window -waitvsync -resolution 640x480 -video opengl -rompath /mnt/terabyte/pyro/Emulators/firmware/
+	$(EMULATOR) coco3 -flop1 $(TARGET) $(MAMEFLAGS) -window -waitvsync -resolution 640x480 -video opengl -rompath ~/Applications/MacSDLMESS/mame0163/roms 
 
 # build rules
 
@@ -187,6 +192,23 @@ $(SYMBOLASM): $(SCRIPTDIR)/symbol-extract.py $(PASS1LIST)
 	$(SCRIPTDIR)/symbol-extract.py $(PASS1LIST) $(SYMBOLASM)
 
 # 6. Assemble Object handling routines to raw machine code
+# 4. Extract symbol addresses from DynoSprite engine 
+$(SYMBOLASM): $(SCRIPTDIR)/symbol-extract.py $(PASS1LIST)
+	$(SCRIPTDIR)/symbol-extract.py $(PASS1LIST) $(SYMBOLASM)
+
+# 5a. Compile C Object handling routines to raw
+$(GENOBJDIR)/object%.raw: $(OBJECTDIR)/%.c $(SRCDIR)/datastruct.asm $(SYMBOLASM)
+	cd $(OBJECTDIR) ; $(CMOC) $(CMOCFLAGS) -I$(SRCDIR) -I$(GENASMDIR)/ -c $(notdir $<)
+	cd $(OBJECTDIR) ; sed -i.bak '$$d' $(patsubst %.c,%.asm,$(notdir $<)) 
+	cd $(OBJECTDIR) ; echo "#define DynospriteObject_DataDefinition" | cat >> $(patsubst %.c,%.asm,$(notdir $<)) 
+	cd $(OBJECTDIR) ; echo "#include \"$(patsubst %.c,%.h,$(notdir $<))\"" | cat >> $(patsubst %.c,%.asm,$(notdir $<))
+	cd $(OBJECTDIR) ; cat ../../$(SRCDIR)/c-object-entry.asm >> $(patsubst %.c,%.asm,$(notdir $<)) 
+	cd $(OBJECTDIR) ; sed -i.bak 's/--entry=0/$(ASMFLAGS) --no-blocks/' $(patsubst %.c,%.cmd,$(notdir $<)) 
+	cd $(OBJECTDIR) ; bash $(patsubst %.c,%.cmd,$(notdir $<))
+	cd $(OBJECTDIR) ; mv $(patsubst %.c,%.bin,$(notdir $<)) ../../$@  
+	cd $(OBJECTDIR) ; mv $(patsubst %.c,%.lst,$(notdir $<)) ../../$(GENLISTDIR)/$(patsubst %.raw,%.lst,$(notdir $@))
+
+# 5b. Assemble Object handling routines to raw machine code
 $(GENOBJDIR)/object%.raw: $(OBJECTDIR)/%.asm $(SRCDIR)/datastruct.asm $(SYMBOLASM)
 	$(ASSEMBLER) $(ASMFLAGS) -r -I $(SRCDIR) -I $(GENASMDIR)/ -o $@ --list=$(GENLISTDIR)/object$*.lst --symbols $<
 
@@ -234,4 +256,6 @@ $(TARGET): $(COCODISKGEN) $(DISKFILES)
 	$(COCODISKGEN) $(TARGET) $(DISKFILES)
 
 .PHONY: all clean test
+
+.PRECIOUS: $(OBJECTCSRC2ASM)
 
