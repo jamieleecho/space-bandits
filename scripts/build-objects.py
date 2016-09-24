@@ -134,6 +134,9 @@ if __name__ == "__main__":
     numGroups = len(spriteRawFiles)
     if len(spriteListFiles) != numGroups or len(objectRawFiles) != numGroups or len(objectListFiles) != numGroups:
         print "****Error: extra or missing sprite/object raw or list files in '%s'.  Make clean and try again" % rawdir
+        print "  %d spriteList files found, %d expected" % (len(spriteListFiles), numGroups)
+        print "  %d object raw files found, %d expected" % (len(objectRawFiles), numGroups)
+        print "  %d object list files found, %d expected" % (len(objectListFiles), numGroups)
         sys.exit(1)
     print "    Found %i sprite/object groups" % numGroups
     # parse input files and create groups

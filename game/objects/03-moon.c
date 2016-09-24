@@ -1,5 +1,5 @@
 #pragma org 0x0
-#include "03-foo.h"
+#include "03-moon.h"
 
 #include "FixedPoint.h"
 #include "FixedPoint.c"
