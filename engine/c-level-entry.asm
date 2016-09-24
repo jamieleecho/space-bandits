@@ -1,4 +1,8 @@
 *********************************************************************************
+* DynoSprite - game/levels/00-marbledemo.asm
+* Copyright (c) 2013-2014, Richard Goedeken
+* All rights reserved.
+* 
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are met:
 * 
@@ -20,65 +24,61 @@
 * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************************
-* Note: Object handling assembly code must be position-independent, because it can
-*       be loaded in different locations depending on the level.
-*       1. If you use local variables, you must address them with PC-relative modes
-*       2. You can only call locally defined functions with B**/LB** instuctions (no JSR or JMP)
-*       This only applies for local data and code.  You can reference functions or data which are
-*       defined in the DynoSprite core with position-dependent instructions, because the addresses
-*       for these items are known at assembly time.
+* Note: The dynamic Level handling code is always loaded first in the level/object code page,
+*       and this page is always mapped to $6000 when being accesssed in the DynoSprite core.
+*       For this reason, you may use position-dependent instructions if desired for local data
+*       and code.
 
+* -----------------------------------------------------------------------------
+* -- Type definitions only
+* -----------------------------------------------------------------------------
 
-            include     macros.asm
             include     datastruct.asm
             include     dynosprite-symbols.asm
 
-Object0_Init
+***********************************************************
+* Level_Initialize:
+*
+* - IN:      None
+* - OUT:     None
+* - Trashed: A,B,X,Y,U
+***********************************************************
+
+Level_Initialize
             sts         DynoStackPointer,pcr
             lds         #$8000
-            pshs        u,y,x
             tst         LibraryInit,pcr
-            bne         Object0_Skip_INILIB
+            bne         Level_Skip_INILIB
             lbsr        INILIB
             inc         LibraryInit,pcr
-Object0_Skip_INILIB:
-            lbsr        _Object0Init
-            puls        u,y,x
+Level_Skip_INILIB:
+            lbsr        _LevelInit
             lds         DynoStackPointer,pcr
             rts
 
-Object0_Reactivate
-            sts         DynoStackPointer,pcr
-            lds         #$8000
-            pshs        u,x
-            lbsr        _Object0Reactivate
-            puls        u,x
-            lds         DynoStackPointer,pcr
-            rts
 
-Object0_Update
+***********************************************************
+* Level_CalculateBkgrndNewXY:
+*
+* - IN:      None
+* - OUT:     None
+* - Trashed: A,B,X,U
+***********************************************************
+* This function evaluates the joystick position and calculates a
+* new background X/Y starting location for the next frame.  It
+* uses 8 bits of fractional position in each dimension to 
+* give a smooth range of speeds
+
+Level_CalculateBkgrndNewXY
             sts         DynoStackPointer,pcr
             lds         #$8000
-            pshs        u,x
-            lbsr        _Object0Update
-            puls        u,x
+            pshs        y
+            lbsr        _LevelCalculateBkgrndNewXY
             lds         DynoStackPointer,pcr
+            puls        y
             rts
 
 
 LibraryInit             fcb         0           * Whether or not we initialized the library
 DynoStackPointer        fdb         0           * Dynosprite Stack Pointer
-
-NumberOfObjects         fcb     1
-ObjectDescriptorTable
-                        fcb     DynospriteObject0_DataSize
-                        fcb     1               * drawType == 1: standard sprite w/ no rowcrop
-                        fcb     1               * initSize
-                        fcb     0               * res1
-                        fdb     Object0_Init
-                        fdb     Object0_Reactivate
-                        fdb     Object0_Update
-                        fdb     0               * custom draw function
-                        fdb     0,0             * res2
-
 

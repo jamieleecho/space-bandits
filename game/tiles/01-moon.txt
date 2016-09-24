@@ -1,0 +1,5 @@
+* Moon stuff
+
+Image = 01-moon.gif
+TileSetStart = 0,0
+TileSetSize = 352,192

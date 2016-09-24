@@ -60,21 +60,21 @@ typedef struct DynospriteDirectPageGlobals {
 
   byte Gfx_NumSpriteGroups;
   unsigned Gfx_SpriteGroupsPtr;
-  
+
   byte Gfx_MonitorIsRGB;
-  
+
   byte Obj_MotionFactor;
-  
+
   byte Obj_NumCurrent;
   unsigned Obj_CurrentTablePtr;
   unsigned Obj_StateDataPtr;
-  
+
   byte Input_UseKeyboard;
-  
+
   byte Input_JoystickX;
   byte Input_JoystickY;
   byte Input_Buttons;
-  
+
   byte Input_JoyButtonMask;
   byte Input_KeyMatrix[8];
   byte Input_KeyMatrixDB[8];
@@ -82,7 +82,7 @@ typedef struct DynospriteDirectPageGlobals {
   byte Input_PressedKeyCodes[8];
 
   byte Sound_OutputMode;
-  
+
   byte Sound_NumWavePages;
   unsigned Sound_WavePageEndPtrs[8];
 

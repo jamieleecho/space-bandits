@@ -267,6 +267,9 @@ if __name__ == "__main__":
     numLevels = len(lvlDescFiles)
     if len(lvlMapFiles) != numLevels or len(lvlRawFiles) != numLevels or len(lvlListFiles) != numLevels:
         print "****Error: Mismatched level description/assembly/map files in '%s' and/or '%s'" % (leveldir, rawdir)
+        print "  %d map files found, %d expected" % (len(lvlMapFiles), numLevels)
+        print "  %d raw files found, %d expected" % (len(lvlRawFiles), numLevels)
+        print "  %d list files found, %d expected" % (len(lvlListFiles), numLevels)
         sys.exit(1)
     print "    Found %i levels" % numLevels
     # get symbol locations for DynoSprite engine
