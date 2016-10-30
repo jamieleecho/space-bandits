@@ -11,16 +11,7 @@ MaxObjectTableSize = 8
 Tileset = 1
 TilemapImage = ../tiles/01-moon.gif
 TilemapStart = 0,0
-<<<<<<< 349b0a37162048ad80a1aed6a5a61bfbfffbbc25
 TilemapSize = 352,192
-=======
-TilemapSize = 304,192
-<<<<<<< 30a0d505207ed980b508540a6c79fe8acd301dfb
-TilemapWidth = 20
-TilemapHeight = 14
-=======
->>>>>>> Rebase and clean up
->>>>>>> Rebase and clean up
 * The background starting X coordinate is in bytes (2-pixels/byte)
 BkgrndStartX = 10
 BkgrndStartY = 10
