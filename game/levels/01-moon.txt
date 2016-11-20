@@ -13,8 +13,8 @@ TilemapImage = ../tiles/01-moon.gif
 TilemapStart = 0,0
 TilemapSize = 320,240
 * The background starting X coordinate is in bytes (2-pixels/byte)
-BkgrndStartX = 10
-BkgrndStartY = 10
+BkgrndStartX = 0
+BkgrndStartY = 0
 
 [Object]
 GroupID = 2
