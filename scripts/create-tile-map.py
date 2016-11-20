@@ -96,7 +96,8 @@ def tile_color_map(tiles):
   }
 
 
-def create_tile_and_tile_map_files(tiles, tile_file_path, tile_map_file_path, cmp=False):
+def create_tile_and_tile_map_files(tiles, tile_file_path, tile_image, image_path,
+                                   tile_map_file_path=None, cmp=False):
   """
   Outputs the tile file.
   :param tiles: images returned by tile_image
@@ -132,24 +133,23 @@ def create_tile_and_tile_map_files(tiles, tile_file_path, tile_map_file_path, cm
 
   # Output the tile file
   with open(tile_file_path, 'wb') as tile_file:
-    output_palette(tile_file, cmp_pal, cmp=True)
-    output_palette(tile_file, rgb_pal, cmp=False)
-    tile_file.write('[Tiles]\n')
-    for tile in tile_list:
-      output_tile(tile_file, tile, rev_rgb8_color_map)
+    tile_file.write('Image = {}\n'.format(path.split(image_path)[1]))
+    tile_file.write('TileSetStart = 0,0\n')
+    tile_file.write('TileSetSize = {},{}\n'.format(tile_image.width, tile_image.height))
 
   # Output the tile map file
-  with open(tile_map_file_path, 'wb') as tile_map_file:
-    tile_map_file.write('*' * 59 + '\n')
-    tile_map_file.write('* {}\n'.format(path.basename(tile_map_file_path)))
-    tile_map_file.write('*' * 59 + '\n')
-    tile_map_file.write('* This file gives the tilemap for the level\n')
-    tile_map_file.write('\n')
-    for yy in xrange(0, len(tiles[0])):
-      tile_row = [
-          '{:02x}'.format(tile_to_index[tiles[xx][yy]]) for xx in xrange(0, len(tiles))
-      ]
-      tile_map_file.write(' '.join(tile_row) + '\n')
+  if tile_map_file_path:
+    with open(tile_map_file_path, 'wb') as tile_map_file:
+      tile_map_file.write('*' * 59 + '\n')
+      tile_map_file.write('* {}\n'.format(path.basename(tile_map_file_path)))
+      tile_map_file.write('*' * 59 + '\n')
+      tile_map_file.write('* This file gives the tilemap for the level\n')
+      tile_map_file.write('\n')
+      for yy in xrange(0, len(tiles[0])):
+        tile_row = [
+            '{:02x}'.format(tile_to_index[tiles[xx][yy]]) for xx in xrange(0, len(tiles))
+        ]
+        tile_map_file.write(' '.join(tile_row) + '\n')
 
 
 def output_palette(tile_file, pal, cmp=False):
@@ -232,13 +232,11 @@ def convert_to_hex_line(val):
 parser = argparse.ArgumentParser(description='Create tile and tile map files from an image')
 parser.add_argument('image_path', type=str, help='Path to image used to create tile and tile map')
 parser.add_argument('tile_file_path', type=str, help='Path to output tile file')
-parser.add_argument('tile_map_file_path', type=str, help='Path to output tile map file')
 parser.add_argument('--threshold', type=float, default=0.05, help='Threshold to use for comparing tiles')
 parser.add_argument('--num-colors', type=int, default=16, help='Maximum number of colors to use')
 parser.add_argument('--dither-reduce-mode', type=int, default=0, help='Dither mode to use when reducing colors')
 parser.add_argument('--dither-remap-mode', type=int, default=1, help='Dither mode to use when remapping colors')
 parser.add_argument('--cmp', default=False, action='store_true', help='Optimize for CMP palette')
-parser.add_argument('--output-result-map', default=False, action='store_true', help='Output resulting image of tiling process')
 args = parser.parse_args()
 
 # Perform the real work
@@ -251,12 +249,15 @@ with Image(filename=args.image_path) as img:
   tiles = tile_image(img)
   tiles = reduce_tiles(tiles, threshold=args.threshold)
 
-  # Create the tile and tile map files
-  create_tile_and_tile_map_files(tiles, args.tile_file_path, args.tile_map_file_path, cmp=args.cmp)
+  # Output the result image
+  pre, ext = path.splitext(args.tile_file_path)
+  new_image = rebuild_image(tiles)
+  with new_image.convert('GIF') as new_converted_image:
+    image_path = pre + '.gif'
+    new_converted_image.save(filename=image_path)
 
-  # Output the optional result map
-  if (args.output_result_map):
-    pre, ext = path.splitext(args.image_path)
-    new_image = rebuild_image(tiles)
-    with new_image.convert('GIF') as new_converted_image:
-      new_converted_image.save(filename=pre + '_reduced.gif')
+    # Create the tile and tile map files
+    create_tile_and_tile_map_files(tiles, args.tile_file_path, new_converted_image,
+                                   image_path, cmp=args.cmp)
+
+
