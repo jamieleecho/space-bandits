@@ -197,11 +197,6 @@ $(PASS1LIST): $(LOADERSRC)
 $(SYMBOLASM): $(SCRIPTDIR)/symbol-extract.py $(PASS1LIST)
 	$(SCRIPTDIR)/symbol-extract.py $(PASS1LIST) $(SYMBOLASM)
 
-# 6. Assemble Object handling routines to raw machine code
-# 4. Extract symbol addresses from DynoSprite engine 
-$(SYMBOLASM): $(SCRIPTDIR)/symbol-extract.py $(PASS1LIST)
-	$(SCRIPTDIR)/symbol-extract.py $(PASS1LIST) $(SYMBOLASM)
-
 # 6a. Compile C Object handling routines to raw
 $(GENOBJDIR)/object%.raw: $(OBJECTDIR)/%.c $(SRCDIR)/datastruct.asm $(SYMBOLASM)
 	cd $(OBJECTDIR) ; $(CMOC) $(CMOCFLAGS) -I$(SRCDIR) -I$(GENASMDIR)/ -c $(notdir $<)
