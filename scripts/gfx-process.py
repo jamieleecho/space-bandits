@@ -33,6 +33,9 @@ import numpy
 from collections import deque
 from PIL import Image
 
+import coco
+
+
 #******************************************************************************
 # Helper functions and classes for graphics processing script
 #
@@ -117,56 +120,10 @@ def BuildCocoColors():
         CocoLuvByCMP.append(ConvertRGBtoLuv(r,g,b))
 
 def GetRGBColor(palidx):
-    """ This is the 'ideal' algorithm
-    r = (((palidx >> 4) & 2) | ((palidx >> 2) & 1)) * 0x55
-    g = (((palidx >> 3) & 2) | ((palidx >> 1) & 1)) * 0x55
-    b = (((palidx >> 2) & 2) | ((palidx >> 0) & 1)) * 0x55
-    return (r,g,b)
-    """
-    # these colors are emperically based on a real CM8 monitor
-    CM8Colors = [ [4, 3, 1],      [5, 8, 62],     [11, 54, 13],   [15, 69, 73],   [42, 2, 1],     [39, 7, 57],    [46, 56, 12],   [45, 64, 66], \
-                  [22, 28, 159],  [63, 65, 223],  [25, 70, 159],  [65, 103, 225], [53, 31, 157],  [84, 61, 221],  [57, 72, 155],  [88, 99, 224], \
-                  [42, 153, 51],  [52, 167, 106], [79, 208, 99],  [95, 220, 143], [69, 151, 54],  [74, 164, 100], [104, 206, 101],[111, 217, 138],\
-                  [45, 151, 170], [86, 171, 230], [77, 205, 186], [105, 215, 237],[73, 149, 169], [102, 170, 230],[99, 197, 180], [120, 213, 234],\
-                  [148, 11, 4],   [133, 12, 52],  [148, 63, 13],  [133, 60, 59],  [230, 32, 11],  [213, 23, 47],  [228, 74, 17],  [209, 64, 54],  \
-                  [135, 40, 159], [146, 62, 220], [136, 77, 161], [146, 92, 220], [214, 55, 156], [199, 66, 217], [212, 88, 160], [200, 93, 217], \
-                  [153, 154, 51], [144, 155, 86], [167, 210, 102],[158, 212, 125],[225, 161, 52], [204, 155, 78], [228, 213, 100],[208, 210, 114],\
-                  [139, 150, 166],[154, 163, 224],[151, 199, 178],[161, 209, 229],[211, 155, 167],[197, 155, 215],[211, 201, 177],[202, 207, 223] ]
-    RGB = CM8Colors[palidx]
-    return (RGB[0], RGB[1], RGB[2])
+    return coco.COCO_RGB_RGB8_COLORS[palidx][:]
 
 def GetCompositeColor(palidx):
-    if palidx == 0:
-        r = g = b = 0
-    elif palidx == 16:
-        r = g = b = 47
-    elif palidx == 32:
-        r = g = b = 120
-    elif palidx == 48 or palidx == 63:
-        r = g = b = 255
-    else:
-        w = .4195456981879*1.01
-        contrast = 70
-        saturation = 92
-        brightness = -50
-        brightness += ((palidx / 16) + 1) * contrast
-        offset = (palidx % 16) - 1 + (palidx / 16)*15
-        r = math.cos(w*(offset +  9.2)) * saturation + brightness
-        g = math.cos(w*(offset + 14.2)) * saturation + brightness
-        b = math.cos(w*(offset + 19.2)) * saturation + brightness
-        if r < 0:
-            r = 0
-        elif r > 255:
-            r = 255
-        if g < 0:
-            g = 0
-        elif g > 255:
-            g = 255
-        if b < 0:
-            b = 0
-        elif b > 255:
-            b = 255
-    return (r,g,b)
+    return coco.COCO_CMP_RGB8_COLORS[palidx][:]
 
 def ConvertRGBtoLuv(r,g,b):
     # calculate liner color components

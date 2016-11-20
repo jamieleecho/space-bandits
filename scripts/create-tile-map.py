@@ -11,7 +11,7 @@ import wand_util
 
 def tile_image(image, width=16, height=16):
   """
-  Returns a double array of image tiles where each tile is sized width and 
+  Returns a double array of image tiles where each tile is sized width and
   height. Extra space at the right and bottom of image is ignored.
   :param image: Wand Image to tile
   :param width: width in pixels of Wand Image tiles
@@ -244,8 +244,10 @@ args = parser.parse_args()
 # Perform the real work
 with Image(filename=args.image_path) as img:
   # Reduce the number of colors and tile the image
-  wand_util.reduce_colors(img, args.num_colors, dither=args.dither_reduce_mode)
+  wand_util.reduce_colors(img, 256, dither=args.dither_reduce_mode)
   wand_util.remap_colors(img, coco.create_color_map_image(cmp=args.cmp), dither=args.dither_remap_mode)
+  wand_util.reduce_colors(img, args.num_colors, dither=args.dither_reduce_mode)
+  wand_util.remap_colors(img, coco.create_color_map_image(cmp=args.cmp), dither=1)
   tiles = tile_image(img)
   tiles = reduce_tiles(tiles, threshold=args.threshold)
 

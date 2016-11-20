@@ -1,6 +1,6 @@
 * Colored pyramids
 
-Image = 00-rainbowpyramids.png
+Image = 00-rainbowpyramids.gif
 TileSetStart = 0,0
 TileSetSize = 304,192
 
