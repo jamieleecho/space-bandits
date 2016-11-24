@@ -9,7 +9,7 @@ import coco
 import wand_util
 
 
-def tile_image(image, width=16, height=16):
+def tile_image(image, width=16, height=16, image_size=None):
   """
   Returns a double array of image tiles where each tile is sized width and
   height. Extra space at the right and bottom of image is ignored.
@@ -97,7 +97,7 @@ def tile_color_map(tiles):
 
 
 def create_tile_and_tile_map_files(tiles, tile_file_path, tile_image, image_path,
-                                   tile_map_file_path=None, cmp=False):
+                                   tile_map_file_path=None, cmp=False, image_size=None):
   """
   Outputs the tile file.
   :param tiles: images returned by tile_image
@@ -133,9 +133,10 @@ def create_tile_and_tile_map_files(tiles, tile_file_path, tile_image, image_path
 
   # Output the tile file
   with open(tile_file_path, 'wb') as tile_file:
+    image_size = image_size or tile_image.size
     tile_file.write('Image = {}\n'.format(path.split(image_path)[1]))
     tile_file.write('TileSetStart = 0,0\n')
-    tile_file.write('TileSetSize = {},{}\n'.format(tile_image.width, tile_image.height))
+    tile_file.write('TileSetSize = {},{}\n'.format(image_size[0], image_size[1]))
 
   # Output the tile map file
   if tile_map_file_path:
@@ -237,6 +238,8 @@ parser.add_argument('--num-colors', type=int, default=16, help='Maximum number o
 parser.add_argument('--dither-reduce-mode', type=int, default=0, help='Dither mode to use when reducing colors')
 parser.add_argument('--dither-remap-mode', type=int, default=1, help='Dither mode to use when remapping colors')
 parser.add_argument('--cmp', default=False, action='store_true', help='Optimize for CMP palette')
+parser.add_argument('--width', default=None, type=int, help='Width to tile in pixels')
+parser.add_argument('--height', default=None, type=int, help='Height to tile in pixels')
 args = parser.parse_args()
 
 # Perform the real work
@@ -246,7 +249,8 @@ with Image(filename=args.image_path) as img:
   wand_util.remap_colors(img, coco.create_color_map_image(cmp=args.cmp), dither=args.dither_remap_mode)
   wand_util.reduce_colors(img, args.num_colors, dither=args.dither_reduce_mode)
   wand_util.remap_colors(img, coco.create_color_map_image(cmp=args.cmp), dither=1)
-  tiles = tile_image(img)
+  image_size = (args.width or img.size[0], args.height or img.size[1])
+  tiles = tile_image(img, image_size=image_size)
   tiles = reduce_tiles(tiles, threshold=args.threshold)
 
   # Output the result image
@@ -258,6 +262,6 @@ with Image(filename=args.image_path) as img:
 
     # Create the tile and tile map files
     create_tile_and_tile_map_files(tiles, args.tile_file_path, new_converted_image,
-                                   image_path, cmp=args.cmp)
+                                   image_path, cmp=args.cmp, image_size=image_size)
 
 
