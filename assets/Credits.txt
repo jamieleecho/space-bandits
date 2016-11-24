@@ -1,0 +1,7 @@
+Credits
+
+Hero Spaceship: James M Weisbecker
+Retro Alien Pack: Retro-8-Bit-2D-Alien-Pack Licensed from Unity asset store:
+                  https://www.assetstore.unity3d.com/en/#!/content/53875
+Earth Rise: Modified Earth Rise photo from NASA
+            https://www.nasa.gov/multimedia/imagegallery/image_feature_1249.html
