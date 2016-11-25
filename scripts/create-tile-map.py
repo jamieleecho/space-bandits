@@ -18,7 +18,7 @@ def tile_image(image, width=16, height=16, image_size=None):
   :param width: height in pixels of Wand Image tiles
   :return: double array of image tiles
   """
-  image_size = image.size
+  image_size = image_size or image.size
   image_size_tiles = (image_size[0] / width, image_size[1] / height)
   if image_size_tiles[0] == 0 or image_size_tiles[1] == 0:
     raise Exception('Image too small')
@@ -50,19 +50,21 @@ def reduce_tiles(tiles, threshold=0.01):
   return tiles
 
 
-def rebuild_image(tiles):
+def rebuild_image(img, tiles):
   """
   Rebuilds the image from the tiles.
+  :param img: base image
   :param tiles: images returned by tile_image
   :return: Image rebuilt from tiles
   """
   width = tiles[0][0].size[0]
   height = tiles[0][0].size[1]
   image = Image(
-      width=len(tiles) * width,
-      height=len(tiles[0]) * height,
+      width=img.width,
+      height=img.height,
   )
   with Drawing() as draw:
+    draw.composite('copy', 0, 0, img.width, img.height, img)
     for xx in xrange(0, len(tiles)):
       start_x = xx * width
       for yy in xrange(0, len(tiles[0])):
@@ -255,7 +257,7 @@ with Image(filename=args.image_path) as img:
 
   # Output the result image
   pre, ext = path.splitext(args.tile_file_path)
-  new_image = rebuild_image(tiles)
+  new_image = rebuild_image(img, tiles)
   with new_image.convert('GIF') as new_converted_image:
     image_path = pre + '.gif'
     new_converted_image.save(filename=image_path)
