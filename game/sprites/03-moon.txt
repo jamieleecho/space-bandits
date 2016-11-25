@@ -3,7 +3,22 @@ Image = ../tiles/01-moon.gif
 Transparent=199,66,217
 Palette = 1
 
-[Whole]
-Location=127,350
+[Ship1]
+Location=73,433
 SinglePixelPosition=True
 
+[Ship2]
+Location=106,433
+SinglePixelPosition=True
+
+[Ship3]
+Location=137,433
+SinglePixelPosition=True
+
+[Ship4]
+Location=170,433
+SinglePixelPosition=True
+
+[Boss1]
+Location=17,259
+SinglePixelPosition=True

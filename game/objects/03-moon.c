@@ -16,7 +16,7 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   }
 
   FooObject0State *statePtr = (FooObject0State *)(cob->statePtr);
-  statePtr->spriteIdx = 0;
+  statePtr->spriteIdx = 4;
   cob->globalX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX2;
   cob->globalY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
 }
@@ -28,7 +28,7 @@ void Object0Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
   FooObject0State *statePtr = (FooObject0State *)(cob->statePtr);
-  statePtr->spriteIdx = 0; //(statePtr->spriteIdx + 1) % 10;
+  statePtr->spriteIdx =  4; //(statePtr->spriteIdx + 1) & 3;
   statePtr->counter++;
   
   FixedPoint val = FixedPointInit(statePtr->counter, 0);
