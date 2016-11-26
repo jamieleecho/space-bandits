@@ -1,0 +1,16 @@
+Group = 4
+Image = ../tiles/01-moon.gif
+Transparent=199,66,217
+Palette = 1
+
+[EnemySwath1]
+Location=20,230
+SinglePixelPosition=True
+
+[EnemySwath2]
+Location=20,242
+SinglePixelPosition=True
+
+[EnemySwath3]
+Location=20,254
+SinglePixelPosition=True

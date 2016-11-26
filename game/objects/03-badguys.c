@@ -1,5 +1,5 @@
 #pragma org 0x0
-#include "03-moon.h"
+#include "03-badguys.h"
 
 #include "FixedPoint.h"
 #include "FixedPoint.c"
@@ -15,10 +15,13 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     FixedPointInitialize();
   }
 
-  FooObject0State *statePtr = (FooObject0State *)(cob->statePtr);
-  statePtr->spriteIdx = 4;
-  cob->globalX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX2;
-  cob->globalY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
+  BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
+  statePtr->spriteIdx = 0;
+  statePtr->counter = 0;
+  statePtr->xx = cob->globalX;
+  statePtr->yy = cob->globalY;
+  //cob->globalX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX2;
+  //cob->globalY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
 }
 
 
@@ -27,22 +30,22 @@ void Object0Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
-  FooObject0State *statePtr = (FooObject0State *)(cob->statePtr);
-  statePtr->spriteIdx =  4; //(statePtr->spriteIdx + 1) & 3;
+  BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
+  statePtr->spriteIdx =  (statePtr->spriteIdx + 1) % 3;
   statePtr->counter++;
   
   FixedPoint val = FixedPointInit(statePtr->counter, 0);
-  FixedPoint val2 = FixedPointInit(0, 16080); // 10 * 2 * pi / 256
+  FixedPoint val2 = FixedPointInit(0, 1608); // 1 * 2 * pi / 256
   FixedPointMul(&val, &val, &val2);
   FixedPointSin(&val2, &val);
   FixedPoint val3 = FixedPointInit(40, 0);
   FixedPointMul(&val3, &val2, &val3);
-  cob->globalX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX2 + 100 + val3.Whole;
+  cob->globalX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX2 + statePtr->xx + val3.Whole;
 
   FixedPointCos(&val2, &val);
   FixedPointSet(&val3, 40, 0);
   FixedPointMul(&val3, &val2, &val3);
-  cob->globalY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY + 80 + val3.Whole;
+  cob->globalY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY + statePtr->yy + val3.Whole;
 }
 
 

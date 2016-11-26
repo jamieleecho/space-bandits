@@ -18,7 +18,3 @@ SinglePixelPosition=True
 [Ship4]
 Location=170,433
 SinglePixelPosition=True
-
-[Boss1]
-Location=17,259
-SinglePixelPosition=True
