@@ -20,8 +20,6 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   statePtr->counter = 0;
   statePtr->xx = cob->globalX;
   statePtr->yy = cob->globalY;
-  //cob->globalX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX2;
-  //cob->globalY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
 }
 
 
@@ -34,6 +32,7 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
   statePtr->spriteIdx =  (statePtr->spriteIdx + 1) % 3;
   statePtr->counter++;
   
+#if 0
   FixedPoint val = FixedPointInit(statePtr->counter, 0);
   FixedPoint val2 = FixedPointInit(0, 1608); // 1 * 2 * pi / 256
   FixedPointMul(&val, &val, &val2);
@@ -46,6 +45,7 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
   FixedPointSet(&val3, 40, 0);
   FixedPointMul(&val3, &val2, &val3);
   cob->globalY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY + statePtr->yy + val3.Whole;
+#endif
 }
 
 
