@@ -4,17 +4,13 @@ Transparent=199,66,217
 Palette = 1
 
 [Ship1]
-Location=73,433
+Location=170,433
 SinglePixelPosition=True
 
 [Ship2]
-Location=106,433
-SinglePixelPosition=True
-
-[Ship3]
 Location=137,433
 SinglePixelPosition=True
 
-[Ship4]
-Location=170,433
+[Ship3]
+Location=106,433
 SinglePixelPosition=True

@@ -55,7 +55,7 @@ typedef struct DynospriteDirectPageGlobals {
   byte Gfx_DrawScreenPage;
   unsigned Gfx_DrawScreenOffset;
 
-  unsigned Gfx_SpriteErasePtrs;
+  unsigned Gfx_SpriteErasePtrs[4];
   unsigned Gfx_SpriteErasePtrPtr;
 
   byte Gfx_NumSpriteGroups;

@@ -12,9 +12,7 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   }
 
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
-  statePtr->spriteIdx = 0;
-  //cob->globalX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX2 + 160;
-  //cob->globalY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY + 170;
+  statePtr->spriteIdx = 1;
 }
 
 
@@ -24,7 +22,25 @@ void Object0Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
-  statePtr->spriteIdx = (statePtr->spriteIdx + 1) & 3;
+
+  unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
+  if (joyx < 16) {
+    if (cob->globalX > 2) {
+      cob->globalX--;
+      statePtr->spriteIdx = 0;
+    } else {
+      statePtr->spriteIdx = 1;
+    }
+  } else if (joyx > 48) {
+    if (cob->globalX < 299) {
+      cob->globalX++;
+      statePtr->spriteIdx = 2;
+    } else {
+      statePtr->spriteIdx = 1;
+    }
+  } else {
+    statePtr->spriteIdx = 1;
+  }
 }
 
 
