@@ -17,6 +17,14 @@ BkgrndStartX = 0
 BkgrndStartY = 0
 
 [Object]
+GroupID = 4
+ObjectID = 0
+Active = 3
+globalX = 160
+globalY = 175
+InitData = 1
+
+[Object]
 GroupID = 3
 ObjectID = 0
 Active = 3
@@ -30,14 +38,6 @@ ObjectID = 0
 Active = 3
 globalX = 220
 globalY = 80
-InitData = 1
-
-[Object]
-GroupID = 4
-ObjectID = 0
-Active = 3
-globalX = 160
-globalY = 170
 InitData = 1
 
 * Here is an object which is a frame counter in the upper-right corner of the screen

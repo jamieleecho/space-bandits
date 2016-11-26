@@ -25,6 +25,11 @@ LEVELSRC = $(wildcard $(LEVELDIR)/??-*.asm)
 SPRITEDSC = $(wildcard $(SPRITEDIR)/??-*.txt)
 OBJECTCSRC = $(wildcard $(OBJECTDIR)/??-*.c)
 OBJECTCSRC2ASM = $(patsubst %.c, %.asm, $(OBJECTCSRC))
+OBJECTCSRC2I = $(patsubst %.c, %.i, $(OBJECTCSRC))
+OBJECTCSRC2CMD = $(patsubst %.c, %.cmd, $(OBJECTCSRC))
+OBJECTCSRC2ASMBAK = $(patsubst %.c, %.asm.bak, $(OBJECTCSRC))
+OBJECTCSRC2CMDBAK = $(patsubst %.c, %.cmd.bak, $(OBJECTCSRC))
+OBJECTCSRC2HEX = $(patsubst %.c, %.hex, $(OBJECTCSRC))
 OBJECTSRC = $(wildcard $(OBJECTDIR)/??-*.asm)
 SOUNDSRC = $(wildcard $(SOUNDDIR)/??-*.wav)
 IMAGESRC = $(wildcard $(IMAGEDIR)/??-*.png)
@@ -159,7 +164,8 @@ SECONDARY: $(SPRITESRC) $(SPRITEASMSRC)
 all: $(TARGET)
 
 clean:
-	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(OBJECTCSRC2ASM) $(LEVELCSRC2ASM)
+	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(OBJECTCSRC2ASM) $(OBJECTCSRC2ASMBAK) $(OBJECTCSRC2I) $(OBJECTCSRC2CMD) $(OBJECTCSRC2CMDBAK) $(LEVELCSRC2ASM) $(OBJECTCSRC2HEX)
+
 
 test:
 	$(EMULATOR) coco3 -flop1 $(TARGET) $(MAMEFLAGS) -window -waitvsync -resolution 640x480 -video opengl -rompath ~/Applications/mame/roms
