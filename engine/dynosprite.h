@@ -200,7 +200,15 @@ typedef struct DynospriteCOB {
 #define DynospriteDirectPageGlobalsPtr ((DynospriteDirectPageGlobals *)0x2000)
 
 /** Pointer to the Dynopsprite Globals */
-#define DynospriteGlobalsPtr ((DynospriteGlobals *)0x2100)
+#define DynospriteGlobalsPtr ((DynospriteGlobals *)0x2100)A
 
+asm void PlaySound(byte val) {
+  asm { 
+  ldd 2,s
+  pshs u
+  jsr Sound_Play
+  puls u
+  }
+}
 
 #endif /* _Dynosprite_h */

@@ -28,6 +28,9 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
     if (cob->globalX > 2) {
       cob->globalX--;
       statePtr->spriteIdx = 0;
+      if (cob->globalX <= 2) {
+        PlaySound(2);
+      }
     } else {
       statePtr->spriteIdx = 1;
     }
@@ -35,6 +38,9 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
     if (cob->globalX < 299) {
       cob->globalX++;
       statePtr->spriteIdx = 2;
+      if (cob->globalX >= 299) {
+        PlaySound(2);
+      }
     } else {
       statePtr->spriteIdx = 1;
     }
