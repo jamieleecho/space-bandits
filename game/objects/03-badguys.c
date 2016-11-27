@@ -1,9 +1,6 @@
 #pragma org 0x0
 #include "03-badguys.h"
 
-#include "FixedPoint.h"
-#include "FixedPoint.c"
-
 
 byte didNotInit = TRUE;
 byte initVal = 0;
@@ -12,14 +9,22 @@ byte initVal = 0;
 void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
-    FixedPointInitialize();
   }
 
   BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
-  statePtr->spriteIdx = 0;
-  statePtr->counter = 0;
   statePtr->xx = cob->globalX;
   statePtr->yy = cob->globalY;
+  byte spriteMin = *initData;
+  if (spriteMin == 0) {
+    statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
+    statePtr->spriteMax = statePtr->spriteMin + 3 - 1;
+  } else if ((spriteMin == 3) || (spriteMin == 7)) {
+    statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
+    statePtr->spriteMax = statePtr->spriteMin + 4 - 1;
+  } else {
+    statePtr->spriteIdx = statePtr->spriteMin = 1;
+    statePtr->spriteMax = statePtr->spriteMin + 3 - 1;
+  }
 }
 
 
@@ -29,8 +34,12 @@ void Object0Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
   BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
-  statePtr->spriteIdx =  (statePtr->spriteIdx + 1) % 3;
-  statePtr->counter++;
+  byte spriteIdx = statePtr->spriteIdx;
+  if (spriteIdx < statePtr->spriteMax) {
+    statePtr->spriteIdx = spriteIdx + 1;
+  } else {
+    statePtr->spriteIdx = statePtr->spriteMin;
+  }
   
 #if 0
   FixedPoint val = FixedPointInit(statePtr->counter, 0);

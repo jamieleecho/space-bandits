@@ -137,7 +137,7 @@ endif
 ifeq ($(MAMEDBG), 1)
   MAMEFLAGS += -debug
 endif
-CMOCFLAGS = --asm-cmd -c -I. -I../../$(SRCDIR) -I../../$(GENASMDIR) -I../shared
+CMOCFLAGS = -O2 --asm-cmd -c -I. -I../../$(SRCDIR) -I../../$(GENASMDIR) -I../shared
 
 # output disk image filename
 TARGET = DYNO$(CPU).DSK

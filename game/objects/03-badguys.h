@@ -25,7 +25,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of BadGuyObjectState in bytes */
-#define DynospriteObject0_DataSize 6
+#define DynospriteObject0_DataSize 7
 
 #else
 
@@ -38,7 +38,8 @@
 /** State of Foo Object */
 typedef struct BadGuyObjectState {
   byte spriteIdx;
-  byte counter;
+  byte spriteMin;
+  byte spriteMax;
   unsigned xx, yy;
 } BadGuyObjectState;
 
