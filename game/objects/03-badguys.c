@@ -21,6 +21,9 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   } else if ((spriteMin == 3) || (spriteMin == 7)) {
     statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
     statePtr->spriteMax = statePtr->spriteMin + 4 - 1;
+  } else if ((spriteMin == 11) || (spriteMin == 13)) {
+    statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
+    statePtr->spriteMax = statePtr->spriteMin + 2 - 1;
   } else {
     statePtr->spriteIdx = statePtr->spriteMin = 1;
     statePtr->spriteMax = statePtr->spriteMin + 3 - 1;
