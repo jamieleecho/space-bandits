@@ -22,63 +22,417 @@ ObjectID = 0
 Active = 3
 globalX = 160
 globalY = 175
-InitData = 1
+InitData = 0
 
 [Object]
 GroupID = 3
 ObjectID = 0
 Active = 3
-globalX = 100
-globalY = 80
-InitData = 1
+globalX = 35
+globalY = 30
+InitData = 3
 
 [Object]
 GroupID = 3
 ObjectID = 0
 Active = 3
-globalX = 120
-globalY = 80
-InitData = 1
+globalX = 60
+globalY = 30
+InitData = 3
 
 [Object]
 GroupID = 3
 ObjectID = 0
 Active = 3
-globalX = 140
-globalY = 80
-InitData = 1
+globalX = 85 
+globalY = 30
+InitData = 3
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 110
+globalY = 30
+InitData = 3
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 135
+globalY = 30
+InitData = 3
 
 [Object]
 GroupID = 3
 ObjectID = 0
 Active = 3
 globalX = 160
-globalY = 80
-InitData = 1
+globalY = 30
+InitData = 3
 
 [Object]
 GroupID = 3
 ObjectID = 0
 Active = 3
-globalX = 180
-globalY = 80
-InitData = 1
+globalX = 185
+globalY = 30
+InitData = 3
 
 [Object]
 GroupID = 3
 ObjectID = 0
 Active = 3
-globalX = 200
-globalY = 80
-InitData = 1
+globalX = 210
+globalY = 30
+InitData = 3
 
 [Object]
 GroupID = 3
 ObjectID = 0
 Active = 3
-globalX = 220
-globalY = 80
-InitData = 1
+globalX = 235
+globalY = 30
+InitData = 3
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 260
+globalY = 30
+InitData = 3
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 285
+globalY = 30
+InitData = 3
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 35
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 60
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 85 
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 110
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 135
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 160
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 185
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 210
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 235
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 260
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 285
+globalY = 50
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 35
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 60
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 85 
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 110
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 135
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 160
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 185
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 210
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 235
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 260
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 285
+globalY = 70
+InitData = 7
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 35
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 60
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 85 
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 110
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 135
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 160
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 185
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 210
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 235
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 260
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 285
+globalY = 90
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 35
+globalY = 110
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 60
+globalY = 110
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 85 
+globalY = 110
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 110
+globalY = 110
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 135
+globalY = 110
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 160
+globalY = 110
+InitData = 0
+
+[Object]
+GroupID = 3
+ObjectID = 0
+Active = 3
+globalX = 185
+globalY = 110
+InitData = 0
+
+
 
 * Here is an object which is a frame counter in the upper-right corner of the screen
 * [Object]

@@ -26,7 +26,7 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
   unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
   if (joyx < 16) {
     if (cob->globalX > 2) {
-      cob->globalX--;
+      cob->globalX -= 4;
       statePtr->spriteIdx = 0;
       if (cob->globalX <= 2) {
         PlaySound(2);
@@ -36,7 +36,7 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
     }
   } else if (joyx > 48) {
     if (cob->globalX < 299) {
-      cob->globalX++;
+      cob->globalX += 4;
       statePtr->spriteIdx = 2;
       if (cob->globalX >= 299) {
         PlaySound(2);
