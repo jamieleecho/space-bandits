@@ -2,8 +2,18 @@
 #include "03-badguys.h"
 
 
+/** Defines how invaders should move */
+enum DirectionMode {
+  DirectionGoRight,
+  DirectionShouldSwitchLeft,
+  DirectionGoLeft,
+  DirectionShouldSwitchRight,
+};
+
 byte didNotInit = TRUE;
 byte initVal = 0;
+enum DirectionMode directionMode;
+DynospriteCOB *switchDirCob=0xffff;
 
 
 void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
@@ -15,6 +25,7 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   statePtr->xx = cob->globalX;
   statePtr->yy = cob->globalY;
   byte spriteMin = *initData;
+  switchDirCob = 0xffff;
   if (spriteMin == 0) {
     statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
     statePtr->spriteMax = statePtr->spriteMin + 3 - 1;
@@ -32,6 +43,10 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 
 
 void Object0Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+  if ((cob <= switchDirCob) && (directionMode & 0x1)) {
+    directionMode = (directionMode + 1) & 0x3;
+    switchDirCob = 0xffff;
+  }
 }
 
 
@@ -43,6 +58,30 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
   } else {
     statePtr->spriteIdx = statePtr->spriteMin;
   }
+
+  if ((cob <= switchDirCob) && (directionMode & 0x1)) {
+    directionMode = (directionMode + 1) & 0x3;
+    switchDirCob = 0xffff;
+  }
+  if (directionMode & 0x2) {
+    cob->globalX--;
+    if (cob->globalX <= 10) {
+      directionMode = directionMode | 0x1;
+      if (switchDirCob == 0xffff) {
+        switchDirCob = cob;
+      }
+      cob->active = FALSE;
+    }
+  } else {
+    cob->globalX++;
+    if (cob->globalX >= 310) {
+      directionMode = directionMode | 0x1;
+      if (switchDirCob == 0xffff) {
+        switchDirCob = cob;
+      }
+    }
+  }
+
   
 #if 0
   FixedPoint val = FixedPointInit(statePtr->counter, 0);

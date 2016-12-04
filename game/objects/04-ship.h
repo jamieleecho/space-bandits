@@ -44,5 +44,5 @@ typedef struct ShipObjectState {
 
 #endif /* _04_ship_h */
 
-#endif /* _Object_DataDefinition */
+#endif /* DynospriteObject_DataDefinition */
 
