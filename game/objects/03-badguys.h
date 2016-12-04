@@ -35,7 +35,7 @@
 #include "dynosprite.h"
 
 
-/** State of Foo Object */
+/** State of BadGuyObject */
 typedef struct BadGuyObjectState {
   byte spriteIdx;
   byte spriteMin;
@@ -45,5 +45,5 @@ typedef struct BadGuyObjectState {
 
 #endif /* _03_badguys_h */
 
-#endif /* _Object_DataDefinition */
+#endif /* DynospriteObject_DataDefinition */
 
