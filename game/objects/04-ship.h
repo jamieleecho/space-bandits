@@ -25,7 +25,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of ShipObjectState in bytes */
-#define DynospriteObject0_DataSize 2
+#define DynospriteObject_DataSize 2
 
 #else
 

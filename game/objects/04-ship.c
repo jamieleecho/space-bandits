@@ -6,7 +6,7 @@ byte didNotInit = TRUE;
 byte initVal = 0;
 
 
-void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
+void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
   }
@@ -16,11 +16,11 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 }
 
 
-void Object0Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
+void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
 
   unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
@@ -52,8 +52,8 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
 
 /** Ignored, only used to guarantee functions will not get optimized away */
 int main() {
-  Object0Init((DynospriteCOB *)0x0, (DynospriteODT *)0x0, (byte *)0x0);
-  Object0Reactivate((DynospriteCOB *)0x0, (DynospriteODT *)0x0);
-  Object0Update((DynospriteCOB *)0x0, (DynospriteODT *)0x0);
+  ObjectInit((DynospriteCOB *)0x0, (DynospriteODT *)0x0, (byte *)0x0);
+  ObjectReactivate((DynospriteCOB *)0x0, (DynospriteODT *)0x0);
+  ObjectUpdate((DynospriteCOB *)0x0, (DynospriteODT *)0x0);
   return 0;
 }
