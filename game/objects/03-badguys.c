@@ -2,21 +2,42 @@
 #include "03-badguys.h"
 
 
-/** Defines how invaders should move */
+#define BAD_PTR ((DynospriteCOB *)0xffff)
+#define SCREEN_LOCATION_MIN 10
+#define SCREEN_LOCATION_MAX 310
+
+/** The invader direction code is a bit confusing. We have to keep all of the
+ *  invaders in sync, going in the same direction, but switching depends on
+ *  the location of the left most or right most invader. This gets a little
+ *  confusing because the invaders are updated object by object without any
+ *  global context. So, if invader 3 is the leading invader and wants to
+ *  start moving in the opposite direction, invader 1 won't get the message
+ *  until the next iteration, but invaders 3 and up will want to go in the
+ *  other direction.
+ *
+ *  We solve the problem by creating a 2-bit state machine and relying on the
+ *  fact that the invaders are updated sequentially. When an invader hits the
+ *  extreme left or right of the screen, it sets the LSB of the state machine
+ *  and sets switchDirCob to its value. This tells the other invaders in the
+ *  sequence to not worry about changing direction. When the next iteration
+ *  occurs, the first invader to get updated (its pointer will be <=
+ *  switchDirCob) will see that the bit is set and know it has to update the
+ *  location.
+ */
 enum DirectionMode {
-  DirectionGoRight,
-  DirectionShouldSwitchLeft,
-  DirectionGoLeft,
-  DirectionShouldSwitchRight,
-};
+  DirectionModeRight,
+  DirectionModeChangeOnNextIterMask,
+  DirectionModeLeft,
+  DirectionModeMask
+} DirectionMode;
 
 byte didNotInit = TRUE;
 byte initVal = 0;
 enum DirectionMode directionMode;
-DynospriteCOB *switchDirCob=0xffff;
+DynospriteCOB *switchDirCob=BAD_PTR;
 
 
-void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
+void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
   }
@@ -25,7 +46,7 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   statePtr->xx = cob->globalX;
   statePtr->yy = cob->globalY;
   byte spriteMin = *initData;
-  switchDirCob = 0xffff;
+  switchDirCob = BAD_PTR;
   if (spriteMin == 0) {
     statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
     statePtr->spriteMax = statePtr->spriteMin + 3 - 1;
@@ -42,15 +63,15 @@ void Object0Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 }
 
 
-void Object0Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
-  if ((cob <= switchDirCob) && (directionMode & 0x1)) {
-    directionMode = (directionMode + 1) & 0x3;
-    switchDirCob = 0xffff;
+void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+  if ((cob <= switchDirCob) && (directionMode & DirectionModeChangeOnNextIterMask)) {
+    directionMode = (directionMode + 1) & DirectionModeMask;
+    switchDirCob = BAD_PTR;
   }
 }
 
 
-void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
+void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
   byte spriteIdx = statePtr->spriteIdx;
   if (spriteIdx < statePtr->spriteMax) {
@@ -59,24 +80,29 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
     statePtr->spriteIdx = statePtr->spriteMin;
   }
 
-  if ((cob <= switchDirCob) && (directionMode & 0x1)) {
-    directionMode = (directionMode + 1) & 0x3;
-    switchDirCob = 0xffff;
+  /* if this is the first invader and the change directon bit is set, then
+   * change direction */
+  if ((cob <= switchDirCob) && (directionMode & DirectionModeChangeOnNextIterMask)) {
+    /* toggle direction and clear DirectionModeChangeOnNextIterMask */
+    directionMode = (directionMode + 1) & DirectionModeMask;
+    switchDirCob = BAD_PTR; /* switchDirCob is now undefined */
   }
-  if (directionMode & 0x2) {
+  if (directionMode & DirectionModeLeft) {
     cob->globalX--;
-    if (cob->globalX <= 10) {
-      directionMode = directionMode | 0x1;
-      if (switchDirCob == 0xffff) {
+    if (cob->globalX <= SCREEN_LOCATION_MIN) {
+      /* hit extreme left, so set DirectionModeChangeOnNextIterMask */
+      directionMode = directionMode | DirectionModeChangeOnNextIterMask;
+      if (switchDirCob == BAD_PTR) {
         switchDirCob = cob;
       }
       cob->active = FALSE;
     }
   } else {
     cob->globalX++;
-    if (cob->globalX >= 310) {
-      directionMode = directionMode | 0x1;
-      if (switchDirCob == 0xffff) {
+    if (cob->globalX >= SCREEN_LOCATION_MAX) {
+      /* hit extreme right, so set DirectionModeChangeOnNextIterMask */
+      directionMode = directionMode | DirectionModeChangeOnNextIterMask;
+      if (switchDirCob == BAD_PTR) {
         switchDirCob = cob;
       }
     }
@@ -102,8 +128,8 @@ void Object0Update(DynospriteCOB *cob, DynospriteODT *odt) {
 
 /** Ignored, only used to guarantee functions will not get optimized away */
 int main() {
-  Object0Init((DynospriteCOB *)0x0, (DynospriteODT *)0x0, (byte *)0x0);
-  Object0Reactivate((DynospriteCOB *)0x0, (DynospriteODT *)0x0);
-  Object0Update((DynospriteCOB *)0x0, (DynospriteODT *)0x0);
+  ObjectInit((DynospriteCOB *)0x0, (DynospriteODT *)0x0, (byte *)0x0);
+  ObjectReactivate((DynospriteCOB *)0x0, (DynospriteODT *)0x0);
+  ObjectUpdate((DynospriteCOB *)0x0, (DynospriteODT *)0x0);
   return 0;
 }

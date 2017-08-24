@@ -33,51 +33,51 @@
             include     datastruct.asm
             include     dynosprite-symbols.asm
 
-Object0_Init
+Object_Init:
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        u,y,x
             tst         LibraryInit,pcr
-            bne         Object0_Skip_INILIB
+            bne         Object_Skip_INILIB
             lbsr        INILIB
             inc         LibraryInit,pcr
-Object0_Skip_INILIB:
-            lbsr        _Object0Init
+Object_Skip_INILIB:
+            lbsr        _ObjectInit
             puls        u,y,x
             lds         DynoStackPointer,pcr
             rts
 
-Object0_Reactivate
+Object_Reactivate:
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        u,x
-            lbsr        _Object0Reactivate
+            lbsr        _ObjectReactivate
             puls        u,x
             lds         DynoStackPointer,pcr
             rts
 
-Object0_Update
+Object_Update:
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        u,x
-            lbsr        _Object0Update
+            lbsr        _ObjectUpdate
             puls        u,x
             lds         DynoStackPointer,pcr
             rts
 
 
-LibraryInit             fcb         0           * Whether or not we initialized the library
-DynoStackPointer        fdb         0           * Dynosprite Stack Pointer
+LibraryInit:            fcb         0           * Whether or not we initialized the library
+DynoStackPointer:       fdb         0           * Dynosprite Stack Pointer
 
-NumberOfObjects         fcb     1
-ObjectDescriptorTable
-                        fcb     DynospriteObject0_DataSize
+NumberOfObjects:        fcb     1
+ObjectDescriptorTable:
+                        fcb     DynospriteObject_DataSize
                         fcb     1               * drawType == 1: standard sprite w/ no rowcrop
                         fcb     1               * initSize
                         fcb     0               * res1
-                        fdb     Object0_Init
-                        fdb     Object0_Reactivate
-                        fdb     Object0_Update
+                        fdb     Object_Init
+                        fdb     Object_Reactivate
+                        fdb     Object_Update
                         fdb     0               * custom draw function
                         fdb     0,0             * res2
 

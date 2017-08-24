@@ -17,6 +17,34 @@
 #define AudioSamplingRate 6000
 
 
+/** Object Data Table */
+typedef struct DynospriteODT {
+  byte dataSize;
+  byte drawType;
+  byte initSize;
+  byte res1;
+  void *init;
+  void *reactivate;
+  void *update;
+  void *draw;
+  byte res2[4];
+} DynospriteODT;
+
+
+/** Curent Object Buffer */
+typedef struct DynospriteCOB {
+  byte groupIdx;
+  byte objectIdx;
+  byte active;
+  byte res1;
+  unsigned globalX;
+  unsigned globalY;
+  byte *statePtr;
+  byte *odtPtr;
+  byte *sprPtr;
+  byte *rowPtr;
+} DynospriteCOB;
+
 /** Datastructure for DynospriteDirectPageGlobals */
 typedef struct DynospriteDirectPageGlobals {
   byte MemMgr_VirtualTable[64];
@@ -66,7 +94,7 @@ typedef struct DynospriteDirectPageGlobals {
   byte Obj_MotionFactor;
 
   byte Obj_NumCurrent;
-  unsigned Obj_CurrentTablePtr;
+  DynospriteCOB *Obj_CurrentTablePtr;
   unsigned Obj_StateDataPtr;
 
   byte Input_UseKeyboard;
@@ -167,40 +195,12 @@ typedef struct DynospriteGlobals {
 } DynospriteGlobals;
 
 
-/** Object Data Table */
-typedef struct DynospriteODT {
-  byte dataSize;
-  byte drawType;
-  byte initSize;
-  byte res1;
-  void *init;
-  void *reactivate;
-  void *update;
-  void *draw;
-  byte res2[4];
-} DynospriteODT;
-
-
-/** Curent Object Buffer */
-typedef struct DynospriteCOB {
-  byte groupIdx;
-  byte objectIdx;
-  byte active;
-  byte res1;
-  unsigned globalX;
-  unsigned globalY;
-  byte *statePtr;
-  byte *odtPtr;
-  byte *sprPtr;
-  byte *rowPtr;
-} DynospriteCOB;
-
-
 /** Pointer to the Dynopsprite Direct Page Globals */
 #define DynospriteDirectPageGlobalsPtr ((DynospriteDirectPageGlobals *)0x2000)
 
 /** Pointer to the Dynopsprite Globals */
-#define DynospriteGlobalsPtr ((DynospriteGlobals *)0x2100)A
+#define DynospriteGlobalsPtr ((DynospriteGlobals *)0x2100)
+
 
 asm void PlaySound(byte val) {
   asm { 
