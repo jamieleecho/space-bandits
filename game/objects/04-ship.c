@@ -22,11 +22,12 @@ void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
+  byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2)) << 1;
 
   unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
   if (joyx < 16) {
     if (cob->globalX > 2) {
-      cob->globalX -= 4;
+      cob->globalX -= delta;
       statePtr->spriteIdx = 0;
       if (cob->globalX <= 2) {
         PlaySound(2);
@@ -36,7 +37,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     }
   } else if (joyx > 48) {
     if (cob->globalX < 299) {
-      cob->globalX += 4;
+      cob->globalX += delta;
       statePtr->spriteIdx = 2;
       if (cob->globalX >= 299) {
         PlaySound(2);

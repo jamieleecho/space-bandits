@@ -6,7 +6,7 @@
 #define SCREEN_LOCATION_MIN 10
 #define SCREEN_LOCATION_MAX 310
 
-/** The invader direction code is a bit confusing. We have to keep all of the
+/* The invader direction code is a bit confusing. We have to keep all of the
  *  invaders in sync, going in the same direction, but switching depends on
  *  the location of the left most or right most invader. This gets a little
  *  confusing because the invaders are updated object by object without any
@@ -37,11 +37,16 @@ enum DirectionMode directionMode;
 DynospriteCOB *switchDirCob=BAD_PTR;
 
 
+
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
   }
 
+  /* We want to animate the different invaders and they all have different
+   * number of frames. This is a little hack where we pass the minimum
+   * spriteIndex as part of the initialization data and because we know the
+   * number of frames, we can set the max here. */
   BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
   statePtr->xx = cob->globalX;
   statePtr->yy = cob->globalY;
@@ -73,6 +78,8 @@ void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
+
+  /* Switch to the next animation frame */
   byte spriteIdx = statePtr->spriteIdx;
   if (spriteIdx < statePtr->spriteMax) {
     statePtr->spriteIdx = spriteIdx + 1;
@@ -87,10 +94,13 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     directionMode = (directionMode + 1) & DirectionModeMask;
     switchDirCob = BAD_PTR; /* switchDirCob is now undefined */
   }
+
+  byte delta = (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
   if (directionMode & DirectionModeLeft) {
-    cob->globalX--;
+    cob->globalX -= delta;
     if (cob->globalX <= SCREEN_LOCATION_MIN) {
       /* hit extreme left, so set DirectionModeChangeOnNextIterMask */
+      cob->globalX = SCREEN_LOCATION_MIN;
       directionMode = directionMode | DirectionModeChangeOnNextIterMask;
       if (switchDirCob == BAD_PTR) {
         switchDirCob = cob;
@@ -98,31 +108,16 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
       cob->active = FALSE;
     }
   } else {
-    cob->globalX++;
+    cob->globalX += delta;
     if (cob->globalX >= SCREEN_LOCATION_MAX) {
       /* hit extreme right, so set DirectionModeChangeOnNextIterMask */
+      cob->globalX = SCREEN_LOCATION_MAX;
       directionMode = directionMode | DirectionModeChangeOnNextIterMask;
       if (switchDirCob == BAD_PTR) {
         switchDirCob = cob;
       }
     }
   }
-
-  
-#if 0
-  FixedPoint val = FixedPointInit(statePtr->counter, 0);
-  FixedPoint val2 = FixedPointInit(0, 1608); // 1 * 2 * pi / 256
-  FixedPointMul(&val, &val, &val2);
-  FixedPointSin(&val2, &val);
-  FixedPoint val3 = FixedPointInit(40, 0);
-  FixedPointMul(&val3, &val2, &val3);
-  cob->globalX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX2 + statePtr->xx + val3.Whole;
-
-  FixedPointCos(&val2, &val);
-  FixedPointSet(&val3, 40, 0);
-  FixedPointMul(&val3, &val2, &val3);
-  cob->globalY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY + statePtr->yy + val3.Whole;
-#endif
 }
 
 
