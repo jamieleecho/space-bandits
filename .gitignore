@@ -25,7 +25,6 @@ game/objects/*.bin
 game/objects/*.i
 game/objects/*.tmp
 game/objects/*.cmd
-game/objects/03-foo.asm
 
 game/levels/*.hex
 game/levels/*.lst
@@ -35,4 +34,11 @@ game/levels/*.tmp
 game/levels/*.cmd
 game/levels/01-testlevel.asm
 .DS_Store
+
+game/levels/01-persei.asm
+game/objects/03-badguys.asm
+game/objects/04-ship.asm
+assets/01-moon.gif
+assets/palette.gif
+
 

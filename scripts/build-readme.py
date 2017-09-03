@@ -3,17 +3,17 @@
 # DynoSprite - scripts/build-readme.py
 # Copyright (c) 2013-2014, Richard Goedeken
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 # * Redistributions of source code must retain the above copyright notice, this
 #   list of conditions and the following disclaimer.
-# 
+#
 # * Redistributions in binary form must reproduce the above copyright notice,
 #   this list of conditions and the following disclaimer in the documentation
 #   and/or other materials provided with the distribution.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -78,7 +78,7 @@ BASICPROG = """
 60 I=USR2(0):IF I=2 AND SL > 1 THEN GOTO 62 ELSE IF I=1 AND SL < #NUMLINES-14 THEN GOTO 64 ELSE IF INKEY$=CHR$(13) THEN GOTO 66 ELSE GOTO 60
 62 SL=SL-1:A=USR1(0):PRINT @0,L$(SL);:GOTO 60
 64 SL=SL+1:A=USR0(0):PRINT @448,L$(SL+14);:GOTO 60
-66 CLS:PRINT "LOADING...":LOADM"DYNO"
+66 CLS:PRINT "LOADING...":LOADM"BANDITS"
 90 DATA 14,&H8E,&H04,&H20,&HEC,&H81,&HED,&H88,&HDE,&H8C,&H05,&HE0,&H26,&HF6,&H39
 92 DATA 14,&H8E,&H05,&HE0,&HEC,&H88,&HDE,&HED,&H83,&H8C,&H04,&H20,&H26,&HF6,&H39
 94 DATA 37,&H4F,&HC6,&HEF,&HF7,&HFF,&H02,&HF6,&HFF,&H00,&HC4,&H08,&H26,&H04,&HC6,&H01,&H20,&H11,&HC6,&HF7,&HF7,&HFF,&H02,&HF6,&HFF,&H00,&HC4,&H08,&H26,&H04,&HC6,&H02,&H20,&H01,&H5F,&H7E,&HB4,&HF4

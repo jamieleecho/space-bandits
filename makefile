@@ -94,7 +94,7 @@ LOADERSRC = $(addprefix $(SRCDIR)/, constants.asm \
 
 # files to be added to Coco3 disk image
 READMEBAS = $(GENDISKDIR)/README.BAS
-LOADERBIN = $(GENDISKDIR)/DYNO.BIN
+LOADERBIN = $(GENDISKDIR)/BANDITS.BIN
 DATA_TILES = $(GENDISKDIR)/TILES.DAT
 DATA_OBJECTS = $(GENDISKDIR)/OBJECTS.DAT
 DATA_LEVELS = $(GENDISKDIR)/LEVELS.DAT
@@ -141,7 +141,7 @@ endif
 CMOCFLAGS = -O2 --asm-cmd -c -I. -I../../$(SRCDIR) -I../../$(GENASMDIR) -I../shared
 
 # output disk image filename
-TARGET = DYNO$(CPU).DSK
+TARGET = BNDT$(CPU).DSK
 
 # build targets
 targets:

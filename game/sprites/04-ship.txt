@@ -1,6 +1,6 @@
 Group = 3
 Image = ../tiles/01-moon.gif
-Transparent=199,66,217
+Transparent=254,0,254
 Palette = 1
 
 [Ship1]

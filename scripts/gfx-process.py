@@ -398,6 +398,38 @@ def NonRecursivePaint(ImgData, Width, Height, x, y, transparentIdx, pixCoordColo
         hitlist.append((x,   y-1))
         hitlist.append((x-1, y-1))
 
+def RecursivePaint(ImgData, Width, Height, x, y, transparentIdx, pixCoordColorList):
+    hitlist = deque()
+    hitlist.append((x, y))
+    RecursivePaint2(ImgData, Width, Height, transparentIdx, pixCoordColorList, hitlist)
+
+def RecursivePaint2(ImgData, Width, Height, transparentIdx, pixCoordColorList, hitlist):
+    while hitlist:
+      x, y = hitlist.pop()
+
+      # return if coordinates are output image boundary
+      if x < 0 or y < 0 or x >= Width or y >= Height:
+        continue
+
+      # return if pixel at current coordinate is transparent
+      pixColor = ImgData[y][x]
+      if pixColor == transparentIdx:
+          continue
+      # we have a non-transparent pixel, so record the color and coordinate
+      pixCoordColorList.append((x, y, pixColor))
+      # then make this pixel transparent to avoid processing it again
+      ImgData[y][x] = transparentIdx
+
+      # and then search all around it, in the 8-neighborhood
+      hitlist.append((x-1, y))
+      hitlist.append((x-1, y+1))
+      hitlist.append((x,   y+1))
+      hitlist.append((x+1, y+1))
+      hitlist.append((x+1, y))
+      hitlist.append((x+1, y-1))
+      hitlist.append((x,   y-1))
+      hitlist.append((x-1, y-1))
+
 def FindSpritePixels(sprite, ImgData, Width, Height, ImageToCocoColor, transparentIdx):
     # start by searching around the starting point in a spiral pattern until we find a non-transparent pixel
     # direction is up, right, down, left
