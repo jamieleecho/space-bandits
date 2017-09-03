@@ -1,5 +1,6 @@
 #pragma org 0x6000
 
+
 void LevelInit() {
 }
 

@@ -37,6 +37,9 @@ enum DirectionMode directionMode;
 DynospriteCOB *switchDirCob=BAD_PTR;
 
 
+#define TOP_SPEED 3
+
+
 
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
@@ -95,7 +98,8 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     switchDirCob = BAD_PTR; /* switchDirCob is now undefined */
   }
 
-  byte delta = (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
+  byte delta = TOP_SPEED - (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
+  delta = (delta > TOP_SPEED) ? 1 : delta;
   if (directionMode & DirectionModeLeft) {
     cob->globalX -= delta;
     if (cob->globalX <= SCREEN_LOCATION_MIN) {
@@ -105,7 +109,6 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
       if (switchDirCob == BAD_PTR) {
         switchDirCob = cob;
       }
-      cob->active = FALSE;
     }
   } else {
     cob->globalX += delta;
@@ -118,6 +121,9 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
       }
     }
   }
+
+  if (cob->globalX < DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr->globalX)
+    cob->active = FALSE;
 }
 
 
