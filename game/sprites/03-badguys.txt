@@ -1,4 +1,4 @@
-Group = 4
+Group = 3
 Image = ../tiles/01-moon.gif
 Transparent=254,0,254
 Palette = 1
