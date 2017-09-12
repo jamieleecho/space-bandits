@@ -122,8 +122,8 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     }
   }
 
-  if (cob->globalX < DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr->globalX)
-    cob->active = FALSE;
+  //if (cob->globalX < DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr->globalX)
+  //  cob->active = FALSE;
 }
 
 

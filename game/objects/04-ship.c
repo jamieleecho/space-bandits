@@ -29,9 +29,6 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     if (cob->globalX > 2) {
       cob->globalX -= delta;
       statePtr->spriteIdx = 0;
-      if (cob->globalX <= 2) {
-        PlaySound(2);
-      }
     } else {
       statePtr->spriteIdx = 1;
     }
@@ -39,14 +36,15 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     if (cob->globalX < 299) {
       cob->globalX += delta;
       statePtr->spriteIdx = 2;
-      if (cob->globalX >= 299) {
-        PlaySound(2);
-      }
     } else {
       statePtr->spriteIdx = 1;
     }
   } else {
     statePtr->spriteIdx = 1;
+  }
+
+  if (!(DynospriteDirectPageGlobalsPtr->Input_Buttons & Joy1Button1)) {
+    PlaySound(3);
   }
 }
 

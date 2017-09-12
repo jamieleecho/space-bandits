@@ -20,8 +20,8 @@ void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
 
-  if (cob->globalY < 20) {
-    cob->globalY = 140;
+  if (cob->globalY < 10) {
+    cob->globalY = 170;
   } else {
     byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2)) << 1;
     cob->globalY -= delta;
