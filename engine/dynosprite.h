@@ -14,7 +14,17 @@
 #define Joy2Button2 8
 
 /** Default audio sampling rate in Hz */
-#define AudioSamplingRate 6000
+#define AudioSamplingRate 3000
+
+
+/** DynospriteCOB.active flag indicating to update item */
+#define OBJECT_UPDATE_ACTIVE 1
+
+/** DynospriteCOB.active flag indicating to draw item */
+#define OBJECT_DRAW_ACTIVE 2
+
+/** DynospriteCOB.active flag indicating to draw and update item */
+#define OBJECT_ACTIVE 3
 
 
 /** Object Data Table */

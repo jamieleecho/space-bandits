@@ -1,14 +1,50 @@
 #pragma org 0x0
 #include "04-ship.h"
+#include "object_info.h"
 
 
 byte didNotInit = TRUE;
 byte initVal = 0;
+DynospriteCOB *missiles[3];
+
+
+/**
+ * @return a missile or NULL if no missile is available.
+ */
+DynospriteCOB *findFreeMissile() {
+  // Return NULL if we fired a missile too recently
+  for (byte ii=0; ii<sizeof(missiles)/sizeof(missiles[0]); ii++) {
+    DynospriteCOB *missile = missiles[ii];
+    if (missile->active && missile->globalY > 113) {
+      return 0;
+    }
+  }
+
+  // Return an available missile
+  for (byte ii=0; ii<sizeof(missiles)/sizeof(missiles[0]); ii++) {
+    DynospriteCOB *missile = missiles[ii];
+    if (!missile->active) {
+      return missile;
+    }
+  }
+
+  return 0;
+}
 
 
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
+
+    DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
+    for (byte ii=0; obj && ii<sizeof(missiles)/sizeof(missiles[0]); ii++) {
+      obj = findObjectByGroup(obj, MISSILE_GROUP_IDX);
+
+      if (obj) {
+        missiles[ii] = obj;
+        obj = obj + 1;
+      }
+    }
   }
 
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
@@ -44,7 +80,13 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   }
 
   if (!(DynospriteDirectPageGlobalsPtr->Input_Buttons & Joy1Button1)) {
-    PlaySound(3);
+    DynospriteCOB *missile = findFreeMissile();
+    if (missile) {
+      missile->globalX = cob->globalX + 9;
+      missile->globalY = 165;
+      missile->active = OBJECT_ACTIVE;
+      PlaySound(3);
+    }
   }
 }
 
