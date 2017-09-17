@@ -62,14 +62,14 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 
   unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
   if (joyx < 16) {
-    if (cob->globalX > 2) {
+    if (cob->globalX > delta) {
       cob->globalX -= delta;
       statePtr->spriteIdx = 0;
     } else {
       statePtr->spriteIdx = 1;
     }
   } else if (joyx > 48) {
-    if (cob->globalX < 299) {
+    if (cob->globalX < 300 - delta) {
       cob->globalX += delta;
       statePtr->spriteIdx = 2;
     } else {

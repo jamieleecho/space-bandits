@@ -22,7 +22,7 @@ BkgrndStartY = 0
 GroupID = 4
 ObjectID = 0
 Active = 3
-globalX = 10
+globalX = 170
 globalY = 175
 InitData = 0
 
