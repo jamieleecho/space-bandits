@@ -1,9 +1,17 @@
 #pragma org 0x0
+
 #include "05-missile.h"
+#include "object_info.h"
 
 
 byte didNotInit = TRUE;
 byte initVal = 0;
+
+
+#define MISSILE_HALF_WIDTH 2
+#define MISSILE_HEIGHT 10
+#define BADGUY_HALF_WIDTH 7
+#define BADGUY_HALF_HEIGHT 7
 
 
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
@@ -17,6 +25,28 @@ void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
+void checkHitBadGuy(DynospriteCOB *cob) {
+  DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
+  int xx0 = cob->globalX - MISSILE_HALF_WIDTH - BADGUY_HALF_WIDTH;
+  int xx1 = cob->globalX + MISSILE_HALF_WIDTH + BADGUY_HALF_WIDTH;
+  int yy0 = cob->globalY - MISSILE_HEIGHT - BADGUY_HALF_HEIGHT;
+  int yy1 = cob->globalY + BADGUY_HALF_HEIGHT;
+  for (byte ii=0; obj; ii++) {
+    obj = findObjectByGroup(obj, BADGUY_GROUP_IDX);
+    if (obj) {
+      if (obj->active &&
+          (obj->globalY >= yy0) && (obj->globalY <= yy1) &&
+          (obj->globalX >= xx0) && (obj->globalX <= xx1)) {
+        obj->active = OBJECT_INACTIVE;
+        cob->active = OBJECT_INACTIVE;
+        return;
+      }
+      obj = obj + 1;
+    }
+  }
+}
+
+
 void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
 
@@ -25,6 +55,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   } else {
     byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2)) << 1;
     cob->globalY -= delta;
+    checkHitBadGuy(cob);
   }
 }
 

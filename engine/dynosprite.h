@@ -17,6 +17,9 @@
 #define AudioSamplingRate 3000
 
 
+/** DynospriteCOB.active flag indicating item inactive */
+#define OBJECT_INACTIVE 0
+
 /** DynospriteCOB.active flag indicating to update item */
 #define OBJECT_UPDATE_ACTIVE 1
 
