@@ -99,7 +99,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   }
 
   byte delta = TOP_SPEED - (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
-  delta = (delta > TOP_SPEED) ? 1 : delta;
+  delta = (delta > TOP_SPEED || delta < 1) ? 1 : delta;
   if (directionMode & DirectionModeLeft) {
     cob->globalX -= delta;
     if (cob->globalX <= SCREEN_LOCATION_MIN) {
