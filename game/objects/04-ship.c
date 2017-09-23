@@ -85,7 +85,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
       missile->globalX = cob->globalX + 9;
       missile->globalY = 165;
       missile->active = OBJECT_ACTIVE;
-      PlaySound(3);
+      PlaySound(SOUND_LASER);
     }
   }
 }

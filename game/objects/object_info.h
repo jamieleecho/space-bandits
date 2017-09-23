@@ -10,6 +10,9 @@
 #define MISSILE_GROUP_IDX 5
 
 
+#define SOUND_LASER 1
+
+
 /**
  * Starting from obj, finds an object with the given group index.
  *
