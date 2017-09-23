@@ -3,8 +3,8 @@
 
 
 #define BAD_PTR ((DynospriteCOB *)0xffff)
-#define SCREEN_LOCATION_MIN 10
-#define SCREEN_LOCATION_MAX 310
+#define SCREEN_LOCATION_MIN 14
+#define SCREEN_LOCATION_MAX 306
 
 /* The invader direction code is a bit confusing. We have to keep all of the
  *  invaders in sync, going in the same direction, but switching depends on
@@ -31,19 +31,21 @@ enum DirectionMode {
   DirectionModeMask
 } DirectionMode;
 
+
 byte didNotInit = TRUE;
 byte initVal = 0;
 enum DirectionMode directionMode;
 DynospriteCOB *switchDirCob=BAD_PTR;
+byte numInvaders = 0;
 
 
 #define TOP_SPEED 3
 
 
-
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
+    numInvaders = 0;
   }
 
   /* We want to animate the different invaders and they all have different
@@ -57,7 +59,7 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
     statePtr->spriteMax = BADGUY_SPRITE_BLADE_INDEX - 1;
   } else if ((spriteMin == BADGUY_SPRITE_BLADE_INDEX) ||
-             (spriteMin == BADGUY_SPRITE_BLADE_INDEX)) {
+             (spriteMin == BADGUY_SPRITE_DUDE_INDEX)) {
     statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
     statePtr->spriteMax = statePtr->spriteMin + 4 - 1;
   } else if ((spriteMin == BADGUY_SPRITE_TINY_INDEX) ||
@@ -68,6 +70,8 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     statePtr->spriteIdx = statePtr->spriteMin = 0;
     statePtr->spriteMax = BADGUY_SPRITE_BLADE_INDEX - 1;
   }
+
+  numInvaders++;
 }
 
 
@@ -90,6 +94,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     statePtr->spriteIdx = statePtr->spriteMin;
   } else if (spriteIdx >= BADGUY_SPRITE_LAST_INDEX) {
     cob->active = OBJECT_INACTIVE;
+    numInvaders--;
     return;
   } else {
     statePtr->spriteIdx = spriteIdx + 1;
@@ -104,13 +109,12 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     switchDirCob = BAD_PTR; /* switchDirCob is now undefined */
   }
 
-  byte delta = TOP_SPEED - (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
-  delta = (delta > TOP_SPEED || delta < 1) ? 1 : delta;
+  byte delta = (TOP_SPEED - ((numInvaders + 3) >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
+  delta = (delta < 1) ? 1 : delta;
   if (directionMode & DirectionModeLeft) {
     cob->globalX -= delta;
     if (cob->globalX <= SCREEN_LOCATION_MIN) {
       /* hit extreme left, so set DirectionModeChangeOnNextIterMask */
-      cob->globalX = SCREEN_LOCATION_MIN;
       directionMode = directionMode | DirectionModeChangeOnNextIterMask;
       if (switchDirCob == BAD_PTR) {
         switchDirCob = cob;
@@ -120,7 +124,6 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     cob->globalX += delta;
     if (cob->globalX >= SCREEN_LOCATION_MAX) {
       /* hit extreme right, so set DirectionModeChangeOnNextIterMask */
-      cob->globalX = SCREEN_LOCATION_MAX;
       directionMode = directionMode | DirectionModeChangeOnNextIterMask;
       if (switchDirCob == BAD_PTR) {
         switchDirCob = cob;
