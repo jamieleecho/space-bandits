@@ -51,22 +51,22 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
    * spriteIndex as part of the initialization data and because we know the
    * number of frames, we can set the max here. */
   BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
-  statePtr->xx = cob->globalX;
-  statePtr->yy = cob->globalY;
   byte spriteMin = *initData;
   switchDirCob = BAD_PTR;
-  if (spriteMin == 0) {
+  if (spriteMin == BADGUY_SPRITE_ENEMY_SWATH_INDEX) {
     statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
-    statePtr->spriteMax = statePtr->spriteMin + 3 - 1;
-  } else if ((spriteMin == 3) || (spriteMin == 7)) {
+    statePtr->spriteMax = BADGUY_SPRITE_BLADE_INDEX - 1;
+  } else if ((spriteMin == BADGUY_SPRITE_BLADE_INDEX) ||
+             (spriteMin == BADGUY_SPRITE_BLADE_INDEX)) {
     statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
     statePtr->spriteMax = statePtr->spriteMin + 4 - 1;
-  } else if ((spriteMin == 11) || (spriteMin == 13)) {
+  } else if ((spriteMin == BADGUY_SPRITE_TINY_INDEX) ||
+             (spriteMin == BADGUY_SPRITE_TIVO_INDEX)) {
     statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
     statePtr->spriteMax = statePtr->spriteMin + 2 - 1;
   } else {
-    statePtr->spriteIdx = statePtr->spriteMin = 1;
-    statePtr->spriteMax = statePtr->spriteMin + 3 - 1;
+    statePtr->spriteIdx = statePtr->spriteMin = 0;
+    statePtr->spriteMax = BADGUY_SPRITE_BLADE_INDEX - 1;
   }
 }
 
@@ -86,8 +86,14 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   byte spriteIdx = statePtr->spriteIdx;
   if (spriteIdx < statePtr->spriteMax) {
     statePtr->spriteIdx = spriteIdx + 1;
-  } else {
+  } else if (spriteIdx == statePtr->spriteMax) {
     statePtr->spriteIdx = statePtr->spriteMin;
+  } else if (spriteIdx >= BADGUY_SPRITE_LAST_INDEX) {
+    cob->active = OBJECT_INACTIVE;
+    return;
+  } else {
+    statePtr->spriteIdx = spriteIdx + 1;
+    return;
   }
 
   /* if this is the first invader and the change directon bit is set, then
@@ -121,9 +127,6 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
       }
     }
   }
-
-  //if (cob->globalX < DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr->globalX)
-  //  cob->active = FALSE;
 }
 
 

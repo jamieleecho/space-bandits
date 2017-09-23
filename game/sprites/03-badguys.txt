@@ -15,6 +15,7 @@ SinglePixelPosition=True
 Location=20,250
 SinglePixelPosition=True
 
+
 [Blade1]
 Location=101,225
 SinglePixelPosition=True
@@ -30,6 +31,7 @@ SinglePixelPosition=True
 [Blade4]
 Location=101,259
 SinglePixelPosition=True
+
 
 [Dude1]
 Location=126,226
@@ -47,6 +49,7 @@ SinglePixelPosition=True
 Location=126,265
 SinglePixelPosition=True
 
+
 [Tiny1]
 Location=78,223
 SinglePixelPosition=True
@@ -55,6 +58,7 @@ SinglePixelPosition=True
 Location=78,230
 SinglePixelPosition=True
 
+
 [Tivo1]
 Location=155,225
 SinglePixelPosition=True
@@ -62,3 +66,44 @@ SinglePixelPosition=True
 [Tivo2]
 Location=155,239
 SinglePixelPosition=True
+
+
+[Explosion1]
+Location=232,284
+SinglePixelPosition=False
+
+[Explosion2]
+Location=256,284
+SinglePixelPosition=False
+
+[Explosion3]
+Location=280,284
+SinglePixelPosition=False
+
+[Explosion4]
+Location=304,284
+SinglePixelPosition=False
+
+[Explosion5]
+Location=231,308
+SinglePixelPosition=False
+
+[Explosion6]
+Location=256,308
+SinglePixelPosition=False
+
+[Explosion7]
+Location=280,308
+SinglePixelPosition=False
+
+[Explosion8]
+Location=304,308
+SinglePixelPosition=False
+
+[Explosion9]
+Location=232,332
+SinglePixelPosition=False
+
+[Explosion10]
+Location=256,332
+SinglePixelPosition=False
