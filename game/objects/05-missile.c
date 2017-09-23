@@ -1,6 +1,7 @@
 #pragma org 0x0
 
 #include "05-missile.h"
+#include "03-badguys.h"
 #include "object_info.h"
 
 
@@ -37,8 +38,12 @@ void checkHitBadGuy(DynospriteCOB *cob) {
       if (obj->active &&
           (obj->globalY >= yy0) && (obj->globalY <= yy1) &&
           (obj->globalX >= xx0) && (obj->globalX <= xx1)) {
-        obj->active = OBJECT_INACTIVE;
         cob->active = OBJECT_INACTIVE;
+        BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
+        if (statePtr->spriteIdx < BADGUY_SPRITE_EXPLOSION_INDEX) {
+          statePtr->spriteIdx = BADGUY_SPRITE_EXPLOSION_INDEX;
+          obj->globalX &= 0xfffe; // explosions must be on even byte boundaries
+        }
         return;
       }
       obj = obj + 1;

@@ -27,3 +27,6 @@ November Vibe by Raw X Limits
 
 Lrrr: camo.githubusercontent.com
 
+Explosions: opengameart.org
+Chuzco
+

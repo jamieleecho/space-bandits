@@ -35,13 +35,23 @@
 #include "dynosprite.h"
 
 
+#define BADGUY_SPRITE_ENEMY_SWATH_INDEX 0
+#define BADGUY_SPRITE_BLADE_INDEX 3
+#define BADGUY_SPRITE_DUDE_INDEX 7
+#define BADGUY_SPRITE_TINY_INDEX 11
+#define BADGUY_SPRITE_TIVO_INDEX 13
+#define BADGUY_SPRITE_EXPLOSION_INDEX 15
+#define BADGUY_SPRITE_LAST_INDEX 24
+
+
 /** State of BadGuyObject */
 typedef struct BadGuyObjectState {
   byte spriteIdx;
   byte spriteMin;
   byte spriteMax;
-  unsigned xx, yy;
 } BadGuyObjectState;
+
+
 
 #endif /* _03_badguys_h */
 
