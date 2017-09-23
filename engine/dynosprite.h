@@ -14,7 +14,7 @@
 #define Joy2Button2 8
 
 /** Default audio sampling rate in Hz */
-#define AudioSamplingRate 3000
+#define AudioSamplingRate 2000
 
 
 /** DynospriteCOB.active flag indicating item inactive */

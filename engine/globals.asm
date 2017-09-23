@@ -138,7 +138,7 @@ Input_PressedKeyCodes   zmb     8
 * -- Sound
 * -----------------------------------------------------------------------------
 
-AudioSamplingRate       EQU     3000
+AudioSamplingRate       EQU     2000
 
 Sound_OutputMode        zmb     1       * -1=no sound, 0=internal 6-bit DAC, 1=Orchestra-90
 
