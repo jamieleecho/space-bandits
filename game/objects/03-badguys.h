@@ -25,7 +25,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of BadGuyObjectState in bytes */
-#define DynospriteObject_DataSize 7
+#define DynospriteObject_DataSize 3
 
 #else
 
