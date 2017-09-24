@@ -15,9 +15,20 @@ byte initVal = 0;
 #define BADGUY_HALF_HEIGHT 7
 
 
+DynospriteCOB *badGuys[25];
+DynospriteCOB **endBadGuys;
+
+
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
+    endBadGuys = &(badGuys[sizeof(badGuys)/sizeof(badGuys[0])]);
+    DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
+    for (byte ii=0; obj && ii<sizeof(badGuys)/sizeof(badGuys[0]); ii++) {
+      obj = findObjectByGroup(obj, BADGUY_GROUP_IDX);
+      badGuys[ii] = obj;
+      obj = obj + 1;
+    }
   }
 }
 
@@ -32,21 +43,18 @@ void checkHitBadGuy(DynospriteCOB *cob) {
   int xx1 = cob->globalX + MISSILE_HALF_WIDTH + BADGUY_HALF_WIDTH;
   int yy0 = cob->globalY - MISSILE_HEIGHT - BADGUY_HALF_HEIGHT;
   int yy1 = cob->globalY + BADGUY_HALF_HEIGHT;
-  for (byte ii=0; obj; ii++) {
-    obj = findObjectByGroup(obj, BADGUY_GROUP_IDX);
-    if (obj) {
-      if (obj->active &&
-          (obj->globalY >= yy0) && (obj->globalY <= yy1) &&
-          (obj->globalX >= xx0) && (obj->globalX <= xx1)) {
-        cob->active = OBJECT_INACTIVE;
-        BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
-        if (statePtr->spriteIdx < BADGUY_SPRITE_EXPLOSION_INDEX) {
-          statePtr->spriteIdx = BADGUY_SPRITE_EXPLOSION_INDEX;
-          obj->globalX &= 0xfffe; // explosions must be on even byte boundaries
-        }
-        return;
+  for (DynospriteCOB **badGuy=badGuys; badGuy < endBadGuys; ++badGuy) {
+    DynospriteCOB *obj = *badGuy;
+    if (obj->active &&
+        (obj->globalY >= yy0) && (obj->globalY <= yy1) &&
+        (obj->globalX >= xx0) && (obj->globalX <= xx1)) {
+      cob->active = OBJECT_INACTIVE;
+      BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
+      if (statePtr->spriteIdx < BADGUY_SPRITE_EXPLOSION_INDEX) {
+        statePtr->spriteIdx = BADGUY_SPRITE_EXPLOSION_INDEX;
+        obj->globalX &= 0xfffe; // explosions must be on even byte boundaries
       }
-      obj = obj + 1;
+      return;
     }
   }
 }
