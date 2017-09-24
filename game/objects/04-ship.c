@@ -58,7 +58,7 @@ void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
-  byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2)) << 1;
+  byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
 
   unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
   if (joyx < 16) {

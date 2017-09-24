@@ -22,7 +22,7 @@
  */
 DynospriteCOB *findObjectByGroup(DynospriteCOB *obj, byte groupIdx) {
   DynospriteCOB *endObj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr + DynospriteDirectPageGlobalsPtr->Obj_NumCurrent;
-  for (; obj<endObj; obj++) {
+  for (; obj<endObj; ++obj) {
     if (obj->groupIdx == groupIdx) {
       return obj;
     }
