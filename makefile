@@ -25,8 +25,10 @@ LEVELSRC = $(wildcard $(LEVELDIR)/??-*.asm)
 SPRITEDSC = $(wildcard $(SPRITEDIR)/??-*.txt)
 OBJECTCSRC = $(wildcard $(OBJECTDIR)/??-*.c)
 OBJECTCSRC2ASM = $(patsubst %.c, %.asm, $(OBJECTCSRC))
-OBJECTCSRC2I = $(patsubst %.c, %.i, $(OBJECTCSRC))
 OBJECTCSRC2LINK = $(patsubst %.c, %.link, $(OBJECTCSRC))
+OBJECTCSRC2LINKBAK = $(patsubst %.c, %.link.bak, $(OBJECTCSRC))
+OBJECTCSRC2LST = $(patsubst %.c, %.lst, $(OBJECTCSRC))
+OBJECTCSRC2OBJ = $(patsubst %.c, %.o, $(OBJECTCSRC))
 OBJECTCSRC2ASMBAK = $(patsubst %.c, %.asm.bak, $(OBJECTCSRC))
 OBJECTCSRC2S = $(patsubst %.c, %.s, $(OBJECTCSRC))
 OBJECTCSRC2SBAK = $(patsubst %.c, %.s.bak, $(OBJECTCSRC))
@@ -37,8 +39,14 @@ IMAGESRC = $(wildcard $(IMAGEDIR)/??-*.png)
 LEVELSRC = $(wildcard $(LEVELDIR)/??-*.asm)
 LEVELCSRC = $(wildcard $(LEVELDIR)/??-*.c)
 LEVELCSRC2ASM = $(patsubst %.c, %.asm, $(LEVELCSRC))
+LEVELCSRC2ASMBAK = $(patsubst %.c, %.asm.bak, $(LEVELCSRC))
+LEVELCSRC2S = $(patsubst %.c, %.s, $(LEVELCSRC))
+LEVELCSRC2SBAK = $(patsubst %.c, %.s.bak, $(LEVELCSRC))
 LEVELDSC = $(wildcard $(LEVELDIR)/??-*.txt)
 LEVELCSRC2LINK = $(patsubst %.c, %.link, $(LEVELCSRC))
+LEVELCSRC2LINKBAK = $(patsubst %.c, %.link.bak, $(LEVELCSRC))
+LEVELCSRC2LST = $(patsubst %.c, %.lst, $(LEVELCSRC))
+LEVELCSRC2OBJ = $(patsubst %.c, %.o, $(LEVELCSRC))
 
 # lists of build products based on game assets
 TILESRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/tileset%.txt, $(TILEDESC))
@@ -168,8 +176,7 @@ SECONDARY: $(SPRITESRC) $(SPRITEASMSRC)
 all: $(TARGET)
 
 clean:
-	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(OBJECTCSRC2ASM) $(OBJECTCSRC2ASMBAK) $(OBJECTCSRC2I) $(OBJECTCSRC2S) $(OBJECTCSRC2SBAK) $(LEVELCSRC2ASM) $(OBJECTCSRC2HEX) $(OBJECTCSRC2LINK) $(LEVELCSRC2LINK)
-
+	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(OBJECTCSRC2ASM) $(OBJECTCSRC2ASMBAK) $(OBJECTCSRC2S) $(OBJECTCSRC2SBAK) $(OBJECTCSRC2HEX) $(OBJECTCSRC2LINK) $(LEVELCSRC2ASM) $(LEVELCSRC2ASMBAK) $(LEVELCSRC2S) $(LEVELCSRC2SBAK) $(LEVELCSRC2LINK) $(OBJECTCSRC2LINKBAK) $(OBJECTCSRC2LINK) $(OBJECTCSRC2LST) $(OBJECTCSRC2OBJ) $(LEVELCSRC2LINK) $(LEVELCSRC2LST) $(LEVELCSRC2LINKBAK) $(LEVELCSRC2OBJ)
 
 test:
 	$(EMULATOR) coco3 -flop1 $(TARGET) $(MAMEFLAGS) -window -waitvsync -resolution 640x480 -video opengl -rompath ~/Applications/mame/roms
