@@ -6,6 +6,9 @@ game-*
 *~
 *.bak
 *.swp
+*.o
+*.s
+*.link
 
 *.pyc
 

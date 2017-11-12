@@ -27,6 +27,7 @@
 #********************************************************************************
 
 import os
+import re
 import sys
 from compression import *
 
@@ -72,7 +73,8 @@ class Group:
             print "****Error: group %i sprite raw code file length is wrong" % self.grpNumber
             sys.exit(1)
         if len(self.ObjRaw) != odtStart + self.numObjects * 16:
-            print "****Error: group %i object raw code file length is wrong" % self.grpNumber
+            print "****Error: group {} object raw code file length is wrong: {} {}" \
+              .format(self.numObjects, len(self.ObjRaw), odtStart + self.numObjects * 16)
             sys.exit(1)
         # compress the sprite and object code, and generate output data for this group
         comp = Compressor(self.SprRaw[:sdtStart-1])
@@ -103,6 +105,25 @@ def SymbolExtract(listName):
         if len(line) > 40 and line[0:4] == '[ G]' and line.find(".") == -1 and line.find("{") == -1:
             symdef = line[5:].split()
             SymDict[symdef[0]] = int(symdef[1], 16)
+
+    if bFoundSymTable:
+        return SymDict
+
+    symbol_parser = re.compile('^Symbol: ([^ ]+) ([^ ]+) = ([0-9A-F]+)$')
+    for line in f.split("\n"):
+        line = line.strip()
+        # look for symbol table
+        if not bFoundSymTable:
+            if line == "Symbol:":
+                bFoundSymTable = True
+
+        if not line.startswith('Symbol: '):
+            continue
+
+        # check this symbol
+        match = symbol_parser.match(line)
+        SymDict[match.group(1)] = int(match.group(3), 16)
+
     return SymDict
 
 #******************************************************************************

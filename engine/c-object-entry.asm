@@ -69,8 +69,8 @@ Object_Update:
 LibraryInit:            fcb         0           * Whether or not we initialized the library
 DynoStackPointer:       fdb         0           * Dynosprite Stack Pointer
 
-NumberOfObjects:        fcb     1
-ObjectDescriptorTable:
+NumberOfObjects        fcb     1
+ObjectDescriptorTable
                         fcb     DynospriteObject_DataSize
                         fcb     1               * drawType == 1: standard sprite w/ no rowcrop
                         fcb     1               * initSize
@@ -81,4 +81,8 @@ ObjectDescriptorTable:
                         fdb     0               * custom draw function
                         fdb     0,0             * res2
 
+Object_Init EXPORT
+LibraryInit EXPORT
+NumberOfObjects EXPORT
+ObjectDescriptorTable EXPORT
 

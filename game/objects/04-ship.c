@@ -1,4 +1,3 @@
-#pragma org 0x0
 #include "04-ship.h"
 #include "object_info.h"
 

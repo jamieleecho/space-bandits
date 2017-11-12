@@ -26,9 +26,10 @@ SPRITEDSC = $(wildcard $(SPRITEDIR)/??-*.txt)
 OBJECTCSRC = $(wildcard $(OBJECTDIR)/??-*.c)
 OBJECTCSRC2ASM = $(patsubst %.c, %.asm, $(OBJECTCSRC))
 OBJECTCSRC2I = $(patsubst %.c, %.i, $(OBJECTCSRC))
-OBJECTCSRC2CMD = $(patsubst %.c, %.cmd, $(OBJECTCSRC))
+OBJECTCSRC2LINK = $(patsubst %.c, %.link, $(OBJECTCSRC))
 OBJECTCSRC2ASMBAK = $(patsubst %.c, %.asm.bak, $(OBJECTCSRC))
-OBJECTCSRC2CMDBAK = $(patsubst %.c, %.cmd.bak, $(OBJECTCSRC))
+OBJECTCSRC2S = $(patsubst %.c, %.s, $(OBJECTCSRC))
+OBJECTCSRC2SBAK = $(patsubst %.c, %.s.bak, $(OBJECTCSRC))
 OBJECTCSRC2HEX = $(patsubst %.c, %.hex, $(OBJECTCSRC))
 OBJECTSRC = $(wildcard $(OBJECTDIR)/??-*.asm)
 SOUNDSRC = $(wildcard $(SOUNDDIR)/??-*.wav)
@@ -37,6 +38,7 @@ LEVELSRC = $(wildcard $(LEVELDIR)/??-*.asm)
 LEVELCSRC = $(wildcard $(LEVELDIR)/??-*.c)
 LEVELCSRC2ASM = $(patsubst %.c, %.asm, $(LEVELCSRC))
 LEVELDSC = $(wildcard $(LEVELDIR)/??-*.txt)
+LEVELCSRC2LINK = $(patsubst %.c, %.link, $(LEVELCSRC))
 
 # lists of build products based on game assets
 TILESRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/tileset%.txt, $(TILEDESC))
@@ -62,6 +64,9 @@ COCODISKGEN = $(TOOLDIR)/file2dsk
 ASSEMBLER = $(TOOLDIR)/lwasm
 EMULATOR = $(TOOLDIR)/mess64
 CMOC = cmoc
+CMOC-ASM = ../../tools/cmoc-asm
+CMOC-ASM-FLAGS = -fobj --pragma=forwardrefmax
+CMOC-LDFLAGS = --org=0x0 --lwlink=../../tools/cmoc-link --intermediate
 
 # make sure build products directories exist
 $(shell mkdir -p $(GENASMDIR))
@@ -138,7 +143,7 @@ endif
 ifeq ($(MAMEDBG), 1)
   MAMEFLAGS += -debug
 endif
-CMOCFLAGS = -O2 --asm-cmd -c -I. -I../../$(SRCDIR) -I../../$(GENASMDIR) -I../shared
+CMOCFLAGS = -O2 --asm-cmd --org=0x0 -S -I. -I../../$(SRCDIR) -I../../$(GENASMDIR) -I../shared --intermediate
 
 # output disk image filename
 TARGET = BNDT$(CPU).DSK
@@ -164,7 +169,7 @@ SECONDARY: $(SPRITESRC) $(SPRITEASMSRC)
 all: $(TARGET)
 
 clean:
-	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(OBJECTCSRC2ASM) $(OBJECTCSRC2ASMBAK) $(OBJECTCSRC2I) $(OBJECTCSRC2CMD) $(OBJECTCSRC2CMDBAK) $(LEVELCSRC2ASM) $(OBJECTCSRC2HEX)
+	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(OBJECTCSRC2ASM) $(OBJECTCSRC2ASMBAK) $(OBJECTCSRC2I) $(OBJECTCSRC2S) $(OBJECTCSRC2SBAK) $(LEVELCSRC2ASM) $(OBJECTCSRC2HEX) $(OBJECTCSRC2LINK) $(LEVELCSRC2LINK)
 
 
 test:
@@ -206,15 +211,18 @@ $(SYMBOLASM): $(SCRIPTDIR)/symbol-extract.py $(PASS1LIST)
 
 # 6a. Compile C Object handling routines to raw
 $(GENOBJDIR)/object%.raw: $(OBJECTDIR)/%.c $(SRCDIR)/datastruct.asm $(SYMBOLASM)
-	cd $(OBJECTDIR) ; $(CMOC) $(CMOCFLAGS) -I$(SRCDIR) -I$(GENASMDIR)/ -c $(notdir $<)
-	cd $(OBJECTDIR) ; sed -i.bak '$$d' $(patsubst %.c,%.asm,$(notdir $<))
-	cd $(OBJECTDIR) ; echo "#define DynospriteObject_DataDefinition" | cat >> $(patsubst %.c,%.asm,$(notdir $<))
-	cd $(OBJECTDIR) ; echo "#include \"$(patsubst %.c,%.h,$(notdir $<))\"" | cat >> $(patsubst %.c,%.asm,$(notdir $<))
-	cd $(OBJECTDIR) ; cat ../../$(SRCDIR)/c-object-entry.asm >> $(patsubst %.c,%.asm,$(notdir $<))
-	cd $(OBJECTDIR) ; sed -i.bak 's/--entry=0/$(ASMFLAGS) --no-blocks/' $(patsubst %.c,%.cmd,$(notdir $<))
-	cd $(OBJECTDIR) ; bash $(patsubst %.c,%.cmd,$(notdir $<))
+	cd $(OBJECTDIR) ; $(CMOC) $(CMOCFLAGS) -I$(SRCDIR) -I$(GENASMDIR)/ $(notdir $<)
+	cd $(OBJECTDIR) ; sed -i.bak '$$d' $(patsubst %.c,%.s,$(notdir $<))
+	cd $(OBJECTDIR) ; echo " SECTION define_the_object" | cat >> $(patsubst %.c,%.s,$(notdir $<))
+	cd $(OBJECTDIR) ; echo "#define DynospriteObject_DataDefinition" | cat >> $(patsubst %.c,%.s,$(notdir $<))
+	cd $(OBJECTDIR) ; echo "#include \"$(patsubst %.c,%.h,$(notdir $<))\"" | cat >> $(patsubst %.c,%.s,$(notdir $<))
+	cd $(OBJECTDIR) ; cat ../../$(SRCDIR)/c-object-entry.asm >> $(patsubst %.c,%.s,$(notdir $<))
+	cd $(OBJECTDIR) ; echo " ENDSECTION" | cat >> $(patsubst %.c,%.s,$(notdir $<))
+	cd $(OBJECTDIR) ; cpp $(patsubst %.c,%.s,$(notdir $<)) > $(patsubst %.c,%.asm,$(notdir $<))
+	cd $(OBJECTDIR) ; $(CMOC-ASM) $(CMOC-ASM-FLAGS) -I $(ASMFLAGS) ../../$(SRCDIR) -I ../../$(GENASMDIR)/ --output=$(patsubst %.c,%.o,$(notdir $<)) --list=$(patsubst %.c,%.lst,$(notdir $<)) $(patsubst %.c,%.asm,$(notdir $<))
+	cd $(OBJECTDIR) ; $(CMOC) $(CFLAGS) $(CMOC-LDFLAGS) $(patsubst %.c,%.o,$(notdir $<))
 	cd $(OBJECTDIR) ; mv $(patsubst %.c,%.bin,$(notdir $<)) ../../$@
-	cd $(OBJECTDIR) ; mv $(patsubst %.c,%.lst,$(notdir $<)) ../../$(GENLISTDIR)/$(patsubst %.raw,%.lst,$(notdir $@))
+	cd $(OBJECTDIR) ; mv $(patsubst %.c,%.map,$(notdir $<)) ../../$(GENLISTDIR)/$(patsubst %.raw,%.lst,$(notdir $@))
 
 # 6b. Assemble Object handling routines to raw machine code
 $(GENOBJDIR)/object%.raw: $(OBJECTDIR)/%.asm $(SRCDIR)/datastruct.asm $(SYMBOLASM)
@@ -224,13 +232,17 @@ $(GENOBJDIR)/object%.raw: $(OBJECTDIR)/%.asm $(SRCDIR)/datastruct.asm $(SYMBOLAS
 # 6a. Compile C Level handling routines to raw
 # 7a. Compile C Level handling routines to raw
 $(GENOBJDIR)/level%.raw: $(LEVELDIR)/%.c $(SRCDIR)/datastruct.asm $(SYMBOLASM)
-	cd $(LEVELDIR) ; $(CMOC) $(CMOCFLAGS) -I$(SRCDIR) -I$(GENASMDIR)/ -c $(notdir $<)
-	cd $(LEVELDIR) ; sed -i.bak '$$d' $(patsubst %.c,%.asm,$(notdir $<))
-	cd $(LEVELDIR) ; cat ../../$(SRCDIR)/c-level-entry.asm >> $(patsubst %.c,%.asm,$(notdir $<))
-	cd $(LEVELDIR) ; sed -i.bak 's/--entry=0/$(ASMFLAGS) --no-blocks/' $(patsubst %.c,%.cmd,$(notdir $<))
-	cd $(LEVELDIR) ; bash $(patsubst %.c,%.cmd,$(notdir $<))
+	cd $(LEVELDIR) ; $(CMOC) $(CMOCFLAGS) -I$(SRCDIR) -I$(GENASMDIR)/ $(notdir $<)
+	cd $(LEVELDIR) ; sed -i.bak '$$d' $(patsubst %.c,%.s,$(notdir $<))
+	cd $(LEVELDIR) ; echo " SECTION define_the_object" | cat >> $(patsubst %.c,%.s,$(notdir $<))
+	cd $(LEVELDIR) ; echo "#define DynospriteObject_DataDefinition" | cat >> $(patsubst %.c,%.s,$(notdir $<))
+	cd $(LEVELDIR) ; cat ../../$(SRCDIR)/c-level-entry.asm >> $(patsubst %.c,%.s,$(notdir $<))
+	cd $(LEVELDIR) ; echo " ENDSECTION" | cat >> $(patsubst %.c,%.s,$(notdir $<))
+	cd $(LEVELDIR) ; cpp $(patsubst %.c,%.s,$(notdir $<)) > $(patsubst %.c,%.asm,$(notdir $<))
+	cd $(LEVELDIR) ; $(CMOC-ASM) $(CMOC-ASM-FLAGS) -I $(ASMFLAGS) ../../$(SRCDIR) -I ../../$(GENASMDIR)/ --output=$(patsubst %.c,%.o,$(notdir $<)) --list=$(patsubst %.c,%.lst,$(notdir $<)) $(patsubst %.c,%.asm,$(notdir $<))
+	cd $(LEVELDIR) ; $(CMOC) $(CFLAGS) $(CMOC-LDFLAGS) $(patsubst %.c,%.o,$(notdir $<))
 	cd $(LEVELDIR) ; mv $(patsubst %.c,%.bin,$(notdir $<)) ../../$@
-	cd $(LEVELDIR) ; mv $(patsubst %.c,%.lst,$(notdir $<)) ../../$(GENLISTDIR)/$(patsubst %.raw,%.lst,$(notdir $@))
+	cd $(LEVELDIR) ; mv $(patsubst %.c,%.map,$(notdir $<)) ../../$(GENLISTDIR)/$(patsubst %.raw,%.lst,$(notdir $@))
 
 # 6b. Assemble Level handling routines to raw machine code
 # 7b. Assemble Level handling routines to raw machine code
