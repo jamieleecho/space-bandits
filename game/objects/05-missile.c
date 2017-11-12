@@ -1,5 +1,3 @@
-#pragma org 0x0
-
 #include "05-missile.h"
 #include "03-badguys.h"
 #include "object_info.h"

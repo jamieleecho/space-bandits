@@ -27,6 +27,7 @@
 #********************************************************************************
 
 import os
+import re
 import sys
 from compression import *
 
@@ -223,6 +224,25 @@ def SymbolExtract(listName):
         if len(line) > 40 and line[0:4] == '[ G]' and line.find(".") == -1 and line.find("{") == -1:
             symdef = line[5:].split()
             SymDict[symdef[0]] = int(symdef[1], 16)
+
+    if bFoundSymTable:
+        return SymDict
+
+    symbol_parser = re.compile('^Symbol: ([^ ]+) ([^ ]+) = ([0-9A-F]+)$')
+    for line in f.split("\n"):
+        line = line.strip()
+        # look for symbol table
+        if not bFoundSymTable:
+            if line == "Symbol:":
+                bFoundSymTable = True
+
+        if not line.startswith('Symbol: '):
+            continue
+
+        # check this symbol
+        match = symbol_parser.match(line)
+        SymDict[match.group(1)] = int(match.group(3), 16)
+
     return SymDict
 
 def StringOut(inString):

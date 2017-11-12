@@ -1,4 +1,3 @@
-#pragma org 0x0
 #include "03-badguys.h"
 
 

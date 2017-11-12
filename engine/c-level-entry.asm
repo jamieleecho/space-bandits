@@ -82,3 +82,7 @@ Level_CalculateBkgrndNewXY
 LibraryInit             fcb         0           * Whether or not we initialized the library
 DynoStackPointer        fdb         0           * Dynosprite Stack Pointer
 
+Level_Initialize EXPORT
+Level_CalculateBkgrndNewXY EXPORT
+Level_Skip_INILIB EXPORT
+DynoStackPointer EXPORT
