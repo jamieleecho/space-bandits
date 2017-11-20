@@ -45,16 +45,11 @@
 ***********************************************************
 
 Level_Initialize
-            rts
-            lda LibraryInit,pcr
-            inca
-            sta LibraryInit,pcr
-            sta $ff9a
-            rts
             sts         DynoStackPointer,pcr
             lds         #$8000
             tst         LibraryInit,pcr
             bne         Level_Skip_INILIB
+            lbsr        INILIB
             inc         LibraryInit,pcr
 Level_Skip_INILIB:
             lbsr        _LevelInit
@@ -75,17 +70,6 @@ Level_Skip_INILIB:
 * give a smooth range of speeds
 
 Level_CalculateBkgrndNewXY
-            lda LibraryInit,pcr
-            inca
-            inca
-            sta LibraryInit,pcr
-            sta $ff9a
-            rts
-            lda LibraryInit,pcr
-            inca
-            sta LibraryInit,pcr
-            sta $ff9a
-            rts
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        y

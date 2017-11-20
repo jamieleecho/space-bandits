@@ -34,31 +34,20 @@
             include     dynosprite-symbols.asm
 
 Object_Init:
-            lda LibraryInit,pcr
-            inca
-            sta LibraryInit,pcr
-            sta $ff9a
-            rts
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        u,y,x
             tst         LibraryInit,pcr
             bne         Object_Skip_INILIB
-*            lbsr        INILIB
+            lbsr        INILIB
             inc         LibraryInit,pcr
 Object_Skip_INILIB:
-*            lbsr        _ObjectInit
+            lbsr        _ObjectInit
             puls        u,y,x
             lds         DynoStackPointer,pcr
             rts
 
 Object_Reactivate:
-            lda         foo,pcr
-            inca
-            sta         $ffbf
-            sta         foo,pcr
-            bra Object_Reactivate
-            rts
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        u,x
@@ -68,12 +57,6 @@ Object_Reactivate:
             rts
 
 Object_Update:
-            lda         foo,pcr
-            inca
-            sta         $ffbf
-            sta         foo,pcr
-            rts
-foo fcb 33
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        u,x
@@ -86,8 +69,8 @@ foo fcb 33
 LibraryInit:            fcb         0           * Whether or not we initialized the library
 DynoStackPointer:       fdb         0           * Dynosprite Stack Pointer
 
-NumberOfObjects        fcb     1
-ObjectDescriptorTable
+NumberOfObjects:        fcb     1
+ObjectDescriptorTable:
                         fcb     DynospriteObject_DataSize
                         fcb     1               * drawType == 1: standard sprite w/ no rowcrop
                         fcb     1               * initSize
