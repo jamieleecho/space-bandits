@@ -244,7 +244,7 @@ UpdateObjLoop@
             pshs        a,x
             ldu         COB.odtPtr,x
             ldb         COB.active,x
-*            andb        #1
+            andb        #1
             beq         >
             * call Update function
             jsr         [ODT.update,u]

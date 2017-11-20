@@ -34,20 +34,31 @@
             include     dynosprite-symbols.asm
 
 Object_Init:
+            lda LibraryInit,pcr
+            inca
+            sta LibraryInit,pcr
+            sta $ff9a
+            rts
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        u,y,x
             tst         LibraryInit,pcr
             bne         Object_Skip_INILIB
-            lbsr        INILIB
+*            lbsr        INILIB
             inc         LibraryInit,pcr
 Object_Skip_INILIB:
-            lbsr        _ObjectInit
+*            lbsr        _ObjectInit
             puls        u,y,x
             lds         DynoStackPointer,pcr
             rts
 
 Object_Reactivate:
+            lda         foo,pcr
+            inca
+            sta         $ffbf
+            sta         foo,pcr
+            bra Object_Reactivate
+            rts
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        u,x
@@ -57,6 +68,12 @@ Object_Reactivate:
             rts
 
 Object_Update:
+            lda         foo,pcr
+            inca
+            sta         $ffbf
+            sta         foo,pcr
+            rts
+foo fcb 33
             sts         DynoStackPointer,pcr
             lds         #$8000
             pshs        u,x

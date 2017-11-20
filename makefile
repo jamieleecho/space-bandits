@@ -74,6 +74,7 @@ CMOC = cmoc
 CMOC-ASM = ../../tools/cmoc-asm
 CMOC-ASM-FLAGS = -fobj --pragma=forwardrefmax
 CMOC-LDFLAGS = --org=0x0 --lwlink=../../tools/cmoc-link --intermediate
+CMOC-LEVEL-LDFLAGS = --org=0x6000 --lwlink=../../tools/cmoc-link --intermediate
 
 # make sure build products directories exist
 $(shell mkdir -p $(GENASMDIR))
@@ -246,7 +247,7 @@ $(GENOBJDIR)/level%.raw: $(LEVELDIR)/%.c $(SRCDIR)/datastruct.asm $(SYMBOLASM)
 	cd $(LEVELDIR) ; echo " ENDSECTION" | cat >> $(patsubst %.c,%.s,$(notdir $<))
 	cd $(LEVELDIR) ; cpp $(patsubst %.c,%.s,$(notdir $<)) > $(patsubst %.c,%.asm,$(notdir $<))
 	cd $(LEVELDIR) ; $(CMOC-ASM) $(CMOC-ASM-FLAGS) -I $(ASMFLAGS) ../../$(SRCDIR) -I ../../$(GENASMDIR)/ --output=$(patsubst %.c,%.o,$(notdir $<)) --list=$(patsubst %.c,%.lst,$(notdir $<)) $(patsubst %.c,%.asm,$(notdir $<))
-	cd $(LEVELDIR) ; $(CMOC) $(CFLAGS) $(CMOC-LDFLAGS) $(patsubst %.c,%.o,$(notdir $<))
+	cd $(LEVELDIR) ; $(CMOC) $(CFLAGS) $(CMOC-LEVEL-LDFLAGS) $(patsubst %.c,%.o,$(notdir $<))
 	cd $(LEVELDIR) ; mv $(patsubst %.c,%.bin,$(notdir $<)) ../../$@
 	cd $(LEVELDIR) ; mv $(patsubst %.c,%.map,$(notdir $<)) ../../$(GENLISTDIR)/$(patsubst %.raw,%.lst,$(notdir $@))
 

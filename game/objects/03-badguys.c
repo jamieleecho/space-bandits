@@ -108,7 +108,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     switchDirCob = BAD_PTR; /* switchDirCob is now undefined */
   }
 
-  byte delta = (TOP_SPEED - ((numInvaders + 3) >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
+  byte delta = (TOP_SPEED - ((numInvaders + 7) >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
   delta = (delta < 1) ? 1 : delta;
   if (directionMode & DirectionModeLeft) {
     cob->globalX -= delta;
