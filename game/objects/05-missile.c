@@ -18,6 +18,7 @@ DynospriteCOB **endBadGuys;
 
 
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
+  return;
   if (didNotInit) {
     didNotInit = FALSE;
     endBadGuys = &(badGuys[sizeof(badGuys)/sizeof(badGuys[0])]);
@@ -59,6 +60,7 @@ void checkHitBadGuy(DynospriteCOB *cob) {
 
 
 void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+  return;
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
 
   if (cob->globalY < 10) {

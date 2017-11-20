@@ -6,8 +6,8 @@
 [Level]
 Name = DynoSprite Demo 2
 Description = "Bubbles In A Box"
-ObjectGroups = 1, 2, 3
-MaxObjectTableSize = 8
+ObjectGroups = 1, 2
+MaxObjectTableSize = 5
 Tileset = 0
 TilemapImage = ../tiles/00-rainbowpyramids.png
 TilemapStart = 0,0
@@ -56,14 +56,6 @@ globalX = 0
 globalY = 0
 InitData = 5
 
-[Object]
-GroupID = 3
-ObjectID = 0
-Active = 3
-globalX = 0
-globalY = 0
-InitData = 5
-
 * Here is an object which is a frame counter in the upper-right corner of the screen
 * [Object]
 * GroupID = 1
@@ -82,4 +74,3 @@ InitData = 5
 * globalX = 100
 * globalY = 10
 * InitData = 2,Input_JoystickX
-
