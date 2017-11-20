@@ -105,7 +105,6 @@ def SymbolExtract(listName):
         if len(line) > 40 and line[0:4] == '[ G]' and line.find(".") == -1 and line.find("{") == -1:
             symdef = line[5:].split()
             SymDict[symdef[0]] = int(symdef[1], 16)
-            print "{}: {}".format(symdef[0], SymDict[symdef[0]])
 
     if bFoundSymTable:
         return SymDict
@@ -124,7 +123,6 @@ def SymbolExtract(listName):
         # check this symbol
         match = symbol_parser.match(line)
         SymDict[match.group(1)] = int(match.group(3), 16)
-        print "{}: {}".format(match.group(1), SymDict[match.group(1)])
 
     return SymDict
 
