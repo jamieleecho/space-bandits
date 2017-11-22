@@ -74,8 +74,8 @@ Level_CalculateBkgrndNewXY
             lds         #$8000
             pshs        y
             lbsr        _LevelCalculateBkgrndNewXY
-            lds         DynoStackPointer,pcr
             puls        y
+            lds         DynoStackPointer,pcr
             rts
 
 
