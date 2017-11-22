@@ -31,8 +31,7 @@ enum DirectionMode {
 } DirectionMode;
 
 
-byte didNotInit = TRUE;
-byte initVal = 0;
+byte didInit = FALSE;
 enum DirectionMode directionMode;
 DynospriteCOB *switchDirCob=BAD_PTR;
 byte numInvaders = 0;
@@ -42,8 +41,8 @@ byte numInvaders = 0;
 
 
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
-  if (didNotInit) {
-    didNotInit = FALSE;
+  if (!didInit) {
+    didInit = TRUE;
     numInvaders = 0;
   }
 
@@ -108,7 +107,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     switchDirCob = BAD_PTR; /* switchDirCob is now undefined */
   }
 
-  byte delta = (TOP_SPEED - ((numInvaders + 7) >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
+  byte delta = (TOP_SPEED - ((numInvaders + 3) >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
   delta = (delta < 1) ? 1 : delta;
   if (directionMode & DirectionModeLeft) {
     cob->globalX -= delta;
