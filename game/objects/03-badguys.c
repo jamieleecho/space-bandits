@@ -83,6 +83,7 @@ void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
+  // cob->active = (cob->active == OBJECT_UPDATE_ACTIVE) ? OBJECT_ACTIVE : OBJECT_UPDATE_ACTIVE;
 
   /* Switch to the next animation frame */
   byte spriteIdx = statePtr->spriteIdx;
@@ -107,8 +108,8 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     switchDirCob = BAD_PTR; /* switchDirCob is now undefined */
   }
 
-  byte delta = (TOP_SPEED - ((numInvaders + 3) >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
-  delta = (delta < 1) ? 1 : delta;
+  byte delta = (TOP_SPEED - (numInvaders >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
+  delta = (delta > 128) ? 1 : ((delta < 1) ? 1 : delta);
   if (directionMode & DirectionModeLeft) {
     cob->globalX -= delta;
     if (cob->globalX <= SCREEN_LOCATION_MIN) {
