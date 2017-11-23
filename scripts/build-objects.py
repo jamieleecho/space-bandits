@@ -67,7 +67,7 @@ class Group:
         odtStart = self.ObjSymbols["ObjectDescriptorTable"]
         self.numSprites = ord(self.SprRaw[sdtStart-1])
         self.numObjects = ord(self.ObjRaw[odtStart-1])
-        print "    Found %i sprites and %i objects in group %i - %i" % (self.numSprites, self.numObjects, self.GrpNumber, ord(self.ObjRaw[odtStart-3]))
+        print "    Found %i sprites and %i objects in group %i" % (self.numSprites, self.numObjects, self.GrpNumber)
         # validate length of raw data
         if len(self.SprRaw) != sdtStart + self.numSprites * 16:
             print "****Error: group %i sprite raw code file length is wrong" % self.grpNumber
