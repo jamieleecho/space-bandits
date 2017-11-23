@@ -2,9 +2,6 @@
 
 lstfile=`echo "$@" | grep -o -e "--script=.*.link" | sed "s/--script=//"`
 fixed_vars=`echo "$@" | sed "s/--format=decb/--format=raw/"`
-#echo $@ >> /Users/jcho/Desktop/foo.txt
-#echo $lstfile >> /Users/jcho/Desktop/foo.txt
-echo $fixed_vars >> /Users/jcho/Desktop/foo.txt
 sed -i.bak '$ d' $lstfile
 echo section define_the_object >> $lstfile
 echo entry program_start >> $lstfile
