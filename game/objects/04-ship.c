@@ -3,7 +3,6 @@
 
 
 byte didNotInit = TRUE;
-byte initVal = 0;
 DynospriteCOB *missiles[3];
 
 

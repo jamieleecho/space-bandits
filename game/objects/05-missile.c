@@ -13,7 +13,7 @@ byte initVal = 0;
 #define BADGUY_HALF_HEIGHT 7
 
 
-DynospriteCOB *badGuys[25];
+DynospriteCOB *badGuys[55];
 DynospriteCOB **endBadGuys;
 
 
