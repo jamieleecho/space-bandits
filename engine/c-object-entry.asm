@@ -54,7 +54,13 @@ Object_Reactivate:
             lbsr        _ObjectReactivate
             puls        u,x
             lds         DynoStackPointer,pcr
-            rts
+            tstb
+            beq         >
+Object_GotoLevel:
+            tfr         b,a
+            leas        2,s
+            jmp         Ldr_Jump_To_New_Level
+!           rts
 
 Object_Update:
             sts         DynoStackPointer,pcr
@@ -63,7 +69,10 @@ Object_Update:
             lbsr        _ObjectUpdate
             puls        u,x
             lds         DynoStackPointer,pcr
-            rts
+            tstb
+            beq         >
+            bra         Object_GotoLevel
+!           rts
 
 
 LibraryInit:            fcb         0           * Whether or not we initialized the library

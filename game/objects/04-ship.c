@@ -47,14 +47,16 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
   statePtr->spriteIdx = 1;
+  return;
 }
 
 
-void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+  return 0;
 }
 
 
-void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
   byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
 
@@ -86,6 +88,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
       PlaySound(SOUND_LASER);
     }
   }
+  return 0;
 }
 
 

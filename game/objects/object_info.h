@@ -5,10 +5,11 @@
 #include "dynosprite.h"
 
 
+#define LEVEL_1 1
+
 #define BADGUY_GROUP_IDX 3
 #define SHIP_GROUP_IDX 4
 #define MISSILE_GROUP_IDX 5
-
 
 #define SOUND_LASER 1
 
