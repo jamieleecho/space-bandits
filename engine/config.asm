@@ -57,5 +57,5 @@
 *         (a step function) each time that the audio playback is started or
 *         stopped.
 
-SOUND_METHOD            EQU     1
+SOUND_METHOD            EQU     2
 
