@@ -25,7 +25,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of ShipObjectState in bytes */
-#define DynospriteObject_DataSize 0
+#define DynospriteObject_DataSize 1
 
 #else
 
@@ -37,7 +37,8 @@
 
 /** State of Missile Object */
 typedef struct MissleObjectState {
-} ShipObjectState;
+  byte spriteIdx;
+} MissileObjectState;
 
 
 #endif /* _05_missile_h */

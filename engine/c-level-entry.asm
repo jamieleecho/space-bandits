@@ -64,10 +64,8 @@ Level_Skip_INILIB:
 * - OUT:     None
 * - Trashed: A,B,X,U
 ***********************************************************
-* This function evaluates the joystick position and calculates a
-* new background X/Y starting location for the next frame.  It
-* uses 8 bits of fractional position in each dimension to 
-* give a smooth range of speeds
+* This function calculates a new background X/Y starting
+* location for the next frame.
 
 Level_CalculateBkgrndNewXY
             sts         DynoStackPointer,pcr

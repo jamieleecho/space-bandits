@@ -3,16 +3,13 @@
 #include "object_info.h"
 
 
-byte didNotInit = TRUE;
-byte initVal = 0;
-
-
 #define MISSILE_HALF_WIDTH 2
 #define MISSILE_HEIGHT 10
 #define BADGUY_HALF_WIDTH 7
 #define BADGUY_HALF_HEIGHT 7
 
 
+byte didNotInit = TRUE;
 DynospriteCOB *badGuys[55];
 DynospriteCOB **endBadGuys;
 
@@ -28,6 +25,8 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
       obj = obj + 1;
     }
   }
+  MissileObjectState *statePtr = (MissileObjectState *)(cob->statePtr);
+  statePtr->spriteIdx = 0;
 }
 
 
@@ -59,7 +58,7 @@ void checkHitBadGuy(DynospriteCOB *cob) {
 
 
 void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
-  ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
+  MissileObjectState *statePtr = (MissileObjectState *)(cob->statePtr);
 
   if (cob->globalY < 10) {
     cob->active = 0;
