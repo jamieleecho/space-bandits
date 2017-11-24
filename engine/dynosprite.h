@@ -67,7 +67,9 @@ typedef struct DynospriteDirectPageGlobals {
   unsigned MemMgr_HeapEndPtr;
 
   byte Gfx_BkgrndBlockCount;
+  byte Gfx_BkgrndMaskCount;
   byte Gfx_BkgrndBlockPages;
+  void *Gfx_CollisionTablePtr;
 
   byte Gfx_BkgrndMapPages;
   unsigned Gfx_BkgrndMapWidth;
