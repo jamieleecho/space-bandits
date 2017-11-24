@@ -1,8 +1,12 @@
+#include <coco.h>
+
+
 void LevelInit() {
 }
 
 
-void LevelCalculateBkgrndNewXY() {
+byte LevelCalculateBkgrndNewXY() {
+  return 0;
 }
 
 

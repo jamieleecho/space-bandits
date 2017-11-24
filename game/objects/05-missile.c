@@ -30,7 +30,8 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 }
 
 
-void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+  return 0;
 }
 
 
@@ -57,7 +58,7 @@ void checkHitBadGuy(DynospriteCOB *cob) {
 }
 
 
-void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   MissileObjectState *statePtr = (MissileObjectState *)(cob->statePtr);
 
   if (cob->globalY < 10) {
@@ -67,6 +68,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     cob->globalY -= delta;
     checkHitBadGuy(cob);
   }
+  return 0;
 }
 
 

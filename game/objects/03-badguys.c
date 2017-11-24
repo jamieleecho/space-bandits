@@ -1,4 +1,5 @@
 #include "03-badguys.h"
+#include "05-missile.h"
 #include "object_info.h"
 
 
@@ -92,17 +93,25 @@ void reset() {
     ++numInvaders;
     obj = obj + 1;
   }
-}
 
-
-void ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
-  if (!numInvaders) {
-    reset();
+  obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
+  for (obj = findObjectByGroup(obj, MISSILE_GROUP_IDX); obj; obj = findObjectByGroup(obj, MISSILE_GROUP_IDX)) {
+    MissileObjectState *statePtr = (MissileObjectState *)(obj->statePtr);
+    obj->active = OBJECT_INACTIVE;
+    obj = obj + 1;
   }
 }
 
 
-void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+  if (!numInvaders) {
+    reset();
+  }
+  return 0;
+}
+
+
+byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
   // cob->active = (cob->active == OBJECT_UPDATE_ACTIVE) ? OBJECT_ACTIVE : OBJECT_UPDATE_ACTIVE;
 
@@ -115,10 +124,10 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   } else if (spriteIdx >= BADGUY_SPRITE_LAST_INDEX) {
     cob->active = OBJECT_INACTIVE;
     --numInvaders;
-    return;
+    return 0;
   } else {
     statePtr->spriteIdx = spriteIdx + 1;
-    return;
+    return 0;
   }
 
   // If we are at the first bad guy...
@@ -137,6 +146,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   cob->globalY += deltaY;
   if (cob->globalY > MAX_Y) {
     cob->globalY = MAX_Y;
+    return LEVEL_1;
   }
 
   byte delta = (TOP_SPEED - (numInvaders >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
@@ -154,6 +164,7 @@ void ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
       directionMode = directionMode | DirectionModeChangeOnNextIterMask;
     }
   }
+  return 0;
 }
 
 

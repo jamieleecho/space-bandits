@@ -74,7 +74,12 @@ Level_CalculateBkgrndNewXY
             lbsr        _LevelCalculateBkgrndNewXY
             puls        y
             lds         DynoStackPointer,pcr
-            rts
+            tstb
+            beq         >
+            tfr         b,a
+            leas        2,s
+            jmp         Ldr_Jump_To_New_Level
+!           rts
 
 
 LibraryInit             fcb         0           * Whether or not we initialized the library
