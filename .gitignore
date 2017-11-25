@@ -42,6 +42,7 @@ game/levels/01-persei.asm
 game/objects/03-badguys.asm
 game/objects/04-ship.asm
 game/objects/05-missile.asm
+game/objects/06-game-over.asm
 assets/00-mainmenu.png
 assets/01-moon.gif
 assets/palette.gif

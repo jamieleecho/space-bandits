@@ -6,7 +6,7 @@
 [Level]
 Name = Omicron Persei 8 Invades
 Description = Drop Down and Increase Speed!
-ObjectGroups = 3, 4, 5
+ObjectGroups = 3, 4, 5, 6
 MaxObjectTableSize = 64
 Tileset = 1
 TilemapImage = ../tiles/01-moon.gif
@@ -496,6 +496,16 @@ ObjectID = 0
 Active = 0
 globalX = 0
 globalY = 0
+InitData = 0
+
+
+*** Game Over
+[Object]
+GroupID = 6
+ObjectID = 0
+Active = 3
+globalX = 160
+globalY = 90 
 InitData = 0
 
 
