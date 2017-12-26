@@ -226,4 +226,14 @@ asm void PlaySound(byte val) {
   }
 }
 
+
+asm byte Random() {
+  asm { 
+  jsr Util_Random
+  tfr b,a
+  rts
+  }
+}
+
+
 #endif /* _Dynosprite_h */
