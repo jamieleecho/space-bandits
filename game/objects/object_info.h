@@ -13,6 +13,15 @@
 
 #define SOUND_LASER 1
 
+#define GAME_OVER_GROUP_IDX 6
+#define BAD_MISSILE_GROUP_IDX 7
+
+#define SOUND_LASER 1
+
+#define NUM_BAD_GUYS 55
+#define NUM_MISSILES 3
+#define NUM_BAD_MISSILES 3
+
 
 /**
  * Starting from obj, finds an object with the given group index.

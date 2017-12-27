@@ -93,9 +93,11 @@ EraseOne@
             swi                                 * error: only No Rowcrop mode is currently supported
 !           ldy         -3,u                    * Y = starting offset to restore bytes in graphics memory
             lda         -4,u                    * A = starting physical page # for graphics memory
+            sta         $FFA3
+            inca
             sta         $FFA4
             inca
-            sta         $FFA5                   * screen window is mapped to $8000-$BFFF
+            sta         $FFA5                   * screen window is mapped to $6000-$BFFF
             lda         -5,u                    * A = Code page (virtual handle) for erase function for this sprite
             ldx         #MemMgr_VirtualTable
             lda         a,x
@@ -134,16 +136,38 @@ Gfx_SpriteDrawSimple
             rorb
             subd        <Gfx_BkgrndNewX
             stb         <gfx_DrawOffsetX
+            * get maximum number of sprites in this group
+ IFDEF DEBUG
+            lda         COB.groupIdx,x
+            ldy         <Gfx_SpriteGroupsPtr
+            ldb         <Gfx_NumSpriteGroups
+!           cmpa        SGT.groupIdx,y
+            beq         FoundSpriteGroup@
+            leay        sizeof{SGT},y
+            decb
+            bne         <
+            swi                                 * error: group index for current object not found
+FoundSpriteGroup@
+ ENDC
             * get pointer to Sprite Descriptor Table for current sprite
             lda         [COB.statePtr,x]        * sprite number must be first byte in state data
+ IFDEF DEBUG
+            cmpa        SGT.spCount,y
+            bls         SpriteIdxOkay@
+            swi                                 * error: sprite index is greater than number of sprites in group
+SpriteIdxOkay@
+ ENDC
             ldb         #sizeof{SDT}
             mul
             addd        COB.sprPtr,x
             tfr         d,u                     * now U points to SDT entry for sprite to draw
             * decide which function (left or right) to use (DrawLRParity = SpriteGlobalX & 1)
+            tst         SDT.cpRight,u
+            beq         DrawLeft@               * if there is no single pixel positioning, we must use the DrawLeft function
             ldb         COB.globalX+1,x
             andb        #1
             bne         DrawRight@
+DrawLeft@
             lda         SDT.cpLeft,u
             ldb         #SDT.drawLeft
             bra         LRDone@
@@ -166,22 +190,33 @@ LRDone@
             sta         lda_ScreenOffset@+1
             anda        #$1F
             tfr         d,x                     * offset is in X
+            leax        $6000,x                 * X is now pointer where we will write pixel data
 lda_ScreenOffset@
             lda         #0                      * SMC: re-load high byte of screen offset
-            anda        #$E0                    * do we need to bump the page?
-            beq         >
             lsra
             lsra
             lsra
             lsra
             lsra
-!           adda        <Gfx_DrawScreenPage
-            sta         <gfx_DrawSpritePage
+            adda        <Gfx_DrawScreenPage     * page is in A
+            * corner case: if starting offset is really close to the beginning of a page, we need to map the prior page as well,
+            * because the draw/erase functions may load/store the first byte with an offset of up to -16 from the X register
+            cmpx        #$6020
+            bhs         >
+            leax        $2000,x
+            deca
+ IFDEF DEBUG
+            bpl         >
+            swi                                 * error: starting page is first page
+ ENDC
+!           sta         <gfx_DrawSpritePage
+            stx         <gfx_DrawSpriteOffset
+            * screen window is mapped to $6000-$BFFF
+            sta         $FFA3
+            inca
             sta         $FFA4
             inca
-            sta         $FFA5                   * screen window is mapped to $8000-$BFFF
-            leax        $8000,x                 * X is now pointer where we will write pixel data
-            stx         <gfx_DrawSpriteOffset
+            sta         $FFA5
             * set up Erase buffer stack data, and call Draw function
             ldy         <Gfx_SpriteErasePtrPtr
             ldy         2,y

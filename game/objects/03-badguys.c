@@ -1,10 +1,10 @@
 #include "03-badguys.h"
 #include "05-missile.h"
+#include "07-bad-missile.h"
 #include "object_info.h"
 
 
 #define BAD_PTR ((DynospriteCOB *)0xffff)
-#define NULL ((DynospriteCOB *)0x0)
 #define SCREEN_LOCATION_MIN 14
 #define SCREEN_LOCATION_MAX 306
 #define DELTA_Y 4
@@ -40,10 +40,21 @@ enum DirectionMode {
 
 byte didInit = FALSE;
 enum DirectionMode directionMode;
-DynospriteCOB *lastCob=NULL;
+DynospriteCOB *lastCob = (DynospriteCOB *)NULL;
 byte numInvaders = 0;
 byte deltaY = 0;
 
+
+DynospriteCOB *badMissiles[NUM_BAD_MISSILES];
+DynospriteCOB **endBadMissiles;
+byte currentMissileFireColumnIndex = 0;
+
+
+// From the original space invaders
+byte missileFireColumns[] = {
+  0x01, 0x07, 0x01, 0x01, 0x01, 0x04, 0x0B, 0x01, 0x06, 0x03, 0x01, 0x01,
+  0x0B, 0x09, 0x02, 0x08, 0x02,0x0B,0x04,0x07,0x0A
+};
 
 
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
@@ -51,6 +62,14 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     didInit = TRUE;
     numInvaders = 0;
     deltaY = 0;
+
+    endBadMissiles = &(badMissiles[sizeof(badMissiles)/sizeof(badMissiles[0])]);
+    DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
+    for (byte ii=0; obj && ii<sizeof(badMissiles)/sizeof(badMissiles[0]); ii++) {
+      obj = findObjectByGroup(obj, BAD_MISSILE_GROUP_IDX);
+      badMissiles[ii] = obj;
+      obj = obj + 1;
+    }
   }
 
   /* We want to animate the different invaders and they all have different

@@ -6,7 +6,7 @@
 [Level]
 Name = Omicron Persei 8 Invades
 Description = Drop Down and Increase Speed!
-ObjectGroups = 3, 4, 5
+ObjectGroups = 3, 4, 5, 6, 7
 MaxObjectTableSize = 64
 Tileset = 1
 TilemapImage = ../tiles/01-moon.gif
@@ -27,7 +27,7 @@ globalY = 175
 InitData = 0
 
 
-*** Bad Guys
+*** Bad Guys Row 5
 [Object]
 GroupID = 3
 ObjectID = 0
@@ -117,6 +117,7 @@ globalY = 30
 InitData = 3
 
 
+*** Bad Guys Row 4
 [Object]
 GroupID = 3
 ObjectID = 0
@@ -206,6 +207,7 @@ globalY = 50
 InitData = 11
 
 
+*** Bad Guys Row 3
 [Object]
 GroupID = 3
 ObjectID = 0
@@ -384,6 +386,7 @@ globalY = 90
 InitData = 13
 
 
+*** Bad Guys Row 1
 [Object]
 GroupID = 3
 ObjectID = 0
@@ -498,6 +501,40 @@ globalX = 0
 globalY = 0
 InitData = 0
 
+*** Bad Guy Missiles
+[Object]
+GroupID = 7
+ObjectID = 0
+Active = 3
+globalX = 20
+globalY = 20
+InitData = 0
+
+[Object]
+GroupID = 7
+ObjectID = 0
+Active = 3
+globalX = 160
+globalY = 20
+InitData = 0
+
+[Object]
+GroupID = 7
+ObjectID = 0
+Active = 3
+globalX = 300 
+globalY = 20
+InitData = 0
+
+
+*** Game Over
+[Object]
+GroupID = 6
+ObjectID = 0
+Active = 0
+globalX = 160
+globalY = 90 
+InitData = 0
 
 * Here is an object which is a frame counter in the upper-right corner of the screen
 * [Object]

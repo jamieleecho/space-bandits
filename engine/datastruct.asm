@@ -38,7 +38,9 @@
 * - Tilesets (TILES.DAT)
 *   - For each tileset:
 *     - palette (32 bytes, 16 CMP + 16 RGB)
+*     - compressed collision table (raw size is one byte per tile)
 *     - compressed tile data (raw size is 128 bytes per tile)
+*     - compressed collision mask data (raw size is 128 bytes per mask)
 * - Level-specific data (LEVELS.DAT)
 *   - For each level:
 *     - Level Directory:
@@ -79,6 +81,7 @@
 *   - For each tileset:
 *     - tileset number                             (char)
 *     - total number of tiles                      (char)
+*     - total number of collision masks            (char)
 *     - compressed tile data size in bytes         (short)
 * - Level directory
 *   - Total # of levels
@@ -142,7 +145,7 @@ rowcrop                 rmd     1
 *      offsetX        2        1   Offset in bytes to add to global X coordinate to draw sprite at hotspot
 *      offsetY        3        1   Offset in lines to add to global Y coordinate to draw sprite at hotspot
 *       cpLeft        4        1   virtual page number for drawLeft function
-*      cpRight        5        1   virtual page number for drawRight function
+*      cpRight        5        1   virtual page number for drawRight function or 0
 *      cpErase        6        1   virtual page number for erase function
 *   storeBytes        7        2   Number of bytes to reserve for storing background pixels
 *     drawLeft        9        2   Pointer to ASM function for storing/drawing
@@ -314,6 +317,7 @@ NumObjects              rmb     1
 GDT         STRUCT
 TilesetNum              rmb     1
 NumTiles                rmb     1
+NumMasks                rmb     1
 DiskSize                rmb     2
             ENDSTRUCT
 

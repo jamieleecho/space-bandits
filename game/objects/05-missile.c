@@ -10,7 +10,7 @@
 
 
 byte didNotInit = TRUE;
-DynospriteCOB *badGuys[55];
+DynospriteCOB *badGuys[NUM_BAD_GUYS];
 DynospriteCOB **endBadGuys;
 
 

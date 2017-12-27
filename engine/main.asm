@@ -128,8 +128,6 @@ beginframe
             sta         $FFA0                   * this contains object tables
             lda         <MemMgr_VirtualTable+VH_SPRERASE
             sta         $FFA6                   * Map sprite erase data to $C000
-            lda         <MemMgr_VirtualTable+VH_LVLOBJCODE
-            sta         $FFA3                   * Map the Level/Object code page to $6000
             ldx         <Obj_CurrentTablePtr
             lda         <Obj_NumCurrent
             beq         DrawObjDone@
@@ -142,6 +140,8 @@ DrawObjLoop@
             ldb         ODT.drawType,u
             bne         >
             * custom drawing function
+            lda         <MemMgr_VirtualTable+VH_LVLOBJCODE
+            sta         $FFA3                   * Map the Level/Object code page to $6000
             jsr         [ODT.draw,u]
             bra         ThisObjDrawn@
 !           cmpb        #1
@@ -265,8 +265,8 @@ UpdateObjDone@
             jmp         mainloop
 
 *           The stack grows downwards from $4000
-*           We should save at least 80 bytes for the stack
-            rmb        $3FB0-*                  * throw an error if Primary code page overflowed
+*           We should save at least 64 bytes for the stack
+            rmb        $3FC0-*                  * throw an error if Primary code page overflowed
 
 ***********************************************************
 *           The game directories and dynamic heap are stored in the first page of BASIC memory

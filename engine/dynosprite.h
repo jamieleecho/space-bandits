@@ -67,7 +67,9 @@ typedef struct DynospriteDirectPageGlobals {
   unsigned MemMgr_HeapEndPtr;
 
   byte Gfx_BkgrndBlockCount;
+  byte Gfx_BkgrndMaskCount;
   byte Gfx_BkgrndBlockPages;
+  unsigned Gfx_CollisionTablePtr;
 
   byte Gfx_BkgrndMapPages;
   unsigned Gfx_BkgrndMapWidth;
@@ -175,6 +177,7 @@ typedef struct DynospriteDirectPageGlobals {
 
 /** Dynosprite Global Variables */
 typedef struct DynospriteGlobals {
+  byte Sound_PageBuffer[256];
   byte MemMgr_PhysicalMap[64];
   byte Gfx_Palette_CMP_RGB[32];
   byte Gfx_PalIdxBKColor;
@@ -201,7 +204,7 @@ typedef struct DynospriteGlobals {
   unsigned Disk_FileBytesInLastSec;
   unsigned Disk_ProgressCallback;
 
-  byte Disk_FAT;
+  byte Disk_FAT[68];
 
   byte Img_Random161[161];
   byte Img_Random200[200];
@@ -221,6 +224,14 @@ asm void PlaySound(byte val) {
   pshs u
   jsr Sound_Play
   puls u
+  }
+}
+
+asm byte Random() {
+  asm { 
+  jsr Util_Random
+  tfr b,a
+  rts
   }
 }
 

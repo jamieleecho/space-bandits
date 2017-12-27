@@ -50,6 +50,7 @@ LEVELCSRC2OBJ = $(patsubst %.c, %.o, $(LEVELCSRC))
 
 # lists of build products based on game assets
 TILESRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/tileset%.txt, $(TILEDESC))
+MASKSRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/tileset%_mask.txt, $(TILEDESC))
 PALSRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/palette%.txt, $(TILEDESC))
 SPRITESRC = $(patsubst $(SPRITEDIR)/%.txt, $(GENGFXDIR)/sprite%.txt, $(SPRITEDSC))
 SPRITERAW := $(patsubst $(SPRITEDIR)/%.txt, $(GENOBJDIR)/sprite%.raw, $(SPRITEDSC))
@@ -189,8 +190,8 @@ $(COCODISKGEN): $(TOOLDIR)/src/file2dsk/main.c
 	gcc -o $@ $<
 
 # 1a. Generate text Palette and Tileset files from images
-$(GENGFXDIR)/tileset%.txt $(GENGFXDIR)/palette%.txt: $(TILEDIR)/%.txt $(SCRIPTDIR)/gfx-process.py
-	$(SCRIPTDIR)/gfx-process.py gentileset $< $(GENGFXDIR)/palette$*.txt $(GENGFXDIR)/tileset$*.txt
+$(GENGFXDIR)/tileset%.txt $(GENGFXDIR)/tilemask%.txt $(GENGFXDIR)/palette%.txt: $(TILEDIR)/%.txt $(SCRIPTDIR)/gfx-process.py
+	$(SCRIPTDIR)/gfx-process.py gentileset $< $(GENGFXDIR)/palette$*.txt $(GENGFXDIR)/tileset$*.txt $(GENGFXDIR)/tilemask$*.txt
 
 # 1b. Generate text Tilemap files from images
 $(GENGFXDIR)/tilemap%.txt: $(LEVELDIR)/%.txt $(TILESRC) $(PALSRC) $(SCRIPTDIR)/gfx-process.py

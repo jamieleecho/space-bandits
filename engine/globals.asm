@@ -66,7 +66,9 @@ MemMgr_HeapEndPtr       zmd     1
 *
 
 Gfx_BkgrndBlockCount    zmb     1       * number of background 16x16 blocks defined in this level
+Gfx_BkgrndMaskCount     zmb     1       * number of 16x16 collision mask blocks defined in this level
 Gfx_BkgrndBlockPages    zmb     1       * number of allocated 8k pages for tiles
+Gfx_CollisionTablePtr   zmd     1
 
 Gfx_BkgrndMapPages      zmb     1
 Gfx_BkgrndMapWidth      zmd     1
@@ -202,7 +204,7 @@ rr_RowsToDraw           zmb     1
 rr_TexRowOffset         zmb     1
 
 * locals for Gfx_SpriteDrawSimple
-gfx_DrawOffsetX         zmb     1
+gfx_DrawOffsetX         zmb     2
 gfx_DrawOffsetY         zmb     1
 gfx_DrawSpritePage      zmb     1
 gfx_DrawSpriteOffset    zmb     2
