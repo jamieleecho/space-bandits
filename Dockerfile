@@ -2,6 +2,12 @@ FROM jamieleecho/coco-dev:0.8
 
 MAINTAINER Jamie Cho version: 0.1
 
+# Install image-magick
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install -y imagemagick
+RUN apt-get clean
+
 # Setup tools folder
 ADD . /home/dynosprite/
 WORKDIR /home/dynosprite/tools
