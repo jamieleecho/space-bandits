@@ -38,7 +38,7 @@ project:
 4. (Optional) Install or build the MESS emulator, and copy the binary into
    the tools/ folder of DynoSprite.  Make sure that it is named 'mess64'
 5. Run 'make all' from the root folder of DynoSprite.  This will produce a disk
-   image file called 'DYNO6809.DSK' in the same folder as the makefile.
+   image file called 'DYNO6809.DSK' in the build folder.
 6. (Optional) Run 'make test' to start the MESS emulator with the disk image
 
 * Windows Build Instructions *

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+docker-compose run --workdir=/home/dynosprite --rm dynosprite make "$@"
+

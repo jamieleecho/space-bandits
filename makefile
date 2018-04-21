@@ -155,7 +155,7 @@ endif
 CMOCFLAGS = -O2 --asm-cmd --org=0x0 -S -I. -I../../$(SRCDIR) -I../../$(GENASMDIR) -I../shared --intermediate
 
 # output disk image filename
-TARGET = BNDT$(CPU).DSK
+TARGET = $(BUILDDIR)/BNDT$(CPU).DSK
 
 # build targets
 targets:

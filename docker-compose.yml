@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  dynosprite:
+    build: .
+    environment:
+      - HOME=/home/dynosprite
+    volumes:
+      - ./build:/home/dynosprite/build
+      - ./cfg:/home/dynosprite/cfg
+      - ./makefile:/home/dynosprite/makefile
+      - ./assets:/home/dynosprite/assets
+      - ./engine:/home/dynosprite/engine
+      - ./scripts:/home/dynosprite/scripts
+      - ./game:/home/dynosprite/game
