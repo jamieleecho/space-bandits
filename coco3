@@ -1,2 +1,0 @@
-cd /Users/jcho/Applications/MacSDLMESS/mess0155/mame
-./mess coco3 -flop1 ~/src/dynosprite/DYNO6809.DSK 
