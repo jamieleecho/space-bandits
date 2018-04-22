@@ -28,7 +28,7 @@ byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   Hero *hero = (Hero *)(cob->statePtr);
 
   unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
-  const unsigned int delta = 1;
+  const unsigned int delta = 2;
   if (joyx < 16) { // want to move left
     if (cob->globalX > GLOBAL_X_MIN) { // can move left
       cob->globalX -= delta;
