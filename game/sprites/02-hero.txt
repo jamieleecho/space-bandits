@@ -1,0 +1,8 @@
+Group = 2
+Image = ../tiles/01-grave.gif
+Transparent=254,0,254
+Palette = 1
+
+[Hero1]
+Location=627,242
+SinglePixelPosition=True

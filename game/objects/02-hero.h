@@ -24,24 +24,25 @@
 /* This preprocessor conditional must be included for each object defined in C */
 #ifdef DynospriteObject_DataDefinition
 
-/** Defines at least the size of ShipObjectState in bytes */
+/** Defines at least the size of Hero in bytes */
 #define DynospriteObject_DataSize 1
 
 #else
 
-#ifndef _06_game_over_h
-#define _06_game_over_h
+#ifndef _02_hero_h
+#define _02_hero_h
 
 #include "dynosprite.h"
 
 
-/** State of Missile Object */
-typedef struct GameOverObjectState {
+/** State of Hero */
+typedef struct Hero {
   byte spriteIdx;
-} GameOverObjectState;
+} Hero;
 
 
-#endif /* _06_game_over_h */
+
+#endif /* _03_hero_h */
 
 #endif /* DynospriteObject_DataDefinition */
 

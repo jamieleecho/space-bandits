@@ -1,0 +1,3 @@
+Image = 01-grave.gif
+TileSetStart = 0,0
+TileSetSize = 720,208

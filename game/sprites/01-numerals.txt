@@ -1,7 +1,7 @@
 Group = 1
 Image = numerals.png
 Transparent=128,128,128
-Palette = 0
+Palette = 1
 
 [0030]
 Location=7,5

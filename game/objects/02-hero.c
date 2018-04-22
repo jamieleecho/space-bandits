@@ -1,10 +1,15 @@
-#include "object_info.h"
-#include "06-game-over.h"
+#include "02-hero.h"
+
+
+byte didInit = FALSE;
 
 
 void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
-  GameOverObjectState *statePtr = (GameOverObjectState *)(cob->statePtr);
-  statePtr->spriteIdx = 0;
+  if (!didInit) {
+    didInit = TRUE;
+  }
+  Hero *hero = (Hero *)(cob->statePtr);
+  hero->spriteIdx = 0;
 }
 
 
@@ -14,6 +19,7 @@ byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+  Hero *hero = (Hero *)(cob->statePtr);
   return 0;
 }
 
