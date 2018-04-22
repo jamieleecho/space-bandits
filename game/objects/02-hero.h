@@ -35,6 +35,9 @@
 #include "dynosprite.h"
 
 
+#define HERO_COUNTER_MAX 20
+
+
 typedef enum HorizontalDirection {
   HorizontalDirectionRight = 0,
   HorizontalDirectionLeft = 1

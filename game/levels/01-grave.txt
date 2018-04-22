@@ -22,6 +22,6 @@ BkgrndStartY = 0
 GroupID = 2
 ObjectID = 0
 Active = 3
-globalX = 175
+globalX = 160
 globalY = 167
 InitData = 0

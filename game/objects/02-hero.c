@@ -15,7 +15,7 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   hero->spriteIdx = 3;
   hero->motionFactor = 1;
   hero->horizontalDirection = HorizontalDirectionRight;
-  hero->counter = COUNTER_MAX;
+  hero->counter = HERO_COUNTER_MAX;
 }
 
 
