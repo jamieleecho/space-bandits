@@ -1,8 +1,10 @@
 #include "02-hero.h"
 
+
+#define COUNTER_MAX 20
+#define SOUND_COUNTER_MAX 30
 #define GLOBAL_X_MIN 20
 #define GLOBAL_X_MAX 700
-#define COUNTER_MAX 20
 
 byte didInit = FALSE;
 
@@ -15,7 +17,8 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   hero->spriteIdx = 3;
   hero->motionFactor = 1;
   hero->horizontalDirection = HorizontalDirectionRight;
-  hero->counter = HERO_COUNTER_MAX;
+  hero->counter = COUNTER_MAX;
+  hero->soundCounter = 0;
 }
 
 
@@ -26,6 +29,10 @@ byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   Hero *hero = (Hero *)(cob->statePtr);
+
+  if (hero->soundCounter > 0) {
+    hero->soundCounter--;
+  }
 
   unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
   const unsigned int delta = 2;
@@ -71,6 +78,11 @@ byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         }
       }
     }
+  }
+
+  if (!hero->soundCounter && !(DynospriteDirectPageGlobalsPtr->Input_Buttons & Joy1Button1)) {
+    hero->soundCounter = SOUND_COUNTER_MAX;
+    PlaySound(1);
   }
 
   return 0;
