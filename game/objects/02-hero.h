@@ -25,7 +25,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of Hero in bytes */
-#define DynospriteObject_DataSize 1
+#define DynospriteObject_DataSize 5
 
 #else
 
@@ -35,9 +35,18 @@
 #include "dynosprite.h"
 
 
+typedef enum HorizontalDirection {
+  HorizontalDirectionRight = 0,
+  HorizontalDirectionLeft = 1
+} HorizontalDirection;
+
+
 /** State of Hero */
 typedef struct Hero {
   byte spriteIdx;
+  signed byte motionFactor;
+  signed byte counter;
+  HorizontalDirection horizontalDirection;
 } Hero;
 
 

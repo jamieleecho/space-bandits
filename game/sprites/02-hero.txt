@@ -3,6 +3,26 @@ Image = ../tiles/01-grave.gif
 Transparent=254,0,254
 Palette = 1
 
+[Hero0]
+Location=579,278
+SinglePixelPosition=True
+
 [Hero1]
+Location=602,278
+SinglePixelPosition=True
+
+[Hero2]
 Location=627,242
+SinglePixelPosition=True
+
+[Hero3]
+Location=654,242
+SinglePixelPosition=True
+
+[Hero4]
+Location=678,278
+SinglePixelPosition=True
+
+[Hero5]
+Location=699,278
 SinglePixelPosition=True
