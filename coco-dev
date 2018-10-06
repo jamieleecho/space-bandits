@@ -7,7 +7,7 @@ case "$(uname -s)" in
      ;;
 
    Linux)
-     docker-compose -f docker-compose.yml run --rm -w /home/synopsrite dynosprite bash
+     docker-compose -f docker-compose.yml run --rm -w /home/dynopsrite dynosprite bash
      ;;
 
    CYGWIN*|MINGW32*|MSYS*)
