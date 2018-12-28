@@ -281,6 +281,7 @@ if __name__ == "__main__":
     lvlListFiles = [name for name in listlist if len(name) >= 11 and name[:5] == "level" and name[5:7].isdigit() and name[-4:].lower() == ".lst"]
     lvlListFiles.sort()
     gfxlist = os.listdir(gfxdir)
+    print gfxlist
     lvlMapFiles = [name for name in gfxlist if len(name) >= 13 and name[:7] == "tilemap" and name[7:9].isdigit() and name[-4:].lower() == ".txt"]
     lvlMapFiles.sort()
     # make sure we have same # of files in each list
