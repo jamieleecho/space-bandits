@@ -30,7 +30,7 @@ DynospriteCOB *findFreeMissile() {
 }
 
 
-void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
+void ShipInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
 
@@ -51,12 +51,12 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 }
 
 
-byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte ShipReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
   return 0;
 }
 
 
-byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
   byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
 

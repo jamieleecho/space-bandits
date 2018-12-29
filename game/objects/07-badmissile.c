@@ -1,5 +1,5 @@
-#include "07-bad-missile.h"
-#include "03-badguys.h"
+#include "07-badmissile.h"
+#include "03-badguy.h"
 #include "object_info.h"
 
 
@@ -12,7 +12,7 @@
 byte didNotInit = TRUE;
 
 
-void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
+void BadmissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
   }
@@ -21,12 +21,12 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 }
 
 
-byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte BadmissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
   return 0;
 }
 
 
-byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   BadMissileObjectState *statePtr = (BadMissileObjectState *)(cob->statePtr);
 
   if (cob->globalY > 170) {

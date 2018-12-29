@@ -29,8 +29,8 @@
 
 #else
 
-#ifndef _06_game_over_h
-#define _06_game_over_h
+#ifndef _06_gameover_h
+#define _06_gameover_h
 
 #include "dynosprite.h"
 
@@ -41,7 +41,7 @@ typedef struct GameOverObjectState {
 } GameOverObjectState;
 
 
-#endif /* _06_game_over_h */
+#endif /* _06_gameover_h */
 
 #endif /* DynospriteObject_DataDefinition */
 

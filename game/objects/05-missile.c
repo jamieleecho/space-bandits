@@ -1,5 +1,5 @@
 #include "05-missile.h"
-#include "03-badguys.h"
+#include "03-badguy.h"
 #include "object_info.h"
 
 
@@ -14,7 +14,7 @@ DynospriteCOB *badGuys[NUM_BAD_GUYS];
 DynospriteCOB **endBadGuys;
 
 
-void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
+void MissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
     endBadGuys = &(badGuys[sizeof(badGuys)/sizeof(badGuys[0])]);
@@ -30,7 +30,7 @@ void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 }
 
 
-byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte MissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
   return 0;
 }
 
@@ -58,7 +58,7 @@ void checkHitBadGuy(DynospriteCOB *cob) {
 }
 
 
-byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   MissileObjectState *statePtr = (MissileObjectState *)(cob->statePtr);
 
   if (cob->globalY < 10) {

@@ -1,7 +1,8 @@
-#include "03-badguys.h"
+#include "03-badguy.h"
 #include "05-missile.h"
-#include "07-bad-missile.h"
+#include "07-badmissile.h"
 #include "object_info.h"
+#include "dynosprite.h"
 
 
 #define BAD_PTR ((DynospriteCOB *)0xffff)
@@ -57,7 +58,7 @@ byte missileFireColumns[] = {
 };
 
 
-void ObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
+void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (!didInit) {
     didInit = TRUE;
     numInvaders = 0;
@@ -122,7 +123,7 @@ void reset() {
 }
 
 
-byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
   if (!numInvaders) {
     reset();
   }
@@ -130,7 +131,7 @@ byte ObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-byte ObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
   // cob->active = (cob->active == OBJECT_UPDATE_ACTIVE) ? OBJECT_ACTIVE : OBJECT_UPDATE_ACTIVE;
 

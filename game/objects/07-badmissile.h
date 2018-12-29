@@ -29,8 +29,8 @@
 
 #else
 
-#ifndef _07_bad_missile_h
-#define _07_bad_missile_h
+#ifndef _07_badmissile_h
+#define _07_badmissile_h
 
 #include "dynosprite.h"
 
@@ -41,7 +41,7 @@ typedef struct BadMissleObjectState {
 } BadMissileObjectState;
 
 
-#endif /* _07_bad_missile_h */
+#endif /* _07_badmissile_h */
 
 #endif /* DynospriteObject_DataDefinition */
 

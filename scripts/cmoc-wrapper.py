@@ -67,6 +67,15 @@ def change_dir(path, new_dir):
     return os.path.join(new_dir, os.path.basename(path))
 
 
+def get_object_name(path):
+    """
+    Given a path with a basename of the form xx-object.c, return Object
+    """
+    (fdir, basename) = os.path.split(path)
+    (base, ext) = os.path.splitext(basename)
+    return base[3:].capitalize()
+
+
 def main(argv):
     # Setup parser
     parser = argparse.ArgumentParser(
@@ -127,6 +136,14 @@ def main(argv):
     lines = lines[:-1]
     lines.append(' SECTION define_the_object\n')
     lines.append('#define DynospriteObject_DataDefinition\n')
+    obj_name = get_object_name(s_file)
+    if args.file_type == 'level':
+        lines.append('#define _LevelInit _{}Init\n'.format(obj_name))
+        lines.append('#define _LevelCalculateBkgrndNewXY _{}CalculateBkgrndNewXY\n'.format(obj_name))
+    else:
+        lines.append('#define _ObjectInit _{}Init\n'.format(obj_name))
+        lines.append('#define _ObjectReactivate _{}Reactivate\n'.format(obj_name))
+        lines.append('#define _ObjectUpdate _{}Update\n'.format(obj_name))
     if args.file_type == 'object':
         lines.append('#include "{}"\n'.format(change_ext(s_file, '.h')))
     with open('../../engine/c-{}-entry.asm'.format(args.file_type)) as f:

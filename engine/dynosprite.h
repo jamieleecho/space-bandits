@@ -1,8 +1,8 @@
 #ifndef _Dynosprite_h
 #define _Dynosprite_h
 
-
 #include <coco.h>
+
 
 /** Joystick 1 button 1 mask */
 #define Joy1Button1 1

@@ -29,8 +29,8 @@
 
 #else
 
-#ifndef _03_badguys_h
-#define _03_badguys_h
+#ifndef _03_badguy_h
+#define _03_badguy_h
 
 #include "dynosprite.h"
 
@@ -56,7 +56,7 @@ typedef struct BadGuyObjectState {
 
 
 
-#endif /* _03_badguys_h */
+#endif /* _03_badguy_h */
 
 #endif /* DynospriteObject_DataDefinition */
 

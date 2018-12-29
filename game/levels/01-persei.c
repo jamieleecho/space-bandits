@@ -1,11 +1,11 @@
 #include <coco.h>
 
 
-void LevelInit() {
+void PerseiInit() {
 }
 
 
-byte LevelCalculateBkgrndNewXY() {
+byte PerseiCalculateBkgrndNewXY() {
   return 0;
 }
 
