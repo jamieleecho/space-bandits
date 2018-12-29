@@ -160,7 +160,9 @@ def main(argv):
     # trickery here with cwd
     cwd = os.getcwd()
     os.chdir(os.path.dirname(dst_obj_file))
-    cmoc_link_args = ['cmoc', '--intermediate', '--org=0x0', '--lwlink=../../tools/cmoc-link', os.path.basename(dst_obj_file)]
+    cmoc_link_args = ['cmoc', '--intermediate',
+      '--org=0x{}'.format('6000' if args.file_type=='level' else '0'),
+      '--lwlink=../../tools/cmoc-link', os.path.basename(dst_obj_file)]
     retval = subprocess.call(cmoc_link_args)
     os.chdir(cwd)
     if retval:
