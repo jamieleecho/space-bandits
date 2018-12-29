@@ -1,3 +1,6 @@
 .git*
 *.dsk
 *.DSK
+.DS_Store
+Space Bandits
+.dockerignore

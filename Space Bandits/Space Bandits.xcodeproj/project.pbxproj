@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		52F1208921D7DD63008A7900 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1208821D7DD63008A7900 /* AppDelegate.m */; };
+		52F1208B21D7DD63008A7900 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208A21D7DD63008A7900 /* GameScene.sks */; };
+		52F1208D21D7DD63008A7900 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208C21D7DD63008A7900 /* Actions.sks */; };
+		52F1209021D7DD63008A7900 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1208F21D7DD63008A7900 /* GameScene.m */; };
+		52F1209321D7DD63008A7900 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1209221D7DD63008A7900 /* ViewController.m */; };
+		52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F1209421D7DD65008A7900 /* Assets.xcassets */; };
+		52F1209821D7DD65008A7900 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52F1209621D7DD65008A7900 /* Main.storyboard */; };
+		52F1209B21D7DD65008A7900 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1209A21D7DD65008A7900 /* main.m */; };
+		52F120A621D7DD65008A7900 /* Space_BanditsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F120A521D7DD65008A7900 /* Space_BanditsTests.m */; };
+		52F120B121D7DD65008A7900 /* Space_BanditsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F120B021D7DD65008A7900 /* Space_BanditsUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		52F120A221D7DD65008A7900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52F1207C21D7DD63008A7900 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52F1208321D7DD63008A7900;
+			remoteInfo = "Space Bandits";
+		};
+		52F120AD21D7DD65008A7900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52F1207C21D7DD63008A7900 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52F1208321D7DD63008A7900;
+			remoteInfo = "Space Bandits";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		52F1208421D7DD63008A7900 /* Space Bandits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Bandits.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52F1208721D7DD63008A7900 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		52F1208821D7DD63008A7900 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		52F1208A21D7DD63008A7900 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		52F1208C21D7DD63008A7900 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		52F1208E21D7DD63008A7900 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		52F1208F21D7DD63008A7900 /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		52F1209121D7DD63008A7900 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		52F1209221D7DD63008A7900 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		52F1209421D7DD65008A7900 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		52F1209721D7DD65008A7900 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		52F1209921D7DD65008A7900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52F1209A21D7DD65008A7900 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		52F1209C21D7DD65008A7900 /* Space_Bandits.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Space_Bandits.entitlements; sourceTree = "<group>"; };
+		52F120A121D7DD65008A7900 /* Space BanditsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Space BanditsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52F120A521D7DD65008A7900 /* Space_BanditsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Space_BanditsTests.m; sourceTree = "<group>"; };
+		52F120A721D7DD65008A7900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52F120AC21D7DD65008A7900 /* Space BanditsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Space BanditsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52F120B021D7DD65008A7900 /* Space_BanditsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Space_BanditsUITests.m; sourceTree = "<group>"; };
+		52F120B221D7DD65008A7900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		52F1208121D7DD63008A7900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F1209E21D7DD65008A7900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F120A921D7DD65008A7900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		52F1207B21D7DD63008A7900 = {
+			isa = PBXGroup;
+			children = (
+				52F1208621D7DD63008A7900 /* Space Bandits */,
+				52F120A421D7DD65008A7900 /* Space BanditsTests */,
+				52F120AF21D7DD65008A7900 /* Space BanditsUITests */,
+				52F1208521D7DD63008A7900 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		52F1208521D7DD63008A7900 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				52F1208421D7DD63008A7900 /* Space Bandits.app */,
+				52F120A121D7DD65008A7900 /* Space BanditsTests.xctest */,
+				52F120AC21D7DD65008A7900 /* Space BanditsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		52F1208621D7DD63008A7900 /* Space Bandits */ = {
+			isa = PBXGroup;
+			children = (
+				52F1208721D7DD63008A7900 /* AppDelegate.h */,
+				52F1208821D7DD63008A7900 /* AppDelegate.m */,
+				52F1208A21D7DD63008A7900 /* GameScene.sks */,
+				52F1208C21D7DD63008A7900 /* Actions.sks */,
+				52F1208E21D7DD63008A7900 /* GameScene.h */,
+				52F1208F21D7DD63008A7900 /* GameScene.m */,
+				52F1209121D7DD63008A7900 /* ViewController.h */,
+				52F1209221D7DD63008A7900 /* ViewController.m */,
+				52F1209421D7DD65008A7900 /* Assets.xcassets */,
+				52F1209621D7DD65008A7900 /* Main.storyboard */,
+				52F1209921D7DD65008A7900 /* Info.plist */,
+				52F1209A21D7DD65008A7900 /* main.m */,
+				52F1209C21D7DD65008A7900 /* Space_Bandits.entitlements */,
+			);
+			path = "Space Bandits";
+			sourceTree = "<group>";
+		};
+		52F120A421D7DD65008A7900 /* Space BanditsTests */ = {
+			isa = PBXGroup;
+			children = (
+				52F120A521D7DD65008A7900 /* Space_BanditsTests.m */,
+				52F120A721D7DD65008A7900 /* Info.plist */,
+			);
+			path = "Space BanditsTests";
+			sourceTree = "<group>";
+		};
+		52F120AF21D7DD65008A7900 /* Space BanditsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				52F120B021D7DD65008A7900 /* Space_BanditsUITests.m */,
+				52F120B221D7DD65008A7900 /* Info.plist */,
+			);
+			path = "Space BanditsUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		52F1208321D7DD63008A7900 /* Space Bandits */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52F120B521D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space Bandits" */;
+			buildPhases = (
+				52F1208021D7DD63008A7900 /* Sources */,
+				52F1208121D7DD63008A7900 /* Frameworks */,
+				52F1208221D7DD63008A7900 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Space Bandits";
+			productName = "Space Bandits";
+			productReference = 52F1208421D7DD63008A7900 /* Space Bandits.app */;
+			productType = "com.apple.product-type.application";
+		};
+		52F120A021D7DD65008A7900 /* Space BanditsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52F120B821D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space BanditsTests" */;
+			buildPhases = (
+				52F1209D21D7DD65008A7900 /* Sources */,
+				52F1209E21D7DD65008A7900 /* Frameworks */,
+				52F1209F21D7DD65008A7900 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52F120A321D7DD65008A7900 /* PBXTargetDependency */,
+			);
+			name = "Space BanditsTests";
+			productName = "Space BanditsTests";
+			productReference = 52F120A121D7DD65008A7900 /* Space BanditsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		52F120AB21D7DD65008A7900 /* Space BanditsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52F120BB21D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space BanditsUITests" */;
+			buildPhases = (
+				52F120A821D7DD65008A7900 /* Sources */,
+				52F120A921D7DD65008A7900 /* Frameworks */,
+				52F120AA21D7DD65008A7900 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52F120AE21D7DD65008A7900 /* PBXTargetDependency */,
+			);
+			name = "Space BanditsUITests";
+			productName = "Space BanditsUITests";
+			productReference = 52F120AC21D7DD65008A7900 /* Space BanditsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		52F1207C21D7DD63008A7900 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Jamie Cho";
+				TargetAttributes = {
+					52F1208321D7DD63008A7900 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					52F120A021D7DD65008A7900 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 52F1208321D7DD63008A7900;
+					};
+					52F120AB21D7DD65008A7900 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 52F1208321D7DD63008A7900;
+					};
+				};
+			};
+			buildConfigurationList = 52F1207F21D7DD63008A7900 /* Build configuration list for PBXProject "Space Bandits" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 52F1207B21D7DD63008A7900;
+			productRefGroup = 52F1208521D7DD63008A7900 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				52F1208321D7DD63008A7900 /* Space Bandits */,
+				52F120A021D7DD65008A7900 /* Space BanditsTests */,
+				52F120AB21D7DD65008A7900 /* Space BanditsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		52F1208221D7DD63008A7900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52F1208B21D7DD63008A7900 /* GameScene.sks in Resources */,
+				52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */,
+				52F1208D21D7DD63008A7900 /* Actions.sks in Resources */,
+				52F1209821D7DD65008A7900 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F1209F21D7DD65008A7900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F120AA21D7DD65008A7900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		52F1208021D7DD63008A7900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52F1209321D7DD63008A7900 /* ViewController.m in Sources */,
+				52F1209021D7DD63008A7900 /* GameScene.m in Sources */,
+				52F1209B21D7DD65008A7900 /* main.m in Sources */,
+				52F1208921D7DD63008A7900 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F1209D21D7DD65008A7900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52F120A621D7DD65008A7900 /* Space_BanditsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F120A821D7DD65008A7900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52F120B121D7DD65008A7900 /* Space_BanditsUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		52F120A321D7DD65008A7900 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52F1208321D7DD63008A7900 /* Space Bandits */;
+			targetProxy = 52F120A221D7DD65008A7900 /* PBXContainerItemProxy */;
+		};
+		52F120AE21D7DD65008A7900 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52F1208321D7DD63008A7900 /* Space Bandits */;
+			targetProxy = 52F120AD21D7DD65008A7900 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		52F1209621D7DD65008A7900 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				52F1209721D7DD65008A7900 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		52F120B321D7DD65008A7900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		52F120B421D7DD65008A7900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		52F120B621D7DD65008A7900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Space Bandits/Space_Bandits.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Space Bandits/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-Bandits";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		52F120B721D7DD65008A7900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Space Bandits/Space_Bandits.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Space Bandits/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-Bandits";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		52F120B921D7DD65008A7900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Space BanditsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Space Bandits.app/Contents/MacOS/Space Bandits";
+			};
+			name = Debug;
+		};
+		52F120BA21D7DD65008A7900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Space BanditsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Space Bandits.app/Contents/MacOS/Space Bandits";
+			};
+			name = Release;
+		};
+		52F120BC21D7DD65008A7900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Space BanditsUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Space Bandits";
+			};
+			name = Debug;
+		};
+		52F120BD21D7DD65008A7900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Space BanditsUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Space Bandits";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		52F1207F21D7DD63008A7900 /* Build configuration list for PBXProject "Space Bandits" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F120B321D7DD65008A7900 /* Debug */,
+				52F120B421D7DD65008A7900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52F120B521D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space Bandits" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F120B621D7DD65008A7900 /* Debug */,
+				52F120B721D7DD65008A7900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52F120B821D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space BanditsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F120B921D7DD65008A7900 /* Debug */,
+				52F120BA21D7DD65008A7900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52F120BB21D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space BanditsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F120BC21D7DD65008A7900 /* Debug */,
+				52F120BD21D7DD65008A7900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 52F1207C21D7DD63008A7900 /* Project object */;
+}
