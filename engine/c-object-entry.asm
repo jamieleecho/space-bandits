@@ -45,6 +45,9 @@ Object_Skip_INILIB:
             lbsr        _ObjectInit
             puls        u,y,x
             lds         DynoStackPointer,pcr
+program_start
+program_end
+_main
             rts
 
 Object_Reactivate:
@@ -94,4 +97,21 @@ Object_Init EXPORT
 LibraryInit EXPORT
 NumberOfObjects EXPORT
 ObjectDescriptorTable EXPORT
+program_start EXPORT
+program_end EXPORT
+INILIB IMPORT
+
+        ENDSECTION
+
+        SECTION initgl_start
+
+INITGL	EXPORT
+INITGL	EQU	*
+
+	ENDSECTION
+
+	SECTION	initgl_end
+INITGLEND EXPORT
+INITGLEND EQU *
+	rts
 

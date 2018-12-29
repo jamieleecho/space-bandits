@@ -54,6 +54,9 @@ Level_Initialize
 Level_Skip_INILIB:
             lbsr        _LevelInit
             lds         DynoStackPointer,pcr
+program_start
+program_end
+_main
             rts
 
 
@@ -89,3 +92,22 @@ Level_Initialize EXPORT
 Level_CalculateBkgrndNewXY EXPORT
 Level_Skip_INILIB EXPORT
 DynoStackPointer EXPORT
+program_start EXPORT
+program_end EXPORT
+INILIB IMPORT
+
+        ENDSECTION
+
+        SECTION initgl_start
+
+INITGL	EXPORT
+INITGL	EQU	*
+
+	ENDSECTION
+
+
+	SECTION	initgl_end
+INITGLEND	EXPORT
+INITGLEND EQU *
+	rts
+
