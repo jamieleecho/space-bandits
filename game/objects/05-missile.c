@@ -70,3 +70,6 @@ byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   }
   return 0;
 }
+
+
+RegisterObject(MissileInit, MissileReactivate, MissileUpdate);

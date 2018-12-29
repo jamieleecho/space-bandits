@@ -90,3 +90,6 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   }
   return 0;
 }
+
+
+RegisterObject(ShipInit, ShipReactivate, ShipUpdate);

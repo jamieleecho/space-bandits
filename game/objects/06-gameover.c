@@ -16,3 +16,6 @@ byte GameoverReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 byte GameoverUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   return 0;
 }
+
+
+RegisterObject(GameoverInit, GameoverReactivate, GameoverUpdate);

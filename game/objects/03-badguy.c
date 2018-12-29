@@ -186,3 +186,6 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   }
   return 0;
 }
+
+
+RegisterObject(BadguyInit, BadguyReactivate, BadguyUpdate);

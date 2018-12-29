@@ -4,6 +4,13 @@
 #include <coco.h>
 
 
+/** Registers the object with the given functions */
+#define RegisterObject(init, reactivate, update)
+
+/** Registers the level with the given functions */
+#define RegisterLevel(init, calculateBackgrndNewXY)
+
+
 /** Joystick 1 button 1 mask */
 #define Joy1Button1 1
 /** Joystick 2 button 1 mask */
