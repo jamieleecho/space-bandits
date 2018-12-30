@@ -13,13 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSLevelRegistry : NSObject {
     @private
-    NSDictionary<NSNumber *, DSLevelRegistry *> *_indexToLevel;
+    NSMutableDictionary<NSNumber *, DSLevel *> *_indexToLevel;
 }
 
 + (DSLevelRegistry *)sharedInstance;
 - (id)init;
 - (void)addLevel:(DSLevel *)level fromFile:(NSString *)file;
-- (DSLevel *)getLevel:(int)index;
+- (void)clear;
+- (DSLevel *)levelForIndex:(int)index;
 
 @end
 

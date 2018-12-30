@@ -1,7 +1,8 @@
 #include <coco.h>
 
-#include "dynosprite.h"
+extern "C" {
 
+#include "dynosprite.h"
 
 void PerseiInit() {
 }
@@ -13,3 +14,5 @@ byte PerseiCalculateBkgrndNewXY() {
 
 
 RegisterLevel(PerseiInit, PerseiCalculateBkgrndNewXY);
+
+}

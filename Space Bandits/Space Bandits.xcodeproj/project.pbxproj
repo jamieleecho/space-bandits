@@ -23,6 +23,8 @@
 		52E7605F21D802A20001F3A0 /* DSLevelRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */; };
 		52E7606021D802A20001F3A0 /* DSLevelRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */; };
 		52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */; };
+		52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */; };
+		52EB04FB21D8538300F333AD /* DynospriteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB04FA21D8538300F333AD /* DynospriteTest.m */; };
 		52F1208921D7DD63008A7900 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1208821D7DD63008A7900 /* AppDelegate.m */; };
 		52F1208B21D7DD63008A7900 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208A21D7DD63008A7900 /* GameScene.sks */; };
 		52F1208D21D7DD63008A7900 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208C21D7DD63008A7900 /* Actions.sks */; };
@@ -63,7 +65,7 @@
 		52E7603721D7EC8F0001F3A0 /* coco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = coco.h; sourceTree = "<group>"; };
 		52E7603821D7ECA70001F3A0 /* dynosprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dynosprite.h; sourceTree = "<group>"; };
 		52E7603B21D7ECEB0001F3A0 /* 01-persei.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "01-persei.txt"; sourceTree = "<group>"; };
-		52E7603C21D7ECEB0001F3A0 /* 01-persei.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "01-persei.c"; sourceTree = "<group>"; };
+		52E7603C21D7ECEB0001F3A0 /* 01-persei.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = "01-persei.c"; sourceTree = "<group>"; };
 		52E7604421D7EF440001F3A0 /* DSLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevel.h; sourceTree = "<group>"; };
 		52E7604521D7EF440001F3A0 /* DSLevel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevel.m; sourceTree = "<group>"; };
 		52E7604E21D7F5410001F3A0 /* DynospriteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynospriteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +74,8 @@
 		52E7605821D7F57B0001F3A0 /* DSLevelTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelTest.m; sourceTree = "<group>"; };
 		52E7605C21D802A20001F3A0 /* DSLevelRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevelRegistry.h; sourceTree = "<group>"; };
 		52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelRegistry.m; sourceTree = "<group>"; };
+		52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelRegistryTest.m; sourceTree = "<group>"; };
+		52EB04FA21D8538300F333AD /* DynospriteTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynospriteTest.m; sourceTree = "<group>"; };
 		52F1208421D7DD63008A7900 /* Space Bandits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Bandits.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F1208721D7DD63008A7900 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		52F1208821D7DD63008A7900 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				52E7605821D7F57B0001F3A0 /* DSLevelTest.m */,
+				52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */,
+				52EB04FA21D8538300F333AD /* DynospriteTest.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -425,9 +431,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */,
 				52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52E7605B21D7F6190001F3A0 /* DSLevel.m in Sources */,
 				52E7605121D7F5410001F3A0 /* DynospriteTests.m in Sources */,
+				52EB04FB21D8538300F333AD /* DynospriteTest.m in Sources */,
 				52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

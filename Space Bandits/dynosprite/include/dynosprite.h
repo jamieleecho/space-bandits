@@ -9,6 +9,15 @@
 #ifndef dynosprite_h
 #define dynosprite_h
 
-#define RegisterLevel(init, calcuateBackgroundNewXY)
+/**
+ * Registers the given level into the shared registry.
+ * @param init level initialization function
+ * @param backgroundNewXY function used to compute new XY location
+ * @param file path to file that defines the functions - ust begin with XY where XY are digits
+ * @return some value
+ */
+int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const char *file);
+
+#define RegisterLevel(init, calcuateBackgroundNewXY) static int levelInit = DSLevelRegistryRegister(init, calcuateBackgroundNewXY, __FILE__)
 
 #endif /* dynosprite_h */

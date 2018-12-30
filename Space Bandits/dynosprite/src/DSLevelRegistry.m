@@ -8,6 +8,20 @@
 
 #import "DSLevelRegistry.h"
 
+
+/**
+ * Registers the given level into the shared registry.
+ * @param init level initialization function
+ * @param backgroundNewXY function used to compute new XY location
+ * @param file path to file that defines the functions - ust begin with XY where XY are digits
+ * @return some value
+ */
+int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const char *file) {
+    DSLevel *level = [[DSLevel alloc] initWithInitLevel:init backgroundNewXY:backgroundNewXY];
+    [[DSLevelRegistry sharedInstance] addLevel:level fromFile:[NSString stringWithUTF8String:file]];
+    return 1;
+}
+
 static DSLevelRegistry *_sharedInstance = nil;
 
 @implementation DSLevelRegistry
@@ -24,7 +38,7 @@ static DSLevelRegistry *_sharedInstance = nil;
     self = [super init];
     
     if (self) {
-        _indexToLevel = [[NSDictionary alloc] init];
+        _indexToLevel = [[NSMutableDictionary alloc] init];
     }
     
     return self;
@@ -32,11 +46,18 @@ static DSLevelRegistry *_sharedInstance = nil;
 
 
 - (void)addLevel:(DSLevel *)level fromFile:(NSString *)file {
+    NSNumber *index = [NSNumber numberWithInteger:[[[file lastPathComponent] substringToIndex:2] intValue]];
+    _indexToLevel[index] = level;
 }
 
 
-- (DSLevelRegistry *)getLevel:(int)index {
-    return [_indexToLevel objectForKey:[NSNumber numberWithInt:index]];
+- (void)clear {
+    [_indexToLevel removeAllObjects];
+}
+
+
+- (DSLevel *)levelForIndex:(int)index {
+    return _indexToLevel[[NSNumber numberWithInt:index]];
 }
 
 @end
