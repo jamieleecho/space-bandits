@@ -13,8 +13,3 @@ BackgroundColor = ffffff
 ForegroundColor = 000000
 ProgressColor = 67fb79
 
-[Image2]
-BackgroundColor = ffffff
-ForegroundColor = 000000
-ProgressColor = 67fb79
-

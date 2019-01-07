@@ -1,5 +1,5 @@
 //
-//  DynospriteTest.m
+//  DynospriteTests.m
 //  DynospriteTests
 //
 //  Created by Jamie Cho on 12/29/18.
@@ -10,14 +10,14 @@
 #import "DSLevelRegistry.h"
 #include "dynosprite.h"
 
-@interface DynospriteTest : XCTestCase
+@interface DynospriteCoreTests : XCTestCase
 
 @end
 
 static void myLevel1Init(void) { }
 static byte myLevel1BackgroundNewXY(void) { return 0; }
 
-@implementation DynospriteTest
+@implementation DynospriteCoreTests
 
 - (void)tearDown {
     [[DSLevelRegistry sharedInstance] clear];

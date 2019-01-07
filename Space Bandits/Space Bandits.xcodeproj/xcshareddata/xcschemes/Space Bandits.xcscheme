@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "52F120A021D7DD65008A7900"
-               BuildableName = "Space BanditsTests.xctest"
-               BlueprintName = "Space BanditsTests"
+               BuildableName = "DynospriteUITests.xctest"
+               BlueprintName = "DynospriteUITests"
                ReferencedContainer = "container:Space Bandits.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "52F120AB21D7DD65008A7900"
-               BuildableName = "Space BanditsUITests.xctest"
-               BlueprintName = "Space BanditsUITests"
+               BuildableName = "DynospriteUITests.xctest"
+               BlueprintName = "DynospriteUITests"
                ReferencedContainer = "container:Space Bandits.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -53,8 +53,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "52E7604D21D7F5410001F3A0"
-               BuildableName = "DynospriteTests.xctest"
-               BlueprintName = "DynospriteTests"
+               BuildableName = "DynospriteCoreTests.xctest"
+               BlueprintName = "DynospriteCoreTests"
                ReferencedContainer = "container:Space Bandits.xcodeproj">
             </BuildableReference>
          </TestableReference>

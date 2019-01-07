@@ -7,24 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52E7603D21D7ECEB0001F3A0 /* 01-persei.txt in Resources */ = {isa = PBXBuildFile; fileRef = 52E7603B21D7ECEB0001F3A0 /* 01-persei.txt */; };
-		52E7603E21D7ECEB0001F3A0 /* 01-persei.txt in Resources */ = {isa = PBXBuildFile; fileRef = 52E7603B21D7ECEB0001F3A0 /* 01-persei.txt */; };
-		52E7603F21D7ECEB0001F3A0 /* 01-persei.txt in Resources */ = {isa = PBXBuildFile; fileRef = 52E7603B21D7ECEB0001F3A0 /* 01-persei.txt */; };
-		52E7604021D7ECEB0001F3A0 /* 01-persei.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E7603C21D7ECEB0001F3A0 /* 01-persei.c */; };
-		52E7604121D7ECEB0001F3A0 /* 01-persei.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E7603C21D7ECEB0001F3A0 /* 01-persei.c */; };
-		52E7604221D7ECEB0001F3A0 /* 01-persei.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E7603C21D7ECEB0001F3A0 /* 01-persei.c */; };
+		5227E72221E2DDA40092C947 /* InitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5227E72121E2DDA40092C947 /* InitScene.m */; };
+		5227E72321E2DDA40092C947 /* InitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5227E72121E2DDA40092C947 /* InitScene.m */; };
+		52A90E2F21E2E71A00CC2643 /* LoadLevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E2E21E2E71A00CC2643 /* LoadLevelScene.m */; };
+		52A90E3021E2E71A00CC2643 /* LoadLevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E2E21E2E71A00CC2643 /* LoadLevelScene.m */; };
+		52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
+		52A90E3621E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
+		52A90E3721E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
+		52A90E3821E2F11100CC2643 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1209221D7DD63008A7900 /* ViewController.m */; };
+		52A90E3C21E2F11100CC2643 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1208F21D7DD63008A7900 /* GameScene.m */; };
+		52A90E3E21E2F17D00CC2643 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208A21D7DD63008A7900 /* GameScene.sks */; };
+		52A90E3F21E2F18C00CC2643 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
+		52A90E4521E2F23000CC2643 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1208821D7DD63008A7900 /* AppDelegate.m */; };
+		52A90E4621E2F23900CC2643 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208C21D7DD63008A7900 /* Actions.sks */; };
+		52A90E5B21E2F78300CC2643 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 52A90E5921E2F78300CC2643 /* levels */; };
+		52A90E5C21E2F78300CC2643 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 52A90E5A21E2F78300CC2643 /* images */; };
 		52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
-		52E7604721D7EF440001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
 		52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
-		52E7605121D7F5410001F3A0 /* DynospriteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605021D7F5410001F3A0 /* DynospriteTests.m */; };
 		52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605821D7F57B0001F3A0 /* DSLevelTest.m */; };
-		52E7605B21D7F6190001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
 		52E7605E21D802A20001F3A0 /* DSLevelRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */; };
-		52E7605F21D802A20001F3A0 /* DSLevelRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */; };
 		52E7606021D802A20001F3A0 /* DSLevelRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */; };
 		52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */; };
 		52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */; };
-		52EB04FB21D8538300F333AD /* DynospriteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB04FA21D8538300F333AD /* DynospriteTest.m */; };
+		52EB04FB21D8538300F333AD /* DynospriteCoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB04FA21D8538300F333AD /* DynospriteCoreTest.m */; };
 		52F1208921D7DD63008A7900 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1208821D7DD63008A7900 /* AppDelegate.m */; };
 		52F1208B21D7DD63008A7900 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208A21D7DD63008A7900 /* GameScene.sks */; };
 		52F1208D21D7DD63008A7900 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208C21D7DD63008A7900 /* Actions.sks */; };
@@ -33,19 +38,11 @@
 		52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F1209421D7DD65008A7900 /* Assets.xcassets */; };
 		52F1209821D7DD65008A7900 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52F1209621D7DD65008A7900 /* Main.storyboard */; };
 		52F1209B21D7DD65008A7900 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1209A21D7DD65008A7900 /* main.m */; };
-		52F120A621D7DD65008A7900 /* Space_BanditsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F120A521D7DD65008A7900 /* Space_BanditsTests.m */; };
-		52F120B121D7DD65008A7900 /* Space_BanditsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F120B021D7DD65008A7900 /* Space_BanditsUITests.m */; };
+		52F120B121D7DD65008A7900 /* DynospriteUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F120B021D7DD65008A7900 /* DynospriteUITests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		52E7605321D7F5410001F3A0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52F1207C21D7DD63008A7900 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52F1208321D7DD63008A7900;
-			remoteInfo = "Space Bandits";
-		};
-		52F120A221D7DD65008A7900 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 52F1207C21D7DD63008A7900 /* Project object */;
 			proxyType = 1;
@@ -62,20 +59,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5227E72021E2DDA40092C947 /* InitScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InitScene.h; sourceTree = "<group>"; };
+		5227E72121E2DDA40092C947 /* InitScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InitScene.m; sourceTree = "<group>"; };
+		52A90E2D21E2E71A00CC2643 /* LoadLevelScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadLevelScene.h; sourceTree = "<group>"; };
+		52A90E2E21E2E71A00CC2643 /* LoadLevelScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoadLevelScene.m; sourceTree = "<group>"; };
+		52A90E3221E2E8A700CC2643 /* DSConfigFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSConfigFileParser.h; sourceTree = "<group>"; };
+		52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSConfigFileParser.m; sourceTree = "<group>"; };
+		52A90E5921E2F78300CC2643 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../../game/levels; sourceTree = "<group>"; };
+		52A90E5A21E2F78300CC2643 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../game/images; sourceTree = "<group>"; };
 		52E7603721D7EC8F0001F3A0 /* coco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = coco.h; sourceTree = "<group>"; };
 		52E7603821D7ECA70001F3A0 /* dynosprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dynosprite.h; sourceTree = "<group>"; };
-		52E7603B21D7ECEB0001F3A0 /* 01-persei.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "01-persei.txt"; sourceTree = "<group>"; };
-		52E7603C21D7ECEB0001F3A0 /* 01-persei.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = "01-persei.c"; sourceTree = "<group>"; };
 		52E7604421D7EF440001F3A0 /* DSLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevel.h; sourceTree = "<group>"; };
 		52E7604521D7EF440001F3A0 /* DSLevel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevel.m; sourceTree = "<group>"; };
-		52E7604E21D7F5410001F3A0 /* DynospriteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynospriteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		52E7604E21D7F5410001F3A0 /* DynospriteCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynospriteCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52E7605021D7F5410001F3A0 /* DynospriteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynospriteTests.m; sourceTree = "<group>"; };
 		52E7605221D7F5410001F3A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52E7605821D7F57B0001F3A0 /* DSLevelTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelTest.m; sourceTree = "<group>"; };
 		52E7605C21D802A20001F3A0 /* DSLevelRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevelRegistry.h; sourceTree = "<group>"; };
 		52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelRegistry.m; sourceTree = "<group>"; };
 		52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelRegistryTest.m; sourceTree = "<group>"; };
-		52EB04FA21D8538300F333AD /* DynospriteTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynospriteTest.m; sourceTree = "<group>"; };
+		52EB04FA21D8538300F333AD /* DynospriteCoreTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynospriteCoreTest.m; sourceTree = "<group>"; };
 		52F1208421D7DD63008A7900 /* Space Bandits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Bandits.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F1208721D7DD63008A7900 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		52F1208821D7DD63008A7900 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,11 +93,8 @@
 		52F1209921D7DD65008A7900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52F1209A21D7DD65008A7900 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52F1209C21D7DD65008A7900 /* Space_Bandits.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Space_Bandits.entitlements; sourceTree = "<group>"; };
-		52F120A121D7DD65008A7900 /* Space BanditsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Space BanditsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		52F120A521D7DD65008A7900 /* Space_BanditsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Space_BanditsTests.m; sourceTree = "<group>"; };
-		52F120A721D7DD65008A7900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		52F120AC21D7DD65008A7900 /* Space BanditsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Space BanditsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		52F120B021D7DD65008A7900 /* Space_BanditsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Space_BanditsUITests.m; sourceTree = "<group>"; };
+		52F120AC21D7DD65008A7900 /* DynospriteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynospriteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		52F120B021D7DD65008A7900 /* DynospriteUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynospriteUITests.m; sourceTree = "<group>"; };
 		52F120B221D7DD65008A7900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,13 +113,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52F1209E21D7DD65008A7900 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		52F120A921D7DD65008A7900 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -130,12 +123,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		52E7603521D7EC5D0001F3A0 /* game */ = {
+		52A90E4121E2F1CA00CC2643 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				52E7603A21D7ECEB0001F3A0 /* levels */,
+				5227E72021E2DDA40092C947 /* InitScene.h */,
+				5227E72121E2DDA40092C947 /* InitScene.m */,
+				52A90E2D21E2E71A00CC2643 /* LoadLevelScene.h */,
+				52A90E2E21E2E71A00CC2643 /* LoadLevelScene.m */,
+				52F1208721D7DD63008A7900 /* AppDelegate.h */,
+				52F1208821D7DD63008A7900 /* AppDelegate.m */,
+				52F1208A21D7DD63008A7900 /* GameScene.sks */,
+				52F1208C21D7DD63008A7900 /* Actions.sks */,
+				52F1208E21D7DD63008A7900 /* GameScene.h */,
+				52F1208F21D7DD63008A7900 /* GameScene.m */,
+				52F1209121D7DD63008A7900 /* ViewController.h */,
+				52F1209221D7DD63008A7900 /* ViewController.m */,
 			);
-			path = game;
+			name = UI;
+			sourceTree = "<group>";
+		};
+		52A90E4421E2F1F200CC2643 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				52E7604421D7EF440001F3A0 /* DSLevel.h */,
+				52E7604521D7EF440001F3A0 /* DSLevel.m */,
+				52E7605C21D802A20001F3A0 /* DSLevelRegistry.h */,
+				52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */,
+				52A90E3221E2E8A700CC2643 /* DSConfigFileParser.h */,
+				52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		52E7603621D7EC6C0001F3A0 /* dynosprite */ = {
@@ -156,33 +173,21 @@
 			path = include;
 			sourceTree = "<group>";
 		};
-		52E7603A21D7ECEB0001F3A0 /* levels */ = {
-			isa = PBXGroup;
-			children = (
-				52E7603B21D7ECEB0001F3A0 /* 01-persei.txt */,
-				52E7603C21D7ECEB0001F3A0 /* 01-persei.c */,
-			);
-			name = levels;
-			path = ../../game/levels;
-			sourceTree = "<group>";
-		};
 		52E7604321D7EF110001F3A0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				52E7604421D7EF440001F3A0 /* DSLevel.h */,
-				52E7604521D7EF440001F3A0 /* DSLevel.m */,
-				52E7605C21D802A20001F3A0 /* DSLevelRegistry.h */,
-				52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */,
+				52A90E4421E2F1F200CC2643 /* Core */,
+				52A90E4121E2F1CA00CC2643 /* UI */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		52E7604921D7F4C50001F3A0 /* DynospriteTests */ = {
+		52E7604921D7F4C50001F3A0 /* DynospriteCoreTests */ = {
 			isa = PBXGroup;
 			children = (
 				52E7605A21D7F5960001F3A0 /* src */,
 			);
-			path = DynospriteTests;
+			path = DynospriteCoreTests;
 			sourceTree = "<group>";
 		};
 		52E7604F21D7F5410001F3A0 /* DynospriteTests */ = {
@@ -199,7 +204,7 @@
 			children = (
 				52E7605821D7F57B0001F3A0 /* DSLevelTest.m */,
 				52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */,
-				52EB04FA21D8538300F333AD /* DynospriteTest.m */,
+				52EB04FA21D8538300F333AD /* DynospriteCoreTest.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -207,12 +212,10 @@
 		52F1207B21D7DD63008A7900 = {
 			isa = PBXGroup;
 			children = (
-				52E7604921D7F4C50001F3A0 /* DynospriteTests */,
+				52E7604921D7F4C50001F3A0 /* DynospriteCoreTests */,
+				52F120AF21D7DD65008A7900 /* DynospriteUITests */,
 				52E7603621D7EC6C0001F3A0 /* dynosprite */,
-				52E7603521D7EC5D0001F3A0 /* game */,
 				52F1208621D7DD63008A7900 /* Space Bandits */,
-				52F120A421D7DD65008A7900 /* Space BanditsTests */,
-				52F120AF21D7DD65008A7900 /* Space BanditsUITests */,
 				52E7604F21D7F5410001F3A0 /* DynospriteTests */,
 				52F1208521D7DD63008A7900 /* Products */,
 			);
@@ -222,9 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				52F1208421D7DD63008A7900 /* Space Bandits.app */,
-				52F120A121D7DD65008A7900 /* Space BanditsTests.xctest */,
-				52F120AC21D7DD65008A7900 /* Space BanditsUITests.xctest */,
-				52E7604E21D7F5410001F3A0 /* DynospriteTests.xctest */,
+				52F120AC21D7DD65008A7900 /* DynospriteUITests.xctest */,
+				52E7604E21D7F5410001F3A0 /* DynospriteCoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,14 +234,8 @@
 		52F1208621D7DD63008A7900 /* Space Bandits */ = {
 			isa = PBXGroup;
 			children = (
-				52F1208721D7DD63008A7900 /* AppDelegate.h */,
-				52F1208821D7DD63008A7900 /* AppDelegate.m */,
-				52F1208A21D7DD63008A7900 /* GameScene.sks */,
-				52F1208C21D7DD63008A7900 /* Actions.sks */,
-				52F1208E21D7DD63008A7900 /* GameScene.h */,
-				52F1208F21D7DD63008A7900 /* GameScene.m */,
-				52F1209121D7DD63008A7900 /* ViewController.h */,
-				52F1209221D7DD63008A7900 /* ViewController.m */,
+				52A90E5A21E2F78300CC2643 /* images */,
+				52A90E5921E2F78300CC2643 /* levels */,
 				52F1209421D7DD65008A7900 /* Assets.xcassets */,
 				52F1209621D7DD65008A7900 /* Main.storyboard */,
 				52F1209921D7DD65008A7900 /* Info.plist */,
@@ -249,30 +245,21 @@
 			path = "Space Bandits";
 			sourceTree = "<group>";
 		};
-		52F120A421D7DD65008A7900 /* Space BanditsTests */ = {
+		52F120AF21D7DD65008A7900 /* DynospriteUITests */ = {
 			isa = PBXGroup;
 			children = (
-				52F120A521D7DD65008A7900 /* Space_BanditsTests.m */,
-				52F120A721D7DD65008A7900 /* Info.plist */,
-			);
-			path = "Space BanditsTests";
-			sourceTree = "<group>";
-		};
-		52F120AF21D7DD65008A7900 /* Space BanditsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				52F120B021D7DD65008A7900 /* Space_BanditsUITests.m */,
+				52F120B021D7DD65008A7900 /* DynospriteUITests.m */,
 				52F120B221D7DD65008A7900 /* Info.plist */,
 			);
-			path = "Space BanditsUITests";
+			path = DynospriteUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		52E7604D21D7F5410001F3A0 /* DynospriteTests */ = {
+		52E7604D21D7F5410001F3A0 /* DynospriteCoreTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52E7605521D7F5410001F3A0 /* Build configuration list for PBXNativeTarget "DynospriteTests" */;
+			buildConfigurationList = 52E7605521D7F5410001F3A0 /* Build configuration list for PBXNativeTarget "DynospriteCoreTests" */;
 			buildPhases = (
 				52E7604A21D7F5410001F3A0 /* Sources */,
 				52E7604B21D7F5410001F3A0 /* Frameworks */,
@@ -283,9 +270,9 @@
 			dependencies = (
 				52E7605421D7F5410001F3A0 /* PBXTargetDependency */,
 			);
-			name = DynospriteTests;
+			name = DynospriteCoreTests;
 			productName = DynospriteTests;
-			productReference = 52E7604E21D7F5410001F3A0 /* DynospriteTests.xctest */;
+			productReference = 52E7604E21D7F5410001F3A0 /* DynospriteCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		52F1208321D7DD63008A7900 /* Space Bandits */ = {
@@ -305,27 +292,9 @@
 			productReference = 52F1208421D7DD63008A7900 /* Space Bandits.app */;
 			productType = "com.apple.product-type.application";
 		};
-		52F120A021D7DD65008A7900 /* Space BanditsTests */ = {
+		52F120AB21D7DD65008A7900 /* DynospriteUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52F120B821D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space BanditsTests" */;
-			buildPhases = (
-				52F1209D21D7DD65008A7900 /* Sources */,
-				52F1209E21D7DD65008A7900 /* Frameworks */,
-				52F1209F21D7DD65008A7900 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				52F120A321D7DD65008A7900 /* PBXTargetDependency */,
-			);
-			name = "Space BanditsTests";
-			productName = "Space BanditsTests";
-			productReference = 52F120A121D7DD65008A7900 /* Space BanditsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		52F120AB21D7DD65008A7900 /* Space BanditsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52F120BB21D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space BanditsUITests" */;
+			buildConfigurationList = 52F120BB21D7DD65008A7900 /* Build configuration list for PBXNativeTarget "DynospriteUITests" */;
 			buildPhases = (
 				52F120A821D7DD65008A7900 /* Sources */,
 				52F120A921D7DD65008A7900 /* Frameworks */,
@@ -336,9 +305,9 @@
 			dependencies = (
 				52F120AE21D7DD65008A7900 /* PBXTargetDependency */,
 			);
-			name = "Space BanditsUITests";
+			name = DynospriteUITests;
 			productName = "Space BanditsUITests";
-			productReference = 52F120AC21D7DD65008A7900 /* Space BanditsUITests.xctest */;
+			productReference = 52F120AC21D7DD65008A7900 /* DynospriteUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -356,10 +325,6 @@
 					};
 					52F1208321D7DD63008A7900 = {
 						CreatedOnToolsVersion = 10.1;
-					};
-					52F120A021D7DD65008A7900 = {
-						CreatedOnToolsVersion = 10.1;
-						TestTargetID = 52F1208321D7DD63008A7900;
 					};
 					52F120AB21D7DD65008A7900 = {
 						CreatedOnToolsVersion = 10.1;
@@ -381,9 +346,8 @@
 			projectRoot = "";
 			targets = (
 				52F1208321D7DD63008A7900 /* Space Bandits */,
-				52F120A021D7DD65008A7900 /* Space BanditsTests */,
-				52F120AB21D7DD65008A7900 /* Space BanditsUITests */,
-				52E7604D21D7F5410001F3A0 /* DynospriteTests */,
+				52F120AB21D7DD65008A7900 /* DynospriteUITests */,
+				52E7604D21D7F5410001F3A0 /* DynospriteCoreTests */,
 			);
 		};
 /* End PBXProject section */
@@ -400,19 +364,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A90E5C21E2F78300CC2643 /* images in Resources */,
+				52A90E5B21E2F78300CC2643 /* levels in Resources */,
 				52F1208B21D7DD63008A7900 /* GameScene.sks in Resources */,
-				52E7603D21D7ECEB0001F3A0 /* 01-persei.txt in Resources */,
 				52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */,
 				52F1208D21D7DD63008A7900 /* Actions.sks in Resources */,
 				52F1209821D7DD65008A7900 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52F1209F21D7DD65008A7900 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52E7603E21D7ECEB0001F3A0 /* 01-persei.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +377,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52E7603F21D7ECEB0001F3A0 /* 01-persei.txt in Resources */,
+				52A90E4621E2F23900CC2643 /* Actions.sks in Resources */,
+				52A90E3E21E2F17D00CC2643 /* GameScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,11 +390,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */,
+				52A90E3F21E2F18C00CC2643 /* DSLevel.m in Sources */,
 				52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
-				52E7605B21D7F6190001F3A0 /* DSLevel.m in Sources */,
-				52E7605121D7F5410001F3A0 /* DynospriteTests.m in Sources */,
-				52EB04FB21D8538300F333AD /* DynospriteTest.m in Sources */,
+				52EB04FB21D8538300F333AD /* DynospriteCoreTest.m in Sources */,
 				52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */,
+				52A90E3721E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,8 +402,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5227E72221E2DDA40092C947 /* InitScene.m in Sources */,
+				52A90E2F21E2E71A00CC2643 /* LoadLevelScene.m in Sources */,
 				52E7605E21D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
-				52E7604021D7ECEB0001F3A0 /* 01-persei.c in Sources */,
+				52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				52F1209321D7DD63008A7900 /* ViewController.m in Sources */,
 				52F1209021D7DD63008A7900 /* GameScene.m in Sources */,
 				52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */,
@@ -454,25 +414,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52F1209D21D7DD65008A7900 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52E7605F21D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
-				52E7604721D7EF440001F3A0 /* DSLevel.m in Sources */,
-				52E7604121D7ECEB0001F3A0 /* 01-persei.c in Sources */,
-				52F120A621D7DD65008A7900 /* Space_BanditsTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		52F120A821D7DD65008A7900 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				52E7606021D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
+				52A90E3021E2E71A00CC2643 /* LoadLevelScene.m in Sources */,
+				52A90E3C21E2F11100CC2643 /* GameScene.m in Sources */,
+				52A90E3821E2F11100CC2643 /* ViewController.m in Sources */,
+				52A90E4521E2F23000CC2643 /* AppDelegate.m in Sources */,
+				52A90E3621E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */,
-				52E7604221D7ECEB0001F3A0 /* 01-persei.c in Sources */,
-				52F120B121D7DD65008A7900 /* Space_BanditsUITests.m in Sources */,
+				5227E72321E2DDA40092C947 /* InitScene.m in Sources */,
+				52F120B121D7DD65008A7900 /* DynospriteUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,11 +437,6 @@
 			isa = PBXTargetDependency;
 			target = 52F1208321D7DD63008A7900 /* Space Bandits */;
 			targetProxy = 52E7605321D7F5410001F3A0 /* PBXContainerItemProxy */;
-		};
-		52F120A321D7DD65008A7900 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52F1208321D7DD63008A7900 /* Space Bandits */;
-			targetProxy = 52F120A221D7DD65008A7900 /* PBXContainerItemProxy */;
 		};
 		52F120AE21D7DD65008A7900 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -515,13 +464,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/dynosprite/include";
-				INFOPLIST_FILE = DynospriteTests/Info.plist;
+				INFOPLIST_FILE = DynospriteCoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jamiecho.DynospriteTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamiecho.DynospriteCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Space Bandits.app/Contents/MacOS/Space Bandits";
 				USER_HEADER_SEARCH_PATHS = (
@@ -538,13 +487,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/dynosprite/include";
-				INFOPLIST_FILE = DynospriteTests/Info.plist;
+				INFOPLIST_FILE = DynospriteCoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jamiecho.DynospriteTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamiecho.DynospriteCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Space Bandits.app/Contents/MacOS/Space Bandits";
 				USER_HEADER_SEARCH_PATHS = (
@@ -703,57 +652,19 @@
 			};
 			name = Release;
 		};
-		52F120B921D7DD65008A7900 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/dynosprite/include";
-				INFOPLIST_FILE = "Space BanditsTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Space Bandits.app/Contents/MacOS/Space Bandits";
-			};
-			name = Debug;
-		};
-		52F120BA21D7DD65008A7900 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/dynosprite/include";
-				INFOPLIST_FILE = "Space BanditsTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Space Bandits.app/Contents/MacOS/Space Bandits";
-			};
-			name = Release;
-		};
 		52F120BC21D7DD65008A7900 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/dynosprite/include";
-				INFOPLIST_FILE = "Space BanditsUITests/Info.plist";
+				INFOPLIST_FILE = DynospriteUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamiecho.DynospriteUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = "Space Bandits";
 			};
@@ -765,13 +676,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/dynosprite/include";
-				INFOPLIST_FILE = "Space BanditsUITests/Info.plist";
+				INFOPLIST_FILE = DynospriteUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamiecho.DynospriteUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = "Space Bandits";
 			};
@@ -780,7 +691,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		52E7605521D7F5410001F3A0 /* Build configuration list for PBXNativeTarget "DynospriteTests" */ = {
+		52E7605521D7F5410001F3A0 /* Build configuration list for PBXNativeTarget "DynospriteCoreTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52E7605621D7F5410001F3A0 /* Debug */,
@@ -807,16 +718,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		52F120B821D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space BanditsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52F120B921D7DD65008A7900 /* Debug */,
-				52F120BA21D7DD65008A7900 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52F120BB21D7DD65008A7900 /* Build configuration list for PBXNativeTarget "Space BanditsUITests" */ = {
+		52F120BB21D7DD65008A7900 /* Build configuration list for PBXNativeTarget "DynospriteUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52F120BC21D7DD65008A7900 /* Debug */,

@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface Space_BanditsUITests : XCTestCase
+@interface DynospriteUITests : XCTestCase
 
 @end
 
-@implementation Space_BanditsUITests
+@implementation DynospriteUITests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
