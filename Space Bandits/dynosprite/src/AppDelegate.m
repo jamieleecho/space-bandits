@@ -11,21 +11,6 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"pcgfont" ofType:@"dfont"];
-    CGDataProviderRef fontDataProvider = CGDataProviderCreateWithFilename([path UTF8String]);
-    
-    // Create the font with the data provider, then release the data provider.
-    CGFontRef customFont = CGFontCreateWithDataProvider(fontDataProvider);
-    CGDataProviderRelease(fontDataProvider);
-    CGFontRelease(customFont);
-    
-    //[NSFontManager
-    //FSRef fsRef;
-    //CFURLGetFSRef((CFURLRef)fontsURL, &fsRef);
-    //ATSFontActivateFromFileReference(&fsRef, kATSFontContextLocal, kATSFontFormatUnspecified,
-    //                                 NULL, kATSOptionFlagsDefault, NULL);
-    
-    NSFont *uiFont = [NSFont fontWithName:@"Pcgfont" size:13];
     // Insert code here to initialize your application
 }
 

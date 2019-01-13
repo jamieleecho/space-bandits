@@ -32,16 +32,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52F120A021D7DD65008A7900"
-               BuildableName = "DynospriteUITests.xctest"
-               BlueprintName = "DynospriteUITests"
-               ReferencedContainer = "container:Space Bandits.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "52F120AB21D7DD65008A7900"
                BuildableName = "DynospriteUITests.xctest"
                BlueprintName = "DynospriteUITests"

@@ -75,8 +75,6 @@
 		52E7604421D7EF440001F3A0 /* DSLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevel.h; sourceTree = "<group>"; };
 		52E7604521D7EF440001F3A0 /* DSLevel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevel.m; sourceTree = "<group>"; };
 		52E7604E21D7F5410001F3A0 /* DynospriteCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynospriteCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		52E7605021D7F5410001F3A0 /* DynospriteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynospriteTests.m; sourceTree = "<group>"; };
-		52E7605221D7F5410001F3A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52E7605821D7F57B0001F3A0 /* DSLevelTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelTest.m; sourceTree = "<group>"; };
 		52E7605C21D802A20001F3A0 /* DSLevelRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevelRegistry.h; sourceTree = "<group>"; };
 		52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelRegistry.m; sourceTree = "<group>"; };
@@ -194,15 +192,6 @@
 			path = DynospriteCoreTests;
 			sourceTree = "<group>";
 		};
-		52E7604F21D7F5410001F3A0 /* DynospriteTests */ = {
-			isa = PBXGroup;
-			children = (
-				52E7605021D7F5410001F3A0 /* DynospriteTests.m */,
-				52E7605221D7F5410001F3A0 /* Info.plist */,
-			);
-			path = DynospriteTests;
-			sourceTree = "<group>";
-		};
 		52E7605A21D7F5960001F3A0 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,7 +209,6 @@
 				52F120AF21D7DD65008A7900 /* DynospriteUITests */,
 				52E7603621D7EC6C0001F3A0 /* dynosprite */,
 				52F1208621D7DD63008A7900 /* Space Bandits */,
-				52E7604F21D7F5410001F3A0 /* DynospriteTests */,
 				52F1208521D7DD63008A7900 /* Products */,
 			);
 			sourceTree = "<group>";
