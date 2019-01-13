@@ -14,14 +14,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Load the SKScene from 'GameScene.sks'
     InitScene *scene = [[InitScene alloc] init];
     
     // Present the scene
     [self.skView presentScene:scene];
-    
-    self.skView.showsFPS = YES;
-    self.skView.showsNodeCount = YES;
 }
 
 @end
