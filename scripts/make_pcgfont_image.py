@@ -1,4 +1,10 @@
+#!/usr/bin/env python
+
+import argparse
+import os
+
 from PIL import Image, ImageDraw
+
 
 PCGFONT = \
   [[0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
@@ -98,4 +104,27 @@ PCGFONT = \
    [0x00, 0x00, 0x76, 0xDC, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
    [0x00, 0x00, 0x00, 0x00, 0x10, 0x38, 0x6C, 0xC6, 0xC6, 0xFE, 0x00, 0x00, 0x00]]
 
+
+def make_font_images(font_data, dir_path):
+    for ii in range(ord(' '), ord(' ') + len(font_data)):
+        img = Image.new('RGB', (8, 13), color = 'white')
+        glyph_data = font_data[ii - ord(' ')]
+        img_draw = ImageDraw.Draw(img)
+        for kk in range(0, len(glyph_data)):
+            line = glyph_data[kk]
+            for ll in range(0, 8):
+                if line & 128:
+                    img_draw.point([ll, kk], fill=(0, 0, 0))
+                line = line << 1
+        img.save(os.path.join(dir_path, str(ii) + '.png'))
+
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Break Dynosprite Glyphs into PNGs')
+    parser.add_argument('path', metavar='DIR', type=str,
+      help='path to directory to store the PNGs')
+
+    args = parser.parse_args()
+    make_font_images(PCGFONT, args.path)
 

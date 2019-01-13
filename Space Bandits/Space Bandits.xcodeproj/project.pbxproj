@@ -22,6 +22,8 @@
 		52A90E4621E2F23900CC2643 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208C21D7DD63008A7900 /* Actions.sks */; };
 		52A90E5B21E2F78300CC2643 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 52A90E5921E2F78300CC2643 /* levels */; };
 		52A90E5C21E2F78300CC2643 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 52A90E5A21E2F78300CC2643 /* images */; };
+		52C3FCE621EBD9C900AE268B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52C3FCE521EBD9C900AE268B /* Fonts */; };
+		52C3FCE721EBD9C900AE268B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52C3FCE521EBD9C900AE268B /* Fonts */; };
 		52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
 		52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
 		52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605821D7F57B0001F3A0 /* DSLevelTest.m */; };
@@ -67,6 +69,7 @@
 		52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSConfigFileParser.m; sourceTree = "<group>"; };
 		52A90E5921E2F78300CC2643 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../../game/levels; sourceTree = "<group>"; };
 		52A90E5A21E2F78300CC2643 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../game/images; sourceTree = "<group>"; };
+		52C3FCE521EBD9C900AE268B /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		52E7603721D7EC8F0001F3A0 /* coco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = coco.h; sourceTree = "<group>"; };
 		52E7603821D7ECA70001F3A0 /* dynosprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dynosprite.h; sourceTree = "<group>"; };
 		52E7604421D7EF440001F3A0 /* DSLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevel.h; sourceTree = "<group>"; };
@@ -158,6 +161,7 @@
 		52E7603621D7EC6C0001F3A0 /* dynosprite */ = {
 			isa = PBXGroup;
 			children = (
+				52C3FCE521EBD9C900AE268B /* Fonts */,
 				52E7604321D7EF110001F3A0 /* src */,
 				52E7603921D7ECB00001F3A0 /* include */,
 			);
@@ -370,6 +374,7 @@
 				52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */,
 				52F1208D21D7DD63008A7900 /* Actions.sks in Resources */,
 				52F1209821D7DD65008A7900 /* Main.storyboard in Resources */,
+				52C3FCE621EBD9C900AE268B /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +384,7 @@
 			files = (
 				52A90E4621E2F23900CC2643 /* Actions.sks in Resources */,
 				52A90E3E21E2F17D00CC2643 /* GameScene.sks in Resources */,
+				52C3FCE721EBD9C900AE268B /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
