@@ -1,6 +1,0 @@
-* Colored pyramids
-
-Image = 00-rainbowpyramids.png
-TileSetStart = 0,0
-TileSetSize = 304,192
-
