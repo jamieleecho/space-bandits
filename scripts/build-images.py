@@ -27,6 +27,7 @@
 #********************************************************************************
 
 import os
+import json
 import sys
 import math
 from compression import *
@@ -206,47 +207,23 @@ class ImageColors:
         self.indices = None
 
 def parseDescription(descFilename):
-    f = open(descFilename, "r").read()
-    ImageColorDict = { }
-    curImage = None
-    for line in f.split("\n"):
-        # remove comments and whitespace from line
-        pivot = line.find("*")
-        if pivot != -1:
-            line = line[:pivot]
-        line = line.strip()
-        if len(line) < 1:
-            continue
-        # handle new sections
-        if len(line) > 7 and line[:6].lower() == '[image' and line[-1] == ']':
-            # create new object for this section and put it in the dictionary
+    def textToLUV(value):
+        iValue = int(value, 16)
+        r = (iValue >> 16) & 0xff
+        g = (iValue >> 8) & 0xff
+        b = (iValue & 0xff)
+        return ConvertRGBtoLuv(r, g, b)
+
+    with  open(descFilename, "r") as f:
+        imageColors = json.load(f)["images"]
+        ImageColorDict = { }
+        for ii, color in enumerate(imageColors):
             curImage = ImageColors()
-            ImageNum = int(line[6:-1])
-            ImageColorDict[ImageNum] = curImage
-            continue
-        # handle color parameters
-        pivot = line.find("=")
-        if curImage is not None and pivot != -1:
-            key = line[:pivot].strip().lower()
-            value = line[pivot+1:].strip()
-            iValue = int(value, 16)
-            r = (iValue >> 16) & 0xff
-            g = (iValue >> 8) & 0xff
-            b = (iValue & 0xff)
-            LuvColor = ConvertRGBtoLuv(r,g,b)
-            if key.lower() == "backgroundcolor":
-                curImage.back = LuvColor
-            elif key.lower() == "foregroundcolor":
-                curImage.fore = LuvColor
-            elif key.lower() == "progresscolor":
-                curImage.bar = LuvColor
-            else:
-                print "****Error: invalid key '%s' in line '%s' in file '%s'" % (key, line, descFilename)
-                sys.exit(1)
-            continue
-        # anything else is unexpected
-        print "****Error: invalid line '%s' in file '%s'" % (line, descFilename)
-        sys.exit(1)
+            curImage.back = textToLUV(color["BackgroundColor"])
+            curImage.fore = textToLUV(color["ForegroundColor"])
+            curImage.bar = textToLUV(color["ProgressColor"])
+            ImageColorDict[ii] = curImage
+
     return ImageColorDict
 
 #******************************************************************************
@@ -264,7 +241,8 @@ if __name__ == "__main__":
     cc3dir = sys.argv[2]
     asmdir = sys.argv[3]
     # parse description file
-    ImageColorDict = parseDescription(os.path.join(imgdir, "images.txt"))
+    ImageColorDict = parseDescription(os.path.join(imgdir, "images.json"))
+
     # make list of input image files found
     filelist = os.listdir(imgdir)
     imgPngFiles = [name for name in filelist if name[-4:].lower() == ".png"]
