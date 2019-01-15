@@ -9,18 +9,12 @@
 #import "InitScene.h"
 
 @implementation InitScene {
-    SKSpriteNode *_backgroundNode;
 }
 
 - (void)didMoveToView:(SKView *)view {
-    if (_backgroundNode == nil) {
-        _backgroundNode = [SKSpriteNode spriteNodeWithImageNamed:@"Images/00-mainmenu.png"];
-        [self addChild:_backgroundNode];
-        self.size = CGSizeMake(1024, 640);
-        self.scaleMode = SKSceneScaleModeAspectFit;
-        _backgroundNode.position = CGPointMake(0, 0);
-        _backgroundNode.anchorPoint = CGPointMake(0, 0);
-        _backgroundNode.size = CGSizeMake(1024, 640);
+    if (self.labels.count < 1) {
+        self.backgroundImageName = @"Images/00-mainmenu.png";
+        [self addLabelWithText:@"[M]onitor sadasdfsfasfasdf" atPosition:CGPointMake(0, 0)];
     }
 }
 

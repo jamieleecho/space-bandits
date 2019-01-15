@@ -6,11 +6,11 @@
 //  Copyright © 2019 Jamie Cho. All rights reserved.
 //
 
-#import <SpriteKit/SpriteKit.h>
+#import "DSTransitionScene.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InitScene : SKScene
+@interface InitScene : DSTransitionScene
 
 @end
 
