@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5227E72221E2DDA40092C947 /* InitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5227E72121E2DDA40092C947 /* InitScene.m */; };
-		5227E72321E2DDA40092C947 /* InitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5227E72121E2DDA40092C947 /* InitScene.m */; };
+		521A849A21FCEE06006120E8 /* DSConfigFileParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */; };
+		521A849C21FCEE80006120E8 /* JSONDict.json in Resources */ = {isa = PBXBuildFile; fileRef = 521A849B21FCEE80006120E8 /* JSONDict.json */; };
+		521A849E21FCEED2006120E8 /* JSONList.json in Resources */ = {isa = PBXBuildFile; fileRef = 521A849D21FCEED2006120E8 /* JSONList.json */; };
+		521A84A021FCF626006120E8 /* JSONBad in Resources */ = {isa = PBXBuildFile; fileRef = 521A849F21FCF626006120E8 /* JSONBad */; };
 		524402DF21ED65CF00B02D38 /* DSTransitionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 524402DE21ED65CF00B02D38 /* DSTransitionScene.m */; };
 		524402E021ED65CF00B02D38 /* DSTransitionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 524402DE21ED65CF00B02D38 /* DSTransitionScene.m */; };
+		527E7ACD21F016B90013E66A /* DSInitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 527E7ACC21F016B90013E66A /* DSInitScene.m */; };
+		527E7ACE21F016B90013E66A /* DSInitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 527E7ACC21F016B90013E66A /* DSInitScene.m */; };
 		52A90E2F21E2E71A00CC2643 /* LoadLevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E2E21E2E71A00CC2643 /* LoadLevelScene.m */; };
 		52A90E3021E2E71A00CC2643 /* LoadLevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E2E21E2E71A00CC2643 /* LoadLevelScene.m */; };
 		52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
@@ -63,10 +67,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5227E72021E2DDA40092C947 /* InitScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InitScene.h; sourceTree = "<group>"; };
-		5227E72121E2DDA40092C947 /* InitScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InitScene.m; sourceTree = "<group>"; };
+		521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSConfigFileParserTest.m; sourceTree = "<group>"; };
+		521A849B21FCEE80006120E8 /* JSONDict.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JSONDict.json; sourceTree = "<group>"; };
+		521A849D21FCEED2006120E8 /* JSONList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JSONList.json; sourceTree = "<group>"; };
+		521A849F21FCF626006120E8 /* JSONBad */ = {isa = PBXFileReference; lastKnownFileType = text; path = JSONBad; sourceTree = "<group>"; };
+		5227E72021E2DDA40092C947 /* DSInitScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSInitScene.h; sourceTree = "<group>"; };
 		524402DD21ED65CF00B02D38 /* DSTransitionScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionScene.h; sourceTree = "<group>"; };
 		524402DE21ED65CF00B02D38 /* DSTransitionScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionScene.m; sourceTree = "<group>"; };
+		527E7ACC21F016B90013E66A /* DSInitScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInitScene.m; sourceTree = "<group>"; };
 		52A90E2D21E2E71A00CC2643 /* LoadLevelScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadLevelScene.h; sourceTree = "<group>"; };
 		52A90E2E21E2E71A00CC2643 /* LoadLevelScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoadLevelScene.m; sourceTree = "<group>"; };
 		52A90E3221E2E8A700CC2643 /* DSConfigFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSConfigFileParser.h; sourceTree = "<group>"; };
@@ -131,8 +139,8 @@
 		52A90E4121E2F1CA00CC2643 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				5227E72021E2DDA40092C947 /* InitScene.h */,
-				5227E72121E2DDA40092C947 /* InitScene.m */,
+				527E7ACC21F016B90013E66A /* DSInitScene.m */,
+				5227E72021E2DDA40092C947 /* DSInitScene.h */,
 				52A90E2D21E2E71A00CC2643 /* LoadLevelScene.h */,
 				52A90E2E21E2E71A00CC2643 /* LoadLevelScene.m */,
 				52F1208721D7DD63008A7900 /* AppDelegate.h */,
@@ -204,6 +212,10 @@
 				52E7605821D7F57B0001F3A0 /* DSLevelTest.m */,
 				52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */,
 				52EB04FA21D8538300F333AD /* DynospriteCoreTest.m */,
+				521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */,
+				521A849B21FCEE80006120E8 /* JSONDict.json */,
+				521A849D21FCEED2006120E8 /* JSONList.json */,
+				521A849F21FCF626006120E8 /* JSONBad */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -355,6 +367,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				521A84A021FCF626006120E8 /* JSONBad in Resources */,
+				521A849C21FCEE80006120E8 /* JSONDict.json in Resources */,
+				521A849E21FCEED2006120E8 /* JSONList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */,
+				521A849A21FCEE06006120E8 /* DSConfigFileParserTest.m in Sources */,
 				52A90E3F21E2F18C00CC2643 /* DSLevel.m in Sources */,
 				52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52EB04FB21D8538300F333AD /* DynospriteCoreTest.m in Sources */,
@@ -402,8 +418,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5227E72221E2DDA40092C947 /* InitScene.m in Sources */,
 				52A90E2F21E2E71A00CC2643 /* LoadLevelScene.m in Sources */,
+				527E7ACD21F016B90013E66A /* DSInitScene.m in Sources */,
 				524402DF21ED65CF00B02D38 /* DSTransitionScene.m in Sources */,
 				52E7605E21D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
@@ -421,13 +437,13 @@
 			files = (
 				52E7606021D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52A90E3021E2E71A00CC2643 /* LoadLevelScene.m in Sources */,
+				527E7ACE21F016B90013E66A /* DSInitScene.m in Sources */,
 				524402E021ED65CF00B02D38 /* DSTransitionScene.m in Sources */,
 				52A90E3C21E2F11100CC2643 /* GameScene.m in Sources */,
 				52A90E3821E2F11100CC2643 /* ViewController.m in Sources */,
 				52A90E4521E2F23000CC2643 /* AppDelegate.m in Sources */,
 				52A90E3621E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */,
-				5227E72321E2DDA40092C947 /* InitScene.m in Sources */,
 				52F120B121D7DD65008A7900 /* DynospriteUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

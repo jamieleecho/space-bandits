@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSDictionary *)parseFile:(NSString *)file;
 - (NSDictionary *)parseResourceNamed:(NSString *)name;
-- (NSDictionary *)parseStream:(NSStream *)stream;
 
 @end
 

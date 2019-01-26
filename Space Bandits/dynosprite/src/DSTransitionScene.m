@@ -81,8 +81,9 @@
     
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithColor:self.backgroundColor size:label.frame.size];
     [background addChild:label];
+    position.y = -position.y;
     background.position = position;
-    background.anchorPoint = CGPointMake(0, -1);
+    background.anchorPoint = CGPointMake(0, 1);
 
     [self addChild:background];
     [_labels addObject:label];

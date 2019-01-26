@@ -12,8 +12,18 @@
 
 - (NSDictionary *)parseFile:(NSString *)file {
     NSInputStream *inStream = [NSInputStream inputStreamWithURL:[NSURL fileURLWithPath:file]];
+    [inStream open];
     @try {
-        return [self parseStream:inStream];
+        NSError *err;
+        id result = [NSJSONSerialization JSONObjectWithStream:inStream options:0 error:&err];
+        if (err) {
+            @throw [NSException exceptionWithName:@"IO error parsing configuration file" reason:[err localizedDescription] userInfo:nil];
+        }
+        if (![result isKindOfClass:[NSDictionary class]]) {
+            @throw [NSException exceptionWithName:@"Unexpected format" reason:@"JSON file is not a dictionary" userInfo:nil];
+        }
+        
+        return result;
     } @finally {
         [inStream close];
     }
@@ -21,12 +31,8 @@
 
 - (NSDictionary *)parseResourceNamed:(NSString *)name {
     NSBundle *main = [NSBundle mainBundle];
-    NSString *resourcePath = [main pathForResource:name ofType:@"txt"];
+    NSString *resourcePath = [main pathForResource:name ofType:@"json"];
     return [self parseFile:resourcePath];
-}
-
-- (NSDictionary *)parseStream:(NSStream *)stream {
-    return nil;
 }
 
 @end

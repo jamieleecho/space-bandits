@@ -6,15 +6,15 @@
 //  Copyright © 2019 Jamie Cho. All rights reserved.
 //
 
-#import "InitScene.h"
+#import "DSInitScene.h"
 
-@implementation InitScene {
+@implementation DSInitScene {
 }
 
 - (void)didMoveToView:(SKView *)view {
     if (self.labels.count < 1) {
         self.backgroundImageName = @"Images/00-mainmenu.png";
-        [self addLabelWithText:@"[M]onitor sadasdfsfasfasdf" atPosition:CGPointMake(0, 0)];
+        [self addLabelWithText:@"[M]onitor sadasdfsfasfasdf" atPosition:CGPointMake(20, 10)];
     }
 }
 

@@ -7,14 +7,14 @@
 //
 
 #import "ViewController.h"
-#import "InitScene.h"
+#import "DSInitScene.h"
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    InitScene *scene = [[InitScene alloc] init];
+    DSInitScene *scene = [[DSInitScene alloc] init];
     
     // Present the scene
     [self.skView presentScene:scene];
