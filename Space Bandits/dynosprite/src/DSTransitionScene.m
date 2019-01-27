@@ -20,32 +20,26 @@
     return _backgroundImageName;
 }
 
-
 - (void)setBackgroundImageName:(NSString *)backgroundImageName {
     _backgroundImageName = backgroundImageName;
     _backgroundImage.texture = [SKTexture textureWithImageNamed:_backgroundImageName];
 }
 
-
 - (NSColor *)foregroundColor {
     return _foregroundColor;
 }
-
 
 - (void)setForegroundColor:(NSColor *)foregroundColor {
     _foregroundColor = foregroundColor;
 }
 
-
 - (NSColor *)progressBarColor {
     return _progressBarColor;
 }
 
-
 - (void)setProgressBarColor:(NSColor *)progressBarColor {
     _progressBarColor = progressBarColor;
 }
-
 
 - (id)init {
     if (self = [super init]) {
@@ -68,7 +62,6 @@
     return self;
 }
 
-
 - (void)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position {
     NSString *font = @"pcgfont";
     SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:font];
@@ -89,11 +82,9 @@
     [_labels addObject:label];
 }
 
-
 - (void)configureLabel:(SKLabelNode *)label {
     label.fontColor = self.foregroundColor;
     ((SKSpriteNode *)label.parent).color = self.backgroundColor;
 }
-
 
 @end
