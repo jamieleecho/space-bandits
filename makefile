@@ -32,7 +32,7 @@ IMAGESRC = $(wildcard $(IMAGEDIR)/??-*.png)
 LEVELSRC = $(wildcard $(LEVELDIR)/??-*.asm)
 LEVELCSRC = $(wildcard $(LEVELDIR)/??-*.c)
 LEVELCSRC2ASM = $(patsubst %.c, %.asm, $(LEVELCSRC))
-LEVELDSC = $(wildcard $(LEVELDIR)/??-*.txt)
+LEVELDSC = $(wildcard $(LEVELDIR)/??-*.json)
 
 # lists of build products based on game assets
 TILESRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/tileset%.txt, $(TILEDESC))
@@ -45,7 +45,7 @@ SOUNDRAW := $(patsubst $(SOUNDDIR)/%.wav, $(GENOBJDIR)/sound%.raw, $(SOUNDSRC))
 SPRITERAW := $(patsubst $(SPRITEDIR)/%.txt, $(GENOBJDIR)/sprite%.raw, $(SPRITEDSC))
 SOUNDRAW := $(patsubst $(SOUNDDIR)/%.wav, $(GENOBJDIR)/sound%.raw, $(SOUNDSRC))
 LEVELRAW := $(patsubst $(LEVELDIR)/%.asm, $(GENOBJDIR)/level%.raw, $(LEVELSRC) $(LEVELCSRC2ASM))
-MAPSRC := $(patsubst $(LEVELDIR)/%.txt, $(GENGFXDIR)/tilemap%.txt, $(LEVELDSC))
+MAPSRC := $(patsubst $(LEVELDIR)/%.json, $(GENGFXDIR)/tilemap%.txt, $(LEVELDSC))
 
 
 # output ASM files generated from sprites

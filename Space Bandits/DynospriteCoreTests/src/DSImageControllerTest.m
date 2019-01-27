@@ -61,5 +61,4 @@
     XCTAssertNotEqual(scene1, scene2);
 }
 
-
 @end

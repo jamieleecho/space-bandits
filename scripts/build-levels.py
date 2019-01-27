@@ -26,6 +26,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #********************************************************************************
 
+import json
 import os
 import re
 import sys
@@ -48,11 +49,11 @@ class ObjectInit:
         return True
     def SetParameter(self, key, value, dynosymbols):
         if key == "initdata":
-            initList = [n.strip() for n in value.split(",")]
+            initList = value
             numList = []
             for initValue in initList:
-                if initValue.isdigit():
-                    numList.append(int(initValue))
+                if type(initValue) is int:
+                    numList.append(initValue)
                 elif initValue in dynosymbols:
                     symLoc = dynosymbols[initValue]
                     numList.append(symLoc >> 8)
@@ -106,60 +107,25 @@ class Level:
                 print "****Error: Missing '%s' parameter in level file '%s'" % (paramName, descFile)
                 sys.exit(1)
         # parse the ObjectGroups parameter to make a list
-        self.ObjectGroups = [int(s.strip()) for s in self.ParamDict["objectgroups"].split(",")]
+        self.ObjectGroups = [s for s in self.ParamDict["objectgroups"]]
         # set the width and height from tilemapsize
-        self.tilemapwidth, self.tilemapheight = (int(v.strip())/16 for v in self.ParamDict["tilemapsize"].split(","))
+        self.tilemapwidth, self.tilemapheight = (v/16 for v in self.ParamDict["tilemapsize"])
 
     def parseDescription(self, descFilename, dynosymbols):
-        f = open(descFilename, "r").read()
-        mode = None
-        curObject = None
-        for line in f.split("\n"):
-            # remove comments and whitespace from line
-            pivot = line.find("*")
-            if pivot != -1:
-                line = line[:pivot]
-            line = line.strip()
-            if len(line) < 1:
-                continue
-            # handle new sections
-            if len(line) > 2 and line[0] == '[' and line[-1] == ']':
-                if mode == "object":
-                    if not curObject.Validate():
-                        print "****Error: in level description file '%s'" % descFilename
-                        sys.exit(1)
-                    self.ObjectInitStream += curObject.WriteDataStream()
-                    self.NumInitObjects += 1
-                # start a new section
-                mode = line[1:-1].lower()
-                if mode == "object":
-                    curObject = ObjectInit()
-                continue
-            # handle level parameters
-            if mode == "level":
-                pivot = line.find("=")
-                if pivot == -1:
-                    print "****Error: invalid line '%s' in [Level] section of file '%s'" % (line, descFilename)
-                    sys.exit(1)
-                key = line[:pivot].strip().lower()
-                value = line[pivot+1:].strip()
-                self.ParamDict[key] = value
-                continue
-            # handle object init parameters
-            if mode == "object":
-                pivot = line.find("=")
-                if pivot == -1:
-                    print "****Error: invalid line '%s' in [Object] section of file '%s'" % (line, descFilename)
-                    sys.exit(1)
-                key = line[:pivot].strip().lower()
-                value = line[pivot+1:].strip()
-                curObject.SetParameter(key, value, dynosymbols)
-                continue
-            # anything else is unexpected
-            print "****Error: invalid line '%s' in [%s] section of file '%s'" % (line, mode or "(None)", descFilename)
-            sys.exit(1)
-        # save any object being defined at end of file
-        if mode == "object":
+        with open(descFilename, 'r') as f:
+            data = json.load(f)
+
+        # First set the level section
+        for key, value in data["Level"].iteritems():
+            if key != "_comment":
+                self.ParamDict[key.lower()] = value
+
+        # Fill out object section
+        for obj in data["Objects"]:
+            curObject = ObjectInit()
+            for key, value in obj.iteritems():
+                if key != "_comment":
+                    curObject.SetParameter(key.lower(), value, dynosymbols)
             if not curObject.Validate():
                 print "****Error: in level description file '%s'" % descFilename
                 sys.exit(1)
@@ -272,7 +238,7 @@ if __name__ == "__main__":
     asmdir = sys.argv[7]
     # make lists of level files (description, raw/list from asm source, tilemap) found
     filelist = os.listdir(leveldir)
-    lvlDescFiles = [name for name in filelist if len(name) >= 6 and name[:2].isdigit() and name[-4:].lower() == ".txt"]
+    lvlDescFiles = [name for name in filelist if len(name) >= 6 and name[:2].isdigit() and name[-5:].lower() == ".json"]
     lvlDescFiles.sort()
     rawlist = os.listdir(rawdir)
     listlist = os.listdir(listdir)
