@@ -172,7 +172,7 @@ $(GENGFXDIR)/tileset%.txt $(GENGFXDIR)/tilemask%.txt $(GENGFXDIR)/palette%.txt: 
 	$(SCRIPTDIR)/gfx-process.py gentileset $< $(GENGFXDIR)/palette$*.txt $(GENGFXDIR)/tileset$*.txt $(GENGFXDIR)/tilemask$*.txt
 
 # 1b. Generate text Tilemap files from images
-$(GENGFXDIR)/tilemap%.txt: $(LEVELDIR)/%.txt $(TILESRC) $(PALSRC) $(SCRIPTDIR)/gfx-process.py
+$(GENGFXDIR)/tilemap%.txt: $(LEVELDIR)/%.json $(TILESRC) $(PALSRC) $(SCRIPTDIR)/gfx-process.py
 	$(SCRIPTDIR)/gfx-process.py gentilemap $< $(GENGFXDIR) $@
 
 # 1c. Generate Sprite files from images

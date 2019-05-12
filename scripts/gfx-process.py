@@ -28,6 +28,7 @@
 
 import os
 import sys
+import json
 import math
 import numpy
 from collections import deque
@@ -227,41 +228,18 @@ class LevelInfo:
         self.tilemapSize = None
 
 def parseLevelDescription(descFilename):
-    f = open(descFilename, "r").read()
-    info = LevelInfo()
-    section = ""
-    for line in f.split("\n"):
-        # remove comments and whitespace from line
-        pivot = line.find("*")
-        if pivot != -1:
-            line = line[:pivot]
-        line = line.strip()
-        if len(line) < 1:
-            continue
-        # handle new sections
-        if len(line) > 2 and line[0] == '[' and line[-1] == ']':
-            section = line[1:-1].lower()
-            continue
-        # the only section we care about is "Level"
-        if section != "level":
-            continue
-        # handle parameters
-        pivot = line.find("=")
-        if pivot != -1:
-            key = line[:pivot].strip().lower()
-            value = line[pivot+1:].strip()
-            if key == "tileset":
-                info.tilesetidx = int(value)
-            elif key == "tilemapimage":
-                info.mapfilename = value
-            elif key == "tilemapstart":
-                info.tilemapStart = [ int(c) for c in value.split(",") ]
-            elif key == "tilemapsize":
-                info.tilemapSize = [ int(c) for c in value.split(",") ]
-            continue
-        # anything else is unexpected
-        print "****Error: invalid line '%s' in level description file '%s'" % (line, descFilename)
+    with open(descFilename, 'r') as f:
+        levelDesc = json.load(f)
+    if not 'Level' in levelDesc:
+        print 'Level section missing in {}'.format(descFilename)
         sys.exit(2)
+    levelInfo = levelDesc['Level']
+    info = LevelInfo()
+    info.tilesetidx = levelInfo['Tileset']
+    info.tilemapimage = levelInfo['TilemapImage']
+    info.mapfilename = levelInfo['TilemapImage']
+    info.tilemapStart = levelInfo['TilemapStart']
+    info.tilemapSize = levelInfo['TilemapSize']
     return info
 
 def parsePaletteRGB(paletteFilename):
