@@ -13,5 +13,7 @@
 @interface DSAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet DSTransitionSceneController *transitionSceneController;
+- (void) awakeFromNib;
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender;
 
 @end

@@ -11,15 +11,11 @@
 
 @implementation DSAppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void) awakeFromNib {
     DSConfigFileParser *parser = [[DSConfigFileParser alloc] init];
     NSDictionary *configs = [parser parseResourceNamed:@"images/images"];
     NSArray *images = [configs objectForKey:@"images"];
     self.transitionSceneController.images = images;
-}
-
-- (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
