@@ -21,7 +21,7 @@
 
 - (void)mouseUp:(NSEvent *)theEvent {
     SKTransition *transition = [SKTransition doorsOpenVerticalWithDuration:1.0];
-    SKScene *newScene = [SKScene nodeWithFileNamed:@"GameScene"];
+    SKScene *newScene = [SKScene nodeWithFileNamed:@"DSGameScene"];
     [self.scene.view presentScene: newScene transition: transition];
 }
 

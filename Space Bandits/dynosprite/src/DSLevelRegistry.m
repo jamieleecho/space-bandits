@@ -33,7 +33,6 @@ static DSLevelRegistry *_sharedInstance = nil;
     return _sharedInstance;
 }
 
-
 - (id)init {
     self = [super init];
     
@@ -44,17 +43,14 @@ static DSLevelRegistry *_sharedInstance = nil;
     return self;
 }
 
-
 - (void)addLevel:(DSLevel *)level fromFile:(NSString *)file {
     NSNumber *index = [NSNumber numberWithInteger:[[[file lastPathComponent] substringToIndex:2] intValue]];
     _indexToLevel[index] = level;
 }
 
-
 - (void)clear {
     [_indexToLevel removeAllObjects];
 }
-
 
 - (DSLevel *)levelForIndex:(int)index {
     return _indexToLevel[[NSNumber numberWithInt:index]];

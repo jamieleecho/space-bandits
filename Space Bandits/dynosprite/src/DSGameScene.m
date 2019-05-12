@@ -1,14 +1,14 @@
 //
-//  GameScene.m
+//  DSGameScene.m
 //  Space Bandits
 //
 //  Created by Jamie Cho on 12/29/18.
 //  Copyright © 2018 Jamie Cho. All rights reserved.
 //
 
-#import "GameScene.h"
+#import "DSGameScene.h"
 
-@implementation GameScene {
+@implementation DSGameScene {
     SKShapeNode *_spinnyNode;
     SKLabelNode *_label;
 }

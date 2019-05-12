@@ -1,5 +1,5 @@
 //
-//  GameScene.h
+//  DSGameScene.h
 //  Space Bandits
 //
 //  Created by Jamie Cho on 12/29/18.
@@ -8,6 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface GameScene : SKScene
+@interface DSGameScene : SKScene
 
 @end
