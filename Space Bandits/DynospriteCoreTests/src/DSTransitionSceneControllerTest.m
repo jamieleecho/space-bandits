@@ -7,11 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "DSImageController.h"
+#import "DSTransitionSceneController.h"
 
 
-@interface DSImageControllerTest : XCTestCase {
-    DSImageController *_target;
+@interface DSTransitionSceneControllerTest : XCTestCase {
+    DSTransitionSceneController *_target;
     NSDictionary *_initImage;
     NSDictionary *_level1Image;
     NSDictionary *_level2Image;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation DSImageControllerTest
+@implementation DSTransitionSceneControllerTest
 
 - (void)setUp {
     _initImage = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -37,14 +37,14 @@
                     @"200000", @"ForegroundColor",
                     @"3bb43a", @"ProgressColor",
                     nil];
-    _target = [[DSImageController alloc] initWithImageDictionaries:@[_initImage, _level1Image, _level2Image]];
+    _target = [[DSTransitionSceneController alloc] initWithImageDictionaries:@[_initImage, _level1Image, _level2Image]];
 }
 
 - (void)testCreatesColors {
-    XCTAssertEqualObjects([DSImageController colorFromRGBString:@"f3Ab24"],
+    XCTAssertEqualObjects([DSTransitionSceneController colorFromRGBString:@"f3Ab24"],
                           [NSColor colorWithCalibratedRed:0xf3/255.0f green:0xab/255.0f blue:0x24/255.0f alpha:1]);
-    XCTAssertThrows([DSImageController colorFromRGBString:@"#f3Ab24"]);
-    XCTAssertThrows([DSImageController colorFromRGBString:@"f3Ab24aa"]);
+    XCTAssertThrows([DSTransitionSceneController colorFromRGBString:@"#f3Ab24"]);
+    XCTAssertThrows([DSTransitionSceneController colorFromRGBString:@"f3Ab24aa"]);
 }
 
 - (void)testCreatesLevels {

@@ -6,12 +6,16 @@
 //  Copyright © 2018 Jamie Cho. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "DSAppDelegate.h"
+#import "DSConfigFileParser.h"
 
-@implementation AppDelegate
+@implementation DSAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+    DSConfigFileParser *parser = [[DSConfigFileParser alloc] init];
+    NSDictionary *configs = [parser parseResourceNamed:@"images/images"];
+    NSArray *images = [configs objectForKey:@"images"];
+    self.transitionSceneController.images = images;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

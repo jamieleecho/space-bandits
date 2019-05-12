@@ -1,20 +1,20 @@
 //
-//  ViewController.m
+//  DSViewController.m
 //  Space Bandits
 //
 //  Created by Jamie Cho on 12/29/18.
 //  Copyright © 2018 Jamie Cho. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "DSViewController.h"
 #import "DSInitScene.h"
 
-@implementation ViewController
+@implementation DSViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    DSInitScene *scene = [[DSInitScene alloc] init];
+    SKScene *scene = [self.transitionSceneController transitionSceneForLevel:0];
     
     // Present the scene
     [self.skView presentScene:scene];

@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSTransitionScene.h"
+#import "DSTransitionSceneControllerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSImageController : NSObject {
-    NSArray *_images;
-}
+@interface DSTransitionSceneController : NSObject <DSTransitionSceneControllerProtocol>
+
+@property NSArray *images;
 
 + (NSColor *)colorFromRGBString:(NSString *)color;
 

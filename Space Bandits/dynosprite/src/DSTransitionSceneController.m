@@ -6,11 +6,12 @@
 //  Copyright © 2019 Jamie Cho. All rights reserved.
 //
 
-#import "DSImageController.h"
+#import "DSTransitionSceneController.h"
+#import "DSInitScene.h"
 #import "DSTransitionScene.h"
 
 
-@implementation DSImageController
+@implementation DSTransitionSceneController
 
 + (NSColor *)colorFromRGBString:(NSString *)color {
     NSError *err;
@@ -31,16 +32,19 @@
 
 - (id)initWithImageDictionaries:(NSArray *)images {
     if (self = [super init]) {
-        _images = images;
+        self.images = images;
     }
     return self;
 }
 
 - (DSTransitionScene *)transitionSceneForLevel:(int)level {
-    DSTransitionScene *transitionScene = [[DSTransitionScene alloc] init];
-    transitionScene.backgroundColor = [DSImageController colorFromRGBString:_images[level][@"BackgroundColor"]];
-    transitionScene.foregroundColor = [DSImageController colorFromRGBString:_images[level][@"ForegroundColor"]];
-    transitionScene.progressBarColor = [DSImageController colorFromRGBString:_images[level][@"ProgressColor"]];
+    if (level < 0) {
+        return nil;
+    }
+    DSTransitionScene *transitionScene = (level == 0) ? [[DSInitScene alloc] init] : [[DSTransitionScene alloc] init];
+    transitionScene.backgroundColor = [DSTransitionSceneController colorFromRGBString:self.images[level][@"BackgroundColor"]];
+    transitionScene.foregroundColor = [DSTransitionSceneController colorFromRGBString:self.images[level][@"ForegroundColor"]];
+    transitionScene.progressBarColor = [DSTransitionSceneController colorFromRGBString:self.images[level][@"ProgressColor"]];
     return transitionScene;
 }
 

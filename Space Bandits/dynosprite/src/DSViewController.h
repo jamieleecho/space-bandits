@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DSViewController.h
 //  Space Bandits
 //
 //  Created by Jamie Cho on 12/29/18.
@@ -10,9 +10,13 @@
 #import <SpriteKit/SpriteKit.h>
 #import <GameplayKit/GameplayKit.h>
 
-@interface ViewController : NSViewController
+#import "DSSharedTransitionSceneController.h"
+
+
+@interface DSViewController : NSViewController
 
 @property (assign) IBOutlet SKView *skView;
+@property IBOutlet NSObject <DSTransitionSceneControllerProtocol> *transitionSceneController;
 
 @end
 

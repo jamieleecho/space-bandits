@@ -11,6 +11,7 @@
 @interface DSTransitionScene() {
 }
 - (void)configureLabel:(SKLabelNode *)label;
+- (void)configureBackgroundImage:(SKSpriteNode *)image;
 @end
 
 
@@ -23,22 +24,6 @@
 - (void)setBackgroundImageName:(NSString *)backgroundImageName {
     _backgroundImageName = backgroundImageName;
     _backgroundImage.texture = [SKTexture textureWithImageNamed:_backgroundImageName];
-}
-
-- (NSColor *)foregroundColor {
-    return _foregroundColor;
-}
-
-- (void)setForegroundColor:(NSColor *)foregroundColor {
-    _foregroundColor = foregroundColor;
-}
-
-- (NSColor *)progressBarColor {
-    return _progressBarColor;
-}
-
-- (void)setProgressBarColor:(NSColor *)progressBarColor {
-    _progressBarColor = progressBarColor;
 }
 
 - (id)init {
@@ -54,9 +39,7 @@
         
         _backgroundImageName = @"";
         _backgroundImage = [SKSpriteNode spriteNodeWithColor:self.backgroundColor size:self.size];
-        _backgroundImage.anchorPoint = CGPointMake(0, 1);
-        _backgroundImage.size = self.size;
-        _backgroundImage.position = CGPointMake(0, 0);
+        [self configureBackgroundImage:_backgroundImage];
         [self addChild:_backgroundImage];
     }
     return self;
@@ -85,6 +68,12 @@
 - (void)configureLabel:(SKLabelNode *)label {
     label.fontColor = self.foregroundColor;
     ((SKSpriteNode *)label.parent).color = self.backgroundColor;
+}
+
+- (void)configureBackgroundImage:(SKSpriteNode *)image {
+    _backgroundImage.anchorPoint = CGPointMake(0, 1);
+    _backgroundImage.size = self.size;
+    _backgroundImage.position = CGPointMake(0, 0);
 }
 
 @end

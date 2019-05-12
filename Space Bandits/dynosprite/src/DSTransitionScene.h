@@ -16,10 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
     @private
     SKSpriteNode *_backgroundImage;
     @private
-    NSColor *_foregroundColor;
-    @private
-    NSColor *_progressBarColor;
-    @private
     NSMutableArray<SKLabelNode *> *_labels;
 }
 
