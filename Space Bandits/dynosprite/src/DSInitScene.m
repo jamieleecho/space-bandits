@@ -15,7 +15,10 @@
     [super didMoveToView:view];
     if (self.labels.count < 1) {
         self.backgroundImageName = @"Images/00-mainmenu.png";
-        [self addLabelWithText:@"[M]onitor sadasdfsfasfasdf" atPosition:CGPointMake(20, 0)];
+        [self addLabelWithText:@"[M]onitor:" atPosition:CGPointMake(3, 120)];
+        [self addLabelWithText:@"[C]ontrol:" atPosition:CGPointMake(3, 136)];
+        [self addLabelWithText:@"[S]ound:" atPosition:CGPointMake(3, 152)];
+        [self addLabelWithText:@"[Space] or joystick button to start" atPosition:CGPointMake(10, 184)];
     }
 }
 
@@ -26,9 +29,9 @@
 }
 
 - (void)configureBackgroundImage:(SKSpriteNode *)image {
-    image.anchorPoint = CGPointMake(0, 1);
     image.size = self.size;
-    image.position = CGPointMake(0, 0);
+    image.position = CGPointMake(0, 8);
+    image.anchorPoint = CGPointMake(0, 1);
 }
 
 @end

@@ -52,7 +52,7 @@
     label.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     label.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
     label.position = CGPointMake(0, 0);
-    label.fontSize = 13;
+    label.fontSize = 12.75f;
     label.fontColor = self.foregroundColor;
     
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithColor:self.backgroundColor size:label.frame.size];

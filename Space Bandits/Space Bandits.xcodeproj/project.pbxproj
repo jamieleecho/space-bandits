@@ -37,6 +37,8 @@
 		52C3FCE721EBD9C900AE268B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52C3FCE521EBD9C900AE268B /* Fonts */; };
 		52CF9D3D2288A56E0054EAD2 /* DSGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF9D3B2288A56E0054EAD2 /* DSGameScene.m */; };
 		52CF9D3E2288A56E0054EAD2 /* DSGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52CF9D3C2288A56E0054EAD2 /* DSGameScene.sks */; };
+		52CF9D422288FB2B0054EAD2 /* DSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF9D412288FB2B0054EAD2 /* DSWindowController.m */; };
+		52CF9D432288FB2B0054EAD2 /* DSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF9D412288FB2B0054EAD2 /* DSWindowController.m */; };
 		52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
 		52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
 		52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605821D7F57B0001F3A0 /* DSLevelTest.m */; };
@@ -94,6 +96,8 @@
 		52CF9D3A2288A56E0054EAD2 /* DSGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSGameScene.h; sourceTree = "<group>"; };
 		52CF9D3B2288A56E0054EAD2 /* DSGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSGameScene.m; sourceTree = "<group>"; };
 		52CF9D3C2288A56E0054EAD2 /* DSGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DSGameScene.sks; sourceTree = "<group>"; };
+		52CF9D402288FB2B0054EAD2 /* DSWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSWindowController.h; sourceTree = "<group>"; };
+		52CF9D412288FB2B0054EAD2 /* DSWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSWindowController.m; sourceTree = "<group>"; };
 		52E7603721D7EC8F0001F3A0 /* coco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = coco.h; sourceTree = "<group>"; };
 		52E7603821D7ECA70001F3A0 /* dynosprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dynosprite.h; sourceTree = "<group>"; };
 		52E7604421D7EF440001F3A0 /* DSLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevel.h; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 				52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */,
 				52A90E3221E2E8A700CC2643 /* DSConfigFileParser.h */,
 				52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */,
+				52CF9D402288FB2B0054EAD2 /* DSWindowController.h */,
+				52CF9D412288FB2B0054EAD2 /* DSWindowController.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -427,6 +433,7 @@
 				52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */,
 				52F1209B21D7DD65008A7900 /* main.m in Sources */,
+				52CF9D422288FB2B0054EAD2 /* DSWindowController.m in Sources */,
 				52F1208921D7DD63008A7900 /* DSAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,6 +450,7 @@
 				524402E021ED65CF00B02D38 /* DSTransitionScene.m in Sources */,
 				52A90E4521E2F23000CC2643 /* DSAppDelegate.m in Sources */,
 				52A90E3621E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
+				52CF9D432288FB2B0054EAD2 /* DSWindowController.m in Sources */,
 				52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */,
 				52F120B121D7DD65008A7900 /* DynospriteUITests.m in Sources */,
 			);
