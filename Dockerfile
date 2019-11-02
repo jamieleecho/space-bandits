@@ -1,6 +1,6 @@
-FROM jamieleecho/coco-dev:0.12
+FROM jamieleecho/coco-dev:0.16
 
-MAINTAINER Jamie Cho version: 0.2
+MAINTAINER Jamie Cho version: 0.3
 
 # Install image-magick
 RUN apt-get update -y

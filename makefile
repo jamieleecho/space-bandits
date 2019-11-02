@@ -54,7 +54,7 @@ SPRITEASMSRC := $(patsubst $(SPRITEDIR)/%.txt, $(GENASMDIR)/sprite%.asm, $(filte
 # paths to dependencies
 COCODISKGEN = $(TOOLDIR)/file2dsk
 ASSEMBLER = $(TOOLDIR)/lwasm
-EMULATOR = $(TOOLDIR)/mess64
+EMULATOR = $(TOOLDIR)/mame64
 
 # make sure build products directories exist
 $(shell mkdir -p $(GENASMDIR))
