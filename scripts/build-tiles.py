@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #********************************************************************************
 # DynoSprite - scripts/build-tiles.py
 # Copyright (c) 2013-2014, Richard Goedeken
@@ -45,46 +45,46 @@ class Tileset:
         # check palette arrays
         for p in range(2):
             if self.palettes[p] == None:
-                print "****Error: missing %s palette in file '%s'" % (palNames[p], self.palfilename)
+                print("****Error: missing %s palette in file '%s'" % (palNames[p], self.palfilename))
                 return False
             if len(self.palettes[p]) != 16:
-                print "****Error: %s palette length is %i (should be 16) in file '%s'" % (palNames[p], len(self.palettes[p]), self.palfilename)
+                print("****Error: %s palette length is %i (should be 16) in file '%s'" % (palNames[p], len(self.palettes[p]), self.palfilename))
                 return False
             for i in range(16):
                 clrIdx = self.palettes[p][i]
                 if clrIdx < 0 or clrIdx > 63:
-                    print "****Error: invalid color value %i in %s palette in file '%s'" % (clrIdx, palNames[p], self.palfilename)
+                    print("****Error: invalid color value %i in %s palette in file '%s'" % (clrIdx, palNames[p], self.palfilename))
                     return False
         # check each tile
         numTiles = len(self.tiles)
         for i in range(numTiles):
             tile = self.tiles[i]
             if len(tile) != 128:
-                print "****Error: invalid data length %i (should be 128) for tile %i in tileset '%s'" % (len(tile), i, self.tilesetfilename)
+                print("****Error: invalid data length %i (should be 128) for tile %i in tileset '%s'" % (len(tile), i, self.tilesetfilename))
                 return False
             for pixVal in tile:
                 if pixVal < 0 or pixVal > 255:
-                    print "****Error: invalid pixel value %i in tile %i in tileset '%s'" % (pixVal, i, self.tilesetfilename)
+                    print("****Error: invalid pixel value %i in tile %i in tileset '%s'" % (pixVal, i, self.tilesetfilename))
                     return False
         # check collision table
         numMasks = len(self.masks)
         if len(self.collisionTable) != numTiles:
-            print "****Error: Collision table length (%i) and number of tiles (%i) don't match in tileset '%s'" % (len(self.collisionTable), numTiles, self.tilesetfilename)
+            print("****Error: Collision table length (%i) and number of tiles (%i) don't match in tileset '%s'" % (len(self.collisionTable), numTiles, self.tilesetfilename))
             return False
         for i in range(numTiles):
             collVal = self.collisionTable[i]
             if collVal < 0 or (collVal != 255 and collVal > numMasks):
-                print "****Error: Invalid value (%i) in Collision Table in tilemask '%s'" % (collVal, self.tilemaskfilename)
+                print("****Error: Invalid value (%i) in Collision Table in tilemask '%s'" % (collVal, self.tilemaskfilename))
                 return False
         # check each mask
         for i in range(numMasks):
             mask = self.masks[i]
             if len(mask) != 128:
-                print "****Error: invalid data length %i (should be 128) for mask %i in tilemask '%s'" % (len(mask), i, self.tilemaskfilename)
+                print("****Error: invalid data length %i (should be 128) for mask %i in tilemask '%s'" % (len(mask), i, self.tilemaskfilename))
                 return False
             for pixVal in mask:
                 if pixVal < 0 or pixVal > 255:
-                    print "****Error: invalid pixel value %i in mask %i in tilemask '%s'" % (pixVal, i, self.tilemaskfilename)
+                    print("****Error: invalid pixel value %i in mask %i in tilemask '%s'" % (pixVal, i, self.tilemaskfilename))
                     return False
         return True
 
@@ -94,7 +94,7 @@ def SaveMatrix(tileset, section, matrix):
     elif section == "palette-rgb":
         tileset.palettes[1] = matrix
     elif section != None:
-        print "****Error: Invalid section '%s' in palette file '%s'" % (section, tileset.palfilename)
+        print("****Error: Invalid section '%s' in palette file '%s'" % (section, tileset.palfilename))
         sys.exit(1)
     return
 
@@ -103,10 +103,10 @@ def SaveMatrix(tileset, section, matrix):
 #
 
 if __name__ == "__main__":
-    print "DynoSprite Tile Builder script"
+    print("DynoSprite Tile Builder script")
     # get input paths
     if len(sys.argv) != 5:
-        print "****Usage: %s <in_gfx_folder> <in_buildobj_folder> <out_cc3_folder> <out_asm_folder>" % sys.argv[0]
+        print("****Usage: %s <in_gfx_folder> <in_buildobj_folder> <out_cc3_folder> <out_asm_folder>" % sys.argv[0])
         sys.exit(1)
     gfxdir = sys.argv[1]
     buildobjdir = sys.argv[2]
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     filelist = os.listdir(gfxdir)
     setnames = [name[7:-4] for name in filelist if len(name) >= 15 and name[:7] == 'tileset' and name[7:9].isdigit() and name[-4:].lower() == ".txt"]
     setnames.sort()
-    print "    Found %i tilesets" % len(setnames)
+    print("    Found %i tilesets" % len(setnames))
     # parse each tileset/palette file pair
     tilesets = []
     for tilesetprefix in setnames:
@@ -124,10 +124,10 @@ if __name__ == "__main__":
         tilemaskfilename = "tilemask%s.txt" % tilesetprefix
         palettefilename = "palette%s.txt" % tilesetprefix
         if not os.path.exists(os.path.join(gfxdir, palettefilename)):
-            print "****Error: Matching palette file '%s' not found!" % palettefilename
+            print("****Error: Matching palette file '%s' not found!" % palettefilename)
             sys.exit(1)
         if not os.path.exists(os.path.join(gfxdir, tilemaskfilename)):
-            print "****Error: Matching tilemask file '%s' not found!" % tilemaskfilename
+            print("****Error: Matching tilemask file '%s' not found!" % tilemaskfilename)
             sys.exit(1)
         mode = None
         curSet = Tileset(palettefilename, tilesetfilename, tilemaskfilename)
@@ -170,7 +170,7 @@ if __name__ == "__main__":
             # handle tile pixel values (hex)
             pix = "".join(line.split())
             if (len(pix) & 1) == 1:
-                print "****Error: invalid tile pixel line length (%i) in tileset '%s'" % (len(pix), filename)
+                print("****Error: invalid tile pixel line length (%i) in tileset '%s'" % (len(pix), filename))
                 sys.exit(1)
             for i in range(0, len(pix), 2):
                 v = int(pix[i:i+2], 16)
@@ -196,7 +196,7 @@ if __name__ == "__main__":
             # handle tile mask values (hex)
             pix = "".join(line.split())
             if (len(pix) & 1) == 1:
-                print "****Error: invalid tile mask line length (%i) in tilemask '%s'" % (len(pix), tilemaskfilename)
+                print("****Error: invalid tile mask line length (%i) in tilemask '%s'" % (len(pix), tilemaskfilename))
                 sys.exit(1)
             for i in range(0, len(pix), 2):
                 v = int(pix[i:i+2], 16)
@@ -213,23 +213,23 @@ if __name__ == "__main__":
     totalTiles = 0
     for curSet in tilesets:
         totalTiles += len(curSet.tiles)
-    print "    Found a total of %i tiles" % (totalTiles)
+    print("    Found a total of %i tiles" % (totalTiles))
     # write out the data file
     f = open(os.path.join(cc3dir, "TILES.DAT"), "wb")
     compressedTilesetLength = [ ]
     for curSet in tilesets:
         for pal in curSet.palettes:
             for i in range(16):
-                f.write(chr(pal[i]))
-        rawData = ""
+                f.write(bytes([pal[i]]))
+        rawData = b''
         for i in range(len(curSet.collisionTable)):
-            rawData += chr(curSet.collisionTable[i])
+            rawData += bytes([curSet.collisionTable[i]])
         for tile in curSet.tiles:
             for i in range(128):
-                rawData += chr(tile[i])
+                rawData += bytes([tile[i]])
         for mask in curSet.masks:
             for i in range(128):
-                rawData += chr(mask[i])
+                rawData += bytes([mask[i]])
         comp = Compressor(rawData)
         zipData = comp.Deflate(bPrintInfo=False, bUseGzip=True)
         compressedTilesetLength.append(len(zipData))

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #********************************************************************************
 # DynoSprite - scripts/sprite2asm.py
 # Copyright (c) 2013-2014, Richard Goedeken
@@ -137,7 +137,7 @@ class AsmStream:
 
     def gen_loadimm_accum(self, regnum, value, comment):
         if self.reg.IsValid(regnum) and self.reg.GetValue(regnum) == value:
-            # print "gen_loadimm_accum warning: register '%s' loading value 0x%x it already contains" % (regName[regnum], value)
+            # print("gen_loadimm_accum warning: register '%s' loading value 0x%x it already contains" % (regName[regnum], value))
             return
         # optimization: if possible, demote this accumulator load instruction to a smaller size
         if regnum == regQ and self.reg.IsValid(regD) and self.reg.GetValue(regD) == ((value >> 16) & 0xffff):
@@ -321,18 +321,18 @@ class Sprite:
                 coords = [ int(v) for v in value[1:-1].split(',') ]
                 self.hotspot = (coords[0], coords[1])
             else:
-                print "illegal line in Sprite '%s' definition: %s" % (self.name, line)
+                print("illegal line in Sprite '%s' definition: %s" % (self.name, line))
         else:
             rowpix = line.split()
             if len(rowpix) == self.width:
                 self.matrix.append([-1 if val == "-" else int(val,16) for val in rowpix])
             else:
-                print "illegal line in Sprite '%s' definition: %s" % (self.name, line)
+                print("illegal line in Sprite '%s' definition: %s" % (self.name, line))
 
     def FinishDefinition(self):
         # check that we loaded all rows of the matrix
         if len(self.matrix) != self.height:
-            print "Sprite [%s] error: Matrix height %i doesn't match sprite height %i" % (self.name, len(self.matrix), self.height)
+            print("Sprite [%s] error: Matrix height %i doesn't match sprite height %i" % (self.name, len(self.matrix), self.height))
         # create one or two draw functions
         if self.hasSinglePixelPos:
             self.funcDraw[0] = AsmStream("DrawLeft_%s" % self.name)
@@ -636,7 +636,7 @@ class Sprite:
                             # we only care about command-3 bytes
                             if byteCmds[idx][0] == 3:
                                 writeVal = byteCmds[idx][1]
-                                if byteWriteCntByVal.has_key(writeVal):
+                                if writeVal in byteWriteCntByVal:
                                     byteWriteCntByVal[writeVal] += 1
                                 else:
                                     byteWriteCntByVal[writeVal] = 1
@@ -647,7 +647,7 @@ class Sprite:
                             # we only care about words containing both command-3 bytes
                             if byteCmds[idx][0] == 3 and byteCmds[idx+1][0] == 3:
                                 writeVal = (byteCmds[idx][1] << 8) + byteCmds[idx+1][1]
-                                if wordWriteCntByVal.has_key(writeVal):
+                                if writeVal in wordWriteCntByVal:
                                     wordWriteCntByVal[writeVal] += 1
                                 else:
                                     wordWriteCntByVal[writeVal] = 1
@@ -659,7 +659,7 @@ class Sprite:
                             # we only care about words containing both command-3 bytes
                             if byteCmds[idx][0] == 3 and byteCmds[idx+1][0] == 3:
                                 writeVal = (byteCmds[idx][1] << 8) + byteCmds[idx+1][1]
-                                if wordWriteCntByVal.has_key(writeVal):
+                                if writeVal in wordWriteCntByVal:
                                     wordWriteCntByVal[writeVal] += 1
                                 else:
                                     wordWriteCntByVal[writeVal] = 1
@@ -1194,7 +1194,7 @@ class Sprite:
             layoutList.pop()
             if bestAsm == None or trialAsm.metrics.cycles < bestAsm.metrics.cycles:
                 #if bestAsm != None:   # fixme debug
-                #    print "%s: row layout with (cyc=%i,bytes=%i) is better than (cyc=%i,bytes=%i)" % (self.name, trialAsm.metrics.cycles, trialAsm.metrics.bytes, bestAsm.metrics.cycles, bestAsm.metrics.bytes)
+                #    print("%s: row layout with (cyc=%i,bytes=%i) is better than (cyc=%i,bytes=%i)" % (self.name, trialAsm.metrics.cycles, trialAsm.metrics.bytes, bestAsm.metrics.cycles, bestAsm.metrics.bytes))
                 bestAsm = trialAsm
         # return the best one
         return bestAsm
@@ -1481,12 +1481,12 @@ class Sprite:
                 if rowNum < self.height - 1:
                     wordWriteProb = self.wordWriteProbByRow[rowNum+1]
                     byteWriteProb = self.byteWriteProbByRow[rowNum+1]
-                    if wordWriteProb.has_key(lastVal):
+                    if lastVal in wordWriteProb:
                         score += wordWriteProb[lastVal]
                     byteProb = 0.0
-                    if byteWriteProb.has_key(lastVal >> 8):
+                    if (lastVal >> 8) in byteWriteProb:
                         byteProb = byteWriteProb[lastVal >> 8]
-                    if byteWriteProb.has_key(lastVal & 0xff):
+                    if (lastVal & 0xff) in  byteWriteProb:
                         byteProb = max(byteProb, byteWriteProb[lastVal & 0xff])
                     score += byteProb
             # give 1 point for each byte load that we can avoid when advancing to next word to write
@@ -1549,7 +1549,7 @@ class App:
                     if key == "group":
                         self.groupNumber = int(value)
                         continue
-                print "Warning: ignore line before sprite section: %s" % line
+                print("Warning: ignore line before sprite section: %s" % line)
                 continue
             curSprite.ReadInputLine(line)
         if curSprite != None:
@@ -1560,7 +1560,7 @@ class App:
             RowName += " " * (16 - len(RowName))
         else:
             RowName = RowName[:16]
-        print RowName,
+        print(RowName, end=' ')
         for val in Values:
             if val == None:
                 s = ""
@@ -1573,10 +1573,10 @@ class App:
             else:
                 raise Exception("Invalid data type")
             if len(s) >= 8:
-                print s[:8],
+                print(s[:8], end=' ')
             else:
-                print (" " * (8 - len(s))) + s,
-        print
+                print(" " * (8 - len(s)) + s, end=' ')
+        print()
 
     def Calculate(self):
         for sprite in self.spriteList:
@@ -1630,11 +1630,11 @@ class App:
                 TotalDrawR += sprite.funcDraw[1].metrics.bytes
         # print summary
         numSprites = len(self.spriteList)
-        print "Total number of sprites: %i" % numSprites
-        print "Total Erase code bytes: %i" % TotalErase
-        print "Total Draw Left code bytes: %i" % TotalDrawL
-        print "Total Draw Right code bytes: %i" % TotalDrawR
-        print
+        print("Total number of sprites: %i" % numSprites)
+        print("Total Erase code bytes: %i" % TotalErase)
+        print("Total Draw Left code bytes: %i" % TotalDrawL)
+        print("Total Draw Right code bytes: %i" % TotalDrawR)
+        print()
         # last column should be averages
         Names.append("Average")
         Pixels.append(sum(Pixels) / numSprites)
@@ -1659,17 +1659,17 @@ class App:
             self.PrintRow("Storage Bytes", Storage[startIdx:endIdx], int)
             self.PrintRow("Max Cycles", MaxCycles[startIdx:endIdx], int)
             self.PrintRow("Cycles/pixel", CyclesPerPix[startIdx:endIdx], float)
-            print "**************Erase:"
+            print("**************Erase:")
             self.PrintRow("Code bytes", EraseBytes[startIdx:endIdx], int)
             self.PrintRow("Clock cycles", EraseCycles[startIdx:endIdx], int)
-            print "**********Draw_Left:"
+            print("**********Draw_Left:")
             self.PrintRow("Code bytes", DrawLBytes[startIdx:endIdx], int)
             self.PrintRow("Clock cycles", DrawLCycles[startIdx:endIdx], int)
             if len(ValidDrawRBytes) > 0:
-                print "*********Draw_Right:"
+                print("*********Draw_Right:")
                 self.PrintRow("Code bytes", DrawRBytes[startIdx:endIdx], int)
                 self.PrintRow("Clock cycles", DrawRCycles[startIdx:endIdx], int)
-            print
+            print()
 
     def WriteAsm(self):
         # make sure we have a group number
@@ -1707,7 +1707,7 @@ class App:
             f.write("            fcb         %s%s* width\n" % (p, " " * (24-len(p))))
             p = str(sprite.height)
             f.write("            fcb         %s%s* height\n" % (p, " " * (24-len(p))))
-            p = str((sprite.originXcode - sprite.originXsprite)/2)
+            p = str((sprite.originXcode - sprite.originXsprite)//2)
             f.write("            fcb         %s%s* offsetX\n" % (p, " " * (24-len(p))))
             p = str(-sprite.hotspot[1])
             f.write("            fcb         %s%s* offsetY\n" % (p, " " * (24-len(p))))
@@ -1733,7 +1733,7 @@ class App:
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print "Usage: %s <InputSpriteFile> <OutputAsmFile> <6809 | 6309>" % sys.argv[0]
+        print("Usage: %s <InputSpriteFile> <OutputAsmFile> <6809 | 6309>" % sys.argv[0])
         sys.exit(1)
     # set CPU type
     global CPU

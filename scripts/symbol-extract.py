@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #********************************************************************************
 # DynoSprite - scripts/symbol-extract.py
 # Copyright (c) 2013-2014, Richard Goedeken
@@ -34,9 +34,9 @@ import sys
 #
 
 if __name__ == "__main__":
-    print "Symbol Extractor Script"
+    print("Symbol Extractor Script")
     if len(sys.argv) != 3:
-        print "    Usage: %0 <input.lst> <output.asm>"
+        print("    Usage: %0 <input.lst> <output.asm>")
         sys.exit(1)
     # parse input list and extract all global symbols
     bFoundSymTable = False
