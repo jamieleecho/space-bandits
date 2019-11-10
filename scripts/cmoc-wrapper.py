@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #********************************************************************************
 # DynoSprite - scripts/cmoc-wrapper.py
 # Copyright (c) 2018, Jamie Cho

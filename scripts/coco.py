@@ -19,8 +19,8 @@ def __GetCompositeColor(palidx):
         contrast = 70
         saturation = 92
         brightness = -50
-        brightness += ((palidx / 16) + 1) * contrast
-        offset = (palidx % 16) - 1 + (palidx / 16)*15
+        brightness += ((palidx // 16) + 1) * contrast
+        offset = (palidx % 16) - 1 + (palidx // 16)*15
         r = math.cos(w*(offset +  9.2)) * saturation + brightness
         g = math.cos(w*(offset + 14.2)) * saturation + brightness
         b = math.cos(w*(offset + 19.2)) * saturation + brightness
@@ -66,17 +66,17 @@ COCO_RGB_RGB8_COLORS = [
 
 # Color Computer 3 CMP colors
 COCO_CMP_RGB8_COLORS = [
-    __GetCompositeColor(ii) for ii in xrange(0, 64)
+    __GetCompositeColor(ii) for ii in range(0, 64)
 ]
 
 # Maps RGB8 colors to Color Computer 3 RGB colors
 RGB8_TO_COCO_RGB_COLORS = {
-    COCO_RGB_RGB8_COLORS[ii]: ii for ii in xrange(0, len(COCO_RGB_RGB8_COLORS))
+    COCO_RGB_RGB8_COLORS[ii]: ii for ii in range(0, len(COCO_RGB_RGB8_COLORS))
 }
 
 # Maps RGB8 colors to Color Computer 3 CMP colors
 RGB8_TO_COCO_CMP_COLORS = {
-    COCO_CMP_RGB8_COLORS[ii]: ii for ii in xrange(0, len(COCO_CMP_RGB8_COLORS))
+    COCO_CMP_RGB8_COLORS[ii]: ii for ii in range(0, len(COCO_CMP_RGB8_COLORS))
 }
 
 
