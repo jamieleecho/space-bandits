@@ -8,6 +8,7 @@
 
 #import "DSTransitionScene.h"
 
+
 @interface DSTransitionScene() {
 }
 - (void)configureLabel:(SKLabelNode *)label;
@@ -45,7 +46,7 @@
     return self;
 }
 
-- (void)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position {
+- (SKLabelNode *)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position {
     NSString *font = @"pcgfont";
     SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:font];
     label.text = labelText;
@@ -63,6 +64,7 @@
 
     [self addChild:background];
     [_labels addObject:label];
+    return label;
 }
 
 - (void)configureLabel:(SKLabelNode *)label {
@@ -74,6 +76,33 @@
     _backgroundImage.anchorPoint = CGPointMake(0, 1);
     _backgroundImage.size = self.size;
     _backgroundImage.position = CGPointMake(0, 0);
+}
+
+- (void)didMoveToView:(SKView *)view {
+    id sampleJoystick = ^{
+        [self.joystickController sample];
+        [self poll];
+    };
+    if (!_pollAction) {
+        _pollAction = [SKAction repeatActionForever:[SKAction sequence:[NSArray arrayWithObjects:[SKAction runBlock:sampleJoystick], [SKAction waitForDuration:1.0f / view.preferredFramesPerSecond], nil]]];
+        [self runAction:self->_pollAction withKey:@"pollAction"];
+    }
+}
+
+- (void)willMoveFromView:(SKView *)view {
+    [self removeActionForKey:@"pollAction"];
+    _pollAction = nil;
+}
+
+- (void)keyDown:(NSEvent *)theEvent {
+    [self.joystickController handleKeyDown:theEvent];
+}
+
+- (void)keyUp:(NSEvent *)theEvent {
+    [self.joystickController handleKeyUp:theEvent];
+}
+
+- (void)poll {    
 }
 
 @end

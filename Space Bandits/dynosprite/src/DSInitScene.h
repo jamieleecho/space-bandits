@@ -10,7 +10,49 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSInitScene : DSTransitionScene
+typedef enum DSInitSceneResolution {
+    DSInitSceneResolutionLow,
+    DSInitSceneResolutionHigh
+} DSInitSceneResolution;
+
+typedef enum DSInitSceneControl {
+    DSInitSceneControlKeyboard,
+DSInitSceneControlJoystick
+} DSInitSceneControl;
+
+typedef enum DSInitSceneSound {
+    DSInitSceneSoundLow,
+    DSInitSceneSoundHigh
+} DSInitSceneSound;
+
+@interface DSInitScene : DSTransitionScene {
+    SKLabelNode *_resolutionLabelNode;
+    SKLabelNode *_controlLabelNode;
+    SKLabelNode *_soundLabelNode;
+    
+    DSInitSceneResolution _resolution;
+    DSInitSceneControl _control;
+    DSInitSceneSound _sound;
+}
+
+- (void)didMoveToView:(SKView *)view;
+- (void)willMoveFromView:(SKView *)view;
+
+- (void)mouseUp:(NSEvent *)theEvent;
+- (void)keyUp:(NSEvent *)theEvent;
+
+- (NSString *)textFromResolution:(DSInitSceneResolution)resolution;
+- (NSString *)textFromControl:(DSInitSceneControl)control;
+- (NSString *)textFromSound:(DSInitSceneSound)sound;
+
+- (void)refreshScreen;
+- (void)transitionToNextScreen;
+
+- (void)toggleResolution;
+- (void)toggleControl;
+- (void)toggleSound;
+
+- (void)poll;
 
 @end
 

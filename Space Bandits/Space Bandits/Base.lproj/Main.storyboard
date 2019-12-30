@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -676,12 +677,17 @@
                 </application>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <customObject id="rDZ-CV-DhK" customClass="DSTransitionSceneController"/>
+                <customObject id="rDZ-CV-DhK" customClass="DSTransitionSceneController">
+                    <connections>
+                        <outlet property="joystickController" destination="Nki-Dk-Bhg" id="6MS-OF-1vF"/>
+                    </connections>
+                </customObject>
                 <customObject id="Voe-Tx-rLC" customClass="DSAppDelegate">
                     <connections>
                         <outlet property="transitionSceneController" destination="rDZ-CV-DhK" id="fEV-se-CkJ"/>
                     </connections>
                 </customObject>
+                <customObject id="Nki-Dk-Bhg" customClass="DSCocoJoystickController"/>
             </objects>
             <point key="canvasLocation" x="63" y="-607"/>
         </scene>

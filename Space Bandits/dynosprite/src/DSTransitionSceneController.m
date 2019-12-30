@@ -42,6 +42,7 @@
         return nil;
     }
     DSTransitionScene *transitionScene = (level == 0) ? [[DSInitScene alloc] init] : [[DSTransitionScene alloc] init];
+    transitionScene.joystickController = self.joystickController;
     transitionScene.backgroundColor = [DSTransitionSceneController colorFromRGBString:self.images[level][@"BackgroundColor"]];
     transitionScene.foregroundColor = [DSTransitionSceneController colorFromRGBString:self.images[level][@"ForegroundColor"]];
     transitionScene.progressBarColor = [DSTransitionSceneController colorFromRGBString:self.images[level][@"ProgressColor"]];

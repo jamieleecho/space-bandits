@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "DSTransitionSceneControllerProtocol.h"
+#import "DSCocoJoystickController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSTransitionSceneController : NSObject <DSTransitionSceneControllerProtocol>
 
 @property NSArray *images;
+@property (weak, nonatomic) IBOutlet DSCocoJoystickController *joystickController;
 
 + (NSColor *)colorFromRGBString:(NSString *)color;
 

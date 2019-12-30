@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "DSCocoJoystickController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,15 +18,26 @@ NS_ASSUME_NONNULL_BEGIN
     SKSpriteNode *_backgroundImage;
     @private
     NSMutableArray<SKLabelNode *> *_labels;
+    @private
+    SKAction *_pollAction;
 }
 
 @property (strong, nonatomic) NSString *backgroundImageName;
 @property (strong, nonatomic) NSColor *foregroundColor;
 @property (strong, nonatomic) NSColor *progressBarColor;
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
+@property (strong, nonatomic) DSCocoJoystickController *joystickController;
 
 - (id)init;
-- (void)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position;
+- (SKLabelNode *)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position;
+
+- (void)didMoveToView:(SKView *)view;
+- (void)willMoveFromView:(SKView *)view;
+
+- (void)keyDown:(NSEvent *)theEvent;
+- (void)keyUp:(NSEvent *)theEvent;
+
+- (void)poll;
 
 @end
 
