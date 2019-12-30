@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #********************************************************************************
 # DynoSprite - scripts/build-readme.py
 # Copyright (c) 2013-2014, Richard Goedeken
@@ -102,7 +102,7 @@ def GenerateReadme(textin, basout):
             padchar = line[1]
             line = line[3:]
             numpad = 32 - len(line)
-            halfpad = numpad / 2
+            halfpad = numpad // 2
             outLines.append((padchar * halfpad) + line.upper() + (padchar * (numpad-halfpad)))
             ListMode = False
             continue
@@ -143,10 +143,10 @@ def GenerateReadme(textin, basout):
 #
 
 if __name__ == "__main__":
-    print "DynoSprite README.BAS Builder script"
+    print("DynoSprite README.BAS Builder script")
     # get input paths
     if len(sys.argv) != 3:
-        print "****Usage: %s <in_readme_text> <out_readme_bas>" % sys.argv[0]
+        print("****Usage: %s <in_readme_text> <out_readme_bas>" % sys.argv[0])
         sys.exit(1)
     textin = sys.argv[1]
     basout = sys.argv[2]

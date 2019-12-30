@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #********************************************************************************
 # DynoSprite - scripts/build-level.py
 # Copyright (c) 2013, Richard Goedeken
@@ -44,7 +44,7 @@ class ObjectInit:
     def Validate(self):
         for key in self.params:
             if self.params[key] == None:
-                print "****Error: Object init section missing parameter '%s'" % key
+                print("****Error: Object init section missing parameter '%s'" % key)
                 return False
         return True
     def SetParameter(self, key, value, dynosymbols):
@@ -59,7 +59,7 @@ class ObjectInit:
                     numList.append(symLoc >> 8)
                     numList.append(symLoc & 255)
                 else:
-                    print "****Error: unknown symbol '%s' in object initialization list" % initValue
+                    print("****Error: unknown symbol '%s' in object initialization list" % initValue)
                     sys.exit(1)
             self.params["initdata"] = numList
             return
@@ -67,13 +67,13 @@ class ObjectInit:
         self.params[key] = int(value)
         return
     def WriteDataStream(self):
-        output = chr(self.params["groupid"]) + chr(self.params["objectid"]) + chr(self.params["active"])
+        output = bytes((self.params["groupid"], self.params["objectid"], self.params["active"]))
         globalX = self.params["globalx"]
-        output += chr(globalX >> 8) + chr(globalX & 0xff)
+        output += bytes((globalX >> 8, globalX & 0xff))
         globalY = self.params["globaly"]
-        output += chr(globalY >> 8) + chr(globalY & 0xff)
+        output += bytes((globalY >> 8, globalY & 0xff))
         for byteval in self.params["initdata"]:
-            output += chr(byteval)
+            output += bytes((byteval,))
         return output
 
 class Level:
@@ -85,49 +85,49 @@ class Level:
         self.CompMap = None             # DEFLATEd tilemap
         self.ParamDict = { }            # from parsing
         self.ObjectGroups = None        # from parsing
-        self.ObjectInitStream = ""      # from parsing
+        self.ObjectInitStream = b''     # from parsing
         self.NumInitObjects = 0
-        self.cc3Data = ""               # output
-        self.tilemap = ""
+        self.cc3Data = b''              # output
+        self.tilemap = b''
         self.tilemapwidth = 0
         self.tilemapheight = 0
 
     def validateCode(self, listFile):
-        if not self.Symbols.has_key("Level_Initialize"):
-            print "****Error: Missing 'Level_Initialize' function in level file '%s'" % listFile
+        if not 'Level_Initialize' in self.Symbols:
+            print("****Error: Missing 'Level_Initialize' function in level file '%s'" % listFile)
             sys.exit(1)
-        if not self.Symbols.has_key("Level_CalculateBkgrndNewXY"):
-            print "****Error: Missing 'Level_CalculateBkgrndNewXY' function in level file '%s'" % listFile
+        if not 'Level_CalculateBkgrndNewXY' in self.Symbols:
+            print("****Error: Missing 'Level_CalculateBkgrndNewXY' function in level file '%s'" % listFile)
             sys.exit(1)
 
     def validateParameters(self, descFile):
         paramList = [ "name", "description", "objectgroups", "maxobjecttablesize", "tileset", "tilemapsize", "bkgrndstartx", "bkgrndstarty" ]
         for paramName in paramList:
-            if not self.ParamDict.has_key(paramName):
-                print "****Error: Missing '%s' parameter in level file '%s'" % (paramName, descFile)
+            if not paramName in self.ParamDict:
+                print("****Error: Missing '%s' parameter in level file '%s'" % (paramName, descFile))
                 sys.exit(1)
         # parse the ObjectGroups parameter to make a list
         self.ObjectGroups = [s for s in self.ParamDict["objectgroups"]]
         # set the width and height from tilemapsize
-        self.tilemapwidth, self.tilemapheight = (v/16 for v in self.ParamDict["tilemapsize"])
+        self.tilemapwidth, self.tilemapheight = (v//16 for v in self.ParamDict["tilemapsize"])
 
     def parseDescription(self, descFilename, dynosymbols):
         with open(descFilename, 'r') as f:
             data = json.load(f)
 
         # First set the level section
-        for key, value in data["Level"].iteritems():
+        for key, value in data["Level"].items():
             if key != "_comment":
                 self.ParamDict[key.lower()] = value
 
         # Fill out object section
         for obj in data["Objects"]:
             curObject = ObjectInit()
-            for key, value in obj.iteritems():
+            for key, value in obj.items():
                 if key != "_comment":
                     curObject.SetParameter(key.lower(), value, dynosymbols)
             if not curObject.Validate():
-                print "****Error: in level description file '%s'" % descFilename
+                print("****Error: in level description file '%s'" % descFilename)
                 sys.exit(1)
             self.ObjectInitStream += curObject.WriteDataStream()
             self.NumInitObjects += 1
@@ -145,15 +145,15 @@ class Level:
             # handle tile index values (hex)
             tiles = "".join(line.split())
             if (len(tiles) & 1) == 1:
-                print "****Error: invalid tilemap line length (%i) in map file '%s'" % (len(tiles), mapFilename)
+                print("****Error: invalid tilemap line length (%i) in map file '%s'" % (len(tiles), mapFilename))
                 sys.exit(1)
             for i in range(0, len(tiles), 2):
                 v = int(tiles[i:i+2], 16)
-                self.tilemap += chr(v)
+                self.tilemap += bytes((v,))
             continue
         # validate tilemap length
         if len(self.tilemap) != lvl.tilemapwidth * lvl.tilemapheight:
-            print "****Error: tilemap length (%i) in file '%s' doesn't match width and height given in level descriptor file" % (len(self.tilemap), mapFilename)
+            print("****Error: tilemap length (%i) in file '%s' doesn't match width and height given in level descriptor file" % (len(self.tilemap), mapFilename))
             sys.exit(1)
 
     def generateData(self):
@@ -172,7 +172,7 @@ class Level:
 def outputWord(value):
     hi = (value >> 8) & 0xff
     lo = value & 0xff
-    return chr(hi) + chr(lo)
+    return bytes((hi, lo))
 
 def SymbolExtract(listName):
     # parse input list and extract all global symbols
@@ -216,7 +216,7 @@ def StringOut(inString):
     for char in delimiters:
         if inString.find(char) == -1:
             return char + inString + char
-    print "This is a bad string: %s" % inString
+    print("This is a bad string: %s" % inString)
     sys.exit(1)
 
 #******************************************************************************
@@ -224,10 +224,10 @@ def StringOut(inString):
 #
 
 if __name__ == "__main__":
-    print "DynoSprite Level Builder script"
+    print("DynoSprite Level Builder script")
     # get input paths
     if len(sys.argv) != 8:
-        print "****Usage: %s <in_level_folder> <dynosprite-pass1.lst> <in_gfx_folder> <in_raw_folder> <in_list_folder> <out_cc3_folder> <out_asm_folder>" % sys.argv[0]
+        print("****Usage: %s <in_level_folder> <dynosprite-pass1.lst> <in_gfx_folder> <in_raw_folder> <in_list_folder> <out_cc3_folder> <out_asm_folder>" % sys.argv[0])
         sys.exit(1)
     leveldir = sys.argv[1]
     dynolist = sys.argv[2]
@@ -247,18 +247,18 @@ if __name__ == "__main__":
     lvlListFiles = [name for name in listlist if len(name) >= 11 and name[:5] == "level" and name[5:7].isdigit() and name[-4:].lower() == ".lst"]
     lvlListFiles.sort()
     gfxlist = os.listdir(gfxdir)
-    print gfxlist
+    print(gfxlist)
     lvlMapFiles = [name for name in gfxlist if len(name) >= 13 and name[:7] == "tilemap" and name[7:9].isdigit() and name[-4:].lower() == ".txt"]
     lvlMapFiles.sort()
     # make sure we have same # of files in each list
     numLevels = len(lvlDescFiles)
     if len(lvlMapFiles) != numLevels or len(lvlRawFiles) != numLevels or len(lvlListFiles) != numLevels:
-        print "****Error: Mismatched level description/assembly/map files in '%s' and/or '%s'" % (leveldir, rawdir)
-        print "  %d map files found, %d expected" % (len(lvlMapFiles), numLevels)
-        print "  %d raw files found, %d expected" % (len(lvlRawFiles), numLevels)
-        print "  %d list files found, %d expected" % (len(lvlListFiles), numLevels)
+        print("****Error: Mismatched level description/assembly/map files in '%s' and/or '%s'" % (leveldir, rawdir))
+        print("  %d map files found, %d expected" % (len(lvlMapFiles), numLevels))
+        print("  %d raw files found, %d expected" % (len(lvlRawFiles), numLevels))
+        print("  %d list files found, %d expected" % (len(lvlListFiles), numLevels))
         sys.exit(1)
-    print "    Found %i levels" % numLevels
+    print("    Found %i levels" % numLevels)
     # get symbol locations for DynoSprite engine
     dynosymbols = SymbolExtract(dynolist)
     # parse input files and create levels
@@ -266,7 +266,7 @@ if __name__ == "__main__":
     for i in range(numLevels):
         lvlNum = int(lvlDescFiles[i][:2])
         if int(lvlMapFiles[i][7:9]) != lvlNum or int(lvlRawFiles[i][5:7]) != lvlNum or int(lvlListFiles[i][5:7]) != lvlNum:
-            print "****Error: mis-matched level description/assembly/map files in '%s' and/or '%s' with number %i" % (leveldir, rawdir, lvlNum)
+            print("****Error: mis-matched level description/assembly/map files in '%s' and/or '%s' with number %i" % (leveldir, rawdir, lvlNum))
             sys.exit(1)
         lvl = Level(lvlNum)
         lvl.Symbols = SymbolExtract(os.path.join(listdir, lvlListFiles[i]))

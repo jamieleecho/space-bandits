@@ -41,3 +41,6 @@ game/levels/01-testlevel.asm
 assets/00-mainmenu.png
 assets/01-moon.gif
 assets/palette.gif
+
+Space Bandits/Space Bandits.xcodeproj/project.xcworkspace/xcuserdata
+tools/mame64
