@@ -9,6 +9,8 @@
 #import "DSTransitionScene.h"
 
 
+const float DefaultFontSize = 12.0f;
+
 @interface DSTransitionScene() {
 }
 - (void)configureLabel:(SKLabelNode *)label;
@@ -17,6 +19,20 @@
 
 
 @implementation DSTransitionScene
+
++ (NSString *)fontForDisplay:(BOOL)hiresMode {
+    return hiresMode ? @"Monaco" : @"pcgfont";
+}
+
++ (void)adjustLabel:(SKLabelNode *)label forPosition:(CGPoint)position {
+    // Determine the font scaling factor that should let the label text fit in the given rectangle.
+    label.fontSize = DefaultFontSize;
+    NSRect rect = CGRectMake(position.x, position.y, label.text.length * 8, 8);
+    float scalingFactor = rect.size.width / label.frame.size.width;
+
+    // Change the fontSize.
+    label.fontSize *= scalingFactor;
+}
 
 - (NSString *)backgroundImageName {
     return _backgroundImageName;
@@ -42,28 +58,32 @@
         _backgroundImage = [SKSpriteNode spriteNodeWithColor:self.backgroundColor size:self.size];
         [self configureBackgroundImage:_backgroundImage];
         [self addChild:_backgroundImage];
+        
+        [self addObserver:self forKeyPath:@"hiresMode" options:NSKeyValueObservingOptionNew context:nil];
+        _labelToPoint = [[NSMapTable alloc] init];
     }
     return self;
 }
 
 - (SKLabelNode *)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position {
-    NSString *font = @"pcgfont";
-    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:font];
+    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:[DSTransitionScene fontForDisplay:self.hiresMode]];
     label.text = labelText;
     label.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     label.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
     label.position = CGPointMake(0, 0);
-    label.fontSize = 12.75f;
+    label.fontSize = DefaultFontSize;
     label.fontColor = self.foregroundColor;
     
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithColor:self.backgroundColor size:label.frame.size];
     [background addChild:label];
-    position.y = -position.y;
+    position.y = -position.y - (label.fontSize / 10.0f);
     background.position = position;
     background.anchorPoint = CGPointMake(0, 1);
 
     [self addChild:background];
+    [_labelToPoint setObject:[NSValue valueWithPoint:position] forKey:label];
     [_labels addObject:label];
+    [DSTransitionScene adjustLabel:label forPosition:position];
     return label;
 }
 
@@ -85,7 +105,7 @@
     };
     if (!_pollAction) {
         _pollAction = [SKAction repeatActionForever:[SKAction sequence:[NSArray arrayWithObjects:[SKAction runBlock:sampleJoystick], [SKAction waitForDuration:1.0f / view.preferredFramesPerSecond], nil]]];
-        [self runAction:self->_pollAction withKey:@"pollAction"];
+        [self runAction:_pollAction withKey:@"pollAction"];
     }
 }
 
@@ -103,6 +123,19 @@
 }
 
 - (void)poll {    
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ((object == self) && [keyPath isEqualToString:@"hiresMode"]) {
+        [self updateDisplayForResolutionChange];
+    }
+}
+
+- (void)updateDisplayForResolutionChange {
+    for (SKLabelNode *label in _labels) {
+        label.fontName = [DSTransitionScene fontForDisplay:self.hiresMode];
+        [DSTransitionScene adjustLabel:label forPosition:[_labelToPoint objectForKey:label].pointValue];
+    }
 }
 
 @end

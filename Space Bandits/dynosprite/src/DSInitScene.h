@@ -10,10 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum DSInitSceneResolution {
-    DSInitSceneResolutionLow,
-    DSInitSceneResolutionHigh
-} DSInitSceneResolution;
+typedef enum DSInitSceneDisplay {
+    DSInitSceneDisplayLow,
+    DSInitSceneDisplayHigh
+} DSInitSceneDisplay;
 
 typedef enum DSInitSceneControl {
     DSInitSceneControlKeyboard,
@@ -30,7 +30,7 @@ typedef enum DSInitSceneSound {
     SKLabelNode *_controlLabelNode;
     SKLabelNode *_soundLabelNode;
     
-    DSInitSceneResolution _resolution;
+    DSInitSceneDisplay _resolution;
     DSInitSceneControl _control;
     DSInitSceneSound _sound;
 }
@@ -41,14 +41,14 @@ typedef enum DSInitSceneSound {
 - (void)mouseUp:(NSEvent *)theEvent;
 - (void)keyUp:(NSEvent *)theEvent;
 
-- (NSString *)textFromResolution:(DSInitSceneResolution)resolution;
+- (NSString *)textFromResolution:(DSInitSceneDisplay)resolution;
 - (NSString *)textFromControl:(DSInitSceneControl)control;
 - (NSString *)textFromSound:(DSInitSceneSound)sound;
 
 - (void)refreshScreen;
 - (void)transitionToNextScreen;
 
-- (void)toggleResolution;
+- (void)toggleDisplay;
 - (void)toggleControl;
 - (void)toggleSound;
 

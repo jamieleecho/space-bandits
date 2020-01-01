@@ -11,8 +11,8 @@
 
 static NSString *MenuControlJoystick = @"Joystick";
 static NSString *MenuControlKeyboard = @"Keyboard";
-static NSString *MenuResolutionHigh = @"High";
-static NSString *MenuResolutionLow = @"Low";
+static NSString *MenuDisplayHigh = @"High";
+static NSString *MenuDisplayLow = @"Low";
 static NSString *MenuSoundHigh = @"HiFi";
 static NSString *MenuSoundLow = @"LoFi";
 
@@ -24,17 +24,17 @@ static NSString *MenuSoundLow = @"LoFi";
     [super didMoveToView:view];
     if (self.labels.count < 1) {
         self.backgroundImageName = @"Images/00-mainmenu.png";
-        [self addLabelWithText:@"[R]esolution:" atPosition:CGPointMake(3, 120)];
-        self->_resolutionLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 120)];
+        [self addLabelWithText:@"[D]isplay:" atPosition:CGPointMake(3, 120)];
+        _resolutionLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 120)];
         [self addLabelWithText:@"[C]ontrol:" atPosition:CGPointMake(3, 136)];
-        self->_controlLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 136)];
+        _controlLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 136)];
         [self addLabelWithText:@"[S]ound:" atPosition:CGPointMake(3, 152)];
-        self->_soundLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 152)];
+        _soundLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 152)];
         [self addLabelWithText:@"[Space] or joystick button to start" atPosition:CGPointMake(10, 184)];
         
-        self->_resolution = DSInitSceneResolutionLow;
-        self->_control = DSInitSceneControlKeyboard;
-        self->_sound = DSInitSceneSoundLow;
+        _resolution = DSInitSceneDisplayLow;
+        _control = DSInitSceneControlKeyboard;
+        _sound = DSInitSceneSoundLow;
         
         [self refreshScreen];
     }
@@ -44,7 +44,7 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)willMoveFromView:(SKView *)view {
     [super willMoveFromView:view];
-    self.joystickController.useHardwareJoystick = self->_control == DSInitSceneControlJoystick;
+    self.joystickController.useHardwareJoystick = _control == DSInitSceneControlJoystick;
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
@@ -59,8 +59,8 @@ static NSString *MenuSoundLow = @"LoFi";
     for (int s = 0; s<[characters length]; s++) {
         unichar character = [characters characterAtIndex:s];
         switch (character) {
-            case 'r':
-                [self toggleResolution];
+            case 'd':
+                [self toggleDisplay];
                 break;
 
             case 'c':
@@ -79,8 +79,8 @@ static NSString *MenuSoundLow = @"LoFi";
 
 }
 
-- (NSString *)textFromResolution:(DSInitSceneResolution)resolution {
-    return resolution == DSInitSceneResolutionHigh ? MenuResolutionHigh : MenuResolutionLow;
+- (NSString *)textFromResolution:(DSInitSceneDisplay)resolution {
+    return resolution == DSInitSceneDisplayHigh ? MenuDisplayHigh : MenuDisplayLow;
 }
 
 - (NSString *)textFromControl:(DSInitSceneControl)control {
@@ -92,9 +92,9 @@ static NSString *MenuSoundLow = @"LoFi";
 }
 
 - (void)refreshScreen {
-    self->_resolutionLabelNode.text = [self textFromResolution:self->_resolution];
-    self->_controlLabelNode.text = [self textFromControl:self->_control];
-    self->_soundLabelNode.text = [self textFromSound:self->_sound];
+    _resolutionLabelNode.text = [self textFromResolution:_resolution];
+    _controlLabelNode.text = [self textFromControl:_control];
+    _soundLabelNode.text = [self textFromSound:_sound];
 }
 
 - (void)transitionToNextScreen {
@@ -103,18 +103,19 @@ static NSString *MenuSoundLow = @"LoFi";
     [self.scene.view presentScene: newScene transition: transition];
 }
 
-- (void)toggleResolution {
-    self->_resolution = (self->_resolution >= DSInitSceneResolutionHigh) ? DSInitSceneResolutionLow : self->_resolution + 1;
+- (void)toggleDisplay {
+    _resolution = (_resolution >= DSInitSceneDisplayHigh) ? DSInitSceneDisplayLow : _resolution + 1;
+    self.hiresMode = _resolution == DSInitSceneDisplayHigh;
     [self refreshScreen];
 }
 
 - (void)toggleControl {
-    self->_control = (self->_control >= DSInitSceneControlJoystick) ? DSInitSceneControlKeyboard : self->_control + 1;
+    _control = (_control >= DSInitSceneControlJoystick) ? DSInitSceneControlKeyboard : _control + 1;
     [self refreshScreen];
 }
 
 - (void)toggleSound {
-    self->_sound = (self->_sound >= DSInitSceneSoundHigh) ? DSInitSceneSoundLow : self->_sound + 1;
+    _sound = (_sound >= DSInitSceneSoundHigh) ? DSInitSceneSoundLow : _sound + 1;
     [self refreshScreen];
 }
 

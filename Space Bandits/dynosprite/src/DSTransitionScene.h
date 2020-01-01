@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableArray<SKLabelNode *> *_labels;
     @private
     SKAction *_pollAction;
+    @private
+    NSMapTable <SKLabelNode *, NSValue *> *_labelToPoint;
+    @private
+    NSMapTable <SKLabelNode *, NSNumber *> *_labelToCentered;
 }
 
 @property (strong, nonatomic) NSString *backgroundImageName;
@@ -27,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSColor *progressBarColor;
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
 @property (strong, nonatomic) DSCocoJoystickController *joystickController;
+@property (nonatomic) BOOL hiresMode;
 
 - (id)init;
 - (SKLabelNode *)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position;
