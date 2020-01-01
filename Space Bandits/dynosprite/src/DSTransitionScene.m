@@ -20,21 +20,6 @@ const float DefaultFontSize = 12.0f;
 
 @implementation DSTransitionScene
 
-+ (NSString *)fontForDisplay:(BOOL)hiresMode {
-    return hiresMode ? @"Monaco" : @"pcgfont";
-}
-
-+ (NSString *)imageWithName:(NSString *)name forDisplay:(BOOL)hiresMode {
-    NSString *dirPath = name.stringByDeletingLastPathComponent;
-    NSString *resourceName = name.lastPathComponent.stringByDeletingPathExtension;
-    NSString *extension = name.lastPathComponent.pathExtension;
-    NSString *hiresDirectory = [@"hires" stringByAppendingPathComponent:dirPath];
-    
-    NSString *path = [NSBundle.mainBundle pathForResource:resourceName ofType:extension inDirectory:hiresDirectory];
-    
-    return hiresMode && (path != nil) ? [hiresDirectory stringByAppendingPathComponent:name.lastPathComponent] : name;
-}
-
 + (void)adjustLabel:(SKLabelNode *)label forPosition:(CGPoint)position {
     // Determine the font scaling factor that should let the label text fit in the given rectangle.
     label.fontSize = DefaultFontSize;
@@ -51,7 +36,7 @@ const float DefaultFontSize = 12.0f;
 
 - (void)setBackgroundImageName:(NSString *)backgroundImageName {
     _backgroundImageName = backgroundImageName;
-    _backgroundImage.texture = [SKTexture textureWithImageNamed:[DSTransitionScene imageWithName:backgroundImageName forDisplay:_hiresMode]];
+    _backgroundImage.texture = [SKTexture textureWithImageNamed:[_resourceController imageWithName:backgroundImageName]];
 }
 
 - (id)init {
@@ -70,14 +55,14 @@ const float DefaultFontSize = 12.0f;
         [self configureBackgroundImage:_backgroundImage];
         [self addChild:_backgroundImage];
         
-        [self addObserver:self forKeyPath:@"hiresMode" options:NSKeyValueObservingOptionNew context:nil];
+        [self addObserver:self forKeyPath:@"resourceController" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
         _labelToPoint = [[NSMapTable alloc] init];
     }
     return self;
 }
 
 - (SKLabelNode *)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position {
-    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:[DSTransitionScene fontForDisplay:self.hiresMode]];
+    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:_resourceController.fontForDisplay];
     label.text = labelText;
     label.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     label.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
@@ -137,14 +122,28 @@ const float DefaultFontSize = 12.0f;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ((object == self) && [keyPath isEqualToString:@"hiresMode"]) {
-        [self updateDisplayForResolutionChange];
+    if (object == self) {
+        if ([keyPath isEqualToString:@"resourceController"]) {
+            DSResourceController *oldController = [change objectForKey:NSKeyValueChangeOldKey];
+            DSResourceController *newController = [change objectForKey:NSKeyValueChangeNewKey];
+            if (![oldController isEqual:[NSNull null]]) {
+                [oldController removeObserver:self forKeyPath:@"hiresMode"];
+            }
+            if (![newController isEqual:[NSNull null]]) {
+                [newController addObserver:self forKeyPath:@"hiresMode" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+            }
+            [self updateDisplayForResolutionChange];
+        }
+    } else if (object == _resourceController) {
+        if ([keyPath isEqualToString:@"hiresMode"]) {
+            [self updateDisplayForResolutionChange];
+        }
     }
 }
 
 - (void)updateDisplayForResolutionChange {
     for (SKLabelNode *label in _labels) {
-        label.fontName = [DSTransitionScene fontForDisplay:self.hiresMode];
+        label.fontName = _resourceController.fontForDisplay;
         [DSTransitionScene adjustLabel:label forPosition:[_labelToPoint objectForKey:label].pointValue];
     }
     if (_backgroundImageName != nil) {

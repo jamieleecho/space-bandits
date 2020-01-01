@@ -105,7 +105,7 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)toggleDisplay {
     _resolution = (_resolution >= DSInitSceneDisplayHigh) ? DSInitSceneDisplayLow : _resolution + 1;
-    self.hiresMode = _resolution == DSInitSceneDisplayHigh;
+    self.resourceController.hiresMode = _resolution == DSInitSceneDisplayHigh;
     [self refreshScreen];
 }
 

@@ -680,6 +680,7 @@
                 <customObject id="rDZ-CV-DhK" customClass="DSTransitionSceneController">
                     <connections>
                         <outlet property="joystickController" destination="Nki-Dk-Bhg" id="6MS-OF-1vF"/>
+                        <outlet property="resourceController" destination="web-E3-IMn" id="wE8-Gh-8qU"/>
                     </connections>
                 </customObject>
                 <customObject id="Voe-Tx-rLC" customClass="DSAppDelegate">
@@ -688,6 +689,7 @@
                     </connections>
                 </customObject>
                 <customObject id="Nki-Dk-Bhg" customClass="DSCocoJoystickController"/>
+                <customObject id="web-E3-IMn" customClass="DSResourceController"/>
             </objects>
             <point key="canvasLocation" x="63" y="-607"/>
         </scene>

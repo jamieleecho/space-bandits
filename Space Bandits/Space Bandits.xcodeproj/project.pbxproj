@@ -61,6 +61,8 @@
 		7D3110EF22FF01D700833374 /* DSCoCoJoystick.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */; };
 		7D3110F022FF01D700833374 /* DSCoCoJoystick.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */; };
 		7D7EED6D23BCE63500804C26 /* hires in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED6C23BCE63500804C26 /* hires */; };
+		7D7EED7023BD0EB700804C26 /* DSResourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EED6F23BD0EB700804C26 /* DSResourceController.m */; };
+		7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EED6F23BD0EB700804C26 /* DSResourceController.m */; };
 		7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
 		7DC4E7F022FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
 		7DC4E7F122FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
@@ -138,6 +140,8 @@
 		7D3110EC22FF01D700833374 /* DSCoCoJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystick.h; sourceTree = "<group>"; };
 		7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DSCoCoJoystick.mm; sourceTree = "<group>"; };
 		7D7EED6C23BCE63500804C26 /* hires */ = {isa = PBXFileReference; lastKnownFileType = folder; name = hires; path = ../../game/hires; sourceTree = "<group>"; };
+		7D7EED6E23BD0EB700804C26 /* DSResourceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSResourceController.h; sourceTree = "<group>"; };
+		7D7EED6F23BD0EB700804C26 /* DSResourceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSResourceController.m; sourceTree = "<group>"; };
 		7DC4E7E822FFB79A00AE8AB4 /* DSCoCoJoystickProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystickProtocol.h; sourceTree = "<group>"; };
 		7DC4E7ED22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoKeyboardJoystick.h; sourceTree = "<group>"; };
 		7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoKeyboardJoystick.m; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 				52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */,
 				52CF9D402288FB2B0054EAD2 /* DSWindowController.h */,
 				52CF9D412288FB2B0054EAD2 /* DSWindowController.m */,
+				7D7EED6E23BD0EB700804C26 /* DSResourceController.h */,
+				7D7EED6F23BD0EB700804C26 /* DSResourceController.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -447,6 +453,7 @@
 				7DC4E7F122FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				521A84B021FE0748006120E8 /* DSAppDelegate.m in Sources */,
 				52A90E3F21E2F18C00CC2643 /* DSLevel.m in Sources */,
+				7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */,
 				7DC4E7F622FFC33A00AE8AB4 /* DSCocoJoystickController.m in Sources */,
 				52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */,
@@ -469,6 +476,7 @@
 				7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				52CF9D3D2288A56E0054EAD2 /* DSGameScene.m in Sources */,
 				525FC91F22888202007F4793 /* DSSharedTransitionSceneController.m in Sources */,
+				7D7EED7023BD0EB700804C26 /* DSResourceController.m in Sources */,
 				7DC4E7F422FFC33A00AE8AB4 /* DSCocoJoystickController.m in Sources */,
 				52E7605E21D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
