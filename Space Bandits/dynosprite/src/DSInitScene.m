@@ -30,7 +30,7 @@ static NSString *MenuSoundLow = @"LoFi";
         _controlLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 136)];
         [self addLabelWithText:@"[S]ound:" atPosition:CGPointMake(3, 152)];
         _soundLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 152)];
-        [self addLabelWithText:@"[Space] or joystick button to start" atPosition:CGPointMake(10, 184)];
+        [self addLabelWithText:@"[Space] or joystick button to start" atPosition:CGPointMake(20, 184)];
         
         _resolution = DSInitSceneDisplayLow;
         _control = DSInitSceneControlKeyboard;

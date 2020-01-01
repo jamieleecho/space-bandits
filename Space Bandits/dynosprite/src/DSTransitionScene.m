@@ -24,6 +24,17 @@ const float DefaultFontSize = 12.0f;
     return hiresMode ? @"Monaco" : @"pcgfont";
 }
 
++ (NSString *)imageWithName:(NSString *)name forDisplay:(BOOL)hiresMode {
+    NSString *dirPath = name.stringByDeletingLastPathComponent;
+    NSString *resourceName = name.lastPathComponent.stringByDeletingPathExtension;
+    NSString *extension = name.lastPathComponent.pathExtension;
+    NSString *hiresDirectory = [@"hires" stringByAppendingPathComponent:dirPath];
+    
+    NSString *path = [NSBundle.mainBundle pathForResource:resourceName ofType:extension inDirectory:hiresDirectory];
+    
+    return hiresMode && (path != nil) ? [hiresDirectory stringByAppendingPathComponent:name.lastPathComponent] : name;
+}
+
 + (void)adjustLabel:(SKLabelNode *)label forPosition:(CGPoint)position {
     // Determine the font scaling factor that should let the label text fit in the given rectangle.
     label.fontSize = DefaultFontSize;
@@ -40,7 +51,7 @@ const float DefaultFontSize = 12.0f;
 
 - (void)setBackgroundImageName:(NSString *)backgroundImageName {
     _backgroundImageName = backgroundImageName;
-    _backgroundImage.texture = [SKTexture textureWithImageNamed:_backgroundImageName];
+    _backgroundImage.texture = [SKTexture textureWithImageNamed:[DSTransitionScene imageWithName:backgroundImageName forDisplay:_hiresMode]];
 }
 
 - (id)init {
@@ -135,6 +146,9 @@ const float DefaultFontSize = 12.0f;
     for (SKLabelNode *label in _labels) {
         label.fontName = [DSTransitionScene fontForDisplay:self.hiresMode];
         [DSTransitionScene adjustLabel:label forPosition:[_labelToPoint objectForKey:label].pointValue];
+    }
+    if (_backgroundImageName != nil) {
+        [self setBackgroundImageName:_backgroundImageName];
     }
 }
 
