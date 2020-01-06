@@ -22,6 +22,7 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
+    self.isDone = NO;
     if (self.labels.count < 1) {
         self.backgroundImageName = @"Images/00-mainmenu.png";
         [self addLabelWithText:@"[D]isplay:" atPosition:CGPointMake(3, 120)];
@@ -101,6 +102,7 @@ static NSString *MenuSoundLow = @"LoFi";
     SKTransition *transition = [SKTransition crossFadeWithDuration:1.0];
     SKScene *newScene = [SKScene nodeWithFileNamed:@"DSGameScene"];
     [self.scene.view presentScene: newScene transition: transition];
+    self.isDone = YES;
 }
 
 - (void)toggleDisplay {
@@ -116,6 +118,7 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)toggleSound {
     _sound = (_sound >= DSInitSceneSoundHigh) ? DSInitSceneSoundLow : _sound + 1;
+    self.resourceController.hifiMode = _sound == DSInitSceneSoundHigh;
     [self refreshScreen];
 }
 

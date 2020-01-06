@@ -30,6 +30,10 @@
     return [NSColor colorWithCalibratedRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1.0f];
 }
 
+- (id)init {
+    return [self initWithImageDictionaries:@[]];
+}
+
 - (id)initWithImageDictionaries:(NSArray *)images {
     if (self = [super init]) {
         self.images = images;

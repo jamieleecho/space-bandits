@@ -51,7 +51,6 @@
 		52F1208921D7DD63008A7900 /* DSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1208821D7DD63008A7900 /* DSAppDelegate.m */; };
 		52F1208D21D7DD63008A7900 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208C21D7DD63008A7900 /* Actions.sks */; };
 		52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F1209421D7DD65008A7900 /* Assets.xcassets */; };
-		52F1209821D7DD65008A7900 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52F1209621D7DD65008A7900 /* Main.storyboard */; };
 		52F1209B21D7DD65008A7900 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1209A21D7DD65008A7900 /* main.m */; };
 		52F120B121D7DD65008A7900 /* DynospriteUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F120B021D7DD65008A7900 /* DynospriteUITests.m */; };
 		7D3110E922FF018D00833374 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; };
@@ -63,6 +62,8 @@
 		7D7EED6D23BCE63500804C26 /* hires in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED6C23BCE63500804C26 /* hires */; };
 		7D7EED7023BD0EB700804C26 /* DSResourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EED6F23BD0EB700804C26 /* DSResourceController.m */; };
 		7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EED6F23BD0EB700804C26 /* DSResourceController.m */; };
+		7D7EED7923BD626500804C26 /* Main.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED7823BD626500804C26 /* Main.storyboardc */; };
+		7D7EED7A23BD626500804C26 /* Main.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED7823BD626500804C26 /* Main.storyboardc */; };
 		7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
 		7DC4E7F022FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
 		7DC4E7F122FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
@@ -129,7 +130,6 @@
 		52F1208821D7DD63008A7900 /* DSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSAppDelegate.m; sourceTree = "<group>"; };
 		52F1208C21D7DD63008A7900 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		52F1209421D7DD65008A7900 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		52F1209721D7DD65008A7900 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52F1209921D7DD65008A7900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52F1209A21D7DD65008A7900 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52F1209C21D7DD65008A7900 /* Space_Bandits.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Space_Bandits.entitlements; sourceTree = "<group>"; };
@@ -142,6 +142,7 @@
 		7D7EED6C23BCE63500804C26 /* hires */ = {isa = PBXFileReference; lastKnownFileType = folder; name = hires; path = ../../game/hires; sourceTree = "<group>"; };
 		7D7EED6E23BD0EB700804C26 /* DSResourceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSResourceController.h; sourceTree = "<group>"; };
 		7D7EED6F23BD0EB700804C26 /* DSResourceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSResourceController.m; sourceTree = "<group>"; };
+		7D7EED7823BD626500804C26 /* Main.storyboardc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.storyboardc; path = Main.storyboardc; sourceTree = "<group>"; };
 		7DC4E7E822FFB79A00AE8AB4 /* DSCoCoJoystickProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystickProtocol.h; sourceTree = "<group>"; };
 		7DC4E7ED22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoKeyboardJoystick.h; sourceTree = "<group>"; };
 		7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoKeyboardJoystick.m; sourceTree = "<group>"; };
@@ -288,7 +289,7 @@
 				52A90E5A21E2F78300CC2643 /* images */,
 				52A90E5921E2F78300CC2643 /* levels */,
 				52F1209421D7DD65008A7900 /* Assets.xcassets */,
-				52F1209621D7DD65008A7900 /* Main.storyboard */,
+				7D7EED7823BD626500804C26 /* Main.storyboardc */,
 				52F1209921D7DD65008A7900 /* Info.plist */,
 				52F1209A21D7DD65008A7900 /* main.m */,
 				52F1209C21D7DD65008A7900 /* Space_Bandits.entitlements */,
@@ -409,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				521A84A021FCF626006120E8 /* JSONBad in Resources */,
+				7D7EED7A23BD626500804C26 /* Main.storyboardc in Resources */,
 				521A849C21FCEE80006120E8 /* JSONDict.json in Resources */,
 				521A849E21FCEED2006120E8 /* JSONList.json in Resources */,
 			);
@@ -424,8 +426,8 @@
 				52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */,
 				52F1208D21D7DD63008A7900 /* Actions.sks in Resources */,
 				52CF9D3E2288A56E0054EAD2 /* DSGameScene.sks in Resources */,
-				52F1209821D7DD65008A7900 /* Main.storyboard in Resources */,
 				52C3FCE621EBD9C900AE268B /* Fonts in Resources */,
+				7D7EED7923BD626500804C26 /* Main.storyboardc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,17 +524,6 @@
 			targetProxy = 52F120AD21D7DD65008A7900 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		52F1209621D7DD65008A7900 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52F1209721D7DD65008A7900 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		52E7605621D7F5410001F3A0 /* Debug */ = {

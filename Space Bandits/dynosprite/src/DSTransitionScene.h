@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
 @property (strong, nonatomic)  DSResourceController *resourceController;
 @property (strong, nonatomic) DSCocoJoystickController *joystickController;
+@property (nonatomic) BOOL isDone;
 
 - (id)init;
 - (SKLabelNode *)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position;
