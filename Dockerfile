@@ -1,19 +1,11 @@
-FROM jamieleecho/coco-dev:0.16
+FROM jamieleecho/coco-dev:0.18
 
 MAINTAINER Jamie Cho version: 0.3
 
 # Install image-magick
-RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get install -y python3-pip
-RUN apt-get clean
-
-# Install useful Python tools
-RUN pip3 install \
-  numpy==1.16.5 \
-  Pillow==6.2.0 \
-  pypng==0.0.20 \
-  wand==0.5.7
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get clean
 
 # Setup tools folder
 ADD . /home/dynosprite/

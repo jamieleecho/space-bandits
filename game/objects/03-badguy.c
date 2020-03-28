@@ -41,7 +41,7 @@ enum DirectionMode {
 
 byte didInit = FALSE;
 enum DirectionMode directionMode;
-DynospriteCOB *lastCob = (DynospriteCOB *)NULL;
+DynospriteCOB *lastCob = 0x0;
 byte numInvaders = 0;
 byte deltaY = 0;
 

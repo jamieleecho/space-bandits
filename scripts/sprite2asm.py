@@ -728,7 +728,7 @@ class Sprite:
             self.lineAdvance += 1
         # dump out return instruction
         funcDraw.emit_op("rts", "", "", 5, 4, 1)
-                
+
 
     # *************************************************************************************************
     # Sprite class: Draw function row generation for 6309
@@ -843,7 +843,7 @@ class Sprite:
             continue
         # return the best result
         return bestAsm
-    
+
     def Permute6309StoreCodeGen(self, bestRowAsm, layoutDict, writeByteList, storeSize, scratchReg):
         if storeSize == 1 and len(layoutDict[1]) == 0:
             # this is a leaf node, so we need to permute across all possible variations of Write operations
