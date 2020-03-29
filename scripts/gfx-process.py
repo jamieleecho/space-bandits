@@ -185,37 +185,15 @@ class TilesetInfo:
         self.tiledesc_lines = [ ]
 
 def parseTilesetDescription(descFilename):
-    f = open(descFilename).read()
     info = TilesetInfo()
-    for line in f.split('\n'):
-        info.tiledesc_lines.append(line)
-        # remove comments and whitespace from line
-        pivot = line.find('*')
-        if pivot != -1:
-            line = line[:pivot]
-        line = line.strip()
-        if len(line) < 1:
-            continue
-        # handle parameters
-        pivot = line.find('=')
-        if pivot != -1:
-            key = line[:pivot].strip().lower()
-            value = line[pivot+1:].strip()
-            if key == 'image':
-                info.filename = value
-            elif key == 'collisionmask':
-                info.maskFilename = value
-            elif key == 'tilesetstart':
-                info.tilesetStart = [ int(c) for c in value.split(',') ]
-            elif key == 'tilesetsize':
-                info.tilesetSize = [ int(c) for c in value.split(',') ]
-            else:
-                print(f'****Error: unknown parameter {key} in tileset description file {descFilename}')
-                sys.exit(2)
-            continue
-        # anything else is unexpected
-        print(f"****Error: invalid line '{line}' in tileset description file '{descFilename}'")
-        sys.exit(2)
+    with open(descFilename) as f:
+        info.tiledesc_lines.extend(f.readlines())
+    data = json.loads(''.join(info.tiledesc_lines))
+    info.filename = data['Image']
+    if 'CollisionMask' in data:
+        info.maskFilename = value
+    info.tilesetStart = data['TileSetStart']
+    info.tilesetSize =  data['TileSetSize']
     return info
 
 class LevelInfo:
@@ -464,7 +442,7 @@ def PrintUsage():
     print(f'****Usage: {sys.argv[0]} <command> [arguments]')
     print('    Commands:')
     print('        mixtiles <input_mapdesc_txt> <output_image_file>')
-    print('        gentileset <input_tiledesc_txt> <output_palette_file> <output_tileset_file> <output_collisionmask_file>')
+    print('        gentileset <input_tiledesc_json> <output_palette_file> <output_tileset_file> <output_collisionmask_file>')
     print('        gentilemap <input_leveldesc_txt> <input_tileset_path> <output_tilemap_file>')
     print('        gensprites <input_spritedesc_txt> <input_palette_path> <output_sprite_file>')
     sys.exit(1)
