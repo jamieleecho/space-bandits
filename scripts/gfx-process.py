@@ -178,8 +178,8 @@ class ImageColors:
 
 class TilesetInfo:
     def __init__(self):
-        self.filename = ""
-        self.maskFilename = ""
+        self.filename = ''
+        self.maskFilename = ''
         self.tilesetStart = [0, 0]
         self.tilesetSize = [0, 0]
         self.tiledesc_lines = [ ]
@@ -187,30 +187,30 @@ class TilesetInfo:
 def parseTilesetDescription(descFilename):
     f = open(descFilename).read()
     info = TilesetInfo()
-    for line in f.split("\n"):
+    for line in f.split('\n'):
         info.tiledesc_lines.append(line)
         # remove comments and whitespace from line
-        pivot = line.find("*")
+        pivot = line.find('*')
         if pivot != -1:
             line = line[:pivot]
         line = line.strip()
         if len(line) < 1:
             continue
         # handle parameters
-        pivot = line.find("=")
+        pivot = line.find('=')
         if pivot != -1:
             key = line[:pivot].strip().lower()
             value = line[pivot+1:].strip()
-            if key == "image":
+            if key == 'image':
                 info.filename = value
-            elif key == "collisionmask":
+            elif key == 'collisionmask':
                 info.maskFilename = value
-            elif key == "tilesetstart":
-                info.tilesetStart = [ int(c) for c in value.split(",") ]
-            elif key == "tilesetsize":
-                info.tilesetSize = [ int(c) for c in value.split(",") ]
+            elif key == 'tilesetstart':
+                info.tilesetStart = [ int(c) for c in value.split(',') ]
+            elif key == 'tilesetsize':
+                info.tilesetSize = [ int(c) for c in value.split(',') ]
             else:
-                print(f"****Error: unknown parameter {key} in tileset description file {descFilename}")
+                print(f'****Error: unknown parameter {key} in tileset description file {descFilename}')
                 sys.exit(2)
             continue
         # anything else is unexpected
@@ -222,7 +222,7 @@ class LevelInfo:
     def __init__(self):
         # this LevelInfo class doesn't store everything from the level description file, only those
         # parameters which are needed for generating the tilemap
-        self.mapfilename = ""
+        self.mapfilename = ''
         self.tilesetidx = -1
         self.tilemapStart = None
         self.tilemapSize = None
@@ -244,11 +244,11 @@ def parseLevelDescription(descFilename):
 
 def parsePaletteRGB(paletteFilename):
     f = open(paletteFilename).read()
-    section = ""
+    section = ''
     matrix = [ ]
-    for line in f.split("\n"):
+    for line in f.split('\n'):
         # remove comments and whitespace from line
-        pivot = line.find("*")
+        pivot = line.find('*')
         if pivot != -1:
             line = line[:pivot]
         line = line.strip()
@@ -259,19 +259,19 @@ def parsePaletteRGB(paletteFilename):
             section = line[1:-1].lower()
             continue
         # the only section we care about is the RGB palette
-        if section != "palette-rgb":
+        if section != 'palette-rgb':
             continue
         # handle palette values
         newvalues = [int(v) for v in line.split()]
         matrix.extend(newvalues)
     # validate result
     if len(matrix) != 16:
-        print("****Error: invalid RGB palette values in %s" % paletteFilename)
+        print(f'****Error: invalid RGB palette values in {paletteFilename}')
     return matrix
 
 class SpriteInfo:
     def __init__(self):
-        self.name = ""
+        self.name = ''
         self.location = [0, 0]
         self.singlepixelpos = False
         self.pixArray = [ ]
@@ -279,7 +279,7 @@ class SpriteInfo:
 
 class SpriteGroupInfo:
     def __init__(self):
-        self.imagefilename = ""
+        self.imagefilename = ''
         self.groupidx = -1
         self.paletteidx = -1
         self.transparentRGB = [0,0,0]
@@ -290,9 +290,9 @@ def parseSpriteDescription(descFilename):
     info = SpriteGroupInfo()
     curSprite = SpriteInfo()
     section = None
-    for line in f.split("\n"):
+    for line in f.split('\n'):
         # remove comments and whitespace from line
-        pivot = line.find("*")
+        pivot = line.find('*')
         if pivot != -1:
             line = line[:pivot]
         line = line.strip()
@@ -309,31 +309,31 @@ def parseSpriteDescription(descFilename):
             curSprite.name = section
             continue
         # handle parameters
-        pivot = line.find("=")
+        pivot = line.find('=')
         if pivot != -1:
             key = line[:pivot].strip().lower()
             value = line[pivot+1:].strip()
             # global parameters
             if section == None:
-                if key == "group":
+                if key == 'group':
                     info.groupidx = int(value)
-                elif key == "image":
+                elif key == 'image':
                     info.imagefilename = value
-                elif key == "transparent":
-                    info.transparentRGB = [int(v.strip()) for v in value.split(",")]
-                elif key == "palette":
+                elif key == 'transparent':
+                    info.transparentRGB = [int(v.strip()) for v in value.split(',')]
+                elif key == 'palette':
                     info.paletteidx = int(value)
                 else:
                     print(f"****Error: invalid global parameter definition '{line}' in sprite description file '{descFilename}'")
                     sys.exit(2)
                 continue
             # sprite parameters
-            if key == "location":
-                curSprite.location = [int(v.strip()) for v in value.split(",")]
-            elif key == "singlepixelposition":
-                if value.lower() == "true":
+            if key == 'location':
+                curSprite.location = [int(v.strip()) for v in value.split(',')]
+            elif key == 'singlepixelposition':
+                if value.lower() == 'true':
                     curSprite.singlepixelpos = True
-                elif value.lower() == "false":
+                elif value.lower() == 'false':
                     curSprite.singlepixelpos = False
                 else:
                     print(f"****Error: invalid boolean value for SinglePixelPosition parameter in line '{line}' in sprite description file '{descFilename}'")
@@ -437,7 +437,7 @@ def FindSpritePixels(sprite, ImgData, Width, Height, ImageToCocoColor, transpare
             if dir == 0 or dir == 2:
                 totalSteps += 1
     if totalSteps >= 40:
-        print("****Error: sprite %s not found within 20 pixels of location %i,%i" % (sprite.name, sprite.location[0], sprite.location[1]))
+        print(f'****Error: sprite {sprite.name} not found within 20 pixels of location {sprite.location[0]},{sprite.location[1]}')
         sys.exit(2)
     # now we apply a painting algoritm to produce a list of all of the touching non-transparent pixels
     pixCoordColorList = [ ]
@@ -574,7 +574,7 @@ def GenerateTileset(tiledesc_fname, palette_fname, tileset_fname, maskset_fname)
                 tileIdx = TileList.index(tilePix)
                 TileIdxByLocation[(x0,y0)] = tileIdx
     # write out tileset file
-    f = open(tileset_fname, "w")
+    f = open(tileset_fname, 'w')
     f.write(f'* The contents of this file were automatically generated with\n* gfx-process.py by processing the tileset description file below.\n* Path: {tiledesc_fname}\n*\n')
     f.write('\n'.join(['* ' + line for line in info.tiledesc_lines]))
     f.write('\n')
@@ -720,40 +720,40 @@ def GenerateTileset(tiledesc_fname, palette_fname, tileset_fname, maskset_fname)
     f.close()
 
     # all done!
-    print("Tileset %s generated from image %s, with %i tiles, containing %i unique colors" % (tileset_fname, ImageFilename, len(TileList), len(NewPalette)))
-    print("Collision mask %s generated from image %s, with %i mask bitmaps" % (maskset_fname, MaskFilename or "N/A", len(MaskList)))
+    print(f'Tileset {tileset_fname} generated from image {ImageFilename}, with {len(TileList)} tiles, containing {len(NewPalette)} unique colors')
+    print(f'Collision mask {maskset_fname} generated from image {MaskFilename or "N/A"}, with {len(MaskList)} mask bitmaps')
 
 def GenerateTilemap(leveldesc_fname, tileset_path, tilemap_fname):
     # parse tileset description file
     info = parseLevelDescription(leveldesc_fname)
     # validate tilemap parameters
     if info.tilesetidx < 0:
-        print("****Error: missing tileset index in level description file %s" % leveldesc_fname)
+        print(f'****Error: missing tileset index in level description file {leveldesc_fname}')
         sys.exit(3)
     if (info.tilemapStart[0] & 15) != 0 or (info.tilemapStart[1] & 15) != 0:
-        print("****Error: tilemap starting coordinates are not divisible by 16!")
+        print('****Error: tilemap starting coordinates are not divisible by 16!')
         sys.exit(3)
     if (info.tilemapSize[0] & 15) != 0 or (info.tilemapSize[1] & 15) != 0:
-        print("****Error: tilemap size not divisible by 16!")
+        print('****Error: tilemap size not divisible by 16!')
         sys.exit(3)
     ImageFilename = os.path.join(os.path.dirname(leveldesc_fname), info.mapfilename)
     if os.path.exists(ImageFilename) == False:
-        print("****Error: image file '%s' for tilemap doesn't exist!" % ImageFilename)
+        print("****Error: image file '{ImageFilename}' for tilemap doesn't exist!")
         sys.exit(3)
     # find the palette and tileset files
     tileset_fname = None
     palette_fname = None
     filelist = os.listdir(tileset_path)
     for fname in filelist:
-        if fname[:7] == "palette" and int(fname[7:9]) == info.tilesetidx and fname[-4:] == ".txt":
+        if fname[:7] == 'palette' and int(fname[7:9]) == info.tilesetidx and fname[-4:] == '.txt':
             palette_fname = fname
-        elif fname[:7] == "tileset" and int(fname[7:9]) == info.tilesetidx and fname[-4:] == ".txt":
+        elif fname[:7] == 'tileset' and int(fname[7:9]) == info.tilesetidx and fname[-4:] == '.txt':
             tileset_fname = fname
     if tileset_fname == None:
-        print("****Error: couldn't find tileset %i file in directory %s" % (info.tilesetidx, tileset_path))
+        print(f"****Error: couldn't find tileset {info.tilesetidx} file in directory {tileset_path}")
         sys.exit(3)
     if palette_fname == None:
-        print("****Error: couldn't find palette %i file in directory %s" % (info.tilesetidx, tileset_path))
+        print(f"****Error: couldn't find palette {info.tilesetidx} file in directory {tileset_path}")
         sys.exit(3)
     # read the RGB palette from the palette file
     CocoPaletteRGB = parsePaletteRGB(os.path.join(tileset_path, palette_fname))
@@ -761,18 +761,18 @@ def GenerateTilemap(leveldesc_fname, tileset_path, tilemap_fname):
     f = open(os.path.join(tileset_path, tileset_fname)).read()
     Tileset = [ ]
     matrix = [ ]
-    for line in f.split("\n"):
+    for line in f.split('\n'):
         # remove comments and whitespace from line
-        pivot = line.find("*")
+        pivot = line.find('*')
         if pivot != -1:
             line = line[:pivot]
         line = line.strip()
         if len(line) < 1:
             continue
         # handle tile pixel values (hex)
-        pix = "".join(line.split())
+        pix = ''.join(line.split())
         if (len(pix) & 1) == 1:
-            print("****Error: invalid tile pixel line length (%i) in tileset '%s'" % (len(pix), filename))
+            print(f"****Error: invalid tile pixel line length ({len(pix)}) in tileset 'filename'")
             sys.exit(1)
         for i in range(0, len(pix)):
             v = int(pix[i], 16)
@@ -812,20 +812,20 @@ def GenerateTilemap(leveldesc_fname, tileset_path, tilemap_fname):
                     imgPix = ImgData[y*width+x]
                     tilePix.append(ImageToCocoColor[imgPix])
             if tilePix not in Tileset:
-                print("****Error: tile at location %i,%i in map file %s is not present in tileset!" % (x0, y0, ImageFilename))
+                print(f'****Error: tile at location {x0},{y0} in map file {ImageFilename} is not present in tileset!')
                 sys.exit(2)
             tileIdx = Tileset.index(tilePix)
             TileLine.append(tileIdx)
         TileMap.append(TileLine)
     # now write out the tilemap file
-    f = open(tilemap_fname, "w")
-    f.write("* The contents of this file were automatically generated with\n* gfx-process.py by processing the tilemap image file %s\n*\n" % ImageFilename)
+    f = open(tilemap_fname, 'w')
+    f.write(f'* The contents of this file were automatically generated with\n* gfx-process.py by processing the tilemap image file {ImageFilename}\n*\n')
     for tileLine in TileMap:
-        f.write(" ".join(["%02x" % v for v in tileLine]))
-        f.write("\n")
+        f.write(' '.join(['%02x' % v for v in tileLine]))
+        f.write('\n')
     f.close()
     # all done!
-    print("Tilemap %s generated from image %s, with size %ix%i" % (tilemap_fname, ImageFilename, len(TileMap[0]), len(TileMap)))
+    print(f'Tilemap {tilemap_fname} generated from image {ImageFilename}, with size {len(TileMap[0])}x{len(TileMap)}')
 
 
 def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
@@ -833,31 +833,31 @@ def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
     info = parseSpriteDescription(spritedesc_fname)
     # validate sprite parameters
     if info.groupidx < 0:
-        print("****Error: missing group number in sprite description file %s" % spritedesc_fname)
+        print(f'****Error: missing group number in sprite description file {spritedesc_fname}')
         sys.exit(3)
     if info.paletteidx < 0:
-        print("****Error: missing palette number in sprite description file %s" % spritedesc_fname)
+        print(f'****Error: missing palette number in sprite description file {spritedesc_fname}')
         sys.exit(3)
-    if info.imagefilename == "":
-        print("****Error: missing image filename in sprite description file %s" % spritedesc_fname)
+    if info.imagefilename == '':
+        print(f'****Error: missing image filename in sprite description file {spritedesc_fname}')
         sys.exit(3)
     for i in range(len(info.sprites)):
         sprite = info.sprites[i]
-        if sprite.name == "":
-            print("****Error: missing sprite #%i name in sprite description file %s" % (i+1, spritedesc_fname))
+        if sprite.name == '':
+            print(f'****Error: missing sprite #{i+1} name in sprite description file {spritedesc_fname}')
             sys.exit(3)
     ImageFilename = os.path.join(os.path.dirname(spritedesc_fname), info.imagefilename)
     if os.path.exists(ImageFilename) == False:
-        print("****Error: image file '%s' for sprite group doesn't exist!" % ImageFilename)
+        print(f"****Error: image file '{ImageFilename}' for sprite group doesn't exist!")
         sys.exit(3)
     # find the palette file
     palette_fname = None
     filelist = os.listdir(palette_path)
     for fname in filelist:
-        if fname[:7] == "palette" and int(fname[7:9]) == info.paletteidx and fname[-4:] == ".txt":
+        if fname[:7] == 'palette' and int(fname[7:9]) == info.paletteidx and fname[-4:] == '.txt':
             palette_fname = fname
     if palette_fname == None:
-        print("****Error: couldn't find palette %i file in directory %s" % (info.paletteidx, palette_path))
+        print(f"****Error: couldn't find palette {info.paletteidx} file in directory {palette_path}")
         sys.exit(3)
     # read the RGB palette from the palette file
     CocoPaletteRGB = parsePaletteRGB(os.path.join(palette_path, palette_fname))
@@ -884,55 +884,55 @@ def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
             transparentIdx = i
             break
     if transparentIdx == None:
-        print("****Error: transparent RGB color {} not found in sprite image {}".format(str(info.transparentRGB), ImageFilename))
+        print(f'****Error: transparent RGB color {str(info.transparentRGB)} not found in sprite image {ImageFilename}')
         sys.exit(3)
     # find and read pixel data, generating a pixel array, for each sprite in the group
     for sprite in info.sprites:
         FindSpritePixels(sprite, ImgData, width, height, ImageToCocoColor, transparentIdx)
     # write out sprite text file
-    pixValMap = { -1:"-", 0:"0", 1:"1", 2:"2", 3:"3", 4:"4", 5:"5", 6:"6", 7:"7", 8:"8", 9:"9", 10:"A", 11:"B", 12:"C", 13:"D", 14:"E", 15:"F" }
-    f = open(sprite_fname, "w")
-    f.write("* The contents of this file were automatically generated with\n* gfx-process.py by processing the sprite image file %s\n*\n" % ImageFilename)
-    f.write("group = %i\n" % info.groupidx)
+    pixValMap = { -1:'-', 0:'0', 1:'1', 2:'2', 3:'3', 4:'4', 5:'5', 6:'6', 7:'7', 8:'8', 9:'9', 10:'A', 11:'B', 12:'C', 13:'D', 14:'E', 15:'F' }
+    f = open(sprite_fname, 'w')
+    f.write(f'* The contents of this file were automatically generated with\n* gfx-process.py by processing the sprite image file {ImageFilename}\n*\n')
+    f.write(f'group = {info.groupidx}\n')
     for sprite in info.sprites:
-        f.write("[%s]\n" % sprite.name)
-        f.write("Width = %i\n" % len(sprite.pixArray[0]))
-        f.write("Height = %i\n" % len(sprite.pixArray))
-        f.write("SinglePixelPosition = %s\n" % str(sprite.singlepixelpos))
-        f.write("Hotspot = (%i,%i)\n" % (sprite.hotspot[0], sprite.hotspot[1]))
+        f.write(f'[{sprite.name}]\n')
+        f.write(f'Width = {len(sprite.pixArray[0])}\n')
+        f.write(f'Height = {len(sprite.pixArray)}\n')
+        f.write(f'SinglePixelPosition = {str(sprite.singlepixelpos)}\n')
+        f.write(f'Hotspot = ({sprite.hotspot[0]},{sprite.hotspot[1]})\n')
         for pixLine in sprite.pixArray:
-            f.write(" ".join([pixValMap[v] for v in pixLine]))
-            f.write("\n")
-        f.write("\n")
+            f.write(' '.join([pixValMap[v] for v in pixLine]))
+            f.write('\n')
+        f.write('\n')
     f.close()
     # all done!
-    print("Sprite file %s generated from image %s, containing %i sprites" % (sprite_fname, ImageFilename, len(info.sprites)))
+    print(f'Sprite file {sprite_fname} generated from image {ImageFilename}, containing {len(info.sprites)} sprites')
 
 #******************************************************************************
 # main function for standard script execution
 #
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     global CocoLuvByRGB, CocoLuvByCMP
-    print("DynoSprite Graphics Processing script")
+    print('DynoSprite Graphics Processing script')
     # get script mode
-    commandList = [ "mixtiles", "gentileset", "gentilemap", "gensprites" ]
+    commandList = [ 'mixtiles', 'gentileset', 'gentilemap', 'gensprites' ]
     if len(sys.argv) < 2:
         PrintUsage()
     command = sys.argv[1]
     if command not in commandList:
-        print("****Error: invalid command '%s'" % command)
+        print(f"****Error: invalid command '{command}'")
         PrintUsage()
     modeIdx = commandList.index(command)
     # handle each command
     if modeIdx == 0:
         # mixtiles
-        print("****Error: mixtiles not yet supported!")
+        print('****Error: mixtiles not yet supported!')
         sys.exit(2)
     elif modeIdx == 1:
         # gentileset
         if len(sys.argv) != 6:
-            print("****Error: wrong number of arguments!")
+            print('****Error: wrong number of arguments!')
             PrintUsage()
         tiledesc_fname = sys.argv[2]
         palette_fname = sys.argv[3]
@@ -942,7 +942,7 @@ if __name__ == "__main__":
     elif modeIdx == 2:
         # gentilemap
         if len(sys.argv) != 5:
-            print("****Error: wrong number of arguments!")
+            print('****Error: wrong number of arguments!')
             PrintUsage()
         leveldesc_fname = sys.argv[2]
         tileset_path = sys.argv[3]
