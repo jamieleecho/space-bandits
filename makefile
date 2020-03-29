@@ -23,7 +23,7 @@ GENDISKDIR = $(BUILDDIR)/disk
 # lists of source game assets
 TILEDESC = $(wildcard $(TILEDIR)/??-*.json)
 LEVELSRC = $(wildcard $(LEVELDIR)/??-*.asm)
-SPRITEDSC = $(wildcard $(SPRITEDIR)/??-*.txt)
+SPRITEDSC = $(wildcard $(SPRITEDIR)/??-*.json)
 OBJECTCSRC = $(wildcard $(OBJECTDIR)/??-*.c)
 OBJECTCSRC2ASM = $(patsubst %.c, %.asm, $(OBJECTCSRC))
 OBJECTSRC = $(wildcard $(OBJECTDIR)/??-*.asm)
@@ -38,11 +38,9 @@ LEVELDSC = $(wildcard $(LEVELDIR)/??-*.json)
 TILESRC = $(patsubst $(TILEDIR)/%.json, $(GENGFXDIR)/tileset%.txt, $(TILEDESC))
 MASKSRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/tileset%_mask.txt, $(TILEDESC))
 PALSRC = $(patsubst $(TILEDIR)/%.txt, $(GENGFXDIR)/palette%.txt, $(TILEDESC))
-SPRITESRC = $(patsubst $(SPRITEDIR)/%.txt, $(GENGFXDIR)/sprite%.txt, $(SPRITEDSC))
-SPRITERAW := $(patsubst $(SPRITEDIR)/%.txt, $(GENOBJDIR)/sprite%.raw, $(SPRITEDSC))
+SPRITESRC = $(patsubst $(SPRITEDIR)/%.json, $(GENGFXDIR)/sprite%.txt, $(SPRITEDSC))
+SPRITERAW := $(patsubst $(SPRITEDIR)/%.json, $(GENOBJDIR)/sprite%.raw, $(SPRITEDSC))
 OBJECTRAW := $(patsubst $(OBJECTDIR)/%.asm, $(GENOBJDIR)/object%.raw, $(OBJECTSRC) $(OBJECTCSRC2ASM))
-SOUNDRAW := $(patsubst $(SOUNDDIR)/%.wav, $(GENOBJDIR)/sound%.raw, $(SOUNDSRC))
-SPRITERAW := $(patsubst $(SPRITEDIR)/%.txt, $(GENOBJDIR)/sprite%.raw, $(SPRITEDSC))
 SOUNDRAW := $(patsubst $(SOUNDDIR)/%.wav, $(GENOBJDIR)/sound%.raw, $(SOUNDSRC))
 LEVELRAW := $(patsubst $(LEVELDIR)/%.asm, $(GENOBJDIR)/level%.raw, $(LEVELSRC) $(LEVELCSRC2ASM))
 MAPSRC := $(patsubst $(LEVELDIR)/%.json, $(GENGFXDIR)/tilemap%.txt, $(LEVELDSC))
@@ -176,7 +174,7 @@ $(GENGFXDIR)/tilemap%.txt: $(LEVELDIR)/%.json $(TILESRC) $(PALSRC) $(SCRIPTDIR)/
 	$(SCRIPTDIR)/gfx-process.py gentilemap $< $(GENGFXDIR) $@
 
 # 1c. Generate Sprite files from images
-$(GENGFXDIR)/sprite%.txt: $(SPRITEDIR)/%.txt $(PALSRC) $(SCRIPTDIR)/gfx-process.py
+$(GENGFXDIR)/sprite%.txt: $(SPRITEDIR)/%.json $(PALSRC) $(SCRIPTDIR)/gfx-process.py
 	$(SCRIPTDIR)/gfx-process.py gensprites $< $(GENGFXDIR) $@
 
 # 2. Compile sprites to 6809 assembly code

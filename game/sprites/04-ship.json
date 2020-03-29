@@ -1,0 +1,22 @@
+{
+  "Main": {
+    "Group": 4,
+    "Image": "../tiles/01-moon.gif",
+    "Transparent": [254, 0, 254],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "Ship1",
+    "Location": [170, 433],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Ship2",
+    "Location": [137, 433],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Ship3",
+    "Location": [106, 433],
+    "SinglePixelPosition": true
+  }]
+}

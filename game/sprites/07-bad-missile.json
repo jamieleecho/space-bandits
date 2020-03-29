@@ -1,0 +1,14 @@
+{
+  "Main": {
+    "Group": 7,
+    "Image": "../tiles/01-moon.gif",
+    "Transparent": [254, 0, 254],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "Missile1",
+    "Location": [114, 415],
+    "SinglePixelPosition": true
+  }]
+}

@@ -1,0 +1,14 @@
+{
+  "Main": {
+    "Group": 6,
+    "Image": "../tiles/01-moon.gif",
+    "Transparent": [254, 0, 254],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "GameOver",
+    "Location": [51, 317],
+    "SinglePixelPosition": true
+  }]
+}

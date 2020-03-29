@@ -264,67 +264,22 @@ class SpriteGroupInfo:
         self.sprites = [ ]
 
 def parseSpriteDescription(descFilename):
-    f = open(descFilename).read()
+    with open(descFilename) as f:
+        data = json.load(f)
+
+    main = data['Main']
     info = SpriteGroupInfo()
-    curSprite = SpriteInfo()
-    section = None
-    for line in f.split('\n'):
-        # remove comments and whitespace from line
-        pivot = line.find('*')
-        if pivot != -1:
-            line = line[:pivot]
-        line = line.strip()
-        if len(line) < 1:
-            continue
-        # handle new sections
-        if len(line) > 2 and line[0] == '[' and line[-1] == ']':
-            # save sprite currently being defined
-            if section != None:
-                info.sprites.append(curSprite)
-                curSprite = SpriteInfo()
-            # set new section name
-            section = line[1:-1].lower()
-            curSprite.name = section
-            continue
-        # handle parameters
-        pivot = line.find('=')
-        if pivot != -1:
-            key = line[:pivot].strip().lower()
-            value = line[pivot+1:].strip()
-            # global parameters
-            if section == None:
-                if key == 'group':
-                    info.groupidx = int(value)
-                elif key == 'image':
-                    info.imagefilename = value
-                elif key == 'transparent':
-                    info.transparentRGB = [int(v.strip()) for v in value.split(',')]
-                elif key == 'palette':
-                    info.paletteidx = int(value)
-                else:
-                    print(f"****Error: invalid global parameter definition '{line}' in sprite description file '{descFilename}'")
-                    sys.exit(2)
-                continue
-            # sprite parameters
-            if key == 'location':
-                curSprite.location = [int(v.strip()) for v in value.split(',')]
-            elif key == 'singlepixelposition':
-                if value.lower() == 'true':
-                    curSprite.singlepixelpos = True
-                elif value.lower() == 'false':
-                    curSprite.singlepixelpos = False
-                else:
-                    print(f"****Error: invalid boolean value for SinglePixelPosition parameter in line '{line}' in sprite description file '{descFilename}'")
-                    sys.exit(2)
-            else:
-                print(f"****Error: invalid sprite parameter definition '{line}' in sprite description file '{descFilename}'")
-                sys.exit(2)
-            continue
-        # anything else is unexpected
-        print(f"****Error: invalid line '{line}' in sprite description file '{descFilename}'")
-        sys.exit(2)
-    # save sprite currently being defined
-    info.sprites.append(curSprite)
+    info.groupidx = main['Group']
+    info.imagefilename = main['Image']
+    info.transparentRGB = main['Transparent']
+    info.paletteidx = main['Palette']
+
+    for dataSprite in data['Sprites']:
+        curSprite = SpriteInfo()
+        curSprite.name = dataSprite['Name']
+        curSprite.location = dataSprite['Location']
+        curSprite.singlepixelpos = dataSprite['SinglePixelPosition']
+        info.sprites.append(curSprite)
     return info
 
 def NonRecursivePaint(ImgData, Width, Height, x, y, transparentIdx, pixCoordColorList):
@@ -444,7 +399,7 @@ def PrintUsage():
     print('        mixtiles <input_mapdesc_txt> <output_image_file>')
     print('        gentileset <input_tiledesc_json> <output_palette_file> <output_tileset_file> <output_collisionmask_file>')
     print('        gentilemap <input_leveldesc_txt> <input_tileset_path> <output_tilemap_file>')
-    print('        gensprites <input_spritedesc_txt> <input_palette_path> <output_sprite_file>')
+    print('        gensprites <input_spritedesc_json> <input_palette_path> <output_sprite_file>')
     sys.exit(1)
 
 #******************************************************************************

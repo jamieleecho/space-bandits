@@ -1,0 +1,110 @@
+{
+  "Main": {
+    "Group": 3,
+    "Image": "../tiles/01-moon.gif",
+    "Transparent": [254, 0, 254],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "EnemySwath1",
+    "Location": [20, 226],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "EnemySwath2",
+    "Location": [20, 238],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "EnemySwath3",
+    "Location": [20, 250],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Blade1",
+    "Location": [101, 225],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Blade2",
+    "Location": [101, 236],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Blade3",
+    "Location": [101, 247],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Blade4",
+    "Location": [101, 259],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Dude1",
+    "Location": [126, 226],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Dude2",
+    "Location": [126, 239],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Dude3",
+    "Location": [126, 252],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Dude4",
+    "Location": [126, 265],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Tiny1",
+    "Location": [78, 223],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Tiny2",
+    "Location": [78, 230],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Tivo1",
+    "Location": [155, 225],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Tivo2",
+    "Location": [155, 239],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Explosion1",
+    "Location": [232, 284],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion2",
+    "Location": [256, 284],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion3",
+    "Location": [280, 284],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion4",
+    "Location": [304, 284],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion5",
+    "Location": [231, 308],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion6",
+    "Location": [256, 308],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion7",
+    "Location": [280, 308],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion8",
+    "Location": [304, 308],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion9",
+    "Location": [232, 332],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion10",
+    "Location": [256, 332],
+    "SinglePixelPosition": false
+  }]
+}
