@@ -39,4 +39,4 @@ byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(BadguymissileInit, BadguymissileReactivate, BadguymissileUpdate);
+RegisterObject(BadmissileInit, BadmissileReactivate, BadmissileUpdate);

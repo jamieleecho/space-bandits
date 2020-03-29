@@ -64,6 +64,14 @@
 		7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EED6F23BD0EB700804C26 /* DSResourceController.m */; };
 		7D7EED7923BD626500804C26 /* Main.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED7823BD626500804C26 /* Main.storyboardc */; };
 		7D7EED7A23BD626500804C26 /* Main.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED7823BD626500804C26 /* Main.storyboardc */; };
+		7DA1789C2431528600AE39D8 /* sprites in Resources */ = {isa = PBXBuildFile; fileRef = 7DA1789B2431528600AE39D8 /* sprites */; };
+		7DA178A02431529D00AE39D8 /* tiles in Resources */ = {isa = PBXBuildFile; fileRef = 7DA1789F2431529D00AE39D8 /* tiles */; };
+		7DA178B82431552E00AE39D8 /* 03-badguy.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178AE2431552D00AE39D8 /* 03-badguy.c */; };
+		7DA178B92431552E00AE39D8 /* 04-ship.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178AF2431552D00AE39D8 /* 04-ship.c */; };
+		7DA178BA2431552E00AE39D8 /* 07-badmissile.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178B12431552D00AE39D8 /* 07-badmissile.c */; };
+		7DA178BB2431552E00AE39D8 /* 05-missile.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178B32431552D00AE39D8 /* 05-missile.c */; };
+		7DA178BC2431552E00AE39D8 /* 06-gameover.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178B72431552E00AE39D8 /* 06-gameover.c */; };
+		7DA178BF243155A900AE39D8 /* 01-persei.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178BE243155A900AE39D8 /* 01-persei.c */; };
 		7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
 		7DC4E7F022FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
 		7DC4E7F122FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
@@ -143,6 +151,20 @@
 		7D7EED6E23BD0EB700804C26 /* DSResourceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSResourceController.h; sourceTree = "<group>"; };
 		7D7EED6F23BD0EB700804C26 /* DSResourceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSResourceController.m; sourceTree = "<group>"; };
 		7D7EED7823BD626500804C26 /* Main.storyboardc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.storyboardc; path = Main.storyboardc; sourceTree = "<group>"; };
+		7DA1789B2431528600AE39D8 /* sprites */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sprites; path = ../../game/sprites; sourceTree = "<group>"; };
+		7DA1789F2431529D00AE39D8 /* tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tiles; path = ../../game/tiles; sourceTree = "<group>"; };
+		7DA178AD2431552D00AE39D8 /* 04-ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "04-ship.h"; path = "../../game/objects/04-ship.h"; sourceTree = "<group>"; };
+		7DA178AE2431552D00AE39D8 /* 03-badguy.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "03-badguy.c"; path = "../../game/objects/03-badguy.c"; sourceTree = "<group>"; };
+		7DA178AF2431552D00AE39D8 /* 04-ship.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "04-ship.c"; path = "../../game/objects/04-ship.c"; sourceTree = "<group>"; };
+		7DA178B02431552D00AE39D8 /* object_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = object_info.h; path = ../../game/objects/object_info.h; sourceTree = "<group>"; };
+		7DA178B12431552D00AE39D8 /* 07-badmissile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "07-badmissile.c"; path = "../../game/objects/07-badmissile.c"; sourceTree = "<group>"; };
+		7DA178B22431552D00AE39D8 /* 07-badmissile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "07-badmissile.h"; path = "../../game/objects/07-badmissile.h"; sourceTree = "<group>"; };
+		7DA178B32431552D00AE39D8 /* 05-missile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "05-missile.c"; path = "../../game/objects/05-missile.c"; sourceTree = "<group>"; };
+		7DA178B42431552D00AE39D8 /* 03-badguy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "03-badguy.h"; path = "../../game/objects/03-badguy.h"; sourceTree = "<group>"; };
+		7DA178B52431552D00AE39D8 /* 05-missile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "05-missile.h"; path = "../../game/objects/05-missile.h"; sourceTree = "<group>"; };
+		7DA178B62431552D00AE39D8 /* 06-gameover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "06-gameover.h"; path = "../../game/objects/06-gameover.h"; sourceTree = "<group>"; };
+		7DA178B72431552E00AE39D8 /* 06-gameover.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "06-gameover.c"; path = "../../game/objects/06-gameover.c"; sourceTree = "<group>"; };
+		7DA178BE243155A900AE39D8 /* 01-persei.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "01-persei.c"; path = "../../game/levels/01-persei.c"; sourceTree = "<group>"; };
 		7DC4E7E822FFB79A00AE8AB4 /* DSCoCoJoystickProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystickProtocol.h; sourceTree = "<group>"; };
 		7DC4E7ED22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoKeyboardJoystick.h; sourceTree = "<group>"; };
 		7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoKeyboardJoystick.m; sourceTree = "<group>"; };
@@ -285,9 +307,13 @@
 		52F1208621D7DD63008A7900 /* Space Bandits */ = {
 			isa = PBXGroup;
 			children = (
+				7DA178BD2431559E00AE39D8 /* levels */,
+				7DA178AC2431551D00AE39D8 /* objects */,
 				7D7EED6C23BCE63500804C26 /* hires */,
 				52A90E5A21E2F78300CC2643 /* images */,
 				52A90E5921E2F78300CC2643 /* levels */,
+				7DA1789B2431528600AE39D8 /* sprites */,
+				7DA1789F2431529D00AE39D8 /* tiles */,
 				52F1209421D7DD65008A7900 /* Assets.xcassets */,
 				7D7EED7823BD626500804C26 /* Main.storyboardc */,
 				52F1209921D7DD65008A7900 /* Info.plist */,
@@ -304,6 +330,32 @@
 				52F120B221D7DD65008A7900 /* Info.plist */,
 			);
 			path = DynospriteUITests;
+			sourceTree = "<group>";
+		};
+		7DA178AC2431551D00AE39D8 /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				7DA178AE2431552D00AE39D8 /* 03-badguy.c */,
+				7DA178B42431552D00AE39D8 /* 03-badguy.h */,
+				7DA178AF2431552D00AE39D8 /* 04-ship.c */,
+				7DA178AD2431552D00AE39D8 /* 04-ship.h */,
+				7DA178B32431552D00AE39D8 /* 05-missile.c */,
+				7DA178B52431552D00AE39D8 /* 05-missile.h */,
+				7DA178B72431552E00AE39D8 /* 06-gameover.c */,
+				7DA178B62431552D00AE39D8 /* 06-gameover.h */,
+				7DA178B12431552D00AE39D8 /* 07-badmissile.c */,
+				7DA178B22431552D00AE39D8 /* 07-badmissile.h */,
+				7DA178B02431552D00AE39D8 /* object_info.h */,
+			);
+			name = objects;
+			sourceTree = "<group>";
+		};
+		7DA178BD2431559E00AE39D8 /* levels */ = {
+			isa = PBXGroup;
+			children = (
+				7DA178BE243155A900AE39D8 /* 01-persei.c */,
+			);
+			name = levels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,9 +473,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D7EED6D23BCE63500804C26 /* hires in Resources */,
+				7DA1789C2431528600AE39D8 /* sprites in Resources */,
 				52A90E5C21E2F78300CC2643 /* images in Resources */,
 				52A90E5B21E2F78300CC2643 /* levels in Resources */,
 				52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */,
+				7DA178A02431529D00AE39D8 /* tiles in Resources */,
 				52F1208D21D7DD63008A7900 /* Actions.sks in Resources */,
 				52CF9D3E2288A56E0054EAD2 /* DSGameScene.sks in Resources */,
 				52C3FCE621EBD9C900AE268B /* Fonts in Resources */,
@@ -471,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				527E7ACD21F016B90013E66A /* DSInitScene.m in Sources */,
+				7DA178BB2431552E00AE39D8 /* 05-missile.c in Sources */,
 				524402DF21ED65CF00B02D38 /* DSTransitionScene.m in Sources */,
 				7D3110EE22FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
 				52F0574D2216323400CDC1DD /* DSViewController.m in Sources */,
@@ -485,7 +540,12 @@
 				52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */,
 				52F1209B21D7DD65008A7900 /* main.m in Sources */,
 				52CF9D422288FB2B0054EAD2 /* DSWindowController.m in Sources */,
+				7DA178BF243155A900AE39D8 /* 01-persei.c in Sources */,
+				7DA178B92431552E00AE39D8 /* 04-ship.c in Sources */,
+				7DA178BC2431552E00AE39D8 /* 06-gameover.c in Sources */,
 				52F1208921D7DD63008A7900 /* DSAppDelegate.m in Sources */,
+				7DA178B82431552E00AE39D8 /* 03-badguy.c in Sources */,
+				7DA178BA2431552E00AE39D8 /* 07-badmissile.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

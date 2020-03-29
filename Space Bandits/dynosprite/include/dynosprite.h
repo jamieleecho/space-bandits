@@ -9,6 +9,39 @@
 #ifndef dynosprite_h
 #define dynosprite_h
 
+#include "coco.h"
+
+
+/** DynospriteCOB.active flag indicating item inactive */
+#define OBJECT_INACTIVE 0
+
+/** DynospriteCOB.active flag indicating to update item */
+#define OBJECT_UPDATE_ACTIVE 1
+
+/** DynospriteCOB.active flag indicating to draw item */
+#define OBJECT_DRAW_ACTIVE 2
+
+/** DynospriteCOB.active flag indicating to draw and update item */
+#define OBJECT_ACTIVE 3
+
+
+typedef struct DynospriteCOB {
+    byte groupIdx;
+    byte objectIdx;
+    byte active;
+    byte res1;
+    unsigned globalX;
+    unsigned globalY;
+    byte *statePtr;
+    byte *odtPtr;
+} DynospriteCOB;
+
+
+typedef struct DynospriteODT {
+    byte foo;
+} DynospriteODT;
+
+
 /**
  * Registers the given level into the shared registry.
  * @param init level initialization function

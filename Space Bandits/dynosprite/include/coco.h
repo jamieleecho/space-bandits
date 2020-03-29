@@ -9,6 +9,8 @@
 #ifndef coco_h
 #define coco_h
 
-typedef __UINT8_TYPE__ byte;
+typedef unsigned char byte;
+#define FALSE 0
+#define TRUE 1
 
 #endif /* coco_h */
