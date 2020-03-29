@@ -93,7 +93,7 @@ def SymbolExtract(listName):
     # parse input list and extract all global symbols
     bFoundSymTable = False
     SymDict = { }
-    f = open(listName, "r").read()
+    f = open(listName).read()
     for line in f.split("\n"):
         line = line.strip()
         # look for symbol table

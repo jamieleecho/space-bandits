@@ -41,7 +41,7 @@ if __name__ == "__main__":
     # parse input list and extract all global symbols
     bFoundSymTable = False
     SymList = [ ]
-    f = open(sys.argv[1], "r").read()
+    f = open(sys.argv[1]).read()
     for line in f.split("\n"):
         line = line.strip()
         # look for symbol table

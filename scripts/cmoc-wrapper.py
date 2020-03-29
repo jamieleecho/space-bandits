@@ -105,7 +105,7 @@ def main(argv):
 
     # Call cmoc
     cmoc_args = ['cmoc', '-S', '--intermediate',
-      '-O{}'.format(args.optimization_level)]
+      f'-O{args.optimization_level}']
     for include_dir in args.include_path or []:
         cmoc_args.append('-I')
         cmoc_args.append(include_dir)
@@ -138,15 +138,15 @@ def main(argv):
     lines.append('#define DynospriteObject_DataDefinition\n')
     obj_name = get_object_name(s_file)
     if args.file_type == 'level':
-        lines.append('#define _LevelInit _{}Init\n'.format(obj_name))
-        lines.append('#define _LevelCalculateBkgrndNewXY _{}CalculateBkgrndNewXY\n'.format(obj_name))
+        lines.append(f'#define _LevelInit _{obj_name}Init\n')
+        lines.append(f'#define _LevelCalculateBkgrndNewXY _{obj_name}CalculateBkgrndNewXY\n')
     else:
-        lines.append('#define _ObjectInit _{}Init\n'.format(obj_name))
-        lines.append('#define _ObjectReactivate _{}Reactivate\n'.format(obj_name))
-        lines.append('#define _ObjectUpdate _{}Update\n'.format(obj_name))
+        lines.append(f'#define _ObjectInit _{obj_name}Init\n')
+        lines.append(f'#define _ObjectReactivate _{obj_name}Reactivate\n')
+        lines.append(f'#define _ObjectUpdate _{obj_name}Update\n')
     if args.file_type == 'object':
         lines.append('#include "{}"\n'.format(change_ext(s_file, '.h')))
-    with open('../../engine/c-{}-entry.asm'.format(args.file_type)) as f:
+    with open(f'../../engine/c-{args.file_type}-entry.asm') as f:
         lines.extend(f.readlines())
     lines.append(' ENDSECTION\n')
     with open(dst_s_file, 'w') as f:
@@ -164,11 +164,11 @@ def main(argv):
     dst_lst_file = change_ext(dst_s_file, '.lst')
     cmoc_asm_args = ['../../tools/cmoc-asm', '-fobj', '--pragma=forwardrefmax',
       '-I', '../../engine', '-I', '../../build/asm',
-      '--output={}'.format(dst_obj_file),
-      '--list={}'.format(dst_lst_file),
+      f'--output={dst_obj_file}',
+      f'--list={dst_lst_file}',
       dst_asm_file]
     for define in args.define or []:
-        cmoc_asm_args.append('--define={}'.format(define))
+        cmoc_asm_args.append(f'--define={define}')
     retval = subprocess.call(cmoc_asm_args)
     if retval:
         sys.exit(retval)

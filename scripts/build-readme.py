@@ -87,7 +87,7 @@ BASICPROG = """
 
 def GenerateReadme(textin, basout):
     # read the input text file
-    inLines = open(textin, "r").read().split("\n")
+    inLines = open(textin).read().split("\n")
     if inLines[-1] == "":
         inLines = inLines[:-1]
     # generate the output data lines

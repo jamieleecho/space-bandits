@@ -104,7 +104,7 @@ class Level:
         paramList = [ "name", "description", "objectgroups", "maxobjecttablesize", "tileset", "tilemapsize", "bkgrndstartx", "bkgrndstarty" ]
         for paramName in paramList:
             if not paramName in self.ParamDict:
-                print("****Error: Missing '%s' parameter in level file '%s'" % (paramName, descFile))
+                print(f"****Error: Missing '{paramName}' parameter in level file '{descFile}'")
                 sys.exit(1)
         # parse the ObjectGroups parameter to make a list
         self.ObjectGroups = [s for s in self.ParamDict["objectgroups"]]
@@ -112,7 +112,7 @@ class Level:
         self.tilemapwidth, self.tilemapheight = (v//16 for v in self.ParamDict["tilemapsize"])
 
     def parseDescription(self, descFilename, dynosymbols):
-        with open(descFilename, 'r') as f:
+        with open(descFilename) as f:
             data = json.load(f)
 
         # First set the level section
@@ -133,7 +133,7 @@ class Level:
             self.NumInitObjects += 1
 
     def parseMap(self, mapFilename):
-        f = open(mapFilename, "r").read()
+        f = open(mapFilename).read()
         for line in f.split("\n"):
             # remove comments and whitespace from line
             pivot = line.find("*")
@@ -178,7 +178,7 @@ def SymbolExtract(listName):
     # parse input list and extract all global symbols
     bFoundSymTable = False
     SymDict = { }
-    f = open(listName, "r").read()
+    f = open(listName).read()
     for line in f.split("\n"):
         line = line.strip()
         # look for symbol table
@@ -253,7 +253,7 @@ if __name__ == "__main__":
     # make sure we have same # of files in each list
     numLevels = len(lvlDescFiles)
     if len(lvlMapFiles) != numLevels or len(lvlRawFiles) != numLevels or len(lvlListFiles) != numLevels:
-        print("****Error: Mismatched level description/assembly/map files in '%s' and/or '%s'" % (leveldir, rawdir))
+        print(f"****Error: Mismatched level description/assembly/map files in '{leveldir}' and/or '{rawdir}'")
         print("  %d map files found, %d expected" % (len(lvlMapFiles), numLevels))
         print("  %d raw files found, %d expected" % (len(lvlRawFiles), numLevels))
         print("  %d list files found, %d expected" % (len(lvlListFiles), numLevels))

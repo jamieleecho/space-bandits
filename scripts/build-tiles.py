@@ -132,7 +132,7 @@ if __name__ == "__main__":
         mode = None
         curSet = Tileset(palettefilename, tilesetfilename, tilemaskfilename)
         # load palettes
-        f = open(os.path.join(gfxdir, palettefilename), 'r').read()
+        f = open(os.path.join(gfxdir, palettefilename)).read()
         matrix = [ ]
         for line in f.split('\n'):
             # remove comments and whitespace from line
@@ -157,7 +157,7 @@ if __name__ == "__main__":
         if len(matrix) > 0:
             SaveMatrix(curSet, mode, matrix)
         # load tiles
-        f = open(os.path.join(gfxdir, tilesetfilename), 'r').read()
+        f = open(os.path.join(gfxdir, tilesetfilename)).read()
         matrix = [ ]
         for line in f.split('\n'):
             # remove comments and whitespace from line
@@ -179,7 +179,7 @@ if __name__ == "__main__":
                 curSet.tiles.append(matrix)
                 matrix = [ ]
         # load masks
-        f = open(os.path.join(gfxdir, tilemaskfilename), 'r').read()
+        f = open(os.path.join(gfxdir, tilemaskfilename)).read()
         matrix = [ ]
         for line in f.split('\n'):
             # remove comments and whitespace from line

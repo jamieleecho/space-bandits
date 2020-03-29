@@ -48,11 +48,11 @@ def FilterFile(Filename, FilterList):
                 if loadAddr >= oldStart and loadAddr <= oldEnd:
                     bMoved = True
                     newLoadAddr = loadAddr + newStart - oldStart
-                    print("Section (%04x-%04x) is moved to %04x" % (loadAddr, loadAddr+length-1, newLoadAddr))
+                    print("Section ({:04x}-{:04x}) is moved to {:04x}".format(loadAddr, loadAddr+length-1, newLoadAddr))
                     loadAddr = newLoadAddr
                     break
             if not bMoved:
-                print("Section (%04x-%04x) is not moved" % (loadAddr, loadAddr+length-1))
+                print("Section ({:04x}-{:04x}) is not moved".format(loadAddr, loadAddr+length-1))
             fOut = fOut + bytes((0, (length >> 8), (length & 0xff), (loadAddr >> 8), (loadAddr & 0xff)))
             fOut = fOut + fIn[curIdx:curIdx+length]
             curIdx += length

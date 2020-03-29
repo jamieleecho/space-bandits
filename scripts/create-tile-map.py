@@ -79,7 +79,7 @@ def tile_set(tiles):
   :param tiles: images returned by tile_image
   :return: set of unique tiles
   """
-  return list(set(img for column in tiles for img in column))
+  return list({img for column in tiles for img in column})
 
 
 def tile_color_map(tiles):
@@ -182,7 +182,7 @@ def output_tile(tile_file, img, rev_rgb8_color_map):
   for yy in xrange(0, img.size[1]):
     row = extract_row(img, yy, rev_rgb8_color_map)
     hex_line = convert_to_hex_line(row)
-    tile_file.write('{}'.format(hex_line))
+    tile_file.write(f'{hex_line}')
   tile_file.write('\n')
 
 

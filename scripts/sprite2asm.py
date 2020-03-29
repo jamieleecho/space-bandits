@@ -177,27 +177,27 @@ class AsmStream:
         elif value == 0 and CPU == 6309 and (regnum == regD or regnum == regE or regnum == regF or regnum == regW):
             self.emit_op("clr%s" % regName[regnum], "", comment, 3, 2, 2)
         elif oldval == 255 - value and (regnum == regA or regnum == regB):
-            self.emit_op("com%s" % regName[regnum], "", comment + " (%s = ~$%02x = $%02x)" % (regName[regnum], oldval, value), 2, 1, 1)
+            self.emit_op("com%s" % regName[regnum], "", comment + " ({} = ~${:02x} = ${:02x})".format(regName[regnum], oldval, value), 2, 1, 1)
         elif oldval == 255 - value and CPU == 6309 and (regnum == regE or regnum == regF):
-            self.emit_op("com%s" % regName[regnum], "", comment + " (%s = ~$%02x = $%02x)" % (regName[regnum], oldval, value), 3, 2, 2)
+            self.emit_op("com%s" % regName[regnum], "", comment + " ({} = ~${:02x} = ${:02x})".format(regName[regnum], oldval, value), 3, 2, 2)
         elif oldval == 65535 - value and CPU == 6309 and (regnum == regD or regnum == regW):
-            self.emit_op("com%s" % regName[regnum], "", comment + " (%s = ~$%04x = $%04x)" % (regName[regnum], oldval, value), 3, 2, 2)
+            self.emit_op("com%s" % regName[regnum], "", comment + " ({} = ~${:04x} = ${:04x})".format(regName[regnum], oldval, value), 3, 2, 2)
         elif oldval == (256 - value) & 0xff and (regnum == regA or regnum == regB):
-            self.emit_op("neg%s" % regName[regnum], "", comment + " (%s = -$%02x = $%02x)" % (regName[regnum], oldval, value), 2, 1, 1)
+            self.emit_op("neg%s" % regName[regnum], "", comment + " ({} = -${:02x} = ${:02x})".format(regName[regnum], oldval, value), 2, 1, 1)
         elif oldval == (65536 - value) & 0xffff and CPU == 6309 and regnum == regD:
-            self.emit_op("neg%s" % regName[regnum], "", comment + " (%s = -$%04x = $%04x)" % (regName[regnum], oldval, value), 3, 2, 2)
+            self.emit_op("neg%s" % regName[regnum], "", comment + " ({} = -${:04x} = ${:04x})".format(regName[regnum], oldval, value), 3, 2, 2)
         elif oldval == (value - 1) & 0xff and (regnum == regA or regnum == regB):
-            self.emit_op("inc%s" % regName[regnum], "", comment + " (%s = $%02x+1 = $%02x)" % (regName[regnum], oldval, value), 2, 1, 1)
+            self.emit_op("inc%s" % regName[regnum], "", comment + " ({} = ${:02x}+1 = ${:02x})".format(regName[regnum], oldval, value), 2, 1, 1)
         elif oldval == (value - 1) & 0xff and CPU == 6309 and (regnum == regE or regnum == regF):
-            self.emit_op("inc%s" % regName[regnum], "", comment + " (%s = $%02x+1 = $%02x)" % (regName[regnum], oldval, value), 3, 2, 2)
+            self.emit_op("inc%s" % regName[regnum], "", comment + " ({} = ${:02x}+1 = ${:02x})".format(regName[regnum], oldval, value), 3, 2, 2)
         elif oldval == (value - 1) & 0xffff and CPU == 6309 and (regnum == regD or regnum == regW):
-            self.emit_op("inc%s" % regName[regnum], "", comment + " (%s = $%04x+1 = $%04x)" % (regName[regnum], oldval, value), 3, 2, 2)
+            self.emit_op("inc%s" % regName[regnum], "", comment + " ({} = ${:04x}+1 = ${:04x})".format(regName[regnum], oldval, value), 3, 2, 2)
         elif oldval == (value + 1) & 0xff and (regnum == regA or regnum == regB):
-            self.emit_op("dec%s" % regName[regnum], "", comment + " (%s = $%02x-1 = $%02x)" % (regName[regnum], oldval, value), 2, 1, 1)
+            self.emit_op("dec%s" % regName[regnum], "", comment + " ({} = ${:02x}-1 = ${:02x})".format(regName[regnum], oldval, value), 2, 1, 1)
         elif oldval == (value + 1) & 0xff and CPU == 6309 and (regnum == regE or regnum == regF):
-            self.emit_op("dec%s" % regName[regnum], "", comment + " (%s = $%02x-1 = $%02x)" % (regName[regnum], oldval, value), 3, 2, 2)
+            self.emit_op("dec%s" % regName[regnum], "", comment + " ({} = ${:02x}-1 = ${:02x})".format(regName[regnum], oldval, value), 3, 2, 2)
         elif oldval == (value + 1) & 0xffff and CPU == 6309 and (regnum == regD or regnum == regW):
-            self.emit_op("dec%s" % regName[regnum], "", comment + " (%s = $%04x-1 = $%04x)" % (regName[regnum], oldval, value), 3, 2, 2)
+            self.emit_op("dec%s" % regName[regnum], "", comment + " ({} = ${:04x}-1 = ${:04x})".format(regName[regnum], oldval, value), 3, 2, 2)
         else:
             # we must do a full register load instruction
             if regnum == regD:
@@ -211,7 +211,7 @@ class AsmStream:
         self.reg.SetValue(regnum, value)
 
     def gen_loadstore_indexed(self, bLoad, regLdSt, regIdx, offset, comment):
-        opcode = "%s%s" % ({False:"st",True:"ld"}[bLoad], regName[regLdSt])
+        opcode = "{}{}".format({False:"st",True:"ld"}[bLoad], regName[regLdSt])
         if offset == 0:
             operands = ",%s" % regName[regIdx]
         else:
@@ -321,13 +321,13 @@ class Sprite:
                 coords = [ int(v) for v in value[1:-1].split(',') ]
                 self.hotspot = (coords[0], coords[1])
             else:
-                print("illegal line in Sprite '%s' definition: %s" % (self.name, line))
+                print(f"illegal line in Sprite '{self.name}' definition: {line}")
         else:
             rowpix = line.split()
             if len(rowpix) == self.width:
                 self.matrix.append([-1 if val == "-" else int(val,16) for val in rowpix])
             else:
-                print("illegal line in Sprite '%s' definition: %s" % (self.name, line))
+                print(f"illegal line in Sprite '{self.name}' definition: {line}")
 
     def FinishDefinition(self):
         # check that we loaded all rows of the matrix
@@ -1524,7 +1524,7 @@ class App:
 
     def ReadInput(self):
         curSprite = None
-        spritetext = open(self.spriteFilename, "r").read()
+        spritetext = open(self.spriteFilename).read()
         for line in spritetext.split("\n"):
             # remove comments and whitespace from line
             pivot = line.find("*")
@@ -1704,27 +1704,27 @@ class App:
         for sprite in self.spriteList:
             f.write("            * %s\n" % sprite.name)
             p = str(sprite.width)
-            f.write("            fcb         %s%s* width\n" % (p, " " * (24-len(p))))
+            f.write("            fcb         {}{}* width\n".format(p, " " * (24-len(p))))
             p = str(sprite.height)
-            f.write("            fcb         %s%s* height\n" % (p, " " * (24-len(p))))
+            f.write("            fcb         {}{}* height\n".format(p, " " * (24-len(p))))
             p = str((sprite.originXcode - sprite.originXsprite)//2)
-            f.write("            fcb         %s%s* offsetX\n" % (p, " " * (24-len(p))))
+            f.write("            fcb         {}{}* offsetX\n".format(p, " " * (24-len(p))))
             p = str(-sprite.hotspot[1])
-            f.write("            fcb         %s%s* offsetY\n" % (p, " " * (24-len(p))))
+            f.write("            fcb         {}{}* offsetY\n".format(p, " " * (24-len(p))))
             f.write("            fcb         0                       * cpLeft\n")
             f.write("            fcb         0                       * cpRight\n")
             f.write("            fcb         0                       * cpErase\n")
             p = str(sprite.numSavedBytes)
-            f.write("            fdb         %s%s* storeBytes\n" % (p, " " * (24-len(p))))
+            f.write("            fdb         {}{}* storeBytes\n".format(p, " " * (24-len(p))))
             p = str(sprite.funcDraw[0].metrics.bytes)
-            f.write("            fdb         %s%s* length of drawLeft in bytes\n" % (p, " " * (24-len(p))))
+            f.write("            fdb         {}{}* length of drawLeft in bytes\n".format(p, " " * (24-len(p))))
             if sprite.hasSinglePixelPos:
                 p = str(sprite.funcDraw[1].metrics.bytes)
-                f.write("            fdb         %s%s* length of drawRight in bytes\n" % (p, " " * (24-len(p))))
+                f.write("            fdb         {}{}* length of drawRight in bytes\n".format(p, " " * (24-len(p))))
             else:
                 f.write("            fdb         0                       * length of drawRight in bytes\n")
             p = str(sprite.funcErase.metrics.bytes)
-            f.write("            fdb         %s%s* length of erase in bytes\n" % (p, " " * (24-len(p))))
+            f.write("            fdb         {}{}* length of erase in bytes\n".format(p, " " * (24-len(p))))
             f.write("            fcb         0                       * res1\n")
 
 # *************************************************************************************************

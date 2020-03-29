@@ -214,7 +214,7 @@ def parseDescription(descFilename):
         b = (iValue & 0xff)
         return ConvertRGBtoLuv(r, g, b)
 
-    with  open(descFilename, "r") as f:
+    with  open(descFilename) as f:
         imageColors = json.load(f)["images"]
         ImageColorDict = { }
         for ii, color in enumerate(imageColors):
