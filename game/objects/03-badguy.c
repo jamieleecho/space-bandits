@@ -31,7 +31,7 @@
  * lastCob) will see that the bit is set and know it has to update the
  * location.
  */
-enum DirectionMode {
+typedef enum DirectionMode {
   DirectionModeRight,
   DirectionModeChangeOnNextIterMask,
   DirectionModeLeft,
@@ -40,7 +40,7 @@ enum DirectionMode {
 
 
 byte didInit = FALSE;
-enum DirectionMode directionMode;
+DirectionMode directionMode;
 DynospriteCOB *lastCob = 0x0;
 byte numInvaders = 0;
 byte deltaY = 0;
@@ -116,7 +116,6 @@ void reset() {
 
   obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
   for (obj = findObjectByGroup(obj, MISSILE_GROUP_IDX); obj; obj = findObjectByGroup(obj, MISSILE_GROUP_IDX)) {
-    MissileObjectState *statePtr = (MissileObjectState *)(obj->statePtr);
     obj->active = OBJECT_INACTIVE;
     obj = obj + 1;
   }
@@ -154,7 +153,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   if (lastCob >= cob) {
     if (directionMode & DirectionModeChangeOnNextIterMask) {
       /* toggle direction and clear DirectionModeChangeOnNextIterMask */
-      directionMode = (directionMode + 1) & DirectionModeMask;
+      directionMode = (DirectionMode)((directionMode + 1) & DirectionModeMask);
       deltaY = DELTA_Y;
     } else {
       deltaY = 0;
@@ -175,13 +174,13 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     cob->globalX -= delta;
     if (cob->globalX <= SCREEN_LOCATION_MIN) {
       /* hit extreme left, so set DirectionModeChangeOnNextIterMask */
-      directionMode = directionMode | DirectionModeChangeOnNextIterMask;
+      directionMode = (DirectionMode)(directionMode | DirectionModeChangeOnNextIterMask);
     }
   } else {
     cob->globalX += delta;
     if (cob->globalX >= SCREEN_LOCATION_MAX) {
       /* hit extreme right, so set DirectionModeChangeOnNextIterMask */
-      directionMode = directionMode | DirectionModeChangeOnNextIterMask;
+      directionMode = (DirectionMode)(directionMode | DirectionModeChangeOnNextIterMask);
     }
   }
   return 0;

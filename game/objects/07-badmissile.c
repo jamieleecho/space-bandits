@@ -9,7 +9,7 @@
 #define GOODGUY_HALF_HEIGHT 7
 
 
-byte didNotInit = TRUE;
+static byte didNotInit = TRUE;
 
 
 void BadmissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
@@ -27,8 +27,6 @@ byte BadmissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
-  BadMissileObjectState *statePtr = (BadMissileObjectState *)(cob->statePtr);
-
   if (cob->globalY > 170) {
     cob->active = 0;
   } else {

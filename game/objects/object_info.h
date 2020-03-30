@@ -1,7 +1,7 @@
 #ifndef _object_info_h
 #define _object_info_h
 
-#include <coco.h>
+#include "coco.h"
 #include "dynosprite.h"
 
 
@@ -30,7 +30,10 @@
  * @param groupIdx groupIdx to look for
  * @return new obj or NULL
  */
-DynospriteCOB *findObjectByGroup(DynospriteCOB *obj, byte groupIdx) {
+#ifdef __cplusplus
+[[maybe_unused]]
+#endif
+static DynospriteCOB *findObjectByGroup(DynospriteCOB *obj, byte groupIdx) {
   DynospriteCOB *endObj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr + DynospriteDirectPageGlobalsPtr->Obj_NumCurrent;
   for (; obj<endObj; ++obj) {
     if (obj->groupIdx == groupIdx) {

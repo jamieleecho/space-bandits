@@ -36,7 +36,6 @@
                                                 ]]];
 }
 
-
 - (void)touchDownAtPoint:(CGPoint)pos {
     SKShapeNode *n = [_spinnyNode copy];
     n.position = pos;
@@ -74,13 +73,14 @@
 - (void)mouseDown:(NSEvent *)theEvent {
     [self touchDownAtPoint:[theEvent locationInNode:self]];
 }
+
 - (void)mouseDragged:(NSEvent *)theEvent {
     [self touchMovedToPoint:[theEvent locationInNode:self]];
 }
+
 - (void)mouseUp:(NSEvent *)theEvent {
     [self touchUpAtPoint:[theEvent locationInNode:self]];
 }
-
 
 -(void)update:(CFTimeInterval)currentTime {
     // Called before each frame is rendered

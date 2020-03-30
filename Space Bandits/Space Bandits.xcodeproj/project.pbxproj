@@ -64,6 +64,18 @@
 		7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EED6F23BD0EB700804C26 /* DSResourceController.m */; };
 		7D7EED7923BD626500804C26 /* Main.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED7823BD626500804C26 /* Main.storyboardc */; };
 		7D7EED7A23BD626500804C26 /* Main.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED7823BD626500804C26 /* Main.storyboardc */; };
+		7D8022942431640F00496138 /* DSObjectRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8022932431640F00496138 /* DSObjectRegistry.m */; };
+		7D8022952431640F00496138 /* DSObjectRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8022932431640F00496138 /* DSObjectRegistry.m */; };
+		7D8022962431640F00496138 /* DSObjectRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8022932431640F00496138 /* DSObjectRegistry.m */; };
+		7D8022992431656C00496138 /* DSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8022982431656C00496138 /* DSObject.m */; };
+		7D80229A2431656C00496138 /* DSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8022982431656C00496138 /* DSObject.m */; };
+		7D80229B2431656C00496138 /* DSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8022982431656C00496138 /* DSObject.m */; };
+		7D80229E24316BB700496138 /* DSDirectPageGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D80229D24316BB700496138 /* DSDirectPageGlobals.m */; };
+		7D80229F24316BB700496138 /* DSDirectPageGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D80229D24316BB700496138 /* DSDirectPageGlobals.m */; };
+		7D8022A024316BB700496138 /* DSDirectPageGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D80229D24316BB700496138 /* DSDirectPageGlobals.m */; };
+		7D8022A42431791C00496138 /* DSSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8022A32431791C00496138 /* DSSound.m */; };
+		7D8022A52431791C00496138 /* DSSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8022A32431791C00496138 /* DSSound.m */; };
+		7D8022A62431791C00496138 /* DSSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8022A32431791C00496138 /* DSSound.m */; };
 		7DA1789C2431528600AE39D8 /* sprites in Resources */ = {isa = PBXBuildFile; fileRef = 7DA1789B2431528600AE39D8 /* sprites */; };
 		7DA178A02431529D00AE39D8 /* tiles in Resources */ = {isa = PBXBuildFile; fileRef = 7DA1789F2431529D00AE39D8 /* tiles */; };
 		7DA178B82431552E00AE39D8 /* 03-badguy.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178AE2431552D00AE39D8 /* 03-badguy.c */; };
@@ -151,6 +163,15 @@
 		7D7EED6E23BD0EB700804C26 /* DSResourceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSResourceController.h; sourceTree = "<group>"; };
 		7D7EED6F23BD0EB700804C26 /* DSResourceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSResourceController.m; sourceTree = "<group>"; };
 		7D7EED7823BD626500804C26 /* Main.storyboardc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.storyboardc; path = Main.storyboardc; sourceTree = "<group>"; };
+		7D8022922431640F00496138 /* DSObjectRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSObjectRegistry.h; sourceTree = "<group>"; };
+		7D8022932431640F00496138 /* DSObjectRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectRegistry.m; sourceTree = "<group>"; };
+		7D8022972431656C00496138 /* DSObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSObject.h; sourceTree = "<group>"; };
+		7D8022982431656C00496138 /* DSObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObject.m; sourceTree = "<group>"; };
+		7D80229C24316BB700496138 /* DSDirectPageGlobals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSDirectPageGlobals.h; sourceTree = "<group>"; };
+		7D80229D24316BB700496138 /* DSDirectPageGlobals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDirectPageGlobals.m; sourceTree = "<group>"; };
+		7D8022A124316C5300496138 /* DynospriteDirectPageGlobals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynospriteDirectPageGlobals.h; sourceTree = "<group>"; };
+		7D8022A22431791C00496138 /* DSSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSound.h; sourceTree = "<group>"; };
+		7D8022A32431791C00496138 /* DSSound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSound.m; sourceTree = "<group>"; };
 		7DA1789B2431528600AE39D8 /* sprites */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sprites; path = ../../game/sprites; sourceTree = "<group>"; };
 		7DA1789F2431529D00AE39D8 /* tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tiles; path = ../../game/tiles; sourceTree = "<group>"; };
 		7DA178AD2431552D00AE39D8 /* 04-ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "04-ship.h"; path = "../../game/objects/04-ship.h"; sourceTree = "<group>"; };
@@ -229,6 +250,8 @@
 				7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */,
 				7DC4E7F222FFC33A00AE8AB4 /* DSCocoJoystickController.h */,
 				7DC4E7F322FFC33A00AE8AB4 /* DSCocoJoystickController.m */,
+				7D80229C24316BB700496138 /* DSDirectPageGlobals.h */,
+				7D80229D24316BB700496138 /* DSDirectPageGlobals.m */,
 				52F1208C21D7DD63008A7900 /* Actions.sks */,
 				52CF9D3A2288A56E0054EAD2 /* DSGameScene.h */,
 				52CF9D3B2288A56E0054EAD2 /* DSGameScene.m */,
@@ -250,12 +273,19 @@
 				52E7604521D7EF440001F3A0 /* DSLevel.m */,
 				52E7605C21D802A20001F3A0 /* DSLevelRegistry.h */,
 				52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */,
+				7D8022972431656C00496138 /* DSObject.h */,
+				7D8022982431656C00496138 /* DSObject.m */,
+				7D8022922431640F00496138 /* DSObjectRegistry.h */,
+				7D8022932431640F00496138 /* DSObjectRegistry.m */,
 				52A90E3221E2E8A700CC2643 /* DSConfigFileParser.h */,
 				52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */,
 				52CF9D402288FB2B0054EAD2 /* DSWindowController.h */,
 				52CF9D412288FB2B0054EAD2 /* DSWindowController.m */,
 				7D7EED6E23BD0EB700804C26 /* DSResourceController.h */,
 				7D7EED6F23BD0EB700804C26 /* DSResourceController.m */,
+				7D8022A124316C5300496138 /* DynospriteDirectPageGlobals.h */,
+				7D8022A22431791C00496138 /* DSSound.h */,
+				7D8022A32431791C00496138 /* DSSound.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -512,9 +542,13 @@
 				7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */,
 				7DC4E7F622FFC33A00AE8AB4 /* DSCocoJoystickController.m in Sources */,
 				52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
+				7D80229B2431656C00496138 /* DSObject.m in Sources */,
+				7D8022A62431791C00496138 /* DSSound.m in Sources */,
+				7D8022A024316BB700496138 /* DSDirectPageGlobals.m in Sources */,
 				52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */,
 				521A84B321FE07A8006120E8 /* DSTransitionSceneControllerTest.m in Sources */,
 				521A84AA21FE0748006120E8 /* DSTransitionScene.m in Sources */,
+				7D8022962431640F00496138 /* DSObjectRegistry.m in Sources */,
 				52A90E3721E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				525FC92122888202007F4793 /* DSSharedTransitionSceneController.m in Sources */,
 			);
@@ -524,16 +558,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D8022942431640F00496138 /* DSObjectRegistry.m in Sources */,
+				7D80229E24316BB700496138 /* DSDirectPageGlobals.m in Sources */,
 				527E7ACD21F016B90013E66A /* DSInitScene.m in Sources */,
 				7DA178BB2431552E00AE39D8 /* 05-missile.c in Sources */,
 				524402DF21ED65CF00B02D38 /* DSTransitionScene.m in Sources */,
 				7D3110EE22FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
+				7D8022A42431791C00496138 /* DSSound.m in Sources */,
 				52F0574D2216323400CDC1DD /* DSViewController.m in Sources */,
 				521A84A821FE02BE006120E8 /* DSTransitionSceneController.m in Sources */,
 				7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				52CF9D3D2288A56E0054EAD2 /* DSGameScene.m in Sources */,
 				525FC91F22888202007F4793 /* DSSharedTransitionSceneController.m in Sources */,
 				7D7EED7023BD0EB700804C26 /* DSResourceController.m in Sources */,
+				7D8022992431656C00496138 /* DSObject.m in Sources */,
 				7DC4E7F422FFC33A00AE8AB4 /* DSCocoJoystickController.m in Sources */,
 				52E7605E21D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
@@ -556,6 +594,7 @@
 				52E7606021D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				527E7ACE21F016B90013E66A /* DSInitScene.m in Sources */,
 				52F0574E2216323400CDC1DD /* DSViewController.m in Sources */,
+				7D80229A2431656C00496138 /* DSObject.m in Sources */,
 				521A84A921FE02BE006120E8 /* DSTransitionSceneController.m in Sources */,
 				7DC4E7F022FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				525FC92022888202007F4793 /* DSSharedTransitionSceneController.m in Sources */,
@@ -563,7 +602,10 @@
 				52A90E4521E2F23000CC2643 /* DSAppDelegate.m in Sources */,
 				52A90E3621E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				7D3110EF22FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
+				7D8022952431640F00496138 /* DSObjectRegistry.m in Sources */,
+				7D8022A52431791C00496138 /* DSSound.m in Sources */,
 				52CF9D432288FB2B0054EAD2 /* DSWindowController.m in Sources */,
+				7D80229F24316BB700496138 /* DSDirectPageGlobals.m in Sources */,
 				7DC4E7F522FFC33A00AE8AB4 /* DSCocoJoystickController.m in Sources */,
 				52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */,
 				52F120B121D7DD65008A7900 /* DynospriteUITests.m in Sources */,

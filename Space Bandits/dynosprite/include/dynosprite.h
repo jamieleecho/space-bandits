@@ -9,7 +9,25 @@
 #ifndef dynosprite_h
 #define dynosprite_h
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "coco.h"
+#include "DynospriteDirectPageGlobals.h"
+
+
+/** Joystick 1 button 1 mask */
+#define Joy1Button1 1
+
+/** Joystick 2 button 1 mask */
+#define Joy2Button1 2
+
+/** Joystick 1 button 2 mask */
+#define Joy1Button2 4
+
+/** Joystick 2 button 2 mask */
+#define Joy2Button2 8
 
 
 /** DynospriteCOB.active flag indicating item inactive */
@@ -23,18 +41,6 @@
 
 /** DynospriteCOB.active flag indicating to draw and update item */
 #define OBJECT_ACTIVE 3
-
-
-typedef struct DynospriteCOB {
-    byte groupIdx;
-    byte objectIdx;
-    byte active;
-    byte res1;
-    unsigned globalX;
-    unsigned globalY;
-    byte *statePtr;
-    byte *odtPtr;
-} DynospriteCOB;
 
 
 typedef struct DynospriteODT {
@@ -52,5 +58,14 @@ typedef struct DynospriteODT {
 int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const char *file);
 
 #define RegisterLevel(init, calcuateBackgroundNewXY) static int levelInit = DSLevelRegistryRegister(init, calcuateBackgroundNewXY, __FILE__)
+#define RegisterObject(init, reactivate, update)
+
+extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
+
+void PlaySound(int soundIndex);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* dynosprite_h */

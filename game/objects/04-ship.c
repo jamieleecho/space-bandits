@@ -2,7 +2,7 @@
 #include "object_info.h"
 
 
-byte didNotInit = TRUE;
+static byte didNotInit = TRUE;
 DynospriteCOB *missiles[3];
 
 

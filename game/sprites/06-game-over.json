@@ -9,6 +9,6 @@
   "Sprites": [{
     "Name": "GameOver",
     "Location": [51, 317],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": false
   }]
 }

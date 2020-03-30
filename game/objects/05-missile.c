@@ -9,7 +9,7 @@
 #define BADGUY_HALF_HEIGHT 7
 
 
-byte didNotInit = TRUE;
+static byte didNotInit = TRUE;
 DynospriteCOB *badGuys[NUM_BAD_GUYS];
 DynospriteCOB **endBadGuys;
 
@@ -36,7 +36,6 @@ byte MissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 void checkHitBadGuy(DynospriteCOB *cob) {
-  DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
   int xx0 = cob->globalX - MISSILE_HALF_WIDTH - BADGUY_HALF_WIDTH;
   int xx1 = cob->globalX + MISSILE_HALF_WIDTH + BADGUY_HALF_WIDTH;
   int yy0 = cob->globalY - MISSILE_HEIGHT - BADGUY_HALF_HEIGHT;
@@ -59,8 +58,6 @@ void checkHitBadGuy(DynospriteCOB *cob) {
 
 
 byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
-  MissileObjectState *statePtr = (MissileObjectState *)(cob->statePtr);
-
   if (cob->globalY < 10) {
     cob->active = 0;
   } else {
