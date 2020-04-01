@@ -64,7 +64,7 @@ const static BOOL JOYSTICK_BUTTON_DEFAULT_PRESSED = NO;
     return self.name;
 }
 
-BOOL readJoystickButton(SDL_Joystick *joystick, int button) {
+static BOOL readJoystickButton(SDL_Joystick *joystick, int button) {
     return SDL_JoystickGetButton(joystick, 0) != 0;
 }
 
