@@ -45,6 +45,7 @@
 		52CF9D3E2288A56E0054EAD2 /* DSGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52CF9D3C2288A56E0054EAD2 /* DSGameScene.sks */; };
 		52CF9D422288FB2B0054EAD2 /* DSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF9D412288FB2B0054EAD2 /* DSWindowController.m */; };
 		52CF9D432288FB2B0054EAD2 /* DSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF9D412288FB2B0054EAD2 /* DSWindowController.m */; };
+		52DF473124355071008DC63F /* DSCoCoKeyboardJoystickTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */; };
 		52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
 		52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7604521D7EF440001F3A0 /* DSLevel.m */; };
 		52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605821D7F57B0001F3A0 /* DSLevelTest.m */; };
@@ -174,6 +175,7 @@
 		52CF9D3C2288A56E0054EAD2 /* DSGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DSGameScene.sks; sourceTree = "<group>"; };
 		52CF9D402288FB2B0054EAD2 /* DSWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSWindowController.h; sourceTree = "<group>"; };
 		52CF9D412288FB2B0054EAD2 /* DSWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSWindowController.m; sourceTree = "<group>"; };
+		52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoKeyboardJoystickTest.m; sourceTree = "<group>"; };
 		52E7603721D7EC8F0001F3A0 /* coco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = coco.h; sourceTree = "<group>"; };
 		52E7603821D7ECA70001F3A0 /* dynosprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dynosprite.h; sourceTree = "<group>"; };
 		52E7604421D7EF440001F3A0 /* DSLevel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevel.h; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				521A849F21FCF626006120E8 /* JSONBad */,
 				521A84B221FE07A8006120E8 /* DSTransitionSceneControllerTest.m */,
 				5284F5E424340FE300B2C2C5 /* DSCocoJoystickTest.m */,
+				52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				521A84AF21FE0748006120E8 /* DSInitScene.m in Sources */,
 				52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */,
 				5284F5E524340FE300B2C2C5 /* DSCocoJoystickTest.m in Sources */,
+				52DF473124355071008DC63F /* DSCoCoKeyboardJoystickTest.m in Sources */,
 				7D3110F022FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
 				521A849A21FCEE06006120E8 /* DSConfigFileParserTest.m in Sources */,
 				521A84AC21FE0748006120E8 /* DSTransitionSceneController.m in Sources */,

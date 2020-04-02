@@ -23,6 +23,7 @@
 
 - (void)tearDown {
     [_target close];
+    [_target open];
 }
 
 - (void)testAvailableJoysticksNotHorriblyBroken {

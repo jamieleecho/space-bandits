@@ -22,7 +22,7 @@ const static unsigned char JOYSTICK_AXIS_DEFAULT_POSITION = 31;
 
 - (instancetype)init {
     if (self = [super init]) {
-        _xAxisPosition = _yAxisPosition = 31;
+        _xAxisPosition = _yAxisPosition = JOYSTICK_AXIS_DEFAULT_POSITION;
         _button0Pressed = _button1Pressed = NO;
         _leftKeyIsPressed = _rightKeyIsPressed = _upKeyIsPressed = _downKeyIsPressed = NO;
     }
@@ -31,7 +31,7 @@ const static unsigned char JOYSTICK_AXIS_DEFAULT_POSITION = 31;
 
 - (void)handleKeyDown:(NSEvent *)event {
     NSString *theArrow = [event charactersIgnoringModifiers];
-    for(NSUInteger ii=0; ii!=theArrow.length; ii++) {
+    for(NSUInteger ii=0; ii != theArrow.length; ii++) {
         const unichar keyChar = [theArrow characterAtIndex:ii];
         switch (keyChar) {
             case NSUpArrowFunctionKey:
@@ -48,7 +48,7 @@ const static unsigned char JOYSTICK_AXIS_DEFAULT_POSITION = 31;
                 break;
             case NSDownArrowFunctionKey:
                 _yAxisPosition = JOYSTICK_AXIS_MAX_POSITION;
-                _leftKeyIsPressed = YES;
+                _downKeyIsPressed = YES;
                 break;
             case ' ':
                 _button0Pressed = YES;
@@ -62,7 +62,7 @@ const static unsigned char JOYSTICK_AXIS_DEFAULT_POSITION = 31;
 
 - (void)handleKeyUp:(NSEvent *)event {
     NSString *theArrow = [event charactersIgnoringModifiers];
-    for(NSUInteger ii=0; ii!=theArrow.length; ii++) {
+    for(NSUInteger ii=0; ii != theArrow.length; ii++) {
         const unichar keyChar = [theArrow characterAtIndex:ii];
         switch (keyChar) {
             case NSUpArrowFunctionKey:
@@ -71,15 +71,15 @@ const static unsigned char JOYSTICK_AXIS_DEFAULT_POSITION = 31;
                 break;
             case NSLeftArrowFunctionKey:
                 _xAxisPosition = _rightKeyIsPressed ? JOYSTICK_AXIS_MAX_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
-                _rightKeyIsPressed = NO;
+                _leftKeyIsPressed = NO;
                 break;
             case NSRightArrowFunctionKey:
                 _xAxisPosition = _leftKeyIsPressed ? JOYSTICK_AXIS_MIN_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
-                _upKeyIsPressed = NO;
+                _rightKeyIsPressed = NO;
                 break;
             case NSDownArrowFunctionKey:
-                _yAxisPosition = _upKeyIsPressed ? JOYSTICK_AXIS_MAX_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
-                _upKeyIsPressed = NO;
+                _yAxisPosition = _upKeyIsPressed ? JOYSTICK_AXIS_MIN_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
+                _downKeyIsPressed = NO;
                 break;
             case ' ':
                 _button0Pressed = NO;
