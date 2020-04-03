@@ -6,11 +6,11 @@
 //  Copyright © 2019 Jamie Cho. All rights reserved.
 //
 
-#import "DSCocoJoystickController.h"
+#import "DSCoCoJoystickController.h"
 #import "DSCoCoJoystick.h"
 
 
-@implementation DSCocoJoystickController
+@implementation DSCoCoJoystickController
 
 - (instancetype)init {
     return [self initWithKeyboardJoystick:[[DSCoCoKeyboardJoystick alloc] init] hardwareJoystickClass:[DSCoCoJoystick class]];
@@ -20,7 +20,8 @@
     if (self = [super init]) {
         _hardwareJoystickClass = hardwareJoystickClass;
         _joystick =_keyboardJoystick = keyboardJoystick;
-        NSAssert([_joystick open] == YES, @"Failed to open DSCoCoKeyboardJoystick");
+        BOOL keyboardJoystickDidOpen = [_joystick open];
+        NSAssert(keyboardJoystickDidOpen == YES, @"Failed to open DSCoCoKeyboardJoystick");
     }
     return self;
 }
@@ -33,6 +34,7 @@
         for(DSCoCoJoystick *joystick in [_hardwareJoystickClass availableJoysticks]) {
             if ([joystick open]) {
                 _joystick = joystick;
+                break;
             }
         }
     } else {
@@ -55,7 +57,7 @@
 }
 
 - (void)handleKeyUp:(NSEvent *)event {
-    [_keyboardJoystick handleKeyDown:event];
+    [_keyboardJoystick handleKeyUp:event];
 }
 
 - (void)sample {

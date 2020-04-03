@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DSTransitionSceneControllerProtocol.h"
-#import "DSCocoJoystickController.h"
+#import "DSCoCoJoystickController.h"
 #import "DSResourceController.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property NSArray *images;
 @property (weak, nonatomic) IBOutlet DSResourceController *resourceController;
-@property (weak, nonatomic) IBOutlet DSCocoJoystickController *joystickController;
+@property (weak, nonatomic) IBOutlet DSCoCoJoystickController *joystickController;
 
 + (NSColor *)colorFromRGBString:(NSString *)color;
 

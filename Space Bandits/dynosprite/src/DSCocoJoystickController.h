@@ -1,5 +1,5 @@
 //
-//  DSCocoJoystickController.h
+//  DSCocCJoystickController.h
 //  Space Bandits
 //
 //  Created by Jamie Cho on 8/10/19.
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSCocoJoystickController : NSObject {
+@interface DSCoCoJoystickController : NSObject {
     NSObject<DSCoCoJoystickProtocol> *_joystick;
     DSCoCoKeyboardJoystick *_keyboardJoystick;
     Class _hardwareJoystickClass;

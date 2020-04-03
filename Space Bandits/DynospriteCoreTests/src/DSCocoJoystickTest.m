@@ -1,5 +1,5 @@
 //
-//  DSCocoJoystickTest.m
+//  DSCoCoJoystickTest.m
 //  DynospriteCoreTests
 //
 //  Created by Jamie Cho on 3/31/20.
@@ -9,13 +9,13 @@
 #import <XCTest/XCTest.h>
 #import "DSCoCoJoystick.h"
 
-@interface DSCocoJoystickTest : XCTestCase {
+@interface DSCoCoJoystickTest : XCTestCase {
     DSCoCoJoystick *_target;
 }
 
 @end
 
-@implementation DSCocoJoystickTest
+@implementation DSCoCoJoystickTest
 
 - (void)setUp {
     _target = [[DSCoCoJoystick alloc] initWithJoystickIndex:65535];

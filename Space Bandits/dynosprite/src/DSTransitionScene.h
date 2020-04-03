@@ -7,7 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "DSCocoJoystickController.h"
+#import "DSCoCoJoystickController.h"
 #import "DSResourceController.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSColor *progressBarColor;
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
 @property (strong, nonatomic)  DSResourceController *resourceController;
-@property (strong, nonatomic) DSCocoJoystickController *joystickController;
+@property (strong, nonatomic) DSCoCoJoystickController *joystickController;
 @property (nonatomic) BOOL isDone;
 
 - (id)init;
