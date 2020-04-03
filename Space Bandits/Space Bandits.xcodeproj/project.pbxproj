@@ -33,6 +33,7 @@
 		5279A4E72436B83B00A51D98 /* DSCoCoJoystickControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */; };
 		5279A4E92436BC7900A51D98 /* OCMock.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5279A4EA2436BC9200A51D98 /* OCMock.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5279A4EC243757D000A51D98 /* DSDirectPageGlobalsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */; };
 		527E7ACD21F016B90013E66A /* DSInitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 527E7ACC21F016B90013E66A /* DSInitScene.m */; };
 		527E7ACE21F016B90013E66A /* DSInitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 527E7ACC21F016B90013E66A /* DSInitScene.m */; };
 		5284F5E524340FE300B2C2C5 /* DSCoCoJoystickTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */; };
@@ -172,6 +173,7 @@
 		525FC91E22888202007F4793 /* DSSharedTransitionSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedTransitionSceneController.m; sourceTree = "<group>"; };
 		5279A4E32436B7AF00A51D98 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickControllerTest.m; sourceTree = "<group>"; };
+		5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDirectPageGlobalsTest.m; sourceTree = "<group>"; };
 		527E7ACC21F016B90013E66A /* DSInitScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInitScene.m; sourceTree = "<group>"; };
 		5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickTest.m; sourceTree = "<group>"; };
 		52A90E3221E2E8A700CC2643 /* DSConfigFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSConfigFileParser.h; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */,
 				52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */,
 				5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */,
+				5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				7D8022962431640F00496138 /* DSObjectRegistry.m in Sources */,
 				52A90E3721E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				525FC92122888202007F4793 /* DSSharedTransitionSceneController.m in Sources */,
+				5279A4EC243757D000A51D98 /* DSDirectPageGlobalsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

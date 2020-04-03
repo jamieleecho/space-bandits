@@ -29,4 +29,8 @@ static DSDirectPageGlobals *_sharedInstance;
     return self;
 }
 
+- (DynospriteDirectPageGlobals *)globals {
+    return _globals;
+}
+
 @end
