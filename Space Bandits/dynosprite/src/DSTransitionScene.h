@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSColor *foregroundColor;
 @property (strong, nonatomic) NSColor *progressBarColor;
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
-@property (strong, nonatomic)  DSResourceController *resourceController;
+@property (strong, nonatomic) DSResourceController *resourceController;
 @property (strong, nonatomic) DSCoCoJoystickController *joystickController;
 @property (nonatomic) BOOL isDone;
 

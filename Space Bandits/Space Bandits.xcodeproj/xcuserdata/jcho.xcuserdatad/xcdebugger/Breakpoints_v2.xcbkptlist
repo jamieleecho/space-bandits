@@ -24,23 +24,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0A789E19-F172-47D1-A5E0-4B0C75BADF20"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "dynosprite/src/DSTransitionScene.m"
-            timestampString = "579408051.294345"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "-addLabelWithText:atPosition:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5F9D46E0-1CA3-4BD6-B477-0E8C1BCCB1E6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"

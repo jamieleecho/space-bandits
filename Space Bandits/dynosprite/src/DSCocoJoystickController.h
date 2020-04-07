@@ -1,5 +1,5 @@
 //
-//  DSCocCJoystickController.h
+//  DSCoCoJoystickController.h
 //  Space Bandits
 //
 //  Created by Jamie Cho on 8/10/19.

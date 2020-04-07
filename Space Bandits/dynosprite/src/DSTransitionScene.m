@@ -36,7 +36,8 @@ const float DefaultFontSize = 12.0f;
 
 - (void)setBackgroundImageName:(NSString *)backgroundImageName {
     _backgroundImageName = backgroundImageName;
-    _backgroundImage.texture = [SKTexture textureWithImageNamed:[_resourceController imageWithName:backgroundImageName]];
+    NSString *image = [_resourceController imageWithName:backgroundImageName];
+    _backgroundImage.texture = [SKTexture textureWithImageNamed:image];
 }
 
 - (id)init {
@@ -47,7 +48,6 @@ const float DefaultFontSize = 12.0f;
 
         self.size = CGSizeMake(320, 200);
         self.anchorPoint = CGPointMake(0, 1);
-        self.yScale = -1;
         self.scaleMode = SKSceneScaleModeAspectFit;
         
         _backgroundImageName = @"";
@@ -55,8 +55,10 @@ const float DefaultFontSize = 12.0f;
         [self configureBackgroundImage:_backgroundImage];
         [self addChild:_backgroundImage];
         
-        [self addObserver:self forKeyPath:@"resourceController" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
         _labelToPoint = [[NSMapTable alloc] init];
+        [self addObserver:self forKeyPath:@"resourceController" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+        [self addObserver:self forKeyPath:@"backgroundColor" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+        [self addObserver:self forKeyPath:@"foregroundColor" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     }
     return self;
 }
@@ -133,6 +135,10 @@ const float DefaultFontSize = 12.0f;
                 [newController addObserver:self forKeyPath:@"hiresMode" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
             }
             [self updateDisplayForResolutionChange];
+        } else if ([keyPath isEqualToString:@"backgroundColor"] || [keyPath isEqualToString:@"foregroundColor"]) {
+            for(SKLabelNode *label in self.labels) {
+                [self configureLabel:label];
+            }
         }
     } else if (object == _resourceController) {
         if ([keyPath isEqualToString:@"hiresMode"]) {
