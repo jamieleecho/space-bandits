@@ -1,6 +1,6 @@
 //
 //  DSCoCoJoystickController.m
-//  Space Bandits
+//  dynosprite
 //
 //  Created by Jamie Cho on 8/10/19.
 //  Copyright © 2019 Jamie Cho. All rights reserved.

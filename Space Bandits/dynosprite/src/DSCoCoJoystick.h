@@ -1,6 +1,6 @@
 //
 //  DSCoCoJoystick.h
-//  JoystickTest3
+//  dynosprite
 //
 //  Created by Jamie Cho on 8/9/19.
 //  Copyright © 2019 Jamie Cho. All rights reserved.

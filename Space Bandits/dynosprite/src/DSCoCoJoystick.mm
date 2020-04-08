@@ -1,6 +1,6 @@
 //
-//  CoCoJoystick.mm
-//  JoystickTest3
+//  DSCoCoJoystick.mm
+//  dynosprite
 //
 //  Created by Jamie Cho on 8/9/19.
 //  Copyright © 2019 Jamie Cho. All rights reserved.

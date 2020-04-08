@@ -1,6 +1,6 @@
 //
 //  InitScene.h
-//  Space Bandits
+//  dynosprite
 //
 //  Created by Jamie Cho on 1/6/19.
 //  Copyright © 2019 Jamie Cho. All rights reserved.

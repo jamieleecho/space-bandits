@@ -1,6 +1,6 @@
 //
 //  DSResourceController.m
-//  Space Bandits
+//  dynosprite
 //
 //  Created by Jamie Cho on 1/1/20.
 //  Copyright © 2020 Jamie Cho. All rights reserved.
