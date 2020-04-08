@@ -29,6 +29,7 @@
 		525FC91F22888202007F4793 /* DSSharedTransitionSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedTransitionSceneController.m */; };
 		525FC92022888202007F4793 /* DSSharedTransitionSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedTransitionSceneController.m */; };
 		525FC92122888202007F4793 /* DSSharedTransitionSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedTransitionSceneController.m */; };
+		52610C89243D64390052EE4F /* forest-hires.png in Resources */ = {isa = PBXBuildFile; fileRef = 52610C88243D64390052EE4F /* forest-hires.png */; };
 		5279A4E42436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E52436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E72436B83B00A51D98 /* DSCoCoJoystickControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */; };
@@ -167,13 +168,14 @@
 		521A84A621FE02BE006120E8 /* DSTransitionSceneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionSceneController.h; sourceTree = "<group>"; };
 		521A84A721FE02BE006120E8 /* DSTransitionSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneController.m; sourceTree = "<group>"; };
 		521A84B221FE07A8006120E8 /* DSTransitionSceneControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneControllerTest.m; sourceTree = "<group>"; };
-		52229FAC2438BCBB0018A082 /* forest.png */ = {isa = PBXFileReference; explicitFileType = image.png; path = forest.png; sourceTree = "<group>"; };
+		52229FAC2438BCBB0018A082 /* forest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forest.png; sourceTree = "<group>"; };
 		5227E72021E2DDA40092C947 /* DSInitScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSInitScene.h; sourceTree = "<group>"; };
 		524402DD21ED65CF00B02D38 /* DSTransitionScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionScene.h; sourceTree = "<group>"; };
 		524402DE21ED65CF00B02D38 /* DSTransitionScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionScene.m; sourceTree = "<group>"; };
 		525FC91A22887A13007F4793 /* DSTransitionSceneControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionSceneControllerProtocol.h; sourceTree = "<group>"; };
 		525FC91D22888202007F4793 /* DSSharedTransitionSceneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSharedTransitionSceneController.h; sourceTree = "<group>"; };
 		525FC91E22888202007F4793 /* DSSharedTransitionSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedTransitionSceneController.m; sourceTree = "<group>"; };
+		52610C88243D64390052EE4F /* forest-hires.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forest-hires.png"; sourceTree = "<group>"; };
 		5279A4E32436B7AF00A51D98 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickControllerTest.m; sourceTree = "<group>"; };
 		5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDirectPageGlobalsTest.m; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				52F120B021D7DD65008A7900 /* DSTransitionSceneTest.m */,
 				52F120B221D7DD65008A7900 /* Info.plist */,
 				52229FAC2438BCBB0018A082 /* forest.png */,
+				52610C88243D64390052EE4F /* forest-hires.png */,
 			);
 			path = DynospriteUITests;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 			files = (
 				52229FAD2438BCBB0018A082 /* forest.png in Resources */,
 				52A90E4621E2F23900CC2643 /* Actions.sks in Resources */,
+				52610C89243D64390052EE4F /* forest-hires.png in Resources */,
 				52C3FCE721EBD9C900AE268B /* Fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

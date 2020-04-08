@@ -94,6 +94,7 @@
     OCMStub([_resourceController fontForDisplay]).andReturn(@"Courier");
     SKLabelNode *label = [_target addLabelWithText:@"Hello World" atPosition:CGPointMake(100, 50)];
     XCTAssertEqualObjects(label.text, @"Hello World");
+    XCTAssert(label.fontName, @"Courier");
     XCTAssertEqual(label.horizontalAlignmentMode, SKLabelHorizontalAlignmentModeLeft);
     XCTAssertEqual(label.verticalAlignmentMode, SKLabelVerticalAlignmentModeTop);
     XCTAssertTrue(CGPointEqualToPoint(label.position, NSMakePoint(0, 0)));
@@ -115,7 +116,6 @@
     _target.backgroundImageName = backgroundImageName;
     CGImageRef backgroundCGImage = ((SKSpriteNode *)(_target.children[0])).texture.CGImage;
     NSImage *backgroundImage = [DSTransitionSceneTest convertToNSImage:backgroundCGImage];
-
     XCTAssertTrue([DSTransitionSceneTest image:image isSameAsImage:backgroundImage]);
     XCTAssertEqual(_target.backgroundImageName, backgroundImageName);
 }
@@ -125,11 +125,6 @@
     XCTAssertFalse(_target.isDone);
     _target.isDone = YES;
     XCTAssertTrue(_target.isDone);
-
-    //@property (strong, nonatomic) NSColor *foregroundColor;
-    //@property (strong, nonatomic) NSColor *progressBarColor;
-    //@property (strong, readonly) NSArray<SKLabelNode *> *labels;
-    //@property (strong, nonatomic) DSResourceController *resourceController;
 }
 
 - (void)testSetJoystickControler {
@@ -156,6 +151,89 @@
     _target.backgroundColor = NSColor.brownColor;
     XCTAssertTrue([DSTransitionSceneTest color:_target.backgroundColor isSameAs:NSColor.brownColor]);
     XCTAssertTrue([DSTransitionSceneTest color:_target.backgroundColor isSameAs:((SKSpriteNode *)(_target.labels[0].parent)).color]);
+}
+
+- (void)testLabels {
+    OCMStub([_resourceController fontForDisplay]).andReturn(@"Courier");
+    SKLabelNode *label1 = [_target addLabelWithText:@"Test1" atPosition:CGPointMake(100, 200)];
+    SKLabelNode *label2 = [_target addLabelWithText:@"Test2" atPosition:CGPointMake(100, 200)];
+    XCTAssertEqual(_target.labels.count, 2);
+    XCTAssertEqual(_target.labels[0], label1);
+    XCTAssertEqual(_target.labels[1], label2);
+}
+
+- (void)testUpdatingResourceControllerUpdatesGetter {
+    id newResourceController = OCMClassMock(DSResourceController.class);
+    _target.resourceController = newResourceController;
+    XCTAssertEqual(_target.resourceController, newResourceController);
+}
+
+- (void)testUpdatingResourceControllerUpdatesObservers {
+    id newResourceController = OCMClassMock(DSResourceController.class);
+    _target.resourceController = newResourceController;
+    OCMVerify([_resourceController removeObserver:_target forKeyPath:@"hiresMode"]);
+    OCMVerify([newResourceController addObserver:_target forKeyPath:@"hiresMode" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil]);
+}
+
+- (void)testUpdatingResourceControllerUpdatesDisplay {
+    // Setup a basic display
+    OCMStub([_resourceController fontForDisplay]).andReturn(@"Courier");
+    _target.foregroundColor = NSColor.purpleColor;
+    SKLabelNode *label = [_target addLabelWithText:@"Test" atPosition:CGPointMake(100, 200)];
+    NSString *backgroundImageName = @"forest";
+    NSString *resourceImagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:backgroundImageName];
+    OCMStub([_resourceController imageWithName:backgroundImageName]).andReturn(resourceImagePath);
+    _target.backgroundImageName = backgroundImageName;
+
+    // Update the resource controller
+    id newResourceController = OCMClassMock(DSResourceController.class);
+    NSString *hiresBackgroundImageName = @"forest-hires";
+    OCMStub([newResourceController fontForDisplay]).andReturn(@"Monaco");
+    NSString *hiresResourceImagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:hiresBackgroundImageName];
+    OCMStub([newResourceController imageWithName:backgroundImageName]).andReturn(hiresResourceImagePath);
+    _target.resourceController = newResourceController;
+    
+    // Verify that the background was updated
+    CGImageRef hiresBackgroundCGImage = ((SKSpriteNode *)(_target.children[0])).texture.CGImage;
+    NSImage *hiresBackgroundImage = [DSTransitionSceneTest convertToNSImage:hiresBackgroundCGImage];
+    NSImage *hiresImage = [[NSImage alloc] initWithContentsOfFile:hiresResourceImagePath];
+    XCTAssertTrue([DSTransitionSceneTest image:hiresImage isSameAsImage:hiresBackgroundImage]);
+    
+    // Verify that the font was updated
+    XCTAssertEqual(label.fontSize, 12.80000114440918);
+    SKSpriteNode *background = (SKSpriteNode *)label.parent;
+    XCTAssert(label.fontName, @"Monaco");
+    XCTAssertTrue(CGPointEqualToPoint(background.position, CGPointMake(100.0f, -201.19999694824219)));
+}
+
+- (void)testResourceControllerUpdatingHiresModeUpdatesDisplay {
+    __block int numFontForDisplayCalls = 0;
+    __block NSString *courierFont = @"Courier";
+    __block NSString *monacoFont = @"Monaco";
+    // Setup a basic display
+    OCMStub([_resourceController fontForDisplay]).andDo(^(NSInvocation *invocation) {
+        [invocation setReturnValue:(numFontForDisplayCalls++ < 1) ? &courierFont : &monacoFont];
+    });
+    _target.foregroundColor = NSColor.purpleColor;
+    SKLabelNode *label = [_target addLabelWithText:@"Test" atPosition:CGPointMake(100, 200)];
+    NSString *backgroundImageName = @"forest";
+    NSString *resourceImagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:backgroundImageName];
+    OCMStub([_resourceController imageWithName:backgroundImageName]).andReturn(resourceImagePath);
+    _target.backgroundImageName = backgroundImageName;
+
+    // Fake a change to hiresMode
+    OCMStub([_resourceController fontForDisplay]).andReturn(@"Monaco");
+    NSString *hiresBackgroundImageName = @"forest-hires";
+    NSString *hiresResourceImagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:hiresBackgroundImageName];
+    OCMStub([_resourceController imageWithName:backgroundImageName]).andReturn(hiresResourceImagePath);
+    _resourceController.hiresMode = YES;
+    [_target observeValueForKeyPath:@"hiresMode" ofObject:_resourceController change:nil context:nil];
+
+    // Verify that the font was updated
+    XCTAssertEqual(label.fontSize, 12.80000114440918);
+    SKSpriteNode *background = (SKSpriteNode *)label.parent;
+    XCTAssert(label.fontName, @"Monaco");
+    XCTAssertTrue(CGPointEqualToPoint(background.position, CGPointMake(100.0f, -201.19999694824219)));
 }
 
 @end
