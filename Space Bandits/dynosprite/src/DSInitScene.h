@@ -34,6 +34,9 @@ typedef enum DSInitSceneSound {
     DSInitSceneControl _control;
     DSInitSceneSound _sound;
 }
++ (NSString *)textFromResolution:(DSInitSceneDisplay)resolution;
++ (NSString *)textFromControl:(DSInitSceneControl)control;
++ (NSString *)textFromSound:(DSInitSceneSound)sound;
 
 - (void)didMoveToView:(SKView *)view;
 - (void)willMoveFromView:(SKView *)view;
@@ -41,16 +44,17 @@ typedef enum DSInitSceneSound {
 - (void)mouseUp:(NSEvent *)theEvent;
 - (void)keyUp:(NSEvent *)theEvent;
 
-- (NSString *)textFromResolution:(DSInitSceneDisplay)resolution;
-- (NSString *)textFromControl:(DSInitSceneControl)control;
-- (NSString *)textFromSound:(DSInitSceneSound)sound;
-
 - (void)refreshScreen;
 - (void)transitionToNextScreen;
 
 - (void)toggleDisplay;
+- (DSInitSceneDisplay)display;
+
 - (void)toggleControl;
+- (DSInitSceneControl)control;
+
 - (void)toggleSound;
+- (DSInitSceneSound)sound;
 
 - (void)poll;
 

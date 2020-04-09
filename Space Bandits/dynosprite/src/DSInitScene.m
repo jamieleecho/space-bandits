@@ -20,6 +20,18 @@ static NSString *MenuSoundLow = @"LoFi";
 @implementation DSInitScene {
 }
 
++ (NSString *)textFromResolution:(DSInitSceneDisplay)resolution {
+    return resolution == DSInitSceneDisplayHigh ? MenuDisplayHigh : MenuDisplayLow;
+}
+
++ (NSString *)textFromControl:(DSInitSceneControl)control {
+    return control == DSInitSceneControlJoystick ? MenuControlJoystick : MenuControlKeyboard;
+}
+
++ (NSString *)textFromSound:(DSInitSceneSound)sound {
+    return sound == DSInitSceneSoundHigh ? MenuSoundHigh : MenuSoundLow;
+}
+
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
     self.isDone = NO;
@@ -40,12 +52,12 @@ static NSString *MenuSoundLow = @"LoFi";
         [self refreshScreen];
     }
     
-    self.joystickController.useHardwareJoystick = YES;
+    [self setJoystickMode];
 }
 
 - (void)willMoveFromView:(SKView *)view {
     [super willMoveFromView:view];
-    self.joystickController.useHardwareJoystick = _control == DSInitSceneControlJoystick;
+    [self setJoystickMode];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
@@ -80,22 +92,10 @@ static NSString *MenuSoundLow = @"LoFi";
 
 }
 
-- (NSString *)textFromResolution:(DSInitSceneDisplay)resolution {
-    return resolution == DSInitSceneDisplayHigh ? MenuDisplayHigh : MenuDisplayLow;
-}
-
-- (NSString *)textFromControl:(DSInitSceneControl)control {
-    return control == DSInitSceneControlJoystick ? MenuControlJoystick : MenuControlKeyboard;
-}
-
-- (NSString *)textFromSound:(DSInitSceneSound)sound {
-    return sound == DSInitSceneSoundHigh ? MenuSoundHigh : MenuSoundLow;
-}
-
 - (void)refreshScreen {
-    _resolutionLabelNode.text = [self textFromResolution:_resolution];
-    _controlLabelNode.text = [self textFromControl:_control];
-    _soundLabelNode.text = [self textFromSound:_sound];
+    _resolutionLabelNode.text = [DSInitScene textFromResolution:_resolution];
+    _controlLabelNode.text = [DSInitScene textFromControl:_control];
+    _soundLabelNode.text = [DSInitScene textFromSound:_sound];
 }
 
 - (void)transitionToNextScreen {
@@ -111,21 +111,37 @@ static NSString *MenuSoundLow = @"LoFi";
     [self refreshScreen];
 }
 
+- (DSInitSceneDisplay)display {
+    return _resolution;
+}
+
 - (void)toggleControl {
     _control = (_control >= DSInitSceneControlJoystick) ? DSInitSceneControlKeyboard : _control + 1;
+    [self setJoystickMode];
     [self refreshScreen];
+}
+
+- (DSInitSceneControl)control {
+    return _control;
 }
 
 - (void)toggleSound {
     _sound = (_sound >= DSInitSceneSoundHigh) ? DSInitSceneSoundLow : _sound + 1;
-    self.resourceController.hifiMode = _sound == DSInitSceneSoundHigh;
     [self refreshScreen];
+}
+
+- (DSInitSceneSound)sound {
+    return _sound;
 }
 
 - (void)poll {
     if (self.joystickController.joystick.button0Pressed) {
         [self transitionToNextScreen];
     }
+}
+
+- (void)setJoystickMode {
+    self.joystickController.useHardwareJoystick = (_control == DSInitSceneControlJoystick);
 }
 
 @end

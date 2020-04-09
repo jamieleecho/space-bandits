@@ -6,8 +6,8 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
+#import <XCTest/XCTest.h>
 
 #import "DSCoCoJoystick.h"
 #import "DSCoCoJoystickController.h"

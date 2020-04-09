@@ -51,6 +51,7 @@
 		52C8C6F6243DEE5800EC582C /* DSTransitionSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */; };
 		52C8C6F8243DF16F00EC582C /* forest.png in Resources */ = {isa = PBXBuildFile; fileRef = 52229FAC2438BCBB0018A082 /* forest.png */; };
 		52C8C6F9243DF17200EC582C /* forest-hires.png in Resources */ = {isa = PBXBuildFile; fileRef = 52610C88243D64390052EE4F /* forest-hires.png */; };
+		52C8C6FB243EA1A500EC582C /* DSInitSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */; };
 		52CF9D3D2288A56E0054EAD2 /* DSGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF9D3B2288A56E0054EAD2 /* DSGameScene.m */; };
 		52CF9D3E2288A56E0054EAD2 /* DSGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52CF9D3C2288A56E0054EAD2 /* DSGameScene.sks */; };
 		52CF9D422288FB2B0054EAD2 /* DSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF9D412288FB2B0054EAD2 /* DSWindowController.m */; };
@@ -188,6 +189,7 @@
 		52A90E5A21E2F78300CC2643 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../game/images; sourceTree = "<group>"; };
 		52C3FCE521EBD9C900AE268B /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneTest.m; sourceTree = "<group>"; };
+		52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSInitSceneTest.m; sourceTree = "<group>"; };
 		52CF9D3A2288A56E0054EAD2 /* DSGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSGameScene.h; sourceTree = "<group>"; };
 		52CF9D3B2288A56E0054EAD2 /* DSGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSGameScene.m; sourceTree = "<group>"; };
 		52CF9D3C2288A56E0054EAD2 /* DSGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DSGameScene.sks; sourceTree = "<group>"; };
@@ -295,6 +297,9 @@
 			children = (
 				52229FAC2438BCBB0018A082 /* forest.png */,
 				52610C88243D64390052EE4F /* forest-hires.png */,
+				521A849B21FCEE80006120E8 /* JSONDict.json */,
+				521A849D21FCEED2006120E8 /* JSONList.json */,
+				521A849F21FCF626006120E8 /* JSONBad */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -383,15 +388,13 @@
 				52E7605821D7F57B0001F3A0 /* DSLevelTest.m */,
 				52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */,
 				521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */,
-				521A849B21FCEE80006120E8 /* JSONDict.json */,
-				521A849D21FCEED2006120E8 /* JSONList.json */,
-				521A849F21FCF626006120E8 /* JSONBad */,
 				521A84B221FE07A8006120E8 /* DSTransitionSceneControllerTest.m */,
 				5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */,
 				52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */,
 				5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */,
 				5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */,
 				52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */,
+				52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 				521A84AF21FE0748006120E8 /* DSInitScene.m in Sources */,
 				52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */,
 				5284F5E524340FE300B2C2C5 /* DSCoCoJoystickTest.m in Sources */,
+				52C8C6FB243EA1A500EC582C /* DSInitSceneTest.m in Sources */,
 				52DF473124355071008DC63F /* DSCoCoKeyboardJoystickTest.m in Sources */,
 				7D3110F022FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
 				52C8C6F6243DEE5800EC582C /* DSTransitionSceneTest.m in Sources */,
