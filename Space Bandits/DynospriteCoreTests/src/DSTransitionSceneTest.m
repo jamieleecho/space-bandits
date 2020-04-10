@@ -67,9 +67,6 @@
     _target.joystickController = _joystickController;
 }
 
-- (void)tearDown {
-}
-
 - (void)testInit {
     XCTAssertEqualObjects(_target.backgroundColor, [[NSColor colorWithRed:.15f green:.15f blue:.15f alpha:1] colorUsingColorSpace:NSColorSpace.deviceRGBColorSpace]);
     XCTAssertEqualObjects(_target.foregroundColor, NSColor.blackColor);

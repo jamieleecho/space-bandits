@@ -48,9 +48,6 @@ enum DSInitSceneLabelIndices : short {
     [_target didMoveToView:_view];
 }
 
-- (void)tearDown {
-}
-
 - (void)testTextFromResolution {
     XCTAssertEqual([DSInitScene textFromResolution:DSInitSceneDisplayLow], @"Low");
     XCTAssertEqual([DSInitScene textFromResolution:DSInitSceneDisplayHigh], @"High");

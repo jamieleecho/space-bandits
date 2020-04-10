@@ -685,11 +685,13 @@
                 </customObject>
                 <customObject id="Voe-Tx-rLC" customClass="DSAppDelegate">
                     <connections>
+                        <outlet property="configFileParser" destination="wHX-XA-T7S" id="oag-Ug-zuw"/>
                         <outlet property="transitionSceneController" destination="rDZ-CV-DhK" id="fEV-se-CkJ"/>
                     </connections>
                 </customObject>
                 <customObject id="Nki-Dk-Bhg" customClass="DSCoCoJoystickController"/>
                 <customObject id="web-E3-IMn" customClass="DSResourceController"/>
+                <customObject id="wHX-XA-T7S" customClass="DSConfigFileParser"/>
             </objects>
             <point key="canvasLocation" x="63" y="-607"/>
         </scene>

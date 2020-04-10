@@ -12,8 +12,7 @@
 @implementation DSAppDelegate
 
 - (void)awakeFromNib {
-    DSConfigFileParser *parser = [[DSConfigFileParser alloc] init];
-    NSDictionary *configs = [parser parseResourceNamed:@"images/images"];
+    NSDictionary *configs = [self.configFileParser parseResourceNamed:@"images/images"];
     NSArray *images = [configs objectForKey:@"images"];
     self.transitionSceneController.images = images;
 }

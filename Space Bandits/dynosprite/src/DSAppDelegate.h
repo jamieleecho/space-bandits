@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "DSConfigFileParser.h"
 #import "DSTransitionSceneController.h"
 
 @interface DSAppDelegate : NSObject <NSApplicationDelegate>
 
+@property (assign) IBOutlet DSConfigFileParser *configFileParser;
 @property (assign) IBOutlet DSTransitionSceneController *transitionSceneController;
 - (void)awakeFromNib;
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender;
