@@ -129,8 +129,20 @@ enum DSInitSceneLabelIndices : short {
 }
 
 - (void)testKeyUpToggleDisplay {
+    // This one is a little tricky to test because we have to verify that the labels get updated before we set the resolution
+    _target.labels[DSInitSceneLabelIndicesDisplayValue].text = @"";
+    _target.labels[DSInitSceneLabelIndicesControlValue].text = @"";
+    _target.labels[DSInitSceneLabelIndicesSoundValue].text = @"";
+    
+    OCMStub([_resourceController setHiresMode:YES]).andDo(^(NSInvocation *invocation) {
+        XCTAssertEqualObjects(self->_target.labels[DSInitSceneLabelIndicesDisplayValue].text, @"High");
+        XCTAssertEqualObjects(self->_target.labels[DSInitSceneLabelIndicesControlValue].text, @"Keyboard");
+        XCTAssertEqualObjects(self->_target.labels[DSInitSceneLabelIndicesSoundValue].text, @"LoFi");
+    });
+    
     NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"d" isARepeat:NO keyCode:123];
     [_target keyUp:keyEvent];
+    
     XCTAssertEqual(_target.display, DSInitSceneDisplayHigh);
     XCTAssertEqual(_target.control, DSInitSceneControlKeyboard);
     XCTAssertEqual(_target.sound, DSInitSceneSoundLow);

@@ -99,7 +99,6 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)toggleDisplay {
     _resolution = (_resolution >= DSInitSceneDisplayHigh) ? DSInitSceneDisplayLow : _resolution + 1;
-    self.resourceController.hiresMode = _resolution == DSInitSceneDisplayHigh;
     [self refreshState];
 }
 
@@ -132,12 +131,12 @@ static NSString *MenuSoundLow = @"LoFi";
 }
 
 - (void)refreshState {
-    self.resourceController.hiresMode = (_resolution == DSInitSceneDisplayHigh);
-    self.joystickController.useHardwareJoystick = (_control == DSInitSceneControlJoystick);
-    self.resourceController.hifiMode = (_sound == DSInitSceneDisplayHigh);
     _resolutionLabelNode.text = [DSInitScene textFromResolution:_resolution];
     _controlLabelNode.text = [DSInitScene textFromControl:_control];
     _soundLabelNode.text = [DSInitScene textFromSound:_sound];
+    self.joystickController.useHardwareJoystick = (_control == DSInitSceneControlJoystick);
+    self.resourceController.hifiMode = (_sound == DSInitSceneDisplayHigh);
+    self.resourceController.hiresMode = (_resolution == DSInitSceneDisplayHigh);
 }
 
 @end
