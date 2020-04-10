@@ -11,7 +11,7 @@
 
 @implementation DSAppDelegate
 
-- (void) awakeFromNib {
+- (void)awakeFromNib {
     DSConfigFileParser *parser = [[DSConfigFileParser alloc] init];
     NSDictionary *configs = [parser parseResourceNamed:@"images/images"];
     NSArray *images = [configs objectForKey:@"images"];

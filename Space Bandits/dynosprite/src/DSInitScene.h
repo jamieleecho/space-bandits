@@ -44,7 +44,6 @@ typedef enum DSInitSceneSound {
 - (void)mouseUp:(NSEvent *)theEvent;
 - (void)keyUp:(NSEvent *)theEvent;
 
-- (void)refreshScreen;
 - (void)transitionToNextScreen;
 
 - (void)toggleDisplay;
