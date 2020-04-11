@@ -38,6 +38,8 @@
 		527E7ACE21F016B90013E66A /* DSInitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 527E7ACC21F016B90013E66A /* DSInitScene.m */; };
 		5284F5E524340FE300B2C2C5 /* DSCoCoJoystickTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */; };
 		529201E6243FF69E000B4D58 /* DSAppDelegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201E5243FF69E000B4D58 /* DSAppDelegateTest.m */; };
+		529201E824413F97000B4D58 /* DSViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201E724413F97000B4D58 /* DSViewControllerTest.m */; };
+		529201EA24414521000B4D58 /* DSSharedTransitionSceneControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201E924414521000B4D58 /* DSSharedTransitionSceneControllerTest.m */; };
 		52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
 		52A90E3621E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
 		52A90E3721E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
@@ -185,6 +187,8 @@
 		527E7ACC21F016B90013E66A /* DSInitScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInitScene.m; sourceTree = "<group>"; };
 		5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickTest.m; sourceTree = "<group>"; };
 		529201E5243FF69E000B4D58 /* DSAppDelegateTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSAppDelegateTest.m; sourceTree = "<group>"; };
+		529201E724413F97000B4D58 /* DSViewControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSViewControllerTest.m; sourceTree = "<group>"; };
+		529201E924414521000B4D58 /* DSSharedTransitionSceneControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedTransitionSceneControllerTest.m; sourceTree = "<group>"; };
 		52A90E3221E2E8A700CC2643 /* DSConfigFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSConfigFileParser.h; sourceTree = "<group>"; };
 		52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSConfigFileParser.m; sourceTree = "<group>"; };
 		52A90E5921E2F78300CC2643 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../../game/levels; sourceTree = "<group>"; };
@@ -387,17 +391,19 @@
 		52E7605A21D7F5960001F3A0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				52E7605821D7F57B0001F3A0 /* DSLevelTest.m */,
-				52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */,
-				521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */,
-				521A84B221FE07A8006120E8 /* DSTransitionSceneControllerTest.m */,
 				5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */,
 				52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */,
 				5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */,
 				5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */,
-				52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */,
 				52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */,
 				529201E5243FF69E000B4D58 /* DSAppDelegateTest.m */,
+				52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */,
+				529201E724413F97000B4D58 /* DSViewControllerTest.m */,
+				521A84B221FE07A8006120E8 /* DSTransitionSceneControllerTest.m */,
+				529201E924414521000B4D58 /* DSSharedTransitionSceneControllerTest.m */,
+				52E7605821D7F57B0001F3A0 /* DSLevelTest.m */,
+				52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */,
+				521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -639,8 +645,10 @@
 				521A84AC21FE0748006120E8 /* DSTransitionSceneController.m in Sources */,
 				7DC4E7F122FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				521A84B021FE0748006120E8 /* DSAppDelegate.m in Sources */,
+				529201E824413F97000B4D58 /* DSViewControllerTest.m in Sources */,
 				52A90E3F21E2F18C00CC2643 /* DSLevel.m in Sources */,
 				7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */,
+				529201EA24414521000B4D58 /* DSSharedTransitionSceneControllerTest.m in Sources */,
 				7DC4E7F622FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
 				52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				7D80229B2431656C00496138 /* DSObject.m in Sources */,
