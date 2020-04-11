@@ -8,15 +8,26 @@
 
 #import "DSResourceController.h"
 
+@interface DSResourceController()
+- (NSString *)resourceWithName:(NSString *)name preferHiresVersion:(BOOL)hires;
+@end
+
 @implementation DSResourceController
 
-+ (NSString *)resourceWithName:(NSString *)name preferHiresVersion:(BOOL)hires {
+- (id)init {
+    if (self = [super init]) {
+        self.bundle = [NSBundle mainBundle];
+    }
+    return self;
+}
+
+- (NSString *)resourceWithName:(NSString *)name preferHiresVersion:(BOOL)hires {
     NSString *dirPath = name.stringByDeletingLastPathComponent;
     NSString *resourceName = name.lastPathComponent.stringByDeletingPathExtension;
     NSString *extension = name.lastPathComponent.pathExtension;
     NSString *hiresDirectory = [@"hires" stringByAppendingPathComponent:dirPath];
 
-    NSString *path = [NSBundle.mainBundle pathForResource:resourceName ofType:extension inDirectory:hiresDirectory];
+    NSString *path = [self.bundle pathForResource:resourceName ofType:extension inDirectory:hiresDirectory];
 
     return hires && (path != nil) ? [hiresDirectory stringByAppendingPathComponent:name.lastPathComponent] : name;
 }
@@ -26,11 +37,11 @@
 }
 
 - (NSString *)imageWithName:(NSString *)name {
-    return [DSResourceController resourceWithName:name preferHiresVersion:self.hiresMode];
+    return [self resourceWithName:name preferHiresVersion:self.hiresMode];
 }
 
 - (NSString *)soundWithName:(NSString *)name {
-    return [DSResourceController resourceWithName:name preferHiresVersion:self.hifiMode];
+    return [self resourceWithName:name preferHiresVersion:self.hifiMode];
 }
 
 @end
