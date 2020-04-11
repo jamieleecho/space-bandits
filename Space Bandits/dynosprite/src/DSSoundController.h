@@ -1,5 +1,5 @@
 //
-//  DSSound.h
+//  DSSoundController.h
 //  dynosprite
 //
 //  Created by Jamie Cho on 3/29/20.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSSound : NSObject
+@interface DSSoundController : NSObject
 
 @end
 
