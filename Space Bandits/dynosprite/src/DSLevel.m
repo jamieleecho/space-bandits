@@ -16,6 +16,14 @@
     if (self) {
         _initLevel = initLevel;
         _backgroundNewXY = backgroundNewXY;
+
+        self.name = @"";
+        self.levelDescription = @"";
+        self.objectGroupIndices = [[NSArray alloc] init];
+        self.tilemapImagePath = @"";
+        self.tilemapStart = [[NSArray alloc] init];
+        self.tilemapSize = [[NSArray alloc] init];
+        self.objects = [[NSArray alloc] init];
     }
     
     return self;

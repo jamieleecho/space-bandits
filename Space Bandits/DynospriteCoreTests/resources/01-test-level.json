@@ -1,0 +1,603 @@
+{
+  "Level": {
+    "Name": "Omicron Persei 8 Invades",
+    "Description": "Drop Down and Increase Speed!",
+    "ObjectGroups": [3, 4, 5, 6, 7],
+    "MaxObjectTableSize": 64,
+    "Tileset": 1,
+    "TilemapImage": "../tiles/01-moon.gif",
+    "TilemapStart": [8, 16],
+    "TilemapSize": [320, 208],
+    "BkgrndStartX": 40,
+    "BkgrndStartY": 12
+  },
+
+  "Objects": [
+    {
+      "_comment": "***** Good Guy",
+      "GroupID": 4,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 170,
+      "globalY": 175,
+      "InitData": [0]
+    },
+
+
+    {
+      "_comment": "***** Bad Guys -- Row 5",
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 35,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 60,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 85,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 110,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 135,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 160,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 185,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 210,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 235,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 260,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 285,
+      "globalY": 30,
+      "InitData": [3]
+    },
+
+
+    {
+      "_comment": "***** Bad Guys -- Row 4",
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 35,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 60,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 85,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 110,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 135,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 160,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 185,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 210,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 235,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 260,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 285,
+      "globalY": 50,
+      "InitData": [11]
+    },
+
+
+    {
+      "_comment": "***** Bad Guys -- Row 3",
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 35,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 60,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 85,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 110,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 135,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 160,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 185,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 210,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 235,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 260,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 285,
+      "globalY": 70,
+      "InitData": [7]
+    },
+
+
+    {
+      "_comment": "***** Bad Guys -- Row 2",
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 35,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 60,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 85,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 110,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 135,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 160,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 185,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 210,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 235,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 260,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 285,
+      "globalY": 90,
+      "InitData": [13]
+    },
+
+
+    {
+      "_comment": "***** Bad Guys -- Row 1",
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 35,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 60,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 85,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 110,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 135,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 160,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 185,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 210,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 235,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 260,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 3,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 285,
+      "globalY": 110,
+      "InitData": [0]
+    },
+
+
+    {
+      "_comment": "***** Good Guy Missiles",
+      "GroupID": 5,
+      "ObjectID": 0,
+      "Active": 0,
+      "globalX": 0,
+      "globalY": 0,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 5,
+      "ObjectID": 0,
+      "Active": 0,
+      "globalX": 0,
+      "globalY": 0,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 5,
+      "ObjectID": 0,
+      "Active": 0,
+      "globalX": 0,
+      "globalY": 0,
+      "InitData": [0]
+    },
+
+
+    {
+      "_comment": "***** Bad Guy Missiles",
+      "GroupID": 7,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 20,
+      "globalY": 20,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 7,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 160,
+      "globalY": 20,
+      "InitData": [0]
+    },
+
+    {
+      "GroupID": 7,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 300,
+      "globalY": 20,
+      "InitData": [0]
+    },
+
+
+    {
+      "_comment": "***** Game Over",
+      "GroupID": 6,
+      "ObjectID": 21,
+      "Active": 0,
+      "globalX": 160,
+      "globalY": 90,
+      "InitData": [2, 3]
+    }
+  ]
+}
+
+
+

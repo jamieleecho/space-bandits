@@ -52,6 +52,9 @@
 		52A90E4621E2F23900CC2643 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208C21D7DD63008A7900 /* Actions.sks */; };
 		52A90E5B21E2F78300CC2643 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 52A90E5921E2F78300CC2643 /* levels */; };
 		52A90E5C21E2F78300CC2643 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 52A90E5A21E2F78300CC2643 /* images */; };
+		52B1A129244B8667008E7066 /* DSLevelFileParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A128244B8667008E7066 /* DSLevelFileParserTest.m */; };
+		52B1A12B244B8F3C008E7066 /* 01-test-level.json in Resources */ = {isa = PBXBuildFile; fileRef = 52B1A12A244B8F3C008E7066 /* 01-test-level.json */; };
+		52B1A12F244BA5CC008E7066 /* DSObjectTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A12E244BA5CC008E7066 /* DSObjectTest.m */; };
 		52C3FCE621EBD9C900AE268B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52C3FCE521EBD9C900AE268B /* Fonts */; };
 		52C3FCE721EBD9C900AE268B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52C3FCE521EBD9C900AE268B /* Fonts */; };
 		52C8C6F4243DEE3800EC582C /* DSTransitionSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F120B021D7DD65008A7900 /* DSTransitionSceneTest.m */; };
@@ -78,6 +81,9 @@
 		52F1208D21D7DD63008A7900 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208C21D7DD63008A7900 /* Actions.sks */; };
 		52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F1209421D7DD65008A7900 /* Assets.xcassets */; };
 		52F1209B21D7DD65008A7900 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1209A21D7DD65008A7900 /* main.m */; };
+		52F845272442911300B1D70F /* DSLevelFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F845252442911300B1D70F /* DSLevelFileParser.m */; };
+		52F845282442911300B1D70F /* DSLevelFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F845252442911300B1D70F /* DSLevelFileParser.m */; };
+		52F845292442911300B1D70F /* DSLevelFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F845252442911300B1D70F /* DSLevelFileParser.m */; };
 		7D3110E922FF018D00833374 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; };
 		7D3110EE22FF01D700833374 /* DSCoCoJoystick.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */; };
 		7D3110EF22FF01D700833374 /* DSCoCoJoystick.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */; };
@@ -198,6 +204,9 @@
 		52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSConfigFileParser.m; sourceTree = "<group>"; };
 		52A90E5921E2F78300CC2643 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../../game/levels; sourceTree = "<group>"; };
 		52A90E5A21E2F78300CC2643 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../game/images; sourceTree = "<group>"; };
+		52B1A128244B8667008E7066 /* DSLevelFileParserTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelFileParserTest.m; sourceTree = "<group>"; };
+		52B1A12A244B8F3C008E7066 /* 01-test-level.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "01-test-level.json"; sourceTree = "<group>"; };
+		52B1A12E244BA5CC008E7066 /* DSObjectTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectTest.m; sourceTree = "<group>"; };
 		52C3FCE521EBD9C900AE268B /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneTest.m; sourceTree = "<group>"; };
 		52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSInitSceneTest.m; sourceTree = "<group>"; };
@@ -229,6 +238,8 @@
 		52F120AC21D7DD65008A7900 /* DynospriteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynospriteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F120B021D7DD65008A7900 /* DSTransitionSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneTest.m; sourceTree = "<group>"; };
 		52F120B221D7DD65008A7900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52F845242442911300B1D70F /* DSLevelFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevelFileParser.h; sourceTree = "<group>"; };
+		52F845252442911300B1D70F /* DSLevelFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelFileParser.m; sourceTree = "<group>"; };
 		7D3110E822FF018D00833374 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		7D3110EC22FF01D700833374 /* DSCoCoJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystick.h; sourceTree = "<group>"; };
 		7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DSCoCoJoystick.mm; sourceTree = "<group>"; };
@@ -309,6 +320,7 @@
 				521A849B21FCEE80006120E8 /* JSONDict.json */,
 				521A849D21FCEED2006120E8 /* JSONList.json */,
 				521A849F21FCF626006120E8 /* JSONBad */,
+				52B1A12A244B8F3C008E7066 /* 01-test-level.json */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -356,6 +368,8 @@
 				5227E72021E2DDA40092C947 /* DSInitScene.h */,
 				52E7604421D7EF440001F3A0 /* DSLevel.h */,
 				52E7604521D7EF440001F3A0 /* DSLevel.m */,
+				52F845242442911300B1D70F /* DSLevelFileParser.h */,
+				52F845252442911300B1D70F /* DSLevelFileParser.m */,
 				52E7605C21D802A20001F3A0 /* DSLevelRegistry.h */,
 				52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */,
 				7D8022972431656C00496138 /* DSObject.h */,
@@ -400,8 +414,10 @@
 				5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */,
 				529201ED24414F8D000B4D58 /* DSGameSceneTest.m */,
 				52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */,
+				52B1A128244B8667008E7066 /* DSLevelFileParserTest.m */,
 				52E7605821D7F57B0001F3A0 /* DSLevelTest.m */,
 				52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */,
+				52B1A12E244BA5CC008E7066 /* DSObjectTest.m */,
 				529201F32441A63F000B4D58 /* DSResourceControllerTest.m */,
 				529201E924414521000B4D58 /* DSSharedTransitionSceneControllerTest.m */,
 				529201EF244150C1000B4D58 /* DSSoundControllerTest.m */,
@@ -602,6 +618,7 @@
 				52C8C6F9243DF17200EC582C /* forest-hires.png in Resources */,
 				521A849C21FCEE80006120E8 /* JSONDict.json in Resources */,
 				52C8C6F8243DF16F00EC582C /* forest.png in Resources */,
+				52B1A12B244B8F3C008E7066 /* 01-test-level.json in Resources */,
 				521A849E21FCEED2006120E8 /* JSONList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,11 +672,14 @@
 				7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */,
 				529201EA24414521000B4D58 /* DSSharedTransitionSceneControllerTest.m in Sources */,
 				7DC4E7F622FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
+				52B1A12F244BA5CC008E7066 /* DSObjectTest.m in Sources */,
 				52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				7D80229B2431656C00496138 /* DSObject.m in Sources */,
 				7D8022A62431791C00496138 /* DSSoundController.m in Sources */,
 				7D8022A024316BB700496138 /* DSDirectPageGlobals.m in Sources */,
 				52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */,
+				52F845292442911300B1D70F /* DSLevelFileParser.m in Sources */,
+				52B1A129244B8667008E7066 /* DSLevelFileParserTest.m in Sources */,
 				529201F0244150C1000B4D58 /* DSSoundControllerTest.m in Sources */,
 				521A84B321FE07A8006120E8 /* DSTransitionSceneControllerTest.m in Sources */,
 				521A84AA21FE0748006120E8 /* DSTransitionScene.m in Sources */,
@@ -684,6 +704,7 @@
 				524402DF21ED65CF00B02D38 /* DSTransitionScene.m in Sources */,
 				7D3110EE22FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
 				7D8022A42431791C00496138 /* DSSoundController.m in Sources */,
+				52F845272442911300B1D70F /* DSLevelFileParser.m in Sources */,
 				52F0574D2216323400CDC1DD /* DSViewController.m in Sources */,
 				521A84A821FE02BE006120E8 /* DSTransitionSceneController.m in Sources */,
 				7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
@@ -725,6 +746,7 @@
 				52CF9D432288FB2B0054EAD2 /* DSWindowController.m in Sources */,
 				52C8C6F4243DEE3800EC582C /* DSTransitionSceneTest.m in Sources */,
 				7D80229F24316BB700496138 /* DSDirectPageGlobals.m in Sources */,
+				52F845282442911300B1D70F /* DSLevelFileParser.m in Sources */,
 				7DC4E7F522FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
 				52D466DF2437ED2D004B4EF1 /* DSResourceController.m in Sources */,
 				52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */,

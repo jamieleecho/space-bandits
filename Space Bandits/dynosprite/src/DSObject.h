@@ -12,6 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSObject : NSObject
 
+@property (nonatomic) int groupID;
+@property (nonatomic) int objectID;
+@property (nonatomic) int initialActive;
+@property (nonatomic) int initialGlobalX;
+@property (nonatomic) int initialGlobalY;
+@property (nonatomic, nonnull) NSArray<NSNumber *> *initialData;
+
 @end
 
 NS_ASSUME_NONNULL_END

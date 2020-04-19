@@ -10,4 +10,11 @@
 
 @implementation DSObject
 
+- (id)init {
+    if (self = [super init]) {
+        self.initialData = [[NSArray alloc] init];
+    }
+    return self;
+}
+
 @end

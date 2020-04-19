@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (DSLevelRegistry *)sharedInstance;
++ (int)indexFromFilename:(NSString *)file;
 - (id)init;
 - (void)addLevel:(DSLevel *)level fromFile:(NSString *)file;
 - (void)clear;

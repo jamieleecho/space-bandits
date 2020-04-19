@@ -36,6 +36,11 @@ static byte myLevel2BackgroundNewXY(void) { return 0; }
     [[DSLevelRegistry sharedInstance] clear];
 }
 
+- (void)testIndexFromFilename {
+    XCTAssertEqual([DSLevelRegistry indexFromFilename:@"/foo01/bar/baz/07-thing-05.json"], 7);
+    XCTAssertEqual([DSLevelRegistry indexFromFilename:@"/foo01/bar/baz/thing-05.json"], 0);
+}
+
 - (void)testSharedInstance {
     XCTAssertNotEqual(_target, [DSLevelRegistry sharedInstance]);
     [[DSLevelRegistry sharedInstance] addLevel:_level1 fromFile:@"01-foo.c"];

@@ -33,6 +33,10 @@ static DSLevelRegistry *_sharedInstance = nil;
     return _sharedInstance;
 }
 
++ (int)indexFromFilename:(NSString *)file {
+    return [[[file lastPathComponent] substringToIndex:2] intValue];
+}
+
 - (id)init {
     self = [super init];
     
@@ -44,7 +48,7 @@ static DSLevelRegistry *_sharedInstance = nil;
 }
 
 - (void)addLevel:(DSLevel *)level fromFile:(NSString *)file {
-    NSNumber *index = [NSNumber numberWithInteger:[[[file lastPathComponent] substringToIndex:2] intValue]];
+    NSNumber *index = [NSNumber numberWithInteger:[DSLevelRegistry indexFromFilename:file]];
     _indexToLevel[index] = level;
 }
 
