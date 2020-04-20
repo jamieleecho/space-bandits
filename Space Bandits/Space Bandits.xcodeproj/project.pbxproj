@@ -72,6 +72,17 @@
 		52B1A15B244CFE45008E7066 /* DSPoint.c in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A158244CFE45008E7066 /* DSPoint.c */; };
 		52B1A15D244D0222008E7066 /* DSPointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A15C244D0222008E7066 /* DSPointTest.m */; };
 		52B1A15F244D0BAD008E7066 /* DSSpriteInfoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A15E244D0BAD008E7066 /* DSSpriteInfoTest.m */; };
+		52B1A162244D20CD008E7066 /* DSTileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A161244D20CD008E7066 /* DSTileInfo.m */; };
+		52B1A163244D20CD008E7066 /* DSTileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A161244D20CD008E7066 /* DSTileInfo.m */; };
+		52B1A164244D20CD008E7066 /* DSTileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A161244D20CD008E7066 /* DSTileInfo.m */; };
+		52B1A166244D2213008E7066 /* DSTileInfoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A165244D2213008E7066 /* DSTileInfoTest.m */; };
+		52B1A169244D23A2008E7066 /* DSTileFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A168244D23A2008E7066 /* DSTileFileParser.m */; };
+		52B1A16A244D23A2008E7066 /* DSTileFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A168244D23A2008E7066 /* DSTileFileParser.m */; };
+		52B1A16B244D23A2008E7066 /* DSTileFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A168244D23A2008E7066 /* DSTileFileParser.m */; };
+		52B1A16D244D2682008E7066 /* 01-moon.json in Resources */ = {isa = PBXBuildFile; fileRef = 52B1A16C244D2682008E7066 /* 01-moon.json */; };
+		52B1A16E244D2682008E7066 /* 01-moon.json in Resources */ = {isa = PBXBuildFile; fileRef = 52B1A16C244D2682008E7066 /* 01-moon.json */; };
+		52B1A16F244D2682008E7066 /* 01-moon.json in Resources */ = {isa = PBXBuildFile; fileRef = 52B1A16C244D2682008E7066 /* 01-moon.json */; };
+		52B1A171244D2712008E7066 /* DSTileFileParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A170244D2712008E7066 /* DSTileFileParserTest.m */; };
 		52C3FCE621EBD9C900AE268B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52C3FCE521EBD9C900AE268B /* Fonts */; };
 		52C3FCE721EBD9C900AE268B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52C3FCE521EBD9C900AE268B /* Fonts */; };
 		52C8C6F4243DEE3800EC582C /* DSTransitionSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F120B021D7DD65008A7900 /* DSTransitionSceneTest.m */; };
@@ -237,6 +248,13 @@
 		52B1A158244CFE45008E7066 /* DSPoint.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = DSPoint.c; sourceTree = "<group>"; };
 		52B1A15C244D0222008E7066 /* DSPointTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSPointTest.m; sourceTree = "<group>"; };
 		52B1A15E244D0BAD008E7066 /* DSSpriteInfoTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSpriteInfoTest.m; sourceTree = "<group>"; };
+		52B1A160244D20CD008E7066 /* DSTileInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTileInfo.h; sourceTree = "<group>"; };
+		52B1A161244D20CD008E7066 /* DSTileInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileInfo.m; sourceTree = "<group>"; };
+		52B1A165244D2213008E7066 /* DSTileInfoTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileInfoTest.m; sourceTree = "<group>"; };
+		52B1A167244D23A2008E7066 /* DSTileFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTileFileParser.h; sourceTree = "<group>"; };
+		52B1A168244D23A2008E7066 /* DSTileFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileFileParser.m; sourceTree = "<group>"; };
+		52B1A16C244D2682008E7066 /* 01-moon.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "01-moon.json"; sourceTree = "<group>"; };
+		52B1A170244D2712008E7066 /* DSTileFileParserTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileFileParserTest.m; sourceTree = "<group>"; };
 		52C3FCE521EBD9C900AE268B /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneTest.m; sourceTree = "<group>"; };
 		52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSInitSceneTest.m; sourceTree = "<group>"; };
@@ -352,6 +370,7 @@
 				521A849F21FCF626006120E8 /* JSONBad */,
 				52B1A12A244B8F3C008E7066 /* 01-test-level.json */,
 				52B1A150244CF7B5008E7066 /* 04-ship.json */,
+				52B1A16C244D2682008E7066 /* 01-moon.json */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -419,6 +438,10 @@
 				7D8022A32431791C00496138 /* DSSoundController.m */,
 				52B1A152244CFD31008E7066 /* DSSpriteInfo.h */,
 				52B1A153244CFD31008E7066 /* DSSpriteInfo.m */,
+				52B1A167244D23A2008E7066 /* DSTileFileParser.h */,
+				52B1A168244D23A2008E7066 /* DSTileFileParser.m */,
+				52B1A160244D20CD008E7066 /* DSTileInfo.h */,
+				52B1A161244D20CD008E7066 /* DSTileInfo.m */,
 				524402DD21ED65CF00B02D38 /* DSTransitionScene.h */,
 				524402DE21ED65CF00B02D38 /* DSTransitionScene.m */,
 				525FC91A22887A13007F4793 /* DSTransitionSceneControllerProtocol.h */,
@@ -464,6 +487,8 @@
 				529201E924414521000B4D58 /* DSSharedTransitionSceneControllerTest.m */,
 				529201EF244150C1000B4D58 /* DSSoundControllerTest.m */,
 				52B1A15E244D0BAD008E7066 /* DSSpriteInfoTest.m */,
+				52B1A165244D2213008E7066 /* DSTileInfoTest.m */,
+				52B1A170244D2712008E7066 /* DSTileFileParserTest.m */,
 				52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */,
 				521A84B221FE07A8006120E8 /* DSTransitionSceneControllerTest.m */,
 				529201E724413F97000B4D58 /* DSViewControllerTest.m */,
@@ -662,6 +687,7 @@
 				52C8C6F9243DF17200EC582C /* forest-hires.png in Resources */,
 				521A849C21FCEE80006120E8 /* JSONDict.json in Resources */,
 				52C8C6F8243DF16F00EC582C /* forest.png in Resources */,
+				52B1A16F244D2682008E7066 /* 01-moon.json in Resources */,
 				52B1A12B244B8F3C008E7066 /* 01-test-level.json in Resources */,
 				521A849E21FCEED2006120E8 /* JSONList.json in Resources */,
 			);
@@ -676,6 +702,7 @@
 				52A90E5C21E2F78300CC2643 /* images in Resources */,
 				52A90E5B21E2F78300CC2643 /* levels in Resources */,
 				52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */,
+				52B1A16D244D2682008E7066 /* 01-moon.json in Resources */,
 				7DA178A02431529D00AE39D8 /* tiles in Resources */,
 				52F1208D21D7DD63008A7900 /* Actions.sks in Resources */,
 				52CF9D3E2288A56E0054EAD2 /* DSGameScene.sks in Resources */,
@@ -688,6 +715,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B1A16E244D2682008E7066 /* 01-moon.json in Resources */,
 				52A90E4621E2F23900CC2643 /* Actions.sks in Resources */,
 				52C3FCE721EBD9C900AE268B /* Fonts in Resources */,
 			);
@@ -712,7 +740,9 @@
 				521A84AC21FE0748006120E8 /* DSTransitionSceneController.m in Sources */,
 				7DC4E7F122FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				521A84B021FE0748006120E8 /* DSAppDelegate.m in Sources */,
+				52B1A164244D20CD008E7066 /* DSTileInfo.m in Sources */,
 				529201E824413F97000B4D58 /* DSViewControllerTest.m in Sources */,
+				52B1A171244D2712008E7066 /* DSTileFileParserTest.m in Sources */,
 				52A90E3F21E2F18C00CC2643 /* DSLevel.m in Sources */,
 				52B1A15B244CFE45008E7066 /* DSPoint.c in Sources */,
 				7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */,
@@ -730,9 +760,11 @@
 				52B1A15D244D0222008E7066 /* DSPointTest.m in Sources */,
 				52B1A129244B8667008E7066 /* DSLevelFileParserTest.m in Sources */,
 				52B1A156244CFD31008E7066 /* DSSpriteInfo.m in Sources */,
+				52B1A16B244D23A2008E7066 /* DSTileFileParser.m in Sources */,
 				529201F0244150C1000B4D58 /* DSSoundControllerTest.m in Sources */,
 				521A84B321FE07A8006120E8 /* DSTransitionSceneControllerTest.m in Sources */,
 				521A84AA21FE0748006120E8 /* DSTransitionScene.m in Sources */,
+				52B1A166244D2213008E7066 /* DSTileInfoTest.m in Sources */,
 				529201F42441A63F000B4D58 /* DSResourceControllerTest.m in Sources */,
 				5279A4E72436B83B00A51D98 /* DSCoCoJoystickControllerTest.m in Sources */,
 				52B1A14F244CF680008E7066 /* DSInitScene.m in Sources */,
@@ -770,6 +802,7 @@
 				7DC4E7F422FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
 				52E7605E21D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
+				52B1A162244D20CD008E7066 /* DSTileInfo.m in Sources */,
 				52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */,
 				52F1209B21D7DD65008A7900 /* main.m in Sources */,
 				52CF9D422288FB2B0054EAD2 /* DSWindowController.m in Sources */,
@@ -780,6 +813,7 @@
 				52B1A13B244BD4F9008E7066 /* DSObjectClass.m in Sources */,
 				7DA178B82431552E00AE39D8 /* 03-badguy.c in Sources */,
 				7DA178BA2431552E00AE39D8 /* 07-badmissile.c in Sources */,
+				52B1A169244D23A2008E7066 /* DSTileFileParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,6 +821,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B1A163244D20CD008E7066 /* DSTileInfo.m in Sources */,
 				52E7606021D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52F0574E2216323400CDC1DD /* DSViewController.m in Sources */,
 				7D80229A2431656C00496138 /* DSObject.m in Sources */,
@@ -810,6 +845,7 @@
 				7DC4E7F522FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
 				52D466DF2437ED2D004B4EF1 /* DSResourceController.m in Sources */,
 				52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */,
+				52B1A16A244D23A2008E7066 /* DSTileFileParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
