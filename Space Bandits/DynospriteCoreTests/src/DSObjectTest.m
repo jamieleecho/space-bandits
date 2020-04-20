@@ -29,6 +29,7 @@
     XCTAssertEqual(_target.initialActive, 0);
     XCTAssertEqual(_target.initialGlobalX, 0);
     XCTAssertEqual(_target.initialGlobalY, 0);
+    XCTAssertTrue([_target.initialData isKindOfClass:NSArray.class]);
     XCTAssertEqual(_target.initialData.count, 0);
 }
 

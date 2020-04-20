@@ -71,6 +71,7 @@
     XCTAssertEqualObjects(_target.backgroundColor, [[NSColor colorWithRed:.15f green:.15f blue:.15f alpha:1] colorUsingColorSpace:NSColorSpace.deviceRGBColorSpace]);
     XCTAssertEqualObjects(_target.foregroundColor, NSColor.blackColor);
     XCTAssertEqualObjects(_target.progressBarColor, NSColor.greenColor);
+    XCTAssertTrue([_target.labels isKindOfClass:NSArray.class]);
     XCTAssertEqual(_target.labels.count, 0);
     XCTAssertTrue(CGSizeEqualToSize(_target.size, CGSizeMake(320, 200)));
     XCTAssertTrue(CGPointEqualToPoint(_target.anchorPoint, CGPointMake(0, 1)));

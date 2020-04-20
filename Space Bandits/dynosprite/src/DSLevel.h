@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "DSObject.h"
-#include <coco.h>
+#import "DSPoint.h"
+#import <coco.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,8 +28,8 @@ typedef byte (*DSLevelBackgroundNewXY)(void);
 @property (nonatomic) int maxObjectTableSize;
 @property (nonatomic) int tilesetIndex;
 @property (nonatomic, nonnull) NSString *tilemapImagePath;
-@property (nonatomic, nonnull) NSArray<NSNumber *> *tilemapStart;
-@property (nonatomic, nonnull) NSArray<NSNumber *> *tilemapSize;
+@property (nonatomic) DSPoint tilemapStart;
+@property (nonatomic) DSPoint tilemapSize;
 @property (nonatomic) int bkgrndStartX;
 @property (nonatomic) int bkgrndStartY;
 @property (nonatomic, nonnull) NSArray<DSObject *> *objects;

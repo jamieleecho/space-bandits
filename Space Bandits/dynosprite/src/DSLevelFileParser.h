@@ -10,19 +10,18 @@
 #import "DSConfigFileParser.h"
 #import "DSLevel.h"
 #import "DSLevelRegistry.h"
+#import "DSPoint.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSLevelFileParser : NSObject {
+    DSConfigFileParser *_parser;
 }
 
-+ (NSArray<NSNumber *> *)intTupleFromArray:(NSArray *)array;
++ (DSPoint)pointFromArray:(NSArray *)array;
 + (NSArray<NSNumber *> *)intArrayFromArray:(NSArray *)array;
 
-@property (nonatomic) DSConfigFileParser *parser;
-
-- (id)init;
 - (void)parseFile:(NSString *)path forLevel:(DSLevel *)level;
 
 @end

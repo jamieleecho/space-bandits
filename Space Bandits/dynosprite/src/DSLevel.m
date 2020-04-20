@@ -21,8 +21,8 @@
         self.levelDescription = @"";
         self.objectGroupIndices = [[NSArray alloc] init];
         self.tilemapImagePath = @"";
-        self.tilemapStart = [[NSArray alloc] init];
-        self.tilemapSize = [[NSArray alloc] init];
+        self.tilemapStart = DSPointMake(0, 0);
+        self.tilemapSize = DSPointMake(0, 0);
         self.objects = [[NSArray alloc] init];
     }
     

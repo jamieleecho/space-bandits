@@ -12,12 +12,12 @@
 
 @implementation DSLevelFileParser
 
-+ (NSArray<NSNumber *> *)intTupleFromArray:(NSArray *)array {
++ (DSPoint)pointFromArray:(NSArray *)array {
     NSAssert(array.count == 2, ([NSString stringWithFormat:@"Wrong number of elements in array. Found %lu, expected 2", array.count]));
     NSAssert([array[0] isKindOfClass:NSNumber.class], @"Array element 0 is not an NSNumber");
     NSAssert([array[1] isKindOfClass:NSNumber.class], @"Array element 1 is not an NSNumber");
     int v1 = [array[0] intValue], v2 = [array[1] intValue];
-    return [NSArray arrayWithObjects:[NSNumber numberWithInt:v1], [NSNumber numberWithInt:v2], nil];
+    return DSPointMake(v1, v2);
 }
 
 + (NSArray<NSNumber *> *)intArrayFromArray:(NSArray *)array {
@@ -31,15 +31,9 @@
     return retval;
 }
 
-- (id)init {
-    if (self = [super init]) {
-        self.parser = [[DSConfigFileParser alloc] init];
-    }
-    return self;
-}
-
 - (void)parseFile:(NSString *)path forLevel:(DSLevel *)level {
-    NSDictionary *levelDict = [self.parser parseFile:path];
+    DSConfigFileParser *parser = [[DSConfigFileParser alloc] init];
+    NSDictionary *levelDict = [parser parseFile:path];
     NSAssert(levelDict != nil, ([NSString stringWithFormat:@"Failed to parse %@", path]));
     
     // Extract the main level data
@@ -51,8 +45,8 @@
     level.maxObjectTableSize = [levelData[@"MaxObjectTableSize"] intValue];
     level.tilesetIndex = [levelData[@"Tileset"] intValue];
     level.tilemapImagePath = levelData[@"TilemapImage"];
-    level.tilemapStart = [DSLevelFileParser intTupleFromArray:levelData[@"TilemapStart"]];
-    level.tilemapSize = [DSLevelFileParser intTupleFromArray:levelData[@"TilemapSize"]];
+    level.tilemapStart = [DSLevelFileParser pointFromArray:levelData[@"TilemapStart"]];
+    level.tilemapSize = [DSLevelFileParser pointFromArray:levelData[@"TilemapSize"]];
     level.bkgrndStartX = [levelData[@"BkgrndStartX"] intValue];
     level.bkgrndStartY = [levelData[@"BkgrndStartY"] intValue];
     

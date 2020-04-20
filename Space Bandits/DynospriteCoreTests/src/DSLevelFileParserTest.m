@@ -27,20 +27,20 @@
 
 - (void)testIntTupleFromArray {
     NSArray *inputArray1 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], [NSNumber numberWithInt:200], nil];
-    NSArray<NSNumber *> *tuple = [DSLevelFileParser intTupleFromArray:inputArray1];
-    XCTAssertEqualObjects(tuple, inputArray1);
-    XCTAssertNotEqual(tuple, inputArray1);
+    DSPoint point = [DSLevelFileParser pointFromArray:inputArray1];
+    XCTAssertEqual(point.x, 320);
+    XCTAssertEqual(point.y, 200);
 
     NSArray *arr1 = [NSArray arrayWithObjects:@"320", [NSNumber numberWithInt:200], nil];
     NSArray *arr2 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], @"200", nil];
     NSArray *arr3 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], [NSNumber numberWithInt:200], [NSNumber numberWithInt:100], nil];
     NSArray *arr4 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], nil];
     NSArray *arr5 = [[NSArray alloc] init];
-    XCTAssertThrows([DSLevelFileParser intTupleFromArray:arr1]);
-    XCTAssertThrows([DSLevelFileParser intTupleFromArray:arr2]);
-    XCTAssertThrows([DSLevelFileParser intTupleFromArray:arr3]);
-    XCTAssertThrows([DSLevelFileParser intTupleFromArray:arr4]);
-    XCTAssertThrows([DSLevelFileParser intTupleFromArray:arr5]);
+    XCTAssertThrows([DSLevelFileParser pointFromArray:arr1]);
+    XCTAssertThrows([DSLevelFileParser pointFromArray:arr2]);
+    XCTAssertThrows([DSLevelFileParser pointFromArray:arr3]);
+    XCTAssertThrows([DSLevelFileParser pointFromArray:arr4]);
+    XCTAssertThrows([DSLevelFileParser pointFromArray:arr5]);
 }
 
 - (void)testIntArrayFromArray {
@@ -75,10 +75,10 @@
     XCTAssertEqual(_level.maxObjectTableSize, 64);
     XCTAssertEqual(_level.tilesetIndex, 1);
     XCTAssertEqualObjects(_level.tilemapImagePath, @"../tiles/01-moon.gif");
-    NSArray *arr1 = [NSArray arrayWithObjects:[NSNumber numberWithInt:8], [NSNumber numberWithInt:16], nil];
-    XCTAssertEqualObjects(_level.tilemapStart, arr1);
-    NSArray *arr2 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], [NSNumber numberWithInt:208], nil];
-    XCTAssertEqualObjects(_level.tilemapSize, arr2);
+    XCTAssertEqual(_level.tilemapStart.x, 8);
+    XCTAssertEqual(_level.tilemapStart.y, 16);
+    XCTAssertEqual(_level.tilemapSize.x, 320);
+    XCTAssertEqual(_level.tilemapSize.y, 208);
     XCTAssertEqual(_level.bkgrndStartX, 40);
     XCTAssertEqual(_level.bkgrndStartY, 12);
     
