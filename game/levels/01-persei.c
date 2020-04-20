@@ -1,8 +1,8 @@
-#include <coco.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include <coco.h>
 
 #include "dynosprite.h"
 

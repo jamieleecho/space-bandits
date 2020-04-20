@@ -1,3 +1,7 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "04-ship.h"
 #include "object_info.h"
 
@@ -93,3 +97,7 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 RegisterObject(ShipInit, ShipReactivate, ShipUpdate);
+
+#ifdef __cplusplus
+}
+#endif

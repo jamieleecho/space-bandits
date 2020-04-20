@@ -1,3 +1,7 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "03-badguy.h"
 #include "05-missile.h"
 #include "07-badmissile.h"
@@ -188,3 +192,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 RegisterObject(BadguyInit, BadguyReactivate, BadguyUpdate);
+
+#ifdef __cplusplus
+}
+#endif

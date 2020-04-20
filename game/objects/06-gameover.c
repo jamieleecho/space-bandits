@@ -1,3 +1,7 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "object_info.h"
 #include "06-gameover.h"
 
@@ -19,3 +23,7 @@ byte GameoverUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 RegisterObject(GameoverInit, GameoverReactivate, GameoverUpdate);
+
+#ifdef __cplusplus
+}
+#endif
