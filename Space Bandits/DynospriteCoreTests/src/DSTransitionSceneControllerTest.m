@@ -22,21 +22,22 @@
 @implementation DSTransitionSceneControllerTest
 
 - (void)setUp {
-    _initImage = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  @"ffffff", @"BackgroundColor",
-                  @"000000", @"ForegroundColor",
-                  @"1bb43a", @"ProgressColor",
-                  nil];
-    _level1Image = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  @"1fffff", @"BackgroundColor",
-                  @"100000", @"ForegroundColor",
-                  @"2bb43a", @"ProgressColor",
-                  nil];
-    _level2Image = [[NSDictionary alloc] initWithObjectsAndKeys:
-                    @"2fffff", @"BackgroundColor",
-                    @"200000", @"ForegroundColor",
-                    @"3bb43a", @"ProgressColor",
-                    nil];
+    _initImage = @{
+        @"BackgroundColor": @"ffffff",
+        @"ForegroundColor": @"000000",
+        @"ProgressColor": @"1bb43a"
+    };
+    _level1Image = @{
+        @"BackgroundColor": @"1fffff",
+        @"ForegroundColor": @"100000",
+        @"ProgressColor": @"1bb43a"
+    };
+    _level2Image = @{
+        @"BackgroundColor": @"2fffff",
+        @"ForegroundColor": @"200000",
+        @"ProgressColor": @"3bb43a"
+    };
+
     _target = [[DSTransitionSceneController alloc] initWithImageDictionaries:@[_initImage, _level1Image, _level2Image]];
 }
 

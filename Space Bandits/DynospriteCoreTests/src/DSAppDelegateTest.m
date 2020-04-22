@@ -40,7 +40,7 @@
 
 - (void)testAwakeFromNib {
     NSArray *images = @[];
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:images, @"images", nil];
+    NSDictionary *dictionary = @{@"images": images};
     OCMStub([_configFileParser parseResourceNamed:@"images/images"]).andReturn(dictionary);
     [_target awakeFromNib];
     OCMVerify([_transitionSceneController setImages:images]);
