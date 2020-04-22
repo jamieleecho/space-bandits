@@ -14,7 +14,7 @@
     if (self = [super init]) {
         self.imagePath = @"";
         self.transparentColor = [NSColor colorNamed:@"black"];
-        self.sprites = [NSArray array];
+        self.sprites = @[];
     }
     return self;
 }

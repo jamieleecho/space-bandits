@@ -39,7 +39,7 @@
 }
 
 - (void)testAwakeFromNib {
-    NSArray *images = [[NSArray alloc] init];
+    NSArray *images = @[];
     NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:images, @"images", nil];
     OCMStub([_configFileParser parseResourceNamed:@"images/images"]).andReturn(dictionary);
     [_target awakeFromNib];

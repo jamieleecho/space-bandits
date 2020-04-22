@@ -19,11 +19,11 @@
 
         self.name = @"";
         self.levelDescription = @"";
-        self.objectGroupIndices = [[NSArray alloc] init];
+        self.objectGroupIndices = @[];
         self.tilemapImagePath = @"";
         self.tilemapStart = DSPointMake(0, 0);
         self.tilemapSize = DSPointMake(0, 0);
-        self.objects = [[NSArray alloc] init];
+        self.objects = @[];
     }
     
     return self;

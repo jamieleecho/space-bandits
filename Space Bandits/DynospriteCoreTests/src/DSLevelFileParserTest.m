@@ -26,16 +26,16 @@
 }
 
 - (void)testIntTupleFromArray {
-    NSArray *inputArray1 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], [NSNumber numberWithInt:200], nil];
+    NSArray *inputArray1 = @[@320, @200];
     DSPoint point = [DSLevelFileParser pointFromArray:inputArray1];
     XCTAssertEqual(point.x, 320);
     XCTAssertEqual(point.y, 200);
 
-    NSArray *arr1 = [NSArray arrayWithObjects:@"320", [NSNumber numberWithInt:200], nil];
-    NSArray *arr2 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], @"200", nil];
-    NSArray *arr3 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], [NSNumber numberWithInt:200], [NSNumber numberWithInt:100], nil];
-    NSArray *arr4 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], nil];
-    NSArray *arr5 = [[NSArray alloc] init];
+    NSArray *arr1 = @[@"320", @200];
+    NSArray *arr2 = @[@320, @"200"];
+    NSArray *arr3 = @[@320, @200, @100];
+    NSArray *arr4 = @[@320];
+    NSArray *arr5 = @[];
     XCTAssertThrows([DSLevelFileParser pointFromArray:arr1]);
     XCTAssertThrows([DSLevelFileParser pointFromArray:arr2]);
     XCTAssertThrows([DSLevelFileParser pointFromArray:arr3]);
@@ -44,16 +44,16 @@
 }
 
 - (void)testIntArrayFromArray {
-    NSArray *inputArray1 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], [NSNumber numberWithInt:200], nil];
+    NSArray *inputArray1 = @[@320, @200];
     NSArray<NSNumber *> *tuple = [DSLevelFileParser intArrayFromArray:inputArray1];
     XCTAssertEqualObjects(tuple, inputArray1);
     XCTAssertNotEqual(tuple, inputArray1);
 
-    NSArray *arr1 = [NSArray arrayWithObjects:@"320", [NSNumber numberWithInt:200], nil];
-    NSArray *arr2 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], @"200", nil];
-    NSArray *arr3 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], [NSNumber numberWithInt:200], [NSNumber numberWithInt:100], nil];
-    NSArray *arr4 = [NSArray arrayWithObjects:[NSNumber numberWithInt:320], nil];
-    NSArray *arr5 = [[NSArray alloc] init];
+    NSArray *arr1 = @[@"320", @200];
+    NSArray *arr2 = @[@320, @"200"];
+    NSArray *arr3 = @[@320, @200, @100];
+    NSArray *arr4 = @[@320];
+    NSArray *arr5 = @[];
     XCTAssertThrows([DSLevelFileParser intArrayFromArray:arr1]);
     XCTAssertThrows([DSLevelFileParser intArrayFromArray:arr2]);
     XCTAssertEqualObjects([DSLevelFileParser intArrayFromArray:arr3], arr3);
@@ -92,14 +92,14 @@
     XCTAssertEqual(obj0.initialActive, 3);
     XCTAssertEqual(obj0.initialGlobalX, 170);
     XCTAssertEqual(obj0.initialGlobalY, 175);
-    XCTAssertEqualObjects(obj0.initialData, [NSArray arrayWithObject:[NSNumber numberWithInt:0]]);
+    XCTAssertEqualObjects(obj0.initialData, @[@0]);
     DSObject *obj62 = _level.objects[62];
     XCTAssertEqual(obj62.groupID, 6);
     XCTAssertEqual(obj62.objectID, 21);
     XCTAssertEqual(obj62.initialActive, 0);
     XCTAssertEqual(obj62.initialGlobalX, 160);
     XCTAssertEqual(obj62.initialGlobalY, 90);
-    XCTAssertEqualObjects(obj62.initialData, ([NSArray arrayWithObjects:[NSNumber numberWithInt:2], [NSNumber numberWithInt:3], nil]));
+    XCTAssertEqualObjects(obj62.initialData, (@[@2, @3]));
 }
 
 - (void)testParseFileForLevelWithBadFileThrows {

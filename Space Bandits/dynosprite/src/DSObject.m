@@ -12,7 +12,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        self.initialData = [[NSArray alloc] init];
+        self.initialData = @[];
     }
     return self;
 }

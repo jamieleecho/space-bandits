@@ -43,7 +43,7 @@ static byte myLevelBackgroundNewXY(void) { return 0; }
 }
 
 - (void)testProperties {
-    NSArray *arr1 = [NSArray arrayWithObjects:[NSNumber numberWithInt:1], nil];
+    NSArray *arr1 = @[@1];
     _target.name = @"My Name";
     _target.levelDescription = @"My Description";
     _target.objectGroupIndices = arr1;
@@ -67,7 +67,7 @@ static byte myLevelBackgroundNewXY(void) { return 0; }
     XCTAssertEqual(_target.tilemapSize.y, 3);
     XCTAssertEqual(_target.bkgrndStartX, 10);
     XCTAssertEqual(_target.bkgrndStartY, 20);
-    NSArray<DSObject *> *objects = [[NSArray alloc] init];
+    NSArray<DSObject *> *objects = @[];
     XCTAssertEqual(_target.objects, objects);
 }
 

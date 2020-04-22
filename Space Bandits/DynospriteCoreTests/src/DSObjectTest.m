@@ -39,7 +39,7 @@
     _target.initialActive = 3;
     _target.initialGlobalX = 4;
     _target.initialGlobalY = 5;
-    NSArray<NSNumber *> *arr = [NSArray arrayWithObjects:[NSNumber numberWithInt:6], nil];
+    NSArray<NSNumber *> *arr = @[@6];
     _target.initialData = arr;
     
     XCTAssertEqual(_target.groupID, 1);

@@ -102,7 +102,7 @@ const float DefaultFontSize = 12.0f;
         [self poll];
     };
     if (!_pollAction) {
-        _pollAction = [SKAction repeatActionForever:[SKAction sequence:[NSArray arrayWithObjects:[SKAction runBlock:sampleJoystick], [SKAction waitForDuration:1.0f / view.preferredFramesPerSecond], nil]]];
+        _pollAction = [SKAction repeatActionForever:[SKAction sequence:@[[SKAction runBlock:sampleJoystick], [SKAction waitForDuration:1.0f / view.preferredFramesPerSecond]]]];
         [self runAction:_pollAction withKey:@"pollAction"];
     }
 }
