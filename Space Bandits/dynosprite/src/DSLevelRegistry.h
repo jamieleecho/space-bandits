@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addLevel:(DSLevel *)level fromFile:(NSString *)file;
 - (void)clear;
 - (DSLevel *)levelForIndex:(int)index;
+- (NSUInteger)count;
 
 @end
 

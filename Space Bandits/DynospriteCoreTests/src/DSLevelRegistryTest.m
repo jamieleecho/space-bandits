@@ -57,6 +57,15 @@ static byte myLevel2BackgroundNewXY(void) { return 0; }
     [_target addLevel:_level2 fromFile:@"05-foo.c"];
     [_target clear];
     XCTAssertNil([_target levelForIndex:5]);
+    XCTAssertEqual(_target.count, 0);
+}
+
+- (void)testCount {
+    XCTAssertEqual(_target.count, 0);
+    [_target addLevel:_level2 fromFile:@"02-foo.c"];
+    XCTAssertEqual(_target.count, 1);
+    [_target addLevel:_level1 fromFile:@"01-foo.c"];
+    XCTAssertEqual(_target.count, 2);
 }
 
 @end

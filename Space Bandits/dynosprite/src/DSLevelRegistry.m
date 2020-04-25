@@ -60,4 +60,8 @@ static DSLevelRegistry *_sharedInstance = nil;
     return _indexToLevel[[NSNumber numberWithInt:index]];
 }
 
+- (NSUInteger)count {
+    return _indexToLevel.count;
+}
+
 @end
