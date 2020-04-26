@@ -12,7 +12,8 @@
 
 - (id)init {
     if (self = [super init]) {
-        self.bundle = [NSBundle mainBundle];
+        self.bundle = NSBundle.mainBundle;
+        self.registry = DSLevelRegistry.sharedInstance;
     }
     return self;
 }

@@ -15,8 +15,8 @@
 
 @interface DSViewController : NSViewController
 
-@property (assign) IBOutlet SKView *skView;
-@property IBOutlet NSObject <DSTransitionSceneControllerProtocol> *transitionSceneController;
+@property (nonatomic, nonnull) IBOutlet SKView *skView;
+@property (nonatomic, nonnull) IBOutlet NSObject <DSTransitionSceneControllerProtocol> *transitionSceneController;
 
 @end
 

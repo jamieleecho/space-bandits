@@ -9,13 +9,18 @@
 #import <Cocoa/Cocoa.h>
 
 #import "DSConfigFileParser.h"
+#import "DSLevelFileParser.h"
+#import "DSLevelLoader.h"
 #import "DSTransitionSceneController.h"
 
 @interface DSAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet DSConfigFileParser *configFileParser;
-@property (assign) IBOutlet DSTransitionSceneController *transitionSceneController;
+@property (nonatomic, nonnull) IBOutlet DSConfigFileParser *configFileParser;
+@property (nonatomic, nonnull) IBOutlet DSLevelLoader *levelLoader;
+@property (nonatomic, nonnull) IBOutlet DSTransitionSceneController *transitionSceneController;
+
+
 - (void)awakeFromNib;
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender;
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *_Null_unspecified)sender;
 
 @end

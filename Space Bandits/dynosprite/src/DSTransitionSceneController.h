@@ -19,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet DSResourceController *resourceController;
 @property (weak, nonatomic) IBOutlet DSCoCoJoystickController *joystickController;
 
-+ (NSColor *)colorFromRGBString:(NSString *)color;
-
 - (id)initWithImageDictionaries:(NSArray *)images;
 - (DSTransitionScene *)transitionSceneForLevel:(int)level;
 

@@ -15,6 +15,8 @@
     NSDictionary *configs = [self.configFileParser parseResourceNamed:@"images/images"];
     NSArray *images = [configs objectForKey:@"images"];
     self.transitionSceneController.images = images;
+    
+    [self.levelLoader load];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

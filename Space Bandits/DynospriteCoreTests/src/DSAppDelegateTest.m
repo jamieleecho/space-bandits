@@ -16,6 +16,7 @@
     DSAppDelegate *_target;
     id _configFileParser;
     id _transitionSceneController;
+    id _levelLoader;
 }
 @end
 
@@ -28,6 +29,8 @@
     _target.configFileParser = _configFileParser;
     _transitionSceneController = OCMClassMock(DSTransitionSceneController.class);
     _target.transitionSceneController = _transitionSceneController;
+    _levelLoader = OCMClassMock(DSLevelLoader.class);
+    _target.levelLoader = _levelLoader;
 }
 
 - (void)testConfigFileParser {
@@ -44,6 +47,7 @@
     OCMStub([_configFileParser parseResourceNamed:@"images/images"]).andReturn(dictionary);
     [_target awakeFromNib];
     OCMVerify([_transitionSceneController setImages:images]);
+    OCMVerify([(DSLevelLoader *)_levelLoader load]);
 }
 
 - (void)testApplicationShouldTerminateAfterLastWindowClosed {

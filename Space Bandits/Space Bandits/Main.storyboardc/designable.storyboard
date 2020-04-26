@@ -677,21 +677,28 @@
                 </application>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="Voe-Tx-rLC" customClass="DSAppDelegate">
+                    <connections>
+                        <outlet property="configFileParser" destination="wHX-XA-T7S" id="oag-Ug-zuw"/>
+                        <outlet property="levelLoader" destination="0lT-tu-CK3" id="FbB-Wc-fNb"/>
+                        <outlet property="transitionSceneController" destination="rDZ-CV-DhK" id="fEV-se-CkJ"/>
+                    </connections>
+                </customObject>
+                <customObject id="wHX-XA-T7S" customClass="DSConfigFileParser"/>
+                <customObject id="4Pk-WU-M93" customClass="DSLevelFileParser"/>
+                <customObject id="Nki-Dk-Bhg" customClass="DSCoCoJoystickController"/>
+                <customObject id="0lT-tu-CK3" customClass="DSLevelLoader">
+                    <connections>
+                        <outlet property="fileParser" destination="4Pk-WU-M93" id="f8F-6h-CoO"/>
+                    </connections>
+                </customObject>
+                <customObject id="web-E3-IMn" customClass="DSResourceController"/>
                 <customObject id="rDZ-CV-DhK" customClass="DSTransitionSceneController">
                     <connections>
                         <outlet property="joystickController" destination="Nki-Dk-Bhg" id="6MS-OF-1vF"/>
                         <outlet property="resourceController" destination="web-E3-IMn" id="wE8-Gh-8qU"/>
                     </connections>
                 </customObject>
-                <customObject id="Voe-Tx-rLC" customClass="DSAppDelegate">
-                    <connections>
-                        <outlet property="configFileParser" destination="wHX-XA-T7S" id="oag-Ug-zuw"/>
-                        <outlet property="transitionSceneController" destination="rDZ-CV-DhK" id="fEV-se-CkJ"/>
-                    </connections>
-                </customObject>
-                <customObject id="Nki-Dk-Bhg" customClass="DSCoCoJoystickController"/>
-                <customObject id="web-E3-IMn" customClass="DSResourceController"/>
-                <customObject id="wHX-XA-T7S" customClass="DSConfigFileParser"/>
             </objects>
             <point key="canvasLocation" x="63" y="-607"/>
         </scene>

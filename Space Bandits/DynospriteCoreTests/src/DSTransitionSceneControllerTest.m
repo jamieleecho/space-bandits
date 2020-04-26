@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "DSTransitionSceneInfoFileParser.h"
 #import "DSTransitionSceneController.h"
 
 
@@ -42,10 +43,10 @@
 }
 
 - (void)testCreatesColors {
-    XCTAssertEqualObjects([DSTransitionSceneController colorFromRGBString:@"f3Ab24"],
+    XCTAssertEqualObjects([DSTransitionSceneInfoFileParser colorFromRGBString:@"f3Ab24"],
                           [NSColor colorWithCalibratedRed:0xf3/255.0f green:0xab/255.0f blue:0x24/255.0f alpha:1]);
-    XCTAssertThrows([DSTransitionSceneController colorFromRGBString:@"#f3Ab24"]);
-    XCTAssertThrows([DSTransitionSceneController colorFromRGBString:@"f3Ab24aa"]);
+    XCTAssertThrows([DSTransitionSceneInfoFileParser colorFromRGBString:@"#f3Ab24"]);
+    XCTAssertThrows([DSTransitionSceneInfoFileParser colorFromRGBString:@"f3Ab24aa"]);
 }
 
 - (void)testCreatesLevels {

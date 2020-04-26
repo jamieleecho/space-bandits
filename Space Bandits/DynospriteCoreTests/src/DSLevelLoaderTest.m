@@ -25,6 +25,8 @@
 - (void)setUp {
     _target = [[DSLevelLoader alloc] init];
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
+    XCTAssertEqual(_target.registry, DSLevelRegistry.sharedInstance);
+    XCTAssertNil(_target.fileParser);
     _levelRegistry = OCMClassMock(DSLevelRegistry.class);
     _levelParser = OCMClassMock(DSLevelFileParser.class);
     _bundle = OCMClassMock(NSBundle.class);
