@@ -44,7 +44,7 @@
     
     [info removeAllObjects];
     for(DSTransitionSceneInfo *infoObjs in infos) {
-        [infos addObject:infoObjs];
+        [info addObject:infoObjs];
     }
 }
 

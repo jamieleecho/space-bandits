@@ -37,5 +37,53 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C100B746-9EB2-44F5-BF11-F27A0634486B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dynosprite/src/DSTransitionSceneInfoFileParser.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "-parseFile:forTransitionInfo:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C100B746-9EB2-44F5-BF11-F27A0634486B - de1b06a94fe2325"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DSTransitionSceneInfoFileParser parseFile:forTransitionInfo:]"
+                  moduleName = "Space Bandits"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jcho/src/dynosprite/Space%20Bandits/dynosprite/src/DSTransitionSceneInfoFileParser.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "2014">
+               </Location>
+               <Location
+                  uuid = "C100B746-9EB2-44F5-BF11-F27A0634486B - 8586b1db00f4011b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DSTransitionSceneInfoFileParser parseFile:forTransitionInfo:]"
+                  moduleName = "DynospriteCoreTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jcho/src/dynosprite/Space%20Bandits/dynosprite/src/DSTransitionSceneInfoFileParser.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "2014">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
