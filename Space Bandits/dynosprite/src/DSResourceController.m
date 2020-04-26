@@ -40,6 +40,11 @@
     return [self resourceWithName:name preferHiresVersion:self.hiresMode];
 }
 
+- (NSString *)pathForConfigFileWithName:(NSString *)name {
+    NSString *updatedPath = [self resourceWithName:name preferHiresVersion:self.hiresMode];
+    return [NSString pathWithComponents:@[self.bundle.resourcePath, updatedPath]];
+}
+
 - (NSString *)soundWithName:(NSString *)name {
     return [self resourceWithName:name preferHiresVersion:self.hifiMode];
 }

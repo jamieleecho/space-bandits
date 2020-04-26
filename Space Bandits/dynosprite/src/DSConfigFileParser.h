@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DSConfigFileParser : NSObject
 
 - (NSDictionary *)parseFile:(NSString *)file;
-- (NSDictionary *)parseResourceNamed:(NSString *)name;
 
 @end
 

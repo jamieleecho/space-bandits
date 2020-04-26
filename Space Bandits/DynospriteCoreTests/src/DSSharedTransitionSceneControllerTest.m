@@ -37,7 +37,7 @@
 }
 
 - (void)testImages {
-    XCTAssertEqual(_target.images, (NSArray *)[_transitionSceneController images]);
+    XCTAssertEqual(_target.sceneInfos, [_transitionSceneController sceneInfos]);
 }
 
 - (void)testTransitionSceneForLevel {

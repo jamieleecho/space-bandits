@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "DSTransitionScene.h"
+#import "DSTransitionSceneInfo.h"
 
 @protocol DSTransitionSceneControllerProtocol <NSObject>
 
-- (NSArray *)images;
+- (NSArray<DSTransitionSceneInfo *> *)sceneInfos;
 - (DSTransitionScene *)transitionSceneForLevel:(int)level;
 
 @end

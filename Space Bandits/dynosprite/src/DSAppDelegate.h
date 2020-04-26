@@ -10,13 +10,13 @@
 
 #import "DSConfigFileParser.h"
 #import "DSLevelFileParser.h"
-#import "DSLevelLoader.h"
+#import "DSAssetLoader.h"
 #import "DSTransitionSceneController.h"
 
 @interface DSAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (nonatomic, nonnull) IBOutlet DSConfigFileParser *configFileParser;
-@property (nonatomic, nonnull) IBOutlet DSLevelLoader *levelLoader;
+@property (nonatomic, nonnull) IBOutlet DSAssetLoader *levelLoader;
 @property (nonatomic, nonnull) IBOutlet DSTransitionSceneController *transitionSceneController;
 
 

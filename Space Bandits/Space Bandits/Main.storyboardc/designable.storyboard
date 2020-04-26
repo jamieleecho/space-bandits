@@ -687,16 +687,22 @@
                 <customObject id="wHX-XA-T7S" customClass="DSConfigFileParser"/>
                 <customObject id="4Pk-WU-M93" customClass="DSLevelFileParser"/>
                 <customObject id="Nki-Dk-Bhg" customClass="DSCoCoJoystickController"/>
-                <customObject id="0lT-tu-CK3" customClass="DSLevelLoader">
+                <customObject id="0lT-tu-CK3" customClass="DSAssetLoader">
                     <connections>
-                        <outlet property="fileParser" destination="4Pk-WU-M93" id="f8F-6h-CoO"/>
+                        <outlet property="levelFileParser" destination="4Pk-WU-M93" id="ZYc-bn-eVd"/>
+                        <outlet property="resourceController" destination="web-E3-IMn" id="IES-SH-Irf"/>
+                        <outlet property="sceneInfos" destination="jjS-RJ-pne" id="Zsh-y2-0YW"/>
+                        <outlet property="transitionSceneInfoFileParser" destination="mI2-rC-MfV" id="vIw-qQ-7lM"/>
                     </connections>
                 </customObject>
+                <customObject id="jjS-RJ-pne" customClass="NSMutableArray"/>
                 <customObject id="web-E3-IMn" customClass="DSResourceController"/>
+                <customObject id="mI2-rC-MfV" customClass="DSTransitionSceneInfoFileParser"/>
                 <customObject id="rDZ-CV-DhK" customClass="DSTransitionSceneController">
                     <connections>
                         <outlet property="joystickController" destination="Nki-Dk-Bhg" id="6MS-OF-1vF"/>
                         <outlet property="resourceController" destination="web-E3-IMn" id="wE8-Gh-8qU"/>
+                        <outlet property="sceneInfos" destination="jjS-RJ-pne" id="8sA-4H-Wse"/>
                     </connections>
                 </customObject>
             </objects>

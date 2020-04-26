@@ -46,6 +46,16 @@
     XCTAssertEqualObjects([_target imageWithName:@"resources/foo/forest.png"], @"hires/resources/foo/forest.png");
 }
 
+- (void)testSelectsRightConfigFile {
+    OCMStub([_bundle pathForResource:@"JSONList" ofType:@"json" inDirectory:@"hires/resources/foo"]).andReturn(@"hires/resources/foo/JSONList.json");
+    OCMStub([_bundle resourcePath]).andReturn(@"foo.app/Contents/Resources");
+    _target.bundle = _bundle;
+    XCTAssertEqualObjects([_target pathForConfigFileWithName:@"resources/foo/JSONList.json"], @"foo.app/Contents/Resources/resources/foo/JSONList.json");
+    
+    _target.hiresMode = YES;
+    XCTAssertEqualObjects([_target pathForConfigFileWithName:@"resources/foo/JSONList.json"], @"foo.app/Contents/Resources/hires/resources/foo/JSONList.json");
+}
+
 - (void)testSelectsRightSound {
     OCMStub([_bundle pathForResource:@"ping" ofType:@"wav" inDirectory:@"hires/resources/foo"]).andReturn(@"resources/foo/hires/ping.wav");
     _target.bundle = _bundle;

@@ -1,24 +1,25 @@
 //
-//  DSLevelLoader.m
+//  DSAssetLoader.m
 //  Space Bandits
 //
 //  Created by Jamie Cho on 4/24/20.
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import "DSLevelLoader.h"
+#import "DSAssetLoader.h"
 
-@implementation DSLevelLoader
+@implementation DSAssetLoader
 
 - (id)init {
     if (self = [super init]) {
         self.bundle = NSBundle.mainBundle;
         self.registry = DSLevelRegistry.sharedInstance;
+        self.sceneInfos = [NSMutableArray array];
     }
     return self;
 }
 
-- (void)load {
+- (void)loadLevels {
     NSError *error;
     NSRegularExpression *levelFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.json$" options:NSRegularExpressionCaseInsensitive error:&error];
 
@@ -47,8 +48,14 @@
     for(NSNumber *levelNumber in levels) {
         NSString *path = levelToPath[levelNumber];
         DSLevel *level = [self.registry levelForIndex:levelNumber.intValue];
-        [self.fileParser parseFile:path forLevel:level];
+        [self.levelFileParser parseFile:path forLevel:level];
     }
+}
+
+- (void)loadSceneInfos {
+    NSString *sceneInfoPath = [self.resourceController pathForConfigFileWithName:@"images/images.json"];
+    [self.transitionSceneInfoFileParser parseFile:sceneInfoPath forTransitionInfo:self.sceneInfos];
+    NSAssert((self.registry.count + 1) == self.sceneInfos.count, ([NSString stringWithFormat:@"%@ contains %lu entries but was expecting %lu because there must be an entry for the initial screen plus %lu entries for the game levels", sceneInfoPath, self.registry.count, (self.registry.count + 1), self.sceneInfos.count]));
 }
 
 @end

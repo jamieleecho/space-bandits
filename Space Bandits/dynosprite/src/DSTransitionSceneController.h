@@ -7,19 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSTransitionSceneControllerProtocol.h"
 #import "DSCoCoJoystickController.h"
 #import "DSResourceController.h"
+#import "DSTransitionSceneControllerProtocol.h"
+#import "DSTransitionSceneInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSTransitionSceneController : NSObject <DSTransitionSceneControllerProtocol>
 
-@property NSArray *images;
-@property (weak, nonatomic) IBOutlet DSResourceController *resourceController;
-@property (weak, nonatomic) IBOutlet DSCoCoJoystickController *joystickController;
+@property (nonnull, nonatomic) IBOutlet NSArray<DSTransitionSceneInfo *> *sceneInfos;
+@property (nonnull, nonatomic) IBOutlet DSResourceController *resourceController;
+@property (nonnull, nonatomic) IBOutlet DSCoCoJoystickController *joystickController;
 
-- (id)initWithImageDictionaries:(NSArray *)images;
+- (id)init;
 - (DSTransitionScene *)transitionSceneForLevel:(int)level;
 
 @end

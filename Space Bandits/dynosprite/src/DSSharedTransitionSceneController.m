@@ -27,8 +27,8 @@
     return self;
 }
 
-- (NSArray *)images {
-    return self.transitionSceneController.images;
+- (NSArray *)sceneInfos {
+    return self.transitionSceneController.sceneInfos;
 }
 
 - (DSTransitionScene *)transitionSceneForLevel:(int)level {

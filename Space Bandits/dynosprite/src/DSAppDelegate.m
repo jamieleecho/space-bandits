@@ -11,12 +11,9 @@
 
 @implementation DSAppDelegate
 
-- (void)awakeFromNib {
-    NSDictionary *configs = [self.configFileParser parseResourceNamed:@"images/images"];
-    NSArray *images = [configs objectForKey:@"images"];
-    self.transitionSceneController.images = images;
-    
-    [self.levelLoader load];
+- (void)awakeFromNib {    
+    [self.levelLoader loadLevels];
+    [self.levelLoader loadSceneInfos];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

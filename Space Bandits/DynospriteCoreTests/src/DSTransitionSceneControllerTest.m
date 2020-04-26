@@ -39,7 +39,26 @@
         @"ProgressColor": @"3bb43a"
     };
 
-    _target = [[DSTransitionSceneController alloc] initWithImageDictionaries:@[_initImage, _level1Image, _level2Image]];
+    _target = [[DSTransitionSceneController alloc] init];
+    XCTAssertTrue([_target.sceneInfos isKindOfClass:NSArray.class]);
+    
+    NSArray<DSTransitionSceneInfo *>*sceneInfos = @[
+        [[DSTransitionSceneInfo alloc] init],
+        [[DSTransitionSceneInfo alloc] init],
+        [[DSTransitionSceneInfo alloc] init]
+    ];
+    sceneInfos[0].backgroundColor = [NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0f];
+    sceneInfos[0].foregroundColor = [NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
+    sceneInfos[0].progressColor = [NSColor colorWithCalibratedRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
+
+    sceneInfos[1].backgroundColor = [NSColor colorWithCalibratedRed:0x1f/255.0f green:1.0f blue:1.0f alpha:1.0f];
+    sceneInfos[1].foregroundColor = [NSColor colorWithCalibratedRed:0x10/255.0f green:0.0f blue:0.0f alpha:1.0f];
+    sceneInfos[1].progressColor = [NSColor colorWithCalibratedRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
+
+    sceneInfos[2].backgroundColor = [NSColor colorWithCalibratedRed:0x2f/255.0f green:1.0f blue:1.0f alpha:1.0f];
+    sceneInfos[2].foregroundColor = [NSColor colorWithCalibratedRed:0x20/255.0f green:0.0f blue:0.0f alpha:1.0f];
+    sceneInfos[2].progressColor = [NSColor colorWithCalibratedRed:0x3b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
+    _target.sceneInfos = sceneInfos;
 }
 
 - (void)testCreatesColors {

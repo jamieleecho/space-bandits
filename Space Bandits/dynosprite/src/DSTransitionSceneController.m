@@ -15,12 +15,8 @@
 @implementation DSTransitionSceneController
 
 - (id)init {
-    return [self initWithImageDictionaries:@[]];
-}
-
-- (id)initWithImageDictionaries:(NSArray *)images {
     if (self = [super init]) {
-        self.images = images;
+        self.sceneInfos = @[];
     }
     return self;
 }
@@ -32,9 +28,9 @@
     DSTransitionScene *transitionScene = (level == 0) ? [[DSInitScene alloc] init] : [[DSTransitionScene alloc] init];
     transitionScene.resourceController = self.resourceController;
     transitionScene.joystickController = self.joystickController;
-    transitionScene.backgroundColor = [DSTransitionSceneInfoFileParser colorFromRGBString:self.images[level][@"BackgroundColor"]];
-    transitionScene.foregroundColor = [DSTransitionSceneInfoFileParser colorFromRGBString:self.images[level][@"ForegroundColor"]];
-    transitionScene.progressBarColor = [DSTransitionSceneInfoFileParser colorFromRGBString:self.images[level][@"ProgressColor"]];
+    transitionScene.backgroundColor = self.sceneInfos[level].backgroundColor;
+    transitionScene.foregroundColor = self.sceneInfos[level].foregroundColor;
+    transitionScene.progressBarColor = self.sceneInfos[level].progressColor;
     return transitionScene;
 }
 
