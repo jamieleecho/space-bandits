@@ -36,7 +36,6 @@ static NSString *MenuSoundLow = @"LoFi";
     [super didMoveToView:view];
     self.isDone = NO;
     if (self.labels.count < 1) {
-        self.backgroundImageName = @"Images/00-mainmenu.png";
         [self addLabelWithText:@"[D]isplay:" atPosition:CGPointMake(3, 120)];
         _resolutionLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 120)];
         [self addLabelWithText:@"[C]ontrol:" atPosition:CGPointMake(3, 136)];

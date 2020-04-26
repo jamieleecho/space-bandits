@@ -18,6 +18,7 @@
     id _levelParser;
     id _transitionSceneInfoParser;
     id _resourceController;
+    id _imageLoader;
     id _bundle;
 }
 
@@ -33,6 +34,7 @@
     XCTAssertNil(_target.levelFileParser);
     XCTAssertNil(_target.transitionSceneInfoFileParser);
     XCTAssertNil(_target.resourceController);
+    XCTAssertNil(_target.imageLoader);
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
 
     _sceneInfos = [NSMutableArray array];
@@ -40,6 +42,7 @@
     _levelParser = OCMClassMock(DSLevelFileParser.class);
     _transitionSceneInfoParser = OCMClassMock(DSTransitionSceneInfoFileParser.class);
     _resourceController = OCMClassMock(DSResourceController.class);
+    _imageLoader = OCMClassMock(DSTransitionImageLoader.class);
     _bundle = OCMClassMock(NSBundle.class);
 
     _target.sceneInfos = _sceneInfos;
@@ -47,6 +50,7 @@
     _target.levelFileParser = _levelParser;
     _target.transitionSceneInfoFileParser = _transitionSceneInfoParser;
     _target.resourceController = _resourceController;
+    _target.imageLoader = _imageLoader;
     _target.bundle = _bundle;
 }
 
@@ -56,6 +60,7 @@
     XCTAssertEqual(_target.levelFileParser, _levelParser);
     XCTAssertEqual(_target.transitionSceneInfoFileParser, _transitionSceneInfoParser);
     XCTAssertEqual(_target.resourceController, _resourceController);
+    XCTAssertEqual(_target.imageLoader, _imageLoader);
     XCTAssertEqual(_target.bundle, _bundle);
 }
 

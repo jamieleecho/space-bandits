@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DSLevelFileParser.h"
 #import "DSResourceController.h"
+#import "DSTransitionImageLoader.h"
 #import "DSTransitionSceneInfoFileParser.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,11 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) IBOutlet DSLevelRegistry *registry;
 @property (nonatomic, nonnull) IBOutlet NSMutableArray *sceneInfos;
 @property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
+@property (nonatomic, nonnull) IBOutlet DSTransitionImageLoader *imageLoader;
 @property (nonatomic, nonnull) NSBundle *bundle;
 
 - (id)init;
 - (void)loadLevels;
 - (void)loadSceneInfos;
+- (void)loadTransitionSceneImages;
 
 @end
 

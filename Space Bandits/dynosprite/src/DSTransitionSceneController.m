@@ -31,6 +31,7 @@
     transitionScene.backgroundColor = self.sceneInfos[level].backgroundColor;
     transitionScene.foregroundColor = self.sceneInfos[level].foregroundColor;
     transitionScene.progressBarColor = self.sceneInfos[level].progressColor;
+    transitionScene.backgroundImageName = [self.resourceController imageWithName:self.sceneInfos[level].backgroundImageName];
     return transitionScene;
 }
 

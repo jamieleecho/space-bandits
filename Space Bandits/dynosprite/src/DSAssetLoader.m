@@ -58,4 +58,8 @@
     NSAssert((self.registry.count + 1) == self.sceneInfos.count, ([NSString stringWithFormat:@"%@ contains %lu entries but was expecting %lu because there must be an entry for the initial screen plus %lu entries for the game levels", sceneInfoPath, self.registry.count, (self.registry.count + 1), self.sceneInfos.count]));
 }
 
+- (void)loadTransitionSceneImages {
+    [self.imageLoader loadImagesForTransitionInfo:self.sceneInfos];
+}
+
 @end

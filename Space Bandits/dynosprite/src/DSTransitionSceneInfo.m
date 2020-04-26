@@ -15,6 +15,7 @@
         self.backgroundColor = NSColor.whiteColor;
         self.foregroundColor = NSColor.blackColor;
         self.progressColor = NSColor.greenColor;
+        self.backgroundImageName = @"";
     }
     return self;
 }

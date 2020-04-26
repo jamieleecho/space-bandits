@@ -22,6 +22,13 @@
 		5223365F2432D06A0065E264 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		522336612432D08A0065E264 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		522336632432D0F80065E264 /* SDL2.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		524109E22455EC2B0005DF54 /* DSLevelLoaderScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109E12455EC2B0005DF54 /* DSLevelLoaderScene.m */; };
+		524109E32455EC2B0005DF54 /* DSLevelLoaderScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109E12455EC2B0005DF54 /* DSLevelLoaderScene.m */; };
+		524109E42455EC2B0005DF54 /* DSLevelLoaderScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109E12455EC2B0005DF54 /* DSLevelLoaderScene.m */; };
+		524109E72455EF910005DF54 /* DSTransitionImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109E62455EF910005DF54 /* DSTransitionImageLoader.m */; };
+		524109E82455EF910005DF54 /* DSTransitionImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109E62455EF910005DF54 /* DSTransitionImageLoader.m */; };
+		524109E92455EF910005DF54 /* DSTransitionImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109E62455EF910005DF54 /* DSTransitionImageLoader.m */; };
+		524109EB245604DA0005DF54 /* DSTransitionImageLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109EA245604DA0005DF54 /* DSTransitionImageLoaderTest.m */; };
 		524402DF21ED65CF00B02D38 /* DSTransitionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 524402DE21ED65CF00B02D38 /* DSTransitionScene.m */; };
 		524402E021ED65CF00B02D38 /* DSTransitionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 524402DE21ED65CF00B02D38 /* DSTransitionScene.m */; };
 		525FC91F22888202007F4793 /* DSSharedTransitionSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedTransitionSceneController.m */; };
@@ -223,6 +230,11 @@
 		521A84B221FE07A8006120E8 /* DSTransitionSceneControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneControllerTest.m; sourceTree = "<group>"; };
 		52229FAC2438BCBB0018A082 /* forest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forest.png; sourceTree = "<group>"; };
 		5227E72021E2DDA40092C947 /* DSInitScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSInitScene.h; sourceTree = "<group>"; };
+		524109E02455EC2B0005DF54 /* DSLevelLoaderScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevelLoaderScene.h; sourceTree = "<group>"; };
+		524109E12455EC2B0005DF54 /* DSLevelLoaderScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelLoaderScene.m; sourceTree = "<group>"; };
+		524109E52455EF910005DF54 /* DSTransitionImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionImageLoader.h; sourceTree = "<group>"; };
+		524109E62455EF910005DF54 /* DSTransitionImageLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionImageLoader.m; sourceTree = "<group>"; };
+		524109EA245604DA0005DF54 /* DSTransitionImageLoaderTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionImageLoaderTest.m; sourceTree = "<group>"; };
 		524402DD21ED65CF00B02D38 /* DSTransitionScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionScene.h; sourceTree = "<group>"; };
 		524402DE21ED65CF00B02D38 /* DSTransitionScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionScene.m; sourceTree = "<group>"; };
 		525FC91A22887A13007F4793 /* DSTransitionSceneControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionSceneControllerProtocol.h; sourceTree = "<group>"; };
@@ -450,6 +462,8 @@
 				52E7604521D7EF440001F3A0 /* DSLevel.m */,
 				52F845242442911300B1D70F /* DSLevelFileParser.h */,
 				52F845252442911300B1D70F /* DSLevelFileParser.m */,
+				524109E02455EC2B0005DF54 /* DSLevelLoaderScene.h */,
+				524109E12455EC2B0005DF54 /* DSLevelLoaderScene.m */,
 				52E7605C21D802A20001F3A0 /* DSLevelRegistry.h */,
 				52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */,
 				7D8022972431656C00496138 /* DSObject.h */,
@@ -472,6 +486,8 @@
 				52B1A168244D23A2008E7066 /* DSTileFileParser.m */,
 				52B1A160244D20CD008E7066 /* DSTileInfo.h */,
 				52B1A161244D20CD008E7066 /* DSTileInfo.m */,
+				524109E52455EF910005DF54 /* DSTransitionImageLoader.h */,
+				524109E62455EF910005DF54 /* DSTransitionImageLoader.m */,
 				52A93D772454F9B300D2327B /* DSTransitionSceneInfo.h */,
 				52A93D782454F9B300D2327B /* DSTransitionSceneInfo.m */,
 				52A93D7E2454FE4100D2327B /* DSTransitionSceneInfoFileParser.h */,
@@ -524,6 +540,7 @@
 				52B1A15E244D0BAD008E7066 /* DSSpriteInfoTest.m */,
 				52B1A165244D2213008E7066 /* DSTileInfoTest.m */,
 				52B1A170244D2712008E7066 /* DSTileFileParserTest.m */,
+				524109EA245604DA0005DF54 /* DSTransitionImageLoaderTest.m */,
 				52A93D8724550D8400D2327B /* DSTransitionSceneInfoFileParserTest.m */,
 				52A93D832454FF7C00D2327B /* DSTransitionSceneInfoTest.m */,
 				52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */,
@@ -771,12 +788,14 @@
 				5284F5E524340FE300B2C2C5 /* DSCoCoJoystickTest.m in Sources */,
 				52C8C6FB243EA1A500EC582C /* DSInitSceneTest.m in Sources */,
 				52DF473124355071008DC63F /* DSCoCoKeyboardJoystickTest.m in Sources */,
+				524109E42455EC2B0005DF54 /* DSLevelLoaderScene.m in Sources */,
 				7D3110F022FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
 				52B1A13D244BD4F9008E7066 /* DSObjectClass.m in Sources */,
 				52B1A14B244CDC21008E7066 /* DSObjectClassFileParserTest.m in Sources */,
 				52C8C6F6243DEE5800EC582C /* DSTransitionSceneTest.m in Sources */,
 				52A93D8824550D8400D2327B /* DSTransitionSceneInfoFileParserTest.m in Sources */,
 				521A849A21FCEE06006120E8 /* DSConfigFileParserTest.m in Sources */,
+				524109EB245604DA0005DF54 /* DSTransitionImageLoaderTest.m in Sources */,
 				521A84AC21FE0748006120E8 /* DSTransitionSceneController.m in Sources */,
 				7DC4E7F122FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				521A84B021FE0748006120E8 /* DSAppDelegate.m in Sources */,
@@ -799,6 +818,7 @@
 				7D8022A024316BB700496138 /* DSDirectPageGlobals.m in Sources */,
 				52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */,
 				52F845292442911300B1D70F /* DSLevelFileParser.m in Sources */,
+				524109E92455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
 				52B1A15D244D0222008E7066 /* DSPointTest.m in Sources */,
 				52B1A129244B8667008E7066 /* DSLevelFileParserTest.m in Sources */,
 				52B1A156244CFD31008E7066 /* DSSpriteInfo.m in Sources */,
@@ -845,10 +865,12 @@
 				525FC91F22888202007F4793 /* DSSharedTransitionSceneController.m in Sources */,
 				52B1A1742453AFD0008E7066 /* DSAssetLoader.m in Sources */,
 				7D7EED7023BD0EB700804C26 /* DSResourceController.m in Sources */,
+				524109E72455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
 				7D8022992431656C00496138 /* DSObject.m in Sources */,
 				7DC4E7F422FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
 				52E7605E21D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
+				524109E22455EC2B0005DF54 /* DSLevelLoaderScene.m in Sources */,
 				52B1A162244D20CD008E7066 /* DSTileInfo.m in Sources */,
 				52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */,
 				52F1209B21D7DD65008A7900 /* main.m in Sources */,
@@ -882,6 +904,8 @@
 				52B1A15A244CFE45008E7066 /* DSPoint.c in Sources */,
 				52B1A148244CC40C008E7066 /* DSObjectClassFileParser.m in Sources */,
 				52A90E4521E2F23000CC2643 /* DSAppDelegate.m in Sources */,
+				524109E82455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
+				524109E32455EC2B0005DF54 /* DSLevelLoaderScene.m in Sources */,
 				52A90E3621E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				7D3110EF22FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
 				7D8022A52431791C00496138 /* DSSoundController.m in Sources */,

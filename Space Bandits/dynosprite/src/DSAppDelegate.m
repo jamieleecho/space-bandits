@@ -14,6 +14,7 @@
 - (void)awakeFromNib {    
     [self.levelLoader loadLevels];
     [self.levelLoader loadSceneInfos];
+    [self.levelLoader loadTransitionSceneImages];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

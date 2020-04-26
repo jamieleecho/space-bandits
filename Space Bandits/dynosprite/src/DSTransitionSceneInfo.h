@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) NSColor *backgroundColor;
 @property (nonatomic, nonnull) NSColor *foregroundColor;
 @property (nonatomic, nonnull) NSColor *progressColor;
+@property (nonatomic, nonnull) NSString *backgroundImageName;
 
 - (id)init;
 

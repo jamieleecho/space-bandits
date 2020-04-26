@@ -689,6 +689,7 @@
                 <customObject id="Nki-Dk-Bhg" customClass="DSCoCoJoystickController"/>
                 <customObject id="0lT-tu-CK3" customClass="DSAssetLoader">
                     <connections>
+                        <outlet property="imageLoader" destination="Nlc-1x-jO5" id="yoe-XY-i13"/>
                         <outlet property="levelFileParser" destination="4Pk-WU-M93" id="ZYc-bn-eVd"/>
                         <outlet property="resourceController" destination="web-E3-IMn" id="IES-SH-Irf"/>
                         <outlet property="sceneInfos" destination="jjS-RJ-pne" id="Zsh-y2-0YW"/>
@@ -697,6 +698,7 @@
                 </customObject>
                 <customObject id="jjS-RJ-pne" customClass="NSMutableArray"/>
                 <customObject id="web-E3-IMn" customClass="DSResourceController"/>
+                <customObject id="Nlc-1x-jO5" customClass="DSTransitionImageLoader"/>
                 <customObject id="mI2-rC-MfV" customClass="DSTransitionSceneInfoFileParser"/>
                 <customObject id="rDZ-CV-DhK" customClass="DSTransitionSceneController">
                     <connections>
