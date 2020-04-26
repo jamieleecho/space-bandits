@@ -1,5 +1,5 @@
 //
-//  DSLevelLoaderScene.h
+//  DSLevelLoadingScene.h
 //  Space Bandits
 //
 //  Created by Jamie Cho on 4/26/20.
@@ -11,7 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSLevelLoaderScene : DSTransitionScene
+@interface DSLevelLoadingScene : DSTransitionScene
+
+@property (nonatomic, nonnull) NSString *levelName;
+@property (nonatomic, nonnull) NSString *levelDescription;
 
 - (void)didMoveToView:(SKView *)view;
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DSCoCoJoystickController.h"
+#import "DSLevelRegistry.h"
 #import "DSResourceController.h"
 #import "DSTransitionSceneControllerProtocol.h"
 #import "DSTransitionSceneInfo.h"
@@ -18,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonnull, nonatomic) IBOutlet NSArray<DSTransitionSceneInfo *> *sceneInfos;
 @property (nonnull, nonatomic) IBOutlet DSResourceController *resourceController;
+@property (nonnull, nonatomic) IBOutlet DSLevelRegistry *levelRegistry;
 @property (nonnull, nonatomic) IBOutlet DSCoCoJoystickController *joystickController;
 
 - (id)init;

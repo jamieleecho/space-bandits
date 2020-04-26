@@ -33,7 +33,7 @@ static byte myLevel2BackgroundNewXY(void) { return 0; }
 }
 
 - (void)tearDown {
-    [[DSLevelRegistry sharedInstance] clear];
+    [DSLevelRegistry.sharedInstance clear];
 }
 
 - (void)testIndexFromFilename {
@@ -42,9 +42,9 @@ static byte myLevel2BackgroundNewXY(void) { return 0; }
 }
 
 - (void)testSharedInstance {
-    XCTAssertNotEqual(_target, [DSLevelRegistry sharedInstance]);
-    [[DSLevelRegistry sharedInstance] addLevel:_level1 fromFile:@"01-foo.c"];
-    XCTAssertEqual([[DSLevelRegistry sharedInstance] levelForIndex:1], _level1);
+    XCTAssertNotEqual(_target, DSLevelRegistry.sharedInstance);
+    [DSLevelRegistry.sharedInstance addLevel:_level1 fromFile:@"01-foo.c"];
+    XCTAssertEqual([DSLevelRegistry.sharedInstance levelForIndex:1], _level1);
 }
 
 - (void)testAddingAndRetrieving {

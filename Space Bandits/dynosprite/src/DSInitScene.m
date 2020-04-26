@@ -91,8 +91,8 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)transitionToNextScreen {
     SKTransition *transition = [SKTransition crossFadeWithDuration:1.0];
-    SKScene *newScene = [SKScene nodeWithFileNamed:@"DSGameScene"];
-    [self.view presentScene:newScene transition:transition];
+    DSTransitionScene *transitionScene = [self.transitionSceneController transitionSceneForLevel:1];
+    [self.view presentScene:transitionScene transition:transition];
     self.isDone = YES;
 }
 

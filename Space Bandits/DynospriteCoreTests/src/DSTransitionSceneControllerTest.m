@@ -6,7 +6,10 @@
 //  Copyright © 2019 Jamie Cho. All rights reserved.
 //
 
+#import <OCMock/OCMock.h>
 #import <XCTest/XCTest.h>
+#import "DSInitScene.h"
+#import "DSLevelLoadingScene.h"
 #import "DSTransitionSceneInfoFileParser.h"
 #import "DSTransitionSceneController.h"
 
@@ -16,6 +19,8 @@
     NSDictionary *_initImage;
     NSDictionary *_level1Image;
     NSDictionary *_level2Image;
+    id _levelRegistry;
+    DSLevel *_level;
 }
 
 @end
@@ -41,6 +46,7 @@
 
     _target = [[DSTransitionSceneController alloc] init];
     XCTAssertTrue([_target.sceneInfos isKindOfClass:NSArray.class]);
+    XCTAssertEqual(_target.levelRegistry, DSLevelRegistry. sharedInstance);
     
     NSArray<DSTransitionSceneInfo *>*sceneInfos = @[
         [[DSTransitionSceneInfo alloc] init],
@@ -59,6 +65,12 @@
     sceneInfos[2].foregroundColor = [NSColor colorWithCalibratedRed:0x20/255.0f green:0.0f blue:0.0f alpha:1.0f];
     sceneInfos[2].progressColor = [NSColor colorWithCalibratedRed:0x3b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
     _target.sceneInfos = sceneInfos;
+    
+    _level.name = @"Omicron Persei 8";
+    _level.levelDescription = @"Do Something!";
+    
+    _levelRegistry = OCMClassMock(DSLevelRegistry.class);
+    _target.levelRegistry = _levelRegistry;
 }
 
 - (void)testCreatesColors {
@@ -69,10 +81,18 @@
 }
 
 - (void)testCreatesLevels {
-    DSTransitionScene *initScene = [_target transitionSceneForLevel:0];
+    DSInitScene *initScene = (DSInitScene *)[_target transitionSceneForLevel:0];
     XCTAssertEqualObjects(initScene.backgroundColor, [[NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0f] colorUsingColorSpace:initScene.backgroundColor.colorSpace]);
     XCTAssertEqualObjects(initScene.foregroundColor, [NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:1.0f]);
     XCTAssertEqualObjects(initScene.progressBarColor, [NSColor colorWithCalibratedRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1]);
+    XCTAssertEqual(initScene.class, DSInitScene.class);
+    XCTAssertEqual(initScene.transitionSceneController, _target);
+    
+    OCMStub([_levelRegistry levelForIndex:2]).andReturn(_level);
+    DSLevelLoadingScene *loadingScene = (DSLevelLoadingScene *)[_target transitionSceneForLevel:2];
+    XCTAssertEqual(loadingScene.class, DSLevelLoadingScene.class);
+    XCTAssertEqual(loadingScene.levelName, _level.name);
+    XCTAssertEqual(loadingScene.levelDescription, _level.levelDescription);
 }
 
 - (void)testCreatesNewLevels {

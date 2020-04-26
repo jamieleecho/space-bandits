@@ -18,7 +18,7 @@
  */
 int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const char *file) {
     DSLevel *level = [[DSLevel alloc] initWithInitLevel:init backgroundNewXY:backgroundNewXY];
-    [[DSLevelRegistry sharedInstance] addLevel:level fromFile:[NSString stringWithUTF8String:file]];
+    [DSLevelRegistry.sharedInstance addLevel:level fromFile:[NSString stringWithUTF8String:file]];
     return 1;
 }
 
