@@ -45,7 +45,6 @@
 		529201E6243FF69E000B4D58 /* DSAppDelegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201E5243FF69E000B4D58 /* DSAppDelegateTest.m */; };
 		529201E824413F97000B4D58 /* DSViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201E724413F97000B4D58 /* DSViewControllerTest.m */; };
 		529201EA24414521000B4D58 /* DSSharedTransitionSceneControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201E924414521000B4D58 /* DSSharedTransitionSceneControllerTest.m */; };
-		529201EE24414F8D000B4D58 /* DSGameSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201ED24414F8D000B4D58 /* DSGameSceneTest.m */; };
 		529201F0244150C1000B4D58 /* DSSoundControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201EF244150C1000B4D58 /* DSSoundControllerTest.m */; };
 		529201F2244151BF000B4D58 /* DSWindowControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201F1244151BF000B4D58 /* DSWindowControllerTest.m */; };
 		529201F42441A63F000B4D58 /* DSResourceControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201F32441A63F000B4D58 /* DSResourceControllerTest.m */; };
@@ -247,7 +246,6 @@
 		529201E5243FF69E000B4D58 /* DSAppDelegateTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSAppDelegateTest.m; sourceTree = "<group>"; };
 		529201E724413F97000B4D58 /* DSViewControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSViewControllerTest.m; sourceTree = "<group>"; };
 		529201E924414521000B4D58 /* DSSharedTransitionSceneControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedTransitionSceneControllerTest.m; sourceTree = "<group>"; };
-		529201ED24414F8D000B4D58 /* DSGameSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSGameSceneTest.m; sourceTree = "<group>"; };
 		529201EF244150C1000B4D58 /* DSSoundControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSoundControllerTest.m; sourceTree = "<group>"; };
 		529201F1244151BF000B4D58 /* DSWindowControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSWindowControllerTest.m; sourceTree = "<group>"; };
 		529201F32441A63F000B4D58 /* DSResourceControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSResourceControllerTest.m; sourceTree = "<group>"; };
@@ -517,7 +515,6 @@
 				52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */,
 				521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */,
 				5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */,
-				529201ED24414F8D000B4D58 /* DSGameSceneTest.m */,
 				52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */,
 				52B1A128244B8667008E7066 /* DSLevelFileParserTest.m */,
 				52E7605821D7F57B0001F3A0 /* DSLevelTest.m */,
@@ -823,7 +820,6 @@
 				52B1A14F244CF680008E7066 /* DSInitScene.m in Sources */,
 				52A90E3721E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				525FC92122888202007F4793 /* DSSharedTransitionSceneController.m in Sources */,
-				529201EE24414F8D000B4D58 /* DSGameSceneTest.m in Sources */,
 				52B1A15F244D0BAD008E7066 /* DSSpriteInfoTest.m in Sources */,
 				529201F2244151BF000B4D58 /* DSWindowControllerTest.m in Sources */,
 				52A93D7B2454F9B300D2327B /* DSTransitionSceneInfo.m in Sources */,

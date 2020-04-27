@@ -13,9 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSLevelLoadingScene : DSTransitionScene
 
+@property (nonatomic, nonnull) NSBundle *bundle;
 @property (nonatomic, nonnull) NSString *levelName;
 @property (nonatomic, nonnull) NSString *levelDescription;
 
+- (id)init;
 - (void)didMoveToView:(SKView *)view;
 
 @end

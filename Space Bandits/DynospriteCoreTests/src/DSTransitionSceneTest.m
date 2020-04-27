@@ -105,6 +105,7 @@
     
     OCMStub([_resourceController imageWithName:backgroundImageName]).andReturn(resourceImagePath);
     _target.backgroundImageName = backgroundImageName;
+    XCTAssertEqual(_target.backgroundImage, (SKSpriteNode *)(_target.children[0]));
     CGImageRef backgroundCGImage = ((SKSpriteNode *)(_target.children[0])).texture.CGImage;
     NSImage *backgroundImage = [DSTransitionSceneTest convertToNSImage:backgroundCGImage];
     XCTAssertTrue([DSTransitionSceneTest image:image isSameAsImage:backgroundImage]);

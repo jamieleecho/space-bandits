@@ -34,6 +34,10 @@ const float DefaultFontSize = 12.0f;
     return _backgroundImageName;
 }
 
+- (SKSpriteNode *)backgroundImage {
+    return _backgroundImage;
+}
+
 - (void)setBackgroundImageName:(NSString *)backgroundImageName {
     _backgroundImageName = backgroundImageName;
     NSString *image = [_resourceController imageWithName:backgroundImageName];

@@ -16,7 +16,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        self.bundle = [NSBundle mainBundle];
+        self.bundle = NSBundle.mainBundle;
     }
     return self;
 }
