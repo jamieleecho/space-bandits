@@ -127,6 +127,7 @@
 		52F1208D21D7DD63008A7900 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52F1208C21D7DD63008A7900 /* Actions.sks */; };
 		52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F1209421D7DD65008A7900 /* Assets.xcassets */; };
 		52F1209B21D7DD65008A7900 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1209A21D7DD65008A7900 /* main.m */; };
+		52F491B72458FD18009123CE /* DSLevelLoadingSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F491B62458FD18009123CE /* DSLevelLoadingSceneTest.m */; };
 		52F845272442911300B1D70F /* DSLevelFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F845252442911300B1D70F /* DSLevelFileParser.m */; };
 		52F845282442911300B1D70F /* DSLevelFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F845252442911300B1D70F /* DSLevelFileParser.m */; };
 		52F845292442911300B1D70F /* DSLevelFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F845252442911300B1D70F /* DSLevelFileParser.m */; };
@@ -316,6 +317,7 @@
 		52F120AC21D7DD65008A7900 /* DynospriteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DynospriteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F120B021D7DD65008A7900 /* DSTransitionSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneTest.m; sourceTree = "<group>"; };
 		52F120B221D7DD65008A7900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52F491B62458FD18009123CE /* DSLevelLoadingSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelLoadingSceneTest.m; sourceTree = "<group>"; };
 		52F845242442911300B1D70F /* DSLevelFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevelFileParser.h; sourceTree = "<group>"; };
 		52F845252442911300B1D70F /* DSLevelFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelFileParser.m; sourceTree = "<group>"; };
 		7D3110E822FF018D00833374 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 				5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */,
 				52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */,
 				52B1A128244B8667008E7066 /* DSLevelFileParserTest.m */,
+				52F491B62458FD18009123CE /* DSLevelLoadingSceneTest.m */,
 				52E7605821D7F57B0001F3A0 /* DSLevelTest.m */,
 				52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */,
 				52B1A12E244BA5CC008E7066 /* DSObjectTest.m */,
@@ -778,6 +781,7 @@
 				52DF473124355071008DC63F /* DSCoCoKeyboardJoystickTest.m in Sources */,
 				7D3110F022FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
 				52B1A13D244BD4F9008E7066 /* DSObjectClass.m in Sources */,
+				52F491B72458FD18009123CE /* DSLevelLoadingSceneTest.m in Sources */,
 				52B1A14B244CDC21008E7066 /* DSObjectClassFileParserTest.m in Sources */,
 				52C8C6F6243DEE5800EC582C /* DSTransitionSceneTest.m in Sources */,
 				52A93D8824550D8400D2327B /* DSTransitionSceneInfoFileParserTest.m in Sources */,

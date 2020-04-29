@@ -13,6 +13,8 @@
 - (id)init {
     if (self = [super init]) {
         self.bundle = NSBundle.mainBundle;
+        self.levelDescription = @"";
+        self.levelName = @"";
     }
     return self;
 }
