@@ -24,13 +24,12 @@
 
 - (void)setUp {
     _target = [[DSLevelLoadingScene alloc] init];
-    XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     _bundle = OCMClassMock(NSBundle.class);
     _resourceController = OCMClassMock(DSResourceController.class);
 }
 
 - (void)testInit {
-    XCTAssertNil(_bundle);
+    XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     XCTAssertEqualObjects(_target.levelName, @"");
     XCTAssertEqualObjects(_target.levelDescription, @"");
     XCTAssertFalse(_target.isDone);
