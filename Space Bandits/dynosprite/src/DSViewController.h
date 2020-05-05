@@ -10,13 +10,13 @@
 #import <SpriteKit/SpriteKit.h>
 #import <GameplayKit/GameplayKit.h>
 
-#import "DSSharedTransitionSceneController.h"
+#import "DSSharedSceneController.h"
 
 
 @interface DSViewController : NSViewController
 
 @property (nonatomic, nonnull) IBOutlet SKView *skView;
-@property (nonatomic, nonnull) IBOutlet NSObject <DSTransitionSceneControllerProtocol> *transitionSceneController;
+@property (nonatomic, nonnull) IBOutlet NSObject <DSSceneControllerProtocol> *sceneController;
 
 @end
 

@@ -10,7 +10,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import <XCTest/XCTest.h>
 
-#import "DSTransitionSceneController.h"
+#import "DSSceneController.h"
 #import "DSViewController.h"
 
 
@@ -26,9 +26,9 @@
 
 - (void)setUp {
     _skView = OCMClassMock(SKView.class);
-    _transitionSceneController = OCMClassMock(DSTransitionSceneController.class);
+    _transitionSceneController = OCMClassMock(DSSceneController.class);
     _target = [[DSViewController alloc] init];
-    _target.transitionSceneController = _transitionSceneController;
+    _target.sceneController = _transitionSceneController;
     _target.skView = _skView;
 }
 

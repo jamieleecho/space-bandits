@@ -91,7 +91,7 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)transitionToNextScreen {
     SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
-    DSTransitionScene *transitionScene = [self.transitionSceneController transitionSceneForLevel:1];
+    DSTransitionScene *transitionScene = [self.sceneController transitionSceneForLevel:1];
     [self.view presentScene:transitionScene transition:transition];
     self.isDone = YES;
 }

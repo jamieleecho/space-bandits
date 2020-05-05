@@ -1,5 +1,5 @@
 //
-//  DSTransitionControllerTest.m
+//  DSSceneControllerTest.m
 //  DynospriteCoreTests
 //
 //  Created by Jamie Cho on 1/27/19.
@@ -10,12 +10,12 @@
 #import <XCTest/XCTest.h>
 #import "DSInitScene.h"
 #import "DSLevelLoadingScene.h"
+#import "DSSceneController.h"
 #import "DSTransitionSceneInfoFileParser.h"
-#import "DSTransitionSceneController.h"
 
 
-@interface DSTransitionSceneControllerTest : XCTestCase {
-    DSTransitionSceneController *_target;
+@interface DSSceneControllerTest : XCTestCase {
+    DSSceneController *_target;
     NSDictionary *_initImage;
     NSDictionary *_level1Image;
     NSDictionary *_level2Image;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation DSTransitionSceneControllerTest
+@implementation DSSceneControllerTest
 
 - (void)setUp {
     _initImage = @{
@@ -44,7 +44,7 @@
         @"ProgressColor": @"3bb43a"
     };
 
-    _target = [[DSTransitionSceneController alloc] init];
+    _target = [[DSSceneController alloc] init];
     XCTAssertTrue([_target.sceneInfos isKindOfClass:NSArray.class]);
     XCTAssertEqual(_target.levelRegistry, DSLevelRegistry. sharedInstance);
     
@@ -86,13 +86,14 @@
     XCTAssertEqualObjects(initScene.foregroundColor, [NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:1.0f]);
     XCTAssertEqualObjects(initScene.progressBarColor, [NSColor colorWithCalibratedRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1]);
     XCTAssertEqual(initScene.class, DSInitScene.class);
-    XCTAssertEqual(initScene.transitionSceneController, _target);
+    XCTAssertEqual(initScene.sceneController, _target);
     
     OCMStub([_levelRegistry levelForIndex:2]).andReturn(_level);
     DSLevelLoadingScene *loadingScene = (DSLevelLoadingScene *)[_target transitionSceneForLevel:2];
     XCTAssertEqual(loadingScene.class, DSLevelLoadingScene.class);
     XCTAssertEqual(loadingScene.levelName, _level.name);
     XCTAssertEqual(loadingScene.levelDescription, _level.levelDescription);
+    XCTAssertEqual(loadingScene.sceneController, _target);
 }
 
 - (void)testCreatesNewLevels {

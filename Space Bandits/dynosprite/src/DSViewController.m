@@ -14,7 +14,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    SKScene *scene = [self.transitionSceneController transitionSceneForLevel:0];
+    SKScene *scene = [self.sceneController transitionSceneForLevel:0];
     
     // Present the scene
     [self.skView presentScene:scene];

@@ -1,5 +1,5 @@
 //
-//  DSImageController.m
+//  DSSceneController.m
 //  dynosprite
 //
 //  Created by Jamie Cho on 1/27/19.
@@ -8,16 +8,17 @@
 
 #import "DSInitScene.h"
 #import "DSLevelLoadingScene.h"
-#import "DSTransitionSceneController.h"
+#import "DSSceneController.h"
 #import "DSTransitionSceneInfoFileParser.h"
 
 
-@implementation DSTransitionSceneController
+@implementation DSSceneController
 
 - (id)init {
     if (self = [super init]) {
-        self.sceneInfos = @[];
+        self.bundle = NSBundle.mainBundle;
         self.levelRegistry = DSLevelRegistry.sharedInstance;
+        self.sceneInfos = @[];
     }
     return self;
 }
@@ -33,17 +34,29 @@
     transitionScene.foregroundColor = self.sceneInfos[level].foregroundColor;
     transitionScene.progressBarColor = self.sceneInfos[level].progressColor;
     transitionScene.backgroundImageName = [self.resourceController imageWithName:self.sceneInfos[level].backgroundImageName];
+    transitionScene.levelNumber = level;
     
-    if (level == 0) {
-        DSInitScene *initScene = (DSInitScene *)transitionScene;
-        initScene.transitionSceneController = self;
-    } else {
+    transitionScene.sceneController = self;
+    if (level != 0) {
         DSLevelLoadingScene *levelLoadingScene = (DSLevelLoadingScene *)transitionScene;
         levelLoadingScene.levelName = [self.levelRegistry levelForIndex:level].name;
         levelLoadingScene.levelDescription = [self.levelRegistry levelForIndex:level].levelDescription;
     }
     
     return transitionScene;
+}
+
+- (DSGameScene *)gameSceneForLevel:(int)level {
+    DSLevel *levelObj = [self.levelRegistry levelForIndex:level];
+    NSString *tileMapImagePath = [self.resourceController imageWithName:levelObj.tilemapImagePath];
+    while([tileMapImagePath hasPrefix:@"../"]) {
+        tileMapImagePath = [tileMapImagePath substringWithRange:NSMakeRange(3, tileMapImagePath.length - 3)];
+    }
+    NSImage *tileMapImage = [[NSImage alloc] initWithContentsOfFile:[self.bundle pathForResource:tileMapImagePath.stringByDeletingPathExtension ofType:tileMapImagePath.pathExtension]];
+    NSRect tileMapRect = NSMakeRect(levelObj.bkgrndStartX, levelObj.bkgrndStartY, levelObj.tilemapSize.x, levelObj.tilemapSize.y);
+    SKTileMapNode *tileMapNode = [self.tileMapMaker nodeFromImage:tileMapImage withRect:tileMapRect];
+    DSGameScene *gameScene = [[DSGameScene alloc] initWithTileMapNode:tileMapNode];
+    return gameScene;
 }
 
 @end

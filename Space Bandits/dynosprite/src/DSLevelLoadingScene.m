@@ -54,7 +54,11 @@
         [progressBarOutline addChild:progressBar];
         SKAction *loadingAction = [SKAction resizeToWidth:66 duration:1.0f];
         [progressBar runAction:loadingAction completion:^{
-            NSBeep();
+            DSGameScene *gameScene = [self.sceneController gameSceneForLevel:self.levelNumber];
+            SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
+            [self.view presentScene:gameScene transition:transition];
+            self.isDone = YES;
+
         }];
         [SKAction repeatAction:loadingAction count:1];
     }

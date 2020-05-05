@@ -1,5 +1,5 @@
 //
-//  DSTransitionSceneControllerProtocol.h
+//  DSSceneControllerProtocol.h
 //  dynosprite
 //
 //  Created by Jamie Cho on 1/27/19.
@@ -7,12 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSTransitionScene.h"
-#import "DSTransitionSceneInfo.h"
+#import "DSGameScene.h"
 
-@protocol DSTransitionSceneControllerProtocol <NSObject>
+@class DSGameScene;
+@class DSTransitionScene;
+@class DSTransitionSceneInfo;
+
+@protocol DSSceneControllerProtocol <NSObject>
 
 - (NSArray<DSTransitionSceneInfo *> *)sceneInfos;
+
+- (DSGameScene *)gameSceneForLevel:(int)level;
 - (DSTransitionScene *)transitionSceneForLevel:(int)level;
 
 @end

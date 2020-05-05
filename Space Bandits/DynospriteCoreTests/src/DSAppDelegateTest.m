@@ -15,7 +15,7 @@
 @interface DSAppDelegateTest : XCTestCase {
     DSAppDelegate *_target;
     id _configFileParser;
-    id _transitionSceneController;
+    id _sceneController;
     id _levelLoader;
 }
 @end
@@ -27,8 +27,8 @@
     _target = [[DSAppDelegate alloc] init];
     _configFileParser = OCMClassMock(DSConfigFileParser.class);
     _target.configFileParser = _configFileParser;
-    _transitionSceneController = OCMClassMock(DSTransitionSceneController.class);
-    _target.transitionSceneController = _transitionSceneController;
+    _sceneController = OCMClassMock(DSSceneController.class);
+    _target.sceneController = _sceneController;
     _levelLoader = OCMClassMock(DSAssetLoader.class);
     _target.levelLoader = _levelLoader;
 }
@@ -38,7 +38,7 @@
 }
 
 - (void)testTransitionSceneController {
-    XCTAssertEqual(_target.transitionSceneController, _transitionSceneController);
+    XCTAssertEqual(_target.sceneController, _sceneController);
 }
 
 - (void)testAwakeFromNib {

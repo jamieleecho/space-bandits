@@ -9,6 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "DSCoCoJoystickController.h"
 #import "DSResourceController.h"
+#import "DSSceneControllerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,7 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
 @property (strong, nonatomic) DSResourceController *resourceController;
 @property (strong, nonatomic) DSCoCoJoystickController *joystickController;
+@property (nonatomic) id<DSSceneControllerProtocol> sceneController;
 @property (nonatomic) BOOL isDone;
+@property (nonatomic) int levelNumber;
 
 - (id)init;
 - (SKLabelNode *)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position;

@@ -7,7 +7,7 @@
 //
 
 #import "DSTransitionScene.h"
-#import "DSTransitionSceneControllerProtocol.h"
+#import "DSSceneControllerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,8 +38,6 @@ typedef enum DSInitSceneSound {
 + (NSString *)textFromResolution:(DSInitSceneDisplay)resolution;
 + (NSString *)textFromControl:(DSInitSceneControl)control;
 + (NSString *)textFromSound:(DSInitSceneSound)sound;
-
-@property (nonatomic) id<DSTransitionSceneControllerProtocol> transitionSceneController;
 
 - (void)didMoveToView:(SKView *)view;
 - (void)willMoveFromView:(SKView *)view;

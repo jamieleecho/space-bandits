@@ -1,5 +1,5 @@
 //
-//  DSTransitionSceneTest.m
+//  DSSceneTest.m
 //  DynospriteCoreTests
 //
 //  Created by Jamie Cho on 12/29/18.
@@ -10,61 +10,33 @@
 #import <XCTest/XCTest.h>
 
 #import "DSCoCoJoystickController.h"
+#import "DSTestUtils.h"
 #import "DSTransitionScene.h"
 #import "DSResourceController.h"
+#import "DSSceneController.h"
 
 
-@interface DSTransitionSceneTest : XCTestCase {
+@interface DSSceneTest : XCTestCase {
     DSTransitionScene *_target;
-    DSResourceController *_resourceController;
     DSCoCoJoystickController *_joystickController;
+    DSResourceController *_resourceController;
+    DSSceneController *_sceneController;
 }
 @end
 
-@implementation DSTransitionSceneTest
-+ (BOOL)color:(NSColor *)color1 isSameAs:(NSColor *)color2 {
-    return [[color1 colorUsingColorSpace:NSColorSpace.sRGBColorSpace] isEqual:[color2 colorUsingColorSpace:NSColorSpace.sRGBColorSpace]];
-}
-
-/**
- * Converts NSImage equivalent to cgImage.
- */
-+ (NSImage *)convertToNSImage:(CGImageRef)cgImage {
-    NSSize imageSize = CGSizeMake(CGImageGetWidth(cgImage), CGImageGetHeight(cgImage));
-    return [[NSImage alloc] initWithCGImage:cgImage size:imageSize];
-}
-
-/**
- * Converts nsImage to an 8x4 Color NSBitmapImageRep.
- */
-+ (NSBitmapImageRep *)convertTo8x4ImageRep:(NSImage *)nsImage {
-    NSBitmapImageRep *nsImageRep = [[NSBitmapImageRep alloc]                                     initWithBitmapDataPlanes:NULL pixelsWide:nsImage.size.width pixelsHigh:nsImage.size.height bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bytesPerRow:nsImage.size.width * 4 bitsPerPixel:32];
-    [NSGraphicsContext saveGraphicsState];
-    NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep: nsImageRep];
-    [NSGraphicsContext setCurrentContext: ctx];
-    [nsImage drawInRect:NSMakeRect(0, 0, nsImage.size.width, nsImage.size.height)];
-    [ctx flushGraphics];
-    [NSGraphicsContext restoreGraphicsState];
-    return nsImageRep;
-}
-
-/**
- * Returns YES IFF image1 renders identically to image2 as an 8*3 BitmapImageRep.
- */
-+ (BOOL)image:(NSImage *)image1 isSameAsImage:(NSImage *)image2 {
-    NSBitmapImageRep *imageRep1 = [DSTransitionSceneTest convertTo8x4ImageRep:image1];
-    NSBitmapImageRep *imageRep2 = [DSTransitionSceneTest convertTo8x4ImageRep:image2];
-    return [imageRep1.TIFFRepresentation isEqual:imageRep2.TIFFRepresentation];
-}
+@implementation DSSceneTest
 
 - (void)setUp {
     _target = [[DSTransitionScene alloc] init];
-    _resourceController = OCMClassMock(DSResourceController.class);
     _joystickController = OCMClassMock(DSCoCoJoystickController.class);
+    _resourceController = OCMClassMock(DSResourceController.class);
+    _sceneController = OCMClassMock(DSSceneController.class);
     XCTAssertNil(_target.resourceController);
     XCTAssertNil(_target.joystickController);
-    _target.resourceController = _resourceController;
+    XCTAssertNil(_target.sceneController);
     _target.joystickController = _joystickController;
+    _target.resourceController = _resourceController;
+    _target.sceneController = _sceneController;
 }
 
 - (void)testInit {
@@ -79,6 +51,10 @@
     XCTAssertEqual(_target.backgroundImageName, @"");
     XCTAssertEqual(_target.yScale, 1);
     XCTAssertEqualObjects(((SKSpriteNode *)(_target.children[0])).color, _target.backgroundColor);
+    
+    XCTAssertEqual(_target.joystickController, _joystickController);
+    XCTAssertEqual(_target.resourceController, _resourceController);
+    XCTAssertEqual(_target.sceneController, _sceneController);
 }
 
 - (void)testAddsLabels {
@@ -107,8 +83,8 @@
     _target.backgroundImageName = backgroundImageName;
     XCTAssertEqual(_target.backgroundImage, (SKSpriteNode *)(_target.children[0]));
     CGImageRef backgroundCGImage = ((SKSpriteNode *)(_target.children[0])).texture.CGImage;
-    NSImage *backgroundImage = [DSTransitionSceneTest convertToNSImage:backgroundCGImage];
-    XCTAssertTrue([DSTransitionSceneTest image:image isSameAsImage:backgroundImage]);
+    NSImage *backgroundImage = [DSTestUtils convertToNSImage:backgroundCGImage];
+    XCTAssertTrue([DSTestUtils image:image isSameAsImage:backgroundImage]);
     XCTAssertEqual(_target.backgroundImageName, backgroundImageName);
 }
 
@@ -127,22 +103,22 @@
     OCMStub([_resourceController fontForDisplay]).andReturn(@"Courier");
     _target.foregroundColor = NSColor.purpleColor;
     [_target addLabelWithText:@"Test" atPosition:CGPointMake(100, 200)];
-    XCTAssertTrue([DSTransitionSceneTest color:_target.foregroundColor isSameAs:NSColor.purpleColor]);
-    XCTAssertTrue([DSTransitionSceneTest color:_target.foregroundColor isSameAs:_target.labels[0].fontColor]);
+    XCTAssertTrue([DSTestUtils color:_target.foregroundColor isSameAs:NSColor.purpleColor]);
+    XCTAssertTrue([DSTestUtils color:_target.foregroundColor isSameAs:_target.labels[0].fontColor]);
     _target.foregroundColor = NSColor.brownColor;
-    XCTAssertTrue([DSTransitionSceneTest color:_target.foregroundColor isSameAs:NSColor.brownColor]);
-    XCTAssertTrue([DSTransitionSceneTest color:_target.foregroundColor isSameAs:_target.labels[0].fontColor]);
+    XCTAssertTrue([DSTestUtils color:_target.foregroundColor isSameAs:NSColor.brownColor]);
+    XCTAssertTrue([DSTestUtils color:_target.foregroundColor isSameAs:_target.labels[0].fontColor]);
 }
 
 - (void)testBackgroundColor {
     OCMStub([_resourceController fontForDisplay]).andReturn(@"Courier");
     _target.backgroundColor = NSColor.purpleColor;
     [_target addLabelWithText:@"Test" atPosition:CGPointMake(100, 200)];
-    XCTAssertTrue([DSTransitionSceneTest color:_target.backgroundColor isSameAs:NSColor.purpleColor]);
-    XCTAssertTrue([DSTransitionSceneTest color:_target.backgroundColor isSameAs:((SKSpriteNode *)(_target.labels[0].parent)).color]);
+    XCTAssertTrue([DSTestUtils color:_target.backgroundColor isSameAs:NSColor.purpleColor]);
+    XCTAssertTrue([DSTestUtils color:_target.backgroundColor isSameAs:((SKSpriteNode *)(_target.labels[0].parent)).color]);
     _target.backgroundColor = NSColor.brownColor;
-    XCTAssertTrue([DSTransitionSceneTest color:_target.backgroundColor isSameAs:NSColor.brownColor]);
-    XCTAssertTrue([DSTransitionSceneTest color:_target.backgroundColor isSameAs:((SKSpriteNode *)(_target.labels[0].parent)).color]);
+    XCTAssertTrue([DSTestUtils color:_target.backgroundColor isSameAs:NSColor.brownColor]);
+    XCTAssertTrue([DSTestUtils color:_target.backgroundColor isSameAs:((SKSpriteNode *)(_target.labels[0].parent)).color]);
 }
 
 - (void)testLabels {
@@ -187,9 +163,9 @@
     
     // Verify that the background was updated
     CGImageRef hiresBackgroundCGImage = ((SKSpriteNode *)(_target.children[0])).texture.CGImage;
-    NSImage *hiresBackgroundImage = [DSTransitionSceneTest convertToNSImage:hiresBackgroundCGImage];
+    NSImage *hiresBackgroundImage = [DSTestUtils convertToNSImage:hiresBackgroundCGImage];
     NSImage *hiresImage = [[NSImage alloc] initWithContentsOfFile:hiresResourceImagePath];
-    XCTAssertTrue([DSTransitionSceneTest image:hiresImage isSameAsImage:hiresBackgroundImage]);
+    XCTAssertTrue([DSTestUtils image:hiresImage isSameAsImage:hiresBackgroundImage]);
     
     // Verify that the font was updated
     XCTAssertEqual(label.fontSize, 12.80000114440918);
