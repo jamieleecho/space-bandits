@@ -14,7 +14,6 @@
     if (self = [super init]) {
         self.size = CGSizeMake(320, 200);
         self.anchorPoint = CGPointMake(0, 1);
-        tileMapNode.anchorPoint = CGPointMake(0, 1);
         _tileMapNode = tileMapNode;
         [self addChild:tileMapNode];
     }

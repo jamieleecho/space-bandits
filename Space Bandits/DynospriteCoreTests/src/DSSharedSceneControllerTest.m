@@ -47,4 +47,9 @@
     XCTAssertEqual([_target transitionSceneForLevel:5], scene);
     OCMVerify([_sceneController transitionSceneForLevel:5]);
 }
+
+- (void)testGameSceneForLevel {
+    XCTAssertNil([_target gameSceneForLevel:1]);
+}
+
 @end

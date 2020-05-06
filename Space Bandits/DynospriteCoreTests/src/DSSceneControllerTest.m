@@ -102,4 +102,8 @@
     XCTAssertNotEqual(scene1, scene2);
 }
 
+- (void)testGameSceneForLevel {
+    XCTAssertTrue(NO);
+}
+
 @end

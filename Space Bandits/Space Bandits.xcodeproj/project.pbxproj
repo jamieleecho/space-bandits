@@ -45,6 +45,7 @@
 		525FC91F22888202007F4793 /* DSSharedSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedSceneController.m */; };
 		525FC92022888202007F4793 /* DSSharedSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedSceneController.m */; };
 		525FC92122888202007F4793 /* DSSharedSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedSceneController.m */; };
+		52629B7824624AB5004AAEA3 /* DSGameSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */; };
 		5279A4E42436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E52436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E72436B83B00A51D98 /* DSCoCoJoystickControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */; };
@@ -263,6 +264,7 @@
 		525FC91D22888202007F4793 /* DSSharedSceneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSharedSceneController.h; sourceTree = "<group>"; };
 		525FC91E22888202007F4793 /* DSSharedSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedSceneController.m; sourceTree = "<group>"; };
 		52610C88243D64390052EE4F /* forest-hires.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forest-hires.png"; sourceTree = "<group>"; };
+		52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSGameSceneTest.m; sourceTree = "<group>"; };
 		5279A4E32436B7AF00A51D98 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickControllerTest.m; sourceTree = "<group>"; };
 		5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDirectPageGlobalsTest.m; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */,
 				521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */,
 				5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */,
+				52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */,
 				52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */,
 				52B1A128244B8667008E7066 /* DSLevelFileParserTest.m */,
 				52F491B62458FD18009123CE /* DSLevelLoadingSceneTest.m */,
@@ -815,6 +818,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52B1A1762453AFD0008E7066 /* DSAssetLoader.m in Sources */,
+				52629B7824624AB5004AAEA3 /* DSGameSceneTest.m in Sources */,
 				52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */,
 				5284F5E524340FE300B2C2C5 /* DSCoCoJoystickTest.m in Sources */,
 				52C8C6FB243EA1A500EC582C /* DSInitSceneTest.m in Sources */,
