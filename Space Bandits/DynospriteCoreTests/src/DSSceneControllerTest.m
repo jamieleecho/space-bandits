@@ -11,6 +11,7 @@
 #import "DSInitScene.h"
 #import "DSLevelLoadingScene.h"
 #import "DSSceneController.h"
+#import "DSTestUtils.h"
 #import "DSTransitionSceneInfoFileParser.h"
 
 
@@ -19,9 +20,15 @@
     NSDictionary *_initImage;
     NSDictionary *_level1Image;
     NSDictionary *_level2Image;
-    id _levelRegistry;
     DSLevel *_level;
+    id _bundle;
+    id _joystickController;
+    id _levelRegistry;
+    id _resourceController;
+    id _tileMapMaker;
+    id _transitionSceneController;
 }
+
 
 @end
 
@@ -46,7 +53,11 @@
 
     _target = [[DSSceneController alloc] init];
     XCTAssertTrue([_target.sceneInfos isKindOfClass:NSArray.class]);
-    XCTAssertEqual(_target.levelRegistry, DSLevelRegistry. sharedInstance);
+    XCTAssertEqual(_target.levelRegistry, DSLevelRegistry.sharedInstance);
+    XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
+    XCTAssertNil(_target.joystickController);
+    XCTAssertNil(_target.resourceController);
+    XCTAssertNil(_target.tileMapMaker);
     
     NSArray<DSTransitionSceneInfo *>*sceneInfos = @[
         [[DSTransitionSceneInfo alloc] init],
@@ -71,6 +82,24 @@
     
     _levelRegistry = OCMClassMock(DSLevelRegistry.class);
     _target.levelRegistry = _levelRegistry;
+    
+    _bundle = OCMClassMock(NSBundle.class);
+    _joystickController = OCMClassMock(DSCoCoJoystickController.class);
+    _levelRegistry = OCMClassMock(DSLevelRegistry.class);
+    _resourceController = OCMClassMock(DSResourceController.class);
+    _tileMapMaker = OCMClassMock(DSTileMapMaker.class);
+    
+    _target.bundle = _bundle;
+    _target.joystickController = _joystickController;
+    _target.levelRegistry = _levelRegistry;
+    _target.resourceController = _resourceController;
+    _target.tileMapMaker = _tileMapMaker;
+    
+    XCTAssertEqual(_target.bundle, _bundle);
+    XCTAssertEqual(_target.joystickController, _joystickController);
+    XCTAssertEqual(_target.levelRegistry, _levelRegistry);
+    XCTAssertEqual(_target.resourceController, _resourceController);
+    XCTAssertEqual(_target.tileMapMaker, _tileMapMaker);
 }
 
 - (void)testCreatesColors {
@@ -91,6 +120,7 @@
     OCMStub([_levelRegistry levelForIndex:2]).andReturn(_level);
     DSLevelLoadingScene *loadingScene = (DSLevelLoadingScene *)[_target transitionSceneForLevel:2];
     XCTAssertEqual(loadingScene.class, DSLevelLoadingScene.class);
+    XCTAssertEqual(loadingScene.joystickController, _joystickController);
     XCTAssertEqual(loadingScene.levelName, _level.name);
     XCTAssertEqual(loadingScene.levelDescription, _level.levelDescription);
     XCTAssertEqual(loadingScene.sceneController, _target);
@@ -103,7 +133,50 @@
 }
 
 - (void)testGameSceneForLevel {
-    XCTAssertTrue(NO);
+    const int level = 3;
+    DSLevel *levelObj = [[DSLevel alloc] init];
+    levelObj.tilemapImagePath = @"../../tiles/mytile.png";
+    levelObj.tilemapSize = DSPointMake(160, 64);
+    levelObj.tilemapStart = DSPointMake(3, 7);
+    
+    OCMStub([_levelRegistry levelForIndex:level]).andReturn(levelObj);
+    OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"hires/tiles/mytile.png");
+    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
+    NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
+    OCMStub([_bundle pathForResource:@"hires/tiles/mytile" ofType:@"png"]).andReturn(imagePath);
+    NSRect tileMapRect = NSMakeRect(3, 7, 160, 64);
+    SKNode *node = [[SKNode alloc] init];
+    OCMStub([_tileMapMaker nodeFromImage:[OCMArg any] withRect:tileMapRect]).andDo(^(NSInvocation *invocation) {
+        NSImage *loadedImage;
+        [invocation getArgument:(void *)&loadedImage atIndex:2];
+        XCTAssertTrue([DSTestUtils image:loadedImage isSameAsImage:image]);
+    }).andReturn(node);
+    
+    DSGameScene *gameScene = [_target gameSceneForLevel:level];
+    XCTAssertEqual(gameScene.children.firstObject, node);
+}
+
+- (void)testGameSceneForLevelWithBadInputs {
+    const int level = 3;
+    DSLevel *levelObj = [[DSLevel alloc] init];
+    levelObj.tilemapImagePath = @"../../tiles/mytile.png";
+    levelObj.tilemapSize = DSPointMake(161, 64);
+    levelObj.tilemapStart = DSPointMake(3, 7);
+    
+    OCMStub([_levelRegistry levelForIndex:level]).andReturn(levelObj);
+    OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"hires/tiles/mytile.png");
+    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
+    NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
+    OCMStub([_bundle pathForResource:@"hires/tiles/mytile" ofType:@"png"]).andReturn(imagePath);
+    NSRect tileMapRect = NSMakeRect(3, 7, 160, 64);
+    SKNode *node = [[SKNode alloc] init];
+    OCMStub([_tileMapMaker nodeFromImage:[OCMArg any] withRect:tileMapRect]).andDo(^(NSInvocation *invocation) {
+        NSImage *loadedImage;
+        [invocation getArgument:(void *)&loadedImage atIndex:2];
+        XCTAssertTrue([DSTestUtils image:loadedImage isSameAsImage:image]);
+    }).andReturn(node);
+    
+    XCTAssertThrows([_target gameSceneForLevel:level]);
 }
 
 @end

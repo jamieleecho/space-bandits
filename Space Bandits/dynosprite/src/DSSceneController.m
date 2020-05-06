@@ -54,7 +54,7 @@
     }
     tileMapImagePath = [self.resourceController imageWithName:tileMapImagePath];
     NSImage *tileMapImage = [[NSImage alloc] initWithContentsOfFile:[self.bundle pathForResource:tileMapImagePath.stringByDeletingPathExtension ofType:tileMapImagePath.pathExtension]];
-    NSRect tileMapRect = NSMakeRect(levelObj.bkgrndStartX, levelObj.bkgrndStartY, levelObj.tilemapSize.x, levelObj.tilemapSize.y);
+    NSRect tileMapRect = NSMakeRect(levelObj.tilemapStart.x, levelObj.tilemapStart.y, levelObj.tilemapSize.x, levelObj.tilemapSize.y);
     SKTileMapNode *tileMapNode = [self.tileMapMaker nodeFromImage:tileMapImage withRect:tileMapRect];
     DSGameScene *gameScene = [[DSGameScene alloc] initWithTileMapNode:tileMapNode];
     return gameScene;

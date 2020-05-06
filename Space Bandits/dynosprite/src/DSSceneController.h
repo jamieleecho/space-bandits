@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
 @property (nonnull, nonatomic) IBOutlet NSArray<DSTransitionSceneInfo *> *sceneInfos;
 @property (nonatomic, nonnull) IBOutlet DSTileMapMaker *tileMapMaker;
-@property (nonatomic, nonnull) id<DSSceneControllerProtocol> transitionSceneController;
 
 - (id)init;
 - (DSTransitionScene *)transitionSceneForLevel:(int)level;
