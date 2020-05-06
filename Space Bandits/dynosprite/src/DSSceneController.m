@@ -48,10 +48,11 @@
 
 - (DSGameScene *)gameSceneForLevel:(int)level {
     DSLevel *levelObj = [self.levelRegistry levelForIndex:level];
-    NSString *tileMapImagePath = [self.resourceController imageWithName:levelObj.tilemapImagePath];
+    NSString *tileMapImagePath = levelObj.tilemapImagePath;
     while([tileMapImagePath hasPrefix:@"../"]) {
         tileMapImagePath = [tileMapImagePath substringWithRange:NSMakeRange(3, tileMapImagePath.length - 3)];
     }
+    tileMapImagePath = [self.resourceController imageWithName:tileMapImagePath];
     NSImage *tileMapImage = [[NSImage alloc] initWithContentsOfFile:[self.bundle pathForResource:tileMapImagePath.stringByDeletingPathExtension ofType:tileMapImagePath.pathExtension]];
     NSRect tileMapRect = NSMakeRect(levelObj.bkgrndStartX, levelObj.bkgrndStartY, levelObj.tilemapSize.x, levelObj.tilemapSize.y);
     SKTileMapNode *tileMapNode = [self.tileMapMaker nodeFromImage:tileMapImage withRect:tileMapRect];
