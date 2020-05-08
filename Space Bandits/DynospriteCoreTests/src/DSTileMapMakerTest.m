@@ -124,7 +124,7 @@
     XCTAssertEqual(tileMapNode.xScale, 1 / NSScreen.mainScreen.backingScaleFactor);
     XCTAssertEqual(tileMapNode.yScale, 1 / NSScreen.mainScreen.backingScaleFactor);
     XCTAssertTrue(CGSizeEqualToSize(tileMapNode.tileSize, CGSizeMake(16 * NSScreen.mainScreen.backingScaleFactor, 16 * NSScreen.mainScreen.backingScaleFactor)));
-    XCTAssertEqualObjects([tileMapNode tileGroupAtColumn:5 row:3].name, @"bc40f63d14b195421c8ce2b058986de6");
+    XCTAssertEqualObjects([tileMapNode tileGroupAtColumn:5 row:2].name, @"bc40f63d14b195421c8ce2b058986de6");
     XCTAssertTrue(CGSizeEqualToSize(tileMapNode.mapSize, CGSizeMake(12 * 16 * NSScreen.mainScreen.backingScaleFactor, 10 * 16 * NSScreen.mainScreen.backingScaleFactor)));
     XCTAssertTrue(CGPointEqualToPoint(tileMapNode.anchorPoint, CGPointMake(0, 1)));
 }

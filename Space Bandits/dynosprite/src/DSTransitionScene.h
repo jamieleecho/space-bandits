@@ -9,19 +9,18 @@
 #import <SpriteKit/SpriteKit.h>
 #import "DSCoCoJoystickController.h"
 #import "DSResourceController.h"
+#import "DSScene.h"
 #import "DSSceneControllerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSTransitionScene : SKScene {
+@interface DSTransitionScene : DSScene {
     @private
     NSString *_backgroundImageName;
     @private
     SKSpriteNode *_backgroundImage;
     @private
     NSMutableArray<SKLabelNode *> *_labels;
-    @private
-    SKAction *_pollAction;
     @private
     NSMapTable <SKLabelNode *, NSValue *> *_labelToPoint;
     @private
@@ -34,21 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSColor *progressBarColor;
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
 @property (strong, nonatomic) DSResourceController *resourceController;
-@property (strong, nonatomic) DSCoCoJoystickController *joystickController;
 @property (nonatomic) id<DSSceneControllerProtocol> sceneController;
-@property (nonatomic) BOOL isDone;
-@property (nonatomic) int levelNumber;
 
 - (id)init;
 - (SKLabelNode *)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position;
-
-- (void)didMoveToView:(SKView *)view;
-- (void)willMoveFromView:(SKView *)view;
-
-- (void)keyDown:(NSEvent *)theEvent;
-- (void)keyUp:(NSEvent *)theEvent;
-
-- (void)poll;
 
 @end
 

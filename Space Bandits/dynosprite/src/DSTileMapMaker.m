@@ -98,7 +98,7 @@
             NSString *hash = [self hashForImage:tileImage];
             SKTileGroup *group = hashToTileGroup[hash];
             NSAssert(group != nil, ([NSString stringWithFormat:@"Could not locate background tile with hash %@.", hash]));
-            [tileMapNode setTileGroup:group forColumn:ii row:tileMapNode.numberOfRows-jj];
+            [tileMapNode setTileGroup:group forColumn:ii row:tileMapNode.numberOfRows - jj - 1];
         }
     }
     tileMapNode.xScale = tileMapNode.yScale = 1 / NSScreen.mainScreen.backingScaleFactor;

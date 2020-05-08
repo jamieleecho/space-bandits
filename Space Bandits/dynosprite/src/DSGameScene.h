@@ -6,12 +6,12 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <SpriteKit/SpriteKit.h>
+#import "DSScene.h"
 #import "DSTileMapMaker.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSGameScene : SKScene {
+@interface DSGameScene : DSScene {
     SKTileMapNode *_tileMapNode;
 }
 

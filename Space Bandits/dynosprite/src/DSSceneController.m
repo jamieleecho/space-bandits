@@ -57,6 +57,9 @@
     NSRect tileMapRect = NSMakeRect(levelObj.tilemapStart.x, levelObj.tilemapStart.y, levelObj.tilemapSize.x, levelObj.tilemapSize.y);
     SKTileMapNode *tileMapNode = [self.tileMapMaker nodeFromImage:tileMapImage withRect:tileMapRect];
     DSGameScene *gameScene = [[DSGameScene alloc] initWithTileMapNode:tileMapNode];
+    gameScene.joystickController = self.joystickController;
+    gameScene.levelNumber = level;
+    
     return gameScene;
 }
 

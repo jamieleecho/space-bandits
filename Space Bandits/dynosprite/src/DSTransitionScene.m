@@ -100,33 +100,6 @@ const float DefaultFontSize = 12.0f;
     _backgroundImage.position = CGPointMake(0, 0);
 }
 
-- (void)didMoveToView:(SKView *)view {
-    id sampleJoystick = ^{
-        [self.joystickController sample];
-        [self poll];
-    };
-    if (!_pollAction) {
-        _pollAction = [SKAction repeatActionForever:[SKAction sequence:@[[SKAction runBlock:sampleJoystick], [SKAction waitForDuration:1.0f / view.preferredFramesPerSecond]]]];
-        [self runAction:_pollAction withKey:@"pollAction"];
-    }
-}
-
-- (void)willMoveFromView:(SKView *)view {
-    [self removeActionForKey:@"pollAction"];
-    _pollAction = nil;
-}
-
-- (void)keyDown:(NSEvent *)theEvent {
-    [self.joystickController handleKeyDown:theEvent];
-}
-
-- (void)keyUp:(NSEvent *)theEvent {
-    [self.joystickController handleKeyUp:theEvent];
-}
-
-- (void)poll {    
-}
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == self) {
         if ([keyPath isEqualToString:@"resourceController"]) {

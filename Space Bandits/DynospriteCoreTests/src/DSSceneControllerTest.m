@@ -122,8 +122,10 @@
     XCTAssertEqual(loadingScene.class, DSLevelLoadingScene.class);
     XCTAssertEqual(loadingScene.joystickController, _joystickController);
     XCTAssertEqual(loadingScene.levelName, _level.name);
+    XCTAssertEqual(loadingScene.levelNumber, 2);
     XCTAssertEqual(loadingScene.levelDescription, _level.levelDescription);
     XCTAssertEqual(loadingScene.sceneController, _target);
+
 }
 
 - (void)testCreatesNewLevels {
@@ -154,6 +156,8 @@
     
     DSGameScene *gameScene = [_target gameSceneForLevel:level];
     XCTAssertEqual(gameScene.children.firstObject, node);
+    XCTAssertEqual(gameScene.levelNumber, level);
+    XCTAssertEqual(gameScene.joystickController, _joystickController);
 }
 
 - (void)testGameSceneForLevelWithBadInputs {
