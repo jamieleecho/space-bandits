@@ -12,9 +12,10 @@
 @implementation DSAppDelegate
 
 - (void)awakeFromNib {    
-    [self.levelLoader loadLevels];
-    [self.levelLoader loadSceneInfos];
-    [self.levelLoader loadTransitionSceneImages];
+    [self.assetLoader loadLevels];
+    [self.assetLoader loadSceneInfos];
+    [self.assetLoader loadTransitionSceneImages];
+    [self.assetLoader loadTileSets];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

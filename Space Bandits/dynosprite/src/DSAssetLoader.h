@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)loadLevels;
 - (void)loadSceneInfos;
 - (void)loadTransitionSceneImages;
+- (void)loadTileSets;
 
 @end
 

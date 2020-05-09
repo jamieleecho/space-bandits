@@ -30,7 +30,7 @@
     _sceneController = OCMClassMock(DSSceneController.class);
     _target.sceneController = _sceneController;
     _levelLoader = OCMClassMock(DSAssetLoader.class);
-    _target.levelLoader = _levelLoader;
+    _target.assetLoader = _levelLoader;
 }
 
 - (void)testConfigFileParser {
@@ -45,6 +45,8 @@
     [_target awakeFromNib];
     OCMVerify([(DSAssetLoader *)_levelLoader loadLevels]);
     OCMVerify([(DSAssetLoader *)_levelLoader loadSceneInfos]);
+    OCMVerify([(DSAssetLoader *)_levelLoader loadTransitionSceneImages]);
+    OCMVerify([(DSAssetLoader *)_levelLoader loadTileSets]);
 }
 
 - (void)testApplicationShouldTerminateAfterLastWindowClosed {

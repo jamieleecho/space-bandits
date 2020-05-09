@@ -93,7 +93,7 @@
     }
 }
 
-- (void)testThrowsWhenNoLevels {
+- (void)testLoadLevelsThrowsWhenNoLevels {
     NSArray<DSLevel *> *levels = @[
     ];
     
@@ -105,7 +105,7 @@
     XCTAssertThrows([_target loadLevels]);
 }
 
-- (void)testThrowsWhenLevelCountsDontMatch {
+- (void)testLoadLevelsThrowsWhenLevelCountsDontMatch {
     NSArray<DSLevel *> *levels = @[
         [[DSLevel alloc] init],
         [[DSLevel alloc] init],
@@ -124,7 +124,7 @@
     XCTAssertThrows([_target loadLevels]);
 }
 
-- (void)testThrowsIfBadFilename {
+- (void)testLoadLevelsThrowsIfBadFilename {
     NSArray<DSLevel *> *levels = @[
         [[DSLevel alloc] init],
         [[DSLevel alloc] init],
@@ -145,7 +145,7 @@
     XCTAssertThrows([_target loadLevels]);
 }
 
-- (void)testThrowsIfMissingLevelsFilename {
+- (void)testLoadLevelsThrowsIfMissingLevelsFilename {
     NSArray<DSLevel *> *levels = @[
         [[DSLevel alloc] init],
         [[DSLevel alloc] init],
@@ -166,7 +166,7 @@
     XCTAssertThrows([_target loadLevels]);
 }
 
-- (void)testThrowsIfSameLevelTwice {
+- (void)testLoadLevelsThrowsIfSameLevelTwice {
     NSArray<DSLevel *> *levels = @[
         [[DSLevel alloc] init],
         [[DSLevel alloc] init],
@@ -187,7 +187,7 @@
     XCTAssertThrows([_target loadLevels]);
 }
 
-- (void)testThrowsIfParseFails {
+- (void)testLoadLevelsThrowsIfParseFails {
     NSArray<DSLevel *> *levels = @[
         [[DSLevel alloc] init],
         [[DSLevel alloc] init],
@@ -207,6 +207,75 @@
     OCMStub([_levelRegistry levelForIndex:3]).andReturn(levels[2]);
     OCMStub([_levelParser parseFile:paths[2] forLevel:levels[2]]).andThrow([NSException exceptionWithName:@"oops" reason:nil userInfo:nil]);
     XCTAssertThrows([_target loadLevels]);
+}
+
+- (void)testLoadTileSets {
+    NSArray<NSString *> *paths = @[
+        @"Resources/levels/02-bar.json",
+        @"Resources/levels/01-foo.jpeg",
+        @"Resources/levels/01-foo.json",
+        @"Resources/levels/03-baz.json"
+    ];
+
+    __block NSMutableSet *set = [NSMutableSet set];
+    OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"tiles"]).andReturn(paths);
+    OCMStub([_tileInfoRegistry addTileInfoFromFile:paths[0] forNumber:2]).andDo(^(NSInvocation *invocation) { [set addObject:paths[0]]; });
+    OCMStub([_tileInfoRegistry addTileInfoFromFile:paths[2] forNumber:1]).andDo(^(NSInvocation *invocation) { [set addObject:paths[2]]; });
+    OCMStub([_tileInfoRegistry addTileInfoFromFile:paths[3] forNumber:3]).andDo(^(NSInvocation *invocation) { [set addObject:paths[3]]; });
+    
+    [_target loadTileSets];
+    XCTAssertEqual(set.count, 3);
+}
+
+- (void)testLoadTileSetsThrowsWhenDuplicateLevels {
+    NSArray<NSString *> *paths = @[
+        @"Resources/levels/02-bar.json",
+        @"Resources/levels/01-foo.json",
+        @"Resources/levels/01-foo.json",
+        @"Resources/levels/03-baz.json"
+    ];
+    OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"tiles"]).andReturn(paths);
+    XCTAssertThrows([_target loadTileSets]);
+}
+
+- (void)testLoadTileSetsThrowsWhenNoLevels {
+    NSArray<NSString *> *paths = @[
+    ];
+    OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"tiles"]).andReturn(paths);
+    XCTAssertThrows([_target loadTileSets]);
+}
+
+- (void)testLoadTileSetsThrowsWhenMissingLevels {
+    NSArray<NSString *> *paths = @[
+        @"Resources/levels/02-bar.json",
+        @"Resources/levels/01-foo.json",
+        @"Resources/levels/01-foo.json",
+        @"Resources/levels/04-baz.json"
+    ];
+    OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"tiles"]).andReturn(paths);
+    XCTAssertThrows([_target loadTileSets]);
+}
+
+- (void)testLoadTileSetsThrowsWhenBadFiles {
+    NSArray<NSString *> *paths = @[
+        @"Resources/levels/02-bar.json",
+        @"Resources/levels/blah01-foo.json",
+        @"Resources/levels/01-foo.json",
+        @"Resources/levels/03-baz.json"
+    ];
+    OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"tiles"]).andReturn(paths);
+    XCTAssertThrows([_target loadTileSets]);
+}
+
+- (void)testLoadTileSetsThrowsWhenJsonBad {
+    NSArray<NSString *> *paths = @[
+        @"Resources/levels/02-bar.json",
+        @"Resources/levels/01-foo.json",
+        @"Resources/levels/03-baz.json"
+    ];
+    OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"tiles"]).andReturn(paths);
+    OCMStub([_tileInfoRegistry addTileInfoFromFile:paths[0] forNumber:2]).andDo(^(NSInvocation *invocation) { @throw [NSException exceptionWithName:@"oops" reason:nil userInfo:nil]; });
+    XCTAssertThrows([_target loadTileSets]);
 }
 
 - (void)testLoadSceneInfos {

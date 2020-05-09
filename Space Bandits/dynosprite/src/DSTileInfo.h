@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
 #import "DSPoint.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) NSString *imagePath;
 @property (nonatomic) DSPoint tileSetStart;
 @property (nonatomic) DSPoint tileSetSize;
+
+@property (nonatomic, nonnull) NSMutableDictionary<NSString *, NSImage *> *hashToImage;
+@property (nonatomic, nonnull) NSMutableDictionary<NSNumber *, NSString *> *numberToHash;
+@property (nonatomic, nonnull) SKTextureAtlas *atlas;
 
 - (id)init;
 

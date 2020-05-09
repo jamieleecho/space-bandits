@@ -80,11 +80,11 @@
     NSAssert(tileSets.count >= 1, @"No level files found.");
     NSAssert([tileSets[0] isEqualToNumber:@1], ([NSString stringWithFormat:@"First tile set starts at number %@ not number 1", tileSets[0]]));
     NSAssert([tileSets[tileSets.count - 1] isEqualToNumber:[NSNumber numberWithUnsignedLong:tileSets.count]], ([NSString stringWithFormat:@"Last tile set should be number %@ not number %lu", tileSets[tileSets.count - 1], tileSets.count]));
-    NSAssert(tileSets.count == self.registry.count, ([NSString stringWithFormat:@"Read %lu tile set files, but registered %lu tile sets", tileSets.count, _registry.count]));
     
     // Load all of the files
     for(NSNumber *tileSetNumber in tileSets) {
         NSString *path = tileSetToPath[tileSetNumber];
+        NSLog(@"([_tileInfoRegistry addTileInfoFromFile:%@ forNumber:%@]", path, tileSetNumber);
         [self.tileInfoRegistry addTileInfoFromFile:path forNumber:tileSetNumber.intValue];
     }
 }

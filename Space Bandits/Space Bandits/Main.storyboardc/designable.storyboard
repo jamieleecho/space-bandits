@@ -679,8 +679,8 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="Voe-Tx-rLC" customClass="DSAppDelegate">
                     <connections>
+                        <outlet property="assetLoader" destination="0lT-tu-CK3" id="I7c-Wm-Ti1"/>
                         <outlet property="configFileParser" destination="wHX-XA-T7S" id="oag-Ug-zuw"/>
-                        <outlet property="levelLoader" destination="0lT-tu-CK3" id="FbB-Wc-fNb"/>
                         <outlet property="sceneController" destination="rDZ-CV-DhK" id="1e8-Ye-aRZ"/>
                     </connections>
                 </customObject>

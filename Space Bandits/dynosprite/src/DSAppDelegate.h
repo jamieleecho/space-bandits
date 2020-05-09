@@ -16,7 +16,7 @@
 @interface DSAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (nonatomic, nonnull) IBOutlet DSConfigFileParser *configFileParser;
-@property (nonatomic, nonnull) IBOutlet DSAssetLoader *levelLoader;
+@property (nonatomic, nonnull) IBOutlet DSAssetLoader *assetLoader;
 @property (nonatomic, nonnull) IBOutlet DSSceneController *sceneController;
 
 

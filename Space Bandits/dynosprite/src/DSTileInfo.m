@@ -15,6 +15,9 @@
         self.imagePath = @"";
         self.tileSetStart = DSPointMake(0, 0);
         self.tileSetSize = DSPointMake(0, 0);
+        
+        self.hashToImage = [NSMutableDictionary dictionary];
+        self.numberToHash = [NSMutableDictionary dictionary];
     }
     return self;
 }
