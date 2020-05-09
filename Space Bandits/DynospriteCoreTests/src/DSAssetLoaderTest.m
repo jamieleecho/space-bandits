@@ -14,12 +14,13 @@
 @interface DSAssetLoaderTest : XCTestCase {
     DSAssetLoader *_target;
     NSMutableArray *_sceneInfos;
+    id _bundle;
+    id _imageLoader;
     id _levelRegistry;
     id _levelParser;
-    id _transitionSceneInfoParser;
     id _resourceController;
-    id _imageLoader;
-    id _bundle;
+    id _tileInfoRegistry;
+    id _transitionSceneInfoParser;
 }
 
 @end
@@ -28,40 +29,42 @@
 
 - (void)setUp {
     _target = [[DSAssetLoader alloc] init];
-    
     XCTAssertEqual(_target.registry, DSLevelRegistry.sharedInstance);
     XCTAssertTrue([_target.sceneInfos isKindOfClass:NSMutableArray.class]);
-    XCTAssertNil(_target.levelFileParser);
-    XCTAssertNil(_target.transitionSceneInfoFileParser);
-    XCTAssertNil(_target.resourceController);
-    XCTAssertNil(_target.imageLoader);
+
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
+    XCTAssertNil(_target.levelFileParser);
+    XCTAssertNil(_target.imageLoader);
+    XCTAssertNil(_target.resourceController);
+    XCTAssertNil(_target.tileInfoRegistry);
 
-    _sceneInfos = [NSMutableArray array];
-    _levelRegistry = OCMClassMock(DSLevelRegistry.class);
-    _levelParser = OCMClassMock(DSLevelFileParser.class);
-    _transitionSceneInfoParser = OCMClassMock(DSTransitionSceneInfoFileParser.class);
-    _resourceController = OCMClassMock(DSResourceController.class);
-    _imageLoader = OCMClassMock(DSTransitionImageLoader.class);
     _bundle = OCMClassMock(NSBundle.class);
+    _imageLoader = OCMClassMock(DSTransitionImageLoader.class);
+    _levelParser = OCMClassMock(DSLevelFileParser.class);
+    _levelRegistry = OCMClassMock(DSLevelRegistry.class);
+    _sceneInfos = [NSMutableArray array];
+    _resourceController = OCMClassMock(DSResourceController.class);
+    _tileInfoRegistry = OCMClassMock(DSTileInfoRegistry.class);
+    _transitionSceneInfoParser = OCMClassMock(DSTransitionSceneInfoFileParser.class);
 
-    _target.sceneInfos = _sceneInfos;
-    _target.registry = _levelRegistry;
-    _target.levelFileParser = _levelParser;
-    _target.transitionSceneInfoFileParser = _transitionSceneInfoParser;
-    _target.resourceController = _resourceController;
-    _target.imageLoader = _imageLoader;
     _target.bundle = _bundle;
+    _target.imageLoader = _imageLoader;
+    _target.levelFileParser = _levelParser;
+    _target.registry = _levelRegistry;
+    _target.resourceController = _resourceController;
+    _target.sceneInfos = _sceneInfos;
+    _target.tileInfoRegistry = _tileInfoRegistry;
+    _target.transitionSceneInfoFileParser = _transitionSceneInfoParser;
 }
 
 - (void)testInit {
-    XCTAssertEqual(_target.sceneInfos, _sceneInfos);
-    XCTAssertEqual(_target.registry, _levelRegistry);
-    XCTAssertEqual(_target.levelFileParser, _levelParser);
-    XCTAssertEqual(_target.transitionSceneInfoFileParser, _transitionSceneInfoParser);
-    XCTAssertEqual(_target.resourceController, _resourceController);
-    XCTAssertEqual(_target.imageLoader, _imageLoader);
     XCTAssertEqual(_target.bundle, _bundle);
+    XCTAssertEqual(_target.imageLoader, _imageLoader);
+    XCTAssertEqual(_target.levelFileParser, _levelParser);
+    XCTAssertEqual(_target.registry, _levelRegistry);
+    XCTAssertEqual(_target.resourceController, _resourceController);
+    XCTAssertEqual(_target.sceneInfos, _sceneInfos);
+    XCTAssertEqual(_target.transitionSceneInfoFileParser, _transitionSceneInfoParser);
 }
 
 - (void)testLoadsValidLevels {
@@ -208,7 +211,7 @@
 
 - (void)testLoadSceneInfos {
     OCMStub([_resourceController pathForConfigFileWithName:@"images/images.json"]).andReturn(@"/foo.app/Contents/Resources/images/images.json");
-    OCMStub([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos]).andDo(^(NSInvocation *invocation){
+    OCMStub([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos]).andDo(^(NSInvocation *invocation) {
         [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
         [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
         [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
@@ -220,7 +223,7 @@
 
 - (void)testLoadSceneInfosThrowsWhenWrongNumberOfLevels {
     OCMStub([_resourceController pathForConfigFileWithName:@"images/images.json"]).andReturn(@"/foo.app/Contents/Resources/images/images.json");
-    OCMStub([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos]).andDo(^(NSInvocation *invocation){
+    OCMStub([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos]).andDo(^(NSInvocation *invocation) {
         [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
         [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
         [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];

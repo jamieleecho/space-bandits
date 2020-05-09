@@ -60,6 +60,10 @@
 		529201F0244150C1000B4D58 /* DSSoundControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201EF244150C1000B4D58 /* DSSoundControllerTest.m */; };
 		529201F2244151BF000B4D58 /* DSWindowControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201F1244151BF000B4D58 /* DSWindowControllerTest.m */; };
 		529201F42441A63F000B4D58 /* DSResourceControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201F32441A63F000B4D58 /* DSResourceControllerTest.m */; };
+		529F9013246629B900C8A706 /* DSTileInfoRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 529F9012246629B900C8A706 /* DSTileInfoRegistry.m */; };
+		529F9014246629B900C8A706 /* DSTileInfoRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 529F9012246629B900C8A706 /* DSTileInfoRegistry.m */; };
+		529F9015246629B900C8A706 /* DSTileInfoRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 529F9012246629B900C8A706 /* DSTileInfoRegistry.m */; };
+		529F901B2466F2DD00C8A706 /* DSTileInfoRegistryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529F901A2466F2DD00C8A706 /* DSTileInfoRegistryTest.m */; };
 		52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
 		52A90E3621E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
 		52A90E3721E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
@@ -280,6 +284,9 @@
 		529201EF244150C1000B4D58 /* DSSoundControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSoundControllerTest.m; sourceTree = "<group>"; };
 		529201F1244151BF000B4D58 /* DSWindowControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSWindowControllerTest.m; sourceTree = "<group>"; };
 		529201F32441A63F000B4D58 /* DSResourceControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSResourceControllerTest.m; sourceTree = "<group>"; };
+		529F9011246629B900C8A706 /* DSTileInfoRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTileInfoRegistry.h; sourceTree = "<group>"; };
+		529F9012246629B900C8A706 /* DSTileInfoRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileInfoRegistry.m; sourceTree = "<group>"; };
+		529F901A2466F2DD00C8A706 /* DSTileInfoRegistryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileInfoRegistryTest.m; sourceTree = "<group>"; };
 		52A90E3221E2E8A700CC2643 /* DSConfigFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSConfigFileParser.h; sourceTree = "<group>"; };
 		52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSConfigFileParser.m; sourceTree = "<group>"; };
 		52A90E5921E2F78300CC2643 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../../game/levels; sourceTree = "<group>"; };
@@ -526,6 +533,8 @@
 				52B1A168244D23A2008E7066 /* DSTileFileParser.m */,
 				52B1A160244D20CD008E7066 /* DSTileInfo.h */,
 				52B1A161244D20CD008E7066 /* DSTileInfo.m */,
+				529F9011246629B900C8A706 /* DSTileInfoRegistry.h */,
+				529F9012246629B900C8A706 /* DSTileInfoRegistry.m */,
 				52F491B8245E0544009123CE /* DSTileMapMaker.h */,
 				52F491B9245E0544009123CE /* DSTileMapMaker.m */,
 				524109E52455EF910005DF54 /* DSTransitionImageLoader.h */,
@@ -584,6 +593,7 @@
 				52169430245E595B00F4B880 /* DSTestUtils.h */,
 				52169431245E595B00F4B880 /* DSTestUtils.m */,
 				52B1A165244D2213008E7066 /* DSTileInfoTest.m */,
+				529F901A2466F2DD00C8A706 /* DSTileInfoRegistryTest.m */,
 				52B1A170244D2712008E7066 /* DSTileFileParserTest.m */,
 				522C1362245E41C000031BD1 /* DSTileMapMakerTest.m */,
 				52C8C6F5243DEE5800EC582C /* DSTransitionSceneTest.m */,
@@ -829,6 +839,7 @@
 			files = (
 				52B1A1762453AFD0008E7066 /* DSAssetLoader.m in Sources */,
 				52629B7824624AB5004AAEA3 /* DSGameSceneTest.m in Sources */,
+				529F901B2466F2DD00C8A706 /* DSTileInfoRegistryTest.m in Sources */,
 				52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */,
 				5284F5E524340FE300B2C2C5 /* DSCoCoJoystickTest.m in Sources */,
 				52C8C6FB243EA1A500EC582C /* DSInitSceneTest.m in Sources */,
@@ -871,6 +882,7 @@
 				52F845292442911300B1D70F /* DSLevelFileParser.m in Sources */,
 				52E447022464DCDC008B6488 /* DSScene.m in Sources */,
 				524109E92455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
+				529F9015246629B900C8A706 /* DSTileInfoRegistry.m in Sources */,
 				52B1A15D244D0222008E7066 /* DSPointTest.m in Sources */,
 				52B1A129244B8667008E7066 /* DSLevelFileParserTest.m in Sources */,
 				52B1A156244CFD31008E7066 /* DSSpriteInfo.m in Sources */,
@@ -920,6 +932,7 @@
 				525FC91F22888202007F4793 /* DSSharedSceneController.m in Sources */,
 				52B1A1742453AFD0008E7066 /* DSAssetLoader.m in Sources */,
 				7D7EED7023BD0EB700804C26 /* DSResourceController.m in Sources */,
+				529F9013246629B900C8A706 /* DSTileInfoRegistry.m in Sources */,
 				52169439245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */,
 				524109E72455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
 				7D8022992431656C00496138 /* DSObject.m in Sources */,
@@ -955,6 +968,7 @@
 				7DC4E7F022FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				52E447012464DCDC008B6488 /* DSScene.m in Sources */,
 				52B1A1752453AFD0008E7066 /* DSAssetLoader.m in Sources */,
+				529F9014246629B900C8A706 /* DSTileInfoRegistry.m in Sources */,
 				52B1A13C244BD4F9008E7066 /* DSObjectClass.m in Sources */,
 				525FC92022888202007F4793 /* DSSharedSceneController.m in Sources */,
 				52B1A155244CFD31008E7066 /* DSSpriteInfo.m in Sources */,
