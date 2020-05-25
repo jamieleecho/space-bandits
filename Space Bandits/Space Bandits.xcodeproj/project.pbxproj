@@ -17,9 +17,6 @@
 		52169447245F2FED00F4B880 /* DSGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169446245F2FED00F4B880 /* DSGameScene.m */; };
 		52169448245F2FED00F4B880 /* DSGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169446245F2FED00F4B880 /* DSGameScene.m */; };
 		52169449245F2FED00F4B880 /* DSGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169446245F2FED00F4B880 /* DSGameScene.m */; };
-		5216AC9A246781C200DAECA8 /* DSTileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5216AC99246781C200DAECA8 /* DSTileLoader.m */; };
-		5216AC9B246781C200DAECA8 /* DSTileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5216AC99246781C200DAECA8 /* DSTileLoader.m */; };
-		5216AC9C246781C200DAECA8 /* DSTileLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5216AC99246781C200DAECA8 /* DSTileLoader.m */; };
 		521A849A21FCEE06006120E8 /* DSConfigFileParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */; };
 		521A849C21FCEE80006120E8 /* JSONDict.json in Resources */ = {isa = PBXBuildFile; fileRef = 521A849B21FCEE80006120E8 /* JSONDict.json */; };
 		521A849E21FCEED2006120E8 /* JSONList.json in Resources */ = {isa = PBXBuildFile; fileRef = 521A849D21FCEED2006120E8 /* JSONList.json */; };
@@ -258,8 +255,6 @@
 		52169445245F2FED00F4B880 /* DSGameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSGameScene.h; sourceTree = "<group>"; };
 		52169446245F2FED00F4B880 /* DSGameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSGameScene.m; sourceTree = "<group>"; };
 		5216944A245F723F00F4B880 /* DSSceneControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSceneControllerProtocol.h; sourceTree = "<group>"; };
-		5216AC98246781C200DAECA8 /* DSTileLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTileLoader.h; sourceTree = "<group>"; };
-		5216AC99246781C200DAECA8 /* DSTileLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileLoader.m; sourceTree = "<group>"; };
 		521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSConfigFileParserTest.m; sourceTree = "<group>"; };
 		521A849B21FCEE80006120E8 /* JSONDict.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JSONDict.json; sourceTree = "<group>"; };
 		521A849D21FCEED2006120E8 /* JSONList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JSONList.json; sourceTree = "<group>"; };
@@ -614,8 +609,6 @@
 				52A93D832454FF7C00D2327B /* DSTransitionSceneInfoTest.m */,
 				529201E724413F97000B4D58 /* DSViewControllerTest.m */,
 				529201F1244151BF000B4D58 /* DSWindowControllerTest.m */,
-				5216AC98246781C200DAECA8 /* DSTileLoader.h */,
-				5216AC99246781C200DAECA8 /* DSTileLoader.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -880,7 +873,6 @@
 				5216943D245EE33B00F4B880 /* DSNSDataMD5ExtensionsTest.m in Sources */,
 				5216943B245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */,
 				529201EA24414521000B4D58 /* DSSharedSceneControllerTest.m in Sources */,
-				5216AC9C246781C200DAECA8 /* DSTileLoader.m in Sources */,
 				7DC4E7F622FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
 				52B1A149244CC40C008E7066 /* DSObjectClassFileParser.m in Sources */,
 				52B1A12F244BA5CC008E7066 /* DSObjectTest.m in Sources */,
@@ -969,7 +961,6 @@
 				7DA178B82431552E00AE39D8 /* 03-badguy.c in Sources */,
 				7DA178BA2431552E00AE39D8 /* 07-badmissile.c in Sources */,
 				52B1A169244D23A2008E7066 /* DSTileFileParser.m in Sources */,
-				5216AC9A246781C200DAECA8 /* DSTileLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,7 +973,6 @@
 				52E7606021D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
 				52F0574E2216323400CDC1DD /* DSViewController.m in Sources */,
 				7D80229A2431656C00496138 /* DSObject.m in Sources */,
-				5216AC9B246781C200DAECA8 /* DSTileLoader.m in Sources */,
 				521A84A921FE02BE006120E8 /* DSSceneController.m in Sources */,
 				7DC4E7F022FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				52E447012464DCDC008B6488 /* DSScene.m in Sources */,

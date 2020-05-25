@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)image:(NSImage *)image1 isEqualTo:(NSImage *)image2;
 - (NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)imageTileDictionaryFromImage:(NSImage *)image;
 - (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary;
+- (NSDictionary<NSNumber *, NSString *> *)tileIndexToTileHashFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary;
 - (SKTileSet *)tileSetFromTextureAtlas:(SKTextureAtlas *)textureAtlas;
 - (SKTileMapNode *)nodeFromTileImage:(NSImage *)tileImage withTileRect:(NSRect)tileRect;
 

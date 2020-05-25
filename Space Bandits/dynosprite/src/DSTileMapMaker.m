@@ -45,7 +45,7 @@
     return [image1.TIFFRepresentation isEqualToData:image2.TIFFRepresentation];
 }
 
-- (NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)imageTileDictionaryFromImage:(NSImage *)image {
+- (NSDictionary<NSString *, NSImage *> *)imageTileDictionaryFromImage:(NSImage *)image {
     NSAssert((((int)image.size.width / DSTileSize) * DSTileSize) == image.size.width, @"TilemapSize width must be a multiple of 16");
     NSAssert((((int)image.size.height / DSTileSize) * DSTileSize) == image.size.height, @"TilemapSize height must be a multiple of 16");
     
@@ -55,7 +55,8 @@
             NSImage *tile = [self tileForImage:image atPoint:NSMakePoint(xx, yy)];
             NSString *hash = [self hashForImage:tile];
             if (hashToImage[hash] == nil) {
-                hashToImage[hash] = [[DSCons alloc] initWithCar:image andCdr:[NSNumber numberWithUnsignedLong:hashToImage.count]];
+                // hashToImage[hash] = tile;
+                hashToImage[hash] = [[DSCons alloc] initWithCar:tile andCdr:[NSNumber numberWithUnsignedLong:hashToImage.count]];
             }
         }
     }
@@ -70,6 +71,15 @@
         hashToImage[key] = imageIndexPair.car;
     }
     return [SKTextureAtlas atlasWithDictionary:hashToImage];
+}
+
+- (NSDictionary<NSNumber *, NSString *> *)tileIndexToTileHashFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary {
+    NSMutableDictionary<NSNumber *, NSString *> *tileIndexToTileHash = [NSMutableDictionary dictionary];
+    for(NSString *key in tileDictionary.allKeys) {
+        DSCons<NSImage *, NSNumber *> *imageIndexPair = tileDictionary[key];
+        tileIndexToTileHash[imageIndexPair.cdr] = key;
+    }
+    return tileIndexToTileHash;
 }
 
 - (SKTileSet *)tileSetFromTextureAtlas:(SKTextureAtlas *)textureAtlas {
