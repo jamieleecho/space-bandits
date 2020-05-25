@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary;
 - (NSDictionary<NSNumber *, NSString *> *)tileIndexToTileHashFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary;
 - (SKTileSet *)tileSetFromTextureAtlas:(SKTextureAtlas *)textureAtlas;
-- (SKTileMapNode *)nodeFromTileImage:(NSImage *)tileImage withTileRect:(NSRect)tileRect;
+- (SKTileMapNode *)nodeFromImage:(NSImage *)image withRect:(NSRect)rect usingTileImage:(NSImage *)tileImage withTileRect:(NSRect)tileRect;
 
 @end
 

@@ -47,16 +47,28 @@
 }
 
 - (DSGameScene *)gameSceneForLevel:(int)level {
+    // Get the image used to create the tilesets
     DSLevel *levelObj = [self.levelRegistry levelForIndex:level];
-    DSTileInfo *tileInfo = [self.tileInfoRegistry tileInfoForNumber:levelObj.tilesetIndex];    
-    NSString *tileMapImagePath = tileInfo.imagePath;
-    while([tileMapImagePath hasPrefix:@"../"]) {
-        tileMapImagePath = [tileMapImagePath substringWithRange:NSMakeRange(3, tileMapImagePath.length - 3)];
+    DSTileInfo *tileInfo = [self.tileInfoRegistry tileInfoForNumber:levelObj.tilesetIndex];
+    NSString *tileImagePath = tileInfo.imagePath;
+    while([tileImagePath hasPrefix:@"../"]) {
+        tileImagePath = [tileImagePath substringWithRange:NSMakeRange(3, tileImagePath.length - 3)];
     }
-    tileMapImagePath = [self.resourceController imageWithName:tileMapImagePath];
-    NSImage *tileMapImage = [[NSImage alloc] initWithContentsOfFile:[self.bundle pathForResource:tileMapImagePath.stringByDeletingPathExtension ofType:tileMapImagePath.pathExtension]];
-    NSRect tileMapRect = NSMakeRect(levelObj.tilemapStart.x, levelObj.tilemapStart.y, levelObj.tilemapSize.x, levelObj.tilemapSize.y);
-    SKTileMapNode *tileMapNode = [self.tileMapMaker nodeFromTileImage:tileMapImage withTileRect:tileMapRect];
+    tileImagePath = [self.resourceController imageWithName:tileImagePath];
+    NSImage *tileImage = [[NSImage alloc] initWithContentsOfFile:[self.bundle pathForResource:tileImagePath.stringByDeletingPathExtension ofType:tileImagePath.pathExtension]];
+    NSRect tileImageRect = NSMakeRect(tileInfo.tileSetStart.x, tileInfo.tileSetStart.y, tileInfo.tileSetSize.x, tileInfo.tileSetSize.y);
+    
+    // Get the image used to create the map (screen)
+    NSString *mapImagePath = levelObj.tilemapImagePath;
+    while([mapImagePath hasPrefix:@"../"]) {
+        mapImagePath = [mapImagePath substringWithRange:NSMakeRange(3, mapImagePath.length - 3)];
+    }
+    mapImagePath = [self.resourceController imageWithName:mapImagePath];
+    NSImage *mapImage = [[NSImage alloc] initWithContentsOfFile:[self.bundle pathForResource:tileImagePath.stringByDeletingPathExtension ofType:mapImagePath.pathExtension]];
+    NSRect mapImageRect = NSMakeRect(levelObj.tilemapStart.x, levelObj.tilemapStart.y, levelObj.tilemapSize.x, levelObj.tilemapSize.y);
+
+    // Create the game scene
+    SKTileMapNode *tileMapNode = [self.tileMapMaker nodeFromImage:mapImage withRect:mapImageRect usingTileImage:tileImage withTileRect:tileImageRect];
     DSGameScene *gameScene = [[DSGameScene alloc] initWithTileMapNode:tileMapNode];
     gameScene.joystickController = self.joystickController;
     gameScene.levelNumber = level;

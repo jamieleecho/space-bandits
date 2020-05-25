@@ -94,22 +94,23 @@
     return [SKTileSet tileSetWithTileGroups:tileGroups];
 }
 
-- (SKTileMapNode *)nodeFromTileImage:(NSImage *)tileImage withTileRect:(NSRect)tileRect {
-    NSImage *imageForMap = [self subImageForMap:tileImage withRect:tileRect];
-    NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *map = [self imageTileDictionaryFromImage:imageForMap];
+- (SKTileMapNode *)nodeFromImage:(NSImage *)image withRect:(NSRect)rect usingTileImage:(NSImage *)tileImage withTileRect:(NSRect)tileRect {
+    NSImage *imageForTiles = [self subImageForMap:tileImage withRect:tileRect];
+    NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *map = [self imageTileDictionaryFromImage:imageForTiles];
     SKTextureAtlas *atlas = [self atlasFromTileDictionary:map];
     SKTileSet *tileSet = [self tileSetFromTextureAtlas:atlas];
-    SKTileMapNode *tileMapNode = [SKTileMapNode tileMapNodeWithTileSet:tileSet columns:tileRect.size.width / DSTileSize rows:tileRect.size.height / DSTileSize tileSize:CGSizeMake(DSTileSize, DSTileSize)];
-    tileMapNode.tileSize = CGSizeMake(DSTileSize * NSScreen.mainScreen.backingScaleFactor, DSTileSize * NSScreen.mainScreen.backingScaleFactor);
 
+    SKTileMapNode *tileMapNode = [SKTileMapNode tileMapNodeWithTileSet:tileSet columns:rect.size.width / DSTileSize rows:rect.size.height / DSTileSize tileSize:CGSizeMake(DSTileSize, DSTileSize)];
+    tileMapNode.tileSize = CGSizeMake(DSTileSize * NSScreen.mainScreen.backingScaleFactor, DSTileSize * NSScreen.mainScreen.backingScaleFactor);
     NSMutableDictionary<NSString *, SKTileGroup *> *hashToTileGroup = [NSMutableDictionary dictionary];
     for(SKTileGroup *group in tileSet.tileGroups) {
         hashToTileGroup[group.name] = group;
     }
     
+    NSImage *mapImage = [self subImageForMap:image withRect:rect];
     for(int jj = 0; jj < tileMapNode.numberOfRows; jj++) {
         for(int ii = 0; ii < tileMapNode.numberOfColumns; ii++) {
-            NSImage *tileImage = [self tileForImage:imageForMap atPoint:NSMakePoint(ii * DSTileSize, jj * DSTileSize)];
+            NSImage *tileImage = [self tileForImage:mapImage atPoint:NSMakePoint(ii * DSTileSize, jj * DSTileSize)];
             NSString *hash = [self hashForImage:tileImage];
             SKTileGroup *group = hashToTileGroup[hash];
             NSAssert(group != nil, ([NSString stringWithFormat:@"Could not locate background tile with hash %@.", hash]));

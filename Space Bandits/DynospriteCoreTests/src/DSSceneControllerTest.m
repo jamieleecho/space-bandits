@@ -152,17 +152,20 @@
     NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
     NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
     OCMStub([_bundle pathForResource:@"hires/tiles/mytile" ofType:@"png"]).andReturn(imagePath);
-    NSRect tileMapRect = NSMakeRect(3, 7, 160, 64);
+    NSRect tileRect = NSMakeRect(3, 7, 160, 64);
     SKNode *node = [[SKNode alloc] init];
-    OCMStub([_tileMapMaker nodeFromTileImage:[OCMArg any] withTileRect:tileMapRect]).andDo(^(NSInvocation *invocation) {
+    
+    DSTileInfo *tileInfo = [[DSTileInfo alloc] init];
+    tileInfo.imagePath = @"tiles/mytile.png";
+    tileInfo.tileSetStart = DSPointMake(3, 7);
+    tileInfo.tileSetSize = DSPointMake(160, 64);
+    OCMStub([_tileInfoRegistry tileInfoForNumber:4]).andReturn(tileInfo);
+    OCMStub([_tileMapMaker nodeFromImage:[OCMArg any] withRect:tileRect usingTileImage:[OCMArg any] withTileRect:tileRect]).andDo(^(NSInvocation *invocation) {
         NSImage *loadedImage;
         [invocation getArgument:(void *)&loadedImage atIndex:2];
         XCTAssertTrue([DSTestUtils image:loadedImage isSameAsImage:image]);
     }).andReturn(node);
-    DSTileInfo *tileInfo = [[DSTileInfo alloc] init];
-    tileInfo.imagePath = @"tiles/mytile.png";
-    OCMStub([_tileInfoRegistry tileInfoForNumber:4]).andReturn(tileInfo);
-    
+
     DSGameScene *gameScene = [_target gameSceneForLevel:level];
     XCTAssertEqual(gameScene.children.firstObject, node);
     XCTAssertEqual(gameScene.levelNumber, level);
@@ -183,7 +186,7 @@
     OCMStub([_bundle pathForResource:@"hires/tiles/mytile" ofType:@"png"]).andReturn(imagePath);
     NSRect tileMapRect = NSMakeRect(3, 7, 160, 64);
     SKNode *node = [[SKNode alloc] init];
-    OCMStub([_tileMapMaker nodeFromTileImage:[OCMArg any] withTileRect:tileMapRect]).andDo(^(NSInvocation *invocation) {
+    OCMStub([_tileMapMaker nodeFromImage:[OCMArg any] withRect:tileMapRect usingTileImage:[OCMArg any] withTileRect:tileMapRect]).andDo(^(NSInvocation *invocation) {
         NSImage *loadedImage;
         [invocation getArgument:(void *)&loadedImage atIndex:2];
         XCTAssertTrue([DSTestUtils image:loadedImage isSameAsImage:image]);

@@ -117,7 +117,7 @@
 }
 
 - (void)testNodeFromImageWithRect {
-    SKTileMapNode *tileMapNode = [_target nodeFromTileImage:_forestImage withTileRect:NSMakeRect(21, 10, 192, 160)];
+    SKTileMapNode *tileMapNode = [_target nodeFromImage:_forestImage withRect:NSMakeRect(21, 10, 192, 160) usingTileImage:_forestImage withTileRect:NSMakeRect(21, 10, 192, 160)];
     XCTAssertEqual(tileMapNode.tileSet.tileGroups.count, 108);
     XCTAssertEqual(tileMapNode.numberOfColumns, 12);
     XCTAssertEqual(tileMapNode.numberOfRows, 10);
@@ -130,8 +130,10 @@
 }
 
 - (void)testNodeFromImageWithRectThrowsWithBadInputs {
-    XCTAssertThrows([_target nodeFromTileImage:_forestImage withTileRect:NSMakeRect(21, 10, 192, 161)]);
-    XCTAssertThrows([_target nodeFromTileImage:_forestImage withTileRect:NSMakeRect(21, 10, 193, 160)]);
+    XCTAssertThrows([_target nodeFromImage:_forestImage withRect:NSMakeRect(21, 10, 192, 161) usingTileImage:_forestImage withTileRect:NSMakeRect(21, 10, 192, 160)]);
+    XCTAssertThrows([_target nodeFromImage:_forestImage withRect:NSMakeRect(21, 10, 193, 160) usingTileImage:_forestImage withTileRect:NSMakeRect(21, 10, 192, 160)]);
+    XCTAssertThrows([_target nodeFromImage:_forestImage withRect:NSMakeRect(21, 10, 192, 160) usingTileImage:_forestImage withTileRect:NSMakeRect(21, 10, 192, 161)]);
+    XCTAssertThrows([_target nodeFromImage:_forestImage withRect:NSMakeRect(21, 10, 192, 160) usingTileImage:_forestImage withTileRect:NSMakeRect(21, 10, 193, 160)]);
 }
 
 @end
