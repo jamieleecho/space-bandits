@@ -17,7 +17,7 @@
     NSDictionary *tileInfoData = [parser parseFile:path];
     NSAssert(tileInfoData != nil, ([NSString stringWithFormat:@"Failed to parse %@", path]));
 
-    info.imagePath = [NSString pathWithComponents:@[@"tiles", [tileInfoData[@"Image"] lastPathComponent]]];    
+    info.imagePath = [NSString pathWithComponents:@[@"tiles", [tileInfoData[@"Image"] stringByDeletingLastPathComponent], [tileInfoData[@"Image"] lastPathComponent]]];    
     info.tileSetStart = [DSLevelFileParser pointFromArray:tileInfoData[@"TileSetStart"]];
     info.tileSetSize = [DSLevelFileParser pointFromArray:tileInfoData[@"TileSetSize"]];
 }

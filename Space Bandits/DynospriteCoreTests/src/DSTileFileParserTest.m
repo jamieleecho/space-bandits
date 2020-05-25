@@ -27,7 +27,7 @@
 - (void)testParseFileForTileInfo {
     NSString *tileFilePath = [[NSBundle bundleForClass:self.class] pathForResource:@"01-moon" ofType:@"json"];
     [_target parseFile:tileFilePath forTileInfo:_tileInfo];
-    XCTAssertEqualObjects(_tileInfo.imagePath, @"01-moon.gif");
+    XCTAssertEqualObjects(_tileInfo.imagePath, @"tiles/01-moon.gif");
     XCTAssertTrue(DSPointEqual(_tileInfo.tileSetStart, DSPointMake(20, 32)));
     XCTAssertTrue(DSPointEqual(_tileInfo.tileSetSize, DSPointMake(320, 208)));
 }

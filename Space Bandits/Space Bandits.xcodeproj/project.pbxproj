@@ -13,7 +13,6 @@
 		5216943A245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
 		5216943B245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
 		5216943D245EE33B00F4B880 /* DSNSDataMD5ExtensionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5216943C245EE33B00F4B880 /* DSNSDataMD5ExtensionsTest.m */; };
-		5216943F245EFDCE00F4B880 /* forest-subimage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5216943E245EFDCE00F4B880 /* forest-subimage.tiff */; };
 		52169447245F2FED00F4B880 /* DSGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169446245F2FED00F4B880 /* DSGameScene.m */; };
 		52169448245F2FED00F4B880 /* DSGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169446245F2FED00F4B880 /* DSGameScene.m */; };
 		52169449245F2FED00F4B880 /* DSGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169446245F2FED00F4B880 /* DSGameScene.m */; };
@@ -46,6 +45,7 @@
 		525FC92022888202007F4793 /* DSSharedSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedSceneController.m */; };
 		525FC92122888202007F4793 /* DSSharedSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedSceneController.m */; };
 		52629B7824624AB5004AAEA3 /* DSGameSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */; };
+		5265BD46247C5F8200FE9F3E /* forest-subimage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5265BD45247C5F8200FE9F3E /* forest-subimage.tiff */; };
 		5279A4E42436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E52436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E72436B83B00A51D98 /* DSCoCoJoystickControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */; };
@@ -251,7 +251,6 @@
 		52169437245EE27800F4B880 /* DSNSDataMD5Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSNSDataMD5Extensions.h; sourceTree = "<group>"; };
 		52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSNSDataMD5Extensions.m; sourceTree = "<group>"; };
 		5216943C245EE33B00F4B880 /* DSNSDataMD5ExtensionsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSNSDataMD5ExtensionsTest.m; sourceTree = "<group>"; };
-		5216943E245EFDCE00F4B880 /* forest-subimage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "forest-subimage.tiff"; path = "../../../../../../../var/folders/76/3_ny3z896pj77bt_5cjp_fbw0000gn/T/forest-subimage.tiff"; sourceTree = "<group>"; };
 		52169445245F2FED00F4B880 /* DSGameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSGameScene.h; sourceTree = "<group>"; };
 		52169446245F2FED00F4B880 /* DSGameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSGameScene.m; sourceTree = "<group>"; };
 		5216944A245F723F00F4B880 /* DSSceneControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSSceneControllerProtocol.h; sourceTree = "<group>"; };
@@ -276,6 +275,7 @@
 		525FC91E22888202007F4793 /* DSSharedSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedSceneController.m; sourceTree = "<group>"; };
 		52610C88243D64390052EE4F /* forest-hires.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forest-hires.png"; sourceTree = "<group>"; };
 		52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSGameSceneTest.m; sourceTree = "<group>"; };
+		5265BD45247C5F8200FE9F3E /* forest-subimage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "forest-subimage.tiff"; sourceTree = "<group>"; };
 		5279A4E32436B7AF00A51D98 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickControllerTest.m; sourceTree = "<group>"; };
 		5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDirectPageGlobalsTest.m; sourceTree = "<group>"; };
@@ -446,7 +446,7 @@
 			children = (
 				52229FAC2438BCBB0018A082 /* forest.png */,
 				52610C88243D64390052EE4F /* forest-hires.png */,
-				5216943E245EFDCE00F4B880 /* forest-subimage.tiff */,
+				5265BD45247C5F8200FE9F3E /* forest-subimage.tiff */,
 				5216942E245E579300F4B880 /* forest-tile.tiff */,
 				52A93D722454F1B400D2327B /* 01-moon.json */,
 				52A93D732454F2A600D2327B /* 01-test-level.json */,
@@ -796,12 +796,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				521A84A021FCF626006120E8 /* JSONBad in Resources */,
+				5265BD46247C5F8200FE9F3E /* forest-subimage.tiff in Resources */,
 				5216942F245E579400F4B880 /* forest-tile.tiff in Resources */,
 				52A93D8F24551F4800D2327B /* images-bad-2.json in Resources */,
 				52B1A151244CF7B5008E7066 /* 04-ship.json in Resources */,
 				52A93D8B2455158000D2327B /* images.json in Resources */,
 				52C8C6F9243DF17200EC582C /* forest-hires.png in Resources */,
-				5216943F245EFDCE00F4B880 /* forest-subimage.tiff in Resources */,
 				52A93D762454F36600D2327B /* 01-moon.json in Resources */,
 				52A93D8D24551EB400D2327B /* images-bad-1.json in Resources */,
 				521A849C21FCEE80006120E8 /* JSONDict.json in Resources */,

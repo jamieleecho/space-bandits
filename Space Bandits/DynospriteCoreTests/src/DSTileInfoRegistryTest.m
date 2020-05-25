@@ -22,7 +22,7 @@
 
 - (void)setUp {
     _target = [[DSTileInfoRegistry alloc] init];
-    XCTAssertNil(_target.tileFileParser);
+    XCTAssertEqual(_target.tileFileParser.class, DSTileFileParser.class);
     _tileFileParser = OCMClassMock(DSTileFileParser.class);
     _target.tileFileParser = _tileFileParser;
 }
