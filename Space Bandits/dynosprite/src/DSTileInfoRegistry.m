@@ -13,6 +13,7 @@
 - (id)init {
     if (self = [super init]) {
         _tileInfoNumberToTileInfo = [NSMutableDictionary dictionary];
+        self.tileFileParser = [[DSTileFileParser alloc] init];
     }
     return self;
 }

@@ -48,14 +48,15 @@
 
 - (DSGameScene *)gameSceneForLevel:(int)level {
     DSLevel *levelObj = [self.levelRegistry levelForIndex:level];
-    NSString *tileMapImagePath = levelObj.tilemapImagePath;
+    DSTileInfo *tileInfo = [self.tileInfoRegistry tileInfoForNumber:levelObj.tilesetIndex];    
+    NSString *tileMapImagePath = tileInfo.imagePath;
     while([tileMapImagePath hasPrefix:@"../"]) {
         tileMapImagePath = [tileMapImagePath substringWithRange:NSMakeRange(3, tileMapImagePath.length - 3)];
     }
     tileMapImagePath = [self.resourceController imageWithName:tileMapImagePath];
     NSImage *tileMapImage = [[NSImage alloc] initWithContentsOfFile:[self.bundle pathForResource:tileMapImagePath.stringByDeletingPathExtension ofType:tileMapImagePath.pathExtension]];
     NSRect tileMapRect = NSMakeRect(levelObj.tilemapStart.x, levelObj.tilemapStart.y, levelObj.tilemapSize.x, levelObj.tilemapSize.y);
-    SKTileMapNode *tileMapNode = [self.tileMapMaker nodeFromImage:tileMapImage withRect:tileMapRect];
+    SKTileMapNode *tileMapNode = [self.tileMapMaker nodeFromTileImage:tileMapImage withTileRect:tileMapRect];
     DSGameScene *gameScene = [[DSGameScene alloc] initWithTileMapNode:tileMapNode];
     gameScene.joystickController = self.joystickController;
     gameScene.levelNumber = level;

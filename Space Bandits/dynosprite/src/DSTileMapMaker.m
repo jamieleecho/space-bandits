@@ -45,7 +45,7 @@
     return [image1.TIFFRepresentation isEqualToData:image2.TIFFRepresentation];
 }
 
-- (NSDictionary<NSString *, NSImage *> *)imageTileDictionaryFromImage:(NSImage *)image {
+- (NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)imageTileDictionaryFromImage:(NSImage *)image {
     NSAssert((((int)image.size.width / DSTileSize) * DSTileSize) == image.size.width, @"TilemapSize width must be a multiple of 16");
     NSAssert((((int)image.size.height / DSTileSize) * DSTileSize) == image.size.height, @"TilemapSize height must be a multiple of 16");
     
@@ -55,7 +55,7 @@
             NSImage *tile = [self tileForImage:image atPoint:NSMakePoint(xx, yy)];
             NSString *hash = [self hashForImage:tile];
             if (hashToImage[hash] == nil) {
-                hashToImage[hash] = tile;
+                hashToImage[hash] = [[DSCons alloc] initWithCar:image andCdr:[NSNumber numberWithUnsignedLong:hashToImage.count]];
             }
         }
     }
@@ -63,8 +63,13 @@
     return hashToImage;
 }
 
-- (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, NSImage *> *)tileDictionary {
-    return [SKTextureAtlas atlasWithDictionary:tileDictionary];
+- (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary {
+    NSMutableDictionary<NSString *, NSImage *> *hashToImage = [NSMutableDictionary dictionary];
+    for(NSString *key in tileDictionary.allKeys) {
+        DSCons<NSImage *, NSNumber *> *imageIndexPair = tileDictionary[key];
+        hashToImage[key] = imageIndexPair.car;
+    }
+    return [SKTextureAtlas atlasWithDictionary:hashToImage];
 }
 
 - (SKTileSet *)tileSetFromTextureAtlas:(SKTextureAtlas *)textureAtlas {
@@ -79,12 +84,12 @@
     return [SKTileSet tileSetWithTileGroups:tileGroups];
 }
 
-- (SKTileMapNode *)nodeFromImage:(NSImage *)image withRect:(NSRect)rect {
-    NSImage *imageForMap = [self subImageForMap:image withRect:rect];
-    NSDictionary<NSString *, NSImage *> *map = [self imageTileDictionaryFromImage:imageForMap];
+- (SKTileMapNode *)nodeFromTileImage:(NSImage *)tileImage withTileRect:(NSRect)tileRect {
+    NSImage *imageForMap = [self subImageForMap:tileImage withRect:tileRect];
+    NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *map = [self imageTileDictionaryFromImage:imageForMap];
     SKTextureAtlas *atlas = [self atlasFromTileDictionary:map];
     SKTileSet *tileSet = [self tileSetFromTextureAtlas:atlas];
-    SKTileMapNode *tileMapNode = [SKTileMapNode tileMapNodeWithTileSet:tileSet columns:rect.size.width / DSTileSize rows:rect.size.height / DSTileSize tileSize:CGSizeMake(DSTileSize, DSTileSize)];
+    SKTileMapNode *tileMapNode = [SKTileMapNode tileMapNodeWithTileSet:tileSet columns:tileRect.size.width / DSTileSize rows:tileRect.size.height / DSTileSize tileSize:CGSizeMake(DSTileSize, DSTileSize)];
     tileMapNode.tileSize = CGSizeMake(DSTileSize * NSScreen.mainScreen.backingScaleFactor, DSTileSize * NSScreen.mainScreen.backingScaleFactor);
 
     NSMutableDictionary<NSString *, SKTileGroup *> *hashToTileGroup = [NSMutableDictionary dictionary];

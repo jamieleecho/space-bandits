@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import <SpriteKit/SpriteKit.h>
 
+#import "DSCons.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSTileMapMaker : NSObject
@@ -18,10 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSImage *)tileForImage:(NSImage *)image atPoint:(NSPoint)p0;
 - (NSString *)hashForImage:(NSImage *)image;
 - (BOOL)image:(NSImage *)image1 isEqualTo:(NSImage *)image2;
-- (NSDictionary<NSString *, NSImage *> *)imageTileDictionaryFromImage:(NSImage *)image;
-- (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, NSImage *> *)tileDictionary;
+- (NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)imageTileDictionaryFromImage:(NSImage *)image;
+- (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary;
 - (SKTileSet *)tileSetFromTextureAtlas:(SKTextureAtlas *)textureAtlas;
-- (SKTileMapNode *)nodeFromImage:(NSImage *)image withRect:(NSRect)rect;
+- (SKTileMapNode *)nodeFromTileImage:(NSImage *)tileImage withTileRect:(NSRect)tileRect;
 
 @end
 

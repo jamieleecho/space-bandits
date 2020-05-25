@@ -12,6 +12,7 @@
 #import "DSLevelRegistry.h"
 #import "DSResourceController.h"
 #import "DSSceneControllerProtocol.h"
+#import "DSTileInfoRegistry.h"
 #import "DSTransitionSceneInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonnull, nonatomic) IBOutlet DSLevelRegistry *levelRegistry;
 @property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
 @property (nonnull, nonatomic) IBOutlet NSArray<DSTransitionSceneInfo *> *sceneInfos;
+@property (nonnull, nonatomic) IBOutlet DSTileInfoRegistry *tileInfoRegistry;
 @property (nonatomic, nonnull) IBOutlet DSTileMapMaker *tileMapMaker;
 
 - (id)init;
