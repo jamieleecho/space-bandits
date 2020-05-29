@@ -17,6 +17,7 @@
 @implementation DSTileMapMakerTest {
     DSTileMapMaker *_target;
     NSImage *_forestImage;
+    NSImage *_forestHackImage;
     NSImage *_forestSubImage;
     NSImage *_forestTileImage;
 }
@@ -24,6 +25,7 @@
 - (void)setUp {
     _target = [[DSTileMapMaker alloc] init];
     _forestImage = [[NSBundle bundleForClass:self.class] imageForResource:@"forest"];
+    _forestHackImage = [[NSBundle bundleForClass:self.class] imageForResource:@"forest-hack"];
     _forestSubImage = [[NSBundle bundleForClass:self.class] imageForResource:@"forest-subimage"];
     _forestTileImage = [[NSBundle bundleForClass:self.class] imageForResource:@"forest-tile"];
 }
@@ -57,6 +59,7 @@
 - (void)testTileImage {
     NSImage *image = [_target tileForImage:_forestImage atPoint:NSMakePoint(76, 154)];
     XCTAssertTrue([DSTestUtils image:image isSameAsImage:_forestTileImage]);
+    
     XCTAssertThrows([_target tileForImage:_forestImage atPoint:NSMakePoint(305, 176)]);
     XCTAssertThrows([_target tileForImage:_forestImage atPoint:NSMakePoint(304, 177)]);
     XCTAssertThrows([_target tileForImage:_forestImage atPoint:NSMakePoint(-1, 0)]);
@@ -65,7 +68,7 @@
 
 - (void)testHashForImage {
     XCTAssertEqualObjects([_target hashForImage:_forestImage], @"7d19093f6755ba855f2642e33bb458be");
-    XCTAssertEqualObjects([_target hashForImage:_forestTileImage], @"11e4d77b77a021049f2dd93733dfa576");
+    XCTAssertEqualObjects([_target hashForImage:_forestTileImage], @"7919e4b229453a778fd696be4554e6ac");
 }
 
 - (void)testImageIsEqualTo {
@@ -77,9 +80,10 @@
 
 - (void)testImageTileDictionaryFromImage {
     NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *hashToImageAndIndex = [_target imageTileDictionaryFromImage:_forestImage];
-    XCTAssertEqual(hashToImageAndIndex.count, 211);
+    XCTAssertEqual(hashToImageAndIndex.count, 209);
     NSImage *blueTile = [_target tileForImage:_forestImage atPoint:NSMakePoint(160, 0)];
     NSImage *blueTileImage = hashToImageAndIndex[[_target hashForImage:blueTile]].car;
+    XCTAssertEqualObjects(@6, [hashToImageAndIndex[[_target hashForImage:blueTile]] cdr]);
     XCTAssertTrue([DSTestUtils image:blueTile isSameAsImage:blueTileImage]);
     
     XCTAssertThrows([_target imageTileDictionaryFromImage:[_target subImage:_forestImage withRect:NSMakeRect(0, 0, 319, 191)]]);
@@ -89,7 +93,7 @@
     NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *hashToImage = [_target imageTileDictionaryFromImage:_forestImage];
     NSImage *blueTile = [_target tileForImage:_forestImage atPoint:NSMakePoint(160, 0)];
     SKTextureAtlas *atlas = [_target atlasFromTileDictionary:hashToImage];
-    XCTAssertEqual(atlas.textureNames.count, 211);
+    XCTAssertEqual(atlas.textureNames.count, 209);
     SKTexture *blueTileTexture = [atlas textureNamed:[_target hashForImage:blueTile]];
     XCTAssertTrue([DSTestUtils image:[DSTestUtils convertToNSImage:blueTileTexture.CGImage withSize:blueTile.size] isSameAsImage:blueTile]);
 }
@@ -98,7 +102,7 @@
     NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *hashToImage = [_target imageTileDictionaryFromImage:_forestImage];
     SKTextureAtlas *atlas = [_target atlasFromTileDictionary:hashToImage];
     SKTileSet *tileSet = [_target tileSetFromTextureAtlas:atlas];
-    XCTAssertTrue(CGSizeEqualToSize(tileSet.defaultTileSize, CGSizeMake(16 * NSScreen.mainScreen.backingScaleFactor, 16 * NSScreen.mainScreen.backingScaleFactor)));
+    XCTAssertTrue(CGSizeEqualToSize(tileSet.defaultTileSize, CGSizeMake(16, 16)));
     NSMutableSet<NSString *> *groupNames = [NSMutableSet setWithCapacity:hashToImage.count];
     NSImage *blueTile = [_target tileForImage:_forestImage atPoint:NSMakePoint(160, 0)];
     NSString *blueTileName = [_target hashForImage:blueTile];
@@ -113,19 +117,32 @@
     XCTAssertEqual(groupNames.count, hashToImage.count);
     SKTexture *blueTileTexture = blueTileGroup.rules.firstObject.tileDefinitions.firstObject.textures.firstObject;
     XCTAssertTrue([DSTestUtils image:[DSTestUtils convertToNSImage:blueTileTexture.CGImage withSize:blueTile.size] isSameAsImage:blueTile]);
-    XCTAssertTrue(CGSizeEqualToSize(blueTileTexture.size, CGSizeMake(16 * NSScreen.mainScreen.backingScaleFactor, 16 * NSScreen.mainScreen.backingScaleFactor)));
+    XCTAssertTrue(CGSizeEqualToSize(blueTileTexture.size, CGSizeMake(16, 16)));
 }
 
-- (void)testNodeFromImageWithRect {
+- (void)testNodeFromImageWithRectUsingTileImageWithTileRect {
     SKTileMapNode *tileMapNode = [_target nodeFromImage:_forestImage withRect:NSMakeRect(21, 10, 192, 160) usingTileImage:_forestImage withTileRect:NSMakeRect(21, 10, 192, 160)];
-    XCTAssertEqual(tileMapNode.tileSet.tileGroups.count, 108);
+    XCTAssertEqual(tileMapNode.tileSet.tileGroups.count, 107);
     XCTAssertEqual(tileMapNode.numberOfColumns, 12);
     XCTAssertEqual(tileMapNode.numberOfRows, 10);
-    XCTAssertEqual(tileMapNode.xScale, 1 / NSScreen.mainScreen.backingScaleFactor);
-    XCTAssertEqual(tileMapNode.yScale, 1 / NSScreen.mainScreen.backingScaleFactor);
-    XCTAssertTrue(CGSizeEqualToSize(tileMapNode.tileSize, CGSizeMake(16 * NSScreen.mainScreen.backingScaleFactor, 16 * NSScreen.mainScreen.backingScaleFactor)));
-    XCTAssertEqualObjects([tileMapNode tileGroupAtColumn:5 row:2].name, @"bc40f63d14b195421c8ce2b058986de6");
-    XCTAssertTrue(CGSizeEqualToSize(tileMapNode.mapSize, CGSizeMake(12 * 16 * NSScreen.mainScreen.backingScaleFactor, 10 * 16 * NSScreen.mainScreen.backingScaleFactor)));
+    XCTAssertEqual(tileMapNode.xScale, 1);
+    XCTAssertEqual(tileMapNode.yScale, 1);
+    XCTAssertTrue(CGSizeEqualToSize(tileMapNode.tileSize, CGSizeMake(16, 16)));
+    XCTAssertEqualObjects([tileMapNode tileGroupAtColumn:5 row:2].name, @"21165f3660b53aa0f64ccdfa74c90e97");
+    XCTAssertTrue(CGSizeEqualToSize(tileMapNode.mapSize, CGSizeMake(12 * 16, 10 * 16)));
+    XCTAssertTrue(CGPointEqualToPoint(tileMapNode.anchorPoint, CGPointMake(0, 1)));
+}
+
+- (void)testNodeFromImageWithRectUsingTileImageWithTileRect2 {
+    SKTileMapNode *tileMapNode = [_target nodeFromImage:_forestHackImage withRect:NSMakeRect(0, 0, 320, 192) usingTileImage:_forestImage withTileRect:NSMakeRect(0, 0, 320, 192)];
+    XCTAssertEqual(tileMapNode.tileSet.tileGroups.count, 209);
+    XCTAssertEqual(tileMapNode.numberOfColumns, 20);
+    XCTAssertEqual(tileMapNode.numberOfRows, 12);
+    XCTAssertEqual(tileMapNode.xScale, 1);
+    XCTAssertEqual(tileMapNode.yScale, 1);
+    XCTAssertTrue(CGSizeEqualToSize(tileMapNode.tileSize, CGSizeMake(16, 16)));
+    XCTAssertTrue(CGSizeEqualToSize(tileMapNode.mapSize, CGSizeMake(320, 192)));
+    XCTAssertEqualObjects([tileMapNode tileGroupAtColumn:0 row:11].name, [tileMapNode tileGroupAtColumn:1 row:10].name);
     XCTAssertTrue(CGPointEqualToPoint(tileMapNode.anchorPoint, CGPointMake(0, 1)));
 }
 

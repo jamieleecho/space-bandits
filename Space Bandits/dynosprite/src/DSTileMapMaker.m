@@ -17,12 +17,18 @@
 - (NSImage *)subImage:(NSImage *)image withRect:(NSRect)rect; {
     NSAssert(rect.origin.x >= 0, @"SubImage X origin must be >= 0");
     NSAssert(rect.origin.y >= 0, @"SubImage Y origin must be >= 0");
-    float y = image.size.height - rect.origin.y - rect.size.height;
-    NSImage *outputImage = [[NSImage alloc] initWithSize:rect.size];
-    [outputImage lockFocus];
-    [image drawInRect:NSMakeRect(0, 0, rect.size.width, rect.size.height) fromRect:NSMakeRect(rect.origin.x, y, rect.size.width, rect.size.height) operation:NSCompositingOperationSourceOver fraction:1];
-    [outputImage unlockFocus];
-    return outputImage;
+    NSAssert(rect.size.width >= 0, @"SubImage width must be >= 0");
+    NSAssert(rect.size.height >= 0, @"SubImage height origin must be >= 0");
+    NSAssert(rect.origin.x + rect.size.width <= image.size.width, @"SubImage X origin and width larger than the image width");
+    NSAssert(rect.origin.y + rect.size.height <= image.size.height, @"SubImage Y origin and height larger than the image height");
+
+    // Get the conversions we need for the CGImageRef
+    CGImageRef imageRef = [image CGImageForProposedRect:nil context:nil hints:nil];
+    CGImageRef cutImageRef = CGImageCreateWithImageInRect(imageRef, CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height));
+    
+    NSImage *cutImage = [[NSImage alloc] initWithCGImage:cutImageRef size:NSZeroSize];
+    CGImageRelease(cutImageRef);
+    return cutImage;
 }
 
 - (NSImage *)subImageForMap:(NSImage *)image withRect:(NSRect)rect {
@@ -55,7 +61,6 @@
             NSImage *tile = [self tileForImage:image atPoint:NSMakePoint(xx, yy)];
             NSString *hash = [self hashForImage:tile];
             if (hashToImage[hash] == nil) {
-                // hashToImage[hash] = tile;
                 hashToImage[hash] = [[DSCons alloc] initWithCar:tile andCdr:[NSNumber numberWithUnsignedLong:hashToImage.count]];
             }
         }
@@ -101,7 +106,7 @@
     SKTileSet *tileSet = [self tileSetFromTextureAtlas:atlas];
 
     SKTileMapNode *tileMapNode = [SKTileMapNode tileMapNodeWithTileSet:tileSet columns:rect.size.width / DSTileSize rows:rect.size.height / DSTileSize tileSize:CGSizeMake(DSTileSize, DSTileSize)];
-    tileMapNode.tileSize = CGSizeMake(DSTileSize * NSScreen.mainScreen.backingScaleFactor, DSTileSize * NSScreen.mainScreen.backingScaleFactor);
+    tileMapNode.tileSize = CGSizeMake(DSTileSize, DSTileSize);
     NSMutableDictionary<NSString *, SKTileGroup *> *hashToTileGroup = [NSMutableDictionary dictionary];
     for(SKTileGroup *group in tileSet.tileGroups) {
         hashToTileGroup[group.name] = group;
@@ -113,11 +118,11 @@
             NSImage *tileImage = [self tileForImage:mapImage atPoint:NSMakePoint(ii * DSTileSize, jj * DSTileSize)];
             NSString *hash = [self hashForImage:tileImage];
             SKTileGroup *group = hashToTileGroup[hash];
-            NSAssert(group != nil, ([NSString stringWithFormat:@"Could not locate background tile with hash %@.", hash]));
+            NSAssert(group != nil, ([NSString stringWithFormat:@"Could not locate background tile with hash %@ at tile map location (%d, %d)", hash, ii, jj]));
             [tileMapNode setTileGroup:group forColumn:ii row:tileMapNode.numberOfRows - jj - 1];
         }
     }
-    tileMapNode.xScale = tileMapNode.yScale = 1 / NSScreen.mainScreen.backingScaleFactor;
+    tileMapNode.xScale = tileMapNode.yScale = 1;
     tileMapNode.anchorPoint = CGPointMake(0, 1);
 
     return tileMapNode;

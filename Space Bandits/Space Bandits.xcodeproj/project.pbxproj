@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5216942F245E579400F4B880 /* forest-tile.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5216942E245E579300F4B880 /* forest-tile.tiff */; };
 		52169432245E595B00F4B880 /* DSTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169431245E595B00F4B880 /* DSTestUtils.m */; };
 		52169439245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
 		5216943A245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
@@ -45,7 +44,10 @@
 		525FC92022888202007F4793 /* DSSharedSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedSceneController.m */; };
 		525FC92122888202007F4793 /* DSSharedSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedSceneController.m */; };
 		52629B7824624AB5004AAEA3 /* DSGameSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */; };
-		5265BD46247C5F8200FE9F3E /* forest-subimage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5265BD45247C5F8200FE9F3E /* forest-subimage.tiff */; };
+		5265BD48247C933800FE9F3E /* DSConsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5265BD47247C933800FE9F3E /* DSConsTest.m */; };
+		5265BD4E247CA68E00FE9F3E /* forest-hack.png in Resources */ = {isa = PBXBuildFile; fileRef = 5265BD4D247CA68E00FE9F3E /* forest-hack.png */; };
+		5265BD5824807CA600FE9F3E /* forest-subimage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5265BD5724807CA500FE9F3E /* forest-subimage.tiff */; };
+		5265BD5C2480822200FE9F3E /* forest-tile.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5265BD5B2480822200FE9F3E /* forest-tile.tiff */; };
 		5279A4E42436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E52436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E72436B83B00A51D98 /* DSCoCoJoystickControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */; };
@@ -245,7 +247,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5216942E245E579300F4B880 /* forest-tile.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "forest-tile.tiff"; sourceTree = "<group>"; };
 		52169430245E595B00F4B880 /* DSTestUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTestUtils.h; sourceTree = "<group>"; };
 		52169431245E595B00F4B880 /* DSTestUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTestUtils.m; sourceTree = "<group>"; };
 		52169437245EE27800F4B880 /* DSNSDataMD5Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSNSDataMD5Extensions.h; sourceTree = "<group>"; };
@@ -275,7 +276,10 @@
 		525FC91E22888202007F4793 /* DSSharedSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedSceneController.m; sourceTree = "<group>"; };
 		52610C88243D64390052EE4F /* forest-hires.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forest-hires.png"; sourceTree = "<group>"; };
 		52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSGameSceneTest.m; sourceTree = "<group>"; };
-		5265BD45247C5F8200FE9F3E /* forest-subimage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "forest-subimage.tiff"; sourceTree = "<group>"; };
+		5265BD47247C933800FE9F3E /* DSConsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSConsTest.m; sourceTree = "<group>"; };
+		5265BD4D247CA68E00FE9F3E /* forest-hack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forest-hack.png"; sourceTree = "<group>"; };
+		5265BD5724807CA500FE9F3E /* forest-subimage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "forest-subimage.tiff"; sourceTree = "<group>"; };
+		5265BD5B2480822200FE9F3E /* forest-tile.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "forest-tile.tiff"; sourceTree = "<group>"; };
 		5279A4E32436B7AF00A51D98 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickControllerTest.m; sourceTree = "<group>"; };
 		5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDirectPageGlobalsTest.m; sourceTree = "<group>"; };
@@ -444,10 +448,11 @@
 		52C8C6F7243DEEC400EC582C /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				5265BD4D247CA68E00FE9F3E /* forest-hack.png */,
 				52229FAC2438BCBB0018A082 /* forest.png */,
 				52610C88243D64390052EE4F /* forest-hires.png */,
-				5265BD45247C5F8200FE9F3E /* forest-subimage.tiff */,
-				5216942E245E579300F4B880 /* forest-tile.tiff */,
+				5265BD5724807CA500FE9F3E /* forest-subimage.tiff */,
+				5265BD5B2480822200FE9F3E /* forest-tile.tiff */,
 				52A93D722454F1B400D2327B /* 01-moon.json */,
 				52A93D732454F2A600D2327B /* 01-test-level.json */,
 				521A849B21FCEE80006120E8 /* JSONDict.json */,
@@ -579,6 +584,7 @@
 				5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */,
 				52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */,
 				521A849921FCEE06006120E8 /* DSConfigFileParserTest.m */,
+				5265BD47247C933800FE9F3E /* DSConsTest.m */,
 				5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */,
 				52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */,
 				52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */,
@@ -796,17 +802,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				521A84A021FCF626006120E8 /* JSONBad in Resources */,
-				5265BD46247C5F8200FE9F3E /* forest-subimage.tiff in Resources */,
-				5216942F245E579400F4B880 /* forest-tile.tiff in Resources */,
 				52A93D8F24551F4800D2327B /* images-bad-2.json in Resources */,
 				52B1A151244CF7B5008E7066 /* 04-ship.json in Resources */,
 				52A93D8B2455158000D2327B /* images.json in Resources */,
 				52C8C6F9243DF17200EC582C /* forest-hires.png in Resources */,
+				5265BD5C2480822200FE9F3E /* forest-tile.tiff in Resources */,
+				5265BD4E247CA68E00FE9F3E /* forest-hack.png in Resources */,
 				52A93D762454F36600D2327B /* 01-moon.json in Resources */,
 				52A93D8D24551EB400D2327B /* images-bad-1.json in Resources */,
 				521A849C21FCEE80006120E8 /* JSONDict.json in Resources */,
 				52C8C6F8243DF16F00EC582C /* forest.png in Resources */,
 				52A93D752454F31800D2327B /* 01-test-level.json in Resources */,
+				5265BD5824807CA600FE9F3E /* forest-subimage.tiff in Resources */,
 				521A849E21FCEED2006120E8 /* JSONList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -883,6 +890,7 @@
 				7D8022A62431791C00496138 /* DSSoundController.m in Sources */,
 				52A93D91245523C300D2327B /* DSAssetLoaderTest.m in Sources */,
 				524109EF245614650005DF54 /* DSLevelLoadingScene.m in Sources */,
+				5265BD48247C933800FE9F3E /* DSConsTest.m in Sources */,
 				7D8022A024316BB700496138 /* DSDirectPageGlobals.m in Sources */,
 				52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */,
 				52169432245E595B00F4B880 /* DSTestUtils.m in Sources */,
