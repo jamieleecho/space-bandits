@@ -146,6 +146,10 @@
 		52E7606021D802A20001F3A0 /* DSLevelRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */; };
 		52E7606121D802A20001F3A0 /* DSLevelRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */; };
 		52EB04F921D8449B00F333AD /* DSLevelRegistryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */; };
+		52EDA7F124A2D28B00D3B490 /* DSImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EDA7F024A2D28B00D3B490 /* DSImageUtil.m */; };
+		52EDA7F424A2DAAE00D3B490 /* DSImageUtilTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EDA7F324A2DAAE00D3B490 /* DSImageUtilTest.m */; };
+		52EDA7F524A2DADC00D3B490 /* DSImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EDA7F024A2D28B00D3B490 /* DSImageUtil.m */; };
+		52EDA7F624A2DADC00D3B490 /* DSImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EDA7F024A2D28B00D3B490 /* DSImageUtil.m */; };
 		52F0574D2216323400CDC1DD /* DSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F0574C2216323400CDC1DD /* DSViewController.m */; };
 		52F0574E2216323400CDC1DD /* DSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F0574C2216323400CDC1DD /* DSViewController.m */; };
 		52F1208921D7DD63008A7900 /* DSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F1208821D7DD63008A7900 /* DSAppDelegate.m */; };
@@ -353,6 +357,9 @@
 		52E7605C21D802A20001F3A0 /* DSLevelRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevelRegistry.h; sourceTree = "<group>"; };
 		52E7605D21D802A20001F3A0 /* DSLevelRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelRegistry.m; sourceTree = "<group>"; };
 		52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelRegistryTest.m; sourceTree = "<group>"; };
+		52EDA7F024A2D28B00D3B490 /* DSImageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSImageUtil.m; sourceTree = "<group>"; };
+		52EDA7F224A2D94400D3B490 /* DSImageUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSImageUtil.h; sourceTree = "<group>"; };
+		52EDA7F324A2DAAE00D3B490 /* DSImageUtilTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSImageUtilTest.m; sourceTree = "<group>"; };
 		52F0574B221631E300CDC1DD /* DSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSViewController.h; sourceTree = "<group>"; };
 		52F0574C2216323400CDC1DD /* DSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSViewController.m; sourceTree = "<group>"; };
 		52F1208421D7DD63008A7900 /* Space Bandits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Bandits.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -508,6 +515,8 @@
 				7D80229D24316BB700496138 /* DSDirectPageGlobals.m */,
 				52169445245F2FED00F4B880 /* DSGameScene.h */,
 				52169446245F2FED00F4B880 /* DSGameScene.m */,
+				52EDA7F224A2D94400D3B490 /* DSImageUtil.h */,
+				52EDA7F024A2D28B00D3B490 /* DSImageUtil.m */,
 				527E7ACC21F016B90013E66A /* DSInitScene.m */,
 				5227E72021E2DDA40092C947 /* DSInitScene.h */,
 				52E7604421D7EF440001F3A0 /* DSLevel.h */,
@@ -587,6 +596,7 @@
 				5265BD47247C933800FE9F3E /* DSConsTest.m */,
 				5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */,
 				52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */,
+				52EDA7F324A2DAAE00D3B490 /* DSImageUtilTest.m */,
 				52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */,
 				52B1A128244B8667008E7066 /* DSLevelFileParserTest.m */,
 				52F491B62458FD18009123CE /* DSLevelLoadingSceneTest.m */,
@@ -878,6 +888,7 @@
 				52B1A15B244CFE45008E7066 /* DSPoint.c in Sources */,
 				7D7EED7123BD0EB700804C26 /* DSResourceController.m in Sources */,
 				5216943D245EE33B00F4B880 /* DSNSDataMD5ExtensionsTest.m in Sources */,
+				52EDA7F524A2DADC00D3B490 /* DSImageUtil.m in Sources */,
 				5216943B245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */,
 				529201EA24414521000B4D58 /* DSSharedSceneControllerTest.m in Sources */,
 				7DC4E7F622FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
@@ -899,6 +910,7 @@
 				524109E92455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
 				529F9015246629B900C8A706 /* DSTileInfoRegistry.m in Sources */,
 				52B1A15D244D0222008E7066 /* DSPointTest.m in Sources */,
+				52EDA7F424A2DAAE00D3B490 /* DSImageUtilTest.m in Sources */,
 				52C7C835247B4A3200B4901E /* DSCons.m in Sources */,
 				52B1A129244B8667008E7066 /* DSLevelFileParserTest.m in Sources */,
 				52B1A156244CFD31008E7066 /* DSSpriteInfo.m in Sources */,
@@ -938,6 +950,7 @@
 				52C7C833247B4A3200B4901E /* DSCons.m in Sources */,
 				7D8022A42431791C00496138 /* DSSoundController.m in Sources */,
 				52A93D802454FE4100D2327B /* DSTransitionSceneInfoFileParser.m in Sources */,
+				52EDA7F124A2D28B00D3B490 /* DSImageUtil.m in Sources */,
 				52F845272442911300B1D70F /* DSLevelFileParser.m in Sources */,
 				52F0574D2216323400CDC1DD /* DSViewController.m in Sources */,
 				521A84A821FE02BE006120E8 /* DSSceneController.m in Sources */,
@@ -990,6 +1003,7 @@
 				525FC92022888202007F4793 /* DSSharedSceneController.m in Sources */,
 				52B1A155244CFD31008E7066 /* DSSpriteInfo.m in Sources */,
 				524402E021ED65CF00B02D38 /* DSTransitionScene.m in Sources */,
+				52EDA7F624A2DADC00D3B490 /* DSImageUtil.m in Sources */,
 				52B1A15A244CFE45008E7066 /* DSPoint.c in Sources */,
 				52B1A148244CC40C008E7066 /* DSObjectClassFileParser.m in Sources */,
 				52A90E4521E2F23000CC2643 /* DSAppDelegate.m in Sources */,
