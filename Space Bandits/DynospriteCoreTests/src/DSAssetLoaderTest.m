@@ -18,6 +18,8 @@
     id _imageLoader;
     id _levelRegistry;
     id _levelParser;
+    id _objectFactory;
+    id _objectParser;
     id _resourceController;
     id _tileInfoRegistry;
     id _transitionSceneInfoParser;
@@ -35,6 +37,8 @@
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     XCTAssertNil(_target.levelFileParser);
     XCTAssertNil(_target.imageLoader);
+    XCTAssertNil(_target.objectFactory);
+    XCTAssertNil(_target.objectParser);
     XCTAssertNil(_target.resourceController);
     XCTAssertNil(_target.tileInfoRegistry);
 
@@ -42,6 +46,8 @@
     _imageLoader = OCMClassMock(DSTransitionImageLoader.class);
     _levelParser = OCMClassMock(DSLevelFileParser.class);
     _levelRegistry = OCMClassMock(DSLevelRegistry.class);
+    _objectFactory = OCMClassMock(DSObjectClassFactory.class);
+    _objectParser = OCMClassMock(DSObjectClassFileParser.class);
     _sceneInfos = [NSMutableArray array];
     _resourceController = OCMClassMock(DSResourceController.class);
     _tileInfoRegistry = OCMClassMock(DSTileInfoRegistry.class);
@@ -50,6 +56,8 @@
     _target.bundle = _bundle;
     _target.imageLoader = _imageLoader;
     _target.levelFileParser = _levelParser;
+    _target.objectFactory = _objectFactory;
+    _target.objectParser = _objectParser;
     _target.registry = _levelRegistry;
     _target.resourceController = _resourceController;
     _target.sceneInfos = _sceneInfos;
@@ -61,6 +69,8 @@
     XCTAssertEqual(_target.bundle, _bundle);
     XCTAssertEqual(_target.imageLoader, _imageLoader);
     XCTAssertEqual(_target.levelFileParser, _levelParser);
+    XCTAssertEqual(_target.objectFactory, _objectFactory);
+    XCTAssertEqual(_target.objectParser, _objectParser);
     XCTAssertEqual(_target.registry, _levelRegistry);
     XCTAssertEqual(_target.resourceController, _resourceController);
     XCTAssertEqual(_target.sceneInfos, _sceneInfos);
@@ -299,6 +309,52 @@
     });
     OCMStub([_levelRegistry count]).andReturn(3);
     XCTAssertThrows([_target loadSceneInfos]);
+}
+
+- (void)testLoadsObjectClasses {
+    NSArray<NSString *> *paths = @[
+        @"Resources/levels/04-goodguy.json",
+        @"Resources/levels/03-badguys.json",
+        @"Resources/levels/05-saucer.json"
+    ];
+
+    NSMutableArray<NSNumber *> *indices = [NSMutableArray arrayWithArray:@[@5, @4, @3]];
+    NSMutableArray<DSObjectClass *> *objectClasses = NSMutableArray.array;
+    void (^invoker)(NSInvocation *invocation) = ^(NSInvocation *invocation) {
+        DSObjectClass *objectClass;
+        NSNumber *num;
+        [invocation getArgument:&objectClass atIndex:2];
+        [invocation getArgument:&num atIndex:3];
+        [objectClasses addObject:objectClass];
+        XCTAssertEqual(num, indices.lastObject);
+        [indices removeLastObject];
+    };
+     
+    OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"sprites"]).andReturn(paths);
+    OCMStub([_objectFactory addObjectClass:OCMArg.any forNumber:@3]).andDo(invoker);
+    OCMStub([_objectFactory addObjectClass:OCMArg.any forNumber:@4]).andDo(invoker);
+    OCMStub([_objectFactory addObjectClass:OCMArg.any forNumber:@5]).andDo(invoker);
+    
+    [_target loadObjects];
+    
+    OCMVerify([_objectFactory addObjectClass:OCMArg.any forNumber:@3]);
+    OCMVerify([_objectFactory addObjectClass:OCMArg.any forNumber:@4]);
+    OCMVerify([_objectFactory addObjectClass:OCMArg.any forNumber:@5]);
+    OCMVerify([_objectParser parseFile:paths[1] forObjectClass:objectClasses[0]]);
+    OCMVerify([_objectParser parseFile:paths[0] forObjectClass:objectClasses[1]]);
+    OCMVerify([_objectParser parseFile:paths[2] forObjectClass:objectClasses[2]]);
+
+    OCMVerifyAll(_objectFactory);
+}
+
+- (void)testErrorsWhenLoadingDuplicateObjectClasses {
+    NSArray<NSString *> *paths = @[
+        @"Resources/levels/04-goodguy.json",
+        @"Resources/levels/03-badguys.json",
+        @"Resources/levels/03-saucer.json"
+    ];
+    OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"sprites"]).andReturn(paths);
+    XCTAssertThrows([_target loadObjects]);
 }
 
 @end

@@ -52,6 +52,40 @@
     }
 }
 
+- (void)loadObjects {
+    NSError *error;
+    NSRegularExpression *objectsFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.json$" options:NSRegularExpressionCaseInsensitive error:&error];
+
+    // Make sure the files in paths specify valid filenames
+    NSArray<NSString *> *paths = [self.bundle pathsForResourcesOfType:@"json" inDirectory:@"sprites"];
+    NSMutableDictionary<NSNumber *, NSString *> *objectSetToPath = [NSMutableDictionary dictionary];
+    for(NSString *path in paths) {
+        // Ignore image files
+        if (![path.pathExtension isEqualToString:@"json"]) {
+            continue;
+        }
+        
+        // Make sure the paths are in the right format
+        NSAssert([objectsFilenameRegex numberOfMatchesInString:path.lastPathComponent options:0 range:NSMakeRange(0, path.lastPathComponent.length)] == 1, ([NSString stringWithFormat:@"Unexpected object filename %@", path.lastPathComponent]));
+        NSTextCheckingResult *result = [objectsFilenameRegex firstMatchInString:path.lastPathComponent options:0 range:NSMakeRange(0, path.lastPathComponent.length)];
+
+        // Make sure there are no duplicates
+        int objectSetNumber = [[path.lastPathComponent substringWithRange:[result rangeAtIndex:1]] intValue];
+        NSAssert([objectSetToPath objectForKey:[NSNumber numberWithInt:objectSetNumber]] == nil, ([NSString stringWithFormat:@"Multiple object files found for object set %d", objectSetNumber]));
+        objectSetToPath[[NSNumber numberWithInt:objectSetNumber]] = path;
+    }
+    
+    // Load all of the files
+    NSArray<NSNumber *> *objectSets = [objectSetToPath.allKeys sortedArrayUsingSelector:@selector(compare:)];
+    for(NSNumber *objectClassNumber in objectSets) {
+        NSString *path = objectSetToPath[objectClassNumber];
+        DSObjectClass *objectClass = [[DSObjectClass alloc] init];
+        [self.objectParser parseFile:path forObjectClass:objectClass];
+        NSLog(@"([_objectSetFactory addObjectClassFromFile:%@ forNumber:%@]", path, objectClassNumber);
+        [self.objectFactory addObjectClass:objectClass forNumber:objectClassNumber];
+    }
+}
+
 - (void)loadTileSets {
     NSError *error;
     NSRegularExpression *tileFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.json$" options:NSRegularExpressionCaseInsensitive error:&error];

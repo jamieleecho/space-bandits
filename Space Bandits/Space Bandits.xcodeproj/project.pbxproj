@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		521497FF24B386D70053FDBB /* DSObjectClassFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 521497FE24B386D70053FDBB /* DSObjectClassFactoryTest.m */; };
 		52169432245E595B00F4B880 /* DSTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169431245E595B00F4B880 /* DSTestUtils.m */; };
 		52169439245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
 		5216943A245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
@@ -48,6 +49,9 @@
 		5265BD4E247CA68E00FE9F3E /* forest-hack.png in Resources */ = {isa = PBXBuildFile; fileRef = 5265BD4D247CA68E00FE9F3E /* forest-hack.png */; };
 		5265BD5824807CA600FE9F3E /* forest-subimage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5265BD5724807CA500FE9F3E /* forest-subimage.tiff */; };
 		5265BD5C2480822200FE9F3E /* forest-tile.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5265BD5B2480822200FE9F3E /* forest-tile.tiff */; };
+		526AF4C024B35316003AB5EA /* DSObjectClassFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 526AF4BF24B35316003AB5EA /* DSObjectClassFactory.m */; };
+		526AF4C124B35316003AB5EA /* DSObjectClassFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 526AF4BF24B35316003AB5EA /* DSObjectClassFactory.m */; };
+		526AF4C224B35316003AB5EA /* DSObjectClassFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 526AF4BF24B35316003AB5EA /* DSObjectClassFactory.m */; };
 		5279A4E42436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E52436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E72436B83B00A51D98 /* DSCoCoJoystickControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */; };
@@ -252,6 +256,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		521497FE24B386D70053FDBB /* DSObjectClassFactoryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassFactoryTest.m; sourceTree = "<group>"; };
 		52169430245E595B00F4B880 /* DSTestUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTestUtils.h; sourceTree = "<group>"; };
 		52169431245E595B00F4B880 /* DSTestUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTestUtils.m; sourceTree = "<group>"; };
 		52169437245EE27800F4B880 /* DSNSDataMD5Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSNSDataMD5Extensions.h; sourceTree = "<group>"; };
@@ -285,6 +290,8 @@
 		5265BD4D247CA68E00FE9F3E /* forest-hack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forest-hack.png"; sourceTree = "<group>"; };
 		5265BD5724807CA500FE9F3E /* forest-subimage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "forest-subimage.tiff"; sourceTree = "<group>"; };
 		5265BD5B2480822200FE9F3E /* forest-tile.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "forest-tile.tiff"; sourceTree = "<group>"; };
+		526AF4BE24B35316003AB5EA /* DSObjectClassFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSObjectClassFactory.h; sourceTree = "<group>"; };
+		526AF4BF24B35316003AB5EA /* DSObjectClassFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassFactory.m; sourceTree = "<group>"; };
 		5279A4E32436B7AF00A51D98 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickControllerTest.m; sourceTree = "<group>"; };
 		5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDirectPageGlobalsTest.m; sourceTree = "<group>"; };
@@ -536,6 +543,8 @@
 				7D8022982431656C00496138 /* DSObject.m */,
 				52B1A139244BD4F9008E7066 /* DSObjectClass.h */,
 				52B1A13A244BD4F9008E7066 /* DSObjectClass.m */,
+				526AF4BE24B35316003AB5EA /* DSObjectClassFactory.h */,
+				526AF4BF24B35316003AB5EA /* DSObjectClassFactory.m */,
 				52B1A145244CC40C008E7066 /* DSObjectClassFileParser.h */,
 				52B1A146244CC40C008E7066 /* DSObjectClassFileParser.m */,
 				52B1A157244CFE45008E7066 /* DSPoint.h */,
@@ -607,6 +616,7 @@
 				52EB04F821D8449B00F333AD /* DSLevelRegistryTest.m */,
 				5216943C245EE33B00F4B880 /* DSNSDataMD5ExtensionsTest.m */,
 				52B1A12E244BA5CC008E7066 /* DSObjectTest.m */,
+				521497FE24B386D70053FDBB /* DSObjectClassFactoryTest.m */,
 				52B1A143244CB941008E7066 /* DSObjectClassTest.m */,
 				52B1A14A244CDC21008E7066 /* DSObjectClassFileParserTest.m */,
 				52B1A15C244D0222008E7066 /* DSPointTest.m */,
@@ -930,8 +940,10 @@
 				52A90E3721E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				525FC92122888202007F4793 /* DSSharedSceneController.m in Sources */,
 				52B1A15F244D0BAD008E7066 /* DSSpriteInfoTest.m in Sources */,
+				526AF4C224B35316003AB5EA /* DSObjectClassFactory.m in Sources */,
 				522C1363245E41C000031BD1 /* DSTileMapMakerTest.m in Sources */,
 				529201F2244151BF000B4D58 /* DSWindowControllerTest.m in Sources */,
+				521497FF24B386D70053FDBB /* DSObjectClassFactoryTest.m in Sources */,
 				52A93D7B2454F9B300D2327B /* DSTransitionSceneInfo.m in Sources */,
 				529201E6243FF69E000B4D58 /* DSAppDelegateTest.m in Sources */,
 				52A93D862454FF7C00D2327B /* DSTransitionSceneInfoTest.m in Sources */,
@@ -960,6 +972,7 @@
 				521A84A821FE02BE006120E8 /* DSSceneController.m in Sources */,
 				52A93D792454F9B300D2327B /* DSTransitionSceneInfo.m in Sources */,
 				52F491BA245E0544009123CE /* DSTileMapMaker.m in Sources */,
+				526AF4C024B35316003AB5EA /* DSObjectClassFactory.m in Sources */,
 				524109ED245614650005DF54 /* DSLevelLoadingScene.m in Sources */,
 				52B1A147244CC40C008E7066 /* DSObjectClassFileParser.m in Sources */,
 				7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
@@ -1030,6 +1043,7 @@
 				52D466DF2437ED2D004B4EF1 /* DSResourceController.m in Sources */,
 				52E7604821D7EF440001F3A0 /* DSLevel.m in Sources */,
 				52B1A16A244D23A2008E7066 /* DSTileFileParser.m in Sources */,
+				526AF4C124B35316003AB5EA /* DSObjectClassFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

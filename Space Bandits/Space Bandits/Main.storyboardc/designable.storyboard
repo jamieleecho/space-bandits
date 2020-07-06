@@ -684,22 +684,25 @@
                         <outlet property="sceneController" destination="rDZ-CV-DhK" id="1e8-Ye-aRZ"/>
                     </connections>
                 </customObject>
-                <customObject id="wHX-XA-T7S" customClass="DSConfigFileParser"/>
-                <customObject id="Nlc-1x-jO5" customClass="DSTransitionImageLoader"/>
-                <customObject id="Nki-Dk-Bhg" customClass="DSCoCoJoystickController"/>
-                <customObject id="4Pk-WU-M93" customClass="DSLevelFileParser"/>
                 <customObject id="0lT-tu-CK3" customClass="DSAssetLoader">
                     <connections>
                         <outlet property="imageLoader" destination="Nlc-1x-jO5" id="yoe-XY-i13"/>
                         <outlet property="levelFileParser" destination="4Pk-WU-M93" id="ZYc-bn-eVd"/>
+                        <outlet property="objectFactory" destination="5dS-7a-Ghz" id="jbb-8k-2WV"/>
+                        <outlet property="objectParser" destination="LPq-ih-HUx" id="eVX-jm-ueV"/>
                         <outlet property="resourceController" destination="web-E3-IMn" id="IES-SH-Irf"/>
                         <outlet property="sceneInfos" destination="jjS-RJ-pne" id="Zsh-y2-0YW"/>
                         <outlet property="tileInfoRegistry" destination="8lv-su-4yx" id="Thg-O9-1uX"/>
                         <outlet property="transitionSceneInfoFileParser" destination="mI2-rC-MfV" id="vIw-qQ-7lM"/>
                     </connections>
                 </customObject>
+                <customObject id="wHX-XA-T7S" customClass="DSConfigFileParser"/>
+                <customObject id="Nlc-1x-jO5" customClass="DSTransitionImageLoader"/>
+                <customObject id="Nki-Dk-Bhg" customClass="DSCoCoJoystickController"/>
+                <customObject id="4Pk-WU-M93" customClass="DSLevelFileParser"/>
+                <customObject id="5dS-7a-Ghz" customClass="DSObjectClassFactory"/>
+                <customObject id="LPq-ih-HUx" customClass="DSObjectClassFileParser"/>
                 <customObject id="web-E3-IMn" customClass="DSResourceController"/>
-                <customObject id="jjS-RJ-pne" customClass="NSMutableArray"/>
                 <customObject id="rDZ-CV-DhK" customClass="DSSceneController">
                     <connections>
                         <outlet property="joystickController" destination="Nki-Dk-Bhg" id="jc7-yr-SqC"/>
@@ -709,9 +712,10 @@
                         <outlet property="tileMapMaker" destination="zlV-f7-gSm" id="DpJ-UM-LB6"/>
                     </connections>
                 </customObject>
-                <customObject id="mI2-rC-MfV" customClass="DSTransitionSceneInfoFileParser"/>
+                <customObject id="jjS-RJ-pne" customClass="NSMutableArray"/>
                 <customObject id="8lv-su-4yx" customClass="DSTileInfoRegistry"/>
                 <customObject id="zlV-f7-gSm" customClass="DSTileMapMaker"/>
+                <customObject id="mI2-rC-MfV" customClass="DSTransitionSceneInfoFileParser"/>
             </objects>
             <point key="canvasLocation" x="63" y="-607"/>
         </scene>

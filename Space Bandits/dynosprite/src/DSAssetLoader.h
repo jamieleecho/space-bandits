@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "DSLevelFileParser.h"
+#import "DSObjectClassFactory.h"
+#import "DSObjectClassFileParser.h"
 #import "DSResourceController.h"
 #import "DSTileInfoRegistry.h"
 #import "DSTransitionImageLoader.h"
@@ -21,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) IBOutlet DSTransitionSceneInfoFileParser *transitionSceneInfoFileParser;
 @property (nonatomic, nonnull) IBOutlet DSLevelRegistry *registry;
 @property (nonatomic, nonnull) IBOutlet NSMutableArray *sceneInfos;
+@property (nonatomic, nonnull) IBOutlet DSObjectClassFactory *objectFactory;
+@property (nonatomic, nonnull) IBOutlet DSObjectClassFileParser *objectParser;
 @property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
 @property (nonatomic, nonnull) IBOutlet DSTileInfoRegistry *tileInfoRegistry;
 @property (nonatomic, nonnull) IBOutlet DSTransitionImageLoader *imageLoader;
@@ -28,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)init;
 - (void)loadLevels;
+- (void)loadObjects;
 - (void)loadSceneInfos;
 - (void)loadTransitionSceneImages;
 - (void)loadTileSets;

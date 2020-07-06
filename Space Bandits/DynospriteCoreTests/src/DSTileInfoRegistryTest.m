@@ -42,7 +42,7 @@
 - (void)testAddsTileForNumber {
     __block DSTileInfo *tileInfo = nil;
     NSString *path = @"foo/bar/test.json";
-    OCMStub([_tileFileParser parseFile:[OCMArg any] forTileInfo:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
+    OCMStub([_tileFileParser parseFile:OCMArg.any forTileInfo:OCMArg.any]).andDo(^(NSInvocation *invocation) {
         NSString *invokedPath;
         [invocation getArgument:(void *)&invokedPath atIndex:2];
         XCTAssertEqual(invokedPath, path);
@@ -55,7 +55,7 @@
 
 - (void)testAddsTileForNumberThrowsWithBadInput {
     NSString *path = @"foo/bar/test.json";
-    OCMStub([_tileFileParser parseFile:[OCMArg any] forTileInfo:[OCMArg any]]).andDo(^(NSInvocation *invocation) {
+    OCMStub([_tileFileParser parseFile:OCMArg.any forTileInfo:OCMArg.any]).andDo(^(NSInvocation *invocation) {
         @throw [NSException exceptionWithName:@"Oops" reason:@"testing stuff" userInfo:nil];
     });
     XCTAssertThrows([_target addTileInfoFromFile:path forNumber:3]);
@@ -63,7 +63,7 @@
 
 - (void)testClear {
     NSString *path = @"foo/bar/test.json";
-    OCMStub([_tileFileParser parseFile:[OCMArg any] forTileInfo:[OCMArg any]]);
+    OCMStub([_tileFileParser parseFile:OCMArg.any forTileInfo:OCMArg.any]);
     [_target addTileInfoFromFile:path forNumber:3];
     XCTAssertEqual(_target.count, 1);
     [_target clear];
