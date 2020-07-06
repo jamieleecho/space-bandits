@@ -53,7 +53,7 @@ extern "C" DSImageUtilImageInfo DSImageUtilGetImagePixelData(CGImageRef inImage)
 }
 
 extern "C" CGImageRef DSImageUtilMakeCGImage(DSImageUtilImageInfo imageInfo) {
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
     CGContextRef bitmapContext = CGBitmapContextCreate(
                                                        imageInfo.imageData,
                                                        imageInfo.width,
@@ -90,7 +90,7 @@ static CGContextRef CreateARGBBitmapContext(CGImageRef inImage) {
     bitmapByteCount     = (bitmapBytesPerRow * pixelsHigh);
 
     // Use the generic RGB color space.
-    colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    colorSpace = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
     if (colorSpace == NULL)
     {
         NSLog(@"Error allocating color space\n");
@@ -99,7 +99,7 @@ static CGContextRef CreateARGBBitmapContext(CGImageRef inImage) {
 
     // Allocate memory for image data. This is the destination in memory
     // where any drawing to the bitmap context will be rendered.
-    bitmapData = malloc( bitmapByteCount );
+    bitmapData = malloc(bitmapByteCount);
     if (bitmapData == NULL)
     {
         NSLog(@"Memory not allocated!");
@@ -111,13 +111,7 @@ static CGContextRef CreateARGBBitmapContext(CGImageRef inImage) {
     // per component. Regardless of what the source image format is
     // (CMYK, Grayscale, and so on) it will be converted over to the format
     // specified here by CGBitmapContextCreate.
-    context = CGBitmapContextCreate (bitmapData,
-                                    pixelsWide,
-                                    pixelsHigh,
-                                    8,      // bits per component
-                                    bitmapBytesPerRow,
-                                    colorSpace,
-                                    kCGImageAlphaPremultipliedFirst);
+    context = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, 8, bitmapBytesPerRow, colorSpace, kCGImageAlphaPremultipliedFirst);
     if (context == NULL)
     {
         free (bitmapData);
