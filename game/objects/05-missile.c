@@ -75,6 +75,7 @@ byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 RegisterObject(MissileInit, MissileReactivate, MissileUpdate);
 
+
 #ifdef __cplusplus
 }
 #endif

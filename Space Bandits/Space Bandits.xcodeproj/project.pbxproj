@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		521497FF24B386D70053FDBB /* DSObjectClassFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 521497FE24B386D70053FDBB /* DSObjectClassFactoryTest.m */; };
+		5214980224B38E1A0053FDBB /* DSObjectClassMethodRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980124B38E1A0053FDBB /* DSObjectClassMethodRegistry.m */; };
+		5214980324B38E1A0053FDBB /* DSObjectClassMethodRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980124B38E1A0053FDBB /* DSObjectClassMethodRegistry.m */; };
+		5214980424B38E1A0053FDBB /* DSObjectClassMethodRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980124B38E1A0053FDBB /* DSObjectClassMethodRegistry.m */; };
+		5214980724B38FBA0053FDBB /* DSObjectClassMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980624B38FBA0053FDBB /* DSObjectClassMethods.m */; };
+		5214980824B38FBA0053FDBB /* DSObjectClassMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980624B38FBA0053FDBB /* DSObjectClassMethods.m */; };
+		5214980924B38FBA0053FDBB /* DSObjectClassMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980624B38FBA0053FDBB /* DSObjectClassMethods.m */; };
+		5214980B24B391430053FDBB /* DSObjectClassMethodsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980A24B391430053FDBB /* DSObjectClassMethodsTest.m */; };
+		5214980D24B393FD0053FDBB /* DSObjectClassMethodRegistryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980C24B393FD0053FDBB /* DSObjectClassMethodRegistryTest.m */; };
 		52169432245E595B00F4B880 /* DSTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169431245E595B00F4B880 /* DSTestUtils.m */; };
 		52169439245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
 		5216943A245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
@@ -257,6 +265,12 @@
 
 /* Begin PBXFileReference section */
 		521497FE24B386D70053FDBB /* DSObjectClassFactoryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassFactoryTest.m; sourceTree = "<group>"; };
+		5214980024B38E1A0053FDBB /* DSObjectClassMethodRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSObjectClassMethodRegistry.h; sourceTree = "<group>"; };
+		5214980124B38E1A0053FDBB /* DSObjectClassMethodRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassMethodRegistry.m; sourceTree = "<group>"; };
+		5214980524B38FBA0053FDBB /* DSObjectClassMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSObjectClassMethods.h; sourceTree = "<group>"; };
+		5214980624B38FBA0053FDBB /* DSObjectClassMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassMethods.m; sourceTree = "<group>"; };
+		5214980A24B391430053FDBB /* DSObjectClassMethodsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassMethodsTest.m; sourceTree = "<group>"; };
+		5214980C24B393FD0053FDBB /* DSObjectClassMethodRegistryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassMethodRegistryTest.m; sourceTree = "<group>"; };
 		52169430245E595B00F4B880 /* DSTestUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTestUtils.h; sourceTree = "<group>"; };
 		52169431245E595B00F4B880 /* DSTestUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTestUtils.m; sourceTree = "<group>"; };
 		52169437245EE27800F4B880 /* DSNSDataMD5Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSNSDataMD5Extensions.h; sourceTree = "<group>"; };
@@ -547,6 +561,10 @@
 				526AF4BF24B35316003AB5EA /* DSObjectClassFactory.m */,
 				52B1A145244CC40C008E7066 /* DSObjectClassFileParser.h */,
 				52B1A146244CC40C008E7066 /* DSObjectClassFileParser.m */,
+				5214980024B38E1A0053FDBB /* DSObjectClassMethodRegistry.h */,
+				5214980124B38E1A0053FDBB /* DSObjectClassMethodRegistry.m */,
+				5214980524B38FBA0053FDBB /* DSObjectClassMethods.h */,
+				5214980624B38FBA0053FDBB /* DSObjectClassMethods.m */,
 				52B1A157244CFE45008E7066 /* DSPoint.h */,
 				52B1A158244CFE45008E7066 /* DSPoint.c */,
 				7D7EED6E23BD0EB700804C26 /* DSResourceController.h */,
@@ -617,8 +635,10 @@
 				5216943C245EE33B00F4B880 /* DSNSDataMD5ExtensionsTest.m */,
 				52B1A12E244BA5CC008E7066 /* DSObjectTest.m */,
 				521497FE24B386D70053FDBB /* DSObjectClassFactoryTest.m */,
-				52B1A143244CB941008E7066 /* DSObjectClassTest.m */,
 				52B1A14A244CDC21008E7066 /* DSObjectClassFileParserTest.m */,
+				5214980A24B391430053FDBB /* DSObjectClassMethodsTest.m */,
+				5214980C24B393FD0053FDBB /* DSObjectClassMethodRegistryTest.m */,
+				52B1A143244CB941008E7066 /* DSObjectClassTest.m */,
 				52B1A15C244D0222008E7066 /* DSPointTest.m */,
 				529201F32441A63F000B4D58 /* DSResourceControllerTest.m */,
 				52E447062464F66D008B6488 /* DSSceneTest.m */,
@@ -884,6 +904,7 @@
 				52DF473124355071008DC63F /* DSCoCoKeyboardJoystickTest.m in Sources */,
 				7D3110F022FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
 				52B1A13D244BD4F9008E7066 /* DSObjectClass.m in Sources */,
+				5214980924B38FBA0053FDBB /* DSObjectClassMethods.m in Sources */,
 				52F491B72458FD18009123CE /* DSLevelLoadingSceneTest.m in Sources */,
 				52B1A14B244CDC21008E7066 /* DSObjectClassFileParserTest.m in Sources */,
 				52169449245F2FED00F4B880 /* DSGameScene.m in Sources */,
@@ -891,6 +912,7 @@
 				52C8C6F6243DEE5800EC582C /* DSTransitionSceneTest.m in Sources */,
 				52A93D8824550D8400D2327B /* DSTransitionSceneInfoFileParserTest.m in Sources */,
 				521A849A21FCEE06006120E8 /* DSConfigFileParserTest.m in Sources */,
+				5214980B24B391430053FDBB /* DSObjectClassMethodsTest.m in Sources */,
 				524109EB245604DA0005DF54 /* DSTransitionImageLoaderTest.m in Sources */,
 				521A84AC21FE0748006120E8 /* DSSceneController.m in Sources */,
 				7DC4E7F122FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
@@ -914,6 +936,7 @@
 				7D80229B2431656C00496138 /* DSObject.m in Sources */,
 				7D8022A62431791C00496138 /* DSSoundController.m in Sources */,
 				52A93D91245523C300D2327B /* DSAssetLoaderTest.m in Sources */,
+				5214980D24B393FD0053FDBB /* DSObjectClassMethodRegistryTest.m in Sources */,
 				524109EF245614650005DF54 /* DSLevelLoadingScene.m in Sources */,
 				5265BD48247C933800FE9F3E /* DSConsTest.m in Sources */,
 				7D8022A024316BB700496138 /* DSDirectPageGlobals.m in Sources */,
@@ -931,6 +954,7 @@
 				52B1A16B244D23A2008E7066 /* DSTileFileParser.m in Sources */,
 				529201F0244150C1000B4D58 /* DSSoundControllerTest.m in Sources */,
 				521A84B321FE07A8006120E8 /* DSSceneControllerTest.m in Sources */,
+				5214980424B38E1A0053FDBB /* DSObjectClassMethodRegistry.m in Sources */,
 				521A84AA21FE0748006120E8 /* DSTransitionScene.m in Sources */,
 				52B1A166244D2213008E7066 /* DSTileInfoTest.m in Sources */,
 				529201F42441A63F000B4D58 /* DSResourceControllerTest.m in Sources */,
@@ -965,10 +989,12 @@
 				52B1A154244CFD31008E7066 /* DSSpriteInfo.m in Sources */,
 				52C7C833247B4A3200B4901E /* DSCons.m in Sources */,
 				7D8022A42431791C00496138 /* DSSoundController.m in Sources */,
+				5214980224B38E1A0053FDBB /* DSObjectClassMethodRegistry.m in Sources */,
 				52A93D802454FE4100D2327B /* DSTransitionSceneInfoFileParser.m in Sources */,
 				52EDA7F124A2D28B00D3B490 /* DSImageUtil.mm in Sources */,
 				52F845272442911300B1D70F /* DSLevelFileParser.m in Sources */,
 				52F0574D2216323400CDC1DD /* DSViewController.m in Sources */,
+				5214980724B38FBA0053FDBB /* DSObjectClassMethods.m in Sources */,
 				521A84A821FE02BE006120E8 /* DSSceneController.m in Sources */,
 				52A93D792454F9B300D2327B /* DSTransitionSceneInfo.m in Sources */,
 				52F491BA245E0544009123CE /* DSTileMapMaker.m in Sources */,
@@ -1015,6 +1041,7 @@
 				7DC4E7F022FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				52E447012464DCDC008B6488 /* DSScene.m in Sources */,
 				52B1A1752453AFD0008E7066 /* DSAssetLoader.m in Sources */,
+				5214980824B38FBA0053FDBB /* DSObjectClassMethods.m in Sources */,
 				529F9014246629B900C8A706 /* DSTileInfoRegistry.m in Sources */,
 				52B1A13C244BD4F9008E7066 /* DSObjectClass.m in Sources */,
 				525FC92022888202007F4793 /* DSSharedSceneController.m in Sources */,
@@ -1028,6 +1055,7 @@
 				524109E82455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
 				52A90E3621E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				7D3110EF22FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
+				5214980324B38E1A0053FDBB /* DSObjectClassMethodRegistry.m in Sources */,
 				7D8022A52431791C00496138 /* DSSoundController.m in Sources */,
 				52CF9D432288FB2B0054EAD2 /* DSWindowController.m in Sources */,
 				52C8C6F4243DEE3800EC582C /* DSTransitionSceneTest.m in Sources */,

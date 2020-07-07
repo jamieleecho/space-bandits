@@ -57,8 +57,18 @@ typedef struct DynospriteODT {
  */
 int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const char *file);
 
+/**
+  * Registers the given level into the shared registry.
+ * @param initMethod method used to initialize the object
+ * @param reactivateMethod function used to reinitialize the object
+ * @param updateMethod function used to update the method on each cycle
+ * @return some value
+ */
+int DSObjectClassMethodRegistryRegisterMethods(void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), const char *path);
+
+
 #define RegisterLevel(init, calcuateBackgroundNewXY) static int levelInit = DSLevelRegistryRegister(init, calcuateBackgroundNewXY, __FILE__)
-#define RegisterObject(init, reactivate, update)
+#define RegisterObject(init, reactivate, update) static int objectInit = DSObjectClassMethodRegistryRegisterMethods(init, reactivate, update, __FILE__)
 
 extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
 

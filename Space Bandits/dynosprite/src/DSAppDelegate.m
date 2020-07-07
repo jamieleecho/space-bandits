@@ -16,6 +16,7 @@
     [self.assetLoader loadSceneInfos];
     [self.assetLoader loadTransitionSceneImages];
     [self.assetLoader loadTileSets];
+    [self.assetLoader loadObjects];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
