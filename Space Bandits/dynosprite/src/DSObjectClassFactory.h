@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "DSObjectClass.h"
+#import "DSObjectClassMethodRegistry.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSObjectClassFactory : NSObject
+@interface DSObjectClassFactory : NSObject {
+    NSDictionary<NSNumber *, DSObjectClass *> *_levelToObjectClass;
+}
 
+@property DSObjectClassMethodRegistry *methodRegistry;
+
+- (id)init;
 - (void)addObjectClass:(DSObjectClass *)objectClass forNumber:(NSNumber *)levelNumber;
 
 @end

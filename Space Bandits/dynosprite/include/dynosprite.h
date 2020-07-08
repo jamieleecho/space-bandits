@@ -43,11 +43,6 @@ extern "C" {
 #define OBJECT_ACTIVE 3
 
 
-typedef struct DynospriteODT {
-    byte foo;
-} DynospriteODT;
-
-
 /**
  * Registers the given level into the shared registry.
  * @param init level initialization function

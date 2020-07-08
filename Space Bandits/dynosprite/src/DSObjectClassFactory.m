@@ -10,6 +10,15 @@
 
 @implementation DSObjectClassFactory
 
+- (id)init {
+    if (self = [super init]) {
+        _levelToObjectClass = NSMutableDictionary.dictionary;
+        self.methodRegistry = DSObjectClassMethodRegistry.sharedInstance;
+        return self;
+    }
+    return self;
+}
+
 - (void)addObjectClass:(DSObjectClass *)objectClass forNumber:(NSNumber *)levelNumber {
     
 }

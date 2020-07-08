@@ -11,7 +11,20 @@
 
 #include "coco.h"
 
+/** Object Data Table */
+typedef struct DynospriteODT {
+  byte dataSize;
+  byte drawType;
+  byte initSize;
+  byte res1;
+  void *init;
+  void *reactivate;
+  void *update;
+  void *draw;
+  byte res2[4];
+} DynospriteODT;
 
+/** Curent Object Buffer */
 typedef struct DynospriteCOB {
     byte groupIdx;
     byte objectIdx;
