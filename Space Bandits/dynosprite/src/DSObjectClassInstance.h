@@ -12,16 +12,14 @@
 #import "DSObjectClassMethods.h"
 #import "DynospriteDirectPageGlobals.h"
 
-#define DSObjectClassInstanceMaxInstances (128)
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSObjectClassInstance : NSObject {
-    /** Textures used by this sprite */
-    NSMutableArray<SKTexture *> *_textures;
-    
-    /** Sprite nodes */
-    NSMutableArray<SKTexture *> *_sprites;
+    /** Represents the class of these objects */
+    DSObjectClass *_objectClass;
+
+    /** C implemention for these objects methods */
+    DSObjectClassMethods *_methods;
     
     /** Object Buffers used to update the position of the SKSpriteNodes */
     DynospriteCOB *_cobs;
@@ -29,17 +27,23 @@ NS_ASSUME_NONNULL_BEGIN
     /** Object Buffers for initial state of the SKSpriteNodes */
     DynospriteODT *_odts;
     
+    /** Textures used by this sprite */
+    NSMutableArray<SKTexture *> *_textures;
+    
+    /** Sprite nodes */
+    NSMutableArray<SKSpriteNode *> *_sprites;
+    
     /** State Pointers for each individual cob above */
-    byte *_statePtr[DSObjectClassInstanceMaxInstances];
+    byte *_statePtr;
 }
 
-@property (nonatomic, nonnull) DSObjectClass *objectClass;
-@property (nonatomic, nonnull) DSObjectClassMethods *methods;
-
-- (id)initWithObjectClass:(DSObjectClass *)objectClass objectMethods:(DSObjectClassMethods *)methods cobs:(DynospriteCOB *)cobs odts:(DynospriteODT *)odt;
+- (id)initWithObjectClass:(DSObjectClass *)objectClass objectMethods:(DSObjectClassMethods *)methods cobs:(DynospriteCOB *)cobs odts:(DynospriteODT *)odts;
 
 - (void)reset;
 - (byte)update;
+
+- (DSObjectClass *)objectClass;
+- (DSObjectClassMethods *)methods;
 
 - (DynospriteCOB *)cobs;
 - (DynospriteODT *)odts;

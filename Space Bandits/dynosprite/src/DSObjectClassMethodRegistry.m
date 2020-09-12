@@ -11,7 +11,7 @@
 static DSObjectClassMethodRegistry *_sharedInstance = nil;
 
 
-int DSObjectClassMethodRegistryRegisterMethods(void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), const char *path) {
+int DSObjectClassMethodRegistryRegisterMethods(void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path) {
     NSError *error;
     NSRegularExpression *spriteFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.c$" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *nspath = [NSString stringWithUTF8String:path];

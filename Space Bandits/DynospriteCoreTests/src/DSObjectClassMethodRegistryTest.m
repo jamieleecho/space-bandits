@@ -83,8 +83,8 @@ static byte reactivate2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 static byte update2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 
 - (void)testAddsMethodsFromFile {
-    XCTAssertEqual(1, DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, "32-hello.c"));
-    XCTAssertEqual(1, DSObjectClassMethodRegistryRegisterMethods(init2, reactivate2, update2, "09-goodbyehello.c"));
+    XCTAssertEqual(1, DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, 128, "32-hello.c"));
+    XCTAssertEqual(1, DSObjectClassMethodRegistryRegisterMethods(init2, reactivate2, update2, 64, "09-goodbyehello.c"));
     DSObjectClassMethods *methods1 = [DSObjectClassMethodRegistry.sharedInstance methodsForIndex:@32];
     XCTAssertTrue(methods1.initMethod == init1);
     XCTAssertTrue(methods1.reactivateMethod == reactivate1);
@@ -96,9 +96,9 @@ static byte update2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 }
 
 - (void)testThrowsIfBogusFile {
-    XCTAssertThrows(DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, "xx-hello.c"));
-    XCTAssertThrows(DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, "20-hello.cpp"));
-    XCTAssertThrows(DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, "-1-hello.cpp"));
+    XCTAssertThrows(DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, 64, "xx-hello.c"));
+    XCTAssertThrows(DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, 64, "20-hello.cpp"));
+    XCTAssertThrows(DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, 64, "-1-hello.cpp"));
 }
 
 @end

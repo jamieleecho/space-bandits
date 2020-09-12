@@ -13,6 +13,7 @@
 extern "C" {
 #endif
 
+#include <stdlib.h>
 #include "coco.h"
 #include "DynospriteDirectPageGlobals.h"
 
@@ -57,13 +58,15 @@ int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const c
  * @param initMethod method used to initialize the object
  * @param reactivateMethod function used to reinitialize the object
  * @param updateMethod function used to update the method on each cycle
- * @return some value
+  * @param stateSize size of the state informtaion in bytes
+  * @param path location of the object
+  * @return some value
  */
-int DSObjectClassMethodRegistryRegisterMethods(void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), const char *path);
+int DSObjectClassMethodRegistryRegisterMethods(void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path);
 
 
 #define RegisterLevel(init, calcuateBackgroundNewXY) static int levelInit = DSLevelRegistryRegister(init, calcuateBackgroundNewXY, __FILE__)
-#define RegisterObject(init, reactivate, update) static int objectInit = DSObjectClassMethodRegistryRegisterMethods(init, reactivate, update, __FILE__)
+#define RegisterObject(init, reactivate, update, stateSize) static int objectInit = DSObjectClassMethodRegistryRegisterMethods(init, reactivate, update, stateSize, __FILE__)
 
 extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
 

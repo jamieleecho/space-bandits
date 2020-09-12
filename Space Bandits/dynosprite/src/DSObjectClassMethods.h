@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *);
 @property (nonatomic) byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *);
 @property (nonatomic) byte(*updateMethod)(DynospriteCOB *, DynospriteODT *);
+@property (nonatomic) size(*updateMethod)(DynospriteCOB *, DynospriteODT *);
 
 @end
 

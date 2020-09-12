@@ -41,7 +41,7 @@ byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(BadmissileInit, BadmissileReactivate, BadmissileUpdate);
+RegisterObject(BadmissileInit, BadmissileReactivate, BadmissileUpdate, sizeof(BadMissleObjectState));
 
 #ifdef __cplusplus
 }

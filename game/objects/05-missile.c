@@ -73,7 +73,7 @@ byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(MissileInit, MissileReactivate, MissileUpdate);
+RegisterObject(MissileInit, MissileReactivate, MissileUpdate, sizeof(MissileObjectState));
 
 
 #ifdef __cplusplus

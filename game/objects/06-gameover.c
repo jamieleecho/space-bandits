@@ -22,7 +22,7 @@ byte GameoverUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(GameoverInit, GameoverReactivate, GameoverUpdate);
+RegisterObject(GameoverInit, GameoverReactivate, GameoverUpdate, sizeof(GameOverObjectState));
 
 #ifdef __cplusplus
 }
