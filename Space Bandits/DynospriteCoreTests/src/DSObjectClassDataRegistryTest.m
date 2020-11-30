@@ -1,5 +1,5 @@
 //
-//  DSObjectClassMethodRegistryTest.m
+//  DSObjectClassDataRegistryTest.m
 //  DynospriteCoreTests
 //
 //  Created by Jamie Cho on 7/6/20.
@@ -7,20 +7,20 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "DSObjectClassMethodRegistry.h"
+#import "DSObjectClassDataRegistry.h"
 
 
-@interface DSObjectClassMethodRegistryTest : XCTestCase {
-    DSObjectClassMethodRegistry *_target;
+@interface DSObjectClassDataRegistryTest : XCTestCase {
+    DSObjectClassDataRegistry *_target;
 }
 
 @end
 
 
-@implementation DSObjectClassMethodRegistryTest
+@implementation DSObjectClassDataRegistryTest
 
 - (void)setUp {
-    _target = [[DSObjectClassMethodRegistry alloc] init];
+    _target = [[DSObjectClassDataRegistry alloc] init];
 }
 
 - (void)tearDown {
@@ -28,9 +28,9 @@
 }
 
 - (void)testSharedInstance {
-    DSObjectClassMethodRegistry *sharedInstance = DSObjectClassMethodRegistry.sharedInstance;
+    DSObjectClassDataRegistry *sharedInstance = DSObjectClassDataRegistry.sharedInstance;
     XCTAssertNotNil(sharedInstance);
-    XCTAssertEqual(DSObjectClassMethodRegistry.sharedInstance, sharedInstance);
+    XCTAssertEqual(DSObjectClassDataRegistry.sharedInstance, sharedInstance);
     XCTAssertNotEqual(_target, sharedInstance);
 }
 
@@ -39,21 +39,21 @@
 }
 
 - (void)testAddsMethods {
-    DSObjectClassMethods *classMethods = [[DSObjectClassMethods alloc] init];
+    DSObjectClassData *classMethods = [[DSObjectClassData alloc] init];
     [_target addMethods:classMethods forIndex:@4];
     XCTAssertEqual([_target methodsForIndex:@4], classMethods);
 }
 
 - (void)testThrowsAddingMethodsMultipleTimes {
-    DSObjectClassMethods *classMethods1 = [[DSObjectClassMethods alloc] init];
-    DSObjectClassMethods *classMethods2 = [[DSObjectClassMethods alloc] init];
+    DSObjectClassData *classMethods1 = [[DSObjectClassData alloc] init];
+    DSObjectClassData *classMethods2 = [[DSObjectClassData alloc] init];
     [_target addMethods:classMethods1 forIndex:@4];
     XCTAssertThrows([_target addMethods:classMethods2 forIndex:@4]);
 }
 
 - (void)testAddsMultipleMethods {
-    DSObjectClassMethods *classMethods1 = [[DSObjectClassMethods alloc] init];
-    DSObjectClassMethods *classMethods2 = [[DSObjectClassMethods alloc] init];
+    DSObjectClassData *classMethods1 = [[DSObjectClassData alloc] init];
+    DSObjectClassData *classMethods2 = [[DSObjectClassData alloc] init];
     [_target addMethods:classMethods1 forIndex:@3];
     [_target addMethods:classMethods2 forIndex:@2];
     XCTAssertEqual([_target methodsForIndex:@3], classMethods1);
@@ -65,8 +65,8 @@
 }
 
 - (void)testClear {
-    DSObjectClassMethods *classMethods1 = [[DSObjectClassMethods alloc] init];
-    DSObjectClassMethods *classMethods2 = [[DSObjectClassMethods alloc] init];
+    DSObjectClassData *classMethods1 = [[DSObjectClassData alloc] init];
+    DSObjectClassData *classMethods2 = [[DSObjectClassData alloc] init];
     [_target addMethods:classMethods1 forIndex:@3];
     [_target addMethods:classMethods2 forIndex:@2];
     [_target clear];
@@ -83,22 +83,24 @@ static byte reactivate2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 static byte update2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 
 - (void)testAddsMethodsFromFile {
-    XCTAssertEqual(1, DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, 128, "32-hello.c"));
-    XCTAssertEqual(1, DSObjectClassMethodRegistryRegisterMethods(init2, reactivate2, update2, 64, "09-goodbyehello.c"));
-    DSObjectClassMethods *methods1 = [DSObjectClassMethodRegistry.sharedInstance methodsForIndex:@32];
+    XCTAssertEqual(1,  DSObjectClassDataRegistryRegisterClassData(init1, reactivate1, update1, 128, "32-hello.c"));
+    XCTAssertEqual(1, DSObjectClassDataRegistryRegisterClassData(init2, reactivate2, update2, 64, "09-goodbyehello.c"));
+    DSObjectClassData *methods1 = [DSObjectClassDataRegistry.sharedInstance methodsForIndex:@32];
     XCTAssertTrue(methods1.initMethod == init1);
     XCTAssertTrue(methods1.reactivateMethod == reactivate1);
     XCTAssertTrue(methods1.updateMethod == update1);
-    DSObjectClassMethods *methods2 = [DSObjectClassMethodRegistry.sharedInstance methodsForIndex:@9];
+    XCTAssertEqual(methods1.stateSize, 128);
+    DSObjectClassData *methods2 = [DSObjectClassDataRegistry.sharedInstance methodsForIndex:@9];
     XCTAssertTrue(methods2.initMethod == init2);
     XCTAssertTrue(methods2.reactivateMethod == reactivate2);
     XCTAssertTrue(methods2.updateMethod == update2);
+    XCTAssertEqual(methods2.stateSize, 64);
 }
 
 - (void)testThrowsIfBogusFile {
-    XCTAssertThrows(DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, 64, "xx-hello.c"));
-    XCTAssertThrows(DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, 64, "20-hello.cpp"));
-    XCTAssertThrows(DSObjectClassMethodRegistryRegisterMethods(init1, reactivate1, update1, 64, "-1-hello.cpp"));
+    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(init1, reactivate1, update1, 64, "xx-hello.c"));
+    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(init1, reactivate1, update1, 64, "20-hello.cpp"));
+    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(init1, reactivate1, update1, 64, "-1-hello.cpp"));
 }
 
 @end

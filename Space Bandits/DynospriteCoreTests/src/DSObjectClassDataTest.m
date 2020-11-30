@@ -1,5 +1,5 @@
 //
-//  DSObjectClassMethodsTest.m
+//  DSObjectClassDataTest.m
 //  DynospriteCoreTests
 //
 //  Created by Jamie Cho on 7/6/20.
@@ -7,10 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "DSObjectClassMethods.h"
+#import "DSObjectClassData.h"
 
-@interface DSObjectClassMethodsTest : XCTestCase {
-    DSObjectClassMethods *_target;
+@interface DSObjectClassDataTest : XCTestCase {
+    DSObjectClassData *_target;
 }
 
 @end
@@ -21,10 +21,10 @@ static byte reactivate(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 static byte update(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 
 
-@implementation DSObjectClassMethodsTest
+@implementation DSObjectClassDataTest
 
 - (void)setUp {
-    _target = [[DSObjectClassMethods alloc] init];
+    _target = [[DSObjectClassData alloc] init];
 }
 
 - (void)testInit {

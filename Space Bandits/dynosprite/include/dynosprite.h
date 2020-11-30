@@ -62,11 +62,11 @@ int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const c
   * @param path location of the object
   * @return some value
  */
-int DSObjectClassMethodRegistryRegisterMethods(void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path);
+int DSObjectClassDataRegistryRegisterClassData(void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path);
 
 
 #define RegisterLevel(init, calcuateBackgroundNewXY) static int levelInit = DSLevelRegistryRegister(init, calcuateBackgroundNewXY, __FILE__)
-#define RegisterObject(init, reactivate, update, stateSize) static int objectInit = DSObjectClassMethodRegistryRegisterMethods(init, reactivate, update, stateSize, __FILE__)
+#define RegisterObject(init, reactivate, update, stateSize) static int objectInit = DSObjectClassDataRegistryRegisterClassData(init, reactivate, update, stateSize, __FILE__)
 
 extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
 

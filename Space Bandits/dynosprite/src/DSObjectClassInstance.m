@@ -10,7 +10,7 @@
 
 @implementation DSObjectClassInstance
 
-- (id)initWithObjectClass:(DSObjectClass *)objectClass objectMethods:(DSObjectClassMethods *)methods cobs:(DynospriteCOB *)cobs odts:(DynospriteODT *)odts {
+- (id)initWithObjectClass:(DSObjectClass *)objectClass objectMethods:(DSObjectClassData *)methods cobs:(DynospriteCOB *)cobs odts:(DynospriteODT *)odts {
     if (self = [super init]) {
         _objectClass = objectClass;
         _methods = methods;
@@ -42,7 +42,7 @@
 }
 
 
-- (DSObjectClassMethods *)methods {
+- (DSObjectClassData *)methods {
     return _methods;
 }
 

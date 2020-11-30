@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 #import "DSObjectClass.h"
-#import "DSObjectClassMethods.h"
+#import "DSObjectClassData.h"
 #import "DynospriteDirectPageGlobals.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
     DSObjectClass *_objectClass;
 
     /** C implemention for these objects methods */
-    DSObjectClassMethods *_methods;
+    DSObjectClassData *_methods;
     
     /** Object Buffers used to update the position of the SKSpriteNodes */
     DynospriteCOB *_cobs;
@@ -37,13 +37,13 @@ NS_ASSUME_NONNULL_BEGIN
     byte *_statePtr;
 }
 
-- (id)initWithObjectClass:(DSObjectClass *)objectClass objectMethods:(DSObjectClassMethods *)methods cobs:(DynospriteCOB *)cobs odts:(DynospriteODT *)odts;
+- (id)initWithObjectClass:(DSObjectClass *)objectClass objectMethods:(DSObjectClassData *)methods cobs:(DynospriteCOB *)cobs odts:(DynospriteODT *)odts;
 
 - (void)reset;
 - (byte)update;
 
 - (DSObjectClass *)objectClass;
-- (DSObjectClassMethods *)methods;
+- (DSObjectClassData *)methods;
 
 - (DynospriteCOB *)cobs;
 - (DynospriteODT *)odts;

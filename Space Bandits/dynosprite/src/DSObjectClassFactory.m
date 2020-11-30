@@ -13,7 +13,7 @@
 - (id)init {
     if (self = [super init]) {
         _levelToObjectClass = NSMutableDictionary.dictionary;
-        self.methodRegistry = DSObjectClassMethodRegistry.sharedInstance;
+        self.methodRegistry = DSObjectClassDataRegistry.sharedInstance;
         return self;
     }
     return self;
