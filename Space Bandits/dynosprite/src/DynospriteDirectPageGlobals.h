@@ -33,7 +33,7 @@ typedef struct DynospriteCOB {
     unsigned globalX;
     unsigned globalY;
     byte *statePtr;
-    byte *odtPtr;
+    DynospriteODT *odtPtr;
 } DynospriteCOB;
 
 /** Datastructure for DynospriteDirectPageGlobals */
