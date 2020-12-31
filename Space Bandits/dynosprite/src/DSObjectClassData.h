@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DSObjectClassData : NSObject
 
 @property (nonatomic) void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *);
+@property (nonatomic) size_t initSize;
 @property (nonatomic) byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *);
 @property (nonatomic) byte(*updateMethod)(DynospriteCOB *, DynospriteODT *);
 @property (nonatomic) size_t stateSize;

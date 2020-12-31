@@ -78,20 +78,20 @@ Object_Update:
 !           rts
 
 
-LibraryInit:            fcb         0           * Whether or not we initialized the library
-DynoStackPointer:       fdb         0           * Dynosprite Stack Pointer
+LibraryInit:            fcb     0                           * Whether or not we initialized the library
+DynoStackPointer:       fdb     0                           * Dynosprite Stack Pointer
 
 NumberOfObjects:        fcb     1
 ObjectDescriptorTable:
                         fcb     DynospriteObject_DataSize
-                        fcb     1               * drawType == 1: standard sprite w/ no rowcrop
-                        fcb     1               * initSize
-                        fcb     0               * res1
+                        fcb     1                           * drawType == 1: standard sprite w/ no rowcrop
+                        fcb     DynospriteObject_InitSize   * initSize
+                        fcb     0                           * res1
                         fdb     Object_Init
                         fdb     Object_Reactivate
                         fdb     Object_Update
-                        fdb     0               * custom draw function
-                        fdb     0,0             * res2
+                        fdb     0                           * custom draw function
+                        fdb     0,0                         * res2
 
 Object_Init EXPORT
 LibraryInit EXPORT

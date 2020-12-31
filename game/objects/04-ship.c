@@ -96,7 +96,7 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(ShipInit, ShipReactivate, ShipUpdate, sizeof(ShipObjectState));
+RegisterObject(ShipInit, 0, ShipReactivate, ShipUpdate, sizeof(ShipObjectState));
 
 #ifdef __cplusplus
 }

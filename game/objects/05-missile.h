@@ -27,6 +27,9 @@
 /** Defines at least the size of ShipObjectState in bytes */
 #define DynospriteObject_DataSize 1
 
+/** Defines at least the number of initialization bytes */
+#define DynospriteObject_InitSize 0
+
 #else
 
 #ifndef _05_missile_h

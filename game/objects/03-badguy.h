@@ -27,6 +27,9 @@
 /** Defines at least the size of BadGuyObjectState in bytes */
 #define DynospriteObject_DataSize 8
 
+/** Defines at least the number of initialization bytes */
+#define DynospriteObject_InitSize 1
+
 #else
 
 #ifndef _03_badguy_h

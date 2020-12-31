@@ -11,15 +11,18 @@
 
 #include "coco.h"
 
+struct DynospriteCOB;
+struct DynospriteODT;
+
 /** Object Data Table */
 typedef struct DynospriteODT {
   byte dataSize;
   byte drawType;
   byte initSize;
   byte res1;
-  void *init;
-  void *reactivate;
-  void *update;
+  void(*init)(struct DynospriteCOB *, struct DynospriteODT *, byte *);
+  byte(*reactivate)(struct DynospriteCOB *, struct DynospriteODT *);
+  byte(*update)(struct DynospriteCOB *, struct DynospriteODT *);
   void *draw;
   byte res2[4];
 } DynospriteODT;

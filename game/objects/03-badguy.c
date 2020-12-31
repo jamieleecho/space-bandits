@@ -191,7 +191,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(BadguyInit, BadguyReactivate, BadguyUpdate, sizeof(BadGuyObjectState));
+RegisterObject(BadguyInit, 1, BadguyReactivate, BadguyUpdate, sizeof(BadGuyObjectState));
 
 #ifdef __cplusplus
 }

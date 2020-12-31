@@ -20,7 +20,7 @@
       "Active": 3,
       "globalX": 170,
       "globalY": 175,
-      "InitData": [0]
+      "InitData": []
     },
 
 
@@ -536,7 +536,7 @@
       "Active": 0,
       "globalX": 0,
       "globalY": 0,
-      "InitData": [0]
+      "InitData": []
     },
 
     {
@@ -545,7 +545,7 @@
       "Active": 0,
       "globalX": 0,
       "globalY": 0,
-      "InitData": [0]
+      "InitData": []
     },
 
     {
@@ -554,7 +554,7 @@
       "Active": 0,
       "globalX": 0,
       "globalY": 0,
-      "InitData": [0]
+      "InitData": []
     },
 
 
@@ -565,7 +565,7 @@
       "Active": 3,
       "globalX": 20,
       "globalY": 20,
-      "InitData": [0]
+      "InitData": []
     },
 
     {
@@ -574,7 +574,7 @@
       "Active": 3,
       "globalX": 160,
       "globalY": 20,
-      "InitData": [0]
+      "InitData": []
     },
 
     {
@@ -583,7 +583,7 @@
       "Active": 3,
       "globalX": 300,
       "globalY": 20,
-      "InitData": [0]
+      "InitData": []
     },
 
 
@@ -594,7 +594,7 @@
       "Active": 0,
       "globalX": 160,
       "globalY": 90,
-      "InitData": [0]
+      "InitData": []
     }
   ]
 }

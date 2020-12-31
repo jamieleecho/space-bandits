@@ -32,7 +32,7 @@
         NSTextCheckingResult *result = [levelFilenameRegex firstMatchInString:path.lastPathComponent options:0 range:NSMakeRange(0, path.lastPathComponent.length)];
 
         // Make sure there are no duplicates
-        int level = [[path.lastPathComponent substringWithRange:[result rangeAtIndex:1]] intValue];
+        int level = [path.lastPathComponent substringWithRange:[result rangeAtIndex:1]].intValue;
         NSAssert([levelToPath objectForKey:[NSNumber numberWithInt:level]] == nil, ([NSString stringWithFormat:@"Multiple level files found for level %d", level]));
         levelToPath[[NSNumber numberWithInt:level]] = path;
     }
@@ -70,7 +70,7 @@
         NSTextCheckingResult *result = [objectsFilenameRegex firstMatchInString:path.lastPathComponent options:0 range:NSMakeRange(0, path.lastPathComponent.length)];
 
         // Make sure there are no duplicates
-        int objectSetNumber = [[path.lastPathComponent substringWithRange:[result rangeAtIndex:1]] intValue];
+        int objectSetNumber = [path.lastPathComponent substringWithRange:[result rangeAtIndex:1]].intValue;
         NSAssert([objectSetToPath objectForKey:[NSNumber numberWithInt:objectSetNumber]] == nil, ([NSString stringWithFormat:@"Multiple object files found for object set %d", objectSetNumber]));
         objectSetToPath[[NSNumber numberWithInt:objectSetNumber]] = path;
     }
@@ -104,7 +104,7 @@
         NSTextCheckingResult *result = [tileFilenameRegex firstMatchInString:path.lastPathComponent options:0 range:NSMakeRange(0, path.lastPathComponent.length)];
 
         // Make sure there are no duplicates
-        int tileSetNumber = [[path.lastPathComponent substringWithRange:[result rangeAtIndex:1]] intValue];
+        int tileSetNumber = [path.lastPathComponent substringWithRange:[result rangeAtIndex:1]].intValue;
         NSAssert([tileSetToPath objectForKey:[NSNumber numberWithInt:tileSetNumber]] == nil, ([NSString stringWithFormat:@"Multiple tiles files found for tile set %d", tileSetNumber]));
         tileSetToPath[[NSNumber numberWithInt:tileSetNumber]] = path;
     }

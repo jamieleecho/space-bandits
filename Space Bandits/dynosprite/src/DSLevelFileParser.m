@@ -25,7 +25,7 @@
     int ii = 0;
     for(NSNumber *num in array) {
         NSAssert([num isKindOfClass:NSNumber.class], ([NSString stringWithFormat:@"Array element %d not an integer.", ii]));
-        [retval addObject:[NSNumber numberWithInt:[num intValue]]];
+        [retval addObject:[NSNumber numberWithInt:num.intValue]];
         ii++;
     }
     return retval;
