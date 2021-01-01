@@ -22,6 +22,8 @@
             DSObjectClassData *classData = [classRegistry methodsForIndex:[NSNumber numberWithInt:odtIndex.intValue]];
             DynospriteODT *odt = _odts + odtIndex.intValue;
 
+            NSCAssert(classData.stateSize >= 1, @"Object in group %@ has a stateSize < 1", odtIndex);
+            
             odt->dataSize = classData.stateSize;
             odt->drawType = 1; // standard draw type
             odt->init = classData.initMethod;
@@ -56,7 +58,7 @@
             cob->globalX = obj.initialGlobalX;
             cob->globalY = obj.initialGlobalY;
             cob->groupIdx = obj.groupID;
-            cob->objectIdx = ii;
+            cob->objectIdx = obj.objectID;
             cob->odtPtr = odt;
             cob->statePtr = malloc(odt->dataSize);
             assert(cob->statePtr != NULL);

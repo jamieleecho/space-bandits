@@ -50,13 +50,13 @@ int DSObjectClassDataRegistryRegisterClassData(void(*initMethod)(DynospriteCOB *
 
 - (void)addMethods:(DSObjectClassData *)methods forIndex:(NSNumber *)index {
     DSObjectClassData *methods0 = _indexToMethods[index];
-    NSAssert(methods0 == nil, @"DSObjectClassData already registered for %@.", index);
+    NSCAssert(methods0 == nil, @"DSObjectClassData already registered for %@.", index);
     _indexToMethods[index] = methods;
 }
 
 - (DSObjectClassData *)methodsForIndex:(NSNumber *)index {
     DSObjectClassData *methods = _indexToMethods[index];
-    NSAssert(methods != nil, @"No DSObjectClassData registered for %@.", index);
+    NSCAssert(methods != nil, @"No DSObjectClassData registered for %@.", index);
     return methods;
 }
 

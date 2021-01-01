@@ -40,6 +40,16 @@
     return [self resourceWithName:name preferHiresVersion:self.hiresMode];
 }
 
+- (NSString *)spriteImageWithName:(NSString *)name {
+    size_t cnt = 0;
+    while([name hasPrefix:@"../"]) {
+        name = [name substringWithRange:NSMakeRange(3, name.length - 3)];
+        cnt++;
+    }
+    NSString *path = (cnt > 0) ? name : [NSString pathWithComponents:@[@"sprites", name]];
+    return [self resourceWithName:path preferHiresVersion:self.hiresMode];
+}
+
 - (NSString *)pathForConfigFileWithName:(NSString *)name {
     NSString *updatedPath = [self resourceWithName:name preferHiresVersion:self.hiresMode];
     return [NSString pathWithComponents:@[self.bundle.resourcePath, updatedPath]];

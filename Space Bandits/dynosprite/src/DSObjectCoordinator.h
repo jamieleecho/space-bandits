@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 #import "DSLevel.h"
-#import "DSObjectClass.h"
+#import "DSSpriteObjectClass.h"
 #import "DSObjectClassData.h"
 #import "DSObjectClassDataRegistry.h"
 #import "DynospriteDirectPageGlobals.h"

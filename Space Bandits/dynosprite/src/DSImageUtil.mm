@@ -147,7 +147,7 @@ typedef enum FindSpriteDir {
 
 const static size_t DSImageUtilFindSpritePixelsMaxSteps = 40;
 
-static void nonRecursivePaint(DSImageWrapper<DSImageUtilARGB8> &image, NSPoint p, std::vector<NSPoint> &pixCoordColorList);
+static void nonRecursivePaint(DSImageWrapper<DSImageUtilARGB8> &image, CGPoint p, std::vector<CGPoint> &pixCoordColorList);
 
 
 /**
@@ -156,7 +156,7 @@ static void nonRecursivePaint(DSImageWrapper<DSImageUtilARGB8> &image, NSPoint p
  *  @param name of the sprite for diagnostic purposes only
  *  @param point to start looking for the sprite which then becomes the hitpoint of the sprite.
  */
-extern "C" NSRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NSString *name, NSPoint point) {
+extern "C" CGRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NSString *name, CGPoint point) {
     DSImageWrapper<DSImageUtilARGB8> image(imageInfo.imageData, imageInfo.width, imageInfo.height);
     
     size_t x = point.x;
@@ -169,7 +169,7 @@ extern "C" NSRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NS
     size_t curSteps = 0;
     while (totalSteps < DSImageUtilFindSpritePixelsMaxSteps) {
         // test for opaque pixel
-        if ((x >= 0) && (y >= 0) && (x < image.width()) && (y < image.height()) && !image(x, y).isTransparent()) {
+        if ((x < 0) || (y < 0) || (x >= image.width()) || (y >= image.height()) || !image(x, y).isTransparent()) {
             break;
         }
 
@@ -198,17 +198,17 @@ extern "C" NSRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NS
     NSCAssert(totalSteps <= 40, @"****Error: sprite %@ not found within 20 pixels of location (%lf, %lf)", name, point.x, point.y);
 
     // now we apply a painting algoritm to produce a list of all of the touching non-transparent pixels
-    std::vector<NSPoint> pixCoordColorList;
-    nonRecursivePaint(image, NSMakePoint(x, y), pixCoordColorList);
+    std::vector<CGPoint> pixCoordColorList;
+    nonRecursivePaint(image, CGPointMake(x, y), pixCoordColorList);
     
     // get lists of all X coordinates and Y coordinates, then calculate width and height of sprite matrix
     std::vector<CGFloat> xCoords(pixCoordColorList.size());
-    std::transform(pixCoordColorList.begin(), pixCoordColorList.end(), xCoords.begin(), [](NSPoint p)
+    std::transform(pixCoordColorList.begin(), pixCoordColorList.end(), xCoords.begin(), [](CGPoint p)
     {
         return p.x;
     });
     std::vector<CGFloat> yCoords(pixCoordColorList.size());
-    std::transform(pixCoordColorList.begin(), pixCoordColorList.end(), yCoords.begin(), [](NSPoint p)
+    std::transform(pixCoordColorList.begin(), pixCoordColorList.end(), yCoords.begin(), [](CGPoint p)
     {
         return p.y;
     });
@@ -217,7 +217,7 @@ extern "C" NSRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NS
     CGFloat matrixWidth = *std::max_element(xCoords.begin(), xCoords.end()) - minX + 1;
     CGFloat matrixHeight = *std::max_element(yCoords.begin(), yCoords.end()) - minY + 1;
 
-    return NSMakeRect(minX, minY, matrixWidth, matrixHeight);
+    return CGRectMake(minX, minY, matrixWidth, matrixHeight);
 }
 
 
@@ -227,13 +227,13 @@ extern "C" NSRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NS
 *  @param p point to start the flood fill
 *  @param pixCoordColorList list of found points
 */
-static void nonRecursivePaint(DSImageWrapper<DSImageUtilARGB8> &image, NSPoint p, std::vector<NSPoint> &pixCoordColorList) {
+static void nonRecursivePaint(DSImageWrapper<DSImageUtilARGB8> &image, CGPoint p, std::vector<CGPoint> &pixCoordColorList) {
 
-    std::deque<NSPoint> hitlist;
+    std::deque<CGPoint> hitlist;
     hitlist.push_back(p);
     while(hitlist.size()) {
         // get coordinates of pixel to examine
-        NSPoint p0 = hitlist.back();
+        CGPoint p0 = hitlist.back();
         hitlist.pop_back();
 
         // return if coordinates are outside image boundary
@@ -251,13 +251,13 @@ static void nonRecursivePaint(DSImageWrapper<DSImageUtilARGB8> &image, NSPoint p
 
         // then make this pixel transparent to avoid processing it again
         image(p0.x, p0.y) = DSImageUtilARGB8::transparentColor;
-        hitlist.push_back(NSMakePoint(p0.x-1, p0.y));
-        hitlist.push_back(NSMakePoint(p0.x-1, p0.y+1));
-        hitlist.push_back(NSMakePoint(p0.x, p0.y+1));
-        hitlist.push_back(NSMakePoint(p0.x+1, p0.y+1));
-        hitlist.push_back(NSMakePoint(p0.x+1, p0.y));
-        hitlist.push_back(NSMakePoint(p0.x+1, p0.y-1));
-        hitlist.push_back(NSMakePoint(p0.x, p0.y-1));
-        hitlist.push_back(NSMakePoint(p0.x-1, p0.y-1));
+        hitlist.push_back(CGPointMake(p0.x-1, p0.y));
+        hitlist.push_back(CGPointMake(p0.x-1, p0.y+1));
+        hitlist.push_back(CGPointMake(p0.x, p0.y+1));
+        hitlist.push_back(CGPointMake(p0.x+1, p0.y+1));
+        hitlist.push_back(CGPointMake(p0.x+1, p0.y));
+        hitlist.push_back(CGPointMake(p0.x+1, p0.y-1));
+        hitlist.push_back(CGPointMake(p0.x, p0.y-1));
+        hitlist.push_back(CGPointMake(p0.x-1, p0.y-1));
     }
 }

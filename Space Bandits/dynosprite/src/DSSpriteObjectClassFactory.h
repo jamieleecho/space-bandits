@@ -1,5 +1,5 @@
 //
-//  DSObjectClassFactory.h
+//  DSSpriteObjectClassFactory.h
 //  Space Bandits
 //
 //  Created by Jamie Cho on 7/6/20.
@@ -7,19 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSObjectClass.h"
+#import "DSSpriteObjectClass.h"
 #import "DSObjectClassDataRegistry.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSObjectClassFactory : NSObject {
-    NSDictionary<NSNumber *, DSObjectClass *> *_levelToObjectClass;
+@interface DSSpriteObjectClassFactory : NSObject {
+    NSDictionary<NSNumber *, DSSpriteObjectClass *> *_levelToObjectClass;
 }
 
 @property DSObjectClassDataRegistry *methodRegistry;
 
 - (id)init;
-- (void)addObjectClass:(DSObjectClass *)objectClass forNumber:(NSNumber *)levelNumber;
+- (void)addSpriteObjectClass:(DSSpriteObjectClass *)objectClass forNumber:(NSNumber *)levelNumber;
 
 @end
 

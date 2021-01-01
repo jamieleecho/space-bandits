@@ -1,14 +1,14 @@
 //
-//  DSObjectClassFactory.m
+//  DSSpriteObjectClassFactory.m
 //  Space Bandits
 //
 //  Created by Jamie Cho on 7/6/20.
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import "DSObjectClassFactory.h"
+#import "DSSpriteObjectClassFactory.h"
 
-@implementation DSObjectClassFactory
+@implementation DSSpriteObjectClassFactory
 
 - (id)init {
     if (self = [super init]) {
@@ -19,7 +19,7 @@
     return self;
 }
 
-- (void)addObjectClass:(DSObjectClass *)objectClass forNumber:(NSNumber *)levelNumber {
+- (void)addSpriteObjectClass:(DSSpriteObjectClass *)objectClass forNumber:(NSNumber *)levelNumber {
     
 }
 

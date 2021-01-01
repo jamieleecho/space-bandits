@@ -15,7 +15,7 @@
 - (void)parseFile:(NSString *)path forTileInfo:(DSTileInfo *)info {
     DSConfigFileParser *parser = [[DSConfigFileParser alloc] init];
     NSDictionary *tileInfoData = [parser parseFile:path];
-    NSAssert(tileInfoData != nil, ([NSString stringWithFormat:@"Failed to parse %@", path]));
+    NSCAssert(tileInfoData != nil, ([NSString stringWithFormat:@"Failed to parse %@", path]));
 
     info.imagePath = [NSString pathWithComponents:@[@"tiles", [tileInfoData[@"Image"] stringByDeletingLastPathComponent], [tileInfoData[@"Image"] lastPathComponent]]];    
     info.tileSetStart = [DSLevelFileParser pointFromArray:tileInfoData[@"TileSetStart"]];

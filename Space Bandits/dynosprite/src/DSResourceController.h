@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)fontForDisplay;
 - (NSString *)imageWithName:(NSString *)name;
 - (NSString *)soundWithName:(NSString *)name;
+- (NSString *)spriteImageWithName:(NSString *)name;
 - (NSString *)pathForConfigFileWithName:(NSString *)name;
 
 @end

@@ -8,35 +8,35 @@
 
 #import <XCTest/XCTest.h>
 
-#import "DSObjectClass.h"
-#import "DSObjectClassFileParser.h"
+#import "DSSpriteObjectClass.h"
+#import "DSSpriteFileParser.h"
 
 
-@interface DSObjectClassFileParserTest : XCTestCase {
-    DSObjectClassFileParser *_target;
-    DSObjectClass *_objectClass;
+@interface DSSpriteFileParserTest : XCTestCase {
+    DSSpriteFileParser *_target;
+    DSSpriteObjectClass *_objectClass;
 }
 @end
 
-@implementation DSObjectClassFileParserTest
+@implementation DSSpriteFileParserTest
 
 - (void)setUp {
-    _target = [[DSObjectClassFileParser alloc] init];
-    _objectClass = [[DSObjectClass alloc] init];
+    _target = [[DSSpriteFileParser alloc] init];
+    _objectClass = [[DSSpriteObjectClass alloc] init];
 }
 
 - (void)testParseColorFromArray {
     NSArray *arr1 = @[@0, @127, @255];
-    XCTAssertEqualObjects([NSColor colorWithRed:0 green:127.0f/255.0f blue:1.0f alpha:1.0f], [DSObjectClassFileParser parseColorFromArray:arr1]);
+    XCTAssertEqualObjects([NSColor colorWithRed:0 green:127.0f/255.0f blue:1.0f alpha:1.0f], [DSSpriteFileParser parseColorFromArray:arr1]);
     NSArray *arr2 = @[@4.5f, @50.25f, @254.75f];
-    XCTAssertEqualObjects([NSColor colorWithRed:4.0f/255.0f green:50.0f/255.0f blue:254.0f/255.0f alpha:1.0f], [DSObjectClassFileParser parseColorFromArray:arr2]);
+    XCTAssertEqualObjects([NSColor colorWithRed:4.0f/255.0f green:50.0f/255.0f blue:254.0f/255.0f alpha:1.0f], [DSSpriteFileParser parseColorFromArray:arr2]);
     
-    XCTAssertThrows([DSObjectClassFileParser parseColorFromArray:(NSArray *)@""]);
-    XCTAssertThrows(([DSObjectClassFileParser parseColorFromArray:@[@0, @127, @255, @255]]));
-    XCTAssertThrows(([DSObjectClassFileParser parseColorFromArray:@[@0, @127]]));
-    XCTAssertThrows(([DSObjectClassFileParser parseColorFromArray:@[@0, @127, @"127"]]));
-    XCTAssertThrows(([DSObjectClassFileParser parseColorFromArray:@[@0, @127, @256]]));
-    XCTAssertThrows(([DSObjectClassFileParser parseColorFromArray:@[@-1, @127, @255]]));
+    XCTAssertThrows([DSSpriteFileParser parseColorFromArray:(NSArray *)@""]);
+    XCTAssertThrows(([DSSpriteFileParser parseColorFromArray:@[@0, @127, @255, @255]]));
+    XCTAssertThrows(([DSSpriteFileParser parseColorFromArray:@[@0, @127]]));
+    XCTAssertThrows(([DSSpriteFileParser parseColorFromArray:@[@0, @127, @"127"]]));
+    XCTAssertThrows(([DSSpriteFileParser parseColorFromArray:@[@0, @127, @256]]));
+    XCTAssertThrows(([DSSpriteFileParser parseColorFromArray:@[@-1, @127, @255]]));
 }
 
 - (void)testSpriteInfoFromDictionary {
@@ -45,7 +45,7 @@
         @"Location": @[@137, @433],
         @"SinglePixelPosition": @YES
     };
-    DSSpriteInfo *spriteInfo1 = [DSObjectClassFileParser spriteInfoFromDictionary:dict1];
+    DSSpriteInfo *spriteInfo1 = [DSSpriteFileParser spriteInfoFromDictionary:dict1];
     XCTAssertEqual(spriteInfo1.name, @"Ship1");
     XCTAssertTrue(DSPointEqual(spriteInfo1.location, DSPointMake(137, 433)));
     XCTAssertTrue(spriteInfo1.singlePixelPosition);
@@ -55,7 +55,7 @@
         @"Location": @[@1370, @4330],
         @"SinglePixelPosition": @NO
     };
-    DSSpriteInfo *spriteInfo2 = [DSObjectClassFileParser spriteInfoFromDictionary:dict2];
+    DSSpriteInfo *spriteInfo2 = [DSSpriteFileParser spriteInfoFromDictionary:dict2];
     XCTAssertEqual(spriteInfo2.name, @"Ship2");
     XCTAssertTrue(DSPointEqual(spriteInfo2.location, DSPointMake(1370, 4330)));
     XCTAssertFalse(spriteInfo2.singlePixelPosition);
@@ -65,8 +65,8 @@
         @"Location": @[@1370, @"4330"],
         @"SinglePixelPosition": @NO
     };
-    XCTAssertThrows([DSObjectClassFileParser spriteInfoFromDictionary:dict3]);
-    XCTAssertThrows([DSObjectClassFileParser spriteInfoFromDictionary:(NSDictionary *)@[]]);
+    XCTAssertThrows([DSSpriteFileParser spriteInfoFromDictionary:dict3]);
+    XCTAssertThrows([DSSpriteFileParser spriteInfoFromDictionary:(NSDictionary *)@[]]);
 }
 
 - (void)testParseFileForObjectClass {

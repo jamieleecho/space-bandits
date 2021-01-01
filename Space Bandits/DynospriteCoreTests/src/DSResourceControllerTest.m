@@ -46,6 +46,20 @@
     XCTAssertEqualObjects([_target imageWithName:@"resources/foo/forest.png"], @"hires/resources/foo/forest.png");
 }
 
+- (void)testSelectsRightSpriteImage {
+    OCMStub([_bundle pathForResource:@"moon" ofType:@"gif" inDirectory:@"sprites"]).andReturn(@"sprites/moon.gif");
+    OCMStub([_bundle pathForResource:@"moon" ofType:@"gif" inDirectory:@"tiles"]).andReturn(@"tiles/moon.gif");
+    OCMStub([_bundle pathForResource:@"moon" ofType:@"gif" inDirectory:@"hires/sprites"]).andReturn(@"sprites/hires/moon.gif");
+    OCMStub([_bundle pathForResource:@"moon" ofType:@"gif" inDirectory:@"hires/tiles"]).andReturn(@"hires/tiles/moon.gif");
+
+    _target.bundle = _bundle;
+    XCTAssertEqualObjects([_target spriteImageWithName:@"moon.gif"], @"sprites/moon.gif");
+    XCTAssertEqualObjects([_target spriteImageWithName:@"../tiles/moon.gif"], @"tiles/moon.gif");
+    _target.hiresMode = YES;
+    XCTAssertEqualObjects([_target spriteImageWithName:@"moon.gif"], @"hires/sprites/moon.gif");
+    XCTAssertEqualObjects([_target spriteImageWithName:@"../tiles/moon.gif"], @"hires/tiles/moon.gif");
+}
+
 - (void)testSelectsRightConfigFile {
     OCMStub([_bundle pathForResource:@"JSONList" ofType:@"json" inDirectory:@"hires/resources/foo"]).andReturn(@"hires/resources/foo/JSONList.json");
     OCMStub([_bundle resourcePath]).andReturn(@"foo.app/Contents/Resources");

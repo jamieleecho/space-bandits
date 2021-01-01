@@ -47,7 +47,7 @@
     OCMVerify([(DSAssetLoader *)_levelLoader loadSceneInfos]);
     OCMVerify([(DSAssetLoader *)_levelLoader loadTransitionSceneImages]);
     OCMVerify([(DSAssetLoader *)_levelLoader loadTileSets]);
-    OCMVerify([(DSAssetLoader *)_levelLoader loadObjects]);
+    OCMVerify([(DSAssetLoader *)_levelLoader loadSprites]);
     OCMVerifyAll(_levelLoader);
 }
 

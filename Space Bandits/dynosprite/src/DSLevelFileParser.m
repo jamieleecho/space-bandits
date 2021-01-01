@@ -13,9 +13,9 @@
 @implementation DSLevelFileParser
 
 + (DSPoint)pointFromArray:(NSArray *)array {
-    NSAssert(array.count == 2, ([NSString stringWithFormat:@"Wrong number of elements in array. Found %lu, expected 2", array.count]));
-    NSAssert([array[0] isKindOfClass:NSNumber.class], @"Array element 0 is not an NSNumber");
-    NSAssert([array[1] isKindOfClass:NSNumber.class], @"Array element 1 is not an NSNumber");
+    NSCAssert(array.count == 2, ([NSString stringWithFormat:@"Wrong number of elements in array. Found %lu, expected 2", array.count]));
+    NSCAssert([array[0] isKindOfClass:NSNumber.class], @"Array element 0 is not an NSNumber");
+    NSCAssert([array[1] isKindOfClass:NSNumber.class], @"Array element 1 is not an NSNumber");
     int v1 = [array[0] intValue], v2 = [array[1] intValue];
     return DSPointMake(v1, v2);
 }
@@ -24,7 +24,7 @@
     NSMutableArray<NSNumber *> *retval = [[NSMutableArray alloc] initWithCapacity:array.count];
     int ii = 0;
     for(NSNumber *num in array) {
-        NSAssert([num isKindOfClass:NSNumber.class], ([NSString stringWithFormat:@"Array element %d not an integer.", ii]));
+        NSCAssert([num isKindOfClass:NSNumber.class], ([NSString stringWithFormat:@"Array element %d not an integer.", ii]));
         [retval addObject:[NSNumber numberWithInt:num.intValue]];
         ii++;
     }
@@ -34,11 +34,11 @@
 - (void)parseFile:(NSString *)path forLevel:(DSLevel *)level {
     DSConfigFileParser *parser = [[DSConfigFileParser alloc] init];
     NSDictionary *levelDict = [parser parseFile:path];
-    NSAssert(levelDict != nil, ([NSString stringWithFormat:@"Failed to parse %@", path]));
+    NSCAssert(levelDict != nil, ([NSString stringWithFormat:@"Failed to parse %@", path]));
     
     // Extract the main level data
     NSDictionary *levelData = [levelDict objectForKey:@"Level"];
-    NSAssert(levelData != nil, ([NSString stringWithFormat:@"Failed to find Level in %@", path]));
+    NSCAssert(levelData != nil, ([NSString stringWithFormat:@"Failed to find Level in %@", path]));
     level.name = levelData[@"Name"];
     level.levelDescription = levelData[@"Description"];
     level.objectGroupIndices = [DSLevelFileParser intArrayFromArray:levelData[@"ObjectGroups"]];

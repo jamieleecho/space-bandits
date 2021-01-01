@@ -700,8 +700,8 @@
                 <customObject id="Nlc-1x-jO5" customClass="DSTransitionImageLoader"/>
                 <customObject id="Nki-Dk-Bhg" customClass="DSCoCoJoystickController"/>
                 <customObject id="4Pk-WU-M93" customClass="DSLevelFileParser"/>
-                <customObject id="5dS-7a-Ghz" customClass="DSObjectClassFactory"/>
-                <customObject id="LPq-ih-HUx" customClass="DSObjectClassFileParser"/>
+                <customObject id="5dS-7a-Ghz" userLabel="Sprite Class Object Factory" customClass="DSSpriteObjectClassFactory"/>
+                <customObject id="LPq-ih-HUx" userLabel="Sprite Class Object Parser" customClass="DSSpriteFileParser"/>
                 <customObject id="web-E3-IMn" customClass="DSResourceController"/>
                 <customObject id="rDZ-CV-DhK" customClass="DSSceneController">
                     <connections>

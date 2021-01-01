@@ -15,12 +15,12 @@
 @implementation DSTileMapMaker
 
 - (NSImage *)subImage:(NSImage *)image withRect:(NSRect)rect; {
-    NSAssert(rect.origin.x >= 0, @"SubImage X origin must be >= 0");
-    NSAssert(rect.origin.y >= 0, @"SubImage Y origin must be >= 0");
-    NSAssert(rect.size.width >= 0, @"SubImage width must be >= 0");
-    NSAssert(rect.size.height >= 0, @"SubImage height origin must be >= 0");
-    NSAssert(rect.origin.x + rect.size.width <= image.size.width, @"SubImage X origin and width larger than the image width");
-    NSAssert(rect.origin.y + rect.size.height <= image.size.height, @"SubImage Y origin and height larger than the image height");
+    NSCAssert(rect.origin.x >= 0, @"SubImage X origin must be >= 0");
+    NSCAssert(rect.origin.y >= 0, @"SubImage Y origin must be >= 0");
+    NSCAssert(rect.size.width >= 0, @"SubImage width must be >= 0");
+    NSCAssert(rect.size.height >= 0, @"SubImage height origin must be >= 0");
+    NSCAssert(rect.origin.x + rect.size.width <= image.size.width, @"SubImage X origin and width larger than the image width");
+    NSCAssert(rect.origin.y + rect.size.height <= image.size.height, @"SubImage Y origin and height larger than the image height");
 
     // Get the conversions we need for the CGImageRef
     CGImageRef imageRef = [image CGImageForProposedRect:nil context:nil hints:nil];
@@ -32,10 +32,10 @@
 }
 
 - (NSImage *)subImageForMap:(NSImage *)image withRect:(NSRect)rect {
-    NSAssert((((int)rect.size.width / DSTileSize) * DSTileSize) == rect.size.width, @"TilemapSize width must be a multiple of 16");
-    NSAssert((((int)rect.size.height / DSTileSize) * DSTileSize) == rect.size.height, @"TilemapSize height must be a multiple of 16");
-    NSAssert(rect.origin.x + rect.size.width <= image.size.width, @"Tilemap X origin and width larger than the image width");
-    NSAssert(rect.origin.y + rect.size.height <= image.size.height, @"Tilemap Y origin and height larger than the image height");
+    NSCAssert((((int)rect.size.width / DSTileSize) * DSTileSize) == rect.size.width, @"TilemapSize width must be a multiple of 16");
+    NSCAssert((((int)rect.size.height / DSTileSize) * DSTileSize) == rect.size.height, @"TilemapSize height must be a multiple of 16");
+    NSCAssert(rect.origin.x + rect.size.width <= image.size.width, @"Tilemap X origin and width larger than the image width");
+    NSCAssert(rect.origin.y + rect.size.height <= image.size.height, @"Tilemap Y origin and height larger than the image height");
     return [self subImage:image withRect:rect];
 }
 
@@ -52,8 +52,8 @@
 }
 
 - (NSDictionary<NSString *, NSImage *> *)imageTileDictionaryFromImage:(NSImage *)image {
-    NSAssert((((int)image.size.width / DSTileSize) * DSTileSize) == image.size.width, @"TilemapSize width must be a multiple of 16");
-    NSAssert((((int)image.size.height / DSTileSize) * DSTileSize) == image.size.height, @"TilemapSize height must be a multiple of 16");
+    NSCAssert((((int)image.size.width / DSTileSize) * DSTileSize) == image.size.width, @"TilemapSize width must be a multiple of 16");
+    NSCAssert((((int)image.size.height / DSTileSize) * DSTileSize) == image.size.height, @"TilemapSize height must be a multiple of 16");
     
     NSMutableDictionary *hashToImage = [NSMutableDictionary dictionary];
     for(int yy = 0; yy < image.size.height; yy += DSTileSize) {
@@ -118,7 +118,7 @@
             NSImage *tileImage = [self tileForImage:mapImage atPoint:NSMakePoint(ii * DSTileSize, jj * DSTileSize)];
             NSString *hash = [self hashForImage:tileImage];
             SKTileGroup *group = hashToTileGroup[hash];
-            NSAssert(group != nil, ([NSString stringWithFormat:@"Could not locate background tile with hash %@ at tile map location (%d, %d)", hash, ii, jj]));
+            NSCAssert(group != nil, ([NSString stringWithFormat:@"Could not locate background tile with hash %@ at tile map location (%d, %d)", hash, ii, jj]));
             [tileMapNode setTileGroup:group forColumn:ii row:tileMapNode.numberOfRows - jj - 1];
         }
     }

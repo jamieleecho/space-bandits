@@ -21,7 +21,7 @@
         _hardwareJoystickClass = hardwareJoystickClass;
         _joystick =_keyboardJoystick = keyboardJoystick;
         BOOL keyboardJoystickDidOpen = [_joystick open];
-        NSAssert(keyboardJoystickDidOpen == YES, @"Failed to open DSCoCoKeyboardJoystick");
+        NSCAssert(keyboardJoystickDidOpen == YES, @"Failed to open DSCoCoKeyboardJoystick");
     }
     return self;
 }

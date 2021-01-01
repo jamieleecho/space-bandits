@@ -14,7 +14,7 @@
 + (NSColor *)colorFromRGBString:(NSString *)color {
     NSError *err;
     NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:@"^[0-9a-f]{6}$" options:NSRegularExpressionCaseInsensitive error:&err];
-    NSAssert(err == nil, @"Failed to create NSRegularExpression.");
+    NSCAssert(err == nil, @"Failed to create NSRegularExpression.");
     NSArray *matches = [regex matchesInString:color options:0 range:NSMakeRange(0, color.length)];
     if (matches.count < 1) {
         @throw [NSException exceptionWithName:@"Failed to parse color" reason:@"invalid hex" userInfo:nil];
@@ -31,7 +31,7 @@
 - (void)parseFile:(NSString *)path forTransitionInfo:(NSMutableArray <DSTransitionSceneInfo *>*)info {
     DSConfigFileParser *parser = [[DSConfigFileParser alloc] init];
     NSArray *configInfos = [parser parseFile:path][@"images"];
-    NSAssert([configInfos isKindOfClass:NSArray.class], ([NSString stringWithFormat:@"%@ does not define a valid images array", path]));
+    NSCAssert([configInfos isKindOfClass:NSArray.class], ([NSString stringWithFormat:@"%@ does not define a valid images array", path]));
     
     NSMutableArray<DSTransitionSceneInfo *> *infos = [NSMutableArray array];
     for(NSDictionary *info in configInfos) {

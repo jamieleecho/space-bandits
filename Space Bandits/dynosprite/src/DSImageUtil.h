@@ -52,7 +52,7 @@ typedef struct DSImageUtilImageInfo {
 externC DSImageUtilImageInfo DSImageUtilGetImagePixelData(CGImageRef inImage);
 externC CGImageRef DSImageUtilMakeCGImage(DSImageUtilImageInfo imageInfo);
 externC void DSImageUtilReplaceColor(DSImageUtilImageInfo info, DSImageUtilARGB8 inColor, DSImageUtilARGB8 outColor);
-externC NSRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NSString *name, NSPoint point);
+externC CGRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NSString *name, CGPoint point);
 
 #ifdef __cplusplus
 template <class T>

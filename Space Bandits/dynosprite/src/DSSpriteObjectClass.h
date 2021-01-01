@@ -1,5 +1,5 @@
 //
-//  DSObjectClass.h
+//  DSSpriteObjectClass.h
 //  Space Bandits
 //
 //  Created by Jamie Cho on 4/18/20.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSObjectClass : NSObject
+@interface DSSpriteObjectClass : NSObject
 
 @property (nonatomic) int groupID;
 @property (nonatomic, nonnull) NSString *imagePath;

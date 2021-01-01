@@ -13,6 +13,7 @@
     DSLevel *_level;
     DSObjectClassDataRegistry *_classRegistry;
     DSObjectCoordinator *_target;
+    DSObjectClassData *_classData3;
 }
 @end
 
@@ -121,14 +122,17 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     DSObjectClassData *classData2 = [[DSObjectClassData alloc] init];
     classData2.initMethod = initializeObj2;
     classData2.initSize = 2;
+    classData2.stateSize = 1;
     classData2.reactivateMethod = reactivateObj2;
     classData2.updateMethod = updateObj2;
 
     DSObjectClassData *classData3 = [[DSObjectClassData alloc] init];
     classData3.initMethod = initializeObj3;
     classData3.initSize = 0;
+    classData3.stateSize = 1;
     classData3.reactivateMethod = reactivateObj3;
     classData3.updateMethod = updateObj3;
+    _classData3 = classData3;
 
     [_classRegistry addMethods:classData2 forIndex:@2];
     [_classRegistry addMethods:classData3 forIndex:@3];
@@ -141,6 +145,54 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
 
 - (void)testInitialization {
     XCTAssertEqual(_target.count, 3);
+    
+    // Check odts
+    XCTAssertEqual(_target.odts[2].initSize, 2);
+    XCTAssertEqual(_target.odts[2].drawType, 1);
+    XCTAssert(_target.odts[2].init == initializeObj2);
+    XCTAssert(_target.odts[2].reactivate == reactivateObj2);
+    XCTAssert(_target.odts[2].update == updateObj2);
+    XCTAssertEqual(_target.odts[3].initSize, 0);
+    XCTAssertEqual(_target.odts[3].drawType, 1);
+    XCTAssert(_target.odts[3].init == initializeObj3);
+    XCTAssert(_target.odts[3].reactivate == reactivateObj3);
+    XCTAssert(_target.odts[3].update == updateObj3);
+    XCTAssertEqual(_target.odts[2].initSize, 2);
+    XCTAssertEqual(_target.odts[2].drawType, 1);
+    XCTAssert(_target.odts[2].init == initializeObj2);
+    XCTAssert(_target.odts[2].reactivate == reactivateObj2);
+    XCTAssert(_target.odts[2].update == updateObj2);
+    
+    // Check cobs
+    XCTAssertEqual(_target.cobs[0].groupIdx, 2);
+    XCTAssertEqual(_target.cobs[0].active, 2);
+    XCTAssertEqual(_target.cobs[0].globalX, 25);
+    XCTAssertEqual(_target.cobs[0].globalY, 52);
+    XCTAssertEqual(_target.cobs[0].odtPtr, _target.odts + 2);
+    XCTAssertEqual(_target.cobs[1].groupIdx, 3);
+    XCTAssertEqual(_target.cobs[1].active, 3);
+    XCTAssertEqual(_target.cobs[1].globalX, 125);
+    XCTAssertEqual(_target.cobs[1].globalY, 152);
+    XCTAssertEqual(_target.cobs[1].odtPtr, _target.odts + 3);
+    XCTAssertEqual(_target.cobs[2].groupIdx, 2);
+    XCTAssertEqual(_target.cobs[2].active, 1);
+    XCTAssertEqual(_target.cobs[2].globalX, 225);
+    XCTAssertEqual(_target.cobs[2].globalY, 252);
+    XCTAssertEqual(_target.cobs[2].odtPtr, _target.odts + 2);
+
+    // Check initialization data
+    XCTAssertEqual(_target.initData[0][0], 1);
+    XCTAssertEqual(_target.initData[0][1], 255);
+    XCTAssertEqual(_target.initData[2][0], 4);
+    XCTAssertEqual(_target.initData[2][1], 1000 & 255);
+    
+    // Check number of objects
+    XCTAssertEqual(_target.count, 3);
+}
+
+- (void)testInitializationThrowsWhenStateSizeTooSmall {
+    _classData3.stateSize = 0;
+    XCTAssertThrows([[DSObjectCoordinator alloc] initWithLevel:_level andClassRegistry:_classRegistry]);
     
     // Check odts
     XCTAssertEqual(_target.odts[2].initSize, 2);

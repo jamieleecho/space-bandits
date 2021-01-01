@@ -1,5 +1,5 @@
 //
-//  DSObjectClassFileParser.h
+//  DSSpriteFileParser.h
 //  Space Bandits
 //
 //  Created by Jamie Cho on 4/19/20.
@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 
 #import "DSConfigFileParser.h"
-#import "DSObjectClass.h"
+#import "DSSpriteObjectClass.h"
 #import "DSSpriteInfo.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSObjectClassFileParser : NSObject
+@interface DSSpriteFileParser : NSObject
 
 + (NSColor *)parseColorFromArray:(NSArray *)colorData;
 + (DSSpriteInfo *)spriteInfoFromDictionary:(NSDictionary *)spriteInfoData;
 
-- (void)parseFile:(NSString *)path forObjectClass:(DSObjectClass *)objectClass;
+- (void)parseFile:(NSString *)path forObjectClass:(DSSpriteObjectClass *)objectClass;
 
 @end
 

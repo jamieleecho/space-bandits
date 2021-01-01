@@ -1,5 +1,5 @@
 //
-//  DSObjectClassTest.m
+//  DSSpriteObjectClassTest.m
 //  DynospriteCoreTests
 //
 //  Created by Jamie Cho on 4/19/20.
@@ -7,19 +7,19 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "DSObjectClass.h"
+#import "DSSpriteObjectClass.h"
 
 
-@interface DSObjectClassTest : XCTestCase {
-    DSObjectClass *_target;
+@interface DSSpriteObjectClassTest : XCTestCase {
+    DSSpriteObjectClass *_target;
 }
 
 @end
 
-@implementation DSObjectClassTest
+@implementation DSSpriteObjectClassTest
 
 - (void)setUp {
-    _target = [[DSObjectClass alloc] init];
+    _target = [[DSSpriteObjectClass alloc] init];
 }
 
 - (void)testInit {

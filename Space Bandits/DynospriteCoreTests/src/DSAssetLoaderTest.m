@@ -18,7 +18,7 @@
     id _imageLoader;
     id _levelRegistry;
     id _levelParser;
-    id _objectFactory;
+    id _spriteClassObjectFactory;
     id _objectParser;
     id _resourceController;
     id _tileInfoRegistry;
@@ -37,7 +37,7 @@
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     XCTAssertNil(_target.levelFileParser);
     XCTAssertNil(_target.imageLoader);
-    XCTAssertNil(_target.objectFactory);
+    XCTAssertNil(_target.spriteObjectClassFactory);
     XCTAssertNil(_target.objectParser);
     XCTAssertNil(_target.resourceController);
     XCTAssertNil(_target.tileInfoRegistry);
@@ -46,8 +46,8 @@
     _imageLoader = OCMClassMock(DSTransitionImageLoader.class);
     _levelParser = OCMClassMock(DSLevelFileParser.class);
     _levelRegistry = OCMClassMock(DSLevelRegistry.class);
-    _objectFactory = OCMClassMock(DSObjectClassFactory.class);
-    _objectParser = OCMClassMock(DSObjectClassFileParser.class);
+    _spriteClassObjectFactory = OCMClassMock(DSSpriteObjectClassFactory.class);
+    _objectParser = OCMClassMock(DSSpriteFileParser.class);
     _sceneInfos = [NSMutableArray array];
     _resourceController = OCMClassMock(DSResourceController.class);
     _tileInfoRegistry = OCMClassMock(DSTileInfoRegistry.class);
@@ -56,7 +56,7 @@
     _target.bundle = _bundle;
     _target.imageLoader = _imageLoader;
     _target.levelFileParser = _levelParser;
-    _target.objectFactory = _objectFactory;
+    _target.spriteObjectClassFactory = _spriteClassObjectFactory;
     _target.objectParser = _objectParser;
     _target.registry = _levelRegistry;
     _target.resourceController = _resourceController;
@@ -69,7 +69,7 @@
     XCTAssertEqual(_target.bundle, _bundle);
     XCTAssertEqual(_target.imageLoader, _imageLoader);
     XCTAssertEqual(_target.levelFileParser, _levelParser);
-    XCTAssertEqual(_target.objectFactory, _objectFactory);
+    XCTAssertEqual(_target.spriteObjectClassFactory, _spriteClassObjectFactory);
     XCTAssertEqual(_target.objectParser, _objectParser);
     XCTAssertEqual(_target.registry, _levelRegistry);
     XCTAssertEqual(_target.resourceController, _resourceController);
@@ -319,9 +319,9 @@
     ];
 
     NSMutableArray<NSNumber *> *indices = [NSMutableArray arrayWithArray:@[@5, @4, @3]];
-    NSMutableArray<DSObjectClass *> *objectClasses = NSMutableArray.array;
+    NSMutableArray<DSSpriteObjectClass *> *objectClasses = NSMutableArray.array;
     void (^invoker)(NSInvocation *invocation) = ^(NSInvocation *invocation) {
-        DSObjectClass *objectClass;
+        DSSpriteObjectClass *objectClass;
         NSNumber *num;
         [invocation getArgument:&objectClass atIndex:2];
         [invocation getArgument:&num atIndex:3];
@@ -331,20 +331,20 @@
     };
      
     OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"sprites"]).andReturn(paths);
-    OCMStub([_objectFactory addObjectClass:OCMArg.any forNumber:@3]).andDo(invoker);
-    OCMStub([_objectFactory addObjectClass:OCMArg.any forNumber:@4]).andDo(invoker);
-    OCMStub([_objectFactory addObjectClass:OCMArg.any forNumber:@5]).andDo(invoker);
+    OCMStub([_spriteClassObjectFactory addSpriteObjectClass:OCMArg.any forNumber:@3]).andDo(invoker);
+    OCMStub([_spriteClassObjectFactory addSpriteObjectClass:OCMArg.any forNumber:@4]).andDo(invoker);
+    OCMStub([_spriteClassObjectFactory addSpriteObjectClass:OCMArg.any forNumber:@5]).andDo(invoker);
     
-    [_target loadObjects];
+    [_target loadSprites];
     
-    OCMVerify([_objectFactory addObjectClass:OCMArg.any forNumber:@3]);
-    OCMVerify([_objectFactory addObjectClass:OCMArg.any forNumber:@4]);
-    OCMVerify([_objectFactory addObjectClass:OCMArg.any forNumber:@5]);
+    OCMVerify([_spriteClassObjectFactory addSpriteObjectClass:OCMArg.any forNumber:@3]);
+    OCMVerify([_spriteClassObjectFactory addSpriteObjectClass:OCMArg.any forNumber:@4]);
+    OCMVerify([_spriteClassObjectFactory addSpriteObjectClass:OCMArg.any forNumber:@5]);
     OCMVerify([_objectParser parseFile:paths[1] forObjectClass:objectClasses[0]]);
     OCMVerify([_objectParser parseFile:paths[0] forObjectClass:objectClasses[1]]);
     OCMVerify([_objectParser parseFile:paths[2] forObjectClass:objectClasses[2]]);
 
-    OCMVerifyAll(_objectFactory);
+    OCMVerifyAll(_spriteClassObjectFactory);
 }
 
 - (void)testErrorsWhenLoadingDuplicateObjectClasses {
@@ -354,7 +354,7 @@
         @"Resources/levels/03-saucer.json"
     ];
     OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"sprites"]).andReturn(paths);
-    XCTAssertThrows([_target loadObjects]);
+    XCTAssertThrows([_target loadSprites]);
 }
 
 @end
