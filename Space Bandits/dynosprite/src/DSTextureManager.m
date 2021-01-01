@@ -8,6 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "DSImageUtil.h"
+#import "DSTestUtils.h"
 #import "DSTextureManager.h"
 
 
@@ -26,13 +27,21 @@
     NSImage *spriteNSImage = [[NSImage alloc] initWithContentsOfFile:path];
     NSCAssert(spriteNSImage != nil, @"Could not open %@ for sprite group %d.", spriteObjectClass.imagePath, spriteObjectClass.groupID);
     CGImageRef spriteCGImage = [spriteNSImage CGImageForProposedRect:NULL context:NULL hints:NULL];
-    SKTexture *mainTexture = [SKTexture textureWithCGImage:spriteCGImage];
+    DSImageUtilImageInfo imageInfo = DSImageUtilGetImagePixelData(spriteCGImage);
+    
+    // Remove the transparent color
+    const DSImageUtilARGB8 transparentColor = {0, 0, 0, 0};
+    const NSColor *remapColor = spriteObjectClass.transparentColor;
+    const DSImageUtilARGB8 transparentColorToMap = {0xff, (uint8_t)(remapColor.redComponent * 0xff), (uint8_t)(remapColor.greenComponent * 0xff), (uint8_t)(remapColor.blueComponent * 0xff)};
+    DSImageUtilReplaceColor(imageInfo, transparentColorToMap, transparentColor);
+    CGImageRef filteredImage = DSImageUtilMakeCGImage(imageInfo);
+    SKTexture *mainTexture = [SKTexture textureWithCGImage:filteredImage];
     
     NSMutableArray<DSTexture *> *textures = [NSMutableArray arrayWithCapacity:spriteObjectClass.sprites.count];
     for(DSSpriteInfo *spriteInfo in spriteObjectClass.sprites) {
-        DSImageUtilImageInfo imageInfo = DSImageUtilGetImagePixelData(spriteCGImage);
+        DSImageUtilImageInfo imageInfo = DSImageUtilGetImagePixelData(filteredImage);
         CGRect rect = DSImageUtilFindSpritePixels(imageInfo, spriteInfo.name, CGPointMake(spriteInfo.location.x, spriteInfo.location.y));
-        CGRect convertedRect = CGRectMake(rect.origin.x / imageInfo.width, rect.origin.y / imageInfo.height, rect.size.width / imageInfo.width, rect.size.height / imageInfo.height);
+        CGRect convertedRect = CGRectMake(rect.origin.x / imageInfo.width, 1.0f - (rect.origin.y + rect.size.height) / imageInfo.height, rect.size.width / imageInfo.width, rect.size.height / imageInfo.height);
         SKTexture *spriteTexture = [SKTexture textureWithRect:convertedRect inTexture:mainTexture];
         CGFloat offsetX = (rect.origin.x + rect.size.width - spriteInfo.location.x) / rect.size.width;
         CGFloat offsetY = (rect.origin.y + rect.size.height - spriteInfo.location.y) / rect.size.height;
@@ -40,6 +49,7 @@
         [textures addObject:texture];
     }
     _groupIdToTextures[[NSNumber numberWithInt:spriteObjectClass.groupID]] = textures;
+    CGImageRelease(filteredImage);
 }
 
 - (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob {

@@ -48,7 +48,7 @@
 
     DSSpriteFileParser *spriteFileParser = [[DSSpriteFileParser alloc] init];
     DSSpriteObjectClass *spriteObjectClass = [[DSSpriteObjectClass alloc] init];
-    NSString *path = [[NSBundle bundleForClass:self.class] pathForResource:@"04-ship" ofType:@"json"];
+    NSString *path = [[NSBundle bundleForClass:self.class] pathForResource:@"04-ship2" ofType:@"json"];
     [spriteFileParser parseFile:path forObjectClass:spriteObjectClass];
     [_target addSpriteObjectClass:spriteObjectClass];
 
@@ -62,15 +62,22 @@
 
 - (void)testInit {
     XCTAssertEqual(_target.resourceController, _resourceController);
-    id sprite = [[MockSKSpriteNode alloc] init];
+    MockSKSpriteNode *sprite = [[MockSKSpriteNode alloc] init];
     _cob.groupIdx = 4;
-    _cob.statePtr[0] = 2;
+    _cob.statePtr[0] = 1;
     _cob.globalX = 23;
     _cob.globalY = 99;
     _cob.active = 1;
-    [_target configureSprite:sprite forCob:&_cob];
-    SKTexture *texture = [sprite texture];
-    NSImage *img = [DSTestUtils convertToNSImage:texture.CGImage];
+    [_target configureSprite:(id)sprite forCob:&_cob];
+    
+    XCTAssertEqual(sprite.position.x, _cob.globalX);
+    XCTAssertEqual(sprite.position.y, _cob.globalY);
+    XCTAssertEqual(sprite.hidden, NO);
+    XCTAssert(fabs(sprite.anchorPoint.x - 0.913043478261) < 0.00001);
+    XCTAssert(fabs(sprite.anchorPoint.y - 0.392857142857) < 0.00001);
+    NSImage *spriteImage = [DSTestUtils convertToNSImage:sprite.texture.CGImage];
+    NSImage *shipImage = [[NSBundle bundleForClass:self.class] imageForResource:@"ship.tiff"];
+    XCTAssertTrue([DSTestUtils image:spriteImage isSameAsImage:shipImage]);
 }
 
 @end

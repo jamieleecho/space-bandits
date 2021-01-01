@@ -22,7 +22,6 @@
 		5214981524B54E590053FDBB /* DSObjectCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214981424B54E590053FDBB /* DSObjectCoordinator.m */; };
 		5214981624B54E590053FDBB /* DSObjectCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214981424B54E590053FDBB /* DSObjectCoordinator.m */; };
 		5214981724B54E590053FDBB /* DSObjectCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214981424B54E590053FDBB /* DSObjectCoordinator.m */; };
-		52169432245E595B00F4B880 /* DSTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169431245E595B00F4B880 /* DSTestUtils.m */; };
 		52169439245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
 		5216943A245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
 		5216943B245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169438245EE27800F4B880 /* DSNSDataMD5Extensions.m */; };
@@ -82,6 +81,9 @@
 		5279A4EC243757D000A51D98 /* DSDirectPageGlobalsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */; };
 		527D777625995E4B00385864 /* DSObjectCoordinatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 527D777525995E4B00385864 /* DSObjectCoordinatorTest.m */; };
 		527E7ACD21F016B90013E66A /* DSInitScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 527E7ACC21F016B90013E66A /* DSInitScene.m */; };
+		5282AEDA259F6FD7004E29B6 /* DSTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169431245E595B00F4B880 /* DSTestUtils.m */; };
+		5282AEDC259F773D004E29B6 /* 04-ship2.json in Resources */ = {isa = PBXBuildFile; fileRef = 5282AEDB259F773D004E29B6 /* 04-ship2.json */; };
+		5282AEDE259F8A43004E29B6 /* ship.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5282AEDD259F8A42004E29B6 /* ship.tiff */; };
 		5284F5E524340FE300B2C2C5 /* DSCoCoJoystickTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */; };
 		529201E6243FF69E000B4D58 /* DSAppDelegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201E5243FF69E000B4D58 /* DSAppDelegateTest.m */; };
 		529201E824413F97000B4D58 /* DSViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529201E724413F97000B4D58 /* DSViewControllerTest.m */; };
@@ -337,6 +339,8 @@
 		5279A4EB243757D000A51D98 /* DSDirectPageGlobalsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDirectPageGlobalsTest.m; sourceTree = "<group>"; };
 		527D777525995E4B00385864 /* DSObjectCoordinatorTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectCoordinatorTest.m; sourceTree = "<group>"; };
 		527E7ACC21F016B90013E66A /* DSInitScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSInitScene.m; sourceTree = "<group>"; };
+		5282AEDB259F773D004E29B6 /* 04-ship2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "04-ship2.json"; sourceTree = "<group>"; };
+		5282AEDD259F8A42004E29B6 /* ship.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ship.tiff; sourceTree = "<group>"; };
 		5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickTest.m; sourceTree = "<group>"; };
 		529201E5243FF69E000B4D58 /* DSAppDelegateTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSAppDelegateTest.m; sourceTree = "<group>"; };
 		529201E724413F97000B4D58 /* DSViewControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSViewControllerTest.m; sourceTree = "<group>"; };
@@ -512,6 +516,7 @@
 				52610C88243D64390052EE4F /* forest-hires.png */,
 				5265BD5724807CA500FE9F3E /* forest-subimage.tiff */,
 				5265BD5B2480822200FE9F3E /* forest-tile.tiff */,
+				5282AEDD259F8A42004E29B6 /* ship.tiff */,
 				52A93D722454F1B400D2327B /* 01-moon.json */,
 				52A93D732454F2A600D2327B /* 01-test-level.json */,
 				521A849B21FCEE80006120E8 /* JSONDict.json */,
@@ -519,6 +524,7 @@
 				521A849F21FCF626006120E8 /* JSONBad */,
 				52796B30259E90EE00FF17B6 /* 03-badguys.json */,
 				52B1A150244CF7B5008E7066 /* 04-ship.json */,
+				5282AEDB259F773D004E29B6 /* 04-ship2.json */,
 				52A93D892455155C00D2327B /* images.json */,
 				52A93D8C24551EB400D2327B /* images-bad-1.json */,
 				52A93D8E24551F4800D2327B /* images-bad-2.json */,
@@ -888,9 +894,11 @@
 				521A84A021FCF626006120E8 /* JSONBad in Resources */,
 				52A93D8F24551F4800D2327B /* images-bad-2.json in Resources */,
 				52B1A151244CF7B5008E7066 /* 04-ship.json in Resources */,
+				5282AEDE259F8A43004E29B6 /* ship.tiff in Resources */,
 				52A93D8B2455158000D2327B /* images.json in Resources */,
 				52C8C6F9243DF17200EC582C /* forest-hires.png in Resources */,
 				5265BD5C2480822200FE9F3E /* forest-tile.tiff in Resources */,
+				5282AEDC259F773D004E29B6 /* 04-ship2.json in Resources */,
 				52796B31259E90EE00FF17B6 /* 03-badguys.json in Resources */,
 				5265BD4E247CA68E00FE9F3E /* forest-hack.png in Resources */,
 				52A93D762454F36600D2327B /* 01-moon.json in Resources */,
@@ -988,7 +996,6 @@
 				52796B2D259E8EE300FF17B6 /* DSTextureManagerTest.m in Sources */,
 				7D8022A024316BB700496138 /* DSDirectPageGlobals.m in Sources */,
 				52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */,
-				52169432245E595B00F4B880 /* DSTestUtils.m in Sources */,
 				52F845292442911300B1D70F /* DSLevelFileParser.m in Sources */,
 				52E447022464DCDC008B6488 /* DSScene.m in Sources */,
 				524109E92455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
@@ -1060,6 +1067,7 @@
 				529F9013246629B900C8A706 /* DSTileInfoRegistry.m in Sources */,
 				52169439245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */,
 				524109E72455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
+				5282AEDA259F6FD7004E29B6 /* DSTestUtils.m in Sources */,
 				7D8022992431656C00496138 /* DSObject.m in Sources */,
 				7DC4E7F422FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
 				52E7605E21D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
