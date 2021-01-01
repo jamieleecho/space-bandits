@@ -13,14 +13,13 @@
 - (id)init {
     if (self = [super init]) {
         _levelToObjectClass = NSMutableDictionary.dictionary;
-        self.methodRegistry = DSObjectClassDataRegistry.sharedInstance;
         return self;
     }
     return self;
 }
 
 - (void)addSpriteObjectClass:(DSSpriteObjectClass *)objectClass forNumber:(NSNumber *)levelNumber {
-    
+    [_textureManager addSpriteObjectClass:objectClass];
 }
 
 @end

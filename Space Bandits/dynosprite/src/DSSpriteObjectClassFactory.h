@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSSpriteObjectClass.h"
 #import "DSObjectClassDataRegistry.h"
+#import "DSSpriteObjectClass.h"
+#import "DSTextureManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSDictionary<NSNumber *, DSSpriteObjectClass *> *_levelToObjectClass;
 }
 
-@property DSObjectClassDataRegistry *methodRegistry;
+@property IBOutlet DSTextureManager *textureManager;
 
 - (id)init;
 - (void)addSpriteObjectClass:(DSSpriteObjectClass *)objectClass forNumber:(NSNumber *)levelNumber;

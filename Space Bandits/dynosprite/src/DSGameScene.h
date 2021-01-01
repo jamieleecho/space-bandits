@@ -6,16 +6,23 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
+#import "DSLevel.h"
 #import "DSScene.h"
+#import "DSObjectCoordinator.h"
+#import "DSTextureManager.h"
 #import "DSTileMapMaker.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSGameScene : DSScene {
+    DSLevel *_level;
+    DSObjectCoordinator *_coordinator;
     SKTileMapNode *_tileMapNode;
+    DSTextureManager *_textureManager;
+    
 }
 
-- (id)initWithTileMapNode:(SKTileMapNode *)tileMapNode;
+- (id)initWithLevel:(DSLevel *)level andObjectCoordinator:(DSObjectCoordinator *)coordinator andTileMapNode:(SKTileMapNode *)tileMapNode andTextureManager:(DSTextureManager *)textureManager;
 
 @end
 

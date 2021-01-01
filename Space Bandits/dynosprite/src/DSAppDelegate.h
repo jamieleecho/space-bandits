@@ -13,12 +13,12 @@
 #import "DSAssetLoader.h"
 #import "DSSceneController.h"
 
+
 @interface DSAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (nonatomic, nonnull) IBOutlet DSConfigFileParser *configFileParser;
 @property (nonatomic, nonnull) IBOutlet DSAssetLoader *assetLoader;
 @property (nonatomic, nonnull) IBOutlet DSSceneController *sceneController;
-
 
 - (void)awakeFromNib;
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *_Null_unspecified)sender;

@@ -10,13 +10,14 @@
 
 @implementation DSGameScene
 
-- (id)initWithTileMapNode:(SKTileMapNode *)tileMapNode {
+- (id)initWithLevel:(DSLevel *)level andObjectCoordinator:(DSObjectCoordinator *)coordinator andTileMapNode:(SKTileMapNode *)tileMapNode andTextureManager:(DSTextureManager *)textureManager {
     if (self = [super init]) {
         self.size = CGSizeMake(320, 200);
         self.anchorPoint = CGPointMake(0, 1);
         _tileMapNode = tileMapNode;
         [self addChild:tileMapNode];
     }
+    
     return self;
 }
 

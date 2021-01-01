@@ -16,9 +16,6 @@
 		5214980924B38FBA0053FDBB /* DSObjectClassData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980624B38FBA0053FDBB /* DSObjectClassData.m */; };
 		5214980B24B391430053FDBB /* DSObjectClassDataTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980A24B391430053FDBB /* DSObjectClassDataTest.m */; };
 		5214980D24B393FD0053FDBB /* DSObjectClassDataRegistryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980C24B393FD0053FDBB /* DSObjectClassDataRegistryTest.m */; };
-		5214981024B5494D0053FDBB /* DSGameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980F24B5494D0053FDBB /* DSGameLoop.m */; };
-		5214981124B5494D0053FDBB /* DSGameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980F24B5494D0053FDBB /* DSGameLoop.m */; };
-		5214981224B5494D0053FDBB /* DSGameLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214980F24B5494D0053FDBB /* DSGameLoop.m */; };
 		5214981524B54E590053FDBB /* DSObjectCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214981424B54E590053FDBB /* DSObjectCoordinator.m */; };
 		5214981624B54E590053FDBB /* DSObjectCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214981424B54E590053FDBB /* DSObjectCoordinator.m */; };
 		5214981724B54E590053FDBB /* DSObjectCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5214981424B54E590053FDBB /* DSObjectCoordinator.m */; };
@@ -288,8 +285,6 @@
 		5214980624B38FBA0053FDBB /* DSObjectClassData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassData.m; sourceTree = "<group>"; };
 		5214980A24B391430053FDBB /* DSObjectClassDataTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassDataTest.m; sourceTree = "<group>"; };
 		5214980C24B393FD0053FDBB /* DSObjectClassDataRegistryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectClassDataRegistryTest.m; sourceTree = "<group>"; };
-		5214980E24B5494D0053FDBB /* DSGameLoop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSGameLoop.h; sourceTree = "<group>"; };
-		5214980F24B5494D0053FDBB /* DSGameLoop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSGameLoop.m; sourceTree = "<group>"; };
 		5214981324B54E590053FDBB /* DSObjectCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSObjectCoordinator.h; sourceTree = "<group>"; };
 		5214981424B54E590053FDBB /* DSObjectCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSObjectCoordinator.m; sourceTree = "<group>"; };
 		52169430245E595B00F4B880 /* DSTestUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTestUtils.h; sourceTree = "<group>"; };
@@ -572,8 +567,6 @@
 				52C7C832247B4A3200B4901E /* DSCons.m */,
 				7D80229C24316BB700496138 /* DSDirectPageGlobals.h */,
 				7D80229D24316BB700496138 /* DSDirectPageGlobals.m */,
-				5214980E24B5494D0053FDBB /* DSGameLoop.h */,
-				5214980F24B5494D0053FDBB /* DSGameLoop.m */,
 				52169445245F2FED00F4B880 /* DSGameScene.h */,
 				52169446245F2FED00F4B880 /* DSGameScene.m */,
 				52EDA7F224A2D94400D3B490 /* DSImageUtil.h */,
@@ -969,7 +962,6 @@
 				7DC4E7F122FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
 				52796B29259E7EA900FF17B6 /* DSTexture.m in Sources */,
 				521A84B021FE0748006120E8 /* DSAppDelegate.m in Sources */,
-				5214981224B5494D0053FDBB /* DSGameLoop.m in Sources */,
 				52B1A164244D20CD008E7066 /* DSTileInfo.m in Sources */,
 				529201E824413F97000B4D58 /* DSViewControllerTest.m in Sources */,
 				52B1A171244D2712008E7066 /* DSTileFileParserTest.m in Sources */,
@@ -1037,7 +1029,6 @@
 			files = (
 				7D80229E24316BB700496138 /* DSDirectPageGlobals.m in Sources */,
 				52E447002464DCDC008B6488 /* DSScene.m in Sources */,
-				5214981024B5494D0053FDBB /* DSGameLoop.m in Sources */,
 				527E7ACD21F016B90013E66A /* DSInitScene.m in Sources */,
 				7DA178BB2431552E00AE39D8 /* 05-missile.c in Sources */,
 				52B1A159244CFE45008E7066 /* DSPoint.c in Sources */,
@@ -1093,7 +1084,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5214981124B5494D0053FDBB /* DSGameLoop.m in Sources */,
 				52B1A163244D20CD008E7066 /* DSTileInfo.m in Sources */,
 				524109EE245614650005DF54 /* DSLevelLoadingScene.m in Sources */,
 				52E7606021D802A20001F3A0 /* DSLevelRegistry.m in Sources */,

@@ -700,7 +700,11 @@
                 <customObject id="Nlc-1x-jO5" customClass="DSTransitionImageLoader"/>
                 <customObject id="Nki-Dk-Bhg" customClass="DSCoCoJoystickController"/>
                 <customObject id="4Pk-WU-M93" customClass="DSLevelFileParser"/>
-                <customObject id="5dS-7a-Ghz" userLabel="Sprite Class Object Factory" customClass="DSSpriteObjectClassFactory"/>
+                <customObject id="5dS-7a-Ghz" userLabel="Sprite Class Object Factory" customClass="DSSpriteObjectClassFactory">
+                    <connections>
+                        <outlet property="textureManager" destination="jjJ-YM-pJl" id="c7B-4d-hWK"/>
+                    </connections>
+                </customObject>
                 <customObject id="LPq-ih-HUx" userLabel="Sprite Class Object Parser" customClass="DSSpriteFileParser"/>
                 <customObject id="web-E3-IMn" customClass="DSResourceController"/>
                 <customObject id="rDZ-CV-DhK" customClass="DSSceneController">
@@ -713,6 +717,7 @@
                     </connections>
                 </customObject>
                 <customObject id="jjS-RJ-pne" customClass="NSMutableArray"/>
+                <customObject id="jjJ-YM-pJl" customClass="DSTextureManager"/>
                 <customObject id="8lv-su-4yx" customClass="DSTileInfoRegistry"/>
                 <customObject id="zlV-f7-gSm" customClass="DSTileMapMaker"/>
                 <customObject id="mI2-rC-MfV" customClass="DSTransitionSceneInfoFileParser"/>

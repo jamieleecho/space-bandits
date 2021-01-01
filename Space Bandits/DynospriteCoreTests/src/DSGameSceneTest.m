@@ -11,6 +11,9 @@
 
 @interface DSGameSceneTest : XCTestCase {
     DSGameScene *_target;
+    DSLevel *_level;
+    DSObjectCoordinator *_objectCoordinator;
+    DSTextureManager *_textureManager;
     SKTileMapNode *_tileMapNode;
 }
 
@@ -19,8 +22,11 @@
 @implementation DSGameSceneTest
 
 - (void)setUp {
+    _level = [[DSLevel alloc] init];
+    _objectCoordinator = [[DSObjectCoordinator alloc] init];
     _tileMapNode = [[SKTileMapNode alloc] init];
-    _target = [[DSGameScene alloc] initWithTileMapNode:_tileMapNode];
+    _textureManager = [[DSTextureManager alloc] init];
+    _target = [[DSGameScene alloc] initWithLevel:_level andObjectCoordinator:_objectCoordinator andTileMapNode:_tileMapNode andTextureManager:_textureManager];
 }
 
 - (void)testInit {

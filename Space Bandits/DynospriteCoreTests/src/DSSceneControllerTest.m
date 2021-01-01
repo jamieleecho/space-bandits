@@ -15,6 +15,15 @@
 #import "DSTransitionSceneInfoFileParser.h"
 
 
+static int backgroundNewXYCount = 0;
+static byte backgroundNewXY() {
+    return backgroundNewXYCount++;
+}
+static int initLevelCount = 0;
+static void initLevel() {
+    initLevelCount++;
+}
+
 @interface DSSceneControllerTest : XCTestCase {
     DSSceneController *_target;
     NSDictionary *_initImage;
@@ -28,9 +37,9 @@
     id _tileInfoRegistry;
     id _tileMapMaker;
     id _transitionSceneController;
+    id _objectCoordinator;
+    id _textureManager;
 }
-
-
 @end
 
 @implementation DSSceneControllerTest
@@ -60,7 +69,9 @@
     XCTAssertNil(_target.resourceController);
     XCTAssertNil(_target.tileInfoRegistry);
     XCTAssertNil(_target.tileMapMaker);
-    
+    XCTAssertNil(_target.objectCoordinator);
+    XCTAssertNil(_target.textureManager);
+
     NSArray<DSTransitionSceneInfo *>*sceneInfos = @[
         [[DSTransitionSceneInfo alloc] init],
         [[DSTransitionSceneInfo alloc] init],
@@ -91,6 +102,8 @@
     _resourceController = OCMClassMock(DSResourceController.class);
     _tileInfoRegistry = OCMClassMock(DSTileInfoRegistry.class);
     _tileMapMaker = OCMClassMock(DSTileMapMaker.class);
+    _objectCoordinator = OCMClassMock(DSObjectCoordinator.class);
+    _textureManager = OCMClassMock(DSTextureManager.class);
     
     _target.bundle = _bundle;
     _target.joystickController = _joystickController;
@@ -98,13 +111,20 @@
     _target.resourceController = _resourceController;
     _target.tileInfoRegistry = _tileInfoRegistry;
     _target.tileMapMaker = _tileMapMaker;
-    
+    _target.objectCoordinator = _objectCoordinator;
+    _target.textureManager = _textureManager;
+
     XCTAssertEqual(_target.bundle, _bundle);
     XCTAssertEqual(_target.joystickController, _joystickController);
     XCTAssertEqual(_target.levelRegistry, _levelRegistry);
     XCTAssertEqual(_target.resourceController, _resourceController);
     XCTAssertEqual(_target.tileInfoRegistry, _tileInfoRegistry);
     XCTAssertEqual(_target.tileMapMaker, _tileMapMaker);
+    XCTAssertEqual(_target.objectCoordinator, _objectCoordinator);
+    XCTAssertEqual(_target.textureManager, _textureManager);
+    
+    initLevelCount = 0;
+    backgroundNewXYCount = 0;
 }
 
 - (void)testCreatesColors {
@@ -141,7 +161,7 @@
 
 - (void)testGameSceneForLevel {
     const int level = 3;
-    DSLevel *levelObj = [[DSLevel alloc] init];
+    DSLevel *levelObj = [[DSLevel alloc] initWithInitLevel:initLevel backgroundNewXY:backgroundNewXY];
     levelObj.tilemapImagePath = @"../../tiles/mytile.png";
     levelObj.tilemapSize = DSPointMake(160, 64);
     levelObj.tilemapStart = DSPointMake(3, 7);
@@ -170,11 +190,13 @@
     XCTAssertEqual(gameScene.children.firstObject, node);
     XCTAssertEqual(gameScene.levelNumber, level);
     XCTAssertEqual(gameScene.joystickController, _joystickController);
+    XCTAssertEqual(initLevelCount, 1);
+    XCTAssertEqual(backgroundNewXYCount, 0);
 }
 
 - (void)testGameSceneForLevelWithBadInputs {
     const int level = 3;
-    DSLevel *levelObj = [[DSLevel alloc] init];
+    DSLevel *levelObj = [[DSLevel alloc] initWithInitLevel:initLevel backgroundNewXY:backgroundNewXY];
     levelObj.tilemapImagePath = @"../../tiles/mytile.png";
     levelObj.tilemapSize = DSPointMake(161, 64);
     levelObj.tilemapStart = DSPointMake(3, 7);
@@ -193,6 +215,8 @@
     }).andReturn(node);
     
     XCTAssertThrows([_target gameSceneForLevel:level]);
+    XCTAssertEqual(initLevelCount, 1);
+    XCTAssertEqual(backgroundNewXYCount, 0);
 }
 
 @end

@@ -47,8 +47,11 @@
 }
 
 - (DSGameScene *)gameSceneForLevel:(int)level {
-    // Get the image used to create the tilesets
+    // Get the level and initialize it
     DSLevel *levelObj = [self.levelRegistry levelForIndex:level];
+    levelObj.initLevel();
+
+    // Create the tilesets for the level background
     DSTileInfo *tileInfo = [self.tileInfoRegistry tileInfoForNumber:levelObj.tilesetIndex];
     NSString *tileImagePath = tileInfo.imagePath;
     while([tileImagePath hasPrefix:@"../"]) {
@@ -69,7 +72,8 @@
 
     // Create the game scene
     SKTileMapNode *tileMapNode = [self.tileMapMaker nodeFromImage:mapImage withRect:mapImageRect usingTileImage:tileImage withTileRect:tileImageRect];
-    DSGameScene *gameScene = [[DSGameScene alloc] initWithTileMapNode:tileMapNode];
+    DSGameScene *gameScene = [[DSGameScene alloc] initWithLevel:levelObj andObjectCoordinator:self.objectCoordinator andTileMapNode:tileMapNode andTextureManager:self.textureManager];
+    
     gameScene.joystickController = self.joystickController;
     gameScene.levelNumber = level;
     
