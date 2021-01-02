@@ -49,18 +49,18 @@ enum DSInitSceneLabelIndices : short {
 }
 
 - (void)testTextFromResolution {
-    XCTAssertEqual([DSInitScene textFromResolution:DSInitSceneDisplayLow], @"Low");
-    XCTAssertEqual([DSInitScene textFromResolution:DSInitSceneDisplayHigh], @"High");
+    XCTAssertEqualObjects([DSInitScene textFromResolution:DSInitSceneDisplayLow], @"Low");
+    XCTAssertEqualObjects([DSInitScene textFromResolution:DSInitSceneDisplayHigh], @"High");
 }
 
 - (void)testTextFromControl {
-    XCTAssertEqual([DSInitScene textFromControl:DSInitSceneControlJoystick], @"Joystick");
-    XCTAssertEqual([DSInitScene textFromControl:DSInitSceneControlKeyboard], @"Keyboard");
+    XCTAssertEqualObjects([DSInitScene textFromControl:DSInitSceneControlJoystick], @"Joystick");
+    XCTAssertEqualObjects([DSInitScene textFromControl:DSInitSceneControlKeyboard], @"Keyboard");
 }
 
 - (void)testTextFromSound {
-    XCTAssertEqual([DSInitScene textFromSound:DSInitSceneSoundLow], @"LoFi");
-    XCTAssertEqual([DSInitScene textFromSound:DSInitSceneSoundHigh], @"HiFi");
+    XCTAssertEqualObjects([DSInitScene textFromSound:DSInitSceneSoundLow], @"LoFi");
+    XCTAssertEqualObjects([DSInitScene textFromSound:DSInitSceneSoundHigh], @"HiFi");
 }
 
 - (void)testDidMoveToView {

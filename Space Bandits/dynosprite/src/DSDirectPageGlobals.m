@@ -18,7 +18,7 @@ static DSDirectPageGlobals *_sharedInstance;
 
 + (DSDirectPageGlobals *)sharedInstance {
     if (_sharedInstance == nil) {
-        _sharedInstance = [[DSDirectPageGlobals alloc] initWithGlobals:&DynospriteGlobals];
+        _sharedInstance = [[DSDirectPageGlobals alloc] init];
     }
     return _sharedInstance;
 }

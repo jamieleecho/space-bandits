@@ -31,7 +31,7 @@ static byte myLevelBackgroundNewXY(void) { return 0; }
     XCTAssertEqual(_target.objectGroupIndices.count, 0);
     XCTAssertEqual(_target.maxObjectTableSize, 0);
     XCTAssertEqual(_target.tilesetIndex, 0);
-    XCTAssertEqual(_target.tilemapImagePath, @"");
+    XCTAssertEqualObjects(_target.tilemapImagePath, @"");
     XCTAssertEqual(_target.tilemapStart.x, 0);
     XCTAssertEqual(_target.tilemapStart.y, 0);
     XCTAssertEqual(_target.tilemapSize.x, 0);

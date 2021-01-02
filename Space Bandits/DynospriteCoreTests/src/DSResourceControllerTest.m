@@ -32,9 +32,9 @@
 }
 
 - (void)testSelectsRightFont {
-    XCTAssertEqual(_target.fontForDisplay, @"pcgfont");
+    XCTAssertEqualObjects(_target.fontForDisplay, @"pcgfont");
     _target.hiresMode = YES;
-    XCTAssertEqual(_target.fontForDisplay, @"Monaco");
+    XCTAssertEqualObjects(_target.fontForDisplay, @"Monaco");
 }
 
 - (void)testSelectsRightImage {

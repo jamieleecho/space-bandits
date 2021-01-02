@@ -59,7 +59,6 @@
 }
 
 - (void)initializeLevel {
-
     // Initialize the globals
     DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr = _objectCoordinator.cobs;
     DynospriteDirectPageGlobalsPtr->Input_Buttons = 0;
