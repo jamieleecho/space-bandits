@@ -100,6 +100,7 @@
     // Create the background
     SKTileMapNode *tileMapNode = [_tileMapMaker nodeFromImage:mapImage withRect:mapImageRect usingTileImage:tileImage withTileRect:tileImageRect];
     [self addChild:tileMapNode];
+    tileMapNode.position = CGPointMake(-_levelObj.bkgrndStartX, _levelObj.bkgrndStartY);
     
     // Create the sprites
     NSMutableArray *sprites = [NSMutableArray arrayWithCapacity:_objectCoordinator.count];
@@ -110,6 +111,6 @@
         [_textureManager configureSprite:sprite forCob:_objectCoordinator.cobs + ii];
     }
     _sprites = sprites;
-}
+    }
 
 @end

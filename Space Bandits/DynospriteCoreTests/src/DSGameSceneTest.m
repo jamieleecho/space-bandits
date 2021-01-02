@@ -68,7 +68,9 @@ static byte backgroundNewXY() {
     _levelObj.tilemapSize = DSPointMake(160, 64);
     _levelObj.tilemapStart = DSPointMake(3, 7);
     _levelObj.tilesetIndex = 4;
-    
+    _levelObj.bkgrndStartX = 100;
+    _levelObj.bkgrndStartY = 237;
+
     OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"forest.png");
     NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
     NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
@@ -127,6 +129,9 @@ static byte backgroundNewXY() {
     OCMVerify([_textureManager configureSprite:_target.sprites[0] forCob:_cobs + 0]);
     OCMVerify([_textureManager configureSprite:_target.sprites[1] forCob:_cobs + 1]);
     OCMVerify([_textureManager configureSprite:_target.sprites[2] forCob:_cobs + 2]);
+
+    // Does the background start at the right point?
+    XCTAssertTrue(CGPointEqualToPoint(_target.children.firstObject.position, CGPointMake(-100, 237)));
 }
 
 - (void)testInitializeLevelWithJoystick {
