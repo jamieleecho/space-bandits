@@ -16,7 +16,7 @@
     DSAppDelegate *_target;
     id _configFileParser;
     id _sceneController;
-    id _levelLoader;
+    id _assetLoader;
 }
 @end
 
@@ -29,8 +29,8 @@
     _target.configFileParser = _configFileParser;
     _sceneController = OCMClassMock(DSSceneController.class);
     _target.sceneController = _sceneController;
-    _levelLoader = OCMClassMock(DSAssetLoader.class);
-    _target.assetLoader = _levelLoader;
+    _assetLoader = OCMClassMock(DSAssetLoader.class);
+    _target.assetLoader = _assetLoader;
 }
 
 - (void)testConfigFileParser {
@@ -43,12 +43,14 @@
 
 - (void)testAwakeFromNib {
     [_target awakeFromNib];
-    OCMVerify([(DSAssetLoader *)_levelLoader loadLevels]);
-    OCMVerify([(DSAssetLoader *)_levelLoader loadSceneInfos]);
-    OCMVerify([(DSAssetLoader *)_levelLoader loadTransitionSceneImages]);
-    OCMVerify([(DSAssetLoader *)_levelLoader loadTileSets]);
-    OCMVerify([(DSAssetLoader *)_levelLoader loadSprites]);
-    OCMVerifyAll(_levelLoader);
+    OCMVerify([_sceneController setClassRegistry:DSObjectClassDataRegistry.sharedInstance]);
+    OCMVerify([_assetLoader setRegistry:DSLevelRegistry.sharedInstance]);
+    OCMVerify([(DSAssetLoader *)_assetLoader loadLevels]);
+    OCMVerify([(DSAssetLoader *)_assetLoader loadSceneInfos]);
+    OCMVerify([(DSAssetLoader *)_assetLoader loadTransitionSceneImages]);
+    OCMVerify([(DSAssetLoader *)_assetLoader loadTileSets]);
+    OCMVerify([(DSAssetLoader *)_assetLoader loadSprites]);
+    OCMVerifyAll(_assetLoader);
 }
 
 - (void)testApplicationShouldTerminateAfterLastWindowClosed {

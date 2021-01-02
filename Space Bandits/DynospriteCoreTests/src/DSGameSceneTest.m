@@ -12,6 +12,7 @@
 #import "DSGameScene.h"
 #import "DSTestUtils.h"
 
+
 @interface DSGameSceneTest : XCTestCase {
     DSGameScene *_target;
     DSLevel *_levelObj;
@@ -22,7 +23,7 @@
     id _joystickController;
     id _objectCoordinator;
     DynospriteCOB _cobs[5];
-    DSTextureManager *_textureManager;
+    id _textureManager;
     SKNode *_node;
 }
 
@@ -49,7 +50,7 @@ static byte backgroundNewXY() {
     _bundle = OCMClassMock(NSBundle.class);
     _joystickController = OCMClassMock(DSCoCoJoystickController.class);
     _objectCoordinator = OCMClassMock(DSObjectCoordinator.class);
-    _textureManager = [[DSTextureManager alloc] init];
+    _textureManager = OCMClassMock(DSTextureManager.class);
     _target = [[DSGameScene alloc] initWithLevel:_levelObj andResourceController:_resourceController andTileInfo:_tileInfo andTileMapMaker:_tileMapMaker andBundle:_bundle andObjectCoordinator:_objectCoordinator andTextureManager:_textureManager];
     _target.joystickController = _joystickController;
     _node = [[SKNode alloc] init];
@@ -58,6 +59,8 @@ static byte backgroundNewXY() {
     initLevelCount = 0;
     
     memset(DynospriteDirectPageGlobalsPtr, 0xff, sizeof(*DynospriteDirectPageGlobalsPtr));
+    
+    OCMStub([_bundle resourcePath]).andReturn([[NSBundle bundleForClass:[self class]] resourcePath]);
 }
 
 - (void)commonInit {
@@ -66,10 +69,9 @@ static byte backgroundNewXY() {
     _levelObj.tilemapStart = DSPointMake(3, 7);
     _levelObj.tilesetIndex = 4;
     
-    OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"hires/tiles/mytile.png");
+    OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"forest.png");
     NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
     NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
-    OCMStub([_bundle pathForResource:@"hires/tiles/mytile" ofType:@"png"]).andReturn(imagePath);
     NSRect tileRect = NSMakeRect(3, 7, 160, 64);
     
     _tileInfo.imagePath = @"tiles/mytile.png";
@@ -83,6 +85,7 @@ static byte backgroundNewXY() {
     }).andReturn(_node);
     
     OCMStub([_objectCoordinator cobs]).andReturn((DynospriteCOB *)_cobs);
+    OCMStub([_objectCoordinator count]).andReturn(3);
 }
 
 - (void)testInit {
@@ -95,6 +98,8 @@ static byte backgroundNewXY() {
     XCTAssertEqual(_target.bundle, _bundle);
     XCTAssertEqual(_target.objectCoordinator, _objectCoordinator);
     XCTAssertEqual(_target.textureManager, _textureManager);
+    XCTAssertNotNil(_target.sprites);
+    XCTAssertEqual(_target.sprites.count, 0);
 }
 
 - (void)testInitializeLevel {
@@ -108,6 +113,7 @@ static byte backgroundNewXY() {
     XCTAssertEqual(backgroundNewXYCount, 0);
     
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, [_objectCoordinator cobs]);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_NumCurrent, 3);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, 0);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickX, 0);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 0);
@@ -115,6 +121,12 @@ static byte backgroundNewXY() {
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_UseKeyboard, 0);
     
     OCMVerify([_objectCoordinator initializeObjects]);
+    
+    XCTAssertEqual(_target.children.count, 4);
+    XCTAssertEqual(_target.sprites.count, 3);
+    OCMVerify([_textureManager configureSprite:_target.sprites[0] forCob:_cobs + 0]);
+    OCMVerify([_textureManager configureSprite:_target.sprites[1] forCob:_cobs + 1]);
+    OCMVerify([_textureManager configureSprite:_target.sprites[2] forCob:_cobs + 2]);
 }
 
 - (void)testInitializeLevelWithJoystick {

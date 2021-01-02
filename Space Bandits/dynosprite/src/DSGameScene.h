@@ -25,10 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
     NSBundle *_bundle;
     DSObjectCoordinator *_objectCoordinator;
     SKTileMapNode *_tileMapNode;
+    NSArray<SKSpriteNode *> *_sprites;
 }
-
-- (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager;
-- (void)initializeLevel;
 
 - (DSLevel *)levelObj;
 - (DSResourceController *)resourceController;
@@ -38,6 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (DSObjectCoordinator *)objectCoordinator;
 - (DSObjectCoordinator *)coordinator;
 - (DSTextureManager *)textureManager;
+- (NSArray <SKSpriteNode *> *)sprites;
+
+- (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager;
+
+- (void)initializeLevel;
 
 @end
 

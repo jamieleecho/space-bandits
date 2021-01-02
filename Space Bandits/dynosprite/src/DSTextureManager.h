@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableDictionary<NSNumber *, NSArray<DSTexture *> *> *_groupIdToTextures;
 }
 
- @property (nonatomic) DSResourceController *resourceController;
+@property (nonatomic) NSBundle *bundle;
+@property (nonatomic) IBOutlet DSResourceController *resourceController;
 
 - (id)init;
 - (void)addSpriteObjectClass:(DSSpriteObjectClass *)spriteObjectClass;

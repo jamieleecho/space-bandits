@@ -688,10 +688,10 @@
                     <connections>
                         <outlet property="imageLoader" destination="Nlc-1x-jO5" id="yoe-XY-i13"/>
                         <outlet property="levelFileParser" destination="4Pk-WU-M93" id="ZYc-bn-eVd"/>
-                        <outlet property="objectFactory" destination="5dS-7a-Ghz" id="jbb-8k-2WV"/>
                         <outlet property="objectParser" destination="LPq-ih-HUx" id="eVX-jm-ueV"/>
                         <outlet property="resourceController" destination="web-E3-IMn" id="IES-SH-Irf"/>
                         <outlet property="sceneInfos" destination="jjS-RJ-pne" id="Zsh-y2-0YW"/>
+                        <outlet property="spriteObjectClassFactory" destination="5dS-7a-Ghz" id="EIK-U3-tSw"/>
                         <outlet property="tileInfoRegistry" destination="8lv-su-4yx" id="Thg-O9-1uX"/>
                         <outlet property="transitionSceneInfoFileParser" destination="mI2-rC-MfV" id="vIw-qQ-7lM"/>
                     </connections>
@@ -712,12 +712,17 @@
                         <outlet property="joystickController" destination="Nki-Dk-Bhg" id="jc7-yr-SqC"/>
                         <outlet property="resourceController" destination="web-E3-IMn" id="yl9-le-aDQ"/>
                         <outlet property="sceneInfos" destination="jjS-RJ-pne" id="qHo-jV-m0F"/>
+                        <outlet property="textureManager" destination="jjJ-YM-pJl" id="H4c-1v-u1u"/>
                         <outlet property="tileInfoRegistry" destination="8lv-su-4yx" id="mAw-iu-dc6"/>
                         <outlet property="tileMapMaker" destination="zlV-f7-gSm" id="DpJ-UM-LB6"/>
                     </connections>
                 </customObject>
                 <customObject id="jjS-RJ-pne" customClass="NSMutableArray"/>
-                <customObject id="jjJ-YM-pJl" customClass="DSTextureManager"/>
+                <customObject id="jjJ-YM-pJl" customClass="DSTextureManager">
+                    <connections>
+                        <outlet property="resourceController" destination="web-E3-IMn" id="fm2-9q-UYj"/>
+                    </connections>
+                </customObject>
                 <customObject id="8lv-su-4yx" customClass="DSTileInfoRegistry"/>
                 <customObject id="zlV-f7-gSm" customClass="DSTileMapMaker"/>
                 <customObject id="mI2-rC-MfV" customClass="DSTransitionSceneInfoFileParser"/>

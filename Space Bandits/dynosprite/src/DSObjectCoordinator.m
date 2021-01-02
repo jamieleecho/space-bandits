@@ -10,8 +10,19 @@
 
 @implementation DSObjectCoordinator
 
+- (DSLevel *)level {
+    return _level;
+}
+
+- (DSObjectClassDataRegistry *)classRegistry {
+    return _classRegistry;
+}
+
 - (id)initWithLevel:(DSLevel *)level andClassRegistry:(DSObjectClassDataRegistry *)classRegistry {
     if (self = [super init]) {
+        _level = level;
+        _classRegistry = classRegistry;
+        
         // Allocate ODT
         size_t odtSize = (level.objectGroupIndices.count == 0) ? 0 : [level.objectGroupIndices sortedArrayUsingSelector:@selector(compare:)].lastObject.intValue + 1;
         _odts = calloc(odtSize, sizeof(_odts[0]));

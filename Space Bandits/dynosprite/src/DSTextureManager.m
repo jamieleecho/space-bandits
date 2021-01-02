@@ -16,6 +16,7 @@
 
 - (id)init {
     if (self = [super init]) {
+        self.bundle = NSBundle.mainBundle;
         _groupIdToTextures = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -23,7 +24,7 @@
 
 - (void)addSpriteObjectClass:(DSSpriteObjectClass *)spriteObjectClass {
     // Get pixels in a format that is easy to manipulate
-    NSString *path = [self.resourceController spriteImageWithName:spriteObjectClass.imagePath];
+    NSString *path = [NSString pathWithComponents:@[self.bundle.resourcePath, [self.resourceController spriteImageWithName:spriteObjectClass.imagePath]]];
     NSImage *spriteNSImage = [[NSImage alloc] initWithContentsOfFile:path];
     NSCAssert(spriteNSImage != nil, @"Could not open %@ for sprite group %d.", spriteObjectClass.imagePath, spriteObjectClass.groupID);
     CGImageRef spriteCGImage = [spriteNSImage CGImageForProposedRect:NULL context:NULL hints:NULL];
@@ -58,7 +59,7 @@
     node.size = texture.texture.size;
     node.texture = texture.texture;
     node.anchorPoint = texture.point;
-    node.position = CGPointMake(cob->globalX, cob->globalY);
+    node.position = CGPointMake(cob->globalX, -(float)cob->globalY);
 }
 
 @end

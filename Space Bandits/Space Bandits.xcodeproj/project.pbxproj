@@ -645,6 +645,8 @@
 				52B1A15E244D0BAD008E7066 /* DSSpriteInfoTest.m */,
 				52169430245E595B00F4B880 /* DSTestUtils.h */,
 				52169431245E595B00F4B880 /* DSTestUtils.m */,
+				52796B2C259E8EE300FF17B6 /* DSTextureManagerTest.m */,
+				52796B2A259E868600FF17B6 /* DSTextureTest.m */,
 				52B1A165244D2213008E7066 /* DSTileInfoTest.m */,
 				529F901A2466F2DD00C8A706 /* DSTileInfoRegistryTest.m */,
 				52B1A170244D2712008E7066 /* DSTileFileParserTest.m */,
@@ -655,8 +657,6 @@
 				52A93D832454FF7C00D2327B /* DSTransitionSceneInfoTest.m */,
 				529201E724413F97000B4D58 /* DSViewControllerTest.m */,
 				529201F1244151BF000B4D58 /* DSWindowControllerTest.m */,
-				52796B2C259E8EE300FF17B6 /* DSTextureManagerTest.m */,
-				52796B2A259E868600FF17B6 /* DSTextureTest.m */,
 			);
 			path = src;
 			sourceTree = "<group>";

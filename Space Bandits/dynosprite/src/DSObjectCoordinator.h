@@ -31,7 +31,14 @@ NS_ASSUME_NONNULL_BEGIN
     
     /** Ponters to individual initialization data for eacb object */
     byte * _Nonnull * _Nonnull _initData;
+    
+    DSLevel *_level;
+    DSObjectClassDataRegistry *_classRegistry;
 }
+
+- (DSLevel *)level;
+
+- (DSObjectClassDataRegistry *)classRegistry;
 
 /**
  * Initializes level objects by building up all of the objects required to run it.

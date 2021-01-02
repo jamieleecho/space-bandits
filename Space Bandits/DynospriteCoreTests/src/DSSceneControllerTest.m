@@ -28,8 +28,8 @@
     id _tileInfoRegistry;
     id _tileMapMaker;
     id _transitionSceneController;
-    id _objectCoordinator;
     id _textureManager;
+    id _classRegistry;
 }
 @end
 
@@ -60,8 +60,8 @@
     XCTAssertNil(_target.resourceController);
     XCTAssertNil(_target.tileInfoRegistry);
     XCTAssertNil(_target.tileMapMaker);
-    XCTAssertNil(_target.objectCoordinator);
     XCTAssertNil(_target.textureManager);
+    XCTAssertNil(_target.classRegistry);
 
     NSArray<DSTransitionSceneInfo *>*sceneInfos = @[
         [[DSTransitionSceneInfo alloc] init],
@@ -93,8 +93,8 @@
     _resourceController = OCMClassMock(DSResourceController.class);
     _tileInfoRegistry = OCMClassMock(DSTileInfoRegistry.class);
     _tileMapMaker = OCMClassMock(DSTileMapMaker.class);
-    _objectCoordinator = OCMClassMock(DSObjectCoordinator.class);
     _textureManager = OCMClassMock(DSTextureManager.class);
+    _classRegistry = OCMClassMock(DSObjectClassDataRegistry.class);
     
     _target.bundle = _bundle;
     _target.joystickController = _joystickController;
@@ -102,8 +102,8 @@
     _target.resourceController = _resourceController;
     _target.tileInfoRegistry = _tileInfoRegistry;
     _target.tileMapMaker = _tileMapMaker;
-    _target.objectCoordinator = _objectCoordinator;
     _target.textureManager = _textureManager;
+    _target.classRegistry = _classRegistry;
 
     XCTAssertEqual(_target.bundle, _bundle);
     XCTAssertEqual(_target.joystickController, _joystickController);
@@ -111,8 +111,8 @@
     XCTAssertEqual(_target.resourceController, _resourceController);
     XCTAssertEqual(_target.tileInfoRegistry, _tileInfoRegistry);
     XCTAssertEqual(_target.tileMapMaker, _tileMapMaker);
-    XCTAssertEqual(_target.objectCoordinator, _objectCoordinator);
     XCTAssertEqual(_target.textureManager, _textureManager);
+    XCTAssertEqual(_target.classRegistry, _classRegistry);
 }
 
 - (void)testCreatesColors {
@@ -181,9 +181,9 @@
     XCTAssertEqual(gameScene.tileInfo, tileInfo);
     XCTAssertEqual(gameScene.tileMapMaker, _tileMapMaker);
     XCTAssertEqual(gameScene.bundle, _bundle);
-    XCTAssertEqual(gameScene.objectCoordinator, _objectCoordinator);
+    XCTAssertEqual(gameScene.objectCoordinator.level, levelObj);
+    XCTAssertEqual(gameScene.objectCoordinator.classRegistry, _classRegistry);
     XCTAssertEqual(_target.textureManager, _textureManager);
-
 }
 
 @end

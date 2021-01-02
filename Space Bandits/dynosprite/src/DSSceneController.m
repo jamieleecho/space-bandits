@@ -50,7 +50,8 @@
     // Get the level and initialize it
     DSLevel *levelObj = [self.levelRegistry levelForIndex:level];
     DSTileInfo *tileInfo = [self.tileInfoRegistry tileInfoForNumber:levelObj.tilesetIndex];
-    DSGameScene *gameScene = [[DSGameScene alloc] initWithLevel:levelObj andResourceController:self.resourceController andTileInfo:tileInfo andTileMapMaker:self.tileMapMaker andBundle:self.bundle andObjectCoordinator:self.objectCoordinator andTextureManager:self.textureManager];
+    DSObjectCoordinator *coordinator = [[DSObjectCoordinator alloc] initWithLevel:levelObj andClassRegistry:self.classRegistry];
+    DSGameScene *gameScene = [[DSGameScene alloc] initWithLevel:levelObj andResourceController:self.resourceController andTileInfo:tileInfo andTileMapMaker:self.tileMapMaker andBundle:self.bundle andObjectCoordinator:coordinator andTextureManager:self.textureManager];
     gameScene.joystickController = self.joystickController;
     gameScene.levelNumber = level;
     

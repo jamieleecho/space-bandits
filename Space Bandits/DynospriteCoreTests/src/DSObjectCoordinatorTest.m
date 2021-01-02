@@ -144,6 +144,8 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 - (void)testInitialization {
+    XCTAssertEqual(_target.level, _level);
+    XCTAssertEqual(_target.classRegistry, _classRegistry);
     XCTAssertEqual(_target.count, 3);
     
     // Check odts

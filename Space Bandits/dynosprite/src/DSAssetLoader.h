@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nonnull) IBOutlet DSLevelFileParser *levelFileParser;
 @property (nonatomic, nonnull) IBOutlet DSTransitionSceneInfoFileParser *transitionSceneInfoFileParser;
-@property (nonatomic, nonnull) IBOutlet DSLevelRegistry *registry;
+@property (nonatomic, nonnull) DSLevelRegistry *registry;
 @property (nonatomic, nonnull) IBOutlet NSMutableArray *sceneInfos;
 @property (nonatomic, nonnull) IBOutlet DSSpriteObjectClassFactory *spriteObjectClassFactory;
 @property (nonatomic, nonnull) IBOutlet DSSpriteFileParser *objectParser;

@@ -31,6 +31,7 @@
     id _resourceController;
     DynospriteCOB _cob;
     byte _state;
+    id _bundle;
 }
 
 @end
@@ -39,12 +40,17 @@
 
 - (void)setUp {
     _target = [[DSTextureManager alloc] init];
+    XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
+    XCTAssertNil(_target.resourceController);
     _resourceController = OCMClassMock(DSResourceController.class);
+    _bundle = OCMClassMock(NSBundle.class);
     _target.resourceController = _resourceController;
-    
-    NSString *imageFile = [[NSBundle bundleForClass:self.class] pathForResource:@"moon" ofType:@"gif"];
-    OCMStub([_resourceController spriteImageWithName:@"../tiles/01-moon.gif"]).andReturn(imageFile);
-    OCMStub([_resourceController spriteImageWithName:@"01-moon.gif"]).andReturn(imageFile);
+    _target.bundle = _bundle;
+    XCTAssertEqual(_target.resourceController, _resourceController);
+    XCTAssertEqual(_target.bundle, _bundle);
+
+    OCMStub([_resourceController spriteImageWithName:@"../tiles/01-moon.gif"]).andReturn(@"moon.gif");
+    OCMStub([_bundle resourcePath]).andReturn([[NSBundle bundleForClass:[self class]] resourcePath]);
 
     DSSpriteFileParser *spriteFileParser = [[DSSpriteFileParser alloc] init];
     DSSpriteObjectClass *spriteObjectClass = [[DSSpriteObjectClass alloc] init];
@@ -53,6 +59,7 @@
     [_target addSpriteObjectClass:spriteObjectClass];
 
     spriteObjectClass = [[DSSpriteObjectClass alloc] init];
+    OCMStub([_resourceController spriteImageWithName:@"01-moon.gif"]).andReturn(@"moon.gif");
     path = [[NSBundle bundleForClass:[self class]] pathForResource:@"03-badguys" ofType:@"json"];
     [spriteFileParser parseFile:path forObjectClass:spriteObjectClass];
     [_target addSpriteObjectClass:spriteObjectClass];
@@ -71,7 +78,7 @@
     [_target configureSprite:(id)sprite forCob:&_cob];
     
     XCTAssertEqual(sprite.position.x, _cob.globalX);
-    XCTAssertEqual(sprite.position.y, _cob.globalY);
+    XCTAssertEqual(sprite.position.y, -(float)_cob.globalY);
     XCTAssertEqual(sprite.hidden, NO);
     XCTAssert(fabs(sprite.anchorPoint.x - 0.913043478261) < 0.00001);
     XCTAssert(fabs(sprite.anchorPoint.y - 0.392857142857) < 0.00001);

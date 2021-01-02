@@ -10,6 +10,7 @@
 #import "DSCoCoJoystickController.h"
 #import "DSGameScene.h"
 #import "DSLevelRegistry.h"
+#import "DSObjectClassDataRegistry.h"
 #import "DSObjectCoordinator.h"
 #import "DSResourceController.h"
 #import "DSSceneControllerProtocol.h"
@@ -28,8 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) IBOutlet NSArray<DSTransitionSceneInfo *> *sceneInfos;
 @property (nonatomic, nonnull) IBOutlet DSTileInfoRegistry *tileInfoRegistry;
 @property (nonatomic, nonnull) IBOutlet DSTileMapMaker *tileMapMaker;
-@property (nonatomic, nonnull) IBOutlet DSObjectCoordinator *objectCoordinator;
 @property (nonatomic, nonnull) IBOutlet DSTextureManager *textureManager;
+@property (nonatomic, nonnull) DSObjectClassDataRegistry *classRegistry;
 
 - (id)init;
 - (DSTransitionScene *)transitionSceneForLevel:(int)level;

@@ -30,7 +30,7 @@
 }
 
 - (NSDictionary *)parseResourceNamed:(NSString *)name {
-    NSBundle *main = [NSBundle mainBundle];
+    NSBundle *main = NSBundle.mainBundle;
     NSString *resourcePath = [main pathForResource:name ofType:@"json"];
     return [self parseFile:resourcePath];
 }

@@ -11,7 +11,9 @@
 
 @implementation DSAppDelegate
 
-- (void)awakeFromNib {    
+- (void)awakeFromNib {
+    self.sceneController.classRegistry = DSObjectClassDataRegistry.sharedInstance;
+    self.assetLoader.registry = DSLevelRegistry.sharedInstance;
     [self.assetLoader loadLevels];
     [self.assetLoader loadSceneInfos];
     [self.assetLoader loadTransitionSceneImages];
