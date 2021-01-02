@@ -28,8 +28,15 @@ extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
     XCTAssertEqual(&_globals, _target.globals);
 }
 
+- (void)testSimpleInit {
+    DSDirectPageGlobals *target = [[DSDirectPageGlobals alloc] init];
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr, target.globals);
+}
+
+
 - (void)testSharedInstance {
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr, DSDirectPageGlobals.sharedInstance.globals);
+    XCTAssertEqual(DSDirectPageGlobals.sharedInstance, DSDirectPageGlobals.sharedInstance);
 }
 
 @end

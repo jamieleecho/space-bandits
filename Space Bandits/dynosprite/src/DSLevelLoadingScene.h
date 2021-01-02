@@ -11,11 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSLevelLoadingScene : DSTransitionScene
+@interface DSLevelLoadingScene : DSTransitionScene {
+    SKAction *_lastAction;
+    void(^_lastActionCompletionHandler)(void);
+}
 
 @property (nonatomic, nonnull) NSBundle *bundle;
 @property (nonatomic, nonnull) NSString *levelDescription;
 @property (nonatomic, nonnull) NSString *levelName;
+- (SKAction *)lastAction;
+- (void(^)(void)) lastActionCompletionHandler;
 
 - (id)init;
 - (void)didMoveToView:(SKView *)view;

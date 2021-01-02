@@ -10,12 +10,14 @@
 #import <XCTest/XCTest.h>
 #import <math.h>
 #import "DSLevelLoadingScene.h"
+#import "DSSceneController.h"
 
 
 @interface DSLevelLoadingSceneTest : XCTestCase {
     DSLevelLoadingScene *_target;
-    id _resourceController;
     id _bundle;
+    id _resourceController;
+    id _sceneController;
 }
 
 @end
@@ -26,6 +28,8 @@
     _target = [[DSLevelLoadingScene alloc] init];
     _bundle = OCMClassMock(NSBundle.class);
     _resourceController = OCMClassMock(DSResourceController.class);
+    _sceneController = OCMClassMock(DSSceneController.class);
+    _target.sceneController = _sceneController;
 }
 
 - (void)testInit {
@@ -33,6 +37,8 @@
     XCTAssertEqualObjects(_target.levelName, @"");
     XCTAssertEqualObjects(_target.levelDescription, @"");
     XCTAssertFalse(_target.isDone);
+    XCTAssertNil(_target.lastAction);
+    XCTAssertNil(_target.lastActionCompletionHandler);
 }
 
 - (void)testProperties {
@@ -46,6 +52,10 @@
     [self initTarget];
     SKView *view = [[SKView alloc] init];
     _target.isDone = YES;
+    _target.levelNumber = 5;
+    id gameScene = OCMClassMock(DSGameScene.class);
+    OCMStub([_sceneController gameSceneForLevel:5]).andReturn(gameScene);
+
     [_target didMoveToView:view];
     XCTAssertFalse(_target.isDone);
     XCTAssertEqual(_target.labels.count, 3);
@@ -76,9 +86,14 @@
     XCTAssertEqualObjects(progressBarOutline.fillColor, progressBarOutlineFillColor);
     XCTAssertEqualObjects(progressBar.color, progressBarColor);
     XCTAssertTrue(progressBar.hasActions);
+    XCTAssertNotNil(_target.lastAction);
+    XCTAssertNotNil(_target.lastActionCompletionHandler);
+    
+    _target.lastActionCompletionHandler();
+    XCTAssertTrue(_target.isDone);
+    OCMVerify([gameScene initializeLevel]);
     
     // Running it again should not add new elements
-    _target.isDone = YES;
     [_target didMoveToView:view];
 }
 

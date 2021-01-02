@@ -15,15 +15,6 @@
 #import "DSTransitionSceneInfoFileParser.h"
 
 
-static int backgroundNewXYCount = 0;
-static byte backgroundNewXY() {
-    return backgroundNewXYCount++;
-}
-static int initLevelCount = 0;
-static void initLevel() {
-    initLevelCount++;
-}
-
 @interface DSSceneControllerTest : XCTestCase {
     DSSceneController *_target;
     NSDictionary *_initImage;
@@ -122,9 +113,6 @@ static void initLevel() {
     XCTAssertEqual(_target.tileMapMaker, _tileMapMaker);
     XCTAssertEqual(_target.objectCoordinator, _objectCoordinator);
     XCTAssertEqual(_target.textureManager, _textureManager);
-    
-    initLevelCount = 0;
-    backgroundNewXYCount = 0;
 }
 
 - (void)testCreatesColors {
@@ -150,7 +138,6 @@ static void initLevel() {
     XCTAssertEqual(loadingScene.levelNumber, 2);
     XCTAssertEqual(loadingScene.levelDescription, _level.levelDescription);
     XCTAssertEqual(loadingScene.sceneController, _target);
-
 }
 
 - (void)testCreatesNewLevels {
@@ -161,7 +148,7 @@ static void initLevel() {
 
 - (void)testGameSceneForLevel {
     const int level = 3;
-    DSLevel *levelObj = [[DSLevel alloc] initWithInitLevel:initLevel backgroundNewXY:backgroundNewXY];
+    DSLevel *levelObj = [[DSLevel alloc] init];
     levelObj.tilemapImagePath = @"../../tiles/mytile.png";
     levelObj.tilemapSize = DSPointMake(160, 64);
     levelObj.tilemapStart = DSPointMake(3, 7);
@@ -187,36 +174,16 @@ static void initLevel() {
     }).andReturn(node);
 
     DSGameScene *gameScene = [_target gameSceneForLevel:level];
-    XCTAssertEqual(gameScene.children.firstObject, node);
     XCTAssertEqual(gameScene.levelNumber, level);
     XCTAssertEqual(gameScene.joystickController, _joystickController);
-    XCTAssertEqual(initLevelCount, 1);
-    XCTAssertEqual(backgroundNewXYCount, 0);
-}
+    XCTAssertEqual(gameScene.levelObj, levelObj);
+    XCTAssertEqual(gameScene.resourceController, _resourceController);
+    XCTAssertEqual(gameScene.tileInfo, tileInfo);
+    XCTAssertEqual(gameScene.tileMapMaker, _tileMapMaker);
+    XCTAssertEqual(gameScene.bundle, _bundle);
+    XCTAssertEqual(gameScene.objectCoordinator, _objectCoordinator);
+    XCTAssertEqual(_target.textureManager, _textureManager);
 
-- (void)testGameSceneForLevelWithBadInputs {
-    const int level = 3;
-    DSLevel *levelObj = [[DSLevel alloc] initWithInitLevel:initLevel backgroundNewXY:backgroundNewXY];
-    levelObj.tilemapImagePath = @"../../tiles/mytile.png";
-    levelObj.tilemapSize = DSPointMake(161, 64);
-    levelObj.tilemapStart = DSPointMake(3, 7);
-    
-    OCMStub([_levelRegistry levelForIndex:level]).andReturn(levelObj);
-    OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"hires/tiles/mytile.png");
-    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
-    NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
-    OCMStub([_bundle pathForResource:@"hires/tiles/mytile" ofType:@"png"]).andReturn(imagePath);
-    NSRect tileMapRect = NSMakeRect(3, 7, 160, 64);
-    SKNode *node = [[SKNode alloc] init];
-    OCMStub([_tileMapMaker nodeFromImage:OCMArg.any withRect:tileMapRect usingTileImage:OCMArg.any withTileRect:tileMapRect]).andDo(^(NSInvocation *invocation) {
-        NSImage *loadedImage;
-        [invocation getArgument:(void *)&loadedImage atIndex:2];
-        XCTAssertTrue([DSTestUtils image:loadedImage isSameAsImage:image]);
-    }).andReturn(node);
-    
-    XCTAssertThrows([_target gameSceneForLevel:level]);
-    XCTAssertEqual(initLevelCount, 1);
-    XCTAssertEqual(backgroundNewXYCount, 0);
 }
 
 @end

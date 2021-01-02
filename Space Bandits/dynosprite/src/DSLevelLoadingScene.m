@@ -19,6 +19,14 @@
     return self;
 }
 
+- (SKAction *)lastAction {
+    return _lastAction;
+}
+
+- (void(^)(void)) lastActionCompletionHandler{
+    return _lastActionCompletionHandler;
+}
+
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
     self.isDone = NO;
@@ -53,13 +61,18 @@
         progressBar.position = CGPointMake(1, 1);
         [progressBarOutline addChild:progressBar];
         SKAction *loadingAction = [SKAction resizeToWidth:66 duration:1.0f];
-        [progressBar runAction:loadingAction completion:^{
-            DSGameScene *gameScene = [self.sceneController gameSceneForLevel:self.levelNumber];
+        
+        DSGameScene *gameScene = [self.sceneController gameSceneForLevel:self.levelNumber];
+        SKView *view = self.view;
+        _lastAction = loadingAction;
+        __weak DSLevelLoadingScene *weakSelf = self;
+        _lastActionCompletionHandler = ^{
             SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
-            [self.view presentScene:gameScene transition:transition];
-            self.isDone = YES;
-
-        }];
+            [view presentScene:gameScene transition:transition];
+            [gameScene initializeLevel];
+            weakSelf.isDone = YES;
+        };
+        [progressBar runAction:loadingAction completion:_lastActionCompletionHandler];
         [SKAction repeatAction:loadingAction count:1];
     }
 }

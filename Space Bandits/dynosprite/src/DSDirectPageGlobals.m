@@ -9,7 +9,8 @@
 #import "DSDirectPageGlobals.h"
 
 
-DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
+DynospriteDirectPageGlobals DynospriteGlobals;
+DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr = &DynospriteGlobals;
 static DSDirectPageGlobals *_sharedInstance;
 
 
@@ -17,13 +18,17 @@ static DSDirectPageGlobals *_sharedInstance;
 
 + (DSDirectPageGlobals *)sharedInstance {
     if (_sharedInstance == nil) {
-        _sharedInstance = [[DSDirectPageGlobals alloc] initWithGlobals:DynospriteDirectPageGlobalsPtr];
+        _sharedInstance = [[DSDirectPageGlobals alloc] initWithGlobals:&DynospriteGlobals];
     }
     return _sharedInstance;
 }
 
+- (id)init {
+    return [self initWithGlobals:&DynospriteGlobals];
+}
+
 - (id)initWithGlobals:(DynospriteDirectPageGlobals *)globals {
-    if (self = [self init]) {
+    if (self = [super init]) {
         self->_globals = globals;
     }
     return self;

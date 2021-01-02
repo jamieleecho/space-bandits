@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (DSDirectPageGlobals *)sharedInstance;
+- (id)init;
 - (id)initWithGlobals:(DynospriteDirectPageGlobals *)globals;
 - (DynospriteDirectPageGlobals *)globals;
 

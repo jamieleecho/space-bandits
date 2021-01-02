@@ -10,19 +10,34 @@
 #import "DSScene.h"
 #import "DSObjectCoordinator.h"
 #import "DSTextureManager.h"
+#import "DSTileInfo.h"
 #import "DSTileMapMaker.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSGameScene : DSScene {
-    DSLevel *_level;
+    DSLevel *_levelObj;
     DSObjectCoordinator *_coordinator;
-    SKTileMapNode *_tileMapNode;
     DSTextureManager *_textureManager;
-    
+    DSResourceController *_resourceController;
+    DSTileInfo *_tileInfo;
+    DSTileMapMaker *_tileMapMaker;
+    NSBundle *_bundle;
+    DSObjectCoordinator *_objectCoordinator;
+    SKTileMapNode *_tileMapNode;
 }
 
-- (id)initWithLevel:(DSLevel *)level andObjectCoordinator:(DSObjectCoordinator *)coordinator andTileMapNode:(SKTileMapNode *)tileMapNode andTextureManager:(DSTextureManager *)textureManager;
+- (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager;
+- (void)initializeLevel;
+
+- (DSLevel *)levelObj;
+- (DSResourceController *)resourceController;
+- (DSTileInfo *)tileInfo;
+- (DSTileMapMaker *)tileMapMaker;
+- (NSBundle *)bundle;
+- (DSObjectCoordinator *)objectCoordinator;
+- (DSObjectCoordinator *)coordinator;
+- (DSTextureManager *)textureManager;
 
 @end
 
