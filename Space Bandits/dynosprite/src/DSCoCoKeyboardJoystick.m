@@ -100,11 +100,17 @@ const static unsigned char JOYSTICK_AXIS_DEFAULT_POSITION = 31;
     return _button1Pressed;
 }
 
+- (BOOL)open {
+    return YES;
+}
+
 - (void)close {
 }
 
-- (BOOL)open {
-    return YES;
+- (void)reset {
+    _xAxisPosition = _yAxisPosition = JOYSTICK_AXIS_DEFAULT_POSITION;
+    _button0Pressed = _button1Pressed = NO;
+    _leftKeyIsPressed = _rightKeyIsPressed = _upKeyIsPressed = _downKeyIsPressed = NO;
 }
 
 - (unsigned char)xaxisPosition {

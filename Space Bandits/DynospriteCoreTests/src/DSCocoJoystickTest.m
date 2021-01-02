@@ -60,4 +60,8 @@
     XCTAssertFalse([_target readJoystickButton:1 withInitialPressed:false]);
 }
 
+- (void)testReset {
+    [_target reset];
+}
+
 @end

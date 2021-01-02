@@ -67,7 +67,7 @@
     // Initialize the globals
     DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr = _objectCoordinator.cobs;
     DynospriteDirectPageGlobalsPtr->Obj_NumCurrent = _objectCoordinator.count;
-    DynospriteDirectPageGlobalsPtr->Input_Buttons = 0;
+    DynospriteDirectPageGlobalsPtr->Input_Buttons = Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2;
     DynospriteDirectPageGlobalsPtr->Input_JoystickX = 0;
     DynospriteDirectPageGlobalsPtr->Input_JoystickY = 0;
     DynospriteDirectPageGlobalsPtr->Obj_MotionFactor = 0;
@@ -100,7 +100,10 @@
     // Create the background
     SKTileMapNode *tileMapNode = [_tileMapMaker nodeFromImage:mapImage withRect:mapImageRect usingTileImage:tileImage withTileRect:tileImageRect];
     [self addChild:tileMapNode];
-    tileMapNode.position = CGPointMake(-_levelObj.bkgrndStartX, _levelObj.bkgrndStartY);
+    SKCameraNode *camera = [[SKCameraNode alloc] init];
+    self.camera = camera;
+    [self addChild:camera];
+    camera.position = CGPointMake(_levelObj.bkgrndStartX + self.size.width / 2, -(float)_levelObj.bkgrndStartY - (float)self.size.height / 2);
     
     // Create the sprites
     NSMutableArray *sprites = [NSMutableArray arrayWithCapacity:_objectCoordinator.count];
@@ -111,6 +114,31 @@
         [_textureManager configureSprite:sprite forCob:_objectCoordinator.cobs + ii];
     }
     _sprites = sprites;
+    
+    [self.joystickController.joystick reset];
+}
+
+- (void)runOneGameLoop {
+    // Update the background
+    self.camera.position = CGPointMake(_levelObj.bkgrndStartX + self.size.width / 2, -(float)_levelObj.bkgrndStartY - (float)self.size.height / 2);
+
+    // Update all the sprites
+    byte newLevel = [_objectCoordinator updateOrReactivateObjects];
+    if (newLevel) {
+        return;
     }
+    for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
+        [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii];
+    }
+ 
+    DynospriteDirectPageGlobalsPtr->Input_JoystickX = self.joystickController.joystick.xaxisPosition;
+    DynospriteDirectPageGlobalsPtr->Input_JoystickY = self.joystickController.joystick.yaxisPosition;
+    DynospriteDirectPageGlobalsPtr->Input_Buttons = ((self.joystickController.joystick.button0Pressed ? 0 : Joy1Button1) | (self.joystickController.joystick.button1Pressed ? 0 : Joy1Button2)) | Joy2Button1 | Joy2Button2;
+}
+
+- (void)update:(NSTimeInterval)currentTime {
+    [super update:currentTime];
+    [self runOneGameLoop];
+}
 
 @end

@@ -116,7 +116,7 @@ static byte backgroundNewXY() {
     
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, [_objectCoordinator cobs]);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_NumCurrent, 3);
-    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, 0);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickX, 0);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 0);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_MotionFactor, 0);
@@ -124,14 +124,14 @@ static byte backgroundNewXY() {
     
     OCMVerify([_objectCoordinator initializeObjects]);
     
-    XCTAssertEqual(_target.children.count, 4);
+    XCTAssertEqual(_target.children.count, 5);
     XCTAssertEqual(_target.sprites.count, 3);
     OCMVerify([_textureManager configureSprite:_target.sprites[0] forCob:_cobs + 0]);
     OCMVerify([_textureManager configureSprite:_target.sprites[1] forCob:_cobs + 1]);
     OCMVerify([_textureManager configureSprite:_target.sprites[2] forCob:_cobs + 2]);
 
     // Does the background start at the right point?
-    XCTAssertTrue(CGPointEqualToPoint(_target.children.firstObject.position, CGPointMake(-100, 237)));
+    XCTAssertTrue(CGPointEqualToPoint(_target.camera.position, CGPointMake(260, -337)));
 }
 
 - (void)testInitializeLevelWithJoystick {

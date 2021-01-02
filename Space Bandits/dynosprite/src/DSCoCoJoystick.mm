@@ -86,6 +86,9 @@ static BOOL readJoystickButton(SDL_Joystick *joystick, int button) {
     return _joystick != NULL;
 }
 
+- (void)reset {
+}
+
 - (void)close {
     if (_joystick) {
         SDL_JoystickClose(_joystick);

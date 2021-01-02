@@ -176,4 +176,16 @@
     XCTAssertFalse(_target.button1Pressed);
 }
 
+- (void)testReset {
+    [self pressKey:@" " modifiedChars:@" "];
+    [self pressKey:@"x" modifiedChars:@"x"];
+    [self pressKey:@"\uf703" modifiedChars:@"\uf703"];
+    [self pressKey:@"\uf701" modifiedChars:@"\uf701"];
+    [_target reset];
+    XCTAssertEqual(31, _target.xaxisPosition);
+    XCTAssertEqual(31, _target.yaxisPosition);
+    XCTAssertFalse(_target.button0Pressed);
+    XCTAssertFalse(_target.button1Pressed);
+}
+
 @end

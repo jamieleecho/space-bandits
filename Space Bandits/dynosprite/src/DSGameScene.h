@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager;
 
 - (void)initializeLevel;
+- (void)runOneGameLoop;
 
 @end
 

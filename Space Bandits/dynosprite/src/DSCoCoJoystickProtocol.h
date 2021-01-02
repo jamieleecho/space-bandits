@@ -15,7 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 /** Must be called before using the joystick */
 - (BOOL)open;
 
-/** Clean up*/
+/** Reset joystick state */
+- (void)reset;
+
+/** Clean up */
 - (void)close;
 
 /** Current X-Axis position on [0, 63] */
