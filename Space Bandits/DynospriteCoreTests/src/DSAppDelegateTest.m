@@ -17,6 +17,7 @@
     id _configFileParser;
     id _sceneController;
     id _assetLoader;
+    id _soundManager;
 }
 @end
 
@@ -31,6 +32,8 @@
     _target.sceneController = _sceneController;
     _assetLoader = OCMClassMock(DSAssetLoader.class);
     _target.assetLoader = _assetLoader;
+    _soundManager = OCMClassMock(DSSoundManager.class);
+    _target.soundManager = _soundManager;
 }
 
 - (void)testConfigFileParser {
@@ -50,7 +53,10 @@
     OCMVerify([(DSAssetLoader *)_assetLoader loadTransitionSceneImages]);
     OCMVerify([(DSAssetLoader *)_assetLoader loadTileSets]);
     OCMVerify([(DSAssetLoader *)_assetLoader loadSprites]);
+    OCMVerify([(DSAssetLoader *)_assetLoader loadSounds]);
     OCMVerifyAll(_assetLoader);
+    
+    XCTAssertEqual(DSSoundManager.sharedInstance, _soundManager);
 }
 
 - (void)testApplicationShouldTerminateAfterLastWindowClosed {

@@ -80,8 +80,8 @@
     XCTAssertEqual(sprite.position.x, _cob.globalX);
     XCTAssertEqual(sprite.position.y, -(float)_cob.globalY);
     XCTAssertEqual(sprite.hidden, NO);
-    XCTAssert(fabs(sprite.anchorPoint.x - 0.913043478261) < 0.00001);
-    XCTAssert(fabs(sprite.anchorPoint.y - 0.392857142857) < 0.00001);
+    XCTAssert(fabs(sprite.anchorPoint.x - 0.086956521739130432) < 0.00001);
+    XCTAssert(fabs(sprite.anchorPoint.y - 0.39285714285714285) < 0.00001);
     NSImage *spriteImage = [DSTestUtils convertToNSImage:sprite.texture.CGImage];
     NSImage *shipImage = [[NSBundle bundleForClass:self.class] imageForResource:@"ship.tiff"];
     XCTAssertTrue([DSTestUtils image:spriteImage isSameAsImage:shipImage]);

@@ -12,6 +12,7 @@
 #import "DSLevelFileParser.h"
 #import "DSAssetLoader.h"
 #import "DSSceneController.h"
+#import "DSSoundManager.h"
 
 
 @interface DSAppDelegate : NSObject <NSApplicationDelegate>
@@ -19,6 +20,7 @@
 @property (nonatomic, nonnull) IBOutlet DSConfigFileParser *configFileParser;
 @property (nonatomic, nonnull) IBOutlet DSAssetLoader *assetLoader;
 @property (nonatomic, nonnull) IBOutlet DSSceneController *sceneController;
+@property (nonatomic, nonnull) IBOutlet DSSoundManager *soundManager;
 
 - (void)awakeFromNib;
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *_Null_unspecified)sender;

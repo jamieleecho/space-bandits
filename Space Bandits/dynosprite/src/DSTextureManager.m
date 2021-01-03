@@ -44,8 +44,8 @@
         CGRect rect = DSImageUtilFindSpritePixels(imageInfo, spriteInfo.name, CGPointMake(spriteInfo.location.x, spriteInfo.location.y));
         CGRect convertedRect = CGRectMake(rect.origin.x / imageInfo.width, 1.0f - (rect.origin.y + rect.size.height) / imageInfo.height, rect.size.width / imageInfo.width, rect.size.height / imageInfo.height);
         SKTexture *spriteTexture = [SKTexture textureWithRect:convertedRect inTexture:mainTexture];
-        CGFloat offsetX = (rect.origin.x + rect.size.width - spriteInfo.location.x) / rect.size.width;
-        CGFloat offsetY = (rect.origin.y + rect.size.height - spriteInfo.location.y) / rect.size.height;
+        CGFloat offsetX = (spriteInfo.location.x - rect.origin.x) / rect.size.width;
+        CGFloat offsetY = (rect.size.height - (spriteInfo.location.y - rect.origin.y)) / rect.size.height;
         DSTexture *texture = [[DSTexture alloc] initWithTexture:spriteTexture andPoint:CGPointMake(offsetX, offsetY)];
         [textures addObject:texture];
     }

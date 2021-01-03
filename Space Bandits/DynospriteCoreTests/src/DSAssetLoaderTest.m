@@ -18,6 +18,7 @@
     id _imageLoader;
     id _levelRegistry;
     id _levelParser;
+    id _soundManager;
     id _spriteClassObjectFactory;
     id _objectParser;
     id _resourceController;
@@ -37,6 +38,7 @@
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     XCTAssertNil(_target.levelFileParser);
     XCTAssertNil(_target.imageLoader);
+    XCTAssertNil(_target.soundManager);
     XCTAssertNil(_target.spriteObjectClassFactory);
     XCTAssertNil(_target.objectParser);
     XCTAssertNil(_target.resourceController);
@@ -46,6 +48,7 @@
     _imageLoader = OCMClassMock(DSTransitionImageLoader.class);
     _levelParser = OCMClassMock(DSLevelFileParser.class);
     _levelRegistry = OCMClassMock(DSLevelRegistry.class);
+    _soundManager = OCMClassMock(DSSoundManager.class);
     _spriteClassObjectFactory = OCMClassMock(DSSpriteObjectClassFactory.class);
     _objectParser = OCMClassMock(DSSpriteFileParser.class);
     _sceneInfos = [NSMutableArray array];
@@ -56,6 +59,7 @@
     _target.bundle = _bundle;
     _target.imageLoader = _imageLoader;
     _target.levelFileParser = _levelParser;
+    _target.soundManager = _soundManager;
     _target.spriteObjectClassFactory = _spriteClassObjectFactory;
     _target.objectParser = _objectParser;
     _target.registry = _levelRegistry;
@@ -69,6 +73,7 @@
     XCTAssertEqual(_target.bundle, _bundle);
     XCTAssertEqual(_target.imageLoader, _imageLoader);
     XCTAssertEqual(_target.levelFileParser, _levelParser);
+    XCTAssertEqual(_target.soundManager, _soundManager);
     XCTAssertEqual(_target.spriteObjectClassFactory, _spriteClassObjectFactory);
     XCTAssertEqual(_target.objectParser, _objectParser);
     XCTAssertEqual(_target.registry, _levelRegistry);
@@ -286,6 +291,19 @@
     OCMStub([_bundle pathsForResourcesOfType:@"json" inDirectory:@"tiles"]).andReturn(paths);
     OCMStub([_tileInfoRegistry addTileInfoFromFile:paths[0] forNumber:2]).andDo(^(NSInvocation *invocation) { @throw [NSException exceptionWithName:@"oops" reason:nil userInfo:nil]; });
     XCTAssertThrows([_target loadTileSets]);
+}
+
+- (void)testLoadSounds {
+    NSArray<NSString *> *paths = @[
+        @"Resources/levels/02-bar.wav",
+        @"Resources/levels/01-foo.wav",
+        @"Resources/levels/03-baz.wav"
+    ];
+    OCMStub([_bundle pathsForResourcesOfType:@"wav" inDirectory:@"sounds"]).andReturn(paths);
+    [_target loadSounds];
+    OCMVerify([_soundManager addSound:@"sounds/01-foo.wav" forId:1]);
+    OCMVerify([_soundManager addSound:@"sounds/02-bar.wav" forId:2]);
+    OCMVerify([_soundManager addSound:@"sounds/03-baz.wav" forId:3]);
 }
 
 - (void)testLoadSceneInfos {

@@ -52,6 +52,37 @@
     }
 }
 
+- (void)loadSounds {
+    NSError *error;
+    NSRegularExpression *soundFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.wav$" options:NSRegularExpressionCaseInsensitive error:&error];
+
+    // Make sure the files in paths specify valid filenames
+    NSArray<NSString *> *paths = [self.bundle pathsForResourcesOfType:@"wav" inDirectory:@"sounds"];
+    NSMutableDictionary<NSNumber *, NSString *> *soundIdToPath = [NSMutableDictionary dictionary];
+    for(NSString *path in paths) {
+        // Ignore random files
+        if (![path.pathExtension isEqualToString:@"wav"]) {
+            continue;
+        }
+        
+        // Make sure the paths are in the right format
+        NSCAssert([soundFilenameRegex numberOfMatchesInString:path.lastPathComponent options:0 range:NSMakeRange(0, path.lastPathComponent.length)] == 1, ([NSString stringWithFormat:@"Unexpected sound filename %@", path.lastPathComponent]));
+        NSTextCheckingResult *result = [soundFilenameRegex firstMatchInString:path.lastPathComponent options:0 range:NSMakeRange(0, path.lastPathComponent.length)];
+
+        // Make sure there are no duplicates
+        int soundSetNumber = [path.lastPathComponent substringWithRange:[result rangeAtIndex:1]].intValue;
+        NSCAssert([soundIdToPath objectForKey:[NSNumber numberWithInt:soundSetNumber]] == nil, ([NSString stringWithFormat:@"Multiple sound files found for ID %d", soundSetNumber]));
+        soundIdToPath[[NSNumber numberWithInt:soundSetNumber]] = path;
+    }
+    
+    // Load all of the files
+    for(NSNumber *soundId in soundIdToPath) {
+        NSString *fullPath = soundIdToPath[soundId];
+        NSString *partialPath = [NSString stringWithFormat:@"%@/%@", @"sounds", fullPath.lastPathComponent];
+        [_soundManager addSound:partialPath forId:soundId.longValue];
+    }
+}
+
 - (void)loadSprites {
     NSError *error;
     NSRegularExpression *spriteFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.json$" options:NSRegularExpressionCaseInsensitive error:&error];
