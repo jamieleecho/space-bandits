@@ -41,6 +41,9 @@
             odt->initSize = classData.initSize;
             odt->reactivate = classData.reactivateMethod;
             odt->update = classData.updateMethod;
+            
+            // initialize the class
+            classData.classInitMethod();
         }
 
         // Allocate object instances

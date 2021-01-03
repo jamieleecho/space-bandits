@@ -73,7 +73,6 @@
             weakSelf.isDone = YES;
         };
         [progressBar runAction:loadingAction completion:_lastActionCompletionHandler];
-        [SKAction repeatAction:loadingAction count:1];
     }
 }
 

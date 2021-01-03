@@ -93,6 +93,7 @@ static NSString *MenuSoundLow = @"LoFi";
     SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
     DSTransitionScene *transitionScene = [self.sceneController transitionSceneForLevel:1];
     [self.view presentScene:transitionScene transition:transition];
+    [self.soundManager loadCache];
     self.isDone = YES;
 }
 
@@ -134,7 +135,7 @@ static NSString *MenuSoundLow = @"LoFi";
     _controlLabelNode.text = [DSInitScene textFromControl:_control];
     _soundLabelNode.text = [DSInitScene textFromSound:_sound];
     self.joystickController.useHardwareJoystick = (_control == DSInitSceneControlJoystick);
-    self.resourceController.hifiMode = (_sound == DSInitSceneDisplayHigh);
+    self.resourceController.hifiMode = (_sound == DSInitSceneSoundHigh);
     self.resourceController.hiresMode = (_resolution == DSInitSceneDisplayHigh);
 }
 

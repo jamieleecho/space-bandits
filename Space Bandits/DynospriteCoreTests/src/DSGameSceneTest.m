@@ -9,7 +9,9 @@
 #import <OCMock/OCMock.h>
 #import <XCTest/XCTest.h>
 #import "DSCoCoJoystickController.h"
+#import "DSInitScene.h"
 #import "DSGameScene.h"
+#import "DSSceneController.h"
 #import "DSTestUtils.h"
 
 
@@ -24,6 +26,7 @@
     id _objectCoordinator;
     DynospriteCOB _cobs[5];
     id _textureManager;
+    id _sceneController;
     SKNode *_node;
 }
 
@@ -51,7 +54,8 @@ static byte backgroundNewXY() {
     _joystickController = OCMClassMock(DSCoCoJoystickController.class);
     _objectCoordinator = OCMClassMock(DSObjectCoordinator.class);
     _textureManager = OCMClassMock(DSTextureManager.class);
-    _target = [[DSGameScene alloc] initWithLevel:_levelObj andResourceController:_resourceController andTileInfo:_tileInfo andTileMapMaker:_tileMapMaker andBundle:_bundle andObjectCoordinator:_objectCoordinator andTextureManager:_textureManager];
+    _sceneController = OCMClassMock(DSSceneController.class);
+    _target = [[DSGameScene alloc] initWithLevel:_levelObj andResourceController:_resourceController andTileInfo:_tileInfo andTileMapMaker:_tileMapMaker andBundle:_bundle andObjectCoordinator:_objectCoordinator andTextureManager:_textureManager andSceneController:_sceneController];
     _target.joystickController = _joystickController;
     _node = [[SKNode alloc] init];
     
@@ -191,6 +195,28 @@ static byte backgroundNewXY() {
     }
 }
 
+- (void) testRunOneGameLoopTransitionToInit {
+    [self commonInit];
+    [_target initializeLevel];
+    SKScene *scene = [[SKScene alloc] init];
+    OCMStub([_sceneController transitionSceneForLevel:0]).andReturn(scene);
+    OCMStub([_objectCoordinator updateOrReactivateObjects]).andReturn(255);
+    [_target runOneGameLoop];
+    OCMVerify([_sceneController transitionSceneForLevel:0]);
+    XCTAssertTrue(_target.isDone);
+}
+
+- (void) testRunOneGameLoopTransitionToNewScene {
+    [self commonInit];
+    [_target initializeLevel];
+    SKScene *scene = [[SKScene alloc] init];
+    OCMStub([_sceneController transitionSceneForLevel:3]).andReturn(scene);
+    OCMStub([_objectCoordinator updateOrReactivateObjects]).andReturn(3);
+    [_target runOneGameLoop];
+    OCMVerify([_sceneController transitionSceneForLevel:3]);
+    XCTAssertTrue(_target.isDone);
+}
+
 - (void)testRunOneGameLoopButton0Pressed {
     [self commonInit];
     OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
@@ -215,6 +241,33 @@ static byte backgroundNewXY() {
     OCMStub([joystick button1Pressed]).andReturn(YES);
     [_target runOneGameLoop];
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy2Button1 | Joy2Button2);
+}
+
+- (void)testUpdate {
+    [self commonInit];
+    OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
+    id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
+    [_target initializeLevel];
+    
+    OCMStub([_joystickController joystick]).andReturn(joystick);
+    OCMStub([joystick button0Pressed]).andReturn(YES);
+    OCMStub([joystick button1Pressed]).andReturn(NO);
+    [_target update:1];
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button2 | Joy2Button1 | Joy2Button2);
+}
+
+- (void)testUpdateWhenPaused {
+    [self commonInit];
+    OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
+    id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
+    [_target initializeLevel];
+    
+    _target.isPaused = YES;
+    OCMStub([_joystickController joystick]).andReturn(joystick);
+    OCMStub([joystick button0Pressed]).andReturn(YES);
+    OCMStub([joystick button1Pressed]).andReturn(NO);
+    [_target update:1];
+    XCTAssertNotEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button2 | Joy2Button1 | Joy2Button2);
 }
 
 @end

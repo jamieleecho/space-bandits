@@ -27,8 +27,9 @@ enum DSInitSceneLabelIndices : short {
 @interface DSInitSceneTest : XCTestCase {
     DSInitScene *_target;
     SKView *_view;
-    id _resourceController;
     id _joystickController;
+    id _resourceController;
+    id _soundManager;
 }
 @end
 
@@ -36,8 +37,9 @@ enum DSInitSceneLabelIndices : short {
 
 - (void)setUp {
     _target = [[DSInitScene alloc] init];
-    _resourceController = OCMClassMock(DSResourceController.class);
     _joystickController = OCMClassMock(DSCoCoJoystickController.class);
+    _resourceController = OCMClassMock(DSResourceController.class);
+    _soundManager = OCMClassMock(DSSoundManager.class);
     _target.resourceController = _resourceController;
     _target.joystickController = _joystickController;
     _view = OCMClassMock(SKView.class);
@@ -46,6 +48,7 @@ enum DSInitSceneLabelIndices : short {
     NSString *resourceImagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
     OCMStub([_resourceController imageWithName:@"Images/00-mainmenu.png"]).andReturn(resourceImagePath);
     [_target didMoveToView:_view];
+    _target.soundManager = _soundManager;
 }
 
 - (void)testTextFromResolution {
@@ -166,6 +169,7 @@ enum DSInitSceneLabelIndices : short {
 
 - (void)testTransitionToNextScene {
     [_target transitionToNextScreen];
+    OCMVerify([_soundManager loadCache]);
     XCTAssertTrue(_target.isDone);
 }
 

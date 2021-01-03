@@ -16,6 +16,15 @@
 
 - (void)keyUp:(NSEvent *)theEvent {
     [self.joystickController handleKeyUp:theEvent];
+    NSString *chars = [theEvent charactersIgnoringModifiers];
+    for(NSUInteger ii=0; ii != chars.length; ii++) {
+        const unichar keyChar = [chars characterAtIndex:ii];
+        switch (keyChar) {
+            case 'p':
+                self.isPaused = !self.isPaused;
+                break;
+        }
+    }
 }
 
 - (void)didMoveToView:(SKView *)view {

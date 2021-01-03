@@ -18,6 +18,13 @@ DynospriteCOB *badGuys[NUM_BAD_GUYS];
 DynospriteCOB **endBadGuys;
 
 
+#ifdef __APPLE__
+void MissileClassInit() {
+    didNotInit = TRUE;
+}
+#endif
+
+
 void MissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
@@ -73,7 +80,7 @@ byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(MissileInit, 0, MissileReactivate, MissileUpdate, sizeof(MissileObjectState));
+RegisterObject(MissileClassInit, MissileInit, 0, MissileReactivate, MissileUpdate, sizeof(MissileObjectState));
 
 
 #ifdef __cplusplus

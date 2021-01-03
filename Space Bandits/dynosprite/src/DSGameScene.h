@@ -15,6 +15,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class DSSceneController;
+
 @interface DSGameScene : DSScene {
     DSLevel *_levelObj;
     DSObjectCoordinator *_coordinator;
@@ -26,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
     DSObjectCoordinator *_objectCoordinator;
     SKTileMapNode *_tileMapNode;
     NSArray<SKSpriteNode *> *_sprites;
+    DSSceneController *_sceneController;
 }
 
 - (DSLevel *)levelObj;
@@ -38,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (DSTextureManager *)textureManager;
 - (NSArray <SKSpriteNode *> *)sprites;
 
-- (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager;
+- (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager andSceneController:(DSSceneController *)sceneController;
 
 - (void)initializeLevel;
 - (void)runOneGameLoop;

@@ -88,7 +88,7 @@ const static unsigned char JOYSTICK_AXIS_DEFAULT_POSITION = 31;
                 _button1Pressed = NO;
                 break;
         }
-    };
+    }
 }
 
 

@@ -10,6 +10,13 @@ static byte didNotInit = TRUE;
 DynospriteCOB *missiles[3];
 
 
+#ifdef __APPLE__
+void ShipClassInit() {
+    didNotInit = TRUE;
+}
+#endif
+
+
 /**
  * @return a missile or NULL if no missile is available.
  */
@@ -96,7 +103,7 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(ShipInit, 0, ShipReactivate, ShipUpdate, sizeof(ShipObjectState));
+RegisterObject(ShipClassInit, ShipInit, 0, ShipReactivate, ShipUpdate, sizeof(ShipObjectState));
 
 #ifdef __cplusplus
 }

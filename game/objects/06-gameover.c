@@ -6,6 +6,12 @@ extern "C" {
 #include "06-gameover.h"
 
 
+#ifdef __APPLE__
+void GameoverClassInit() {
+}
+#endif
+
+
 void GameoverInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   GameOverObjectState *statePtr = (GameOverObjectState *)(cob->statePtr);
   statePtr->spriteIdx = 0;
@@ -22,7 +28,7 @@ byte GameoverUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(GameoverInit, 0, GameoverReactivate, GameoverUpdate, sizeof(GameOverObjectState));
+RegisterObject(GameoverClassInit, GameoverInit, 0, GameoverReactivate, GameoverUpdate, sizeof(GameOverObjectState));
 
 #ifdef __cplusplus
 }

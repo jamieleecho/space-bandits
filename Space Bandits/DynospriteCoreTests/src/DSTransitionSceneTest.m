@@ -21,6 +21,7 @@
     DSCoCoJoystickController *_joystickController;
     DSResourceController *_resourceController;
     DSSceneController *_sceneController;
+    DSSoundManager *_soundManager;
 }
 @end
 
@@ -31,11 +32,14 @@
     _joystickController = OCMClassMock(DSCoCoJoystickController.class);
     _resourceController = OCMClassMock(DSResourceController.class);
     _sceneController = OCMClassMock(DSSceneController.class);
+    _soundManager = OCMClassMock(DSSoundManager.class);
     XCTAssertNil(_target.resourceController);
     XCTAssertNil(_target.joystickController);
     XCTAssertNil(_target.sceneController);
+    XCTAssertNil(_target.soundManager);
     _target.resourceController = _resourceController;
     _target.sceneController = _sceneController;
+    _target.soundManager = _soundManager;
 }
 
 - (void)testInit {

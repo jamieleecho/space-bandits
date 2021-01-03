@@ -35,7 +35,7 @@
     transitionScene.progressBarColor = self.sceneInfos[level].progressColor;
     transitionScene.backgroundImageName = [self.resourceController imageWithName:self.sceneInfos[level].backgroundImageName];
     transitionScene.levelNumber = level;
-    
+    transitionScene.soundManager = self.soundManager;
     transitionScene.sceneController = self;
     if (level != 0) {
         DSLevelLoadingScene *levelLoadingScene = (DSLevelLoadingScene *)transitionScene;
@@ -51,7 +51,7 @@
     DSLevel *levelObj = [self.levelRegistry levelForIndex:level];
     DSTileInfo *tileInfo = [self.tileInfoRegistry tileInfoForNumber:levelObj.tilesetIndex];
     DSObjectCoordinator *coordinator = [[DSObjectCoordinator alloc] initWithLevel:levelObj andClassRegistry:self.classRegistry];
-    DSGameScene *gameScene = [[DSGameScene alloc] initWithLevel:levelObj andResourceController:self.resourceController andTileInfo:tileInfo andTileMapMaker:self.tileMapMaker andBundle:self.bundle andObjectCoordinator:coordinator andTextureManager:self.textureManager];
+    DSGameScene *gameScene = [[DSGameScene alloc] initWithLevel:levelObj andResourceController:self.resourceController andTileInfo:tileInfo andTileMapMaker:self.tileMapMaker andBundle:self.bundle andObjectCoordinator:coordinator andTextureManager:self.textureManager andSceneController:self];
     gameScene.joystickController = self.joystickController;
     gameScene.levelNumber = level;
     

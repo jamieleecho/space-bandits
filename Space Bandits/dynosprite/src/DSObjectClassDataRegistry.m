@@ -11,7 +11,7 @@
 static DSObjectClassDataRegistry *_sharedInstance = nil;
 
 
-int DSObjectClassDataRegistryRegisterClassData(void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path) {
+int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path) {
     NSError *error;
     NSRegularExpression *spriteFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.c$" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *nspath = [NSString stringWithUTF8String:path];
@@ -21,6 +21,7 @@ int DSObjectClassDataRegistryRegisterClassData(void(*initMethod)(DynospriteCOB *
     NSNumber *index = [NSNumber numberWithInt:[[nspath.lastPathComponent substringWithRange:[result rangeAtIndex:1]] intValue]];
 
     DSObjectClassData *methods = [[DSObjectClassData alloc] init];
+    methods.classInitMethod = classInitMethod;
     methods.initMethod = initMethod;
     methods.initSize = initSize;
     methods.reactivateMethod = reactivateMethod;

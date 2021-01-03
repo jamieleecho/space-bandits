@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) DSCoCoJoystickController *joystickController;
 @property (nonatomic) BOOL isDone;
 @property (nonatomic) int levelNumber;
+@property (nonatomic) BOOL isPaused;
 
 - (void)keyDown:(NSEvent *)theEvent;
 - (void)keyUp:(NSEvent *)theEvent;

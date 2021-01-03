@@ -67,6 +67,13 @@ const float DefaultFontSize = 12.0f;
     return self;
 }
 
+- (void)dealloc {
+    [self.resourceController removeObserver:self forKeyPath:@"hiresMode"];
+    [self removeObserver:self forKeyPath:@"resourceController"];
+    [self removeObserver:self forKeyPath:@"backgroundColor"];
+    [self removeObserver:self forKeyPath:@"foregroundColor"];
+}
+
 - (SKLabelNode *)addLabelWithText:(NSString *)labelText atPosition:(CGPoint)position {
     SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:_resourceController.fontForDisplay];
     label.text = labelText;

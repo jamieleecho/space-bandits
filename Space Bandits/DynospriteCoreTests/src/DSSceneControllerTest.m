@@ -25,6 +25,7 @@
     id _joystickController;
     id _levelRegistry;
     id _resourceController;
+    id _soundManager;
     id _tileInfoRegistry;
     id _tileMapMaker;
     id _transitionSceneController;
@@ -58,6 +59,7 @@
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     XCTAssertNil(_target.joystickController);
     XCTAssertNil(_target.resourceController);
+    XCTAssertNil(_target.soundManager);
     XCTAssertNil(_target.tileInfoRegistry);
     XCTAssertNil(_target.tileMapMaker);
     XCTAssertNil(_target.textureManager);
@@ -91,6 +93,7 @@
     _joystickController = OCMClassMock(DSCoCoJoystickController.class);
     _levelRegistry = OCMClassMock(DSLevelRegistry.class);
     _resourceController = OCMClassMock(DSResourceController.class);
+    _soundManager = OCMClassMock(DSSoundManager.class);
     _tileInfoRegistry = OCMClassMock(DSTileInfoRegistry.class);
     _tileMapMaker = OCMClassMock(DSTileMapMaker.class);
     _textureManager = OCMClassMock(DSTextureManager.class);
@@ -100,6 +103,7 @@
     _target.joystickController = _joystickController;
     _target.levelRegistry = _levelRegistry;
     _target.resourceController = _resourceController;
+    _target.soundManager = _soundManager;
     _target.tileInfoRegistry = _tileInfoRegistry;
     _target.tileMapMaker = _tileMapMaker;
     _target.textureManager = _textureManager;
@@ -109,6 +113,7 @@
     XCTAssertEqual(_target.joystickController, _joystickController);
     XCTAssertEqual(_target.levelRegistry, _levelRegistry);
     XCTAssertEqual(_target.resourceController, _resourceController);
+    XCTAssertEqual(_target.soundManager, _soundManager);
     XCTAssertEqual(_target.tileInfoRegistry, _tileInfoRegistry);
     XCTAssertEqual(_target.tileMapMaker, _tileMapMaker);
     XCTAssertEqual(_target.textureManager, _textureManager);
@@ -137,6 +142,7 @@
     XCTAssertEqual(loadingScene.levelName, _level.name);
     XCTAssertEqual(loadingScene.levelNumber, 2);
     XCTAssertEqual(loadingScene.levelDescription, _level.levelDescription);
+    XCTAssertEqual(loadingScene.soundManager, _target.soundManager);
     XCTAssertEqual(loadingScene.sceneController, _target);
 }
 

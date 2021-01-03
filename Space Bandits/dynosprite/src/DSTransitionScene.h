@@ -11,6 +11,7 @@
 #import "DSResourceController.h"
 #import "DSScene.h"
 #import "DSSceneControllerProtocol.h"
+#import "DSSoundManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSColor *progressBarColor;
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
 @property (strong, nonatomic) DSResourceController *resourceController;
+@property (strong, nonatomic) DSSoundManager *soundManager;
 @property (nonatomic) id<DSSceneControllerProtocol> sceneController;
 
 - (id)init;

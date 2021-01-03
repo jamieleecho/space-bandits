@@ -26,9 +26,11 @@ typedef struct Group3State {
 
 
 static const size_t maxNumCalls = 10;
+static size_t numClassInit2Calls = 0;
 static size_t numInitialize2Calls = 0;
 static size_t numReactivate2Calls = 0;
 static size_t numUpdate2Calls = 0;
+static size_t numClassInit3Calls = 0;
 static size_t numInitialize3Calls = 0;
 static size_t numReactivate3Calls = 0;
 static size_t numUpdate3Calls = 0;
@@ -38,6 +40,10 @@ static DynospriteCOB *param1[maxNumCalls];
 static DynospriteODT *param2[maxNumCalls];
 static byte *param3[maxNumCalls];
 
+
+static void classInit2() {
+    numClassInit2Calls++;
+}
 
 static void initializeObj2(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     param1[numInitialize2Calls + numInitialize3Calls] = cob;
@@ -58,6 +64,10 @@ static byte updateObj2(DynospriteCOB *cob, DynospriteODT *odt) {
     param2[numReactivate2Calls + numUpdate2Calls + numReactivate3Calls + numUpdate3Calls] = odt;
     numUpdate2Calls++;
     return 0;
+}
+
+static void classInit3() {
+    numClassInit3Calls++;
 }
 
 static void initializeObj3(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
@@ -85,9 +95,11 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
 @implementation DSObjectCoordinatorTest
 
 - (void)setUp {
+    numClassInit2Calls = 0;
     numInitialize2Calls = 0;
     numReactivate2Calls = 0;
     numUpdate2Calls = 0;
+    numClassInit2Calls = 0;
     numInitialize3Calls = 0;
     numReactivate3Calls = 0;
     numUpdate3Calls = 0;
@@ -120,6 +132,7 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     obj3.initialGlobalY = 252;
 
     DSObjectClassData *classData2 = [[DSObjectClassData alloc] init];
+    classData2.classInitMethod = classInit2;
     classData2.initMethod = initializeObj2;
     classData2.initSize = 2;
     classData2.stateSize = 1;
@@ -127,6 +140,7 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     classData2.updateMethod = updateObj2;
 
     DSObjectClassData *classData3 = [[DSObjectClassData alloc] init];
+    classData3.classInitMethod = classInit3;
     classData3.initMethod = initializeObj3;
     classData3.initSize = 0;
     classData3.stateSize = 1;
@@ -147,7 +161,9 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     XCTAssertEqual(_target.level, _level);
     XCTAssertEqual(_target.classRegistry, _classRegistry);
     XCTAssertEqual(_target.count, 3);
-    
+    XCTAssertEqual(numClassInit2Calls, 1);
+    XCTAssertEqual(numClassInit2Calls, 1);
+
     // Check odts
     XCTAssertEqual(_target.odts[2].initSize, 2);
     XCTAssertEqual(_target.odts[2].drawType, 1);

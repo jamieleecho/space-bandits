@@ -7,6 +7,9 @@
 //
 
 #import "DSGameScene.h"
+#import "DSSceneController.h"
+#import "DSInitScene.h"
+#import "DSTransitionScene.h"
 
 @implementation DSGameScene
 
@@ -46,7 +49,7 @@
     return _sprites;
 }
 
-- (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager {
+- (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager andSceneController:(DSSceneController *)sceneController {
     if (self = [super init]) {
         self.size = CGSizeMake(320, 200);
         self.anchorPoint = CGPointMake(0, 1);
@@ -57,6 +60,7 @@
         _bundle = bundle;
         _objectCoordinator = coordinator;
         _textureManager = textureManager;
+        _sceneController = sceneController;
         _sprites = @[];
     }
     
@@ -125,6 +129,11 @@
     // Update all the sprites
     byte newLevel = [_objectCoordinator updateOrReactivateObjects];
     if (newLevel) {
+        SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
+        DSTransitionScene *transitionScene = [_sceneController transitionSceneForLevel:(newLevel & 128) ? 0 : newLevel];
+        self.isDone = YES;
+        [self.view presentScene:transitionScene transition:transition];
+        
         return;
     }
     for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
@@ -138,7 +147,10 @@
 
 - (void)update:(NSTimeInterval)currentTime {
     [super update:currentTime];
-    [self runOneGameLoop];
+    
+    if (!self.isPaused) {
+        [self runOneGameLoop];
+    }
 }
 
 @end

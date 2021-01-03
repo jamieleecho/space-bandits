@@ -55,6 +55,7 @@ int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const c
 
 /**
   * Registers the given level into the shared registry.
+ * @param classInitMethod method used to initialize the class
  * @param initMethod method used to initialize the object
  * @param reactivateMethod function used to reinitialize the object
  * @param updateMethod function used to update the method on each cycle
@@ -62,11 +63,11 @@ int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const c
   * @param path location of the object
   * @return some value
  */
-int DSObjectClassDataRegistryRegisterClassData(void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path);
+int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path);
 
 
 #define RegisterLevel(init, calcuateBackgroundNewXY) static int levelInit = DSLevelRegistryRegister(init, calcuateBackgroundNewXY, __FILE__)
-#define RegisterObject(init, initSize, reactivate, update, stateSize) static int objectInit = DSObjectClassDataRegistryRegisterClassData(init, initSize, reactivate, update, stateSize, __FILE__)
+#define RegisterObject(classInit, init, initSize, reactivate, update, stateSize) static int objectInit = DSObjectClassDataRegistryRegisterClassData(classInit, init, initSize, reactivate, update, stateSize, __FILE__)
 
 extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
 

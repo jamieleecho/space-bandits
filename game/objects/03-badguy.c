@@ -62,6 +62,18 @@ byte missileFireColumns[] = {
 };
 
 
+#ifdef __APPLE__
+void BadguyClassInit() {
+    didInit = FALSE;
+    lastCob = 0x0;
+    numInvaders = 0;
+    deltaY = 0;
+    currentMissileFireColumnIndex = 0;
+    directionMode = DirectionModeRight;
+}
+#endif
+
+
 void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (!didInit) {
     didInit = TRUE;
@@ -169,7 +181,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
   cob->globalY += deltaY;
   if (cob->globalY > MAX_Y) {
     cob->globalY = MAX_Y;
-    return LEVEL_1;
+    return -1;
   }
 
   byte delta = (TOP_SPEED - (numInvaders >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
@@ -191,7 +203,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(BadguyInit, 1, BadguyReactivate, BadguyUpdate, sizeof(BadGuyObjectState));
+RegisterObject(BadguyClassInit, BadguyInit, 1, BadguyReactivate, BadguyUpdate, sizeof(BadGuyObjectState));
 
 #ifdef __cplusplus
 }

@@ -714,6 +714,7 @@
                         <outlet property="joystickController" destination="Nki-Dk-Bhg" id="jc7-yr-SqC"/>
                         <outlet property="resourceController" destination="web-E3-IMn" id="yl9-le-aDQ"/>
                         <outlet property="sceneInfos" destination="jjS-RJ-pne" id="qHo-jV-m0F"/>
+                        <outlet property="soundManager" destination="2cP-OL-euM" id="bp6-FP-tGz"/>
                         <outlet property="textureManager" destination="jjJ-YM-pJl" id="H4c-1v-u1u"/>
                         <outlet property="tileInfoRegistry" destination="8lv-su-4yx" id="mAw-iu-dc6"/>
                         <outlet property="tileMapMaker" destination="zlV-f7-gSm" id="DpJ-UM-LB6"/>

@@ -16,6 +16,13 @@ extern "C" {
 static byte didNotInit = TRUE;
 
 
+#ifdef __APPLE__
+void BadmissileClassInit() {
+    didNotInit = TRUE;
+}
+#endif
+
+
 void BadmissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
   if (didNotInit) {
     didNotInit = FALSE;
@@ -41,7 +48,7 @@ byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(BadmissileInit, 0, BadmissileReactivate, BadmissileUpdate, sizeof(BadMissleObjectState));
+RegisterObject(BadmissileClassInit, BadmissileInit, 0, BadmissileReactivate, BadmissileUpdate, sizeof(BadMissleObjectState));
 
 #ifdef __cplusplus
 }
