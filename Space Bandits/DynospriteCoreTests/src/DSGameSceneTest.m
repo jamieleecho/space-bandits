@@ -164,4 +164,57 @@ static byte backgroundNewXY() {
     XCTAssertEqual(backgroundNewXYCount, 0);
 }
 
+- (void) testRunOneGameLoop {
+    [self commonInit];
+    OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
+    id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
+    [_target initializeLevel];
+    
+    _levelObj.bkgrndStartX = 50;
+    _levelObj.bkgrndStartY = 100;
+    OCMStub([_objectCoordinator updateOrReactivateObjects]).andReturn(0);
+    OCMStub([_joystickController joystick]).andReturn(joystick);
+    OCMStub([joystick xaxisPosition]).andReturn(20);
+    OCMStub([joystick yaxisPosition]).andReturn(41);
+    OCMStub([joystick button0Pressed]).andReturn(NO);
+    OCMStub([joystick button1Pressed]).andReturn(NO);
+
+    [_target runOneGameLoop];
+    OCMVerify([_objectCoordinator updateOrReactivateObjects]);
+    XCTAssertEqual(_target.camera.position.x, 210);
+    XCTAssertEqual(_target.camera.position.y, -200);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickX, 20);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 41);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2);
+    for(size_t ii=0; ii<3; ii++) {
+        OCMVerify( [_textureManager configureSprite:_target.sprites[ii] forCob:_cobs + ii]);
+    }
+}
+
+- (void)testRunOneGameLoopButton0Pressed {
+    [self commonInit];
+    OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
+    id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
+    [_target initializeLevel];
+    
+    OCMStub([_joystickController joystick]).andReturn(joystick);
+    OCMStub([joystick button0Pressed]).andReturn(YES);
+    OCMStub([joystick button1Pressed]).andReturn(NO);
+    [_target runOneGameLoop];
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button2 | Joy2Button1 | Joy2Button2);
+}
+
+- (void)testRunOneGameLoopButton1Pressed {
+    [self commonInit];
+    OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
+    id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
+    [_target initializeLevel];
+    
+    OCMStub([_joystickController joystick]).andReturn(joystick);
+    OCMStub([joystick button0Pressed]).andReturn(NO);
+    OCMStub([joystick button1Pressed]).andReturn(YES);
+    [_target runOneGameLoop];
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy2Button1 | Joy2Button2);
+}
+
 @end
