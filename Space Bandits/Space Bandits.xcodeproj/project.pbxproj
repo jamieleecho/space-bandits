@@ -23,6 +23,10 @@
 		521A84A821FE02BE006120E8 /* DSSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521A84A721FE02BE006120E8 /* DSSceneController.m */; };
 		521A84B321FE07A8006120E8 /* DSSceneControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 521A84B221FE07A8006120E8 /* DSSceneControllerTest.m */; };
 		521E22D025A1379000121A7D /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 521E22CF25A1379000121A7D /* sounds */; };
+		521E22D425A153C500121A7D /* 03-foo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 521E22D125A153C500121A7D /* 03-foo.wav */; };
+		521E22D525A153C500121A7D /* 01-foo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 521E22D225A153C500121A7D /* 01-foo.wav */; };
+		521E22D625A153C500121A7D /* 02-foo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 521E22D325A153C500121A7D /* 02-foo.wav */; };
+		521E22DF25A15DF200121A7D /* hires in Resources */ = {isa = PBXBuildFile; fileRef = 521E22DE25A15DF200121A7D /* hires */; };
 		5223365C2432CF490065E264 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; };
 		5223365D2432CF540065E264 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; };
 		5223365F2432D06A0065E264 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -264,6 +268,10 @@
 		521A84A721FE02BE006120E8 /* DSSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSceneController.m; sourceTree = "<group>"; };
 		521A84B221FE07A8006120E8 /* DSSceneControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSceneControllerTest.m; sourceTree = "<group>"; };
 		521E22CF25A1379000121A7D /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
+		521E22D125A153C500121A7D /* 03-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "03-foo.wav"; sourceTree = "<group>"; };
+		521E22D225A153C500121A7D /* 01-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "01-foo.wav"; sourceTree = "<group>"; };
+		521E22D325A153C500121A7D /* 02-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "02-foo.wav"; sourceTree = "<group>"; };
+		521E22DE25A15DF200121A7D /* hires */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hires; sourceTree = "<group>"; };
 		52229FAC2438BCBB0018A082 /* forest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forest.png; sourceTree = "<group>"; };
 		5227E72021E2DDA40092C947 /* DSInitScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSInitScene.h; sourceTree = "<group>"; };
 		522C1362245E41C000031BD1 /* DSTileMapMakerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileMapMakerTest.m; sourceTree = "<group>"; };
@@ -467,6 +475,10 @@
 		52C8C6F7243DEEC400EC582C /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				521E22DE25A15DF200121A7D /* hires */,
+				521E22D225A153C500121A7D /* 01-foo.wav */,
+				521E22D325A153C500121A7D /* 02-foo.wav */,
+				521E22D125A153C500121A7D /* 03-foo.wav */,
 				52EDA7F724B287EC00D3B490 /* moon.gif */,
 				5265BD4D247CA68E00FE9F3E /* forest-hack.png */,
 				52229FAC2438BCBB0018A082 /* forest.png */,
@@ -847,6 +859,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				521E22DF25A15DF200121A7D /* hires in Resources */,
+				521E22D625A153C500121A7D /* 02-foo.wav in Resources */,
 				521A84A021FCF626006120E8 /* JSONBad in Resources */,
 				52A93D8F24551F4800D2327B /* images-bad-2.json in Resources */,
 				52B1A151244CF7B5008E7066 /* 04-ship.json in Resources */,
@@ -859,9 +873,11 @@
 				5265BD4E247CA68E00FE9F3E /* forest-hack.png in Resources */,
 				52A93D762454F36600D2327B /* 01-moon.json in Resources */,
 				52EDA7F824B287EC00D3B490 /* moon.gif in Resources */,
+				521E22D425A153C500121A7D /* 03-foo.wav in Resources */,
 				52A93D8D24551EB400D2327B /* images-bad-1.json in Resources */,
 				521A849C21FCEE80006120E8 /* JSONDict.json in Resources */,
 				52C8C6F8243DF16F00EC582C /* forest.png in Resources */,
+				521E22D525A153C500121A7D /* 01-foo.wav in Resources */,
 				52A93D752454F31800D2327B /* 01-test-level.json in Resources */,
 				5265BD5824807CA600FE9F3E /* forest-subimage.tiff in Resources */,
 				521A849E21FCEED2006120E8 /* JSONList.json in Resources */,

@@ -28,6 +28,10 @@ static DSSoundManager *_sharedInstance = nil;
     return _cacheState;
 }
 
+- (NSMutableDictionary<NSNumber *, NSArray<NSSound *> *> *) onlyUseForUnitTestingSoundsIdToSounds {
+    return _soundIdToSounds;
+}
+
 - (id)init {
     if (self = [super init]) {
         self.bundle = [NSBundle mainBundle];
@@ -42,7 +46,8 @@ static DSSoundManager *_sharedInstance = nil;
     BOOL isReady = ((self.resourceController.hifiMode && _cacheState == DSSoundManagerCacheStateHiFiCached) || (!self.resourceController.hifiMode && _cacheState == DSSoundManagerCacheStateLoFiCached));
     if (!isReady) {
         for(NSNumber *soundId in _soundIdToPath) {
-            NSString *path = [NSString pathWithComponents:@[self.bundle.resourcePath, _soundIdToPath[soundId]]];
+            NSString *name = [_resourceController soundWithName:_soundIdToPath[soundId]];
+            NSString *path = [NSString pathWithComponents:@[self.bundle.resourcePath, name]];
 
             NSMutableArray *sounds = [NSMutableArray arrayWithCapacity:2];
             _soundIdToSounds[soundId] = sounds;

@@ -29,6 +29,7 @@ typedef enum DSSoundManagerCacheState {
 @property NSBundle *bundle;
 @property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
 - (DSSoundManagerCacheState) cacheState;
+- (NSMutableDictionary<NSNumber *, NSArray<NSSound *> *> *) onlyUseForUnitTestingSoundsIdToSounds;
 
 - (id)init;
 - (void)loadCache;

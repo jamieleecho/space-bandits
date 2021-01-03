@@ -720,7 +720,11 @@
                     </connections>
                 </customObject>
                 <customObject id="jjS-RJ-pne" customClass="NSMutableArray"/>
-                <customObject id="2cP-OL-euM" customClass="DSSoundManager"/>
+                <customObject id="2cP-OL-euM" customClass="DSSoundManager">
+                    <connections>
+                        <outlet property="resourceController" destination="web-E3-IMn" id="bmq-RI-pHP"/>
+                    </connections>
+                </customObject>
                 <customObject id="jjJ-YM-pJl" customClass="DSTextureManager">
                     <connections>
                         <outlet property="resourceController" destination="web-E3-IMn" id="fm2-9q-UYj"/>
