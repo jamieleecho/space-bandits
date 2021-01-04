@@ -273,6 +273,7 @@ Menu_Keypress_Space
             jsr         MemMgr_FreeGfxAperature
             * load and execute Level 1
             lda         #1                      * Level #1
+	    clr		UserGlobals_Init
             jmp         Ldr_Load_Level          * jump to loader (it does not return, but jumps to mainloop)
 
 

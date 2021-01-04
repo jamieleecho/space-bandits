@@ -70,6 +70,7 @@ int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), voi
 #define RegisterObject(classInit, init, initSize, reactivate, update, stateSize) static int objectInit = DSObjectClassDataRegistryRegisterClassData(classInit, init, initSize, reactivate, update, stateSize, __FILE__)
 
 extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
+extern DynospriteGlobals *DynospriteGlobalsPtr;
 
 void PlaySound(int soundIndex);
 

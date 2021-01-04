@@ -14,13 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSDirectPageGlobals : NSObject {
     @private
-    DynospriteDirectPageGlobals *_globals;
+    DynospriteDirectPageGlobals *_directPageGlobals;
+    DynospriteGlobals *_globals;
 }
 
 + (DSDirectPageGlobals *)sharedInstance;
 - (id)init;
-- (id)initWithGlobals:(DynospriteDirectPageGlobals *)globals;
-- (DynospriteDirectPageGlobals *)globals;
+- (id)initWithDirectPageGlobals:(DynospriteDirectPageGlobals *)directPageGlobals andGlobals:(DynospriteGlobals *)globals;
+- (DynospriteDirectPageGlobals *)directPageGlobals;
+- (DynospriteGlobals *)globals;
 
 @end
 

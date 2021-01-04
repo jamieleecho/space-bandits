@@ -215,6 +215,9 @@ typedef struct DynospriteGlobals {
 
   byte Img_Random161[161];
   byte Img_Random200[200];
+
+  byte UserGlobals_Init;
+  byte UserGlobals[31];
 } DynospriteGlobals;
 
 

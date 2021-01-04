@@ -111,6 +111,7 @@ AUDIORATE = $(shell grep -E "AudioSamplingRate\s+EQU\s+[0-9]+" $(SRCDIR)/globals
 # options
 ifneq ($(RELEASE), 1)
   ASMFLAGS += --define=DEBUG
+  CFLAGS += -DDEBUG
 endif
 ifeq ($(SPEEDTEST), 1)
   ASMFLAGS += --define=SPEEDTEST
@@ -195,7 +196,7 @@ $(SYMBOLASM): $(SCRIPTDIR)/symbol-extract.py $(PASS1LIST)
 
 # 6a. Compile C Object handling routines to raw
 $(GENOBJDIR)/object%.raw: $(OBJECTDIR)/%.c $(SRCDIR)/datastruct.asm $(SYMBOLASM)
-	cd $(OBJECTDIR) ; ../../scripts/cmoc-wrapper.py $(ASMFLAGS) -I../../$(SRCDIR) -I$(GENASMDIR)/ --output-dir=../../$(GENTMPDIR) --file-type=object $(notdir $<)
+	cd $(OBJECTDIR) ; ../../scripts/cmoc-wrapper.py $(ASMFLAGS) $(CFLAGS) -I../../$(SRCDIR) -I$(GENASMDIR)/ --output-dir=../../$(GENTMPDIR) --file-type=object $(notdir $<)
 	cd $(OBJECTDIR) ; mv ../../$(GENTMPDIR)/$(patsubst %.c,%.bin,$(notdir $<)) ../../$@
 	cd $(OBJECTDIR) ; mv ../../$(GENTMPDIR)/$(patsubst %.c,%.map,$(notdir $<)) ../../$(GENLISTDIR)/$(patsubst %.raw,%.lst,$(notdir $@))
 
@@ -207,7 +208,7 @@ $(GENOBJDIR)/object%.raw: $(OBJECTDIR)/%.asm $(SRCDIR)/datastruct.asm $(SYMBOLAS
 # 6a. Compile C Level handling routines to raw
 # 7a. Compile C Level handling routines to raw
 $(GENOBJDIR)/level%.raw: $(LEVELDIR)/%.c $(SRCDIR)/datastruct.asm $(SYMBOLASM)
-	cd $(LEVELDIR) ; ../../scripts/cmoc-wrapper.py $(ASMFLAGS) -I../../$(SRCDIR) -I$(GENASMDIR)/ --output-dir=../../$(GENTMPDIR) --file-type=level $(notdir $<)
+	cd $(LEVELDIR) ; ../../scripts/cmoc-wrapper.py $(ASMFLAGS) $(CFLAGS) -I../../$(SRCDIR) -I$(GENASMDIR)/ --output-dir=../../$(GENTMPDIR) --file-type=level $(notdir $<)
 	cd $(LEVELDIR) ; mv ../../$(GENTMPDIR)/$(patsubst %.c,%.bin,$(notdir $<)) ../../$@
 	cd $(LEVELDIR) ; mv ../../$(GENTMPDIR)/$(patsubst %.c,%.map,$(notdir $<)) ../../$(GENLISTDIR)/$(patsubst %.raw,%.lst,$(notdir $@))
 

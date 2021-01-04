@@ -12,7 +12,11 @@ extern "C" {
 #define BAD_PTR ((DynospriteCOB *)0xffff)
 #define SCREEN_LOCATION_MIN 14
 #define SCREEN_LOCATION_MAX 306
+#ifdef __APPLE__
+#define DELTA_Y 2
+#else
 #define DELTA_Y 4
+#endif
 #define MAX_Y 155
 #define TOP_SPEED 3
 
@@ -36,10 +40,10 @@ extern "C" {
  * location.
  */
 typedef enum DirectionMode {
-  DirectionModeRight,
-  DirectionModeChangeOnNextIterMask,
-  DirectionModeLeft,
-  DirectionModeMask
+    DirectionModeRight,
+    DirectionModeChangeOnNextIterMask,
+    DirectionModeLeft,
+    DirectionModeMask
 } DirectionMode;
 
 
@@ -57,8 +61,8 @@ byte currentMissileFireColumnIndex = 0;
 
 // From the original space invaders
 byte missileFireColumns[] = {
-  0x01, 0x07, 0x01, 0x01, 0x01, 0x04, 0x0B, 0x01, 0x06, 0x03, 0x01, 0x01,
-  0x0B, 0x09, 0x02, 0x08, 0x02,0x0B,0x04,0x07,0x0A
+    0x01, 0x07, 0x01, 0x01, 0x01, 0x04, 0x0B, 0x01, 0x06, 0x03, 0x01, 0x01,
+    0x0B, 0x09, 0x02, 0x08, 0x02,0x0B,0x04,0x07,0x0A
 };
 
 
@@ -75,131 +79,131 @@ void BadguyClassInit() {
 
 
 void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
-  if (!didInit) {
-    didInit = TRUE;
-    numInvaders = 0;
-    deltaY = 0;
-
-    endBadMissiles = &(badMissiles[sizeof(badMissiles)/sizeof(badMissiles[0])]);
-    DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
-    for (byte ii=0; obj && ii<sizeof(badMissiles)/sizeof(badMissiles[0]); ii++) {
-      obj = findObjectByGroup(obj, BAD_MISSILE_GROUP_IDX);
-      badMissiles[ii] = obj;
-      obj = obj + 1;
+    if (!didInit) {
+        didInit = TRUE;
+        numInvaders = 0;
+        deltaY = 0;
+        
+        endBadMissiles = &(badMissiles[sizeof(badMissiles)/sizeof(badMissiles[0])]);
+        DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
+        for (byte ii=0; obj && ii<sizeof(badMissiles)/sizeof(badMissiles[0]); ii++) {
+            obj = findObjectByGroup(obj, BAD_MISSILE_GROUP_IDX);
+            badMissiles[ii] = obj;
+            obj = obj + 1;
+        }
     }
-  }
-
-  /* We want to animate the different invaders and they all have different
-   * number of frames. This is a little hack where we pass the minimum
-   * spriteIndex as part of the initialization data and because we know the
-   * number of frames, we can set the max here. */
-  BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
-  byte spriteMin = *initData;
-  if (spriteMin == BADGUY_SPRITE_ENEMY_SWATH_INDEX) {
-    statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
-    statePtr->spriteMax = BADGUY_SPRITE_BLADE_INDEX - 1;
-  } else if ((spriteMin == BADGUY_SPRITE_BLADE_INDEX) ||
-             (spriteMin == BADGUY_SPRITE_DUDE_INDEX)) {
-    statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
-    statePtr->spriteMax = statePtr->spriteMin + 4 - 1;
-  } else if ((spriteMin == BADGUY_SPRITE_TINY_INDEX) ||
-             (spriteMin == BADGUY_SPRITE_TIVO_INDEX)) {
-    statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
-    statePtr->spriteMax = statePtr->spriteMin + 2 - 1;
-  } else {
-    statePtr->spriteIdx = statePtr->spriteMin = 0;
-    statePtr->spriteMax = BADGUY_SPRITE_BLADE_INDEX - 1;
-  }
-  statePtr->originalSpriteIdx = statePtr->spriteIdx;
-  statePtr->originalGlobalX = cob->globalX;
-  statePtr->originalGlobalY = cob->globalY;
-
-  numInvaders++;
+    
+    /* We want to animate the different invaders and they all have different
+     * number of frames. This is a little hack where we pass the minimum
+     * spriteIndex as part of the initialization data and because we know the
+     * number of frames, we can set the max here. */
+    BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
+    byte spriteMin = *initData;
+    if (spriteMin == BADGUY_SPRITE_ENEMY_SWATH_INDEX) {
+        statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
+        statePtr->spriteMax = BADGUY_SPRITE_BLADE_INDEX - 1;
+    } else if ((spriteMin == BADGUY_SPRITE_BLADE_INDEX) ||
+               (spriteMin == BADGUY_SPRITE_DUDE_INDEX)) {
+        statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
+        statePtr->spriteMax = statePtr->spriteMin + 4 - 1;
+    } else if ((spriteMin == BADGUY_SPRITE_TINY_INDEX) ||
+               (spriteMin == BADGUY_SPRITE_TIVO_INDEX)) {
+        statePtr->spriteIdx = statePtr->spriteMin = spriteMin;
+        statePtr->spriteMax = statePtr->spriteMin + 2 - 1;
+    } else {
+        statePtr->spriteIdx = statePtr->spriteMin = 0;
+        statePtr->spriteMax = BADGUY_SPRITE_BLADE_INDEX - 1;
+    }
+    statePtr->originalSpriteIdx = statePtr->spriteIdx;
+    statePtr->originalGlobalX = cob->globalX;
+    statePtr->originalGlobalY = cob->globalY;
+    
+    numInvaders++;
 }
 
 
 void reset() {
-  DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
-  for (obj = findObjectByGroup(obj, BADGUY_GROUP_IDX); obj; obj = findObjectByGroup(obj, BADGUY_GROUP_IDX)) {
-    BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
-    obj->active = OBJECT_ACTIVE;
-    statePtr->spriteIdx = statePtr->originalSpriteIdx;
-    obj->globalX = statePtr->originalGlobalX;
-    obj->globalY = statePtr->originalGlobalY;
-    ++numInvaders;
-    obj = obj + 1;
-  }
-
-  obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
-  for (obj = findObjectByGroup(obj, MISSILE_GROUP_IDX); obj; obj = findObjectByGroup(obj, MISSILE_GROUP_IDX)) {
-    obj->active = OBJECT_INACTIVE;
-    obj = obj + 1;
-  }
+    DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
+    for (obj = findObjectByGroup(obj, BADGUY_GROUP_IDX); obj; obj = findObjectByGroup(obj, BADGUY_GROUP_IDX)) {
+        BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
+        obj->active = OBJECT_ACTIVE;
+        statePtr->spriteIdx = statePtr->originalSpriteIdx;
+        obj->globalX = statePtr->originalGlobalX;
+        obj->globalY = statePtr->originalGlobalY;
+        ++numInvaders;
+        obj = obj + 1;
+    }
+    
+    obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
+    for (obj = findObjectByGroup(obj, MISSILE_GROUP_IDX); obj; obj = findObjectByGroup(obj, MISSILE_GROUP_IDX)) {
+        obj->active = OBJECT_INACTIVE;
+        obj = obj + 1;
+    }
 }
 
 
 byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
-  if (!numInvaders) {
-    reset();
-  }
-  return 0;
+    if (!numInvaders) {
+        reset();
+    }
+    return 0;
 }
 
 
 byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
-  BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
-  // cob->active = (cob->active == OBJECT_UPDATE_ACTIVE) ? OBJECT_ACTIVE : OBJECT_UPDATE_ACTIVE;
-
-  /* Switch to the next animation frame */
-  byte spriteIdx = statePtr->spriteIdx;
-  if (spriteIdx < statePtr->spriteMax) {
-    statePtr->spriteIdx = spriteIdx + 1;
-  } else if (spriteIdx == statePtr->spriteMax) {
-    statePtr->spriteIdx = statePtr->spriteMin;
-  } else if (spriteIdx >= BADGUY_SPRITE_LAST_INDEX) {
-    cob->active = OBJECT_INACTIVE;
-    --numInvaders;
-    return 0;
-  } else {
-    statePtr->spriteIdx = spriteIdx + 1;
-    return 0;
-  }
-
-  // If we are at the first bad guy...
-  if (lastCob >= cob) {
-    if (directionMode & DirectionModeChangeOnNextIterMask) {
-      /* toggle direction and clear DirectionModeChangeOnNextIterMask */
-      directionMode = (DirectionMode)((directionMode + 1) & DirectionModeMask);
-      deltaY = DELTA_Y;
+    BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
+    // cob->active = (cob->active == OBJECT_UPDATE_ACTIVE) ? OBJECT_ACTIVE : OBJECT_UPDATE_ACTIVE;
+    
+    /* Switch to the next animation frame */
+    byte spriteIdx = statePtr->spriteIdx;
+    if (spriteIdx < statePtr->spriteMax) {
+        statePtr->spriteIdx = spriteIdx + 1;
+    } else if (spriteIdx == statePtr->spriteMax) {
+        statePtr->spriteIdx = statePtr->spriteMin;
+    } else if (spriteIdx >= BADGUY_SPRITE_LAST_INDEX) {
+        cob->active = OBJECT_INACTIVE;
+        --numInvaders;
+        return 0;
     } else {
-      deltaY = 0;
+        statePtr->spriteIdx = spriteIdx + 1;
+        return 0;
     }
-  }
-  lastCob = cob;
+    
+    // If we are at the first bad guy...
+    if (lastCob >= cob) {
+        if (directionMode & DirectionModeChangeOnNextIterMask) {
+            /* toggle direction and clear DirectionModeChangeOnNextIterMask */
+            directionMode = (DirectionMode)((directionMode + 1) & DirectionModeMask);
+            deltaY = DELTA_Y;
+        } else {
+            deltaY = 0;
+        }
+    }
+    lastCob = cob;
+    
+    // Move down if needed
+    cob->globalY += deltaY;
+    if (cob->globalY > MAX_Y) {
+        cob->globalY = MAX_Y;
+        return -1;
+    }
 
-  // Move down if needed
-  cob->globalY += deltaY;
-  if (cob->globalY > MAX_Y) {
-    cob->globalY = MAX_Y;
-    return -1;
-  }
-
-  byte delta = (TOP_SPEED - (numInvaders >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
-  delta = (delta > 128) ? 1 : ((delta < 1) ? 1 : delta);
-  if (directionMode & DirectionModeLeft) {
-    cob->globalX -= delta;
-    if (cob->globalX <= SCREEN_LOCATION_MIN) {
-      /* hit extreme left, so set DirectionModeChangeOnNextIterMask */
-      directionMode = (DirectionMode)(directionMode | DirectionModeChangeOnNextIterMask);
+    byte delta = (TOP_SPEED - (numInvaders >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
+    delta = (delta > 128) ? 1 : ((delta < 1) ? 1 : delta);
+    if (directionMode & DirectionModeLeft) {
+        cob->globalX -= delta;
+        if (cob->globalX <= SCREEN_LOCATION_MIN) {
+            /* hit extreme left, so set DirectionModeChangeOnNextIterMask */
+            directionMode = (DirectionMode)(directionMode | DirectionModeChangeOnNextIterMask);
+        }
+    } else {
+        cob->globalX += delta;
+        if (cob->globalX >= SCREEN_LOCATION_MAX) {
+            /* hit extreme right, so set DirectionModeChangeOnNextIterMask */
+            directionMode = (DirectionMode)(directionMode | DirectionModeChangeOnNextIterMask);
+        }
     }
-  } else {
-    cob->globalX += delta;
-    if (cob->globalX >= SCREEN_LOCATION_MAX) {
-      /* hit extreme right, so set DirectionModeChangeOnNextIterMask */
-      directionMode = (DirectionMode)(directionMode | DirectionModeChangeOnNextIterMask);
-    }
-  }
-  return 0;
+    return 0;
 }
 
 

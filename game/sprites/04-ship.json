@@ -18,5 +18,45 @@
     "Name": "Ship3",
     "Location": [106, 433],
     "SinglePixelPosition": true
+  }, {
+    "Name": "Explosion1",
+    "Location": [232, 284],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion2",
+    "Location": [256, 284],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion3",
+    "Location": [280, 284],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion4",
+    "Location": [304, 284],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion5",
+    "Location": [231, 308],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion6",
+    "Location": [256, 308],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion7",
+    "Location": [280, 308],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion8",
+    "Location": [304, 308],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion9",
+    "Location": [232, 332],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion10",
+    "Location": [256, 332],
+    "SinglePixelPosition": false
   }]
 }

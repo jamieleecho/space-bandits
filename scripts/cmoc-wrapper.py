@@ -84,6 +84,8 @@ def main(argv):
       required=False, help='Include path')
     parser.add_argument('--define', action='append',
       required=False, help='LWASM defines')
+    parser.add_argument('-D', dest='cmoc_defines', action='append',
+      required=False, help='CMOC defines')
     parser.add_argument('-O', dest='optimization_level', metavar='LEVEL', type=int, default=2,
       help='Optimization level')
     parser.add_argument('--output-dir', metavar='DIR', type=str, required=True,
@@ -109,6 +111,8 @@ def main(argv):
     for include_dir in args.include_path or []:
         cmoc_args.append('-I')
         cmoc_args.append(include_dir)
+    for define in args.cmoc_defines or []:
+        cmoc_args.append(f'-D{define}')
     cmoc_args.append(args.file)
     retval = subprocess.call(cmoc_args)
 
