@@ -94,6 +94,7 @@ static NSString *MenuSoundLow = @"LoFi";
     DSTransitionScene *transitionScene = [self.sceneController transitionSceneForLevel:1];
     [self.view presentScene:transitionScene transition:transition];
     [self.soundManager loadCache];
+    DynospriteGlobalsPtr->UserGlobals_Init = NO;
     self.isDone = YES;
 }
 

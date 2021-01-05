@@ -168,9 +168,11 @@ enum DSInitSceneLabelIndices : short {
 }
 
 - (void)testTransitionToNextScene {
+    DynospriteGlobalsPtr->UserGlobals_Init = YES;
     [_target transitionToNextScreen];
     OCMVerify([_soundManager loadCache]);
     XCTAssertTrue(_target.isDone);
+    XCTAssertFalse(DynospriteGlobalsPtr->UserGlobals_Init);
 }
 
 - (void)testPollJoystickButtonNotPressed {
