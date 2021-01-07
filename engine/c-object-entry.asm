@@ -76,6 +76,7 @@ Object_GotoLevel:
             jmp         Ldr_Jump_To_New_Level 
 !           rts
 Object_GotoMenu:
+            jsr         Ldr_Unload_Level
 	    jmp	        Menu_RunMain
 
 

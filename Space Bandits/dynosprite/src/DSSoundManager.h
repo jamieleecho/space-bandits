@@ -17,8 +17,10 @@ typedef enum DSSoundManagerCacheState {
     DSSoundManagerCacheStateHiFiCached
 } DSSoundManagerCacheState;
 
-@interface DSSoundManager : NSObject {
+@interface DSSoundManager : NSObject<NSSoundDelegate> {
+    NSMutableSet *_playingSounds;
     DSSoundManagerCacheState _cacheState;
+    size_t _maxNumSounds;
     NSMutableDictionary<NSNumber *, NSString *> *_soundIdToPath;
     NSMutableDictionary<NSNumber *, NSArray<NSSound *> *> *_soundIdToSounds;
 }
@@ -30,6 +32,8 @@ typedef enum DSSoundManagerCacheState {
 @property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
 - (DSSoundManagerCacheState) cacheState;
 - (NSMutableDictionary<NSNumber *, NSArray<NSSound *> *> *) onlyUseForUnitTestingSoundsIdToSounds;
+- (size_t)maxNumSounds;
+- (void)setMaxNumSounds:(size_t)maxNumSounds;
 
 - (id)init;
 - (void)loadCache;

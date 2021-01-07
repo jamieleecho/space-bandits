@@ -72,8 +72,8 @@
     DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr = _objectCoordinator.cobs;
     DynospriteDirectPageGlobalsPtr->Obj_NumCurrent = _objectCoordinator.count;
     DynospriteDirectPageGlobalsPtr->Input_Buttons = Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2;
-    DynospriteDirectPageGlobalsPtr->Input_JoystickX = 0;
-    DynospriteDirectPageGlobalsPtr->Input_JoystickY = 0;
+    DynospriteDirectPageGlobalsPtr->Input_JoystickX = self.joystickController.joystick.xaxisPosition;
+    DynospriteDirectPageGlobalsPtr->Input_JoystickY = self.joystickController.joystick.yaxisPosition;
     DynospriteDirectPageGlobalsPtr->Obj_MotionFactor = 0;
     DynospriteDirectPageGlobalsPtr->Input_UseKeyboard = !self.joystickController.useHardwareJoystick;
     

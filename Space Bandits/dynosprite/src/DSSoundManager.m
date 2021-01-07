@@ -32,9 +32,20 @@ static DSSoundManager *_sharedInstance = nil;
     return _soundIdToSounds;
 }
 
+- (size_t)maxNumSounds {
+    return _maxNumSounds;
+}
+
+- (void)setMaxNumSounds:(size_t)maxNumSounds {
+    _cacheState = DSSoundManagerCacheStateEmpty;
+    _maxNumSounds = maxNumSounds;
+}
+
 - (id)init {
     if (self = [super init]) {
         self.bundle = [NSBundle mainBundle];
+        _maxNumSounds = 2;
+        _playingSounds = NSMutableSet.set;
         _cacheState = DSSoundManagerCacheStateEmpty;
         _soundIdToPath = NSMutableDictionary.dictionary;
         _soundIdToSounds = NSMutableDictionary.dictionary;
@@ -49,10 +60,13 @@ static DSSoundManager *_sharedInstance = nil;
             NSString *name = [_resourceController soundWithName:_soundIdToPath[soundId]];
             NSString *path = [NSString pathWithComponents:@[self.bundle.resourcePath, name]];
 
-            NSMutableArray *sounds = [NSMutableArray arrayWithCapacity:2];
+            NSMutableArray *sounds = [NSMutableArray arrayWithCapacity:_maxNumSounds];
             _soundIdToSounds[soundId] = sounds;
-            [sounds addObject:[[NSSound alloc] initWithContentsOfFile:path byReference:NO]];
-            [sounds addObject:[[NSSound alloc] initWithContentsOfFile:path byReference:NO]];
+            for(size_t ii=0; ii<_maxNumSounds; ii++) {
+                NSSound *sound = [[NSSound alloc] initWithContentsOfFile:path byReference:NO];
+                sound.delegate = self;
+                [sounds addObject:sound];
+            }
         }
         _cacheState = self.resourceController.hifiMode ? DSSoundManagerCacheStateHiFiCached : DSSoundManagerCacheStateLoFiCached;
     }
@@ -64,16 +78,31 @@ static DSSoundManager *_sharedInstance = nil;
     [_soundIdToSounds removeAllObjects];
 }
 
+- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)didFinish {
+    [_playingSounds removeObject:sound];
+}
+
 - (BOOL)playSound:(size_t)soundId {
     [self loadCache];
+    
+    if (_playingSounds.count >= _maxNumSounds) {
+        return NO;
+    }
+    
     NSArray *sounds = _soundIdToSounds[[NSNumber numberWithLong:soundId]];
     if (sounds == nil) {
         return NO;
     }
-    if (![sounds[0] play]) {
-        return [sounds[1] play];
+    for(NSSound *sound in sounds) {
+        if (sound.isPlaying) {
+            continue;
+        }
+        if ([sound play]) {
+            [_playingSounds addObject:sound];
+            return YES;
+        }
     }
-    return YES;
+    return NO;
 }
 
 @end

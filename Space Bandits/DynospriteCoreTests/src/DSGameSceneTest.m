@@ -111,7 +111,10 @@ static byte backgroundNewXY() {
 - (void)testInitializeLevel {
     [self commonInit];
     OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
-    
+    id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
+    OCMStub([_joystickController joystick]).andReturn(joystick);
+    OCMStub([joystick xaxisPosition]).andReturn(25);
+    OCMStub([joystick yaxisPosition]).andReturn(52);
     [_target initializeLevel];
     
     XCTAssertEqual(_target.children.firstObject, _node);
@@ -121,8 +124,8 @@ static byte backgroundNewXY() {
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, [_objectCoordinator cobs]);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_NumCurrent, 3);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2);
-    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickX, 0);
-    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 0);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickX, 25);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 52);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_MotionFactor, 0);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_UseKeyboard, 0);
     

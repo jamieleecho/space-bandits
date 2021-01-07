@@ -168,11 +168,14 @@ enum DSInitSceneLabelIndices : short {
 }
 
 - (void)testTransitionToNextScene {
+    OCMStub([_resourceController hifiMode]).andReturn(YES);
     DynospriteGlobalsPtr->UserGlobals_Init = YES;
+    [_target toggleSound];
     [_target transitionToNextScreen];
     OCMVerify([_soundManager loadCache]);
     XCTAssertTrue(_target.isDone);
     XCTAssertFalse(DynospriteGlobalsPtr->UserGlobals_Init);
+    OCMVerify([_soundManager setMaxNumSounds:10]);
 }
 
 - (void)testPollJoystickButtonNotPressed {

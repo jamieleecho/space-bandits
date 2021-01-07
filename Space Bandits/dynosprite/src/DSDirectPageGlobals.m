@@ -33,8 +33,8 @@ static DSDirectPageGlobals *_sharedInstance;
 
 - (id)initWithDirectPageGlobals:(DynospriteDirectPageGlobals *)directPageGlobals andGlobals:(DynospriteGlobals *)globals {
     if (self = [super init]) {
-        self->_directPageGlobals = directPageGlobals;
-        self->_globals = globals;
+        _directPageGlobals = directPageGlobals;
+        _globals = globals;
     }
     return self;
 }

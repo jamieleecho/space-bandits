@@ -104,7 +104,7 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     if (!(DynospriteDirectPageGlobalsPtr->Input_Buttons & Joy1Button1)) {
         DynospriteCOB *missile = findFreeMissile();
         if (missile) {
-            missile->globalX = cob->globalX + 9;
+            missile->globalX = cob->globalX;
             missile->globalY = 165;
             missile->active = OBJECT_ACTIVE;
             PlaySound(SOUND_LASER);

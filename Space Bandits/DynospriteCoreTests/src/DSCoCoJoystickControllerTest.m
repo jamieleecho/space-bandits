@@ -51,7 +51,7 @@ static int numSampleCalls;
     availableJoysticks = @[];
     numSampleCalls = 0;
     OCMStub([(DSCoCoKeyboardJoystick *)_mockKeyboardJoystick open]).andReturn(YES);
-    _target = [[DSCoCoJoystickController alloc] initWithKeyboardJoystick:self->_mockKeyboardJoystick hardwareJoystickClass:self->_mockJoystickClass];
+    _target = [[DSCoCoJoystickController alloc] initWithKeyboardJoystick:_mockKeyboardJoystick hardwareJoystickClass:_mockJoystickClass];
 }
 
 - (void)testDefaultsToKeyboardJoystick {
@@ -68,19 +68,19 @@ static int numSampleCalls;
 }
 
 - (void)testSwitchesJoystickOneAvailableJoystick {
-    availableJoysticks = @[self->_mockJoystick1];
+    availableJoysticks = @[_mockJoystick1];
     OCMStub([(DSCoCoJoystick *)_mockJoystick1 open]).andReturn(YES);
     _target.useHardwareJoystick = YES;
     XCTAssertTrue(_target.useHardwareJoystick);
     XCTAssertEqualObjects(_target.joystick, _mockJoystick1);
-    availableJoysticks = @[self->_mockJoystick2];
+    availableJoysticks = @[_mockJoystick2];
     _target.useHardwareJoystick = YES;
     XCTAssertTrue(_target.useHardwareJoystick);
     XCTAssertEqualObjects(_target.joystick, _mockJoystick1);
 }
 
 - (void)testSwitchesJoystickMultipleAvailableJoysticks {
-    availableJoysticks = @[self->_mockJoystick1, self->_mockJoystick2];
+    availableJoysticks = @[_mockJoystick1, _mockJoystick2];
     OCMStub([(DSCoCoJoystick *)_mockJoystick1 open]).andReturn(YES);
     OCMStub([(DSCoCoJoystick *)_mockJoystick2 open]).andReturn(YES);
     _target.useHardwareJoystick = YES;
@@ -89,7 +89,7 @@ static int numSampleCalls;
 }
 
 - (void)testSwitchesJoystickMultipleJoysticksOnlyOneAvailable {
-    availableJoysticks = @[self->_mockJoystick1, self->_mockJoystick2];
+    availableJoysticks = @[_mockJoystick1, _mockJoystick2];
     OCMStub([(DSCoCoJoystick *)_mockJoystick1 open]).andReturn(NO);
     OCMStub([(DSCoCoJoystick *)_mockJoystick2 open]).andReturn(YES);
     _target.useHardwareJoystick = YES;
@@ -98,7 +98,7 @@ static int numSampleCalls;
 }
 
 - (void)testClosesJoystickWhenSwitchingToKeyboard {
-    availableJoysticks = @[self->_mockJoystick1];
+    availableJoysticks = @[_mockJoystick1];
     OCMStub([(DSCoCoJoystick *)_mockJoystick1 open]).andReturn(YES);
     _target.useHardwareJoystick = YES;
     _target.useHardwareJoystick = NO;
@@ -108,7 +108,7 @@ static int numSampleCalls;
 - (void)testSample {
     [_target sample];
     XCTAssertEqual(numSampleCalls, 1);
-    availableJoysticks = @[self->_mockJoystick1];
+    availableJoysticks = @[_mockJoystick1];
     _target.useHardwareJoystick = YES;
     [_target sample];
     XCTAssertEqual(numSampleCalls, 2);
@@ -123,7 +123,7 @@ static int numSampleCalls;
 }
 
 - (void)testPassesKeyboardKeysEvenWithHardwareJoystick {
-    availableJoysticks = @[self->_mockJoystick1];
+    availableJoysticks = @[_mockJoystick1];
     _target.useHardwareJoystick = YES;
     NSEvent *event = [[NSEvent alloc] init];
     [_target handleKeyUp:event];

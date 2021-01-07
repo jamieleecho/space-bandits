@@ -3,7 +3,7 @@
     "Name": "Omicron Persei 8 Invades",
     "Description": "Drop Down and Increase Speed!",
     "ObjectGroups": [3, 4, 5, 6, 7],
-    "MaxObjectTableSize": 64,
+    "MaxObjectTableSize": 70,
     "Tileset": 1,
     "TilemapImage": "../tiles/01-moon.gif",
     "TilemapStart": [0, 0],
@@ -18,7 +18,7 @@
       "GroupID": 4,
       "ObjectID": 0,
       "Active": 3,
-      "globalX": 170,
+      "globalX": 160,
       "globalY": 175,
       "InitData": []
     },

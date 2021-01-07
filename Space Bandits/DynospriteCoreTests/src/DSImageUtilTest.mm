@@ -26,7 +26,7 @@
 }
 
 - (void)testGetsImageContents {
-    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(self->_forestImage);
+    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(_forestImage);
     XCTAssertEqual(info.width, 320);
     XCTAssertEqual(info.height, 192);
     
@@ -123,7 +123,7 @@
 }
 
 - (void)testDSImageUtilReplaceColor {
-    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(self->_forestImage);
+    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(_forestImage);
     DSImageWrapper<DSImageUtilARGB8> image(info.imageData, info.width, info.height);
 
     DSImageUtilReplaceColor(info, DSImageUtilARGB8(255, 255, 255, 0), DSImageUtilARGB8::transparentColor);
@@ -132,7 +132,7 @@
 }
 
 - (void)testDSImageWrapper {
-    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(self->_forestImage);
+    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(_forestImage);
     DSImageWrapper<DSImageUtilARGB8> target(info.imageData, info.width, info.height);
 
     XCTAssertEqual(target.data(), info.imageData);
@@ -163,7 +163,7 @@
 }
 
 - (void)testDSImageUtilMakeCGImage {
-    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(self->_forestImage);
+    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(_forestImage);
     CGImageRef target = DSImageUtilMakeCGImage(info);
     DSImageUtilImageInfo targetInfo = DSImageUtilGetImagePixelData(target);
     CGImageRelease(target);
@@ -179,7 +179,7 @@
 }
 
 - (void) testDSImageUtilFindSpritePixels {
-    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(self->_moonImage);
+    DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(_moonImage);
     DSImageUtilReplaceColor(info, DSImageUtilARGB8(255, 254, 0, 254), DSImageUtilARGB8::transparentColor);
     NSRect explosion1 = DSImageUtilFindSpritePixels(info, @"explosion1", NSMakePoint(231, 283));
     XCTAssertTrue(NSEqualRects(explosion1, NSMakeRect(222, 272, 18, 20)));
