@@ -3,6 +3,7 @@ extern "C" {
 #endif
 
 #include "03-badguy.h"
+#include "04-ship.h"
 #include "05-missile.h"
 #include "07-badmissile.h"
 #include "object_info.h"
@@ -54,6 +55,7 @@ byte numInvaders = 0;
 byte deltaY = 0;
 
 
+ShipObjectState *shipState;
 DynospriteCOB *badMissiles[NUM_BAD_MISSILES];
 DynospriteCOB **endBadMissiles;
 byte currentMissileFireColumnIndex = 0;
@@ -91,6 +93,8 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
             badMissiles[ii] = obj;
             obj = obj + 1;
         }
+        
+        shipState = (ShipObjectState *)findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, SHIP_GROUP_IDX)->statePtr;
     }
     
     /* We want to animate the different invaders and they all have different
@@ -152,7 +156,6 @@ byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
-    // cob->active = (cob->active == OBJECT_UPDATE_ACTIVE) ? OBJECT_ACTIVE : OBJECT_UPDATE_ACTIVE;
     
     /* Switch to the next animation frame */
     byte spriteIdx = statePtr->spriteIdx;
@@ -166,6 +169,10 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     } else {
         statePtr->spriteIdx = spriteIdx + 1;
+        return 0;
+    }
+
+    if (shipState->counter) {
         return 0;
     }
     

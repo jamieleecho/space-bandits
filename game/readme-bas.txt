@@ -22,6 +22,9 @@ Earth Rise: NASA
 Laser Sound: freesound.org
 The bizniss
 
+Explosion Sound: freesound.org
+tommccann
+
 Song Sound: www.looperman.com
 November Vibe by Raw X Limits
 

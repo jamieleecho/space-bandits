@@ -22,7 +22,6 @@
 		521A84A021FCF626006120E8 /* JSONBad in Resources */ = {isa = PBXBuildFile; fileRef = 521A849F21FCF626006120E8 /* JSONBad */; };
 		521A84A821FE02BE006120E8 /* DSSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521A84A721FE02BE006120E8 /* DSSceneController.m */; };
 		521A84B321FE07A8006120E8 /* DSSceneControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 521A84B221FE07A8006120E8 /* DSSceneControllerTest.m */; };
-		521E22D025A1379000121A7D /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 521E22CF25A1379000121A7D /* sounds */; };
 		521E22D425A153C500121A7D /* 03-foo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 521E22D125A153C500121A7D /* 03-foo.wav */; };
 		521E22D525A153C500121A7D /* 01-foo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 521E22D225A153C500121A7D /* 01-foo.wav */; };
 		521E22D625A153C500121A7D /* 02-foo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 521E22D325A153C500121A7D /* 02-foo.wav */; };
@@ -137,6 +136,8 @@
 		52B1A16A244D23A2008E7066 /* DSTileFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A168244D23A2008E7066 /* DSTileFileParser.m */; };
 		52B1A171244D2712008E7066 /* DSTileFileParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A170244D2712008E7066 /* DSTileFileParserTest.m */; };
 		52B1A1742453AFD0008E7066 /* DSAssetLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B1A1732453AFD0008E7066 /* DSAssetLoader.m */; };
+		52C0C2B425AB896B001D619F /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 52C0C2B325AB896B001D619F /* Credits.html */; };
+		52C0C2B625AB9D24001D619F /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 52C0C2B525AB9D24001D619F /* sounds */; };
 		52C3FCE621EBD9C900AE268B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52C3FCE521EBD9C900AE268B /* Fonts */; };
 		52C3FCE721EBD9C900AE268B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52C3FCE521EBD9C900AE268B /* Fonts */; };
 		52C7C833247B4A3200B4901E /* DSCons.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C7C832247B4A3200B4901E /* DSCons.m */; };
@@ -267,7 +268,6 @@
 		521A84A621FE02BE006120E8 /* DSSceneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSceneController.h; sourceTree = "<group>"; };
 		521A84A721FE02BE006120E8 /* DSSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSceneController.m; sourceTree = "<group>"; };
 		521A84B221FE07A8006120E8 /* DSSceneControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSceneControllerTest.m; sourceTree = "<group>"; };
-		521E22CF25A1379000121A7D /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		521E22D125A153C500121A7D /* 03-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "03-foo.wav"; sourceTree = "<group>"; };
 		521E22D225A153C500121A7D /* 01-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "01-foo.wav"; sourceTree = "<group>"; };
 		521E22D325A153C500121A7D /* 02-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "02-foo.wav"; sourceTree = "<group>"; };
@@ -355,6 +355,8 @@
 		52B1A170244D2712008E7066 /* DSTileFileParserTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileFileParserTest.m; sourceTree = "<group>"; };
 		52B1A1722453AFD0008E7066 /* DSAssetLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSAssetLoader.h; sourceTree = "<group>"; };
 		52B1A1732453AFD0008E7066 /* DSAssetLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSAssetLoader.m; sourceTree = "<group>"; };
+		52C0C2B325AB896B001D619F /* Credits.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		52C0C2B525AB9D24001D619F /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = ../../game/sounds; sourceTree = "<group>"; };
 		52C3FCE521EBD9C900AE268B /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		52C7C831247B4A3200B4901E /* DSCons.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCons.h; sourceTree = "<group>"; };
 		52C7C832247B4A3200B4901E /* DSCons.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCons.m; sourceTree = "<group>"; };
@@ -706,7 +708,7 @@
 				7D7EED6C23BCE63500804C26 /* hires */,
 				52A90E5A21E2F78300CC2643 /* images */,
 				52A90E5921E2F78300CC2643 /* levels */,
-				521E22CF25A1379000121A7D /* sounds */,
+				52C0C2B525AB9D24001D619F /* sounds */,
 				7DA1789B2431528600AE39D8 /* sprites */,
 				7DA1789F2431529D00AE39D8 /* tiles */,
 				52F1209421D7DD65008A7900 /* Assets.xcassets */,
@@ -714,6 +716,7 @@
 				52F1209921D7DD65008A7900 /* Info.plist */,
 				52F1209A21D7DD65008A7900 /* main.m */,
 				52F1209C21D7DD65008A7900 /* Space_Bandits.entitlements */,
+				52C0C2B325AB896B001D619F /* Credits.html */,
 			);
 			path = "Space Bandits";
 			sourceTree = "<group>";
@@ -888,15 +891,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				521E22D025A1379000121A7D /* sounds in Resources */,
 				7D7EED6D23BCE63500804C26 /* hires in Resources */,
 				7DA1789C2431528600AE39D8 /* sprites in Resources */,
 				52A90E5C21E2F78300CC2643 /* images in Resources */,
 				52A90E5B21E2F78300CC2643 /* levels in Resources */,
 				52F1209521D7DD65008A7900 /* Assets.xcassets in Resources */,
+				52C0C2B625AB9D24001D619F /* sounds in Resources */,
 				7DA178A02431529D00AE39D8 /* tiles in Resources */,
 				52F1208D21D7DD63008A7900 /* Actions.sks in Resources */,
 				52C3FCE621EBD9C900AE268B /* Fonts in Resources */,
+				52C0C2B425AB896B001D619F /* Credits.html in Resources */,
 				7D7EED7923BD626500804C26 /* Main.storyboardc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
