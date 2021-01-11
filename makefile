@@ -49,6 +49,9 @@ MAPSRC := $(patsubst $(LEVELDIR)/%.json, $(GENGFXDIR)/tilemap%.txt, $(LEVELDSC))
 # output ASM files generated from sprites
 SPRITEASMSRC := $(patsubst $(SPRITEDIR)/%.txt, $(GENASMDIR)/sprite%.asm, $(filter %.txt, $(SPRITEDSC)))
 
+# optional MAMEFLAGS
+MAMEFLAGS := -speed 10
+
 # paths to dependencies
 COCODISKGEN = $(TOOLDIR)/file2dsk
 ASSEMBLER = $(TOOLDIR)/lwasm

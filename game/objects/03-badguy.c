@@ -172,9 +172,9 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
 
-    if (shipState->counter) {
-        return 0;
-    }
+    //if (shipState->counter) {
+    //    return 0;
+    //}
     
     // If we are at the first bad guy...
     if (lastCob >= cob) {
