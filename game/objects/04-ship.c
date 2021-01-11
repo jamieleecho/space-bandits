@@ -64,19 +64,20 @@ void ShipInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     
     ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
     statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
-    //statePtr->counter = 0;
+    statePtr->counter = 0;
     return;
 }
 
 
 byte ShipReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
     ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
-    //if (statePtr->counter < 64) {
-    //    cob->active = TRUE;
-    //    statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
-    //} else {
-        //--statePtr->counter;
-    //}
+    byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
+    if (statePtr->counter < 64) {
+        cob->active = OBJECT_ACTIVE;
+        statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
+    } else {
+        statePtr->counter -= delta;
+    }
     return 0;
 }
 
@@ -87,18 +88,19 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     
     if ((statePtr->spriteIdx >= SHIP_SPRITE_EXPLOSION_INDEX) && ((statePtr->spriteIdx < SHIP_SPRITE_LAST_INDEX))) {
         ++statePtr->spriteIdx;
-        //--statePtr->counter;
+        --statePtr->counter;
         if (statePtr->spriteIdx >= SHIP_SPRITE_LAST_INDEX) {
-            // cob->active = FALSE;
+            statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
+            cob->active = OBJECT_INACTIVE;
         }
         return 0;
     }
     
-    //if (statePtr->counter > 0) {
-        //--statePtr->counter;
-    //    statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
-    //    return 0;
-    //}
+    if (statePtr->counter >= delta) {
+        statePtr->counter -= delta;
+        return 0;
+    }
+    statePtr->counter = 0;
     
     unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
     if (joyx < 16) {

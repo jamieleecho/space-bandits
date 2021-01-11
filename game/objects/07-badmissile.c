@@ -34,9 +34,9 @@ void BadmissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 
 
 byte BadmissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
-    //if (((ShipObjectState *)shipCob->statePtr)->counter != 0) {
-    //    return 0;
-    //}
+    if (((ShipObjectState *)shipCob->statePtr)->counter != 0) {
+        return 0;
+    }
     cob->globalY = 10;
     cob->active = OBJECT_ACTIVE;
     return 0;
@@ -47,10 +47,10 @@ byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     if (cob->globalY > 180) {
         cob->globalY = 10;
 
-        //if (((ShipObjectState *)shipCob->statePtr)->counter != 0) {
-        //    cob->active = OBJECT_INACTIVE;
-        //    return 0;
-        //}
+        if (((ShipObjectState *)shipCob->statePtr)->counter != 0) {
+            cob->active = OBJECT_INACTIVE;
+            return 0;
+        }
     } else {
         byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2)) << 1;
         cob->globalY += delta;
@@ -91,8 +91,8 @@ static void checkHitShip(DynospriteCOB *cob) {
         if (statePtr->spriteIdx < SHIP_SPRITE_EXPLOSION_INDEX) {
             statePtr->spriteIdx = SHIP_SPRITE_EXPLOSION_INDEX;
             cob->globalX &= 0xfffe;
-            //statePtr->counter = 128;
-            //PlaySound(2);
+            statePtr->counter = 128;
+            PlaySound(2);
         }
     }
 
