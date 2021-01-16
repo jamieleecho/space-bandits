@@ -47,7 +47,7 @@
 typedef struct GameGlobals {
     byte initialized;
     byte numShips;
-    unsigned score;
+    word score;
 } GameGlobals;
 
 

@@ -28,7 +28,7 @@
 #define DynospriteObject_DataSize 8
 
 /** Defines at least the number of initialization bytes */
-#define DynospriteObject_InitSize 1
+#define DynospriteObject_InitSize 2
 
 #else
 
@@ -44,8 +44,8 @@ typedef struct BadGuyObjectState {
     byte spriteMin;
     byte spriteMax;
     byte originalSpriteIdx;
-    unsigned originalGlobalX;
-    unsigned originalGlobalY;
+    word originalGlobalX;
+    word originalGlobalY;
 } BadGuyObjectState;
 
 

@@ -55,7 +55,7 @@
 
 - (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob {
     DSTexture *texture = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]][cob->statePtr[0]];
-    node.hidden = !((cob->active & 1) == 1);
+    node.hidden = ((cob->active & 2) == 0);
     node.size = texture.texture.size;
     node.texture = texture.texture;
     node.anchorPoint = texture.point;
