@@ -41,7 +41,7 @@ typedef struct DynospriteCOB {
 
 /** Datastructure for DynospriteDirectPageGlobals */
 typedef struct DynospriteDirectPageGlobals {
-    byte Obj_MotionFactor;
+    sbyte Obj_MotionFactor;
     
     byte Obj_NumCurrent;
     DynospriteCOB *Obj_CurrentTablePtr;

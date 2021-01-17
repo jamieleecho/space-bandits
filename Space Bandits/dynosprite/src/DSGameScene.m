@@ -74,7 +74,7 @@
     DynospriteDirectPageGlobalsPtr->Input_Buttons = Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2;
     DynospriteDirectPageGlobalsPtr->Input_JoystickX = self.joystickController.joystick.xaxisPosition;
     DynospriteDirectPageGlobalsPtr->Input_JoystickY = self.joystickController.joystick.yaxisPosition;
-    DynospriteDirectPageGlobalsPtr->Obj_MotionFactor = 0;
+    DynospriteDirectPageGlobalsPtr->Obj_MotionFactor = -1;
     DynospriteDirectPageGlobalsPtr->Input_UseKeyboard = !self.joystickController.useHardwareJoystick;
     
     // Initialize the objects

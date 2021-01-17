@@ -126,7 +126,7 @@ static byte backgroundNewXY() {
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickX, 25);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 52);
-    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_MotionFactor, 0);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_MotionFactor, -1);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_UseKeyboard, 0);
     
     OCMVerify([_objectCoordinator initializeObjects]);

@@ -113,7 +113,7 @@ typedef struct DynospriteDirectPageGlobals {
 
   byte Gfx_MonitorIsRGB;
 
-  byte Obj_MotionFactor;
+  sbyte Obj_MotionFactor;
 
   byte Obj_NumCurrent;
   DynospriteCOB *Obj_CurrentTablePtr;

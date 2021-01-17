@@ -44,6 +44,9 @@ byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     } else {
         byte delta = (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 1) << 1;
+        if (delta < 1) {
+            delta = 1;
+        }
         cob->globalY += delta;
         checkHitShip(cob);
     }
