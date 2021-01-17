@@ -50,7 +50,10 @@ void ShipInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         globals->initialized = TRUE;
         globals->numShips = 3;
         globals->score = 0;
-        
+        globals->shootCounter[0] = 0;
+        globals->shootCounter[1] = 0;
+        globals->shootCounter[2] = 0;
+
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(missiles)/sizeof(missiles[0]); ii++) {
             obj = findObjectByGroup(obj, MISSILE_GROUP_IDX);
@@ -74,6 +77,7 @@ byte ShipReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
     byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
     if (statePtr->counter < 64) {
         cob->active = OBJECT_ACTIVE;
+        cob->globalX = 160;
         statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
     } else {
         statePtr->counter -= delta;

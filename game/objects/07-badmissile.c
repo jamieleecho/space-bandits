@@ -24,7 +24,7 @@ void BadmissileClassInit() {
 
 void BadmissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!didInit) {
-	didInit = TRUE;
+        didInit = TRUE;
     }
     DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
     shipCob = findObjectByGroup(obj, SHIP_GROUP_IDX);
@@ -34,25 +34,16 @@ void BadmissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 
 
 byte BadmissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
-    if (((ShipObjectState *)shipCob->statePtr)->counter != 0) {
-        return 0;
-    }
-    cob->globalY = 10;
-    cob->active = OBJECT_ACTIVE;
     return 0;
 }
 
 
 byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
-    if (cob->globalY > 180) {
-        cob->globalY = 10;
-
-        if (((ShipObjectState *)shipCob->statePtr)->counter != 0) {
-            cob->active = OBJECT_INACTIVE;
-            return 0;
-        }
+    if (cob->globalY > 175) {
+        cob->active = OBJECT_INACTIVE;
+        return 0;
     } else {
-        byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2)) << 1;
+        byte delta = (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 1) << 1;
         cob->globalY += delta;
         checkHitShip(cob);
     }
@@ -60,13 +51,13 @@ byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 static void checkHitShip(DynospriteCOB *cob) {
-    if (!shipCob->active) {
+    if (!shipCob->active || ((ShipObjectState *)shipCob->statePtr)->counter) {
         return;
     }
     
     int deltaX = shipCob->globalX - cob->globalX;
     int deltaY = shipCob->globalY - cob->globalY;
-    int yy0 = deltaY - MISSILE_HEIGHT - SHIP_HALF_HEIGHT;
+    int yy0 = deltaY - SHIP_HALF_HEIGHT;
     int yy1 = deltaY + MISSILE_HEIGHT + SHIP_HALF_HEIGHT;
     byte didHit = FALSE;
     if ((yy0 <= 0) && (yy1 >= 0)) {
@@ -77,7 +68,7 @@ static void checkHitShip(DynospriteCOB *cob) {
         }
     }
     
-    int yy2 = deltaY - MISSILE_HEIGHT - SHIP_THICK_HALF_HEIGHT;
+    int yy2 = deltaY - SHIP_THICK_HALF_HEIGHT;
     if (!didHit && yy2 <= 0) {
         int xx2 = deltaX - MISSILE_HALF_WIDTH - SHIP_HALF_WIDTH;
         int xx3 = deltaX + MISSILE_HALF_WIDTH + SHIP_HALF_WIDTH;
@@ -91,7 +82,7 @@ static void checkHitShip(DynospriteCOB *cob) {
         if (statePtr->spriteIdx < SHIP_SPRITE_EXPLOSION_INDEX) {
             statePtr->spriteIdx = SHIP_SPRITE_EXPLOSION_INDEX;
             cob->globalX &= 0xfffe;
-            statePtr->counter = 128;
+            statePtr->counter = 255;
             PlaySound(2);
         }
     }

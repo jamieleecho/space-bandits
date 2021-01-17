@@ -66,7 +66,7 @@ byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     if (cob->globalY < 10) {
         cob->active = OBJECT_INACTIVE;
     } else {
-        byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2)) << 1;
+        byte delta = (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 1) << 1;
         cob->globalY -= delta;
         checkHitBadGuy(cob);
     }

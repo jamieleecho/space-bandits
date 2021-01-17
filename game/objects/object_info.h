@@ -47,7 +47,8 @@
 typedef struct GameGlobals {
     byte initialized;
     byte numShips;
-    word score;
+    dword score;
+    word shootCounter[3];
 } GameGlobals;
 
 

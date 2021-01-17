@@ -28,7 +28,7 @@
 #define DynospriteObject_DataSize 8
 
 /** Defines at least the number of initialization bytes */
-#define DynospriteObject_InitSize 2
+#define DynospriteObject_InitSize 1
 
 #else
 

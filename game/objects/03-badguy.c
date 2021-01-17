@@ -13,6 +13,8 @@ extern "C" {
 #define BAD_PTR ((DynospriteCOB *)0xffff)
 #define SCREEN_LOCATION_MIN 14
 #define SCREEN_LOCATION_MAX 306
+#define NUM_COLUMNS 11
+#define NUM_ROWS 5
 #ifdef __APPLE__
 #define DELTA_Y 2
 #else
@@ -48,23 +50,30 @@ typedef enum DirectionMode {
 } DirectionMode;
 
 
-byte didInit = FALSE;
-DirectionMode directionMode;
-DynospriteCOB *lastCob = 0x0;
-byte numInvaders = 0;
-byte deltaY = 0;
+static byte didInit = FALSE;
+static DirectionMode directionMode;
+static DynospriteCOB *lastCob = 0x0;
+static byte numInvaders = 0;
+static byte deltaY = 0;
 
 
-ShipObjectState *shipState;
-DynospriteCOB *badMissiles[NUM_BAD_MISSILES];
-DynospriteCOB **endBadMissiles;
-byte currentMissileFireColumnIndex = 0;
+static ShipObjectState *shipState;
+static DynospriteCOB *firstBadGuy;
+static DynospriteCOB *badMissiles[NUM_BAD_MISSILES];
+static DynospriteCOB **endBadMissiles;
+static byte currentMissileFireColumnIndex = 0;
+static GameGlobals *globals;
 
 
-// From the original space invaders
-byte missileFireColumns[] = {
+/** Maximum shooting counters */
+static const word shootCounterMax[] = {
+    (NUM_COLUMNS * NUM_ROWS * 193), (NUM_COLUMNS * NUM_ROWS * 201), (NUM_COLUMNS * NUM_ROWS * 369)
+};
+
+/* From the original space invaders */
+static const byte missileFireColumns[] = {
     0x01, 0x07, 0x01, 0x01, 0x01, 0x04, 0x0B, 0x01, 0x06, 0x03, 0x01, 0x01,
-    0x0B, 0x09, 0x02, 0x08, 0x02,0x0B,0x04,0x07,0x0A
+    0x0B, 0x09, 0x02, 0x08, 0x02, 0x0B, 0x04, 0x07, 0x0A
 };
 
 
@@ -80,12 +89,45 @@ void BadguyClassInit() {
 #endif
 
 
+/**
+ * Finds the lowest ship that should fire based on missileFireColumns and currentMissileFireColumnIndex.
+ * Increments and resets to 0 if needed currentMissileFireColumnIndex.
+ * @return lowest ship COB or possibly NULL.
+ */
+static DynospriteCOB *getLowestBadguyToFireMissile() {
+    byte column = missileFireColumns[currentMissileFireColumnIndex];
+    currentMissileFireColumnIndex = currentMissileFireColumnIndex + 1;
+    if (currentMissileFireColumnIndex > sizeof(missileFireColumns)/sizeof(missileFireColumns[0])) {
+        currentMissileFireColumnIndex = 0;
+    }
+    
+    DynospriteCOB *cob = NULL;
+    byte foundCob = FALSE;
+    for(byte ii=0; !foundCob && ii<NUM_COLUMNS; ii++) {
+        byte xx = column + ii;
+        if (xx >= NUM_COLUMNS) {
+            xx = xx - NUM_COLUMNS;
+        }
+        cob = firstBadGuy + (NUM_COLUMNS * (NUM_ROWS - 1)) + xx;
+        for(; cob >= firstBadGuy ; cob = cob - NUM_COLUMNS) {
+            if ((cob->active) && (cob->globalY < 130)) {
+                foundCob = TRUE;
+                break;
+            }
+        }
+    }
+    
+    return foundCob ? cob : (DynospriteCOB *)NULL;
+}
+
+
 void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!didInit) {
         didInit = TRUE;
         numInvaders = 0;
         deltaY = 0;
-        
+        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
+
         endBadMissiles = &(badMissiles[sizeof(badMissiles)/sizeof(badMissiles[0])]);
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(badMissiles)/sizeof(badMissiles[0]); ii++) {
@@ -94,6 +136,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
             obj = obj + 1;
         }
         
+        firstBadGuy = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, BADGUY_GROUP_IDX);
         shipState = (ShipObjectState *)findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, SHIP_GROUP_IDX)->statePtr;
     }
     
@@ -150,6 +193,14 @@ byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
     if (!numInvaders) {
         reset();
     }
+    if (shipState->counter) {
+        return 0;
+    }
+    
+    globals->shootCounter[0] = (globals->shootCounter[0] & 0x7fff) + 1;
+    globals->shootCounter[1] = (globals->shootCounter[1] & 0x7fff) + 2;
+    globals->shootCounter[2] = (globals->shootCounter[2] & 0x7fff) + 3;
+
     return 0;
 }
 
@@ -195,7 +246,11 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         return -1;
     }
 
+#ifdef __APPLE__
+    byte delta = (TOP_SPEED - (numInvaders >> 2)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
+#else
     byte delta = (TOP_SPEED - (numInvaders >> 3)) * (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2);
+#endif
     delta = (delta > 128) ? 1 : ((delta < 1) ? 1 : delta);
     if (directionMode & DirectionModeLeft) {
         cob->globalX -= delta;
@@ -210,6 +265,23 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
             directionMode = (DirectionMode)(directionMode | DirectionModeChangeOnNextIterMask);
         }
     }
+    
+    for(byte ii=0; ii<sizeof(globals->shootCounter)/sizeof(globals->shootCounter[0]); ii++) {
+        globals->shootCounter[ii] = (globals->shootCounter[ii] & 0x7fff) + 1;
+        if (!(badMissiles[ii]->active) && (globals->shootCounter[ii] > shootCounterMax[ii])) {
+            DynospriteCOB *cob = getLowestBadguyToFireMissile();
+            if (cob) {
+                globals->shootCounter[ii] = 0;
+                badMissiles[ii]->active = OBJECT_ACTIVE;
+                badMissiles[ii]->globalX = cob->globalX;
+                if ((badMissiles[ii]->globalX < 10) || (badMissiles[ii]->globalY < 20)) {
+                    badMissiles[ii]->globalX = 10;
+                }
+                badMissiles[ii]->globalY = cob->globalY + MISSILE_HEIGHT + BADGUY_HALF_HEIGHT;
+            }
+        }
+    }
+
     return 0;
 }
 

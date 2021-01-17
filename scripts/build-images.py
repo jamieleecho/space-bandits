@@ -189,7 +189,6 @@ def Vector3Distance(v1, v2):
     return diff[0]*diff[0] + diff[1]*diff[1] + diff[2]*diff[2]
 
 def ClosestColorOf16(LuvColor, CocoPalette, PaletteColorset):
-    global CocoLuvByRGB, CocoLuvByCMP
     BestIdx = None
     BestDist = -1
     for i in range(16):
