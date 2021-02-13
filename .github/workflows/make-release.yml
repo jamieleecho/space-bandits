@@ -19,11 +19,30 @@ jobs:
           name: dsk-images
           path: build/*.DSK
           retention-days: 1
+ 
+  build-and-test-macos:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1
 
+      - name: Build and test macOS application
+        env:
+          DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+        run: _
+          xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" test
+          xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" build CONFIGURATION_BUILD_DIR=`pwd`/build
+          '(cd build && tar cvf space-bandits.tgz *.app)'
+
+      - name: 'Upload Tar Ball Apps'
+        uses: actions/upload-artifact@v2
+        with:
+          name: tar-ball-apps
+          path: build/*.app
+          retention-days: 1
 
   upload-artifacts:
     runs-on: ubuntu-latest
-    needs: build-dsk-images
+    needs: [build-dsk-images, build-and-test-macos]
     steps:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v2
@@ -37,7 +56,9 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "./dsk-images/*.DSK"
+          path: |
+            "./dsk-images/*.DSK"
+            "./tar-ball-apps/*.app"
           allowUpdates: true
           draft: true
           name: "${{ format('{0} {1}', env.REPO_NAME, env.RELEASE_TAG) }}"
