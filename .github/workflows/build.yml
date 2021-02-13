@@ -20,5 +20,6 @@ jobs:
         env:
           DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
         run: _
+          sudo xcode-select -switch /Applications/Xcode_11.4.app
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" test
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" build CONFIGURATION_BUILD_DIR=`pwd`/build
