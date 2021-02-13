@@ -1,0 +1,12 @@
+name: Build
+
+on:
+  - push
+
+jobs:
+  build-dsk-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build
+        run: ./forge all
