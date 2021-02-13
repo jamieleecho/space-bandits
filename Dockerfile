@@ -1,12 +1,10 @@
-FROM jamieleecho/coco-dev:0.22
+FROM jamieleecho/coco-dev:0.34
 
-MAINTAINER Jamie Cho version: 0.3
+MAINTAINER Jamie Cho version: 0.4
 
-# Install ImageMagick
-RUN apt-get update && \
-  apt-get install -y imagemagick && \
-  apt-get upgrade -y && \
-  apt-get clean
+# Install wand
+#RUN pip2 install wand && \
+#  pip3 install wand
 
 # Setup tools folder
 ADD . /home/dynosprite/
