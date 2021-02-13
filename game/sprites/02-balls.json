@@ -1,0 +1,50 @@
+{
+  "Main": {
+    "Group": 2,
+    "Image": "marbles.png",
+    "Transparent": [128, 128, 128],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "Whole",
+    "Location": [13, 16],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Outline",
+    "Location": [34, 16],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Cycle_1",
+    "Location": [54, 16],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Cycle_2",
+    "Location": [54, 39],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Cycle_3",
+    "Location": [54, 62],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Cycle_4",
+    "Location": [54, 85],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Rain_1",
+    "Location": [74, 16],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Rain_2",
+    "Location": [74, 39],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Rain_3",
+    "Location": [74, 62],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Rain_4",
+    "Location": [74, 85],
+    "SinglePixelPosition": true
+  }] 
+}

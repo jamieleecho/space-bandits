@@ -1,0 +1,75 @@
+{
+  "Main": {
+    "Group": 1,
+    "Image": "numerals.png",
+    "Transparent": [128, 128, 128],
+    "Palette": 1
+  },
+
+
+  "Sprites": [{
+    "Name": "0030",
+    "Location": [7, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "0031",
+    "Location": [17, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "032",
+    "Location": [27, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "033",
+    "Location": [37, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "034",
+    "Location": [47, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "035",
+    "Location": [57, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "036",
+    "Location": [67, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "037",
+    "Location": [77, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "038",
+    "Location": [87, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "039",
+    "Location": [97, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "041",
+    "Location": [107, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "042",
+    "Location": [117, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "043",
+    "Location": [127, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "044",
+    "Location": [137, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "045",
+    "Location": [147, 5],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "046",
+    "Location": [157, 5],
+    "SinglePixelPosition": false
+  }]
+}
