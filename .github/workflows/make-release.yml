@@ -8,11 +8,10 @@ on:
 jobs:
   build-dsk-images:
     runs-on: ubuntu-latest
-    container: jamieleecho/coco-dev:0.34
     steps:
       - uses: actions/checkout@v1
       - name: Build *.dsk images
-        run: make all
+        run: ./forge all
 
       - name: 'Upload *.dsk Images'
         uses: actions/upload-artifact@v2
