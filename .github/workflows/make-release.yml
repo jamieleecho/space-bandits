@@ -17,7 +17,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dsk-images
-          path: ./*.dsk
+          path: build/*.DSK
           retention-days: 1
 
 
@@ -37,7 +37,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "./*.dsk"
+          artifacts: "./*.DSK"
           allowUpdates: true
           draft: true
           name: "${{ format('{0} {1}', env.REPO_NAME, env.RELEASE_TAG) }}"
