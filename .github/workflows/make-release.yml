@@ -57,7 +57,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: |
+          artifacts: |
             "./dsk-images/*.DSK"
             "./tar-ball-apps/*.tgz"
           allowUpdates: true
