@@ -31,7 +31,8 @@ jobs:
         run: |
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits GitHub" test
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" build CONFIGURATION_BUILD_DIR=`pwd`/build
-          '(cd build && tar cvf space-bandits.tgz *.app)'
+          cd build
+          'tar cvf space-bandits.tgz *.app'
 
       - name: 'Upload Tar Ball Apps'
         uses: actions/upload-artifact@v2
