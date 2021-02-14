@@ -1,10 +1,10 @@
 {
   "configurations" : [
     {
-      "id" : "E354B429-341B-428E-AA6B-5851928F9887",
+      "id" : "F12A95E9-C1E9-42F4-B16B-320D202BB5EC",
       "name" : "Configuration 1",
       "options" : {
-        "targetForVariableExpansion" : null
+
       }
     }
   ],
@@ -13,6 +13,10 @@
   },
   "testTargets" : [
     {
+      "skippedTests" : [
+        "DSLevelLoadingSceneTest\/testDidMoveToView",
+        "DSTextureManagerTest"
+      ],
       "target" : {
         "containerPath" : "container:Space Bandits.xcodeproj",
         "identifier" : "52E7604D21D7F5410001F3A0",

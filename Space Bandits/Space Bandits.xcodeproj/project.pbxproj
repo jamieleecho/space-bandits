@@ -247,6 +247,7 @@
 		524109EC245614650005DF54 /* DSLevelLoadingScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSLevelLoadingScene.m; sourceTree = "<group>"; };
 		524402DD21ED65CF00B02D38 /* DSTransitionScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionScene.h; sourceTree = "<group>"; };
 		524402DE21ED65CF00B02D38 /* DSTransitionScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionScene.m; sourceTree = "<group>"; };
+		5254A65F25D8CB1200AAD39B /* Dynosprite (GitHub).xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Dynosprite (GitHub).xctestplan"; sourceTree = "<group>"; };
 		525FC91D22888202007F4793 /* DSSharedSceneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSharedSceneController.h; sourceTree = "<group>"; };
 		525FC91E22888202007F4793 /* DSSharedSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedSceneController.m; sourceTree = "<group>"; };
 		52610C88243D64390052EE4F /* forest-hires.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forest-hires.png"; sourceTree = "<group>"; };
@@ -361,7 +362,7 @@
 		52F491B9245E0544009123CE /* DSTileMapMaker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileMapMaker.m; sourceTree = "<group>"; };
 		52F845242442911300B1D70F /* DSLevelFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevelFileParser.h; sourceTree = "<group>"; };
 		52F845252442911300B1D70F /* DSLevelFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSLevelFileParser.m; sourceTree = "<group>"; };
-		7D21492C25744E6600D78814 /* Space Bandits.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Space Bandits.xctestplan"; path = "Space Bandits.xcodeproj/Space Bandits.xctestplan"; sourceTree = "<group>"; };
+		7D21492C25744E6600D78814 /* Dynosprite.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Dynosprite.xctestplan; sourceTree = "<group>"; };
 		7D3110E822FF018D00833374 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		7D3110EC22FF01D700833374 /* DSCoCoJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystick.h; sourceTree = "<group>"; };
 		7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DSCoCoJoystick.mm; sourceTree = "<group>"; };
@@ -570,13 +571,13 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		52E7604921D7F4C50001F3A0 /* DynospriteCoreTests */ = {
+		52E7604921D7F4C50001F3A0 /* dynosprite tests */ = {
 			isa = PBXGroup;
 			children = (
 				52C8C6F7243DEEC400EC582C /* resources */,
 				52E7605A21D7F5960001F3A0 /* src */,
 			);
-			path = DynospriteCoreTests;
+			path = "dynosprite tests";
 			sourceTree = "<group>";
 		};
 		52E7605A21D7F5960001F3A0 /* src */ = {
@@ -633,12 +634,13 @@
 		52F1207B21D7DD63008A7900 = {
 			isa = PBXGroup;
 			children = (
-				7D21492C25744E6600D78814 /* Space Bandits.xctestplan */,
-				52E7604921D7F4C50001F3A0 /* DynospriteCoreTests */,
 				52E7603621D7EC6C0001F3A0 /* dynosprite */,
+				52E7604921D7F4C50001F3A0 /* dynosprite tests */,
 				52F1208621D7DD63008A7900 /* Space Bandits */,
 				52F1208521D7DD63008A7900 /* Products */,
 				5223365B2432CF490065E264 /* Frameworks */,
+				7D21492C25744E6600D78814 /* Dynosprite.xctestplan */,
+				5254A65F25D8CB1200AAD39B /* Dynosprite (GitHub).xctestplan */,
 			);
 			sourceTree = "<group>";
 		};
@@ -987,7 +989,7 @@
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/dynosprite/include";
-				INFOPLIST_FILE = DynospriteCoreTests/Info.plist;
+				INFOPLIST_FILE = "dynosprite tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1014,7 +1016,7 @@
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/dynosprite/include";
-				INFOPLIST_FILE = DynospriteCoreTests/Info.plist;
+				INFOPLIST_FILE = "dynosprite tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

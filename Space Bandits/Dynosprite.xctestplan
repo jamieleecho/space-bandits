@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "E354B429-341B-428E-AA6B-5851928F9887",
+      "name" : "Default",
+      "options" : {
+        "targetForVariableExpansion" : null
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Space Bandits.xcodeproj",
+        "identifier" : "52E7604D21D7F5410001F3A0",
+        "name" : "DynospriteCoreTests"
+      }
+    }
+  ],
+  "version" : 1
+}

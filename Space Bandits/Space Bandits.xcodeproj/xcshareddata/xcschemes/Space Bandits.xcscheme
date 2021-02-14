@@ -38,7 +38,7 @@
       </MacroExpansion>
       <TestPlans>
          <TestPlanReference
-            reference = "container:Space Bandits.xcodeproj/Space Bandits.xctestplan"
+            reference = "container:Dynosprite.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
