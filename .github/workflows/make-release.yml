@@ -28,7 +28,7 @@ jobs:
       - name: Build and test macOS application
         env:
           DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
-        run: _
+        run: |
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" test
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" build CONFIGURATION_BUILD_DIR=`pwd`/build
           '(cd build && tar cvf space-bandits.tgz *.app)'
@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: tar-ball-apps
-          path: build/*.app
+          path: build/*.tgz
           retention-days: 1
 
   upload-artifacts:
@@ -58,7 +58,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: |
             "./dsk-images/*.DSK"
-            "./tar-ball-apps/*.app"
+            "./tar-ball-apps/*.tgz"
           allowUpdates: true
           draft: true
           name: "${{ format('{0} {1}', env.REPO_NAME, env.RELEASE_TAG) }}"
