@@ -2,8 +2,10 @@
   "scheme": "custom",
   "schemeDefinition": "major.minor[.build][->patch]",
   "versionFile": "./package.json",
-  "files": [
-  ],
+  "files": [{
+    "path": "Space Bandits/Space Bandits/Info.plist",
+    "line": 22
+  }],
   "rules": [{
       "trigger": "manual",
       "bump": "minor",
