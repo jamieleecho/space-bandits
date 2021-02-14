@@ -4,25 +4,14 @@
       "id" : "E354B429-341B-428E-AA6B-5851928F9887",
       "name" : "Configuration 1",
       "options" : {
-
+        "targetForVariableExpansion" : null
       }
     }
   ],
   "defaultOptions" : {
-    "targetForVariableExpansion" : {
-      "containerPath" : "container:Space Bandits.xcodeproj",
-      "identifier" : "52F1208321D7DD63008A7900",
-      "name" : "Space Bandits"
-    }
+
   },
   "testTargets" : [
-    {
-      "target" : {
-        "containerPath" : "container:Space Bandits.xcodeproj",
-        "identifier" : "52F120AB21D7DD65008A7900",
-        "name" : "DynospriteUITests"
-      }
-    },
     {
       "target" : {
         "containerPath" : "container:Space Bandits.xcodeproj",
