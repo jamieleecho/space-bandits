@@ -58,8 +58,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: |
-            "./dsk-images/*.DSK"
-            "./tar-ball-apps/*.tgz"
+            "./dsk-images/*.DSK, ./tar-ball-apps/*.tgz"
           allowUpdates: true
           draft: true
           name: "${{ format('{0} {1}', env.REPO_NAME, env.RELEASE_TAG) }}"
