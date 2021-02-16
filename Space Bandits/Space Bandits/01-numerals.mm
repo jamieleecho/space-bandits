@@ -6,7 +6,8 @@
 //  Copyright © 2021 Jamie Cho. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
+#import "DSTexture.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -43,7 +44,20 @@ byte NumeralsUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
     
-void NumeralsDraw(struct DynospriteCOB *, void *scene, void *camera, void *textures, void *node) {
+void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures, void *node) {
+    SKSpriteNode *sprite = (__bridge SKSpriteNode *)node;
+    NSArray<DSTexture *> *textureArray = (__bridge NSArray<DSTexture *> *)textures;
+    sprite.anchorPoint = CGPointMake(0, 1);
+    sprite.position = CGPointMake(cob->globalX * 2, cob->globalY);
+    if (sprite.children.count == 0) {
+        for(size_t ii=0; ii<6; ii++) {
+            SKSpriteNode *digitNode = [[SKSpriteNode alloc] initWithTexture:textureArray[0].texture];
+            digitNode.anchorPoint = CGPointMake(0, 1);
+            digitNode.position = CGPointMake(ii * 8, 0);
+            [sprite addChild:digitNode];
+            digitNode.texture = textureArray[ii].texture;
+        }
+    }
 }
 
     

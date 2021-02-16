@@ -1,5 +1,5 @@
 //
-//  DSTextureManagerTest.m
+//  DSTextureManagerTest.mm
 //  DynospriteCoreTests
 //
 //  Created by Jamie Cho on 12/31/20.
@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
+#include <vector>
 #import "DSResourceController.h"
 #import "DSSpriteFileParser.h"
 #import "DSTextureManager.h"
@@ -38,6 +39,24 @@
 }
 
 @end
+
+
+struct DrawArgs {
+    DynospriteCOB *cob;
+    void *scene;
+    void *camera;
+    void *textures;
+    void *node;
+};
+
+static std::vector<DrawArgs> drawArgs;
+
+
+static void draw(DynospriteCOB *cob, void *scene, void *camera, void *textures, void *node) {
+    DrawArgs args = {cob, scene, camera, textures, node};
+    drawArgs.push_back(args);
+}
+
 
 @implementation DSTextureManagerTest
 
@@ -72,9 +91,10 @@
     _cob.statePtr = &_state;
     _cob.odtPtr = &_odt;
     _odt.draw = NULL;
+    drawArgs.clear();
 }
 
-- (void)testInit {
+- (void)testConfigureSprite {
     XCTAssertEqual(_target.resourceController, _resourceController);
     MockSKSpriteNode *sprite = [[MockSKSpriteNode alloc] init];
     _cob.groupIdx = 4;
@@ -92,6 +112,22 @@
     NSImage *spriteImage = [DSTestUtils convertToNSImage:sprite.texture.CGImage];
     NSImage *shipImage = [[NSBundle bundleForClass:self.class] imageForResource:@"ship.tiff"];
     XCTAssertTrue([DSTestUtils image:spriteImage isSameAsImage:shipImage]);
+    XCTAssertEqual(drawArgs.size(), 0);
+}
+
+
+- (void)testConfigureCustomDraw {
+    _odt.draw = draw;
+    _cob.groupIdx = 3;
+    MockSKSpriteNode *sprite = [[MockSKSpriteNode alloc] init];
+    [_target configureSprite:(id)sprite forCob:&_cob andScene:_scene andCamera:_camera];
+    XCTAssertEqual(drawArgs.size(), 1);
+    XCTAssertEqual(drawArgs[0].cob, &_cob);
+    XCTAssertTrue((__bridge SKScene *)drawArgs[0].scene == _scene);
+    XCTAssertTrue((__bridge SKCameraNode *)drawArgs[0].camera == _camera);
+    XCTAssertTrue((__bridge MockSKSpriteNode *)drawArgs[0].node == (MockSKSpriteNode *)sprite);
+    NSArray<DSTexture *> *textures = (__bridge NSArray<DSTexture *> *)drawArgs[0].textures;
+    XCTAssertEqual(textures.count, 25);
 }
 
 @end

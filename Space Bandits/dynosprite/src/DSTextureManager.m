@@ -55,7 +55,8 @@
 
 - (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob andScene:(SKScene *)scene andCamera:(SKCameraNode *)camera {
     if (cob->odtPtr->draw) {
-        
+        NSArray<DSTexture *> *textures = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]];
+        cob->odtPtr->draw(cob, (__bridge void *)scene, (__bridge void *)camera, (__bridge void *)textures, (__bridge void *)node);
     } else {
         DSTexture *texture = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]][cob->statePtr[0]];
         node.hidden = ((cob->active & 2) == 0);

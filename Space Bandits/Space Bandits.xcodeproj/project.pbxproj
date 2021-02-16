@@ -89,7 +89,7 @@
 		52796B23259E5D7D00FF17B6 /* DSTextureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52796B22259E5D7D00FF17B6 /* DSTextureManager.m */; };
 		52796B27259E7EA900FF17B6 /* DSTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 52796B26259E7EA900FF17B6 /* DSTexture.m */; };
 		52796B2B259E868600FF17B6 /* DSTextureTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52796B2A259E868600FF17B6 /* DSTextureTest.m */; };
-		52796B2D259E8EE300FF17B6 /* DSTextureManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52796B2C259E8EE300FF17B6 /* DSTextureManagerTest.m */; };
+		52796B2D259E8EE300FF17B6 /* DSTextureManagerTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52796B2C259E8EE300FF17B6 /* DSTextureManagerTest.mm */; };
 		52796B31259E90EE00FF17B6 /* 03-badguys.json in Resources */ = {isa = PBXBuildFile; fileRef = 52796B30259E90EE00FF17B6 /* 03-badguys.json */; };
 		5279A4E52436B7B000A51D98 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5279A4E32436B7AF00A51D98 /* OCMock.framework */; };
 		5279A4E72436B83B00A51D98 /* DSCoCoJoystickControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */; };
@@ -267,7 +267,7 @@
 		52796B25259E7EA900FF17B6 /* DSTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTexture.h; sourceTree = "<group>"; };
 		52796B26259E7EA900FF17B6 /* DSTexture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTexture.m; sourceTree = "<group>"; };
 		52796B2A259E868600FF17B6 /* DSTextureTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTextureTest.m; sourceTree = "<group>"; };
-		52796B2C259E8EE300FF17B6 /* DSTextureManagerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTextureManagerTest.m; sourceTree = "<group>"; };
+		52796B2C259E8EE300FF17B6 /* DSTextureManagerTest.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DSTextureManagerTest.mm; sourceTree = "<group>"; };
 		52796B30259E90EE00FF17B6 /* 03-badguys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "03-badguys.json"; sourceTree = "<group>"; };
 		5279A4E32436B7AF00A51D98 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		5279A4E62436B83B00A51D98 /* DSCoCoJoystickControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickControllerTest.m; sourceTree = "<group>"; };
@@ -619,7 +619,7 @@
 				52B1A15E244D0BAD008E7066 /* DSSpriteInfoTest.m */,
 				52169430245E595B00F4B880 /* DSTestUtils.h */,
 				52169431245E595B00F4B880 /* DSTestUtils.m */,
-				52796B2C259E8EE300FF17B6 /* DSTextureManagerTest.m */,
+				52796B2C259E8EE300FF17B6 /* DSTextureManagerTest.mm */,
 				52796B2A259E868600FF17B6 /* DSTextureTest.m */,
 				52B1A165244D2213008E7066 /* DSTileInfoTest.m */,
 				529F901A2466F2DD00C8A706 /* DSTileInfoRegistryTest.m */,
@@ -902,7 +902,7 @@
 				52A93D91245523C300D2327B /* DSAssetLoaderTest.m in Sources */,
 				5214980D24B393FD0053FDBB /* DSObjectClassDataRegistryTest.m in Sources */,
 				5265BD48247C933800FE9F3E /* DSConsTest.m in Sources */,
-				52796B2D259E8EE300FF17B6 /* DSTextureManagerTest.m in Sources */,
+				52796B2D259E8EE300FF17B6 /* DSTextureManagerTest.mm in Sources */,
 				52E7605921D7F57B0001F3A0 /* DSLevelTest.m in Sources */,
 				52B1A15D244D0222008E7066 /* DSPointTest.m in Sources */,
 				52EDA7F424A2DAAE00D3B490 /* DSImageUtilTest.mm in Sources */,

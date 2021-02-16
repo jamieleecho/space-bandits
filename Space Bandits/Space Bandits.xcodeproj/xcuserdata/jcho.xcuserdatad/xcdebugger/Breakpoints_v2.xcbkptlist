@@ -88,23 +88,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9455B783-D4E2-4B36-B4B3-59200E5E6FA8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            condition = "spriteObjectClass.groupID == 5"
-            continueAfterRunningActions = "No"
-            filePath = "dynosprite/src/DSTextureManager.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "-addSpriteObjectClass:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B5C30459-207E-4880-B1F5-DE755FBF852D"
             shouldBeEnabled = "No"
             ignoreCount = "0"
