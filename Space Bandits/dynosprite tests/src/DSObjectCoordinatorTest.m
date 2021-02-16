@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <SceneKit/SceneKit.h>
 #import "DSObjectCoordinator.h"
 
 @interface DSObjectCoordinatorTest : XCTestCase {
@@ -34,6 +35,7 @@ static size_t numClassInit3Calls = 0;
 static size_t numInitialize3Calls = 0;
 static size_t numReactivate3Calls = 0;
 static size_t numUpdate3Calls = 0;
+static size_t numDraw3Calls = 0;
 static int newReactivateLevel = 0;
 static int newUpdateLevel = 0;
 static DynospriteCOB *param1[maxNumCalls];
@@ -91,6 +93,10 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     return newUpdateLevel;
 }
 
+static void drawObj3(DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite) {
+    numDraw3Calls++;
+}
+
 
 @implementation DSObjectCoordinatorTest
 
@@ -105,6 +111,7 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     numUpdate3Calls = 0;
     newReactivateLevel = 0;
     newUpdateLevel = 0;
+    numDraw3Calls = 0;
     
     _level = [[DSLevel alloc] init];
     _level.objectGroupIndices = @[@3, @2];
@@ -146,6 +153,7 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     classData3.stateSize = 1;
     classData3.reactivateMethod = reactivateObj3;
     classData3.updateMethod = updateObj3;
+    classData3.drawMethod = drawObj3;
     _classData3 = classData3;
 
     [_classRegistry addMethods:classData2 forIndex:@2];
@@ -155,6 +163,7 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     _level.objects = @[obj1, obj2, obj3];
     
     _target = [[DSObjectCoordinator alloc] initWithLevel:_level andClassRegistry:_classRegistry];
+    XCTAssertEqual(numDraw3Calls, 0);
 }
 
 - (void)testInitialization {
@@ -171,12 +180,14 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     XCTAssert(_target.odts[2].reactivate == reactivateObj2);
     XCTAssert(_target.odts[2].update == updateObj2);
     XCTAssertEqual(_target.odts[3].initSize, 0);
-    XCTAssertEqual(_target.odts[3].drawType, 1);
+    XCTAssertEqual(_target.odts[3].drawType, 0);
+    XCTAssertTrue(_target.odts[3].draw == drawObj3);
     XCTAssert(_target.odts[3].init == initializeObj3);
     XCTAssert(_target.odts[3].reactivate == reactivateObj3);
     XCTAssert(_target.odts[3].update == updateObj3);
     XCTAssertEqual(_target.odts[2].initSize, 2);
     XCTAssertEqual(_target.odts[2].drawType, 1);
+    XCTAssertTrue(_target.odts[2].draw == NULL);
     XCTAssert(_target.odts[2].init == initializeObj2);
     XCTAssert(_target.odts[2].reactivate == reactivateObj2);
     XCTAssert(_target.odts[2].update == updateObj2);
@@ -206,6 +217,7 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     
     // Check number of objects
     XCTAssertEqual(_target.count, 3);
+    XCTAssertEqual(numDraw3Calls, 0);
 }
 
 - (void)testInitializationThrowsWhenStateSizeTooSmall {
@@ -215,19 +227,16 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     // Check odts
     XCTAssertEqual(_target.odts[2].initSize, 2);
     XCTAssertEqual(_target.odts[2].drawType, 1);
+    XCTAssertTrue(_target.odts[2].draw == NULL);
     XCTAssert(_target.odts[2].init == initializeObj2);
     XCTAssert(_target.odts[2].reactivate == reactivateObj2);
     XCTAssert(_target.odts[2].update == updateObj2);
     XCTAssertEqual(_target.odts[3].initSize, 0);
-    XCTAssertEqual(_target.odts[3].drawType, 1);
+    XCTAssertEqual(_target.odts[3].drawType, 0);
+    XCTAssertTrue(_target.odts[3].draw == drawObj3);
     XCTAssert(_target.odts[3].init == initializeObj3);
     XCTAssert(_target.odts[3].reactivate == reactivateObj3);
     XCTAssert(_target.odts[3].update == updateObj3);
-    XCTAssertEqual(_target.odts[2].initSize, 2);
-    XCTAssertEqual(_target.odts[2].drawType, 1);
-    XCTAssert(_target.odts[2].init == initializeObj2);
-    XCTAssert(_target.odts[2].reactivate == reactivateObj2);
-    XCTAssert(_target.odts[2].update == updateObj2);
     
     // Check cobs
     XCTAssertEqual(_target.cobs[0].groupIdx, 2);
@@ -254,6 +263,7 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     
     // Check number of objects
     XCTAssertEqual(_target.count, 3);
+    XCTAssertEqual(numDraw3Calls, 0);
 }
 
 - (void)testInitializeObjects {
@@ -297,6 +307,8 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     XCTAssertEqual(param2[1], _target.odts + 3);
     XCTAssertEqual(param1[2], _target.cobs + 2);
     XCTAssertEqual(param2[2], _target.odts + 2);
+    
+    XCTAssertEqual(numDraw3Calls, 0);
 }
 
 - (void)testUpdateOrReactivatesObjectsUpdatesLevels {
@@ -330,6 +342,8 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     XCTAssertEqual(numInitialize3Calls, 0);
     XCTAssertEqual(numReactivate3Calls, 1);
     XCTAssertEqual(numUpdate3Calls, 2);
+    
+    XCTAssertEqual(numDraw3Calls, 0);
 }
 
 @end

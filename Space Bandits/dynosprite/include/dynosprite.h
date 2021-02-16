@@ -17,7 +17,6 @@ extern "C" {
 #include "coco.h"
 #include "DynospriteDirectPageGlobals.h"
 
-
 /** Joystick 1 button 1 mask */
 #define Joy1Button1 1
 
@@ -59,15 +58,16 @@ int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const c
  * @param initMethod method used to initialize the object
  * @param reactivateMethod function used to reinitialize the object
  * @param updateMethod function used to update the method on each cycle
+ * @param drawMethod function used to draw the sprite
   * @param stateSize size of the state informtaion in bytes
   * @param path location of the object
   * @return some value
  */
-int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path);
+int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), void(*drawMethod)(struct DynospriteCOB *, void *, void *, void *, void *), size_t stateSize, const char *path);
 
 
 #define RegisterLevel(init, calcuateBackgroundNewXY) static int levelInit = DSLevelRegistryRegister(init, calcuateBackgroundNewXY, __FILE__)
-#define RegisterObject(classInit, init, initSize, reactivate, update, stateSize) static int objectInit = DSObjectClassDataRegistryRegisterClassData(classInit, init, initSize, reactivate, update, stateSize, __FILE__)
+#define RegisterObject(classInit, init, initSize, reactivate, update, draw, stateSize) static int objectInit = DSObjectClassDataRegistryRegisterClassData(classInit, init, initSize, reactivate, update, draw, stateSize, __FILE__)
 
 extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
 extern DynospriteGlobals *DynospriteGlobalsPtr;

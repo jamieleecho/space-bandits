@@ -11,9 +11,9 @@
 static DSObjectClassDataRegistry *_sharedInstance = nil;
 
 
-int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), size_t stateSize, const char *path) {
+int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), void(*drawMethod)(struct DynospriteCOB *, void *, void *, void *, void *), size_t stateSize, const char *path) {
     NSError *error;
-    NSRegularExpression *spriteFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.c$" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *spriteFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.(c|mm)$" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *nspath = [NSString stringWithUTF8String:path];
  
     NSCAssert([spriteFilenameRegex numberOfMatchesInString:nspath.lastPathComponent options:0 range:NSMakeRange(0, nspath.lastPathComponent.length)] == 1, ([NSString stringWithFormat:@"Unexpected object filename %@", nspath.lastPathComponent]));
@@ -26,6 +26,7 @@ int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), voi
     methods.initSize = initSize;
     methods.reactivateMethod = reactivateMethod;
     methods.updateMethod = updateMethod;
+    methods.drawMethod = drawMethod;
     methods.stateSize = stateSize;
     
     [DSObjectClassDataRegistry.sharedInstance addMethods:methods forIndex:index];

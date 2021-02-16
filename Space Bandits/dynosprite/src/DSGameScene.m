@@ -115,7 +115,7 @@
         SKSpriteNode *sprite = [[SKSpriteNode alloc] initWithColor:NSColor.redColor size:CGSizeMake(5, 5)];
         [sprites addObject:sprite];
         [self addChild:sprite];
-        [_textureManager configureSprite:sprite forCob:_objectCoordinator.cobs + ii];
+        [_textureManager configureSprite:sprite forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];
     }
     _sprites = sprites;
     
@@ -137,7 +137,7 @@
         return;
     }
     for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
-        [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii];
+        [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];
     }
  
     DynospriteDirectPageGlobalsPtr->Input_JoystickX = self.joystickController.joystick.xaxisPosition;

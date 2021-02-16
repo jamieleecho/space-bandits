@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)init;
 - (void)addSpriteObjectClass:(DSSpriteObjectClass *)spriteObjectClass;
-- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob;
+- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob andScene:(SKScene *)scene andCamera:(SKCameraNode *)camera;
 
 @end
 

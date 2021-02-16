@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SceneKit/SceneKit.h>
 #include "dynosprite.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -18,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) size_t initSize;
 @property (nonatomic) byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *);
 @property (nonatomic) byte(*updateMethod)(DynospriteCOB *, DynospriteODT *);
+@property (nonatomic) void(*drawMethod)(struct DynospriteCOB *, void *, void *, void *, void *);
 @property (nonatomic) size_t stateSize;
 
 @end

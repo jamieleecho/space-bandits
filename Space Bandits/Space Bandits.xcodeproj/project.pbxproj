@@ -30,6 +30,8 @@
 		5223365F2432D06A0065E264 /* SDL2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		522336632432D0F80065E264 /* SDL2.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		522C1363245E41C000031BD1 /* DSTileMapMakerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 522C1362245E41C000031BD1 /* DSTileMapMakerTest.m */; };
+		523A6C5225DC198F00C609B4 /* 01-numerals.mm in Sources */ = {isa = PBXBuildFile; fileRef = 523A6C5125DC198F00C609B4 /* 01-numerals.mm */; };
+		523A6C5325DC198F00C609B4 /* 01-numerals.mm in Sources */ = {isa = PBXBuildFile; fileRef = 523A6C5125DC198F00C609B4 /* 01-numerals.mm */; };
 		524109E72455EF910005DF54 /* DSTransitionImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109E62455EF910005DF54 /* DSTransitionImageLoader.m */; };
 		524109EB245604DA0005DF54 /* DSTransitionImageLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109EA245604DA0005DF54 /* DSTransitionImageLoaderTest.m */; };
 		524109ED245614650005DF54 /* DSLevelLoadingScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 524109EC245614650005DF54 /* DSLevelLoadingScene.m */; };
@@ -240,6 +242,8 @@
 		52229FAC2438BCBB0018A082 /* forest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forest.png; sourceTree = "<group>"; };
 		5227E72021E2DDA40092C947 /* DSInitScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSInitScene.h; sourceTree = "<group>"; };
 		522C1362245E41C000031BD1 /* DSTileMapMakerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileMapMakerTest.m; sourceTree = "<group>"; };
+		523A6C5125DC198F00C609B4 /* 01-numerals.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "01-numerals.mm"; sourceTree = "<group>"; };
+		523A6C5425DC1AA700C609B4 /* 01-numerals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "01-numerals.h"; sourceTree = "<group>"; };
 		524109E02455EC2B0005DF54 /* DSLevelLoadingScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSLevelLoadingScene.h; sourceTree = "<group>"; };
 		524109E52455EF910005DF54 /* DSTransitionImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionImageLoader.h; sourceTree = "<group>"; };
 		524109E62455EF910005DF54 /* DSTransitionImageLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionImageLoader.m; sourceTree = "<group>"; };
@@ -380,16 +384,16 @@
 		7DA1789B2431528600AE39D8 /* sprites */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sprites; path = ../../game/sprites; sourceTree = "<group>"; };
 		7DA1789F2431529D00AE39D8 /* tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tiles; path = ../../game/tiles; sourceTree = "<group>"; };
 		7DA178AD2431552D00AE39D8 /* 04-ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "04-ship.h"; path = "../../game/objects/04-ship.h"; sourceTree = "<group>"; };
-		7DA178AE2431552D00AE39D8 /* 03-badguy.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "03-badguy.c"; path = "../../game/objects/03-badguy.c"; sourceTree = "<group>"; };
-		7DA178AF2431552D00AE39D8 /* 04-ship.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "04-ship.c"; path = "../../game/objects/04-ship.c"; sourceTree = "<group>"; };
+		7DA178AE2431552D00AE39D8 /* 03-badguy.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "03-badguy.c"; path = "../../game/objects/03-badguy.c"; sourceTree = "<group>"; };
+		7DA178AF2431552D00AE39D8 /* 04-ship.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "04-ship.c"; path = "../../game/objects/04-ship.c"; sourceTree = "<group>"; };
 		7DA178B02431552D00AE39D8 /* object_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = object_info.h; path = ../../game/objects/object_info.h; sourceTree = "<group>"; };
-		7DA178B12431552D00AE39D8 /* 07-badmissile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "07-badmissile.c"; path = "../../game/objects/07-badmissile.c"; sourceTree = "<group>"; };
+		7DA178B12431552D00AE39D8 /* 07-badmissile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "07-badmissile.c"; path = "../../game/objects/07-badmissile.c"; sourceTree = "<group>"; };
 		7DA178B22431552D00AE39D8 /* 07-badmissile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "07-badmissile.h"; path = "../../game/objects/07-badmissile.h"; sourceTree = "<group>"; };
-		7DA178B32431552D00AE39D8 /* 05-missile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "05-missile.c"; path = "../../game/objects/05-missile.c"; sourceTree = "<group>"; };
+		7DA178B32431552D00AE39D8 /* 05-missile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "05-missile.c"; path = "../../game/objects/05-missile.c"; sourceTree = "<group>"; };
 		7DA178B42431552D00AE39D8 /* 03-badguy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "03-badguy.h"; path = "../../game/objects/03-badguy.h"; sourceTree = "<group>"; };
 		7DA178B52431552D00AE39D8 /* 05-missile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "05-missile.h"; path = "../../game/objects/05-missile.h"; sourceTree = "<group>"; };
 		7DA178B62431552D00AE39D8 /* 06-gameover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "06-gameover.h"; path = "../../game/objects/06-gameover.h"; sourceTree = "<group>"; };
-		7DA178B72431552E00AE39D8 /* 06-gameover.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "06-gameover.c"; path = "../../game/objects/06-gameover.c"; sourceTree = "<group>"; };
+		7DA178B72431552E00AE39D8 /* 06-gameover.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "06-gameover.c"; path = "../../game/objects/06-gameover.c"; sourceTree = "<group>"; };
 		7DA178BE243155A900AE39D8 /* 01-persei.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "01-persei.c"; path = "../../game/levels/01-persei.c"; sourceTree = "<group>"; };
 		7DC4E7E822FFB79A00AE8AB4 /* DSCoCoJoystickProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystickProtocol.h; sourceTree = "<group>"; };
 		7DC4E7ED22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoKeyboardJoystick.h; sourceTree = "<group>"; };
@@ -677,6 +681,7 @@
 		7DA178AC2431551D00AE39D8 /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				523A6C5125DC198F00C609B4 /* 01-numerals.mm */,
 				7DA178AE2431552D00AE39D8 /* 03-badguy.c */,
 				7DA178B42431552D00AE39D8 /* 03-badguy.h */,
 				7DA178AF2431552D00AE39D8 /* 04-ship.c */,
@@ -688,6 +693,7 @@
 				7DA178B12431552D00AE39D8 /* 07-badmissile.c */,
 				7DA178B22431552D00AE39D8 /* 07-badmissile.h */,
 				7DA178B02431552D00AE39D8 /* object_info.h */,
+				523A6C5425DC1AA700C609B4 /* 01-numerals.h */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -912,6 +918,7 @@
 				522C1363245E41C000031BD1 /* DSTileMapMakerTest.m in Sources */,
 				529201F2244151BF000B4D58 /* DSWindowControllerTest.m in Sources */,
 				521497FF24B386D70053FDBB /* DSSpriteObjectClassFactoryTest.m in Sources */,
+				523A6C5325DC198F00C609B4 /* 01-numerals.mm in Sources */,
 				529FBE3525A004C2002A51F6 /* DSTestUtils.m in Sources */,
 				529201E6243FF69E000B4D58 /* DSAppDelegateTest.m in Sources */,
 				52A93D862454FF7C00D2327B /* DSTransitionSceneInfoTest.m in Sources */,
@@ -952,6 +959,7 @@
 				7D7EED7023BD0EB700804C26 /* DSResourceController.m in Sources */,
 				5214981524B54E590053FDBB /* DSObjectCoordinator.m in Sources */,
 				529F9013246629B900C8A706 /* DSTileInfoRegistry.m in Sources */,
+				523A6C5225DC198F00C609B4 /* 01-numerals.mm in Sources */,
 				52169439245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */,
 				524109E72455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
 				7D8022992431656C00496138 /* DSObject.m in Sources */,

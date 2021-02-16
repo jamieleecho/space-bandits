@@ -53,13 +53,17 @@
     CGImageRelease(filteredImage);
 }
 
-- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob {
-    DSTexture *texture = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]][cob->statePtr[0]];
-    node.hidden = ((cob->active & 2) == 0);
-    node.size = texture.texture.size;
-    node.texture = texture.texture;
-    node.anchorPoint = texture.point;
-    node.position = CGPointMake(cob->globalX, -(float)cob->globalY);
+- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob andScene:(SKScene *)scene andCamera:(SKCameraNode *)camera {
+    if (cob->odtPtr->draw) {
+        
+    } else {
+        DSTexture *texture = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]][cob->statePtr[0]];
+        node.hidden = ((cob->active & 2) == 0);
+        node.size = texture.texture.size;
+        node.texture = texture.texture;
+        node.anchorPoint = texture.point;
+        node.position = CGPointMake(cob->globalX, -(float)cob->globalY);
+    }
 }
 
 @end

@@ -5,7 +5,7 @@
 
 
 /** Registers the object with the given functions */
-#define RegisterObject(classInit, init, initSize, reactivate, update, stateSize)
+#define RegisterObject(classInit, init, initSize, reactivate, update, draw, stateSize)
 
 /** Registers the level with the given functions */
 #define RegisterLevel(init, calculateBackgrndNewXY)

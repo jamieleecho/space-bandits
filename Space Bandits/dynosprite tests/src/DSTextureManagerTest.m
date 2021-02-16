@@ -30,8 +30,11 @@
     DSTextureManager *_target;
     id _resourceController;
     DynospriteCOB _cob;
+    DynospriteODT _odt;
     byte _state;
     id _bundle;
+    SKCameraNode *_camera;
+    SKScene *_scene;
 }
 
 @end
@@ -39,6 +42,8 @@
 @implementation DSTextureManagerTest
 
 - (void)setUp {
+    _scene = [[SKScene alloc] init];
+    _camera = [[SKCameraNode alloc] init];
     _target = [[DSTextureManager alloc] init];
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     XCTAssertNil(_target.resourceController);
@@ -65,6 +70,8 @@
     [_target addSpriteObjectClass:spriteObjectClass];
     
     _cob.statePtr = &_state;
+    _cob.odtPtr = &_odt;
+    _odt.draw = NULL;
 }
 
 - (void)testInit {
@@ -75,7 +82,7 @@
     _cob.globalX = 23;
     _cob.globalY = 99;
     _cob.active = 1;
-    [_target configureSprite:(id)sprite forCob:&_cob];
+    [_target configureSprite:(id)sprite forCob:&_cob andScene:_scene andCamera:_camera];
     
     XCTAssertEqual(sprite.position.x, _cob.globalX);
     XCTAssertEqual(sprite.position.y, -(float)_cob.globalY);
