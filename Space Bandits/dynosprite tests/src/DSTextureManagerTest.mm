@@ -104,8 +104,8 @@ static void draw(DynospriteCOB *cob, void *scene, void *camera, void *textures, 
     _cob.active = 1;
     [_target configureSprite:(id)sprite forCob:&_cob andScene:_scene andCamera:_camera];
     
-    XCTAssertEqual(sprite.position.x, _cob.globalX);
-    XCTAssertEqual(sprite.position.y, -(float)_cob.globalY);
+    XCTAssertEqual(sprite.position.x, 32.5f);
+    XCTAssertEqual(sprite.position.y, -96.0f);
     XCTAssertEqual(sprite.hidden, YES);
     XCTAssertEqual(sprite.anchorPoint.x, 0.0f);
     XCTAssertEqual(sprite.anchorPoint.y, 0.0f);

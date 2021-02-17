@@ -40,6 +40,7 @@ extern "C" DSImageUtilImageInfo DSImageUtilGetImagePixelData(CGImageRef inImage)
     // Draw the image to the bitmap context. Once we draw, the memory
     // allocated for the context for rendering will then contain the
     // raw image data in the specified color space.
+    CGContextClearRect(cgctx, rect);
     CGContextDrawImage(cgctx, rect, inImage);
 
     // Now we can get a pointer to the image data associated with the bitmap
