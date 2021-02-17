@@ -39,27 +39,36 @@
     SKTexture *mainTexture = [SKTexture textureWithCGImage:filteredImage];
     
     NSMutableArray<DSTexture *> *textures = [NSMutableArray arrayWithCapacity:spriteObjectClass.sprites.count];
+    NSMutableArray<SKTexture *> *skTextures = [NSMutableArray arrayWithCapacity:textures.count];
     for(DSSpriteInfo *spriteInfo in spriteObjectClass.sprites) {
         DSImageUtilImageInfo imageInfo = DSImageUtilGetImagePixelData(filteredImage);
         CGRect rect = DSImageUtilFindSpritePixels(imageInfo, spriteInfo.name, CGPointMake(spriteInfo.location.x, spriteInfo.location.y));
         CGRect convertedRect = CGRectMake(rect.origin.x / imageInfo.width, 1.0f - (rect.origin.y + rect.size.height) / imageInfo.height, rect.size.width / imageInfo.width, rect.size.height / imageInfo.height);
         SKTexture *spriteTexture = [SKTexture textureWithRect:convertedRect inTexture:mainTexture];
-        CGFloat offsetX = (spriteInfo.location.x - rect.origin.x) / rect.size.width;
-        CGFloat offsetY = (rect.size.height - (spriteInfo.location.y - rect.origin.y)) / rect.size.height;
+        CGFloat offsetX = -(spriteInfo.location.x - rect.origin.x - (rect.size.width / 2));
+        CGFloat offsetY = -(spriteInfo.location.y - rect.origin.y - (rect.size.height / 2));
         DSTexture *texture = [[DSTexture alloc] initWithTexture:spriteTexture andPoint:CGPointMake(offsetX, offsetY)];
         [textures addObject:texture];
+        [skTextures addObject:spriteTexture];
     }
+
+    // Map the textures
     _groupIdToTextures[[NSNumber numberWithInt:spriteObjectClass.groupID]] = textures;
+
     CGImageRelease(filteredImage);
 }
 
-- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob {
-    DSTexture *texture = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]][cob->statePtr[0]];
-    node.hidden = ((cob->active & 2) == 0);
-    node.size = texture.texture.size;
-    node.texture = texture.texture;
-    node.anchorPoint = texture.point;
-    node.position = CGPointMake(cob->globalX, -(float)cob->globalY);
+- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob andScene:(SKScene *)scene andCamera:(SKCameraNode *)camera {
+    if (cob->odtPtr->draw) {
+        NSArray<DSTexture *> *textures = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]];
+        cob->odtPtr->draw(cob, (__bridge void *)scene, (__bridge void *)camera, (__bridge void *)textures, (__bridge void *)node);
+    } else {
+        DSTexture *texture = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]][cob->statePtr[0]];
+        node.hidden = ((cob->active & 2) == 0);
+        node.size = texture.texture.size;
+        node.texture = texture.texture;
+        node.position = CGPointMake(cob->globalX + texture.point.x, -((float)cob->globalY + texture.point.y));
+    }
 }
 
 @end

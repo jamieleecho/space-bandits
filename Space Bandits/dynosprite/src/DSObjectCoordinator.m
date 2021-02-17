@@ -36,11 +36,12 @@
             NSCAssert(classData.stateSize >= 1, @"Object in group %@ has a stateSize < 1", odtIndex);
             
             odt->dataSize = classData.stateSize;
-            odt->drawType = 1; // standard draw type
+            odt->drawType = classData.drawMethod ? 0 : 1;
             odt->init = classData.initMethod;
             odt->initSize = classData.initSize;
             odt->reactivate = classData.reactivateMethod;
             odt->update = classData.updateMethod;
+            odt->draw = classData.drawMethod;
             
             // initialize the class
             classData.classInitMethod();

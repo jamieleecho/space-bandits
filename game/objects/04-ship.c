@@ -8,7 +8,6 @@ extern "C" {
 
 static byte didNotInit = TRUE;
 static DynospriteCOB *missiles[3];
-static GameGlobals *globals;
 
 
 #ifdef __APPLE__
@@ -46,14 +45,6 @@ void ShipInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (didNotInit) {
         didNotInit = FALSE;
         
-        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
-        globals->initialized = TRUE;
-        globals->numShips = 3;
-        globals->score = 0;
-        globals->shootCounter[0] = 0;
-        globals->shootCounter[1] = 0;
-        globals->shootCounter[2] = 0;
-
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(missiles)/sizeof(missiles[0]); ii++) {
             obj = findObjectByGroup(obj, MISSILE_GROUP_IDX);
@@ -129,7 +120,7 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         DynospriteCOB *missile = findFreeMissile();
         if (missile) {
             missile->globalX = cob->globalX;
-            missile->globalY = 165;
+            missile->globalY = 165 - MISSILE_HEIGHT;
             missile->active = OBJECT_ACTIVE;
             PlaySound(SOUND_LASER);
         }
@@ -138,7 +129,7 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(ShipClassInit, ShipInit, 0, ShipReactivate, ShipUpdate, sizeof(ShipObjectState));
+RegisterObject(ShipClassInit, ShipInit, 0, ShipReactivate, ShipUpdate, NULL, sizeof(ShipObjectState));
 
 #ifdef __cplusplus
 }

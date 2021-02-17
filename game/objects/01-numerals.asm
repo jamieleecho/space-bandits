@@ -40,6 +40,18 @@
             include     datastruct.asm
             include     dynosprite-symbols.asm
 
+
+* -----------------------------------------------------------------------------
+* -- GameGlobals
+GameGlobals STRUCT
+* -----------------------------------------------------------------------------
+Initialized rmb     1 
+NumShips    rmb     1 
+Score       rmb     6
+ShootCounter rmd    3
+            ENDSTRUCT
+
+
 * -----------------------------------------------------------------------------
 * -- Object 0 -- 6-digit BCD Counter
 * -----------------------------------------------------------------------------
@@ -102,23 +114,32 @@ Demo_Object0_Draw
             pshs        a
             anda        #$1F
             tfr         d,u                     * offset is in U
+            leau        $8000,u                 * U is now pointer where we will write pixel data
             puls        a
-            anda        #$E0                    * do we need to bump the page?
-            beq         >
             lsra
             lsra
             lsra
             lsra
             lsra
-!           adda        <Gfx_DrawScreenPage
-            sta         <DigitDrawSpritePage,PCR
+            adda        <Gfx_DrawScreenPage     * page is in A
+            * corner case: if starting offset is really close to the beginning of a page, we need to map the prior page as well,
+            * because the draw/erase functions may load/store the first byte with an offset of up to -2 from the X register
+            cmpu        #$8004
+            bhs         >
+            leau        $2000,u
+            deca
+ IFDEF DEBUG
+            bpl         >
+            swi                                 * error: starting page is first page
+ ENDC
+!           sta         <DigitDrawSpritePage,PCR
+            * screen window is mapped to $8000-$BFFF
             sta         $FFA4
             inca
             sta         $FFA5                   * screen window is mapped to $8000-$BFFF
-            leau        $8000,u                 * U is now pointer where we will write pixel data
             exg         x,u
             ldy         COB.sprPtr,u            * Y is pointer to Sprite Descriptor Table for group 0 (numerals)
-            ldu         COB.statePtr,u
+            ldu         #UserGlobals_Init+GameGlobals.Score
             lda         #101010b                * draw 6 digits (weird counter)
             ldb         ,u+                     * get first byte
             bra         DigitDraw
@@ -151,6 +172,7 @@ DigitDraw
             lda         <DigitDrawSpritePage,PCR
             sta         5,y                     * store page where pixel data were stored
             ldd         2,s                     * D is value of X before push (graphics memory pointer)
+            subd        #$2000                  * graphics memory window starts from $6000 during sprite erase (our window starts at $8000)
             std         6,y
             clr         8,y
             leay        9,y                     * now Y is pointer to end of sprite erase heap
@@ -227,20 +249,29 @@ Demo_Object1_Draw
             pshs        a
             anda        #$1F
             tfr         d,u                     * offset is in U
+            leau        $8000,u                 * U is now pointer where we will write pixel data
             puls        a
-            anda        #$E0                    * do we need to bump the page?
-            beq         >
             lsra
             lsra
             lsra
             lsra
             lsra
-!           adda        <Gfx_DrawScreenPage
-            sta         DigitDrawSpritePage,PCR
+            adda        <Gfx_DrawScreenPage     * page is in A
+            * corner case: if starting offset is really close to the beginning of a page, we need to map the prior page as well,
+            * because the draw/erase functions may load/store the first byte with an offset of up to -2 from the X register
+            cmpu        #$8004
+            bhs         >
+            leau        $2000,u
+            deca
+ IFDEF DEBUG
+            bpl         >
+            swi                                 * error: starting page is first page
+ ENDC
+!           sta         DigitDrawSpritePage,PCR
+            * screen window is mapped to $8000-$BFFF
             sta         $FFA4
             inca
             sta         $FFA5                   * screen window is mapped to $8000-$BFFF
-            leau        $8000,u                 * U is now pointer where we will write pixel data
             exg         x,u
             ldy         COB.sprPtr,u            * Y is pointer to Sprite Descriptor Table for group 0 (numerals)
             ldu         COB.statePtr,u
@@ -286,5 +317,4 @@ ObjectDescriptorTable
                         fdb     Demo_Object1_Update
                         fdb     Demo_Object1_Draw
                         fdb     0,0             * res2
-
 

@@ -19,7 +19,7 @@
 #define SOUND_LASER 1
 #define SOUND_EXPLOSION 2
 
-#define NUM_BAD_GUYS 55
+#define NUM_BAD_GUYS 45
 #define NUM_MISSILES 3
 #define NUM_BAD_MISSILES 3
 
@@ -30,7 +30,7 @@
 #define SHIP_HALF_HEIGHT 15
 #define SHIP_THICK_HALF_HEIGHT 7
 #define MISSILE_HALF_WIDTH 2
-#define MISSILE_HEIGHT 10
+#define MISSILE_HEIGHT 8
 
 #define BADGUY_SPRITE_ENEMY_SWATH_INDEX 0
 #define BADGUY_SPRITE_BLADE_INDEX 3
@@ -47,7 +47,7 @@
 typedef struct GameGlobals {
     byte initialized;
     byte numShips;
-    dword score;
+    byte score[6];
     word shootCounter[3];
 } GameGlobals;
 
@@ -70,6 +70,66 @@ static DynospriteCOB *findObjectByGroup(DynospriteCOB *obj, byte groupIdx) {
         }
     }
     return 0;
+}
+
+
+/**
+ * Bumps the score by amount where amount must be a binary coded decimal number < 90.
+ */
+#ifdef __cplusplus
+[[maybe_unused]]
+#endif
+static void bumpScore(byte amount) {
+#if __APPLE__
+    byte *score0 = ((GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init))->score;
+    byte *score2 = score0 + 2;
+    
+    byte amount0 = amount & 0xf;
+    byte amount1 = amount & 0xf0;
+    for (byte *score = score2; score >=score0; score--) {
+        byte lsd = ((*score & 0xf) + amount0);
+        amount0 = 0;
+        if (lsd > 9) {
+            lsd = (lsd - 0x0a);
+            amount1 = amount1 + 0x10;
+        }
+
+        byte msd = ((*score & 0xf0) + amount1);
+        if (amount1) {
+            if (msd > 0x90) {
+                msd = (msd - 0xa0);
+                amount0 = 1;
+            }
+            amount1 = 0;
+        }
+        
+        *score = msd | lsd;
+
+        if (!(amount0 | amount1)) {
+            break;
+        }
+    }
+#else
+    byte *score0 = ((GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init))->score;
+    asm {
+        ldx score0
+
+        lda 2,x
+        adca amount
+        daa
+        sta 2,x
+
+        lda 1,x
+        adca #0
+        daa
+        sta 1,x
+
+        lda ,x
+        adca #0
+        daa
+        sta ,x
+    }
+#endif
 }
 
 #endif

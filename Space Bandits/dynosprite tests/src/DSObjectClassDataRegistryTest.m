@@ -78,21 +78,24 @@ static void classInit1() { }
 static void init1(DynospriteCOB *cob, DynospriteODT *odt, byte *data) { }
 static byte reactivate1(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 static byte update1(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
+static void draw1(struct DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite) { }
 
 static void classInit2() { }
 static void init2(DynospriteCOB *cob, DynospriteODT *odt, byte *data) { }
 static byte reactivate2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 static byte update2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
+static void draw2(struct DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite) { }
 
 - (void)testAddsMethodsFromFile {
-    XCTAssertEqual(1,  DSObjectClassDataRegistryRegisterClassData(classInit1, init1, 3, reactivate1, update1, 128, "32-hello.c"));
-    XCTAssertEqual(1, DSObjectClassDataRegistryRegisterClassData(classInit2, init2, 4, reactivate2, update2, 64, "09-goodbyehello.c"));
+    XCTAssertEqual(1,  DSObjectClassDataRegistryRegisterClassData(classInit1, init1, 3, reactivate1, update1, draw1, 128, "32-hello.c"));
+    XCTAssertEqual(1, DSObjectClassDataRegistryRegisterClassData(classInit2, init2, 4, reactivate2, update2, draw2, 64, "09-goodbyehello.mm"));
     DSObjectClassData *methods1 = [DSObjectClassDataRegistry.sharedInstance methodsForIndex:@32];
     XCTAssertTrue(methods1.classInitMethod == classInit1);
     XCTAssertTrue(methods1.initMethod == init1);
     XCTAssertTrue(methods1.initSize == 3);
     XCTAssertTrue(methods1.reactivateMethod == reactivate1);
     XCTAssertTrue(methods1.updateMethod == update1);
+    XCTAssertTrue(methods1.drawMethod == draw1);
     XCTAssertEqual(methods1.stateSize, 128);
     DSObjectClassData *methods2 = [DSObjectClassDataRegistry.sharedInstance methodsForIndex:@9];
     XCTAssertTrue(methods2.classInitMethod == classInit2);
@@ -100,13 +103,15 @@ static byte update2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
     XCTAssertTrue(methods2.initSize == 4);
     XCTAssertTrue(methods2.reactivateMethod == reactivate2);
     XCTAssertTrue(methods2.updateMethod == update2);
+    XCTAssertTrue(methods2.drawMethod == draw2);
     XCTAssertEqual(methods2.stateSize, 64);
 }
 
 - (void)testThrowsIfBogusFile {
-    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(classInit1, init1, 2, reactivate1, update1, 64, "xx-hello.c"));
-    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(classInit1, init1, 0, reactivate1, update1, 64, "20-hello.cpp"));
-    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(classInit2, init1, 1, reactivate1, update1, 64, "-1-hello.cpp"));
+    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(classInit1, init1, 2, reactivate1, update1, draw1, 64, "xx-hello.c"));
+    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(classInit1, init1, 2, reactivate1, update1, draw1, 64, "xx-hello.m"));
+    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(classInit1, init1, 0, reactivate1, update1, draw1, 64, "20-hello.cpp"));
+    XCTAssertThrows(DSObjectClassDataRegistryRegisterClassData(classInit2, init1, 1, reactivate1, update1, draw1, 64, "-1-hello.cpp"));
 }
 
 @end

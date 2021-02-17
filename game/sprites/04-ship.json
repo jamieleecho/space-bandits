@@ -8,55 +8,55 @@
 
   "Sprites": [{
     "Name": "Ship1",
-    "Location": [179, 433],
+    "Location": [178, 429],
     "SinglePixelPosition": true
   }, {
     "Name": "Ship2",
-    "Location": [146, 433],
+    "Location": [146, 429],
     "SinglePixelPosition": true
   }, {
     "Name": "Ship3",
-    "Location": [115, 433],
+    "Location": [114, 429],
     "SinglePixelPosition": true
   }, {
-    "Name": "Explosion1",
-    "Location": [232, 284],
-    "SinglePixelPosition": false
-  }, {
-    "Name": "Explosion2",
-    "Location": [256, 284],
-    "SinglePixelPosition": false
-  }, {
-    "Name": "Explosion3",
-    "Location": [280, 284],
-    "SinglePixelPosition": false
-  }, {
-    "Name": "Explosion4",
-    "Location": [304, 284],
-    "SinglePixelPosition": false
-  }, {
-    "Name": "Explosion5",
-    "Location": [231, 308],
-    "SinglePixelPosition": false
-  }, {
-    "Name": "Explosion6",
-    "Location": [256, 308],
-    "SinglePixelPosition": false
-  }, {
-    "Name": "Explosion7",
-    "Location": [280, 308],
-    "SinglePixelPosition": false
-  }, {
-    "Name": "Explosion8",
-    "Location": [304, 308],
-    "SinglePixelPosition": false
-  }, {
-    "Name": "Explosion9",
-    "Location": [232, 332],
-    "SinglePixelPosition": false
-  }, {
-    "Name": "Explosion10",
-    "Location": [256, 332],
-    "SinglePixelPosition": false
-  }]
+     "Name": "Explosion1",
+      "Location": [230, 281],
+      "SinglePixelPosition": false
+    }, {
+      "Name": "Explosion2",
+      "Location": [254, 282],
+      "SinglePixelPosition": false
+    }, {
+      "Name": "Explosion3",
+      "Location": [278, 282],
+      "SinglePixelPosition": false
+    }, {
+      "Name": "Explosion4",
+      "Location": [302, 282],
+      "SinglePixelPosition": false
+    }, {
+      "Name": "Explosion5",
+      "Location": [230, 306],
+      "SinglePixelPosition": false
+    }, {
+      "Name": "Explosion6",
+      "Location": [254, 306],
+      "SinglePixelPosition": false
+    }, {
+      "Name": "Explosion7",
+      "Location": [278, 307],
+      "SinglePixelPosition": false
+    }, {
+      "Name": "Explosion8",
+      "Location": [303, 307],
+      "SinglePixelPosition": false
+    }, {
+      "Name": "Explosion9",
+      "Location": [230, 331],
+      "SinglePixelPosition": false
+    }, {
+      "Name": "Explosion10",
+      "Location": [254, 331],
+      "SinglePixelPosition": false
+    }]
 }

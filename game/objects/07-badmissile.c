@@ -93,7 +93,7 @@ static void checkHitShip(DynospriteCOB *cob) {
     return;
 }
 
-RegisterObject(BadmissileClassInit, BadmissileInit, 0, BadmissileReactivate, BadmissileUpdate, sizeof(BadMissleObjectState));
+RegisterObject(BadmissileClassInit, BadmissileInit, 0, BadmissileReactivate, BadmissileUpdate, NULL, sizeof(BadMissleObjectState));
 
 #ifdef __cplusplus
 }

@@ -8,7 +8,7 @@
 
   "Sprites": [{
     "Name": "Missile1",
-    "Location": [114, 415],
+    "Location": [115, 405],
     "SinglePixelPosition": true
   }]
 }

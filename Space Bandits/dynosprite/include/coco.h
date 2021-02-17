@@ -9,6 +9,8 @@
 #ifndef coco_h
 #define coco_h
 
+#include <string.h>
+
 typedef unsigned char byte;
 typedef unsigned short word;
 typedef unsigned int dword;
