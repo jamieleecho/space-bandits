@@ -8,7 +8,6 @@ extern "C" {
 
 static byte didNotInit = TRUE;
 static DynospriteCOB *missiles[3];
-static GameGlobals *globals;
 
 
 #ifdef __APPLE__
@@ -46,14 +45,6 @@ void ShipInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (didNotInit) {
         didNotInit = FALSE;
         
-        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
-        globals->initialized = TRUE;
-        globals->numShips = 3;
-        globals->score = 0;
-        globals->shootCounter[0] = 0;
-        globals->shootCounter[1] = 0;
-        globals->shootCounter[2] = 0;
-
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(missiles)/sizeof(missiles[0]); ii++) {
             obj = findObjectByGroup(obj, MISSILE_GROUP_IDX);

@@ -50,11 +50,14 @@ static void checkHitBadGuy(DynospriteCOB *cob) {
         if (obj->active &&
             (obj->globalY >= yy0) && (obj->globalY <= yy1) &&
             (obj->globalX >= xx0) && (obj->globalX <= xx1)) {
-            cob->active = OBJECT_INACTIVE;
             BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
             if (statePtr->spriteIdx < BADGUY_SPRITE_EXPLOSION_INDEX) {
+                cob->active = OBJECT_INACTIVE;
                 statePtr->spriteIdx = BADGUY_SPRITE_EXPLOSION_INDEX;
                 obj->globalX &= 0xfffe; // explosions must be on even byte boundaries
+                bumpScore(0x10);
+            } else {
+                continue;
             }
             return;
         }

@@ -40,6 +40,18 @@
             include     datastruct.asm
             include     dynosprite-symbols.asm
 
+
+* -----------------------------------------------------------------------------
+* -- GameGlobals
+GameGlobals STRUCT
+* -----------------------------------------------------------------------------
+Initialized rmb     1 
+NumShips    rmb     1 
+Score       rmb     6
+ShootCounter rmd    3
+            ENDSTRUCT
+
+
 * -----------------------------------------------------------------------------
 * -- Object 0 -- 6-digit BCD Counter
 * -----------------------------------------------------------------------------
@@ -127,7 +139,7 @@ Demo_Object0_Draw
             sta         $FFA5                   * screen window is mapped to $8000-$BFFF
             exg         x,u
             ldy         COB.sprPtr,u            * Y is pointer to Sprite Descriptor Table for group 0 (numerals)
-            ldu         COB.statePtr,u
+            ldu         #UserGlobals_Init+GameGlobals.Score
             lda         #101010b                * draw 6 digits (weird counter)
             ldb         ,u+                     * get first byte
             bra         DigitDraw

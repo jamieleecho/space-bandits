@@ -8,6 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "DSTexture.h"
+#import "object_info.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -49,15 +50,19 @@ void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures,
     NSArray<DSTexture *> *textureArray = (__bridge NSArray<DSTexture *> *)textures;
     sprite.anchorPoint = CGPointMake(0, 1);
     sprite.position = CGPointMake(cob->globalX * 2, cob->globalY);
-    if (sprite.children.count == 0) {
-        for(size_t ii=0; ii<6; ii++) {
+    byte *score = ((GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init))->score;
+    for(size_t ii=0; ii<6; ii++) {
+        if (sprite.children.count <= ii) {
             SKSpriteNode *digitNode = [[SKSpriteNode alloc] initWithTexture:textureArray[0].texture];
             digitNode.size = CGSizeMake(8, 8);
             digitNode.anchorPoint = CGPointMake(0, 1);
             digitNode.position = CGPointMake(ii * 8, 0);
             [sprite addChild:digitNode];
-            digitNode.texture = textureArray[ii].texture;
         }
+        SKSpriteNode *digitNode = (SKSpriteNode *)sprite.children[ii];
+        byte msb = (ii + 1) & 1;
+        byte digit = (msb ? score[ii / 2] >> 4 : score[ii / 2]) & 0xf;
+        digitNode.texture = textureArray[digit].texture;
     }
 }
 

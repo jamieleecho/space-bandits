@@ -8,11 +8,11 @@
 
 
   "Sprites": [{
-    "Name": "0030",
+    "Name": "030",
     "Location": [7, 5],
     "SinglePixelPosition": false
   }, {
-    "Name": "0031",
+    "Name": "031",
     "Location": [18, 5],
     "SinglePixelPosition": false
   }, {
