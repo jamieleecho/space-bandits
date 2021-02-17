@@ -52,6 +52,7 @@ void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures,
     if (sprite.children.count == 0) {
         for(size_t ii=0; ii<6; ii++) {
             SKSpriteNode *digitNode = [[SKSpriteNode alloc] initWithTexture:textureArray[0].texture];
+            digitNode.size = CGSizeMake(8, 8);
             digitNode.anchorPoint = CGPointMake(0, 1);
             digitNode.position = CGPointMake(ii * 8, 0);
             [sprite addChild:digitNode];

@@ -107,8 +107,8 @@ static void draw(DynospriteCOB *cob, void *scene, void *camera, void *textures, 
     XCTAssertEqual(sprite.position.x, _cob.globalX);
     XCTAssertEqual(sprite.position.y, -(float)_cob.globalY);
     XCTAssertEqual(sprite.hidden, YES);
-    XCTAssert(fabs(sprite.anchorPoint.x - 0.086956521739130432) < 0.00001);
-    XCTAssert(fabs(sprite.anchorPoint.y - 0.39285714285714285) < 0.00001);
+    XCTAssertEqual(sprite.anchorPoint.x, 0.0f);
+    XCTAssertEqual(sprite.anchorPoint.y, 0.0f);
     NSImage *spriteImage = [DSTestUtils convertToNSImage:sprite.texture.CGImage];
     NSImage *shipImage = [[NSBundle bundleForClass:self.class] imageForResource:@"ship.tiff"];
     XCTAssertTrue([DSTestUtils image:spriteImage isSameAsImage:shipImage]);

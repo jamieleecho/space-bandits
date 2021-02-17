@@ -39,6 +39,7 @@
     SKTexture *mainTexture = [SKTexture textureWithCGImage:filteredImage];
     
     NSMutableArray<DSTexture *> *textures = [NSMutableArray arrayWithCapacity:spriteObjectClass.sprites.count];
+    NSMutableArray<SKTexture *> *skTextures = [NSMutableArray arrayWithCapacity:textures.count];
     for(DSSpriteInfo *spriteInfo in spriteObjectClass.sprites) {
         DSImageUtilImageInfo imageInfo = DSImageUtilGetImagePixelData(filteredImage);
         CGRect rect = DSImageUtilFindSpritePixels(imageInfo, spriteInfo.name, CGPointMake(spriteInfo.location.x, spriteInfo.location.y));
@@ -48,8 +49,21 @@
         CGFloat offsetY = (rect.size.height - (spriteInfo.location.y - rect.origin.y)) / rect.size.height;
         DSTexture *texture = [[DSTexture alloc] initWithTexture:spriteTexture andPoint:CGPointMake(offsetX, offsetY)];
         [textures addObject:texture];
+        [skTextures addObject:spriteTexture];
     }
+
+    // Map the textures
     _groupIdToTextures[[NSNumber numberWithInt:spriteObjectClass.groupID]] = textures;
+
+    // This is probably superstiation, but wait for textures to load to avoid texture
+    __block BOOL didLoad = NO;
+    [SKTexture preloadTextures:skTextures withCompletionHandler:^{
+        didLoad = YES;
+    }];
+    while(!didLoad) {
+        usleep(100);
+    }
+
     CGImageRelease(filteredImage);
 }
 
@@ -62,7 +76,6 @@
         node.hidden = ((cob->active & 2) == 0);
         node.size = texture.texture.size;
         node.texture = texture.texture;
-        node.anchorPoint = texture.point;
         node.position = CGPointMake(cob->globalX, -(float)cob->globalY);
     }
 }

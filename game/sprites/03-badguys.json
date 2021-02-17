@@ -8,103 +8,103 @@
 
   "Sprites": [{
     "Name": "EnemySwath1",
-    "Location": [20, 226],
+    "Location": [19, 224],
     "SinglePixelPosition": true
   }, {
     "Name": "EnemySwath2",
-    "Location": [20, 238],
+    "Location": [19, 236],
     "SinglePixelPosition": true
   }, {
     "Name": "EnemySwath3",
-    "Location": [20, 250],
+    "Location": [18, 248],
     "SinglePixelPosition": true
   }, {
     "Name": "Blade1",
-    "Location": [101, 225],
+    "Location": [100, 224],
     "SinglePixelPosition": true
   }, {
     "Name": "Blade2",
-    "Location": [101, 236],
+    "Location": [100, 235],
     "SinglePixelPosition": true
   }, {
     "Name": "Blade3",
-    "Location": [101, 247],
+    "Location": [100, 246],
     "SinglePixelPosition": true
   }, {
     "Name": "Blade4",
-    "Location": [101, 259],
+    "Location": [100, 258],
     "SinglePixelPosition": true
   }, {
     "Name": "Dude1",
-    "Location": [126, 226],
+    "Location": [125, 223],
     "SinglePixelPosition": true
   }, {
     "Name": "Dude2",
-    "Location": [126, 239],
+    "Location": [125, 236],
     "SinglePixelPosition": true
   }, {
     "Name": "Dude3",
-    "Location": [126, 252],
+    "Location": [125, 249],
     "SinglePixelPosition": true
   }, {
     "Name": "Dude4",
-    "Location": [126, 265],
+    "Location": [125, 262],
     "SinglePixelPosition": true
   }, {
     "Name": "Tiny1",
-    "Location": [78, 223],
+    "Location": [77, 223],
     "SinglePixelPosition": true
   }, {
     "Name": "Tiny2",
-    "Location": [78, 230],
+    "Location": [77, 230],
     "SinglePixelPosition": true
   }, {
     "Name": "Tivo1",
-    "Location": [155, 225],
+    "Location": [154, 224],
     "SinglePixelPosition": true
   }, {
     "Name": "Tivo2",
-    "Location": [155, 239],
+    "Location": [154, 238],
     "SinglePixelPosition": true
   }, {
     "Name": "Explosion1",
-    "Location": [232, 284],
+    "Location": [230, 281],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion2",
-    "Location": [256, 284],
+    "Location": [254, 282],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion3",
-    "Location": [280, 284],
+    "Location": [278, 282],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion4",
-    "Location": [304, 284],
+    "Location": [302, 282],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion5",
-    "Location": [231, 308],
+    "Location": [230, 306],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion6",
-    "Location": [256, 308],
+    "Location": [254, 306],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion7",
-    "Location": [280, 308],
+    "Location": [278, 307],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion8",
-    "Location": [304, 308],
+    "Location": [303, 307],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion9",
-    "Location": [232, 332],
+    "Location": [230, 331],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion10",
-    "Location": [256, 332],
+    "Location": [254, 331],
     "SinglePixelPosition": false
   }]
 }
