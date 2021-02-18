@@ -140,17 +140,16 @@
         [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];
     }
  
+    // Update the globals
+    memcpy(DynospriteDirectPageGlobalsPtr->Input_KeyMatrixDB, self.debouncedKeys, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrixDB));
     DynospriteDirectPageGlobalsPtr->Input_JoystickX = self.joystickController.joystick.xaxisPosition;
     DynospriteDirectPageGlobalsPtr->Input_JoystickY = self.joystickController.joystick.yaxisPosition;
     DynospriteDirectPageGlobalsPtr->Input_Buttons = ((self.joystickController.joystick.button0Pressed ? 0 : Joy1Button1) | (self.joystickController.joystick.button1Pressed ? 0 : Joy1Button2)) | Joy2Button1 | Joy2Button2;
 }
 
 - (void)update:(NSTimeInterval)currentTime {
-    [super update:currentTime];
-    
-    if (!self.isPaused) {
-        [self runOneGameLoop];
-    }
+    [super update:currentTime];    
+    [self runOneGameLoop];
 }
 
 @end

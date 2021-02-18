@@ -259,18 +259,25 @@ static byte backgroundNewXY() {
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button2 | Joy2Button1 | Joy2Button2);
 }
 
-- (void)testUpdateWhenPaused {
+- (void)testRunOneGameLoopTransfersButtonPresses {
     [self commonInit];
-    OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
-    id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
     [_target initializeLevel];
+    byte *matrix = DynospriteDirectPageGlobalsPtr->Input_KeyMatrixDB;
+    memset(matrix, 0, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrixDB));
     
-    _target.isPaused = YES;
-    OCMStub([_joystickController joystick]).andReturn(joystick);
-    OCMStub([joystick button0Pressed]).andReturn(YES);
-    OCMStub([joystick button1Pressed]).andReturn(NO);
-    [_target update:1];
-    XCTAssertNotEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button2 | Joy2Button1 | Joy2Button2);
+    NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"p\x1byn" isARepeat:NO keyCode:0];
+    [_target keyDown:keyEvent];
+    [_target runOneGameLoop];
+    XCTAssertEqual(matrix[0], 0x04);
+    XCTAssertEqual(matrix[2], 0x40);
+    XCTAssertEqual(matrix[1], 0x08);
+    XCTAssertEqual(matrix[6], 0x02);
+    [_target keyUp:keyEvent];
+    [_target runOneGameLoop];
+    XCTAssertEqual(matrix[0], 0x00);
+    XCTAssertEqual(matrix[2], 0x00);
+    XCTAssertEqual(matrix[1], 0x00);
+    XCTAssertEqual(matrix[6], 0x00);
 }
 
 @end
