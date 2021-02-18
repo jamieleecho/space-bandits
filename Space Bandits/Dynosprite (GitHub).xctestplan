@@ -15,6 +15,7 @@
     {
       "skippedTests" : [
         "DSLevelLoadingSceneTest\/testDidMoveToView",
+        "DSSceneTest\/testClearsMatrixWhenMovedFromView",
         "DSTextureManagerTest"
       ],
       "target" : {
