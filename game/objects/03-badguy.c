@@ -277,11 +277,6 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
                 globals->shootCounter[ii] = 0;
                 badMissiles[ii]->active = OBJECT_ACTIVE;
                 badMissiles[ii]->globalX = cob->globalX;
-                if (cob < firstBadGuy) {
-                    asm {
-                    }
-                } else if (cob >= firstBadGuy + NUM_BAD_GUYS) {
-                }
                 badMissiles[ii]->globalY = cob->globalY + MISSILE_HEIGHT + BADGUY_HALF_HEIGHT;
             }
         }
