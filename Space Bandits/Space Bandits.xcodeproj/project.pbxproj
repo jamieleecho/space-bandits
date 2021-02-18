@@ -109,6 +109,7 @@
 		529F9013246629B900C8A706 /* DSTileInfoRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 529F9012246629B900C8A706 /* DSTileInfoRegistry.m */; };
 		529F901B2466F2DD00C8A706 /* DSTileInfoRegistryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 529F901A2466F2DD00C8A706 /* DSTileInfoRegistryTest.m */; };
 		529FBE3525A004C2002A51F6 /* DSTestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 52169431245E595B00F4B880 /* DSTestUtils.m */; };
+		52A0C03625DE607100D807EC /* 08-shipcounter.c in Sources */ = {isa = PBXBuildFile; fileRef = 52A0C03525DE607100D807EC /* 08-shipcounter.c */; };
 		52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */; };
 		52A90E5B21E2F78300CC2643 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 52A90E5921E2F78300CC2643 /* levels */; };
 		52A90E5C21E2F78300CC2643 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 52A90E5A21E2F78300CC2643 /* images */; };
@@ -286,6 +287,8 @@
 		529F9011246629B900C8A706 /* DSTileInfoRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTileInfoRegistry.h; sourceTree = "<group>"; };
 		529F9012246629B900C8A706 /* DSTileInfoRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileInfoRegistry.m; sourceTree = "<group>"; };
 		529F901A2466F2DD00C8A706 /* DSTileInfoRegistryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTileInfoRegistryTest.m; sourceTree = "<group>"; };
+		52A0C03425DE607100D807EC /* 08-shipcounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "08-shipcounter.h"; path = "../../game/objects/08-shipcounter.h"; sourceTree = "<group>"; };
+		52A0C03525DE607100D807EC /* 08-shipcounter.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "08-shipcounter.c"; path = "../../game/objects/08-shipcounter.c"; sourceTree = "<group>"; };
 		52A90E3221E2E8A700CC2643 /* DSConfigFileParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSConfigFileParser.h; sourceTree = "<group>"; };
 		52A90E3321E2E8A700CC2643 /* DSConfigFileParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSConfigFileParser.m; sourceTree = "<group>"; };
 		52A90E5921E2F78300CC2643 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../../game/levels; sourceTree = "<group>"; };
@@ -681,6 +684,8 @@
 		7DA178AC2431551D00AE39D8 /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				7DA178B02431552D00AE39D8 /* object_info.h */,
+				523A6C5425DC1AA700C609B4 /* 01-numerals.h */,
 				523A6C5125DC198F00C609B4 /* 01-numerals.mm */,
 				7DA178AE2431552D00AE39D8 /* 03-badguy.c */,
 				7DA178B42431552D00AE39D8 /* 03-badguy.h */,
@@ -692,8 +697,8 @@
 				7DA178B62431552D00AE39D8 /* 06-gameover.h */,
 				7DA178B12431552D00AE39D8 /* 07-badmissile.c */,
 				7DA178B22431552D00AE39D8 /* 07-badmissile.h */,
-				7DA178B02431552D00AE39D8 /* object_info.h */,
-				523A6C5425DC1AA700C609B4 /* 01-numerals.h */,
+				52A0C03525DE607100D807EC /* 08-shipcounter.c */,
+				52A0C03425DE607100D807EC /* 08-shipcounter.h */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -960,6 +965,7 @@
 				5214981524B54E590053FDBB /* DSObjectCoordinator.m in Sources */,
 				529F9013246629B900C8A706 /* DSTileInfoRegistry.m in Sources */,
 				523A6C5225DC198F00C609B4 /* 01-numerals.mm in Sources */,
+				52A0C03625DE607100D807EC /* 08-shipcounter.c in Sources */,
 				52169439245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */,
 				524109E72455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
 				7D8022992431656C00496138 /* DSObject.m in Sources */,
