@@ -96,6 +96,9 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         if (statePtr->spriteIdx >= SHIP_SPRITE_LAST_INDEX) {
             statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
             cob->active = OBJECT_INACTIVE;
+            if (--globals->numShips == 0x0) {
+                globals->gameState = GameStateOver;
+            }
         }
         return 0;
     }

@@ -1,0 +1,14 @@
+{
+  "Main": {
+    "Group": 8,
+    "Image": "../tiles/01-moon.gif",
+    "Transparent": [254, 0, 254],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "ShipCounter1",
+    "Location": [238, 374],
+    "SinglePixelPosition": false
+  }]
+}

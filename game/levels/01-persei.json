@@ -2,7 +2,7 @@
   "Level": {
     "Name": "Omicron Persei 8 Invades",
     "Description": "Drop Down and Increase Speed!",
-    "ObjectGroups": [1, 3, 4, 5, 6, 7],
+    "ObjectGroups": [1, 3, 4, 5, 6, 7, 8],
     "MaxObjectTableSize": 70,
     "Tileset": 1,
     "TilemapImage": "../tiles/01-moon.gif",
@@ -507,6 +507,7 @@
       "InitData": []
     },
 
+    
     {
       "_comment": "***** Score",
       "GroupID": 1,
@@ -515,6 +516,46 @@
       "globalX": 68,
       "globalY": 0,
       "InitData": [0, 0, 0]
+    },
+
+    
+    {
+      "_comment": "***** ShipCounter1",
+      "GroupID": 8,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 314,
+      "globalY": 4,
+      "InitData": [1]
+    },
+    {
+      "_comment": "ShipCounter2",
+      "GroupID": 8,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 306,
+      "globalY": 4,
+      "InitData": [2]
+    },
+
+    {
+      "_comment": "ShipCounter3",
+      "GroupID": 8,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 298,
+      "globalY": 4,
+      "InitData": [3]
+    },
+
+    {
+      "_comment": "ShipCounter4",
+      "GroupID": 8,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 290,
+      "globalY": 4,
+      "InitData": [4]
     }
   ]
 }
