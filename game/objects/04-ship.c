@@ -8,6 +8,7 @@ extern "C" {
 
 static byte didNotInit = TRUE;
 static DynospriteCOB *missiles[3];
+static GameGlobals *globals;
 
 
 #ifdef __APPLE__
@@ -44,7 +45,7 @@ DynospriteCOB *findFreeMissile() {
 void ShipInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (didNotInit) {
         didNotInit = FALSE;
-        
+        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(missiles)/sizeof(missiles[0]); ii++) {
             obj = findObjectByGroup(obj, MISSILE_GROUP_IDX);
@@ -64,6 +65,10 @@ void ShipInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 
 
 byte ShipReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+    if (globals->gameState) {
+        return 0;
+    }
+
     ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
     byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
     if (statePtr->counter < 64) {
@@ -78,6 +83,10 @@ byte ShipReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+    if (globals->gameState) {
+        return 0;
+    }
+
     ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
     byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
     

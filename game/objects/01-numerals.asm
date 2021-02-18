@@ -47,7 +47,8 @@ GameGlobals STRUCT
 * -----------------------------------------------------------------------------
 Initialized rmb     1 
 NumShips    rmb     1 
-Score       rmb     6
+GameState   rmd     1
+Score       rmb     3
 ShootCounter rmd    3
             ENDSTRUCT
 

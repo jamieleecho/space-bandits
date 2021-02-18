@@ -28,7 +28,7 @@
      row
      */
     if (self = [super init]) {
-        memset(_debouncedKeys, 0, sizeof(_debouncedKeys));
+        memset(_debouncedKeys, 0xff, sizeof(_debouncedKeys));
         _pressedKeys = [[NSMutableSet alloc] init];
         _keyCodeToMatrix = @{
             @'@':    @[@0x01, @0x00, @0x00, @0x00, @0x00, @0x00, @0x00, @0x00],
@@ -100,14 +100,14 @@
 }
 
 - (void)updateDebouncedKeys {
-    memset(_debouncedKeys, 0, sizeof(_debouncedKeys));
+    memset(_debouncedKeys, 0xff, sizeof(_debouncedKeys));
     for(NSNumber *key in _pressedKeys) {
         NSArray<NSNumber *> *matrix = _keyCodeToMatrix[key];
         if (matrix == nil) {
             continue;
         }
         for(size_t ii=0; ii<sizeof(_debouncedKeys); ii++) {
-            _debouncedKeys[ii] |= matrix[ii].intValue;
+            _debouncedKeys[ii] &= ~(matrix[ii].intValue);
         }
     }
 }

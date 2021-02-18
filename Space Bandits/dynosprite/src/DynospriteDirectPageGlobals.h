@@ -52,7 +52,7 @@ typedef struct DynospriteDirectPageGlobals {
     byte Input_JoystickY;
     byte Input_Buttons;
     
-    byte Input_KeyMatrixDB[8];
+    byte Input_KeyMatrix[8];
 } DynospriteDirectPageGlobals;
 
 /** Datastructure for DynospriteGlobals */

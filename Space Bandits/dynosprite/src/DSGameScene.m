@@ -76,6 +76,7 @@
     DynospriteDirectPageGlobalsPtr->Input_JoystickY = self.joystickController.joystick.yaxisPosition;
     DynospriteDirectPageGlobalsPtr->Obj_MotionFactor = -1;
     DynospriteDirectPageGlobalsPtr->Input_UseKeyboard = !self.joystickController.useHardwareJoystick;
+    memset(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix, 0xff, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix));
     
     // Initialize the objects
     [_objectCoordinator initializeObjects];
@@ -141,7 +142,7 @@
     }
  
     // Update the globals
-    memcpy(DynospriteDirectPageGlobalsPtr->Input_KeyMatrixDB, self.debouncedKeys, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrixDB));
+    memcpy(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix, self.debouncedKeys, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix));
     DynospriteDirectPageGlobalsPtr->Input_JoystickX = self.joystickController.joystick.xaxisPosition;
     DynospriteDirectPageGlobalsPtr->Input_JoystickY = self.joystickController.joystick.yaxisPosition;
     DynospriteDirectPageGlobalsPtr->Input_Buttons = ((self.joystickController.joystick.button0Pressed ? 0 : Joy1Button1) | (self.joystickController.joystick.button1Pressed ? 0 : Joy1Button2)) | Joy2Button1 | Joy2Button2;

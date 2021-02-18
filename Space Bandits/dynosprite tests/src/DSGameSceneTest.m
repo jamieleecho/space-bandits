@@ -128,7 +128,15 @@ static byte backgroundNewXY() {
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 52);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Obj_MotionFactor, -1);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_UseKeyboard, 0);
-    
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[0], 0xff);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[1], 0xff);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[2], 0xff);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[3], 0xff);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[4], 0xff);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[5], 0xff);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[6], 0xff);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[7], 0xff);
+
     OCMVerify([_objectCoordinator initializeObjects]);
     
     XCTAssertEqual(_target.children.count, 5);
@@ -262,22 +270,22 @@ static byte backgroundNewXY() {
 - (void)testRunOneGameLoopTransfersButtonPresses {
     [self commonInit];
     [_target initializeLevel];
-    byte *matrix = DynospriteDirectPageGlobalsPtr->Input_KeyMatrixDB;
-    memset(matrix, 0, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrixDB));
+    byte *matrix = DynospriteDirectPageGlobalsPtr->Input_KeyMatrix;
+    memset(matrix, 0, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix));
     
     NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"p\x1byn" isARepeat:NO keyCode:0];
     [_target keyDown:keyEvent];
     [_target runOneGameLoop];
-    XCTAssertEqual(matrix[0], 0x04);
-    XCTAssertEqual(matrix[2], 0x40);
-    XCTAssertEqual(matrix[1], 0x08);
-    XCTAssertEqual(matrix[6], 0x02);
+    XCTAssertEqual(matrix[0], 0xff & ~0x04);
+    XCTAssertEqual(matrix[2], 0xff & ~0x40);
+    XCTAssertEqual(matrix[1], 0xff & ~0x08);
+    XCTAssertEqual(matrix[6], 0xff & ~0x02);
     [_target keyUp:keyEvent];
     [_target runOneGameLoop];
-    XCTAssertEqual(matrix[0], 0x00);
-    XCTAssertEqual(matrix[2], 0x00);
-    XCTAssertEqual(matrix[1], 0x00);
-    XCTAssertEqual(matrix[6], 0x00);
+    XCTAssertEqual(matrix[0], 0xff);
+    XCTAssertEqual(matrix[2], 0xff);
+    XCTAssertEqual(matrix[1], 0xff);
+    XCTAssertEqual(matrix[6], 0xff);
 }
 
 @end
