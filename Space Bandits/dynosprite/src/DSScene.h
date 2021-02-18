@@ -16,12 +16,19 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DSScene : SKScene {
     @private
     SKAction *_pollAction;
+    NSDictionary<NSNumber *, NSArray<NSNumber *> *> *_keyCodeToMatrix;
+    NSMutableSet<NSNumber *> *_pressedKeys;
+    uint8_t _debouncedKeys[8];
 }
 
 @property (strong, nonatomic) DSCoCoJoystickController *joystickController;
 @property (nonatomic) BOOL isDone;
 @property (nonatomic) int levelNumber;
-@property (nonatomic) BOOL isPaused;
+
+- (id)init;
+
+- (void)updateDebouncedKeys;
+- (uint8_t *)debouncedKeys;
 
 - (void)keyDown:(NSEvent *)theEvent;
 - (void)keyUp:(NSEvent *)theEvent;

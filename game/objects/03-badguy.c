@@ -187,6 +187,9 @@ void reset() {
 
 
 byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+    if (globals->gameState) {
+        return 0;
+    }
     if (!numInvaders) {
         reset();
     }
@@ -204,6 +207,10 @@ byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+    if (globals->gameState) {
+        return 0;
+    }
+
     BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
     
     /* Switch to the next animation frame */
@@ -241,7 +248,8 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     cob->globalY += deltaY;
     if (cob->globalY > MAX_Y) {
         cob->globalY = MAX_Y;
-        return -1;
+        globals->gameState = GameStateOver;
+        return 0;
     }
 
 

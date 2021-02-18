@@ -10,6 +10,7 @@ extern "C" {
 static byte didNotInit = TRUE;
 DynospriteCOB *badGuys[NUM_BAD_GUYS];
 DynospriteCOB **endBadGuys;
+static GameGlobals *globals;
 
 
 #ifdef __APPLE__
@@ -22,6 +23,7 @@ void MissileClassInit() {
 void MissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (didNotInit) {
         didNotInit = FALSE;
+        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
         endBadGuys = &(badGuys[sizeof(badGuys)/sizeof(badGuys[0])]);
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(badGuys)/sizeof(badGuys[0]); ii++) {
@@ -66,6 +68,10 @@ static void checkHitBadGuy(DynospriteCOB *cob) {
 
 
 byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+    if (globals->gameState) {
+        return 0;
+    }
+
     if (cob->globalY < 10) {
         cob->active = OBJECT_INACTIVE;
     } else {

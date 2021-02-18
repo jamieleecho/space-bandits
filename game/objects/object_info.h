@@ -44,10 +44,19 @@
 #define SHIP_SPRITE_LAST_INDEX 12
 
 
+enum GameState {
+    GameStatePlaying = 0,
+    GameStatePaused  = 1,
+    GameStateQuit    = 2,
+    GameStateOver    = 3
+};
+
+
 typedef struct GameGlobals {
     byte initialized;
     byte numShips;
-    byte score[6];
+    enum GameState gameState;
+    byte score[3];
     word shootCounter[3];
 } GameGlobals;
 

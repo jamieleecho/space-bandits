@@ -13,6 +13,7 @@ static void checkHitShip(DynospriteCOB *cob);
 
 static byte didInit = FALSE;
 static DynospriteCOB *shipCob;
+static GameGlobals *globals;
 
 
 #ifdef __APPLE__
@@ -25,6 +26,7 @@ void BadmissileClassInit() {
 void BadmissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!didInit) {
         didInit = TRUE;
+        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
     }
     DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
     shipCob = findObjectByGroup(obj, SHIP_GROUP_IDX);
@@ -39,6 +41,10 @@ byte BadmissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+    if (globals->gameState) {
+        return 0;
+    }
+
     if (cob->globalY > 175) {
         cob->active = OBJECT_INACTIVE;
         return 0;

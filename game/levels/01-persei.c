@@ -12,6 +12,7 @@ void PerseiInit() {
     memset(globals, 0, sizeof(*globals));
     globals->numShips = 3;
     globals->initialized = TRUE;
+    globals->gameState = GameStatePlaying;
 }
 
 
