@@ -745,9 +745,17 @@ class Sprite:
                 thisCmd = byteCmds[byteIdx]
                 byteOffCmdList.append((off0+byteIdx, dstOffset, thisCmd[0], thisCmd[1], thisCmd[2]))
                 dstOffset += 1
-        # exhaustively search all permutations of store/write commands, and return best result
+
+        # in block of n commands, exhaustively search all permutations of store/write commands, and return best result
+        # we choose n = 12 as a compromise for compile time performance and runtime performance
+        n = 12
         layoutDict = { 1:[], 2:[], 4:[] }
-        return self.Permute6309StoreLayouts(regState, layoutDict, byteOffCmdList, 4)
+        results = [self.Permute6309StoreLayouts(regState, layoutDict, byteOffCmdList[ii:ii + n], 4)
+                      for ii in range(0, len(byteOffCmdList), n)]
+        return_value = results[0]
+        for ii in range(1, len(results)):
+            return_value += results[ii]
+        return return_value
 
     def Permute6309StoreLayouts(self, regState, layoutDict, byteOffCmdList, searchSize):
         cmdListLen = len(byteOffCmdList)
