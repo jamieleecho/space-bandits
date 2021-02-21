@@ -281,7 +281,7 @@ def parseSpriteDescription(descFilename):
         curSprite.location = dataSprite['Location']
         curSprite.singlepixelpos = dataSprite['SinglePixelPosition']
         if 'ChunkHint' in dataSprite:
-            curSprite.chunkHunt = dataSprite['ChunkSprite']
+            curSprite.chunkHint = dataSprite['ChunkHint']
         info.sprites.append(curSprite)
     return info
 

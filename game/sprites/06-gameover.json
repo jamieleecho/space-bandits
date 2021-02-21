@@ -9,14 +9,17 @@
   "Sprites": [{
     "Name": "GamePaused",
     "Location": [58, 295],
-    "SinglePixelPosition": false
+    "SinglePixelPosition": false,
+    "ChunkHint": 12
   }, {
     "Name": "QuitGame",
     "Location": [106, 302],
-    "SinglePixelPosition": false
+    "SinglePixelPosition": false,
+    "ChunkHint": 12
   }, {
     "Name": "GameOver",
     "Location": [57, 317],
-    "SinglePixelPosition": false
+    "SinglePixelPosition": false,
+    "ChunkHint": 12
   }]
 }
