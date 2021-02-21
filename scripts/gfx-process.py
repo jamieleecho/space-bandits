@@ -254,6 +254,7 @@ class SpriteInfo:
         self.singlepixelpos = False
         self.pixArray = [ ]
         self.hotspot = [0, 0]
+        self.chunkHint = sys.maxsize
 
 class SpriteGroupInfo:
     def __init__(self):
@@ -279,6 +280,8 @@ def parseSpriteDescription(descFilename):
         curSprite.name = dataSprite['Name']
         curSprite.location = dataSprite['Location']
         curSprite.singlepixelpos = dataSprite['SinglePixelPosition']
+        if 'ChunkHint' in dataSprite:
+            curSprite.chunkHunt = dataSprite['ChunkSprite']
         info.sprites.append(curSprite)
     return info
 
@@ -833,6 +836,8 @@ def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
         f.write(f'Height = {len(sprite.pixArray)}\n')
         f.write(f'SinglePixelPosition = {str(sprite.singlepixelpos)}\n')
         f.write(f'Hotspot = ({sprite.hotspot[0]},{sprite.hotspot[1]})\n')
+        if (sprite.chunkHint < sys.maxsize):
+            f.write(f'ChunkHint = {sprite.chunkHint}\n')
         for pixLine in sprite.pixArray:
             f.write(' '.join([pixValMap[v] for v in pixLine]))
             f.write('\n')
