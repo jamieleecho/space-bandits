@@ -13,4 +13,5 @@ services:
       - ./engine:/home/dynosprite/engine
       - ./scripts:/home/dynosprite/scripts
       - ./game:/home/dynosprite/game
+      - /Users/jcho/src:/Users/jcho/src
 

@@ -85,14 +85,14 @@ game/readme-bas.txt           - Template text file that is used to generate the 
                                 with "{X}" are centered, with the charater X filling in the left
                                 and right sides.
 
-game/images/images.txt        - For each Splash image, this descriptive text file gives 24-bit RGB
+game/images/images.json       - For each Splash image, this descriptive text file gives 24-bit RGB
                                 values for 3 different special colors: the foreground, background,
                                 and the 'progress bar' color.  This is used for the fade-in and
                                 fade-out routines.  Splash images are currently only used for the
                                 main menu and level loading screens, though a game could use them
                                 for other purposes as well (cut scenes).
 
-game/levels/01-marbledemo.txt - The DynoSprite Demo only has one 'level', and this file gives the
+game/levels/01-marbledemo.json  - The DynoSprite Demo only has one 'level', and this file gives the
                                 parameters used to describe this level to the engine, including:
                                 - Level Name & Description (used in level loading screen)
                                 - List of Sprite/Object groups to load for this level
@@ -122,7 +122,7 @@ game/levels/01-marbledemo.asm - Contains assembly source code for the 2 level fu
 game/levels/01-marbledemo.map - Contains a matrix of hexadecimal tileset indices which map out the
                                 background tilemap used for this level.  The dimensions of this
                                 matrix must match those given in the level description file
-                                01-marbledemo.txt.  For the DynoSprite demo, this data is actually
+                                01-marbledemo.json.  For the DynoSprite demo, this data is actually
                                 not used.  At level initialization time, the Level_Initialize
                                 function increases the size of the background tilemap to 256x64,
                                 clears it, and randomly places tetris-like blocks of colored tiles.
@@ -154,7 +154,7 @@ game/sprites/*.spr                - Contains 5 parameters and a pixel matrix for
                                     from the Tileset, so the pixel values used in the sprite matrix
                                     must match with the colors defined in the Tileset's palette.
 
-game/tiles/00-rainbowpyramids.txt - This text file defines the tileset used by the demo level.  It
+game/tiles/00-rainbowpyramids.json - This text file defines the tileset used by the demo level.  It
                                     consists of the palettes to use for Composite and RGB monitors
                                     (in decimal numbers) and then one 16x16 hexadecimal matrix for
                                     each background tile, with the tile matrices separated by one
@@ -285,7 +285,7 @@ build-images.py    - Processes the input splash images (game/images/*.png) by lo
                      compressing the pixel data, packaging into IMAGES.DAT file, and generating
                      gamedir-images.asm Game Data Directory file.
 
-build-levels.py    - Parses the level description files (game/levels/*.txt) and background tilemap
+build-levels.py    - Parses the level description files (game/levels/*.json) and background tilemap
                      files (game/levels/*.map).  Reads the raw binary output from assembling the
                      level assembly code files (game/levels/*.asm) and packages all of this data
                      into the LEVELS.DAT file.  Also generates the gamedir-levels.asm Game Data
@@ -303,7 +303,7 @@ build-sounds.py    - Reads all of the raw audio waveform files (build/obj/sound*
                      them into SOUNDS.DAT file.  Also generates the gamedir-sounds.asm Game Data
                      Directory file.
 
-build-tiles.py     - Reads all of the tileset definition files (game/tiles/*.txt), packages them
+build-tiles.py     - Reads all of the tileset definition files (game/tiles/*.json), packages them
                      into output TILES.DAT file, and generates the gamedir-tiles.asm Game Data
                      Directory file.
 
@@ -415,7 +415,7 @@ different set of Sprites and Objects to go with the colors defined in another Ti
 space levels.
 
 Each Level in a game may use as many Sprite/Object Groups as you want.  The particular Groups to
-load with a level are defined in the Level's description file (game/levels/XX-LevelName.txt).  You
+load with a level are defined in the Level's description file (game/levels/XX-LevelName.json).  You
 are only limited by the amount of available memory.
 
 ===================================================================================================
@@ -431,7 +431,7 @@ loaded from disk, and they stay on the heap for the duration of that level.
 The Current Object Table (COT) contains one entry for each Object instance which is currently
 present in the Level. Note that it is possible to dynamically create and delete objects during
 gameplay, but this behavior is not used by the demo.  The Level description file (game/levels/
-XX-Name.txt) contains a parameter which specifies the maximum size of this table, which may be
+XX-Name.json) contains a parameter which specifies the maximum size of this table, which may be
 necessary to support dynamic Object creation.  Note that not all of the Objects in this table have
 to be visible or drawn on the screen.  You can organize the object however you want.  For example,
 you may use the first object in a level for the main character, the next 5 for enemies, another 4
@@ -465,7 +465,7 @@ handling functions (Initialize, Reactivate, Update, and Draw).
 
 To see how the various data members in these tables work together, you can examine the source code
 in game/objects/02-balls.asm.  This object uses a single byte in the initialization stream (taken
-from the InitData list in the [Object] sections in game/levels/01-marbledemo.txt).  The value of
+from the InitData list in the [Object] sections in game/levels/01-marbledemo.json).  The value of
 this initialization byte tells the ball object which 'type' of ball it should be.  There are 2
 static balls (Whole and Outline), and 4 dynamic balls (clockwise and counter-clockwise rotation of
 2 different sprite animation sequences).  The Ball Object also defines a data structure (G2OB0)
@@ -525,7 +525,7 @@ will fail with an error.
 Creating Tilesets and Level Tilemaps
 ------------------------------------
 
-Currently, Tilesets are defined in the proprietary and self-explanatory "game/tiles/*.txt" files,
+Currently, Tilesets are defined in the proprietary and self-explanatory "game/tiles/*.json" files,
 and Tilemaps for each level are defined in the "game/levels/*.map" files.  In order to integrate
 DynoSprite with a graphical tilemap generation tool, you will need to either write a custom
 conversion script to generate the Tileset and Tilemap files as expected by DynoSprite, or modify
