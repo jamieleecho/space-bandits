@@ -146,7 +146,7 @@ if __name__ == "__main__":
     print("DynoSprite README.BAS Builder script")
     # get input paths
     if len(sys.argv) != 3:
-        print("****Usage: %s <in_readme_text> <out_readme_bas>" % sys.argv[0])
+        print(f"****Usage: {sys.argv[0]} <in_readme_text> <out_readme_bas>")
         sys.exit(1)
     textin = sys.argv[1]
     basout = sys.argv[2]

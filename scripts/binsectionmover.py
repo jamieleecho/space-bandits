@@ -29,7 +29,7 @@
 import sys
 
 def FilterFile(Filename, FilterList):
-    print("Filtering BIN file section locations: %s" % Filename)
+    print(f"Filtering BIN file section locations: {Filename}")
     fIn = open(Filename, "rb").read()
     fOut = b''
     curIdx = 0
@@ -48,11 +48,11 @@ def FilterFile(Filename, FilterList):
                 if loadAddr >= oldStart and loadAddr <= oldEnd:
                     bMoved = True
                     newLoadAddr = loadAddr + newStart - oldStart
-                    print("Section ({:04x}-{:04x}) is moved to {:04x}".format(loadAddr, loadAddr+length-1, newLoadAddr))
+                    print(f"Section ({loadAddr:04x}-{loadAddr + length - 1:04x}) is moved to {newLoadAddr:04x}")
                     loadAddr = newLoadAddr
                     break
             if not bMoved:
-                print("Section ({:04x}-{:04x}) is not moved".format(loadAddr, loadAddr+length-1))
+                print(f"Section ({loadAddr:04x}-{loadAddr + length - 1:04x}) is not moved")
             fOut = fOut + bytes((0, (length >> 8), (length & 0xff), (loadAddr >> 8), (loadAddr & 0xff)))
             fOut = fOut + fIn[curIdx:curIdx+length]
             curIdx += length
@@ -62,16 +62,16 @@ def FilterFile(Filename, FilterList):
             execAddr = fIn[curIdx+2] * 256 + fIn[curIdx+3]
             curIdx += 4
             if zeros != 0:
-                print("Error: values in postamble which should be zero are %04x" % zeros)
+                print(f"Error: values in postamble which should be zero are {zeros:04x}")
                 return -3
-            print("Postamble section found with execution address %04x" % execAddr)
+            print(f"Postamble section found with execution address {execAddr:04x}")
             fOut = fOut + bytes((255, 0, 0, execAddr >> 8, execAddr & 0xff))
             if curIdx != len(fIn):
                 print("Error: %i extra bytes after postamble in BIN file" % (len(fIn)-curIdx))
                 return -4
             break
         else:
-            print("Error in BIN file: section start flag value is %02x" % flag)
+            print(f"Error in BIN file: section start flag value is {flag:02x}")
             return -2
     if len(fOut) != len(fIn):
         print("Internal error: output length doesn't match input length")
@@ -85,14 +85,14 @@ def FilterFile(Filename, FilterList):
 
 if __name__ == "__main__":
     if len(sys.argv) < 4 or (len(sys.argv) & 1) != 0:
-        print("Usage: %s <filename.bin> [(OldStart-OldEnd) NewStart] ..." % sys.argv[0])
+        print(f"Usage: {sys.argv[0]} <filename.bin> [(OldStart-OldEnd) NewStart] ...")
         sys.exit(1)
     Filename = sys.argv[1]
     AddrFilters = []
     for i in range(2,len(sys.argv),2):
         oldRange = sys.argv[i].split('-')
         if len(oldRange) != 2:
-            print("Error: invalid range %s" % sys.argv[i])
+            print(f"Error: invalid range {sys.argv[i]}")
         oldStart = int(oldRange[0], 16)
         oldEnd = int(oldRange[1], 16)
         newStart = int(sys.argv[i+1], 16)

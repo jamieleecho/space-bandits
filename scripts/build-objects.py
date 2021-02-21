@@ -134,7 +134,7 @@ if __name__ == "__main__":
     print("DynoSprite Object Builder script")
     # get input paths
     if len(sys.argv) != 5:
-        print("****Usage: %s <in_raw_folder> <in_list_folder> <out_cc3_folder> <out_asm_folder>" % sys.argv[0])
+        print(f"****Usage: {sys.argv[0]} <in_raw_folder> <in_list_folder> <out_cc3_folder> <out_asm_folder>")
         sys.exit(1)
     rawdir = sys.argv[1]
     listdir = sys.argv[2]
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     # make sure we have same # of files in each list
     numGroups = len(spriteRawFiles)
     if len(spriteListFiles) != numGroups or len(objectRawFiles) != numGroups or len(objectListFiles) != numGroups:
-        print("****Error: extra or missing sprite/object raw or list files in '%s'.  Make clean and try again" % rawdir)
+        print(f"****Error: extra or missing sprite/object raw or list files in '{rawdir}'.  Make clean and try again")
         print("  %d spriteList files found, %d expected" % (len(spriteListFiles), numGroups))
         print("  %d object raw files found, %d expected" % (len(objectRawFiles), numGroups))
         print("  %d object list files found, %d expected" % (len(objectListFiles), numGroups))
@@ -165,7 +165,7 @@ if __name__ == "__main__":
     for i in range(numGroups):
         grpNum = int(spriteRawFiles[i][6:8])
         if int(spriteListFiles[i][6:8]) != grpNum or int(objectRawFiles[i][6:8]) != grpNum or int(objectListFiles[i][6:8]) != grpNum:
-            print("****Error: mis-matched sprite/object group numbering in '%s'." % rawdir)
+            print(f"****Error: mis-matched sprite/object group numbering in '{rawdir}'.")
             sys.exit(1)
         grp = Group(grpNum)
         grp.SprSymbols = SymbolExtract(os.path.join(listdir, spriteListFiles[i]))

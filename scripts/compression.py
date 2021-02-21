@@ -477,14 +477,14 @@ class Decompressor:
                 zipIdx += 1
             zipIdx += 1
             if bPrintInfo:
-                print("    Original .GZ filename: %s" % inputdata[startNameIdx:zipIdx-1])
+                print(f"    Original .GZ filename: {inputdata[startNameIdx:zipIdx - 1]}")
         if (flags & 16) != 0:
             startCommentIdx = zipIdx
             while inputdata[zipIdx] != 0:
                 zipIdx += 1
             zipIdx += 1
             if bPrintInfo:
-                print("    Original .GZ file comment: %s" % inputdata[startCommentIdx:zipIdx-1])
+                print(f"    Original .GZ file comment: {inputdata[startCommentIdx:zipIdx - 1]}")
         if (flags & 2) != 0:
             zipIdx += 2 # CRC
         # return just the DEFLATE stream
@@ -615,7 +615,7 @@ if __name__ == "__main__":
     print("DynoSprite DEFLATE Compressor Script")
     # get input paths
     if len(sys.argv) != 4 or (sys.argv[1].lower() != 'zip' and sys.argv[1].lower() != 'gzip' and sys.argv[1].lower() != 'unzip'):
-        print("****Usage: %s <command> <input-file> <output-file>" % sys.argv[0])
+        print(f"****Usage: {sys.argv[0]} <command> <input-file> <output-file>")
         print("    <command> is either 'zip', 'gzip', or 'unzip'")
         print("    <input-file> for 'unzip' command can be in .gz format or raw compressed stream")
         sys.exit(1)

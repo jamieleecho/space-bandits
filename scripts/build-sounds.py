@@ -38,7 +38,7 @@ if __name__ == "__main__":
     print("DynoSprite Sound Builder script")
     # get input paths
     if len(sys.argv) != 4:
-        print("****Usage: %s <in_raw_folder> <out_cc3_folder> <out_asm_folder>" % sys.argv[0])
+        print(f"****Usage: {sys.argv[0]} <in_raw_folder> <out_cc3_folder> <out_asm_folder>")
         sys.exit(1)
     rawdir = sys.argv[1]
     cc3dir = sys.argv[2]
@@ -78,17 +78,17 @@ if __name__ == "__main__":
     f = open(os.path.join(asmdir, "gamedir-sounds.asm"), "w")
     f.write("Gamedir_Sounds\n")
     s = str(maxNumber+1)
-    f.write((" " * 24) + "fcb     " + s + (" " * (16 - len(s))) + "* number of sound waveforms\n")
+    f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of sound waveforms\n")
     for i in range(maxNumber+1):
         if i not in soundRawNumbers:
             f.write((" " * 24) + ("* Waveform: %02i - [empty]\n" % i))
-            f.write((" " * 24) + "fdb     " + "0,0\n")
+            f.write(f"{' ' * 24}fdb     0,0\n")
             continue
         idx = soundRawNumbers.index(i)
         f.write((" " * 24) + ("* Waveform: %02i - %s\n" % (i, soundRawFiles[idx][8:-4])))
         s = str(allSoundSizes[i][0])
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* Uncompressed size (bytes) of waveform\n")
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Uncompressed size (bytes) of waveform\n")
         s = str(allSoundSizes[i][1])
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* Compressed size / Starting address\n")
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Compressed size / Starting address\n")
     f.close()
 
