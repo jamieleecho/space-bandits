@@ -215,7 +215,7 @@ class AsmStream:
         if offset == 0:
             operands = f",{regName[regIdx]}"
         else:
-            operands = "%i,%s" % (offset, regName[regIdx])
+            operands = f"{int(offset)},{regName[regIdx]}"
         if regLdSt == regA or regLdSt == regB:
             cycles = 4
             bytes = 2
@@ -232,7 +232,7 @@ class AsmStream:
             cycles = 8
             bytes = 3
         else:
-            raise Exception("Unsupported register %i" % regLdSt)
+            raise Exception(f"Unsupported register {int(regLdSt)}")
         if offset == 0:
             cycles += 0
             bytes += 0
@@ -257,7 +257,7 @@ class AsmStream:
         if offset == 0:
             operands = f",{regName[regSrc]}"
         else:
-            operands = "%i,%s" % (offset, regName[regSrc])
+            operands = f"{int(offset)},{regName[regSrc]}"
         cycles6309 = 4
         cycles6809 = 4
         bytes = 2
@@ -332,7 +332,7 @@ class Sprite:
     def FinishDefinition(self):
         # check that we loaded all rows of the matrix
         if len(self.matrix) != self.height:
-            print("Sprite [%s] error: Matrix height %i doesn't match sprite height %i" % (self.name, len(self.matrix), self.height))
+            print(f"Sprite [{self.name}] error: Matrix height {int(len(self.matrix))} doesn't match sprite height {int(self.height)}")
         # create one or two draw functions
         if self.hasSinglePixelPos:
             self.funcDraw[0] = AsmStream(f"DrawLeft_{self.name}")
@@ -577,7 +577,7 @@ class Sprite:
                 # generate the command
                 if offX not in byteStoreList:
                     if nibToWrite != 0:
-                        raise Exception("Logical error: byte offset %i not in store list, but nibToWrite is %i" % (offX, nibToWrite))
+                        raise Exception(f"Logical error: byte offset {int(offX)} not in store list, but nibToWrite is {int(nibToWrite)}")
                     byteCmds.append((0, 0, 0))
                     continue
                 if nibToWrite == 0:
@@ -714,7 +714,7 @@ class Sprite:
                     self.lineAdvance = 0
             # fixme save the YPtrOffNew here if hasRowPointerArray is true
             if self.hasRowPointerArray:
-                funcDraw.emit_label("Row%i_%s" % (y, funcDraw.name))
+                funcDraw.emit_label(f"Row{int(y)}_{funcDraw.name}")
             # call the specific row handler method for the current CPU
             if CPU == 6309:
                 rowAsm = self.RowDraw6309(y, regState, byteStrips)
@@ -1295,7 +1295,7 @@ class Sprite:
         while idx < len(cmdBytesToWrite):
             (offX,offY,byteCmd) = cmdBytesToWrite[idx]
             if byteCmd[0] != 3:
-                raise Exception("Error: byte command %i is in the cmdBytesToWrite list!" % byteCmd[0])
+                raise Exception(f"Error: byte command {int(byteCmd[0])} is in the cmdBytesToWrite list!")
             if rowAsm.reg.IsValid(regA) and byteCmd[1] == rowAsm.reg.GetValue(regA):
                 rowAsm.gen_loadstore_indexed(False, regA, regX, offX + 256*self.lineAdvance, "")  # sta off,x
                 cmdBytesToWrite.pop(idx)
@@ -1365,10 +1365,10 @@ class Sprite:
             raise Exception("internal error: unstored bytes/words remaining!");
         for (offX,offY,byteCmd) in cmdBytesToWrite:
             if byteCmd[0] != 3:
-                raise Exception("internal error: command-%i byte to write" % byteCmd[0])
+                raise Exception(f"internal error: command-{int(byteCmd[0])} byte to write")
         for (offX,offY,byteCmd1,byteCmd2) in cmdWordsToWrite:
             if byteCmd1[0] != 3 or byteCmd2[0] != 3:
-                raise Exception("internal error: command-(%i,%i) bytes to write in word" % (byteCmd1[0],byteCmd2[0]))
+                raise Exception(f"internal error: command-({int(byteCmd1[0])},{int(byteCmd2[0])}) bytes to write in word")
         # emit byte writes for any bytes which match our current register values
         if rowAsm.reg.IsValid(regA) or rowAsm.reg.IsValid(regB):
             idx = 0
@@ -1638,10 +1638,10 @@ class App:
                 TotalDrawR += sprite.funcDraw[1].metrics.bytes
         # print summary
         numSprites = len(self.spriteList)
-        print("Total number of sprites: %i" % numSprites)
-        print("Total Erase code bytes: %i" % TotalErase)
-        print("Total Draw Left code bytes: %i" % TotalDrawL)
-        print("Total Draw Right code bytes: %i" % TotalDrawR)
+        print(f"Total number of sprites: {int(numSprites)}")
+        print(f"Total Erase code bytes: {int(TotalErase)}")
+        print(f"Total Draw Left code bytes: {int(TotalDrawL)}")
+        print(f"Total Draw Right code bytes: {int(TotalDrawR)}")
         print()
         # last column should be averages
         Names.append("Average")
@@ -1691,23 +1691,23 @@ class App:
         for sprite in self.spriteList:
             # drawLeft
             length = sprite.funcDraw[0].metrics.bytes
-            f.write("* (Origin: $%04X  Length: %i bytes)\n" % (origin, length))
+            f.write(f"* (Origin: ${origin:04X}  Length: {int(length)} bytes)\n")
             f.write(f"{sprite.funcDraw[0].text}\n")
             origin += length
             # drawRight
             if sprite.hasSinglePixelPos:
                 length = sprite.funcDraw[1].metrics.bytes
-                f.write("* (Origin: $%04X  Length: %i bytes)\n" % (origin, length))
+                f.write(f"* (Origin: ${origin:04X}  Length: {int(length)} bytes)\n")
                 f.write(f"{sprite.funcDraw[1].text}\n")
                 origin += length
                 bHasDrawRight = True
             # erase
             length = sprite.funcErase.metrics.bytes
-            f.write("* (Origin: $%04X  Length: %i bytes)\n" % (origin, length))
+            f.write(f"* (Origin: ${origin:04X}  Length: {int(length)} bytes)\n")
             f.write(f"{sprite.funcErase.text}\n")
             origin += length
         # at the end, write the Sprite Descriptor Table
-        f.write("\nNumberOfSprites\n            fcb         %i\n" % len(self.spriteList))
+        f.write(f"\nNumberOfSprites\n            fcb         {int(len(self.spriteList))}\n")
         f.write("SpriteDescriptorTable\n")
         for sprite in self.spriteList:
             f.write(f"            * {sprite.name}\n")

@@ -67,7 +67,7 @@ def FilterFile(Filename, FilterList):
             print(f"Postamble section found with execution address {execAddr:04x}")
             fOut = fOut + bytes((255, 0, 0, execAddr >> 8, execAddr & 0xff))
             if curIdx != len(fIn):
-                print("Error: %i extra bytes after postamble in BIN file" % (len(fIn)-curIdx))
+                print(f"Error: {int(len(fIn) - curIdx)} extra bytes after postamble in BIN file")
                 return -4
             break
         else:

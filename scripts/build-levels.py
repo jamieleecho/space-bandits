@@ -145,7 +145,7 @@ class Level:
             # handle tile index values (hex)
             tiles = "".join(line.split())
             if (len(tiles) & 1) == 1:
-                print("****Error: invalid tilemap line length (%i) in map file '%s'" % (len(tiles), mapFilename))
+                print(f"****Error: invalid tilemap line length ({int(len(tiles))}) in map file '{mapFilename}'")
                 sys.exit(1)
             for i in range(0, len(tiles), 2):
                 v = int(tiles[i:i+2], 16)
@@ -153,7 +153,7 @@ class Level:
             continue
         # validate tilemap length
         if len(self.tilemap) != lvl.tilemapwidth * lvl.tilemapheight:
-            print("****Error: tilemap length (%i) in file '%s' doesn't match width and height given in level descriptor file" % (len(self.tilemap), mapFilename))
+            print(f"****Error: tilemap length ({int(len(self.tilemap))}) in file '{mapFilename}' doesn't match width and height given in level descriptor file")
             sys.exit(1)
 
     def generateData(self):
@@ -254,11 +254,11 @@ if __name__ == "__main__":
     numLevels = len(lvlDescFiles)
     if len(lvlMapFiles) != numLevels or len(lvlRawFiles) != numLevels or len(lvlListFiles) != numLevels:
         print(f"****Error: Mismatched level description/assembly/map files in '{leveldir}' and/or '{rawdir}'")
-        print("  %d map files found, %d expected" % (len(lvlMapFiles), numLevels))
-        print("  %d raw files found, %d expected" % (len(lvlRawFiles), numLevels))
-        print("  %d list files found, %d expected" % (len(lvlListFiles), numLevels))
+        print(f"  {int(len(lvlMapFiles))} map files found, {int(numLevels)} expected")
+        print(f"  {int(len(lvlRawFiles))} raw files found, {int(numLevels)} expected")
+        print(f"  {int(len(lvlListFiles))} list files found, {int(numLevels)} expected")
         sys.exit(1)
-    print("    Found %i levels" % numLevels)
+    print(f"    Found {int(numLevels)} levels")
     # get symbol locations for DynoSprite engine
     dynosymbols = SymbolExtract(dynolist)
     # parse input files and create levels
@@ -266,7 +266,7 @@ if __name__ == "__main__":
     for i in range(numLevels):
         lvlNum = int(lvlDescFiles[i][:2])
         if int(lvlMapFiles[i][7:9]) != lvlNum or int(lvlRawFiles[i][5:7]) != lvlNum or int(lvlListFiles[i][5:7]) != lvlNum:
-            print("****Error: mis-matched level description/assembly/map files in '%s' and/or '%s' with number %i" % (leveldir, rawdir, lvlNum))
+            print(f"****Error: mis-matched level description/assembly/map files in '{leveldir}' and/or '{rawdir}' with number {int(lvlNum)}")
             sys.exit(1)
         lvl = Level(lvlNum)
         lvl.Symbols = SymbolExtract(os.path.join(listdir, lvlListFiles[i]))
@@ -292,18 +292,18 @@ if __name__ == "__main__":
     s = str(len(allLevels))
     f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* total number of levels\n")
     for lvl in allLevels:
-        f.write(f"{' ' * 24}{'* Level %i: (%s)' % (lvl.LvlNumber, lvl.ParamDict['name'])}\n")
+        f.write(f"{' ' * 24}* Level {lvl.LvlNumber}: {lvl.ParamDict['name']}\n")
         s = str(lvl.LvlNumber)
         f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* Level number\n")
-        s = "Level%02iName" % lvl.LvlNumber
+        s = f"Level{int(lvl.LvlNumber):02}Name"
         f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level name\n")
-        s = "Level%02iDesc" % lvl.LvlNumber
+        s = f"Level{int(lvl.LvlNumber):02}Desc"
         f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level description\n")
         s = str(len(lvl.cc3Data))
         f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Level size on disk in bytes\n")
         s = str(len(lvl.ObjectGroups))
         f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of object groups to load with level\n")
-        s = "Level%02iGroups" % lvl.LvlNumber
+        s = f"Level{int(lvl.LvlNumber):02}Groups"
         f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* pointer to group number list to load\n")
         s = str(int(lvl.ParamDict["maxobjecttablesize"]))
         f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* Maximum number of objects in Current Object Table\n")

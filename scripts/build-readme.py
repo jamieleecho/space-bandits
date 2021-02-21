@@ -135,7 +135,7 @@ def GenerateReadme(textin, basout):
     f.write(BASICPROG.replace("\n","\r").replace("#NUMLINES",str(len(outLines))))
     for idx in range(len(outLines)):
         #f.write('%i DATA "%s"\n' % (100 + idx * 10, outLines[idx]))
-        f.write('%i DATA "%s"\r' % (100 + idx * 10, outLines[idx]))
+        f.write(f'{int(100 + idx * 10)} DATA "{outLines[idx]}"\r')
     f.close()
 
 #******************************************************************************

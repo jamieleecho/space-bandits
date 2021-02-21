@@ -250,7 +250,7 @@ if __name__ == "__main__":
     numImages = len(imgPngFiles)
     minNumber = min(imgPngNumbers)
     maxNumber = max(imgPngNumbers)
-    print("    Found %i image files, numbered from %i to %i" % (numImages, minNumber, maxNumber))
+    print(f"    Found {int(numImages)} image files, numbered from {int(minNumber)} to {int(maxNumber)}")
     # Build Luv palettes for all of the colors in the Coco's 64-color palette for RGB and Composite modes
     BuildCocoColors()
     # read input images, extract metadata, and compress them
@@ -285,7 +285,7 @@ if __name__ == "__main__":
                 NewPalette.append(j)
         # we cannot make a Coco image out of this if it uses more than 16 colors
         if len(NewPalette) > 16:
-            print("Error: image '%s' uses more than 16 colors! (actual=%i)" % (imgPngFiles[idx], len(NewPalette)))
+            print(f"Error: image '{imgPngFiles[idx]}' uses more than 16 colors! (actual={int(len(NewPalette))})")
             sys.exit(4)
         # generate palettes and palette mappings for both Composite and RGB mode on Coco
         (CMPPalette, RGBPalette, ImageToCocoMap) = GenerateCocoPalettes(NewPalette, im.palette.getdata()[1])
@@ -316,7 +316,7 @@ if __name__ == "__main__":
         allCompImageData += bytes((BKIdx, FGIdx, BarIdx))
         allCompImageData += compImgData
         # print message
-        print("    Image '%s'  width=%i  height=%i  compressed bytes=%i" % (imgPngFiles[idx], width, height, len(compImgData)))
+        print(f"    Image '{imgPngFiles[idx]}'  width={int(width)}  height={int(height)}  compressed bytes={int(len(compImgData))}")
         print(f"        CMP Palette: {' '.join([('%02i' % i) for i in CMPPalette])}")
         print(f"        RGB Palette: {' '.join([('%02i' % i) for i in RGBPalette])}")
     # write out the data file
@@ -330,13 +330,13 @@ if __name__ == "__main__":
     f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of splash images in directory\n")
     for i in range(maxNumber+1):
         if i not in imgPngNumbers:
-            f.write((" " * 24) + ("* Image: %02i - [empty]\n" % i))
+            f.write((" " * 24) + f"* Image: {int(i):02} - [empty]\n")
             f.write(f"{' ' * 24}fdb     0,0\n")
             f.write(f"{' ' * 24}fcb     0,0,0\n")
             continue
         idx = imgPngNumbers.index(i)
         SpecialColors = ImageColorDict[i]
-        f.write((" " * 24) + ("* Image: %02i - %s\n" % (i, imgPngFiles[idx][3:-4])))
+        f.write((" " * 24) + f"* Image: {int(i):02} - {imgPngFiles[idx][3:-4]}\n")
         s = str(allImageSizes[i][0] // 2)
         f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* width of image (in bytes)\n")
         s = str(allImageSizes[i][1])
