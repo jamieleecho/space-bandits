@@ -90,7 +90,7 @@ class BitWriter:
     def AddBits(self, numBits, value, bIsCode):
         # check to make sure input is valid
         if (value >> numBits) != 0:
-            raise Exception("BitWriter::AddBits error: the value %i doesn't fit within %i bits" % (value, numBits))
+            raise Exception(f"BitWriter::AddBits error: the value {int(value)} doesn't fit within {int(numBits)} bits")
         # pack the bits in our accumulator
         if bIsCode:
             for bitIdxIn in range(numBits-1,-1,-1):
@@ -277,7 +277,7 @@ class Compressor:
         # check to make sure it's legal
         for (bits,codeval) in huffCodes:
             if bits is not None and bits > maxBits:
-                raise Exception("Huffman tree contains codes longer than maximum allowed (%i)" % maxBits)
+                raise Exception(f"Huffman tree contains codes longer than maximum allowed ({int(maxBits)})")
         return huffCodes
 
     def GenHuffmanCodesFromLengths(self, huffLengths):
@@ -351,7 +351,7 @@ class Compressor:
 
     def Deflate(self, bPrintInfo, bUseGzip):
         if bPrintInfo:
-            print("%i bytes in input file." % len(self.inputdata))
+            print(f"{int(len(self.inputdata))} bytes in input file.")
         # call separate function to use GZIP if necessary
         if bUseGzip:
             outputData = self.DeflateWithGzip(bPrintInfo)
@@ -359,7 +359,7 @@ class Compressor:
         # start by eliminating string redundancies converting uncompressed data to LZ77 symbol list
         self.GenerateSymbolList()
         if bPrintInfo:
-            print("%i LZ77 symbols generated" % len(self.lz77SymbolList))
+            print(f"{int(len(self.lz77SymbolList))} LZ77 symbols generated")
         # now generate histograms of value/length codes and distance codes
         lenCodeHist = [ 0 for i in range(286) ]
         distCodeHist = [ 0 for i in range(30) ]
@@ -477,14 +477,14 @@ class Decompressor:
                 zipIdx += 1
             zipIdx += 1
             if bPrintInfo:
-                print("    Original .GZ filename: %s" % inputdata[startNameIdx:zipIdx-1])
+                print(f"    Original .GZ filename: {inputdata[startNameIdx:zipIdx - 1]}")
         if (flags & 16) != 0:
             startCommentIdx = zipIdx
             while inputdata[zipIdx] != 0:
                 zipIdx += 1
             zipIdx += 1
             if bPrintInfo:
-                print("    Original .GZ file comment: %s" % inputdata[startCommentIdx:zipIdx-1])
+                print(f"    Original .GZ file comment: {inputdata[startCommentIdx:zipIdx - 1]}")
         if (flags & 2) != 0:
             zipIdx += 2 # CRC
         # return just the DEFLATE stream
@@ -561,11 +561,11 @@ class Decompressor:
                         repeatCount = self.inputBitstream.GetBits(7) + 11
                         codeLengths.extend([0] * repeatCount)
                     else:
-                        raise Exception("Invalid RLE Code length symbol %i" % rleSymbol)
+                        raise Exception(f"Invalid RLE Code length symbol {int(rleSymbol)}")
                 if len(codeLengths) != totalCodeLengths:
                     raise Exception("Unexpected number of literal/distance huffman code lengths extracted from compressed RLE symbols")
             else:
-                raise Exception("Unsupported DEFLATE block type %i" % blockType)
+                raise Exception(f"Unsupported DEFLATE block type {int(blockType)}")
             # generate the literal/length and distance huffman trees
             lenHuffTree = self.GenerateHuffmanTreeFromLengths(codeLengths[:numLenCodes])
             distHuffTree = self.GenerateHuffmanTreeFromLengths(codeLengths[numLenCodes:])
@@ -615,7 +615,7 @@ if __name__ == "__main__":
     print("DynoSprite DEFLATE Compressor Script")
     # get input paths
     if len(sys.argv) != 4 or (sys.argv[1].lower() != 'zip' and sys.argv[1].lower() != 'gzip' and sys.argv[1].lower() != 'unzip'):
-        print("****Usage: %s <command> <input-file> <output-file>" % sys.argv[0])
+        print(f"****Usage: {sys.argv[0]} <command> <input-file> <output-file>")
         print("    <command> is either 'zip', 'gzip', or 'unzip'")
         print("    <input-file> for 'unzip' command can be in .gz format or raw compressed stream")
         sys.exit(1)
@@ -630,7 +630,7 @@ if __name__ == "__main__":
         comp = Compressor(ifdata)
         ofdata = comp.Deflate(True, bUseGzip)
         open(outfilename, "wb").write(ofdata)
-        print("Input file was compressed from %i bytes down to %i bytes." % (len(ifdata), len(ofdata)))
+        print(f"Input file was compressed from {int(len(ifdata))} bytes down to {int(len(ofdata))} bytes.")
     else:
         # read the input (compressed) file
         ifdata = open(infilename, "rb").read()
@@ -641,5 +641,5 @@ if __name__ == "__main__":
         decomp = Decompressor(ifdata)
         ofdata = decomp.Inflate()
         open(outfilename, "wb").write(ofdata)
-        print("Input file was decompressed from %i bytes to %i bytes." % (len(ifdata), len(ofdata)))
+        print(f"Input file was decompressed from {int(len(ifdata))} bytes to {int(len(ofdata))} bytes.")
 

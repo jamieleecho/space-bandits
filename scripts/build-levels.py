@@ -44,7 +44,7 @@ class ObjectInit:
     def Validate(self):
         for key in self.params:
             if self.params[key] == None:
-                print("****Error: Object init section missing parameter '%s'" % key)
+                print(f"****Error: Object init section missing parameter '{key}'")
                 return False
         return True
     def SetParameter(self, key, value, dynosymbols):
@@ -59,7 +59,7 @@ class ObjectInit:
                     numList.append(symLoc >> 8)
                     numList.append(symLoc & 255)
                 else:
-                    print("****Error: unknown symbol '%s' in object initialization list" % initValue)
+                    print(f"****Error: unknown symbol '{initValue}' in object initialization list")
                     sys.exit(1)
             self.params["initdata"] = numList
             return
@@ -94,10 +94,10 @@ class Level:
 
     def validateCode(self, listFile):
         if not 'Level_Initialize' in self.Symbols:
-            print("****Error: Missing 'Level_Initialize' function in level file '%s'" % listFile)
+            print(f"****Error: Missing 'Level_Initialize' function in level file '{listFile}'")
             sys.exit(1)
         if not 'Level_CalculateBkgrndNewXY' in self.Symbols:
-            print("****Error: Missing 'Level_CalculateBkgrndNewXY' function in level file '%s'" % listFile)
+            print(f"****Error: Missing 'Level_CalculateBkgrndNewXY' function in level file '{listFile}'")
             sys.exit(1)
 
     def validateParameters(self, descFile):
@@ -127,7 +127,7 @@ class Level:
                 if key != "_comment":
                     curObject.SetParameter(key.lower(), value, dynosymbols)
             if not curObject.Validate():
-                print("****Error: in level description file '%s'" % descFilename)
+                print(f"****Error: in level description file '{descFilename}'")
                 sys.exit(1)
             self.ObjectInitStream += curObject.WriteDataStream()
             self.NumInitObjects += 1
@@ -145,7 +145,7 @@ class Level:
             # handle tile index values (hex)
             tiles = "".join(line.split())
             if (len(tiles) & 1) == 1:
-                print("****Error: invalid tilemap line length (%i) in map file '%s'" % (len(tiles), mapFilename))
+                print(f"****Error: invalid tilemap line length ({int(len(tiles))}) in map file '{mapFilename}'")
                 sys.exit(1)
             for i in range(0, len(tiles), 2):
                 v = int(tiles[i:i+2], 16)
@@ -153,7 +153,7 @@ class Level:
             continue
         # validate tilemap length
         if len(self.tilemap) != lvl.tilemapwidth * lvl.tilemapheight:
-            print("****Error: tilemap length (%i) in file '%s' doesn't match width and height given in level descriptor file" % (len(self.tilemap), mapFilename))
+            print(f"****Error: tilemap length ({int(len(self.tilemap))}) in file '{mapFilename}' doesn't match width and height given in level descriptor file")
             sys.exit(1)
 
     def generateData(self):
@@ -216,7 +216,7 @@ def StringOut(inString):
     for char in delimiters:
         if inString.find(char) == -1:
             return char + inString + char
-    print("This is a bad string: %s" % inString)
+    print(f"This is a bad string: {inString}")
     sys.exit(1)
 
 #******************************************************************************
@@ -227,7 +227,7 @@ if __name__ == "__main__":
     print("DynoSprite Level Builder script")
     # get input paths
     if len(sys.argv) != 8:
-        print("****Usage: %s <in_level_folder> <dynosprite-pass1.lst> <in_gfx_folder> <in_raw_folder> <in_list_folder> <out_cc3_folder> <out_asm_folder>" % sys.argv[0])
+        print(f"****Usage: {sys.argv[0]} <in_level_folder> <dynosprite-pass1.lst> <in_gfx_folder> <in_raw_folder> <in_list_folder> <out_cc3_folder> <out_asm_folder>")
         sys.exit(1)
     leveldir = sys.argv[1]
     dynolist = sys.argv[2]
@@ -254,11 +254,11 @@ if __name__ == "__main__":
     numLevels = len(lvlDescFiles)
     if len(lvlMapFiles) != numLevels or len(lvlRawFiles) != numLevels or len(lvlListFiles) != numLevels:
         print(f"****Error: Mismatched level description/assembly/map files in '{leveldir}' and/or '{rawdir}'")
-        print("  %d map files found, %d expected" % (len(lvlMapFiles), numLevels))
-        print("  %d raw files found, %d expected" % (len(lvlRawFiles), numLevels))
-        print("  %d list files found, %d expected" % (len(lvlListFiles), numLevels))
+        print(f"  {int(len(lvlMapFiles))} map files found, {int(numLevels)} expected")
+        print(f"  {int(len(lvlRawFiles))} raw files found, {int(numLevels)} expected")
+        print(f"  {int(len(lvlListFiles))} list files found, {int(numLevels)} expected")
         sys.exit(1)
-    print("    Found %i levels" % numLevels)
+    print(f"    Found {int(numLevels)} levels")
     # get symbol locations for DynoSprite engine
     dynosymbols = SymbolExtract(dynolist)
     # parse input files and create levels
@@ -266,7 +266,7 @@ if __name__ == "__main__":
     for i in range(numLevels):
         lvlNum = int(lvlDescFiles[i][:2])
         if int(lvlMapFiles[i][7:9]) != lvlNum or int(lvlRawFiles[i][5:7]) != lvlNum or int(lvlListFiles[i][5:7]) != lvlNum:
-            print("****Error: mis-matched level description/assembly/map files in '%s' and/or '%s' with number %i" % (leveldir, rawdir, lvlNum))
+            print(f"****Error: mis-matched level description/assembly/map files in '{leveldir}' and/or '{rawdir}' with number {int(lvlNum)}")
             sys.exit(1)
         lvl = Level(lvlNum)
         lvl.Symbols = SymbolExtract(os.path.join(listdir, lvlListFiles[i]))
@@ -290,39 +290,39 @@ if __name__ == "__main__":
     f = open(os.path.join(asmdir, "gamedir-levels.asm"), "w")
     f.write("Gamedir_Levels\n")
     s = str(len(allLevels))
-    f.write((" " * 24) + "fcb     " + s + (" " * (16 - len(s))) + "* total number of levels\n")
+    f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* total number of levels\n")
     for lvl in allLevels:
-        f.write((" " * 24) + ("* Level %i: (%s)" % (lvl.LvlNumber, lvl.ParamDict["name"]) + "\n"))
+        f.write(f"{' ' * 24}* Level {lvl.LvlNumber}: {lvl.ParamDict['name']}\n")
         s = str(lvl.LvlNumber)
-        f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* Level number\n")
-        s = "Level%02iName" % lvl.LvlNumber
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* Pointer to level name\n")
-        s = "Level%02iDesc" % lvl.LvlNumber
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* Pointer to level description\n")
+        f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* Level number\n")
+        s = f"Level{int(lvl.LvlNumber):02}Name"
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level name\n")
+        s = f"Level{int(lvl.LvlNumber):02}Desc"
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level description\n")
         s = str(len(lvl.cc3Data))
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* Level size on disk in bytes\n")
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Level size on disk in bytes\n")
         s = str(len(lvl.ObjectGroups))
-        f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* number of object groups to load with level\n")
-        s = "Level%02iGroups" % lvl.LvlNumber
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* pointer to group number list to load\n")
+        f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of object groups to load with level\n")
+        s = f"Level{int(lvl.LvlNumber):02}Groups"
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* pointer to group number list to load\n")
         s = str(int(lvl.ParamDict["maxobjecttablesize"]))
-        f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* Maximum number of objects in Current Object Table\n")
+        f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* Maximum number of objects in Current Object Table\n")
         s = str(lvl.NumInitObjects)
-        f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* number of objects to initialize from Init Stream\n")
+        f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of objects to initialize from Init Stream\n")
         s = str(int(lvl.ParamDict["tileset"]))
-        f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* tileset number to load\n")
+        f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* tileset number to load\n")
         s = str(lvl.tilemapwidth)
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* width of background tilemap\n")
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* width of background tilemap\n")
         s = str(lvl.tilemapheight)
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* height of background tilemap\n")
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* height of background tilemap\n")
         s = str(int(lvl.ParamDict["bkgrndstartx"]))
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* background tilemap starting position X\n")
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* background tilemap starting position X\n")
         s = str(int(lvl.ParamDict["bkgrndstarty"]))
-        f.write((" " * 24) + "fdb     " + s + (" " * (16-len(s))) + "* background tilemap starting position Y\n")
+        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* background tilemap starting position Y\n")
     for lvl in allLevels:
-        f.write(("Level%02iName             fcn     " % lvl.LvlNumber) + StringOut(lvl.ParamDict["name"]) + "\n")
-        f.write(("Level%02iDesc             fcn     " % lvl.LvlNumber) + StringOut(lvl.ParamDict["description"]) + "\n")
-        f.write(("Level%02iGroups           fcb     " % lvl.LvlNumber) + ",".join([str(og) for og in lvl.ObjectGroups]) + "\n")
+        f.write(f"{'Level%02iName             fcn     ' % lvl.LvlNumber + StringOut(lvl.ParamDict['name'])}\n")
+        f.write(f"{'Level%02iDesc             fcn     ' % lvl.LvlNumber + StringOut(lvl.ParamDict['description'])}\n")
+        f.write(f"{'Level%02iGroups           fcb     ' % lvl.LvlNumber + ','.join([str(og) for og in lvl.ObjectGroups])}\n")
     f.close()
 
 
