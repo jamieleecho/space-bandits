@@ -174,7 +174,7 @@ typedef struct DynospriteDirectPageGlobals {
   byte rr_RowsToDraw;
   byte rr_TexRowOffset;
 
-  byte gfx_DrawOffsetX[2];
+  byte gfx_DrawOffsetX;
   byte gfx_DrawOffsetY;
   byte gfx_DrawSpritePage;
   byte gfx_DrawSpriteOffset[2];
