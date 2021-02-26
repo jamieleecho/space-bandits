@@ -22,6 +22,7 @@ computer running XCode 11.2 or later.
 
 ```
 ln -s ~/Applications/mame/mame64 tools/mame64 # or whereever your mame64 is
+sudo -s    # Linux only, also see https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
 ./coco-dev # start virtual linux environment
 make all   # builds `build/BNDT6809.dsk`
 exit       # exut cirtual linux environment

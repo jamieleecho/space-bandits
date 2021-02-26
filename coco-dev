@@ -3,19 +3,16 @@
 case "$(uname -s)" in
 
    Darwin)
-     docker-compose -f docker-compose.yml run --rm -w /home/dynosprite dynosprite bash
+     docker-compose -f docker-compose.yml run --rm dynosprite bash
      ;;
 
    Linux)
-     docker-compose -f docker-compose.yml run --rm -w /home/dynopsrite dynosprite bash
+     docker-compose -f docker-compose.yml run --rm dynosprite bash
      ;;
 
    CYGWIN*|MINGW32*|MSYS*)
      echo 'MS Windows not supported yet'
      ;;
-
-   # Add here more strings to compare
-   # See correspondence table at the bottom of this answer
 
    *)
      echo 'Unknown OS not supported' 
