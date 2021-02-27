@@ -20,6 +20,8 @@
 #define SOUND_EXPLOSION 2
 
 #define NUM_BAD_GUYS 45
+#define BAD_GUY_ROWS 5
+#define BAD_GUY_COLUMNS 9
 #define NUM_MISSILES 3
 #define NUM_BAD_MISSILES 3
 

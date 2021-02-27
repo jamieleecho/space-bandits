@@ -25,10 +25,10 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of NumeralsObjectState in bytes */
-#define DynospriteObject_DataSize 8
+#define DynospriteObject_DataSize 3
 
 /** Defines at least the number of initialization bytes */
-#define DynospriteObject_InitSize 3
+#define DynospriteObject_InitSize 0
 
 #else
 

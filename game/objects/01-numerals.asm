@@ -65,12 +65,6 @@ ShootCounter rmd    3
 * - Trashed: all
 *
 Demo_Object0_Init
-            * copy 3 bytes (BCD counter starting value) from init stream to object state
-            ldx         COB.statePtr,x
-            lda         ,u
-            sta         ,x
-            ldd         1,u
-            std         1,x
             rts
 
 Demo_Object0_Reactivate
@@ -214,12 +208,6 @@ DrawLoopTail@
 * - Trashed: all
 *
 Demo_Object1_Init
-            * copy 3 bytes (number of bytes, starting address) from init stream to object state
-            ldx         COB.statePtr,x
-            lda         ,u
-            sta         ,x
-            ldd         1,u
-            std         1,x
             rts
 
 Demo_Object1_Reactivate
@@ -301,7 +289,7 @@ NumberOfObjects         fcb     2
 ObjectDescriptorTable
                         fcb     3               * dataSize
                         fcb     0               * drawType == 0: custom function
-                        fcb     3               * initSize
+                        fcb     0               * initSize
                         fcb     0               * res1
                         fdb     Demo_Object0_Init
                         fdb     Demo_Object0_Reactivate
@@ -311,7 +299,7 @@ ObjectDescriptorTable
 
                         fcb     3               * dataSize
                         fcb     0               * drawType == 0: custom function
-                        fcb     3               * initSize
+                        fcb     0               * initSize
                         fcb     0               * res1
                         fdb     Demo_Object1_Init
                         fdb     Demo_Object1_Reactivate
