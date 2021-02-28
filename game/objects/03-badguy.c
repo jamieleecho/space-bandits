@@ -20,12 +20,30 @@ extern "C" {
 #define TOP_SPEED 4
 
 
-/* The invader direction code is a bit confusing. We have to keep all of the
- */
+/** The invader direction code is a bit confusing. We have to keep all of the */
 typedef enum DirectionMode {
     DirectionModeRight,
     DirectionModeLeft,
 } DirectionMode;
+
+
+/** Invader grouping mode */
+typedef enum GroupingMode {
+    /** All invaders move together */
+    GroupingModeAll = 0,
+
+    /** All invaders in a column move together */
+    GroupingModeColumn,
+
+    /** All invaders in a row move together */
+    GroupingModeRow,
+
+    /** All invaders move in whatever direction they want */
+    GroupingModeFreeForAll,
+
+    /** Invalid grouping mode */
+    GroupingModeInvalid
+} GroupingMode;
 
 
 // Has the class been initialized
@@ -33,6 +51,15 @@ static byte didInit = FALSE;
 
 // Direction that all of the invaders should be moving
 static byte /* DirectionMode */ groupDirection;
+
+// Direction that the given column all of the invaders should be moving
+static byte /* DirectionMode */ columnGroupDirection[NUM_COLUMNS];
+
+// Direction that the given row all of the invaders should be moving
+static byte /* DirectionMode */ rowGroupDirection[NUM_ROWS];
+
+// How the invaders shouls be grouped together
+static byte /* GroupingMode */ groupMode;
 
 // Number of invaders that are alive
 static byte numInvaders = 0;
@@ -119,7 +146,10 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         
         firstBadGuy = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, BADGUY_GROUP_IDX);
         shipState = (ShipObjectState *)findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, SHIP_GROUP_IDX)->statePtr;
+        groupMode = GroupingModeFreeForAll;
         groupDirection = DirectionModeRight;
+        memset(columnGroupDirection, DirectionModeRight, sizeof(columnGroupDirection));
+        memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));
     }
     
     /* We want to animate the different invaders and they all have different
@@ -167,8 +197,11 @@ void reset() {
         obj = obj + 1;
     }
     
+    groupMode = (groupMode + 1) % GroupingModeInvalid;
     groupDirection = DirectionModeRight;
-    
+    memset(columnGroupDirection, DirectionModeRight, sizeof(columnGroupDirection));
+    memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));
+
     obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
     for (obj = findObjectByGroup(obj, MISSILE_GROUP_IDX); obj; obj = findObjectByGroup(obj, MISSILE_GROUP_IDX)) {
         obj->active = OBJECT_INACTIVE;
@@ -248,6 +281,29 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     } else {
         cob->globalX -= delta;
     }
+
+    // Logic for deciding how things should be groups
+    byte *groupDirectionPtr;
+    sbyte iterDelta;
+    switch(groupMode) {
+        case GroupingModeAll:
+            groupDirectionPtr = &groupDirection;
+            iterDelta = -1;
+            break;
+        case GroupingModeColumn:
+            groupDirectionPtr = columnGroupDirection + statePtr->column;
+            iterDelta = -NUM_COLUMNS;
+            break;
+        case GroupingModeRow:
+            groupDirectionPtr = rowGroupDirection + statePtr->row;
+            iterDelta = -1;
+            break;
+        case GroupingModeFreeForAll:
+        default:
+            groupDirectionPtr = &statePtr->direction;
+            iterDelta = -1;
+            break;
+    }
     
     // Did this character hit an extreme or move opposite from global direction?
     // If so, move down and update directions
@@ -256,21 +312,27 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         statePtr->direction =
             ((statePtr->direction == DirectionModeRight) ?
              DirectionModeLeft : DirectionModeRight);
-        byte newDirection = (statePtr->direction != groupDirection);
-        groupDirection = statePtr->direction;
+        byte newDirection = (statePtr->direction != *groupDirectionPtr);
+        
+        *groupDirectionPtr = statePtr->direction;
         cob->globalY += DELTA_Y;
 
         // We have to patch up the direction of the previous bad guys
-        if (newDirection) {
-            for(DynospriteCOB *cob0 = cob - 1; cob0 >= firstBadGuy ; cob0 = cob0 - 1) {
+        if (newDirection && (groupMode != GroupingModeFreeForAll)) {
+            for(DynospriteCOB *cob0 = cob + iterDelta; cob0 >= firstBadGuy ; cob0 = cob0 + iterDelta) {
                 if (cob0->active) {
-                    ((BadGuyObjectState *)cob0->statePtr)->direction = groupDirection;
+                    if (groupMode == GroupingModeRow) {
+                        if (((BadGuyObjectState *)cob0->statePtr)->row != statePtr->row) {
+                            break;
+                        }
+                    }
+                    ((BadGuyObjectState *)cob0->statePtr)->direction = *groupDirectionPtr;
                     cob0->globalY += DELTA_Y;
                 }
             }
         }
-    } else if (statePtr->direction != groupDirection) {
-        statePtr->direction = groupDirection;
+    } else if (statePtr->direction != *groupDirectionPtr) {
+        statePtr->direction = *groupDirectionPtr;
         cob->globalY += DELTA_Y;
     }
 
