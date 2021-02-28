@@ -123,8 +123,7 @@ static DynospriteCOB *getLowestBadguyToFireMissile() {
     }
 
     DynospriteCOB *cob = NULL;
-    byte foundCob = FALSE;
-    for(byte ii=0; !foundCob && ii<NUM_COLUMNS; ii++) {
+    for(byte ii=0; ii<NUM_COLUMNS; ii++) {
         byte xx = column + ii;
         if (xx >= NUM_COLUMNS) {
             xx = xx - NUM_COLUMNS;
@@ -132,14 +131,13 @@ static DynospriteCOB *getLowestBadguyToFireMissile() {
         cob = firstBadGuy + (NUM_COLUMNS * (NUM_ROWS - 1)) + xx;
 
         for(; cob >= firstBadGuy ; cob = cob - NUM_COLUMNS) {
-            if ((cob->active) && (cob->globalY < 130)) {
-                foundCob = TRUE;
-                break;
+            if ((cob->active == OBJECT_ACTIVE) && (cob->globalY < 130)) {
+                return cob;
             }
         }
     }
 
-    return foundCob ? cob : (DynospriteCOB *)NULL;
+    return (DynospriteCOB *)NULL;
 }
 
 
@@ -383,8 +381,8 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         globals->shootCounter[ii] = (globals->shootCounter[ii] & 0x7fff) + 1;
         if (!(badMissiles[ii]->active) && (globals->shootCounter[ii] > shootCounterMax[ii])) {
             DynospriteCOB *cob = getLowestBadguyToFireMissile();
-            if (cob) {                
-                globals->shootCounter[ii] = 0;
+            globals->shootCounter[ii] = 0;
+            if (cob) {
                 badMissiles[ii]->active = OBJECT_ACTIVE;
                 badMissiles[ii]->globalX = cob->globalX;
                 badMissiles[ii]->globalY = cob->globalY + MISSILE_HEIGHT + BADGUY_HALF_HEIGHT;

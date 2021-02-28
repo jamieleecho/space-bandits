@@ -127,8 +127,8 @@
             filePath = "../game/objects/03-badguy.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
             landmarkName = "BadguyUpdate(cob, odt)"
             landmarkType = "9">
          </BreakpointContent>
@@ -143,8 +143,8 @@
             filePath = "../game/objects/03-badguy.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "BadguyUpdate(cob, odt)"
             landmarkType = "9">
          </BreakpointContent>
