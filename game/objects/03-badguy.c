@@ -46,38 +46,50 @@ typedef enum GroupingMode {
 } GroupingMode;
 
 
-// Has the class been initialized
+/** Maps a groupingMode to the correspnding deltaY for that mode */
+static const byte groupModeToDeltaY[] = {
+    2, 4, 4, 6
+};
+
+
+/** Has the class been initialized */
 static byte didInit = FALSE;
 
-// Direction that all of the invaders should be moving
+/** Direction that all of the invaders should be moving */
 static byte /* DirectionMode */ groupDirection;
 
-// Direction that the given column all of the invaders should be moving
+/** Direction that the given column all of the invaders should be moving */
 static byte /* DirectionMode */ columnGroupDirection[NUM_COLUMNS];
 
-// Direction that the given row all of the invaders should be moving
+/** Direction that the given row all of the invaders should be moving */
 static byte /* DirectionMode */ rowGroupDirection[NUM_ROWS];
 
-// How the invaders shouls be grouped together
+/** How the invaders shouls be grouped together */
 static byte /* GroupingMode */ groupMode;
 
-// Number of invaders that are alive
+/** Number of invaders that are alive */
 static byte numInvaders = 0;
 
-// Array containing the bad missile objects
+/** Array containing the bad missile objects */
 static DynospriteCOB *badMissiles[NUM_BAD_MISSILES];
 
-// Which invader array should be shooting
+/** Which invader array should be shooting */
 static byte currentMissileFireColumnIndex = 0;
 
-// Game global variables
+/** Game global variables */
 static GameGlobals *globals;
 
-// Useful for indexing into bad guys
+/** Useful for indexing into bad guys */
 static DynospriteCOB *firstBadGuy;
 
-// For checking the state of the ship
+/** For checking the state of the ship */
 static ShipObjectState *shipState;
+
+/** The last bad guy processed */
+static DynospriteCOB *lastBadGuyUpdated;
+
+/** Number of pixels to move objDelta */
+static sbyte objDelta = 0;
 
 /** Maximum shooting counters */
 static const word shootCounterMax[] = {
@@ -146,10 +158,12 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         
         firstBadGuy = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, BADGUY_GROUP_IDX);
         shipState = (ShipObjectState *)findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, SHIP_GROUP_IDX)->statePtr;
-        groupMode = GroupingModeFreeForAll;
+        groupMode = GroupingModeAll;
         groupDirection = DirectionModeRight;
         memset(columnGroupDirection, DirectionModeRight, sizeof(columnGroupDirection));
         memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));
+        
+        lastBadGuyUpdated = (DynospriteCOB *)0xffff;
     }
     
     /* We want to animate the different invaders and they all have different
@@ -185,27 +199,31 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 
 
 void reset() {
+    groupMode = (groupMode + 1) % GroupingModeInvalid;
+    groupDirection = DirectionModeRight;
+    memset(columnGroupDirection, DirectionModeRight, sizeof(columnGroupDirection));
+    memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));
+
     DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
     for (obj = findObjectByGroup(obj, BADGUY_GROUP_IDX); obj; obj = findObjectByGroup(obj, BADGUY_GROUP_IDX)) {
         BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
         obj->active = OBJECT_ACTIVE;
         statePtr->spriteIdx = statePtr->originalSpriteIdx;
-        statePtr->direction = statePtr->originalDirection;
+
+        if (groupMode == GroupingModeFreeForAll) {
+            statePtr->direction = (statePtr->row + statePtr->column) & 1 ? DirectionModeRight : DirectionModeLeft;
+        } else {
+            statePtr->direction = statePtr->originalDirection;
+        }
         obj->globalX = statePtr->originalGlobalX;
         obj->globalY = statePtr->originalGlobalY;
         numInvaders = NUM_BAD_GUYS;
         obj = obj + 1;
     }
     
-    groupMode = (groupMode + 1) % GroupingModeInvalid;
-    groupDirection = DirectionModeRight;
-    memset(columnGroupDirection, DirectionModeRight, sizeof(columnGroupDirection));
-    memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));
-
-    obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
-    for (obj = findObjectByGroup(obj, MISSILE_GROUP_IDX); obj; obj = findObjectByGroup(obj, MISSILE_GROUP_IDX)) {
-        obj->active = OBJECT_INACTIVE;
-        obj = obj + 1;
+    lastBadGuyUpdated = (DynospriteCOB *)0xffff;
+    for(byte ii=0; ii<NUM_MISSILES; ii++) {
+        badMissiles[ii]->active = OBJECT_INACTIVE;
     }
 }
 
@@ -242,8 +260,12 @@ byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
-    
-    /* Switch to the next animation frame */
+
+    // Whether or not there is a new frame
+    byte newFrame = cob < lastBadGuyUpdated;
+    lastBadGuyUpdated = cob;
+
+    // Switch to the next animation frame
     byte spriteIdx = statePtr->spriteIdx;
     if (spriteIdx < statePtr->spriteMax) {
         statePtr->spriteIdx = spriteIdx + 1;
@@ -274,12 +296,14 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     // direction. Move the character down on any motion change.
     
     // Move the character
-    sbyte frameDelta = DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2;
-    byte delta = (TOP_SPEED - (numInvaders >> 4)) * frameDelta;
+    if (newFrame) {
+        sbyte frameDelta = DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2;
+        objDelta = (TOP_SPEED - (numInvaders >> 4)) * frameDelta;
+    }
     if (statePtr->direction == DirectionModeRight) {
-        cob->globalX += delta;
+        cob->globalX += objDelta;
     } else {
-        cob->globalX -= delta;
+        cob->globalX -= objDelta;
     }
 
     // Logic for deciding how things should be groups
@@ -307,15 +331,26 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     
     // Did this character hit an extreme or move opposite from global direction?
     // If so, move down and update directions
-    if ((cob->globalX <= SCREEN_LOCATION_MIN && (statePtr->direction == DirectionModeLeft)) ||
-        (cob->globalX >= SCREEN_LOCATION_MAX && (statePtr->direction == DirectionModeRight))) {
+    word xOffset = cob->globalX;
+    if ((xOffset <= SCREEN_LOCATION_MIN && (statePtr->direction == DirectionModeLeft)) ||
+        (xOffset >= SCREEN_LOCATION_MAX && (statePtr->direction == DirectionModeRight))) {
+        
+        // Adjust position if in column mode
+        if (groupMode == GroupingModeColumn) {
+            if (xOffset < SCREEN_LOCATION_MIN) {
+                cob->globalX = SCREEN_LOCATION_MIN + (SCREEN_LOCATION_MIN - xOffset);
+            } else if (xOffset > SCREEN_LOCATION_MAX) {
+                cob->globalX = SCREEN_LOCATION_MAX + (SCREEN_LOCATION_MAX - xOffset);
+            }
+        }
+        
         statePtr->direction =
             ((statePtr->direction == DirectionModeRight) ?
              DirectionModeLeft : DirectionModeRight);
         byte newDirection = (statePtr->direction != *groupDirectionPtr);
         
         *groupDirectionPtr = statePtr->direction;
-        cob->globalY += DELTA_Y;
+        cob->globalY += groupModeToDeltaY[groupMode];
 
         // We have to patch up the direction of the previous bad guys
         if (newDirection && (groupMode != GroupingModeFreeForAll)) {
@@ -327,13 +362,13 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
                         }
                     }
                     ((BadGuyObjectState *)cob0->statePtr)->direction = *groupDirectionPtr;
-                    cob0->globalY += DELTA_Y;
+                    cob0->globalY += groupModeToDeltaY[groupMode];
                 }
             }
         }
     } else if (statePtr->direction != *groupDirectionPtr) {
         statePtr->direction = *groupDirectionPtr;
-        cob->globalY += DELTA_Y;
+        cob->globalY += groupModeToDeltaY[groupMode];
     }
 
     // If the invaders hit the bottom, then the game is over
