@@ -41,6 +41,18 @@ typedef struct DynospriteCOB {
 
 /** Datastructure for DynospriteDirectPageGlobals */
 typedef struct DynospriteDirectPageGlobals {
+    /** X coordinates of last rendered buffer pair */
+    word Gfx_BkgrndLastX;
+
+    /** Y coordinates of last rendered buffer pair */
+    word Gfx_BkgrndLastY;
+    
+    /** New X coordinates of buffer pair which is being redrawn */
+    word Gfx_BkgrndNewX;
+
+    /** New Y coordinates of buffer pair which is being redrawn */
+    word Gfx_BkgrndNewY;
+
     sbyte Obj_MotionFactor;
     
     byte Obj_NumCurrent;

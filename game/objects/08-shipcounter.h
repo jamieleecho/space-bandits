@@ -11,7 +11,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of ShipObjectState in bytes */
-#define DynospriteObject_DataSize 2
+#define DynospriteObject_DataSize 6
 
 /** Defines at least the number of initialization bytes */
 #define DynospriteObject_InitSize 1
@@ -28,6 +28,8 @@
 typedef struct ShipCounterObjectState {
     byte spriteIdx;
     byte numShips;
+    word initX;
+    word initY;
 } ShipCounterObjectState;
 
 

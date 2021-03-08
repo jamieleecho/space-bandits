@@ -1,5 +1,5 @@
 {
-  "Image": "01-moon.gif",
+  "Image": "01-moon.png",
   "TileSetStart": [0, 0],
-  "TileSetSize": [320, 208]
+  "TileSetSize": [352, 224]
 }

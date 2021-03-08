@@ -16,7 +16,7 @@ extern "C" {
 #define NUM_COLUMNS 9
 #define NUM_ROWS 5
 #define DELTA_Y 2
-#define MAX_Y 155
+#define MAX_Y (SHIP_POSITION_Y - 20)
 #define TOP_SPEED 4
 
 

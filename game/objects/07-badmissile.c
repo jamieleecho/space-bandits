@@ -45,7 +45,7 @@ byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
 
-    if (cob->globalY > 175) {
+    if (cob->globalY > SHIP_POSITION_Y + MISSILE_HEIGHT / 2) {
         cob->active = OBJECT_INACTIVE;
         return 0;
     } else {
@@ -92,6 +92,7 @@ static void checkHitShip(DynospriteCOB *cob) {
             statePtr->spriteIdx = SHIP_SPRITE_EXPLOSION_INDEX;
             cob->globalX &= 0xfffe;
             statePtr->counter = 255;
+            cob->active = OBJECT_INACTIVE;
             PlaySound(2);
         }
     }

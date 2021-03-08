@@ -45,6 +45,8 @@
 #define SHIP_SPRITE_EXPLOSION_INDEX 3
 #define SHIP_SPRITE_LAST_INDEX 12
 
+#define SHIP_POSITION_Y 183
+
 
 enum GameState {
     GameStatePlaying = 0,

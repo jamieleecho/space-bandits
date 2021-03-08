@@ -132,7 +132,7 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         DynospriteCOB *missile = findFreeMissile();
         if (missile) {
             missile->globalX = cob->globalX;
-            missile->globalY = 165 - MISSILE_HEIGHT;
+            missile->globalY = SHIP_POSITION_Y - MISSILE_HEIGHT;
             missile->active = OBJECT_ACTIVE;
             PlaySound(SOUND_LASER);
         }

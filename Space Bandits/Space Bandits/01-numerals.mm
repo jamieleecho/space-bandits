@@ -49,7 +49,7 @@ void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures,
     SKSpriteNode *sprite = (__bridge SKSpriteNode *)node;
     NSArray<DSTexture *> *textureArray = (__bridge NSArray<DSTexture *> *)textures;
     sprite.anchorPoint = CGPointMake(0, 1);
-    sprite.position = CGPointMake(cob->globalX * 2, cob->globalY);
+    sprite.position = CGPointMake(((float)cob->globalX - (float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX) * 2, (float)cob->globalY - (float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY);
     byte *score = ((GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init))->score;
     for(size_t ii=0; ii<6; ii++) {
         if (sprite.children.count <= ii) {
