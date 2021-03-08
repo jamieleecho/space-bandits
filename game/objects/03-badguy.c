@@ -11,8 +11,8 @@ extern "C" {
 
 
 #define BAD_PTR ((DynospriteCOB *)0xffff)
-#define SCREEN_LOCATION_MIN 14
-#define SCREEN_LOCATION_MAX 306
+#define SCREEN_LOCATION_MIN 26
+#define SCREEN_LOCATION_MAX 318
 #define NUM_COLUMNS 9
 #define NUM_ROWS 5
 #define DELTA_Y 2
