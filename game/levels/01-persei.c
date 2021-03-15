@@ -13,11 +13,12 @@ void PerseiInit() {
     globals->numShips = 3;
     globals->initialized = TRUE;
     globals->gameState = GameStatePlaying;
+    globals->counter = 0;
 }
 
 
 byte PerseiCalculateBkgrndNewXY() {
-  return 0;
+    return 0;
 }
 
 

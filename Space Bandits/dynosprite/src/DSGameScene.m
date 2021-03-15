@@ -78,12 +78,6 @@
     DynospriteDirectPageGlobalsPtr->Input_UseKeyboard = !self.joystickController.useHardwareJoystick;
     memset(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix, 0xff, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix));
     
-    // Initialize the objects
-    [_objectCoordinator initializeObjects];
-    
-    // Initialize the level
-    _levelObj.initLevel();
-    
     // Create the tilesets for the level background
     NSString *tileImagePath = _tileInfo.imagePath;
     while([tileImagePath hasPrefix:@"../"]) {
@@ -123,15 +117,22 @@
     }
     _sprites = sprites;
     
+    // Initialize the objects
+    [_objectCoordinator initializeObjects];
+    
+    // Initialize the level
+    _levelObj.initLevel();
+    
     [self.joystickController.joystick reset];
 }
 
 - (void)runOneGameLoop {
-    // Set the new frame position
-    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
-    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
-    self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + self.size.width / 2, -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
-
+    // Update the globals
+    memcpy(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix, self.debouncedKeys, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix));
+    DynospriteDirectPageGlobalsPtr->Input_JoystickX = self.joystickController.joystick.xaxisPosition;
+    DynospriteDirectPageGlobalsPtr->Input_JoystickY = self.joystickController.joystick.yaxisPosition;
+    DynospriteDirectPageGlobalsPtr->Input_Buttons = ((self.joystickController.joystick.button0Pressed ? 0 : Joy1Button1) | (self.joystickController.joystick.button1Pressed ? 0 : Joy1Button2)) | Joy2Button1 | Joy2Button2;
+    
     // Update all the sprites
     byte newLevel = [_objectCoordinator updateOrReactivateObjects];
     if (newLevel) {
@@ -146,11 +147,10 @@
         [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];
     }
  
-    // Update the globals
-    memcpy(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix, self.debouncedKeys, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix));
-    DynospriteDirectPageGlobalsPtr->Input_JoystickX = self.joystickController.joystick.xaxisPosition;
-    DynospriteDirectPageGlobalsPtr->Input_JoystickY = self.joystickController.joystick.yaxisPosition;
-    DynospriteDirectPageGlobalsPtr->Input_Buttons = ((self.joystickController.joystick.button0Pressed ? 0 : Joy1Button1) | (self.joystickController.joystick.button1Pressed ? 0 : Joy1Button2)) | Joy2Button1 | Joy2Button2;
+    // Set the new frame position
+    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
+    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
+    self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + self.size.width / 2, -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
     
     // Calculate the new frame position
     self.levelObj.backgroundNewXY();

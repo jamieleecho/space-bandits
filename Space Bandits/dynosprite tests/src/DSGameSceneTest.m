@@ -179,7 +179,7 @@ static byte backgroundNewXY() {
     }).andReturn(node);
     
     XCTAssertThrows([_target initializeLevel]);
-    XCTAssertEqual(initLevelCount, 1);
+    XCTAssertEqual(initLevelCount, 0);
     XCTAssertEqual(backgroundNewXYCount, 0);
 }
 

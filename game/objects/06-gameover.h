@@ -25,7 +25,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of ShipObjectState in bytes */
-#define DynospriteObject_DataSize 1
+#define DynospriteObject_DataSize 3
 
 /** Defines at least the number of initialization bytes */
 #define DynospriteObject_InitSize 0
@@ -41,6 +41,8 @@
 /** State of Missile Object */
 typedef struct GameOverObjectState {
     byte spriteIdx;
+    byte initX;
+    byte initY;
 } GameOverObjectState;
 
 

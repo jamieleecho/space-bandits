@@ -22,6 +22,8 @@ byte buttonPressed;
 void GameoverInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     GameOverObjectState *statePtr = (GameOverObjectState *)(cob->statePtr);
     statePtr->spriteIdx = 0;
+    statePtr->initX = cob->globalX - (DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX / 2);
+    statePtr->initY = cob->globalY - DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
     pPressed = FALSE;
 }
 
@@ -56,6 +58,9 @@ byte GameoverReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
         cob->active = OBJECT_ACTIVE;
         statePtr->spriteIdx =  (byte)(globals->gameState - 1);
     }
+    cob->globalX = statePtr->initX + (2 * DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX);
+    cob->globalY = statePtr->initY + DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
+    
     return 0;
 }
 
@@ -63,7 +68,12 @@ byte GameoverReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 byte GameoverUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     byte *matrix = DynospriteDirectPageGlobalsPtr->Input_KeyMatrix;
     GameGlobals *globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
+    GameOverObjectState *statePtr = (GameOverObjectState *)(cob->statePtr);
 
+    cob->globalX = statePtr->initX + (2 * DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX);
+    cob->globalY = statePtr->initY + DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
+    
+    
     // Handle the paused state
     if (globals->gameState == GameStatePaused) {
         // Make sure p is unpressed

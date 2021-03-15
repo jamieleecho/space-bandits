@@ -22,6 +22,7 @@
 #define NUM_BAD_GUYS 45
 #define BAD_GUY_ROWS 5
 #define BAD_GUY_COLUMNS 9
+#define BAD_GUY_FIRE_MAX_Y 150
 #define NUM_MISSILES 3
 #define NUM_BAD_MISSILES 3
 
@@ -62,6 +63,7 @@ typedef struct GameGlobals {
     enum GameState gameState;
     byte score[3];
     word shootCounter[3];
+    byte counter;
 } GameGlobals;
 
 

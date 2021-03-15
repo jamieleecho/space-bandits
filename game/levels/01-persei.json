@@ -9,7 +9,7 @@
     "TilemapStart": [0, 0],
     "TilemapSize": [352, 224],
     "BkgrndStartX": 8,
-    "BkgrndStartY": 8
+    "BkgrndStartY": 0
   },
 
   "Objects": [
@@ -525,7 +525,7 @@
       "ObjectID": 0,
       "Active": 3,
       "globalX": 314,
-      "globalY": 12,
+      "globalY": 4,
       "InitData": [1]
     },
     {
@@ -534,7 +534,7 @@
       "ObjectID": 0,
       "Active": 3,
       "globalX": 306,
-      "globalY": 12,
+      "globalY": 4,
       "InitData": [2]
     },
 
@@ -544,7 +544,7 @@
       "ObjectID": 0,
       "Active": 3,
       "globalX": 298,
-      "globalY": 12,
+      "globalY": 4,
       "InitData": [3]
     },
 
@@ -554,7 +554,7 @@
       "ObjectID": 0,
       "Active": 3,
       "globalX": 290,
-      "globalY": 12,
+      "globalY": 4,
       "InitData": [4]
     }
   ]

@@ -9,6 +9,85 @@ extern "C" {
 static byte didNotInit = TRUE;
 static DynospriteCOB *missiles[3];
 static GameGlobals *globals;
+static byte startUpOffsetY;
+
+static sbyte ExplosionOffsets[] = {
+    9, 7,
+    9, 6,
+    8, 5,
+    8, 5,
+    7, 5,
+    7, 6,
+    7, 7,
+    7, 8,
+    7, 9,
+    8, 10,
+    8, 9,
+    9, 9,
+    9, 7,
+    9, 6,
+    9, 5,
+    8, 4,
+    7, 4,
+    6, 5,
+    6, 6,
+    6, 8,
+    6, 10,
+    7, 11,
+    8, 11,
+    9, 10,
+    10, 8,
+    10, 6,
+    9, 5,
+    9, 3,
+    8, 3,
+    7, 3,
+    6, 5,
+    6, 7,
+    6, 9,
+    6, 11,
+    8, 12,
+    9, 11,
+    10, 10,
+    10, 8,
+    10, 5,
+    9, 3,
+    8, 2,
+    7, 2,
+    6, 3,
+    5, 5,
+    5, 8,
+    6, 11,
+    7, 12,
+    8, 13,
+    9, 12,
+    10, 9,
+    11, 7,
+    10, 4,
+    9, 2,
+    8, 1,
+    6, 1,
+    5, 4,
+    5, 7,
+    5, 10,
+    6, 12,
+    7, 14,
+    9, 13,
+    10, 12,
+    11, 8,
+    11, 5,
+    10, 2,
+    9, 0,
+    7, 0,
+    5, 1,
+    4, 4,
+    4, 8,
+    5, 12,
+    6, 14,
+    8, 15,
+    10, 14,
+    11, 11
+};
 
 
 #ifdef __APPLE__
@@ -55,46 +134,74 @@ void ShipInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
                 obj = obj + 1;
             }
         }
+        startUpOffsetY = 0;
     }
     
     ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
     statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
-    statePtr->counter = 0;
+    globals->counter = 0;
     return;
 }
 
 
 byte ShipReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+    ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
+    byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
     if (globals->gameState) {
+        if (globals->gameState == GameStateOver) {
+            if (globals->counter >= delta) {
+                DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = ExplosionOffsets[globals->counter/4];
+                DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ExplosionOffsets[globals->counter/4 + 1];
+                globals->counter -= delta;
+            }
+        }
+
         return 0;
     }
 
-    ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
-    byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
-    if (statePtr->counter < 64) {
+    if (globals->counter < 64) {
         cob->active = OBJECT_ACTIVE;
         cob->globalX = 160;
         statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
     } else {
-        statePtr->counter -= delta;
+        if (globals->counter > delta) {
+            globals->counter -= delta;
+        } else {
+            globals->counter = 0;
+        }
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = ExplosionOffsets[globals->counter/4];
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ExplosionOffsets[globals->counter/4 + 1];
     }
     return 0;
 }
 
 
 byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+    if (startUpOffsetY < 8) {
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ++startUpOffsetY;
+    }
+    
+    byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
     if (globals->gameState) {
+        if (globals->gameState == GameStateOver) {
+            if (globals->counter >= delta) {
+                DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = ExplosionOffsets[globals->counter/4];
+                DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ExplosionOffsets[globals->counter/4 + 1];
+                globals->counter -= delta;
+            }
+        }
         return 0;
     }
 
     ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
-    byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
     
     if ((statePtr->spriteIdx >= SHIP_SPRITE_EXPLOSION_INDEX) && ((statePtr->spriteIdx < SHIP_SPRITE_LAST_INDEX))) {
         ++statePtr->spriteIdx;
-        --statePtr->counter;
+        --globals->counter;
         if (statePtr->spriteIdx >= SHIP_SPRITE_LAST_INDEX) {
             statePtr->spriteIdx = SHIP_SPRITE_MIDDLE_INDEX;
+            DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = ExplosionOffsets[globals->counter/4];
+            DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ExplosionOffsets[globals->counter/4 + 1];
             cob->active = OBJECT_INACTIVE;
             if (--globals->numShips == 0x0) {
                 globals->gameState = GameStateOver;
@@ -103,11 +210,13 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
     
-    if (statePtr->counter >= delta) {
-        statePtr->counter -= delta;
+    if (globals->counter >= delta) {
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = ExplosionOffsets[globals->counter/4];
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ExplosionOffsets[globals->counter/4 + 1];
+        globals->counter -= delta;
         return 0;
     }
-    statePtr->counter = 0;
+    globals->counter = 0;
     
     unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
     if (joyx < 16) {

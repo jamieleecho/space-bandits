@@ -91,6 +91,9 @@ static DynospriteCOB *lastBadGuyUpdated;
 /** Number of pixels to move objDelta */
 static sbyte objDelta = 0;
 
+/** Whether or not we hit the bottom */
+static byte hitBottom = FALSE;
+
 /** Maximum shooting counters */
 static const word shootCounterMax[] = {
     (NUM_COLUMNS * NUM_ROWS * 193), (NUM_COLUMNS * NUM_ROWS * 201), (NUM_COLUMNS * NUM_ROWS * 369)
@@ -131,7 +134,7 @@ static DynospriteCOB *getLowestBadguyToFireMissile() {
         cob = firstBadGuy + (NUM_COLUMNS * (NUM_ROWS - 1)) + xx;
 
         for(; cob >= firstBadGuy ; cob = cob - NUM_COLUMNS) {
-            if ((cob->active == OBJECT_ACTIVE) && (cob->globalY < 130)) {
+            if ((cob->active == OBJECT_ACTIVE) && (cob->globalY < BAD_GUY_FIRE_MAX_Y)) {
                 return cob;
             }
         }
@@ -162,6 +165,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));
         
         lastBadGuyUpdated = (DynospriteCOB *)0xffff;
+        hitBottom = FALSE;
     }
     
     /* We want to animate the different invaders and they all have different
@@ -228,7 +232,7 @@ void reset() {
 
 byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt);
 byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
-    if (shipState->counter) {
+    if (globals->counter) {
         return 0;
     }
 
@@ -236,6 +240,13 @@ byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
 
+    if (hitBottom && (cob == firstBadGuy)) {
+        globals->gameState = GameStateOver;
+        globals->counter = 255;
+        PlaySound(SOUND_EXPLOSION);
+        return 0;
+    }
+    
     if (!numInvaders) {
         reset();
 
@@ -278,11 +289,18 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
 
-    if (shipState->counter) {
+    if (globals->counter) {
         return 0;
     }
 
     if (globals->gameState) {
+        return 0;
+    }
+
+    if (hitBottom && (cob == firstBadGuy)) {
+        globals->gameState = GameStateOver;
+        globals->counter = 255;
+        PlaySound(SOUND_EXPLOSION);
         return 0;
     }
     
@@ -371,9 +389,9 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 
     // If the invaders hit the bottom, then the game is over
     if (cob->globalY > MAX_Y) {
-         cob->globalY = MAX_Y;
-         globals->gameState = GameStateOver;
-         return 0;
+        cob->globalY = MAX_Y;
+        hitBottom = TRUE;
+        return 0;
     }
     
     // Shoot a missile if it is time to
