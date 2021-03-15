@@ -137,3 +137,30 @@ and how an author can use DynoSprite to build his or her game, read the
 DynoSpriteUsage.txt guide and follow the instructions included within.
 
 
+# 5. Credits
+## Space Ship
+James M Weisbecker
+
+## Aliens
+Unity Store - Retro Alien Pack
+
+## Earth Rise
+NASA
+
+## Laser Sound
+freesound.org - The bizniss
+
+## Explosion Sound
+freesound.org - tommccann
+
+## Song Sound
+www.looperman.com
+November Vibe by Raw X Limits
+
+## Lrrr
+camo.githubusercontent.com
+
+## Explosions
+opengameart.org - Chuzco
+
+
