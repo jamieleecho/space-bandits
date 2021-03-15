@@ -11,7 +11,7 @@
 #include "08-shipcounter.h"
 
 
-GameGlobals *globals;
+static GameGlobals *globals;
 
 
 #ifdef __APPLE__

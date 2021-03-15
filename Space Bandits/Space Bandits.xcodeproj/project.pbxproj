@@ -79,6 +79,8 @@
 		5254A65925D8C70F00AAD39B /* DSTransitionScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 524402DE21ED65CF00B02D38 /* DSTransitionScene.m */; };
 		5254A65B25D8C70F00AAD39B /* DSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F0574C2216323400CDC1DD /* DSViewController.m */; };
 		5254A65D25D8C70F00AAD39B /* DSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF9D412288FB2B0054EAD2 /* DSWindowController.m */; };
+		525ACDD025FEFEF7001B5DC2 /* 09-boss1.c in Sources */ = {isa = PBXBuildFile; fileRef = 525ACDCF25FEFEF7001B5DC2 /* 09-boss1.c */; };
+		525ACDD125FEFEF7001B5DC2 /* 09-boss1.c in Sources */ = {isa = PBXBuildFile; fileRef = 525ACDCF25FEFEF7001B5DC2 /* 09-boss1.c */; };
 		525FC91F22888202007F4793 /* DSSharedSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FC91E22888202007F4793 /* DSSharedSceneController.m */; };
 		52629B7824624AB5004AAEA3 /* DSGameSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52629B7724624AB5004AAEA3 /* DSGameSceneTest.m */; };
 		5265BD48247C933800FE9F3E /* DSConsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5265BD47247C933800FE9F3E /* DSConsTest.m */; };
@@ -253,6 +255,8 @@
 		524402DD21ED65CF00B02D38 /* DSTransitionScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSTransitionScene.h; sourceTree = "<group>"; };
 		524402DE21ED65CF00B02D38 /* DSTransitionScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSTransitionScene.m; sourceTree = "<group>"; };
 		5254A65F25D8CB1200AAD39B /* Dynosprite (GitHub).xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Dynosprite (GitHub).xctestplan"; sourceTree = "<group>"; };
+		525ACDCE25FEFEF7001B5DC2 /* 09-boss1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "09-boss1.h"; path = "../../game/objects/09-boss1.h"; sourceTree = "<group>"; };
+		525ACDCF25FEFEF7001B5DC2 /* 09-boss1.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; name = "09-boss1.c"; path = "../../game/objects/09-boss1.c"; sourceTree = "<group>"; };
 		525FC91D22888202007F4793 /* DSSharedSceneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSharedSceneController.h; sourceTree = "<group>"; };
 		525FC91E22888202007F4793 /* DSSharedSceneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedSceneController.m; sourceTree = "<group>"; };
 		52610C88243D64390052EE4F /* forest-hires.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forest-hires.png"; sourceTree = "<group>"; };
@@ -699,6 +703,8 @@
 				7DA178B22431552D00AE39D8 /* 07-badmissile.h */,
 				52A0C03525DE607100D807EC /* 08-shipcounter.c */,
 				52A0C03425DE607100D807EC /* 08-shipcounter.h */,
+				525ACDCF25FEFEF7001B5DC2 /* 09-boss1.c */,
+				525ACDCE25FEFEF7001B5DC2 /* 09-boss1.h */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -898,6 +904,7 @@
 				521A849A21FCEE06006120E8 /* DSConfigFileParserTest.m in Sources */,
 				5214980B24B391430053FDBB /* DSObjectClassDataTest.m in Sources */,
 				524109EB245604DA0005DF54 /* DSTransitionImageLoaderTest.m in Sources */,
+				525ACDD125FEFEF7001B5DC2 /* 09-boss1.c in Sources */,
 				529201E824413F97000B4D58 /* DSViewControllerTest.m in Sources */,
 				52B1A171244D2712008E7066 /* DSTileFileParserTest.m in Sources */,
 				5216943D245EE33B00F4B880 /* DSNSDataMD5ExtensionsTest.m in Sources */,
@@ -944,6 +951,7 @@
 				52796B23259E5D7D00FF17B6 /* DSTextureManager.m in Sources */,
 				7D3110EE22FF01D700833374 /* DSCoCoJoystick.mm in Sources */,
 				52B1A154244CFD31008E7066 /* DSSpriteInfo.m in Sources */,
+				525ACDD025FEFEF7001B5DC2 /* 09-boss1.c in Sources */,
 				52C7C833247B4A3200B4901E /* DSCons.m in Sources */,
 				7D8022A42431791C00496138 /* DSSoundManager.m in Sources */,
 				5214980224B38E1A0053FDBB /* DSObjectClassDataRegistry.m in Sources */,

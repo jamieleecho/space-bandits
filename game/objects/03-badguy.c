@@ -296,6 +296,17 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     if (globals->gameState) {
         return 0;
     }
+    
+    // If we are at the first bad guy...
+    if (lastCob >= cob) {
+        if (directionMode & DirectionModeChangeOnNextIterMask) {
+            /* toggle direction and clear DirectionModeChangeOnNextIterMask */
+            directionMode = (DirectionMode)((directionMode + 1) & DirectionModeMask);
+            deltaY = DELTA_Y;
+        } else {
+            deltaY = 0;
+        }
+    }
 
     if (hitBottom && (cob == firstBadGuy)) {
         globals->gameState = GameStateOver;

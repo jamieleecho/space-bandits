@@ -1,0 +1,23 @@
+{
+  "Main": {
+    "Group": 9,
+    "Image": "../tiles/01-moon.gif",
+    "Transparent": [254, 0, 254],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "Boss1_1",
+    "Location": [194, 226],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Boss1_2",
+    "Location": [194, 253],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Boss1_3",
+    "Location": [194, 278],
+    "SinglePixelPosition": true
+  }]
+}
+
