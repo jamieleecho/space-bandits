@@ -72,7 +72,7 @@ byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
 
-    if (cob->globalY < 10) {
+    if (cob->globalY < 22) {
         cob->active = OBJECT_INACTIVE;
     } else {
         byte delta = (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2) << 1;

@@ -1,7 +1,7 @@
 {
   "Main": {
     "Group": 6,
-    "Image": "../tiles/01-moon.gif",
+    "Image": "01-sprites.png",
     "Transparent": [254, 0, 254],
     "Palette": 1
   },

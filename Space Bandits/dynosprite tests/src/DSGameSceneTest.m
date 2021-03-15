@@ -72,7 +72,7 @@ static byte backgroundNewXY() {
     _levelObj.tilemapSize = DSPointMake(160, 64);
     _levelObj.tilemapStart = DSPointMake(3, 7);
     _levelObj.tilesetIndex = 4;
-    _levelObj.bkgrndStartX = 100;
+    _levelObj.bkgrndStartX = 101;
     _levelObj.bkgrndStartY = 237;
 
     OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"forest.png");
@@ -136,6 +136,10 @@ static byte backgroundNewXY() {
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[5], 0xff);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[6], 0xff);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[7], 0xff);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX, 50);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY, 237);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX, 50);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY, 237);
 
     OCMVerify([_objectCoordinator initializeObjects]);
     
@@ -175,7 +179,7 @@ static byte backgroundNewXY() {
     }).andReturn(node);
     
     XCTAssertThrows([_target initializeLevel]);
-    XCTAssertEqual(initLevelCount, 1);
+    XCTAssertEqual(initLevelCount, 0);
     XCTAssertEqual(backgroundNewXYCount, 0);
 }
 
@@ -187,6 +191,8 @@ static byte backgroundNewXY() {
     
     _levelObj.bkgrndStartX = 50;
     _levelObj.bkgrndStartY = 100;
+    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = 27;
+    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = 101;
     OCMStub([_objectCoordinator updateOrReactivateObjects]).andReturn(0);
     OCMStub([_joystickController joystick]).andReturn(joystick);
     OCMStub([joystick xaxisPosition]).andReturn(20);
@@ -196,14 +202,18 @@ static byte backgroundNewXY() {
 
     [_target runOneGameLoop];
     OCMVerify([_objectCoordinator updateOrReactivateObjects]);
-    XCTAssertEqual(_target.camera.position.x, 210);
-    XCTAssertEqual(_target.camera.position.y, -200);
+    XCTAssertEqual(_target.camera.position.x, 214);
+    XCTAssertEqual(_target.camera.position.y, -201);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickX, 20);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 41);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2);
     for(size_t ii=0; ii<3; ii++) {
         OCMVerify( [_textureManager configureSprite:_target.sprites[ii] forCob:_cobs + ii andScene:_target andCamera:_target.camera]);
     }
+    
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX, 27);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY, 101);
+    XCTAssertEqual(backgroundNewXYCount, 1);
 }
 
 - (void) testRunOneGameLoopTransitionToInit {
