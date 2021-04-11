@@ -1,22 +1,22 @@
 {
   "Main": {
     "Group": 9,
-    "Image": "../tiles/01-moon.gif",
+    "Image": "01-sprites.png",
     "Transparent": [254, 0, 254],
     "Palette": 1
   },
 
   "Sprites": [{
     "Name": "Boss1_1",
-    "Location": [194, 226],
+    "Location": [194, 221],
     "SinglePixelPosition": true
   }, {
     "Name": "Boss1_2",
-    "Location": [194, 253],
+    "Location": [194, 248],
     "SinglePixelPosition": true
   }, {
     "Name": "Boss1_3",
-    "Location": [194, 278],
+    "Location": [194, 273],
     "SinglePixelPosition": true
   }]
 }

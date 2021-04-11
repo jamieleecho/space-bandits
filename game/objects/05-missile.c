@@ -68,7 +68,7 @@ static void checkHitBadGuy(DynospriteCOB *cob) {
 
 
 byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
-    if (globals->gameState) {
+    if (globals->gameState && globals->gameState != GameStateOver) {
         return 0;
     }
 
@@ -77,6 +77,11 @@ byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     } else {
         byte delta = (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2) << 1;
         cob->globalY -= delta;
+
+        if (globals->gameState) {
+            return 0;
+        }
+
         checkHitBadGuy(cob);
     }
     return 0;

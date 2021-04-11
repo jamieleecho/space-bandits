@@ -1,6 +1,6 @@
-FROM jamieleecho/coco-dev:0.34
+FROM jamieleecho/coco-dev:0.36
 
-MAINTAINER Jamie Cho version: 0.4
+MAINTAINER Jamie Cho version: 0.5
 
 # Install wand
 #RUN pip2 install wand && \

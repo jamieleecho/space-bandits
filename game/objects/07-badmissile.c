@@ -41,7 +41,7 @@ byte BadmissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
-    if (globals->gameState) {
+    if (globals->gameState && globals->gameState != GameStateOver) {
         return 0;
     }
 
@@ -54,6 +54,11 @@ byte BadmissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
             delta = 1;
         }
         cob->globalY += delta;
+
+        if (globals->gameState) {
+            return 0;
+        }
+
         checkHitShip(cob);
     }
     return 0;
