@@ -41,6 +41,9 @@ typedef enum GroupingMode {
     /** All invaders move in whatever direction they want */
     GroupingModeFreeForAll,
 
+    /** Boss stage  */
+    GroupingModeBoss,
+
     /** Invalid grouping mode */
     GroupingModeInvalid
 } GroupingMode;
@@ -181,6 +184,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     statePtr->row = initData[2];
     statePtr->originalDirection = initData[3];
 
+    cob->active = (groupMode != GroupingModeBoss) ? OBJECT_ACTIVE : OBJECT_INACTIVE;
     statePtr->spriteMin = statePtr->originalSpriteIdx;
     statePtr->spriteIdx = statePtr->spriteMin;
     if (statePtr->spriteMin == BADGUY_SPRITE_ENEMY_SWATH_INDEX) {
@@ -209,7 +213,7 @@ void reset() {
     DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
     for (obj = findObjectByGroup(obj, BADGUY_GROUP_IDX); obj; obj = findObjectByGroup(obj, BADGUY_GROUP_IDX)) {
         BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
-        obj->active = OBJECT_ACTIVE;
+        obj->active = (groupMode != GroupingModeBoss) ? OBJECT_ACTIVE : OBJECT_INACTIVE;
         statePtr->spriteIdx = statePtr->originalSpriteIdx;
 
         if (groupMode == GroupingModeFreeForAll) {
@@ -219,10 +223,10 @@ void reset() {
         }
         obj->globalX = statePtr->originalGlobalX;
         obj->globalY = statePtr->originalGlobalY;
-        numInvaders = NUM_BAD_GUYS;
         obj = obj + 1;
     }
-    
+    numInvaders = NUM_BAD_GUYS;
+
     lastBadGuyUpdated = (DynospriteCOB *)0xffff;
     for(byte ii=0; ii<NUM_MISSILES; ii++) {
         badMissiles[ii]->active = OBJECT_INACTIVE;
@@ -276,6 +280,9 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 
     // Switch to the next animation frame
     byte spriteIdx = statePtr->spriteIdx;
+    if (globals->gameState && spriteIdx >= BADGUY_SPRITE_EXPLOSION_INDEX) {
+        return 0;
+    }
     if (spriteIdx < statePtr->spriteMax) {
         statePtr->spriteIdx = spriteIdx + 1;
     } else if (spriteIdx == statePtr->spriteMax) {

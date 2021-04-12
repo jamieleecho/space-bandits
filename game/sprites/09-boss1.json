@@ -8,15 +8,15 @@
 
   "Sprites": [{
     "Name": "Boss1_1",
-    "Location": [194, 221],
+    "Location": [194, 228],
     "SinglePixelPosition": true
   }, {
     "Name": "Boss1_2",
-    "Location": [194, 248],
+    "Location": [194, 256],
     "SinglePixelPosition": true
   }, {
     "Name": "Boss1_3",
-    "Location": [194, 273],
+    "Location": [194, 280],
     "SinglePixelPosition": true
   }]
 }

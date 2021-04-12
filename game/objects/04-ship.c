@@ -5,6 +5,8 @@ extern "C" {
 #include "04-ship.h"
 #include "object_info.h"
 
+#define SHIP_MIN_X (SHIP_HALF_WIDTH + 16 + 3)
+#define SHIP_MAX_X (320 + 16 - SHIP_HALF_WIDTH - 4)
 
 static byte didNotInit = TRUE;
 static DynospriteCOB *missiles[3];
@@ -153,6 +155,9 @@ byte ShipReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
                 DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = ExplosionOffsets[globals->counter/4];
                 DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ExplosionOffsets[globals->counter/4 + 1];
                 globals->counter -= delta;
+            } else {
+                DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = 8;
+                DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = 8;
             }
         }
 
@@ -215,23 +220,32 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ExplosionOffsets[globals->counter/4 + 1];
         globals->counter -= delta;
         return 0;
+    } else {
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = 8;
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = 8;
     }
     globals->counter = 0;
     
     unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
     if (joyx < 16) {
-        if (cob->globalX > delta) {
-            cob->globalX -= delta;
-            statePtr->spriteIdx = 0;
+        if (cob->globalX < delta) {
+            cob->globalX = SHIP_MIN_X;
         } else {
+            cob->globalX -= delta;
+        }
+        if (cob->globalX < SHIP_MIN_X) {
+            cob->globalX = SHIP_MIN_X;
             statePtr->spriteIdx = 1;
+        } else {
+            statePtr->spriteIdx = 0;
         }
     } else if (joyx > 48) {
-        if (cob->globalX < 300 - delta) {
-            cob->globalX += delta;
-            statePtr->spriteIdx = 2;
-        } else {
+        cob->globalX += delta;
+        if (cob->globalX > SHIP_MAX_X) {
+            cob->globalX = SHIP_MAX_X;
             statePtr->spriteIdx = 1;
+        } else {
+            statePtr->spriteIdx = 2;
         }
     } else {
         statePtr->spriteIdx = 1;

@@ -54,9 +54,9 @@ void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures,
     for(size_t ii=0; ii<6; ii++) {
         if (sprite.children.count <= ii) {
             SKSpriteNode *digitNode = [[SKSpriteNode alloc] initWithTexture:textureArray[0].texture];
-            digitNode.size = CGSizeMake(8, 8);
+            digitNode.size = CGSizeMake(9.0, 11);
             digitNode.anchorPoint = CGPointMake(0, 1);
-            digitNode.position = CGPointMake(ii * 8, 0);
+            digitNode.position = CGPointMake(4 + ii * 9.75, 0);
             [sprite addChild:digitNode];
         }
         SKSpriteNode *digitNode = (SKSpriteNode *)sprite.children[ii];
