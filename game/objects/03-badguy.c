@@ -27,28 +27,6 @@ typedef enum DirectionMode {
 } DirectionMode;
 
 
-/** Invader grouping mode */
-typedef enum GroupingMode {
-    /** All invaders move together */
-    GroupingModeAll = 0,
-
-    /** All invaders in a column move together */
-    GroupingModeColumn,
-
-    /** All invaders in a row move together */
-    GroupingModeRow,
-
-    /** All invaders move in whatever direction they want */
-    GroupingModeFreeForAll,
-
-    /** Boss stage  */
-    GroupingModeBoss,
-
-    /** Invalid grouping mode */
-    GroupingModeInvalid
-} GroupingMode;
-
-
 /** Maps a groupingMode to the correspnding deltaY for that mode */
 static const byte groupModeToDeltaY[] = {
     2, 4, 4, 6
@@ -66,9 +44,6 @@ static byte /* DirectionMode */ columnGroupDirection[NUM_COLUMNS];
 
 /** Direction that the given row all of the invaders should be moving */
 static byte /* DirectionMode */ rowGroupDirection[NUM_ROWS];
-
-/** How the invaders shouls be grouped together */
-static byte /* GroupingMode */ groupMode;
 
 /** Number of invaders that are alive */
 static byte numInvaders = 0;
@@ -162,7 +137,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         
         firstBadGuy = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, BADGUY_GROUP_IDX);
         shipState = (ShipObjectState *)findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, SHIP_GROUP_IDX)->statePtr;
-        groupMode = GroupingModeAll;
+        globals->gameWave = GameWavePerseiBoss;
         groupDirection = DirectionModeRight;
         memset(columnGroupDirection, DirectionModeRight, sizeof(columnGroupDirection));
         memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));
@@ -184,7 +159,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     statePtr->row = initData[2];
     statePtr->originalDirection = initData[3];
 
-    cob->active = (groupMode != GroupingModeBoss) ? OBJECT_ACTIVE : OBJECT_INACTIVE;
+    cob->active = (globals->gameWave != GameWavePerseiBoss) ? OBJECT_ACTIVE : OBJECT_INACTIVE;
     statePtr->spriteMin = statePtr->originalSpriteIdx;
     statePtr->spriteIdx = statePtr->spriteMin;
     if (statePtr->spriteMin == BADGUY_SPRITE_ENEMY_SWATH_INDEX) {
@@ -205,7 +180,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 
 
 void reset() {
-    groupMode = (groupMode + 1) % GroupingModeInvalid;
+    globals->gameWave = (globals->gameWave + 1) % GameWavePerseiInvalid;
     groupDirection = DirectionModeRight;
     memset(columnGroupDirection, DirectionModeRight, sizeof(columnGroupDirection));
     memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));
@@ -213,10 +188,10 @@ void reset() {
     DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
     for (obj = findObjectByGroup(obj, BADGUY_GROUP_IDX); obj; obj = findObjectByGroup(obj, BADGUY_GROUP_IDX)) {
         BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
-        obj->active = (groupMode != GroupingModeBoss) ? OBJECT_ACTIVE : OBJECT_INACTIVE;
+        obj->active = (globals->gameWave != GameWavePerseiBoss) ? OBJECT_ACTIVE : OBJECT_INACTIVE;
         statePtr->spriteIdx = statePtr->originalSpriteIdx;
 
-        if (groupMode == GroupingModeFreeForAll) {
+        if (globals->gameWave == GameWavePerseiMoveAtWill) {
             statePtr->direction = (statePtr->row + statePtr->column) & 1 ? DirectionModeRight : DirectionModeLeft;
         } else {
             statePtr->direction = statePtr->originalDirection;
@@ -332,20 +307,20 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     // Logic for deciding how things should be groups
     byte *groupDirectionPtr;
     sbyte iterDelta;
-    switch(groupMode) {
-        case GroupingModeAll:
+    switch(globals->gameWave) {
+        case GameWavePerseiMoveInUnison:
             groupDirectionPtr = &groupDirection;
             iterDelta = -1;
             break;
-        case GroupingModeColumn:
+        case GameWavePerseiMoveInColumn:
             groupDirectionPtr = columnGroupDirection + statePtr->column;
             iterDelta = -NUM_COLUMNS;
             break;
-        case GroupingModeRow:
+        case GameWavePerseiMoveInRow:
             groupDirectionPtr = rowGroupDirection + statePtr->row;
             iterDelta = -1;
             break;
-        case GroupingModeFreeForAll:
+        case GameWavePerseiMoveAtWill:
         default:
             groupDirectionPtr = &statePtr->direction;
             iterDelta = -1;
@@ -359,7 +334,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         (xOffset >= SCREEN_LOCATION_MAX && (statePtr->direction == DirectionModeRight))) {
         
         // Adjust position if in column mode
-        if (groupMode == GroupingModeColumn) {
+        if (globals->gameWave == GameWavePerseiMoveInColumn) {
             if (xOffset < SCREEN_LOCATION_MIN) {
                 cob->globalX = SCREEN_LOCATION_MIN + (SCREEN_LOCATION_MIN - xOffset);
             } else if (xOffset > SCREEN_LOCATION_MAX) {
@@ -373,25 +348,25 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         byte newDirection = (statePtr->direction != *groupDirectionPtr);
         
         *groupDirectionPtr = statePtr->direction;
-        cob->globalY += groupModeToDeltaY[groupMode];
+        cob->globalY += groupModeToDeltaY[globals->gameWave];
 
         // We have to patch up the direction of the previous bad guys
-        if (newDirection && (groupMode != GroupingModeFreeForAll)) {
+        if (newDirection && (globals->gameWave != GameWavePerseiMoveAtWill)) {
             for(DynospriteCOB *cob0 = cob + iterDelta; cob0 >= firstBadGuy ; cob0 = cob0 + iterDelta) {
                 if (cob0->active) {
-                    if (groupMode == GroupingModeRow) {
+                    if (globals->gameWave == GameWavePerseiMoveInRow) {
                         if (((BadGuyObjectState *)cob0->statePtr)->row != statePtr->row) {
                             break;
                         }
                     }
                     ((BadGuyObjectState *)cob0->statePtr)->direction = *groupDirectionPtr;
-                    cob0->globalY += groupModeToDeltaY[groupMode];
+                    cob0->globalY += groupModeToDeltaY[globals->gameWave];
                 }
             }
         }
     } else if (statePtr->direction != *groupDirectionPtr) {
         statePtr->direction = *groupDirectionPtr;
-        cob->globalY += groupModeToDeltaY[groupMode];
+        cob->globalY += groupModeToDeltaY[globals->gameWave];
     }
 
     // If the invaders hit the bottom, then the game is over

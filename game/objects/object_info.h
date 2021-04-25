@@ -57,14 +57,38 @@ enum GameState {
 };
 
 
+/** Global game data */
 typedef struct GameGlobals {
     byte initialized;
     byte numShips;
-    enum GameState gameState;
+    byte /* GameState */ gameState;
     byte score[3];
     word shootCounter[3];
     byte counter;
+    byte gameWave;
 } GameGlobals;
+
+
+/** GameWave Definitions for Persei Level */
+typedef enum GameWavePersei {
+    /** All invaders move together */
+    GameWavePerseiMoveInUnison = 0,
+
+    /** All invaders in a column move together */
+    GameWavePerseiMoveInColumn,
+
+    /** All invaders in a row move together */
+    GameWavePerseiMoveInRow,
+
+    /** All invaders move in whatever direction they want */
+    GameWavePerseiMoveAtWill,
+
+    /** Boss stage  */
+    GameWavePerseiBoss,
+
+    /** Invalid grouping mode */
+    GameWavePerseiInvalid
+} GameWavePersei;
 
 
 /**
@@ -96,7 +120,7 @@ static DynospriteCOB *findObjectByGroup(DynospriteCOB *obj, byte groupIdx) {
 #endif
 static void bumpScore(byte amount) {
 #if __APPLE__
-    byte *score0 = ((GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init))->score;
+    byte *score0 = (byte *)&((GameGlobals *)DynospriteGlobalsPtr)->score;
     byte *score2 = score0 + 2;
     
     byte amount0 = amount & 0xf;

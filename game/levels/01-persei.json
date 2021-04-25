@@ -502,30 +502,11 @@
         "GroupID": 9,
         "ObjectID": 0,
         "Active": 0,
-        "globalX": 128,
-        "globalY": 80,
-        "InitData": []
-    },
-
-    {
-        "GroupID": 9,
-        "ObjectID": 0,
-        "Active": 0,
         "globalX": 168,
-        "globalY": 80,
+        "globalY": 30,
         "InitData": []
     },
 
-    {
-        "GroupID": 9,
-        "ObjectID": 0,
-        "Active": 0,
-        "globalX": 208,
-        "globalY": 80,
-        "InitData": []
-    },
-
-    
     {
       "_comment": "***** Game Over",
       "GroupID": 6,

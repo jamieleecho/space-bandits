@@ -106,7 +106,7 @@ def main(argv):
           sys.exit(1)
 
     # Call cmoc
-    cmoc_args = ['cmoc', '-S', '--intermediate',
+    cmoc_args = ['cmoc', '-S', '--intermediate', '--raw',
       f'-O{args.optimization_level}']
     for include_dir in args.include_path or []:
         cmoc_args.append('-I')

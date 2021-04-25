@@ -45,11 +45,13 @@
 * -- GameGlobals
 GameGlobals STRUCT
 * -----------------------------------------------------------------------------
-Initialized rmb     1 
-NumShips    rmb     1 
-GameState   rmd     1
-Score       rmb     3
-ShootCounter rmd    3
+Initialized  rmb     1 
+NumShips     rmb     1 
+GameState    rmb     1
+Score        rmb     3
+ShootCounter rmd     3
+Counter      rmb     1
+GameWave     rmb     1
             ENDSTRUCT
 
 

@@ -228,7 +228,7 @@ typedef struct DynospriteGlobals {
 #define DynospriteGlobalsPtr ((void *)0x2620)
 
 
-asm void PlaySound(byte val) {
+static asm void PlaySound(byte val) {
   asm { 
   ldd 2,s
   pshs u
@@ -237,7 +237,7 @@ asm void PlaySound(byte val) {
   }
 }
 
-asm byte Random() {
+static asm byte Random() {
   asm { 
   jsr Util_Random
   tfr b,a

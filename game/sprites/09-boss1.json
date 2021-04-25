@@ -12,7 +12,7 @@
     "SinglePixelPosition": true
   }, {
     "Name": "Boss1_2",
-    "Location": [194, 256],
+    "Location": [194, 255],
     "SinglePixelPosition": true
   }, {
     "Name": "Boss1_3",
