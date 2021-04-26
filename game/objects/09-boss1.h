@@ -11,7 +11,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of ShipObjectState in bytes */
-#define DynospriteObject_DataSize 1
+#define DynospriteObject_DataSize 2
 
 /** Defines at least the number of initialization bytes */
 #define DynospriteObject_InitSize 0
@@ -24,9 +24,14 @@
 #include "dynosprite.h"
 
 
+#define BOSS1_SPRITE_EXPLOSTION_INDEX 3
+
+
 /** State of Boss1 Object */
 typedef struct Boss1ObjectState {
     byte spriteIdx;
+    byte currentPhase;
+    byte resetPhase;
 } Boss1ObjectState;
 
 

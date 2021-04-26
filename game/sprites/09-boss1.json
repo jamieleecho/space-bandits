@@ -18,6 +18,18 @@
     "Name": "Boss1_3",
     "Location": [194, 280],
     "SinglePixelPosition": true
+  }, {
+    "Name": "Boss1_4",
+    "Location": [270, 381],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Boss1_5",
+    "Location": [270, 408],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Boss1_6",
+    "Location": [270, 433],
+    "SinglePixelPosition": true
   }]
 }
 

@@ -18,7 +18,6 @@ typedef enum Boss1MoveMode {
 
 
 static GameGlobals *globals;
-static byte currentPhase = 0;
 static byte frameCounter = 0;
 const static byte phases[] = {
     0x0, 0x1, 0x2, 0x2, 0x1, 0x0
@@ -38,7 +37,8 @@ void Boss1Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         globals = (GameGlobals *)DynospriteGlobalsPtr;
         Boss1ObjectState *state = (Boss1ObjectState *)cob->statePtr;
         state->spriteIdx = 0;
-        currentPhase = 0;
+        state->currentPhase = 0;
+        state->resetPhase = 0xff;
         moveMode = Boss1MoveModeRight;
     }
 }
@@ -60,15 +60,25 @@ byte Boss1Update(DynospriteCOB *cob, DynospriteODT *odt) {
     }
 
     frameCounter += timeDelta;
-    if (frameCounter >= 3) {
+    if (frameCounter >= BOSS1_SPRITE_EXPLOSTION_INDEX) {
         frameCounter = 0x0;
     }
+    Boss1ObjectState *state = (Boss1ObjectState *)cob->statePtr;
     if (frameCounter == 0) {
-        if (++currentPhase >= sizeof(phases)/sizeof(phases[0])) {
-            currentPhase = 0;
+        if (++state->currentPhase >= sizeof(phases)/sizeof(phases[0])) {
+            state->currentPhase = 0;
         }
-        (((Boss1ObjectState *)(cob->statePtr))->spriteIdx) = phases[currentPhase];
+        if (state->currentPhase == state->resetPhase) {
+            state->resetPhase = 0xff;
+        }
+        
+        (((Boss1ObjectState *)(cob->statePtr))->spriteIdx) = (state->resetPhase == 0xff ? 0 : BOSS1_SPRITE_EXPLOSTION_INDEX) + phases[state->currentPhase];
     }
+    
+    if (globals->gameState) {
+        return 0;
+    }
+    
     if (moveMode == Boss1MoveModeRight) {
         cob->globalX += delta;
         if (cob->globalX > 320) {

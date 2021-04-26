@@ -4,11 +4,13 @@ extern "C" {
 
 #include "05-missile.h"
 #include "03-badguy.h"
+#include "09-boss1.h"
 #include "object_info.h"
 
 
 static byte didNotInit = TRUE;
 DynospriteCOB *badGuys[NUM_BAD_GUYS];
+DynospriteCOB *boss;
 DynospriteCOB **endBadGuys;
 static GameGlobals *globals;
 
@@ -32,6 +34,10 @@ void MissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
             obj = obj + 1;
         }
     }
+
+    DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
+    boss = findObjectByGroup(obj, BOSS1_GROUP_IDX);
+
     MissileObjectState *statePtr = (MissileObjectState *)(cob->statePtr);
     statePtr->spriteIdx = 0;
 }
@@ -43,24 +49,37 @@ byte MissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 static void checkHitBadGuy(DynospriteCOB *cob) {
-    int xx0 = cob->globalX - MISSILE_HALF_WIDTH - BADGUY_HALF_WIDTH;
-    int xx1 = cob->globalX + MISSILE_HALF_WIDTH + BADGUY_HALF_WIDTH;
-    int yy0 = cob->globalY - MISSILE_HEIGHT - BADGUY_HALF_HEIGHT;
-    int yy1 = cob->globalY + BADGUY_HALF_HEIGHT;
-    for (DynospriteCOB **badGuy=badGuys; badGuy < endBadGuys; ++badGuy) {
+    byte bossMode = globals->gameWave == GameWavePerseiBoss;
+    DynospriteCOB **startBadGuy = bossMode ? &boss : badGuys;
+    DynospriteCOB **endOfBadGuys = bossMode ? &boss + 1 : endBadGuys;
+
+    int xx0 = cob->globalX - MISSILE_HALF_WIDTH - (bossMode ? BOSS1_HALF_WIDTH : BADGUY_HALF_WIDTH);
+    int xx1 = cob->globalX + MISSILE_HALF_WIDTH + (bossMode ? BOSS1_HALF_WIDTH : BADGUY_HALF_WIDTH);
+    int yy0 = cob->globalY - MISSILE_HEIGHT - (bossMode ? BOSS1_HALF_HEIGHT : BADGUY_HALF_HEIGHT);
+    int yy1 = cob->globalY + (bossMode ? BOSS1_HALF_HEIGHT : BADGUY_HALF_HEIGHT) ;
+    
+    for (DynospriteCOB **badGuy=startBadGuy; badGuy < endOfBadGuys; ++badGuy) {
         DynospriteCOB *obj = *badGuy;
         if (obj->active &&
             (obj->globalY >= yy0) && (obj->globalY <= yy1) &&
             (obj->globalX >= xx0) && (obj->globalX <= xx1)) {
-            BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
-            if (statePtr->spriteIdx < BADGUY_SPRITE_EXPLOSION_INDEX) {
+            
+            if (bossMode) {
+                Boss1ObjectState *statePtr = (Boss1ObjectState *)(obj->statePtr);
                 cob->active = OBJECT_INACTIVE;
-                statePtr->spriteIdx = BADGUY_SPRITE_EXPLOSION_INDEX;
-                obj->globalX &= 0xfffe; // explosions must be on even byte boundaries
-                bumpScore(0x10);
+                statePtr->resetPhase = statePtr->currentPhase;
             } else {
-                continue;
+                BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
+                if (statePtr->spriteIdx < BADGUY_SPRITE_EXPLOSION_INDEX) {
+                    cob->active = OBJECT_INACTIVE;
+                    statePtr->spriteIdx = BADGUY_SPRITE_EXPLOSION_INDEX;
+                    obj->globalX &= 0xfffe; // explosions must be on even byte boundaries
+                    bumpScore(0x10);
+                } else {
+                    continue;
+                }
             }
+    
             return;
         }
     }
