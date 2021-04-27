@@ -5,8 +5,8 @@ extern "C" {
 #include "04-ship.h"
 #include "object_info.h"
 
-#define SHIP_MIN_X (SHIP_HALF_WIDTH + 16 + 3)
-#define SHIP_MAX_X (320 + 16 - SHIP_HALF_WIDTH - 4)
+#define SHIP_MIN_X (PLAYFIELD_CENTER_WIDTH_OFFSET + SHIP_HALF_WIDTH + 3)
+#define SHIP_MAX_X (SCREEN_WIDTH + PLAYFIELD_CENTER_WIDTH_OFFSET - SHIP_HALF_WIDTH - 4)
 
 static byte didNotInit = TRUE;
 static DynospriteCOB *missiles[3];

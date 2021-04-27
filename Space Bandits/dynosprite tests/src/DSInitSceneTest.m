@@ -190,8 +190,27 @@ enum DSInitSceneLabelIndices : short {
 - (void)testPollJoystickButtonPressed {
     id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
     OCMStub([_joystickController joystick]).andReturn(joystick);
-    OCMStub([joystick button0Pressed]).andReturn(YES);
+
+    // Ignore if pressed from start
+    const BOOL yesValue = YES, noValue = NO;
+    __block int returnValuesIndex = 0;
+    OCMStub([joystick button0Pressed]).andDo((^(NSInvocation *invocation) {
+        NSLog(@"here");
+        const BOOL *returnValues[] = {
+            &yesValue, &noValue, &yesValue
+        };
+        [invocation setReturnValue: (void *)returnValues[returnValuesIndex]];
+        returnValuesIndex++;
+    }));
     OCMStub([joystick button1Pressed]).andReturn(NO);
+    [_target poll];
+    XCTAssertFalse(_target.isDone);
+
+    // Ignore if unpressed
+    [_target poll];
+    XCTAssertFalse(_target.isDone);
+
+    // Ack if pressed
     [_target poll];
     XCTAssertTrue(_target.isDone);
 }

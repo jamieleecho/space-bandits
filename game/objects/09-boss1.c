@@ -12,6 +12,15 @@
 #include "09-boss1.h"
 
 
+#define SCREEN_LOCATION_MIN (PLAYFIELD_CENTER_HEIGHT_OFFSET + 26)
+#define SCREEN_LOCATION_MAX (PLAYFIELD_WIDTH - PLAYFIELD_CENTER_WIDTH_OFFSET - 20)
+#define MAX_Y (SHIP_POSITION_Y - 23)
+#define END_Y (SHIP_POSITION_Y + 6)
+#define DELTA_Y 8
+#define DELTA_X 6
+#define MAX_DELTA_X 6
+
+
 typedef enum Boss1MoveMode {
     Boss1MoveModeRight = 0,
     Boss1MoveModeLeft = 1
@@ -57,9 +66,9 @@ byte Boss1Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 byte Boss1Update(DynospriteCOB *cob, DynospriteODT *odt) {
     byte timeDelta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2));
-    byte delta = timeDelta * 6;
-    if (delta > 12) {
-        delta = 12;
+    byte delta = timeDelta * DELTA_X;
+    if (delta > MAX_DELTA_X) {
+        delta = MAX_DELTA_X;
     }
 
     frameCounter += timeDelta;
@@ -82,24 +91,29 @@ byte Boss1Update(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
     
+    byte moveDown = FALSE;
     if (moveMode == Boss1MoveModeRight) {
         cob->globalX += delta;
-        if (cob->globalX > 320) {
+        if (cob->globalX > SCREEN_LOCATION_MAX) {
             moveMode = Boss1MoveModeLeft;
-            ++cob->globalY;
+            moveDown = TRUE;
         }
     } else {
         cob->globalX -= delta;
-        if (cob->globalX < 34) {
+        if (cob->globalX < SCREEN_LOCATION_MIN) {
             moveMode = Boss1MoveModeRight;
-            cob->globalY += 4;
-            if (cob->globalY > 156) {
-                cob->globalY = 185;
-                ((ShipObjectState *)ship->statePtr)->spriteIdx = SHIP_SPRITE_EXPLOSION_INDEX;
-                globals->counter = 0xff;
-                globals->gameState = GameStateOver;
-                PlaySound(SOUND_EXPLOSION);
-            }
+            moveDown = TRUE;
+        }
+    }
+    
+    if (moveDown) {
+        cob->globalY += DELTA_Y;
+        if (cob->globalY > MAX_Y) {
+            cob->globalY = END_Y;
+            ((ShipObjectState *)ship->statePtr)->spriteIdx = SHIP_SPRITE_EXPLOSION_INDEX;
+            globals->counter = 0xff;
+            globals->gameState = GameStateOver;
+            PlaySound(SOUND_EXPLOSION);
         }
     }
 

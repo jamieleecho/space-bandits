@@ -34,6 +34,7 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
+    _alwaysPressed = YES;
     self.isDone = NO;
     if (self.labels.count < 1) {
         [self addLabelWithText:@"[D]isplay:" atPosition:CGPointMake(3, 120)];
@@ -128,7 +129,11 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)poll {
     if (self.joystickController.joystick.button0Pressed) {
-        [self transitionToNextScreen];
+        if (!_alwaysPressed) {
+            [self transitionToNextScreen];
+        }
+    } else {
+        _alwaysPressed = NO;
     }
 }
 

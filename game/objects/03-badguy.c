@@ -10,13 +10,12 @@ extern "C" {
 #include "dynosprite.h"
 
 
-#define BAD_PTR ((DynospriteCOB *)0xffff)
-#define SCREEN_LOCATION_MIN 26
-#define SCREEN_LOCATION_MAX 318
+#define SCREEN_LOCATION_MIN (PLAYFIELD_CENTER_HEIGHT_OFFSET + 14)
+#define SCREEN_LOCATION_MAX (SCREEN_WIDTH + PLAYFIELD_CENTER_WIDTH_OFFSET - 18)
+#define MAX_Y (SHIP_POSITION_Y - 20)
 #define NUM_COLUMNS 9
 #define NUM_ROWS 5
 #define DELTA_Y 2
-#define MAX_Y (SHIP_POSITION_Y - 20)
 #define TOP_SPEED 4
 
 
