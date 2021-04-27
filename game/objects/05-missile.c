@@ -68,6 +68,7 @@ static void checkHitBadGuy(DynospriteCOB *cob) {
                 Boss1ObjectState *statePtr = (Boss1ObjectState *)(obj->statePtr);
                 cob->active = OBJECT_INACTIVE;
                 statePtr->resetPhase = statePtr->currentPhase;
+                PlaySound(SOUND_CLICK);
             } else {
                 BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
                 if (statePtr->spriteIdx < BADGUY_SPRITE_EXPLOSION_INDEX) {

@@ -19,6 +19,7 @@
 
 #define SOUND_LASER 1
 #define SOUND_EXPLOSION 2
+#define SOUND_CLICK 3
 
 #define NUM_BAD_GUYS 45
 #define BAD_GUY_ROWS 5

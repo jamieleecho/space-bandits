@@ -72,7 +72,7 @@ byte Boss1Update(DynospriteCOB *cob, DynospriteODT *odt) {
             state->resetPhase = 0xff;
         }
         
-        (((Boss1ObjectState *)(cob->statePtr))->spriteIdx) = (state->resetPhase == 0xff ? 0 : BOSS1_SPRITE_EXPLOSTION_INDEX) + phases[state->currentPhase];
+        state->spriteIdx = ((state->resetPhase == 0xff) ? 0 : BOSS1_SPRITE_EXPLOSTION_INDEX) + phases[state->currentPhase];
     }
     
     if (globals->gameState) {
