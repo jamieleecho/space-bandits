@@ -186,8 +186,9 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ++startUpOffsetY;
     }
     
+    ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);    
     byte delta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 3));
-    if (globals->gameState) {
+    if (globals->gameState && (statePtr->spriteIdx < SHIP_SPRITE_EXPLOSION_INDEX)) {
         if (globals->gameState == GameStateOver) {
             if (globals->counter >= delta) {
                 DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = ExplosionOffsets[globals->counter/4];
@@ -198,8 +199,6 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
 
-    ShipObjectState *statePtr = (ShipObjectState *)(cob->statePtr);
-    
     if ((statePtr->spriteIdx >= SHIP_SPRITE_EXPLOSION_INDEX) && ((statePtr->spriteIdx < SHIP_SPRITE_LAST_INDEX))) {
         ++statePtr->spriteIdx;
         --globals->counter;

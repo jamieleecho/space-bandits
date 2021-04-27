@@ -8,6 +8,7 @@
 
 #include "dynosprite.h"
 #include "object_info.h"
+#include "04-ship.h"
 #include "09-boss1.h"
 
 
@@ -23,6 +24,7 @@ const static byte phases[] = {
     0x0, 0x1, 0x2, 0x2, 0x1, 0x0
 };
 static byte /* Boss1MoveMode */ moveMode;
+static DynospriteCOB *ship;
 
 
 #ifdef __APPLE__
@@ -40,6 +42,7 @@ void Boss1Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         state->currentPhase = 0;
         state->resetPhase = 0xff;
         moveMode = Boss1MoveModeRight;
+        ship = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, SHIP_GROUP_IDX);
     }
 }
 
@@ -54,7 +57,7 @@ byte Boss1Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 byte Boss1Update(DynospriteCOB *cob, DynospriteODT *odt) {
     byte timeDelta = ((DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2));
-    byte delta = timeDelta * 3;
+    byte delta = timeDelta * 6;
     if (delta > 12) {
         delta = 12;
     }
@@ -89,7 +92,14 @@ byte Boss1Update(DynospriteCOB *cob, DynospriteODT *odt) {
         cob->globalX -= delta;
         if (cob->globalX < 34) {
             moveMode = Boss1MoveModeRight;
-            ++cob->globalY;
+            cob->globalY += 4;
+            if (cob->globalY > 156) {
+                cob->globalY = 185;
+                ((ShipObjectState *)ship->statePtr)->spriteIdx = SHIP_SPRITE_EXPLOSION_INDEX;
+                globals->counter = 0xff;
+                globals->gameState = GameStateOver;
+                PlaySound(SOUND_EXPLOSION);
+            }
         }
     }
 
