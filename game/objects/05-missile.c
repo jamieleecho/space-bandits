@@ -48,8 +48,7 @@ byte MissileReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-static void checkHitBadGuy(DynospriteCOB *cob) {
-    byte bossMode = globals->gameWave == GameWavePerseiBoss;
+static void checkHitBadGuy(DynospriteCOB *cob, byte bossMode) {
     DynospriteCOB **startBadGuy = bossMode ? &boss : badGuys;
     DynospriteCOB **endOfBadGuys = bossMode ? &boss + 1 : endBadGuys;
 
@@ -68,7 +67,25 @@ static void checkHitBadGuy(DynospriteCOB *cob) {
                 Boss1ObjectState *statePtr = (Boss1ObjectState *)(obj->statePtr);
                 cob->active = OBJECT_INACTIVE;
                 statePtr->resetPhase = statePtr->currentPhase;
-                PlaySound(SOUND_CLICK);
+                if (--statePtr->hitsRemaining == 0) {
+                    obj->active = OBJECT_INACTIVE;
+                    PlaySound(SOUND_EXPLOSION);
+                    
+                    CreateBadGuyWithSpriteIdx(cob->globalX - BOSS1_HALF_WIDTH / 4,
+                                              (byte)cob->globalY - BOSS1_HALF_HEIGHT / 4,
+                                              BADGUY_SPRITE_EXPLOSION_INDEX);
+                    CreateBadGuyWithSpriteIdx(cob->globalX - BOSS1_HALF_WIDTH / 4,
+                                              (byte)cob->globalY + BOSS1_HALF_HEIGHT / 4,
+                                              BADGUY_SPRITE_EXPLOSION_INDEX);
+                    CreateBadGuyWithSpriteIdx(cob->globalX + BOSS1_HALF_WIDTH / 4,
+                                              (byte)cob->globalY - BOSS1_HALF_HEIGHT / 4,
+                                              BADGUY_SPRITE_EXPLOSION_INDEX);
+                    CreateBadGuyWithSpriteIdx(cob->globalX + BOSS1_HALF_WIDTH / 4,
+                                              (byte)cob->globalY + BOSS1_HALF_HEIGHT / 4,
+                                              BADGUY_SPRITE_EXPLOSION_INDEX);
+                } else {
+                    PlaySound(SOUND_CLICK);
+                }
             } else {
                 BadGuyObjectState *statePtr = (BadGuyObjectState *)(obj->statePtr);
                 if (statePtr->spriteIdx < BADGUY_SPRITE_EXPLOSION_INDEX) {
@@ -102,7 +119,8 @@ byte MissileUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
             return 0;
         }
 
-        checkHitBadGuy(cob);
+        checkHitBadGuy(cob, FALSE);
+        checkHitBadGuy(cob, TRUE);
     }
     return 0;
 }

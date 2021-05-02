@@ -13,8 +13,6 @@ extern "C" {
 #define SCREEN_LOCATION_MIN (PLAYFIELD_CENTER_HEIGHT_OFFSET + 14)
 #define SCREEN_LOCATION_MAX (SCREEN_WIDTH + PLAYFIELD_CENTER_WIDTH_OFFSET - 18)
 #define MAX_Y (SHIP_POSITION_Y - 20)
-#define NUM_COLUMNS 9
-#define NUM_ROWS 5
 #define DELTA_Y 2
 #define TOP_SPEED 4
 
@@ -28,7 +26,7 @@ typedef enum DirectionMode {
 
 /** Maps a groupingMode to the correspnding deltaY for that mode */
 static const byte groupModeToDeltaY[] = {
-    2, 4, 4, 6
+    2, 4, 4, 6, 2
 };
 
 
@@ -39,10 +37,10 @@ static byte didInit = FALSE;
 static byte /* DirectionMode */ groupDirection;
 
 /** Direction that the given column all of the invaders should be moving */
-static byte /* DirectionMode */ columnGroupDirection[NUM_COLUMNS];
+static byte /* DirectionMode */ columnGroupDirection[BADGUY_NUM_COLUMNS];
 
 /** Direction that the given row all of the invaders should be moving */
-static byte /* DirectionMode */ rowGroupDirection[NUM_ROWS];
+static byte /* DirectionMode */ rowGroupDirection[BADGUY_NUM_ROWS];
 
 /** Number of invaders that are alive */
 static byte numInvaders = 0;
@@ -73,8 +71,9 @@ static byte hitBottom = FALSE;
 
 /** Maximum shooting counters */
 static const word shootCounterMax[] = {
-    (NUM_COLUMNS * NUM_ROWS * 193), (NUM_COLUMNS * NUM_ROWS * 201), (NUM_COLUMNS * NUM_ROWS * 369)
+    (BADGUY_NUM_COLUMNS * BADGUY_NUM_ROWS * 193), (BADGUY_NUM_COLUMNS * BADGUY_NUM_ROWS * 201), (BADGUY_NUM_COLUMNS * BADGUY_NUM_ROWS * 369)
 };
+
 
 /* From the original space invaders */
 static const byte missileFireColumns[] = {
@@ -103,14 +102,14 @@ static DynospriteCOB *getLowestBadguyToFireMissile() {
     }
 
     DynospriteCOB *cob = NULL;
-    for(byte ii=0; ii<NUM_COLUMNS; ii++) {
+    for(byte ii=0; ii<BADGUY_NUM_COLUMNS; ii++) {
         byte xx = column + ii;
-        if (xx >= NUM_COLUMNS) {
-            xx = xx - NUM_COLUMNS;
+        if (xx >= BADGUY_NUM_COLUMNS) {
+            xx = xx - BADGUY_NUM_COLUMNS;
         }
-        cob = firstBadGuy + (NUM_COLUMNS * (NUM_ROWS - 1)) + xx;
+        cob = firstBadGuy + (BADGUY_NUM_COLUMNS * (BADGUY_NUM_ROWS - 1)) + xx;
 
-        for(; cob >= firstBadGuy ; cob = cob - NUM_COLUMNS) {
+        for(; cob >= firstBadGuy ; cob = cob - BADGUY_NUM_COLUMNS) {
             if ((cob->active == OBJECT_ACTIVE) && (cob->globalY < BAD_GUY_FIRE_MAX_Y)) {
                 return cob;
             }
@@ -143,6 +142,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         
         lastBadGuyUpdated = (DynospriteCOB *)0xffff;
         hitBottom = FALSE;
+        numInvaders = 0;
     }
     
     /* We want to animate the different invaders and they all have different
@@ -157,6 +157,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     statePtr->column = initData[1];
     statePtr->row = initData[2];
     statePtr->originalDirection = initData[3];
+    statePtr->numInvadersPtr = &numInvaders;
 
     cob->active = (globals->gameWave != GameWavePerseiBoss) ? OBJECT_ACTIVE : OBJECT_INACTIVE;
     statePtr->spriteMin = statePtr->originalSpriteIdx;
@@ -174,7 +175,9 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     }
     statePtr->direction = statePtr->originalDirection;
 
-    numInvaders = NUM_BAD_GUYS;
+    if (globals->gameWave != GameWavePerseiBoss) {
+        ++numInvaders;
+    }
 }
 
 
@@ -199,7 +202,7 @@ void reset() {
         obj->globalY = statePtr->originalGlobalY;
         obj = obj + 1;
     }
-    numInvaders = NUM_BAD_GUYS;
+    numInvaders = (globals->gameWave == GameWavePerseiBoss) ? 0 :  NUM_BAD_GUYS;
 
     lastBadGuyUpdated = (DynospriteCOB *)0xffff;
     for(byte ii=0; ii<NUM_MISSILES; ii++) {
@@ -225,7 +228,7 @@ byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
     
-    if (!numInvaders) {
+    if (!numInvaders && (globals->gameWave != GameWavePerseiBoss)) {
         reset();
 
         // We have to patch up the direction of the previous bad guys
@@ -249,7 +252,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     BadGuyObjectState *statePtr = (BadGuyObjectState *)(cob->statePtr);
 
     // Whether or not there is a new frame
-    byte newFrame = cob < lastBadGuyUpdated;
+    byte newFrame = cob <= lastBadGuyUpdated;
     lastBadGuyUpdated = cob;
 
     // Switch to the next animation frame
@@ -313,7 +316,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
             break;
         case GameWavePerseiMoveInColumn:
             groupDirectionPtr = columnGroupDirection + statePtr->column;
-            iterDelta = -NUM_COLUMNS;
+            iterDelta = -BADGUY_NUM_COLUMNS;
             break;
         case GameWavePerseiMoveInRow:
             groupDirectionPtr = rowGroupDirection + statePtr->row;

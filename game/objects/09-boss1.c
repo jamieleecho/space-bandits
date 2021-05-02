@@ -8,6 +8,7 @@
 
 #include "dynosprite.h"
 #include "object_info.h"
+#include "03-badguy.h"
 #include "04-ship.h"
 #include "09-boss1.h"
 
@@ -19,6 +20,7 @@
 #define DELTA_Y 8
 #define DELTA_X 6
 #define MAX_DELTA_X 6
+#define BOSS_NUM_HITS 10
 
 
 typedef enum Boss1MoveMode {
@@ -36,6 +38,11 @@ static byte /* Boss1MoveMode */ moveMode;
 static DynospriteCOB *ship;
 
 
+static byte createBadGuyTicks[] = {
+    43, 37, 45, 44, 26, 43, 48, 44, 50
+};
+
+
 #ifdef __APPLE__
 void Boss1ClassInit() {
     globals = NULL;
@@ -46,19 +53,25 @@ void Boss1ClassInit() {
 void Boss1Init(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!globals) {
         globals = (GameGlobals *)DynospriteGlobalsPtr;
-        Boss1ObjectState *state = (Boss1ObjectState *)cob->statePtr;
-        state->spriteIdx = 0;
-        state->currentPhase = 0;
-        state->resetPhase = 0xff;
         moveMode = Boss1MoveModeRight;
         ship = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, SHIP_GROUP_IDX);
     }
+    
+    Boss1ObjectState *state = (Boss1ObjectState *)cob->statePtr;
+    state->spriteIdx = 0;
+    state->currentPhase = 0;
+    state->resetPhase = 0xff;
+    state->hitsRemaining = BOSS_NUM_HITS;
+    state->currentTickIndex = 0;
+    state->remainingTicks = createBadGuyTicks[state->currentTickIndex];
 }
 
 
 byte Boss1Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
     if (globals->gameWave == GameWavePerseiBoss) {
-        cob->active = OBJECT_ACTIVE;
+        if (((Boss1ObjectState *)cob->statePtr)->hitsRemaining > 0) {
+            cob->active = OBJECT_ACTIVE;
+        }
     }
     return 0;
 }
@@ -87,10 +100,19 @@ byte Boss1Update(DynospriteCOB *cob, DynospriteODT *odt) {
         state->spriteIdx = ((state->resetPhase == 0xff) ? 0 : BOSS1_SPRITE_EXPLOSTION_INDEX) + phases[state->currentPhase];
     }
     
-    if (globals->gameState) {
+    if (globals->gameState || globals->counter) {
         return 0;
     }
-    
+
+    if (--state->remainingTicks == 0) {
+        CreateBadGuy(cob->globalX, (byte)cob->globalY, moveMode);
+        
+        if (++state->currentTickIndex >= sizeof(createBadGuyTicks)/sizeof(createBadGuyTicks[0])) {
+            state->currentTickIndex = 0;
+        }
+        state->remainingTicks = createBadGuyTicks[state->currentTickIndex];
+    }
+
     byte moveDown = FALSE;
     if (moveMode == Boss1MoveModeRight) {
         cob->globalX += delta;

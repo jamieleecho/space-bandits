@@ -25,7 +25,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of BadGuyObjectState in bytes */
-#define DynospriteObject_DataSize 12
+#define DynospriteObject_DataSize 14
 
 /** Defines at least the number of initialization bytes */
 #define DynospriteObject_InitSize 4
@@ -36,6 +36,11 @@
 #define _03_badguy_h
 
 #include "dynosprite.h"
+#include "object_info.h"
+
+
+#define BADGUY_NUM_COLUMNS 9
+#define BADGUY_NUM_ROWS 5
 
 
 /** State of BadGuyObject */
@@ -50,7 +55,44 @@ typedef struct BadGuyObjectState {
     byte row;
     byte originalSpriteIdx;
     byte originalDirection;
+    byte *numInvadersPtr;
 } BadGuyObjectState;
+
+
+#ifdef __cplusplus
+[[maybe_unused]]
+#endif
+static DynospriteCOB *CreateBadGuy(word x, byte y, byte direction) {
+    DynospriteCOB *cob = NULL;
+    DynospriteCOB *firstBadGuy = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, BADGUY_GROUP_IDX);
+    for(byte jj=0; jj < BADGUY_NUM_COLUMNS; ++jj) {
+        cob = firstBadGuy + jj;
+        for(byte ii=0; ii < BADGUY_NUM_ROWS; ++ii, cob += BADGUY_NUM_COLUMNS) {
+            if (cob->active == OBJECT_INACTIVE) {
+                cob->active = OBJECT_ACTIVE;
+                cob->globalX = x;
+                cob->globalY = y;
+                ((BadGuyObjectState *)cob->statePtr)->spriteIdx = ((BadGuyObjectState *)cob->statePtr)->originalSpriteIdx;
+                ++(*((BadGuyObjectState *)cob->statePtr)->numInvadersPtr);
+                ((BadGuyObjectState *)cob->statePtr)->direction = direction;
+                ((BadGuyObjectState *)cob->statePtr)->originalDirection = direction;
+                return cob;
+            }
+        }
+    }
+    
+    return NULL;
+}
+
+
+#ifdef __cplusplus
+[[maybe_unused]]
+#endif
+static DynospriteCOB *CreateBadGuyWithSpriteIdx(word x, byte y, byte spriteIdx) {
+    DynospriteCOB *cob = CreateBadGuy(x, y, 0);
+    ((BadGuyObjectState *)cob->statePtr)->spriteIdx = spriteIdx;
+    return cob;
+}
 
 
 #endif /* _03_badguy_h */
