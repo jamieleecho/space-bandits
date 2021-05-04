@@ -47,6 +47,7 @@ typedef struct DynospriteODT {
   void *reactivate;
   void *update;
   void *draw;
+  byte vpage;
   byte res2[4];
 } DynospriteODT;
 

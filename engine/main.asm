@@ -140,7 +140,7 @@ DrawObjLoop@
             ldb         ODT.drawType,u
             bne         >
             * custom drawing function
-            lda         <MemMgr_VirtualTable+VH_LVLOBJCODE
+            lda         <MemMgr_VirtualTable+VH_LVLOBJCODE1
             sta         $FFA3                   * Map the Level/Object code page to $6000
             jsr         [ODT.draw,u]
             bra         ThisObjDrawn@
@@ -183,7 +183,7 @@ DrawObjDone@
 InputDone@
 
             * 7. Calculate next frame background position (update Gfx_BkgrndNewX/Y)
-            lda         <MemMgr_VirtualTable+VH_LVLOBJCODE
+            lda         <MemMgr_VirtualTable+VH_LVLOBJCODE1
             sta         $FFA3                   * Map Level/Object code page at $6000 (fixme: is this needed here?)
             jsr         [Ldr_LDD.PtrCalcBkgrnd]
             * Setup the RedrawOldX/Y coordinates for the next frame's background draw operation

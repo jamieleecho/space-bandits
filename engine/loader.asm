@@ -41,6 +41,7 @@ Ldr_ProgressBarPtr      zmb     2
 Ldr_ProgressBarPage     zmb     1
 Ldr_CurProgressSec      zmb     2
 Ldr_CurProgressPct      zmb     1
+ObjCodeVirtualPage      zmb     1
 
 ***********************************************************
 * Ldr_Jump_To_New_Level:
@@ -235,8 +236,11 @@ SetFrontBufBackground@
             jsr         System_SetPaletteAuto
             lda         #0
             jsr         Img_FadeIn
-            * Allocate 8k block to store Level and Object code, and map it to $6000
-            lda         #VH_LVLOBJCODE
+            * Allocate 2 8k blocksto store Level and Object code, and map first to $6000
+            lda         #VH_LVLOBJCODE2
+            jsr         MemMgr_AllocateBlock
+            lda         #VH_LVLOBJCODE1
+            sta         ObjCodeVirtualPage
             jsr         MemMgr_AllocateBlock
             stb         $FFA3
             ldd         #$6000
@@ -889,11 +893,26 @@ SpriteLoop@
             std         ObjCodePtr@
             addd        GroupObjCodeSize@
  IFDEF DEBUG
-            cmpd        #$8000
-            bls         >
-            swi                                 * Error: out of memory for level / object code
+            cmpd        #$7e00                  * reserve 0x100 bytes at top for C stack
+            bls         LoadObject@
  ENDC
-!           std         Ldr_LvlObjCodeEndPtr    * update end pointer
+*
+            lda         ObjCodeVirtualPage      * Did we already hit the second page?
+	    cmpa        #VH_LVLOBJCODE2
+            bne         >                       * No, nothing to see here
+            swi                                 * Error: out of memory for level / object code
+*
+* We have to map in another page and record the fact that we are doing that
+!           lda         <MemMgr_VirtualTable+VH_LVLOBJCODE2 * Map in the second page
+            sta         $FFA3
+	    lda         #VH_LVLOBJCODE2         * Record the virtual page
+	    sta         ObjCodeVirtualPage 
+	    ldd         #$6000                  * Store code at the beggining of the page
+	    tfr	        d,u
+            addd        GroupObjCodeSize@
+*
+LoadObject@
+            std         Ldr_LvlObjCodeEndPtr    * update end pointer
             ldy         GroupObjCodeSize@
             jsr         Decomp_Read_Stream      * read the object handling code
             * close compressed object code stream
@@ -921,6 +940,8 @@ ObjectLoop@
             ldd         ODT.draw,x
             addd        ObjCodePtr@
             std         ODT.draw,x
+            lda         ObjCodeVirtualPage 
+            sta         ODT.vpage,x
             puls        a
             leax        sizeof{ODT},x
             deca
@@ -1087,7 +1108,9 @@ ProgressDone@
 *
 Ldr_Unload_Level
             * 1. Start by freeing all of the 8k blocks allocated
-            lda         #VH_LVLOBJCODE          * free the level/object code page
+            lda         #VH_LVLOBJCODE1         * free the level/object code page
+            jsr         MemMgr_FreeBlock
+            lda         #VH_LVLOBJCODE2
             jsr         MemMgr_FreeBlock
             ldb         Ldr_NumSpriteCodePages  * free the Sprite Draw/Erase code pages
             lda         #VH_SPRCODE
