@@ -93,7 +93,7 @@ ObjectDescriptorTable:
                         fdb     Object_Reactivate
                         fdb     Object_Update
                         fdb     0                           * custom draw function
-                        fcb     0                           * vpage
+                        fdb     0                           * vpageAddr
                         fdb     0,0                         * res2
 
 Object_Init EXPORT

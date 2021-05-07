@@ -295,7 +295,7 @@ ObjectDescriptorTable
                         fdb     Demo_Object0_Reactivate
                         fdb     Demo_Object0_Update
                         fdb     Demo_Object0_Draw
-                        fcb     0               * vpage
+                        fdb     0               * vpageAddr
                         fdb     0,0             * res2
 
                         fcb     3               * dataSize
@@ -306,6 +306,6 @@ ObjectDescriptorTable
                         fdb     Demo_Object1_Reactivate
                         fdb     Demo_Object1_Update
                         fdb     Demo_Object1_Draw
-                        fcb     0               * vpage
+                        fdb     0               * vpageAddr
                         fdb     0,0             * res2
 

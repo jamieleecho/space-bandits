@@ -41,6 +41,7 @@ Ldr_ProgressBarPtr      zmb     2
 Ldr_ProgressBarPage     zmb     1
 Ldr_CurProgressSec      zmb     2
 Ldr_CurProgressPct      zmb     1
+                        zmb     1
 ObjCodeVirtualPage      zmb     1
 
 ***********************************************************
@@ -940,8 +941,9 @@ ObjectLoop@
             ldd         ODT.draw,x
             addd        ObjCodePtr@
             std         ODT.draw,x
-            lda         ObjCodeVirtualPage 
-            sta         ODT.vpage,x
+            ldy         ObjCodeVirtualPage-1
+            leay        MemMgr_VirtualTable,y
+            sty         ODT.vpageAddr,x
             puls        a
             leax        sizeof{ODT},x
             deca
