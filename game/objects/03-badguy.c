@@ -121,7 +121,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!didInit) {
         didInit = TRUE;
         globals = (GameGlobals *)DynospriteGlobalsPtr;
-	globals->numInvaders = 0;
+        globals->numInvaders = 0;
 
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(badMissiles)/sizeof(badMissiles[0]); ii++) {
@@ -132,14 +132,13 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         
         firstBadGuy = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, BADGUY_GROUP_IDX);
         shipState = (ShipObjectState *)findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, SHIP_GROUP_IDX)->statePtr;
-        globals->gameWave = GameWavePerseiBoss;
+        globals->gameWave = GameWavePerseiMoveInUnison;
         groupDirection = DirectionModeRight;
         memset(columnGroupDirection, DirectionModeRight, sizeof(columnGroupDirection));
         memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));
         
         lastBadGuyUpdated = (DynospriteCOB *)0xffff;
         hitBottom = FALSE;
-        globals->numInvaders = 0;
     }
     
     /* We want to animate the different invaders and they all have different

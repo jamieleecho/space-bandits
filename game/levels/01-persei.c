@@ -14,7 +14,7 @@ void PerseiInit() {
     globals->initialized = TRUE;
     globals->gameState = GameStatePlaying;
     globals->counter = 0;
-    globals->gameWave = GameWavePerseiBoss;
+    globals->gameWave = GameWavePerseiMoveInUnison;
 }
 
 
