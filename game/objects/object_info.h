@@ -79,6 +79,7 @@ typedef struct GameGlobals {
     word shootCounter[3];
     byte counter;
     byte gameWave;
+    byte numInvaders;
 } GameGlobals;
 
 

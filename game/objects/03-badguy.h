@@ -25,7 +25,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of BadGuyObjectState in bytes */
-#define DynospriteObject_DataSize 14
+#define DynospriteObject_DataSize 12
 
 /** Defines at least the number of initialization bytes */
 #define DynospriteObject_InitSize 4
@@ -55,7 +55,6 @@ typedef struct BadGuyObjectState {
     byte row;
     byte originalSpriteIdx;
     byte originalDirection;
-    byte *numInvadersPtr;
 } BadGuyObjectState;
 
 
@@ -73,7 +72,8 @@ static DynospriteCOB *CreateBadGuy(word x, byte y, byte direction) {
                 cob->globalX = x;
                 cob->globalY = y;
                 ((BadGuyObjectState *)cob->statePtr)->spriteIdx = ((BadGuyObjectState *)cob->statePtr)->originalSpriteIdx;
-                ++(*((BadGuyObjectState *)cob->statePtr)->numInvadersPtr);
+		GameGlobals *globals = (GameGlobals *)DynospriteGlobalsPtr;
+		++(globals->numInvaders);
                 ((BadGuyObjectState *)cob->statePtr)->direction = direction;
                 ((BadGuyObjectState *)cob->statePtr)->originalDirection = direction;
                 return cob;

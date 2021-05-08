@@ -42,9 +42,6 @@ static byte /* DirectionMode */ columnGroupDirection[BADGUY_NUM_COLUMNS];
 /** Direction that the given row all of the invaders should be moving */
 static byte /* DirectionMode */ rowGroupDirection[BADGUY_NUM_ROWS];
 
-/** Number of invaders that are alive */
-static byte numInvaders = 0;
-
 /** Array containing the bad missile objects */
 static DynospriteCOB *badMissiles[NUM_BAD_MISSILES];
 
@@ -123,8 +120,8 @@ static DynospriteCOB *getLowestBadguyToFireMissile() {
 void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!didInit) {
         didInit = TRUE;
-        numInvaders = 0;
         globals = (GameGlobals *)DynospriteGlobalsPtr;
+	globals->numInvaders = 0;
 
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(badMissiles)/sizeof(badMissiles[0]); ii++) {
@@ -142,7 +139,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         
         lastBadGuyUpdated = (DynospriteCOB *)0xffff;
         hitBottom = FALSE;
-        numInvaders = 0;
+        globals->numInvaders = 0;
     }
     
     /* We want to animate the different invaders and they all have different
@@ -157,7 +154,6 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     statePtr->column = initData[1];
     statePtr->row = initData[2];
     statePtr->originalDirection = initData[3];
-    statePtr->numInvadersPtr = &numInvaders;
 
     cob->active = (globals->gameWave != GameWavePerseiBoss) ? OBJECT_ACTIVE : OBJECT_INACTIVE;
     statePtr->spriteMin = statePtr->originalSpriteIdx;
@@ -176,7 +172,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     statePtr->direction = statePtr->originalDirection;
 
     if (globals->gameWave != GameWavePerseiBoss) {
-        ++numInvaders;
+        ++globals->numInvaders;
     }
 }
 
@@ -202,7 +198,7 @@ void reset() {
         obj->globalY = statePtr->originalGlobalY;
         obj = obj + 1;
     }
-    numInvaders = (globals->gameWave == GameWavePerseiBoss) ? 0 :  NUM_BAD_GUYS;
+    globals->numInvaders = (globals->gameWave == GameWavePerseiBoss) ? 0 :  NUM_BAD_GUYS;
 
     lastBadGuyUpdated = (DynospriteCOB *)0xffff;
     for(byte ii=0; ii<NUM_MISSILES; ii++) {
@@ -228,7 +224,7 @@ byte BadguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
         return 0;
     }
     
-    if (!numInvaders && (globals->gameWave != GameWavePerseiBoss)) {
+    if (!globals->numInvaders && (globals->gameWave != GameWavePerseiBoss)) {
         reset();
 
         // We have to patch up the direction of the previous bad guys
@@ -266,7 +262,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         statePtr->spriteIdx = statePtr->spriteMin;
     } else if (spriteIdx >= BADGUY_SPRITE_LAST_INDEX) {
         cob->active = OBJECT_INACTIVE;
-        --numInvaders;
+        --globals->numInvaders;
         return 0;
     } else {
         statePtr->spriteIdx = spriteIdx + 1;
@@ -298,7 +294,7 @@ byte BadguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     // Move the character
     if (newFrame) {
         sbyte frameDelta = DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2;
-        objDelta = (TOP_SPEED - (numInvaders >> 4)) * frameDelta;
+        objDelta = (TOP_SPEED - (globals->numInvaders >> 4)) * frameDelta;
     }
     if (statePtr->direction == DirectionModeRight) {
         cob->globalX += objDelta;
