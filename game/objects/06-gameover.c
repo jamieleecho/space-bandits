@@ -30,7 +30,7 @@ void GameoverInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 
 byte GameoverReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
     byte *matrix = DynospriteDirectPageGlobalsPtr->Input_KeyMatrix;
-    GameGlobals *globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
+    GameGlobals *globals = (GameGlobals *)DynospriteGlobalsPtr;
     GameOverObjectState *statePtr = (GameOverObjectState *)(cob->statePtr);
     
     // Make sure the p button is unpressed
@@ -67,7 +67,7 @@ byte GameoverReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 byte GameoverUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     byte *matrix = DynospriteDirectPageGlobalsPtr->Input_KeyMatrix;
-    GameGlobals *globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
+    GameGlobals *globals = (GameGlobals *)DynospriteGlobalsPtr;
     GameOverObjectState *statePtr = (GameOverObjectState *)(cob->statePtr);
 
     cob->globalX = statePtr->initX + (2 * DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX);

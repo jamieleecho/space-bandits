@@ -21,7 +21,7 @@ void ShipcounterClassInit() {
 
 
 void ShipcounterInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
-    globals = (GameGlobals *)&DynospriteGlobalsPtr->UserGlobals_Init;
+    globals = (GameGlobals *)DynospriteGlobalsPtr;
     ShipCounterObjectState *state = (ShipCounterObjectState *)cob->statePtr;
     state->spriteIdx = 0;
     state->numShips = initData[0];

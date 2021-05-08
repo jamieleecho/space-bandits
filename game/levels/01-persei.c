@@ -8,7 +8,7 @@ extern "C" {
 
     
 void PerseiInit() {
-    GameGlobals *globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
+    GameGlobals *globals = (GameGlobals *)DynospriteGlobalsPtr;
     memset(globals, 0, sizeof(*globals));
     globals->numShips = 3;
     globals->initialized = TRUE;

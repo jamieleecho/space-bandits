@@ -148,7 +148,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!didInit) {
         didInit = TRUE;
         numInvaders = 0;
-        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
+        globals = (GameGlobals *)DynospriteGlobalsPtr;
 
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(badMissiles)/sizeof(badMissiles[0]); ii++) {
