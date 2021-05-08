@@ -52,6 +52,7 @@ Score        rmb     3
 ShootCounter rmd     3
 Counter      rmb     1
 GameWave     rmb     1
+NumInvaders  rmb     1
             ENDSTRUCT
 
 

@@ -68,9 +68,9 @@ typedef struct DynospriteDirectPageGlobals {
 } DynospriteDirectPageGlobals;
 
 /** Datastructure for DynospriteGlobals */
-typedef struct DynospriteGlobals {
+typedef union DynospriteGlobals {
     byte UserGlobals_Init;
-    byte UserGlobals[31];
+    byte UserGlobals[32];
 } DynospriteGlobals;
 
 #endif /* DynospriteDirectPageGlobals_h */

@@ -14,7 +14,7 @@ DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr = &DynospriteDirectP
 static DSDirectPageGlobals *_sharedInstance;
 
 DynospriteGlobals DynospriteGlobalData;
-DynospriteGlobals *DynospriteGlobalsPtr = &DynospriteGlobalData;
+void *DynospriteGlobalsPtr = &DynospriteGlobalData;
 static DSDirectPageGlobals *_sharedInstance;
 
 

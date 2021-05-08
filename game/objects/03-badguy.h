@@ -72,8 +72,8 @@ static DynospriteCOB *CreateBadGuy(word x, byte y, byte direction) {
                 cob->globalX = x;
                 cob->globalY = y;
                 ((BadGuyObjectState *)cob->statePtr)->spriteIdx = ((BadGuyObjectState *)cob->statePtr)->originalSpriteIdx;
-		GameGlobals *globals = (GameGlobals *)DynospriteGlobalsPtr;
-		++(globals->numInvaders);
+                GameGlobals *globals = (GameGlobals *)DynospriteGlobalsPtr;
+                ++(globals->numInvaders);
                 ((BadGuyObjectState *)cob->statePtr)->direction = direction;
                 ((BadGuyObjectState *)cob->statePtr)->originalDirection = direction;
                 return cob;
