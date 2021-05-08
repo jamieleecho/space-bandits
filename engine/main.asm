@@ -137,11 +137,11 @@ DrawObjLoop@
             beq         SkipDraw@
             pshs        a,x
             ldu         COB.odtPtr,x
+            ldb         [ODT.vpageAddr,u]       * load the page number
+            stb         $FFA3                   * Map the Level/Object code page to $6000
             ldb         ODT.drawType,u
             bne         >
             * custom drawing function
-            ldb         [ODT.vpageAddr,u]       * load the page number
-            stb         $FFA3                   * Map the Level/Object code page to $6000
             jsr         [ODT.draw,u]
             bra         ThisObjDrawn@
 !           cmpb        #1

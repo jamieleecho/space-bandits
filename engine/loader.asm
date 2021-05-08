@@ -523,6 +523,7 @@ LoadThisGroup@
 AllGroupsLoaded@
             * close the OBJECTS.DAT file
             jsr         Disk_FileClose
+
             * initialize the Objects with the OIT
             lda         #VH_BKTILES             * map the (temporary) page for OIT table into $4000
             ldb         #2
@@ -682,6 +683,8 @@ SkipSound2@
             lda         #1
             sta         Ldr_SkipSound
             * call the level's initialization function
+!           lda         <MemMgr_VirtualTable+VH_LVLOBJCODE1 * Map in the first page
+            sta         $FFA3
             jsr         [Ldr_LDD.PtrInitLevel]
             * set up graphics variables
             jsr         Gfx_InitBkgrndBounds
@@ -910,6 +913,7 @@ SpriteLoop@
 	    sta         ObjCodeVirtualPage 
 	    ldd         #$6000                  * Store code at the beggining of the page
 	    tfr	        d,u
+            std         ObjCodePtr@
             addd        GroupObjCodeSize@
 *
 LoadObject@

@@ -119,6 +119,8 @@ ObjectLoop2@
             puls        a
             deca
             bne         ObjectLoop2@
+!           lda         <MemMgr_VirtualTable+VH_LVLOBJCODE1 * Map in the first page
+            sta         $FFA3
             rts
 
 ***********************************************************
