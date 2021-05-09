@@ -7,9 +7,18 @@
 
 #define LEVEL_1 1
 
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 200
+#define PLAYFIELD_WIDTH 352
+#define PLAYFIELD_HEIGHT 224
+#define PLAYFIELD_CENTER_WIDTH_OFFSET ((PLAYFIELD_WIDTH - SCREEN_WIDTH) / 2)
+#define PLAYFIELD_CENTER_HEIGHT_OFFSET ((PLAYFIELD_HEIGHT - SCREEN_HEIGHT) / 2)
+
+
 #define BADGUY_GROUP_IDX 3
 #define SHIP_GROUP_IDX 4
 #define MISSILE_GROUP_IDX 5
+#define BOSS1_GROUP_IDX 9
 
 #define SOUND_LASER 1
 
@@ -18,11 +27,12 @@
 
 #define SOUND_LASER 1
 #define SOUND_EXPLOSION 2
+#define SOUND_CLICK 3
 
 #define NUM_BAD_GUYS 45
 #define BAD_GUY_ROWS 5
 #define BAD_GUY_COLUMNS 9
-#define BAD_GUY_FIRE_MAX_Y 150
+#define BAD_GUY_FIRE_MAX_Y (PLAYFIELD_HEIGHT - PLAYFIELD_CENTER_HEIGHT_OFFSET - 62)
 #define NUM_MISSILES 3
 #define NUM_BAD_MISSILES 3
 
@@ -35,6 +45,9 @@
 #define MISSILE_HALF_WIDTH 2
 #define MISSILE_HEIGHT 8
 
+#define BOSS1_HALF_WIDTH 18
+#define BOSS1_HALF_HEIGHT 12
+
 #define BADGUY_SPRITE_ENEMY_SWATH_INDEX 0
 #define BADGUY_SPRITE_BLADE_INDEX 3
 #define BADGUY_SPRITE_DUDE_INDEX 7
@@ -46,7 +59,7 @@
 #define SHIP_SPRITE_EXPLOSION_INDEX 3
 #define SHIP_SPRITE_LAST_INDEX 12
 
-#define SHIP_POSITION_Y 183
+#define SHIP_POSITION_Y (PLAYFIELD_HEIGHT - PLAYFIELD_CENTER_HEIGHT_OFFSET - 29)
 
 
 enum GameState {
@@ -57,14 +70,39 @@ enum GameState {
 };
 
 
+/** Global game data */
 typedef struct GameGlobals {
     byte initialized;
     byte numShips;
-    enum GameState gameState;
+    byte /* GameState */ gameState;
     byte score[3];
     word shootCounter[3];
     byte counter;
+    byte gameWave;
+    byte numInvaders;
 } GameGlobals;
+
+
+/** GameWave Definitions for Persei Level */
+typedef enum GameWavePersei {
+    /** All invaders move together */
+    GameWavePerseiMoveInUnison = 0,
+
+    /** All invaders in a column move together */
+    GameWavePerseiMoveInColumn,
+
+    /** All invaders in a row move together */
+    GameWavePerseiMoveInRow,
+
+    /** All invaders move in whatever direction they want */
+    GameWavePerseiMoveAtWill,
+
+    /** Boss stage  */
+    GameWavePerseiBoss,
+
+    /** Invalid grouping mode */
+    GameWavePerseiInvalid
+} GameWavePersei;
 
 
 /**
@@ -96,7 +134,7 @@ static DynospriteCOB *findObjectByGroup(DynospriteCOB *obj, byte groupIdx) {
 #endif
 static void bumpScore(byte amount) {
 #if __APPLE__
-    byte *score0 = ((GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init))->score;
+    byte *score0 = (byte *)&((GameGlobals *)DynospriteGlobalsPtr)->score;
     byte *score2 = score0 + 2;
     
     byte amount0 = amount & 0xf;

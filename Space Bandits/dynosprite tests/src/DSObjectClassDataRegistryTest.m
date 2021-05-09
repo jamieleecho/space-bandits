@@ -21,6 +21,7 @@
 
 - (void)setUp {
     _target = [[DSObjectClassDataRegistry alloc] init];
+    [DSObjectClassDataRegistry.sharedInstance clear];
 }
 
 - (void)tearDown {

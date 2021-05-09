@@ -34,6 +34,8 @@ typedef enum DSInitSceneSound {
     DSInitSceneDisplay _resolution;
     DSInitSceneControl _control;
     DSInitSceneSound _sound;
+    
+    bool _alwaysPressed;
 }
 + (NSString *)textFromResolution:(DSInitSceneDisplay)resolution;
 + (NSString *)textFromControl:(DSInitSceneControl)control;

@@ -130,12 +130,12 @@ else
   MAMESYSTEM = coco3
 endif
 ifeq ($(OBJPAGES),)
-  ASMFLAGS += --define=OBJPAGES=1
+  ASMFLAGS += --define=OBJPAGES=2
 else
   ASMFLAGS += --define=OBJPAGES=$(OBJPAGES)
 endif
 ifeq ($(OBJPAGEGUARD),)
-  ASMFLAGS += --define=OBJPAGEGUARD=0
+  ASMFLAGS += --define=OBJPAGEGUARD=256
 else
   ASMFLAGS += --define=OBJPAGEGUARD=$(OBJPAGEGUARD)
 endif

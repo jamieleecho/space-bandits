@@ -9,11 +9,12 @@ extern "C" {
     
 void PerseiInit() {
     GameGlobals *globals = (GameGlobals *)DynospriteGlobalsPtr;
-    memset(globals, 0, sizeof(*globals));
     globals->numShips = 3;
     globals->initialized = TRUE;
+    globals->score[0] = globals->score[1] = globals->score[2] = 0;
     globals->gameState = GameStatePlaying;
     globals->counter = 0;
+    globals->gameWave = GameWavePerseiMoveInUnison;
 }
 
 

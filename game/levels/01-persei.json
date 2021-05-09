@@ -2,8 +2,8 @@
   "Level": {
     "Name": "Omicron Persei 8 Invades",
     "Description": "Drop Down and Increase Speed!",
-    "ObjectGroups": [1, 3, 4, 5, 6, 7, 8],
-    "MaxObjectTableSize": 70,
+    "ObjectGroups": [1, 3, 4, 5, 6, 7, 8, 9],
+    "MaxObjectTableSize": 65,
     "Tileset": 1,
     "TilemapImage": "../tiles/01-moon.png",
     "TilemapStart": [0, 0],
@@ -496,6 +496,16 @@
       "InitData": []
     },
 
+    
+    {
+        "_comment": "***** Boss",
+        "GroupID": 9,
+        "ObjectID": 0,
+        "Active": 0,
+        "globalX": 168,
+        "globalY": 30,
+        "InitData": []
+    },
 
     {
       "_comment": "***** Game Over",

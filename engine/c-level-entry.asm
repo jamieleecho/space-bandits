@@ -49,7 +49,7 @@ Level_Initialize
             lds         #$8000
             tst         LibraryInit,pcr
             bne         Level_Skip_INILIB
-            lbsr        INILIB
+            lbsr        INITGL
             inc         LibraryInit,pcr
 Level_Skip_INILIB:
             lbsr        _LevelInit

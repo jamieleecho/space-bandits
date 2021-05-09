@@ -25,11 +25,16 @@ The bizniss
 Explosion Sound: freesound.org
 tommccann
 
-Song Sound: www.looperman.com
-November Vibe by Raw X Limits
-
 Lrrr: camo.githubusercontent.com
 
 Explosions: opengameart.org
 Chuzco
+
+Click Noise: soundbible.com
+Police 357 Magnum Loading
+Mike Koenig
+
+Space
+www.istockphoto.com
+Svetlana Malysheva
 

@@ -50,13 +50,13 @@ void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures,
     NSArray<DSTexture *> *textureArray = (__bridge NSArray<DSTexture *> *)textures;
     sprite.anchorPoint = CGPointMake(0, 1);
     sprite.position = CGPointMake(((float)cob->globalX + (float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX) * 2, (float)cob->globalY - (float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY);
-    byte *score = ((GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init))->score;
+    byte *score = (byte *)&((GameGlobals *)DynospriteGlobalsPtr)->score[0];
     for(size_t ii=0; ii<6; ii++) {
         if (sprite.children.count <= ii) {
             SKSpriteNode *digitNode = [[SKSpriteNode alloc] initWithTexture:textureArray[0].texture];
-            digitNode.size = CGSizeMake(8, 8);
+            digitNode.size = CGSizeMake(9.0, 11);
             digitNode.anchorPoint = CGPointMake(0, 1);
-            digitNode.position = CGPointMake(ii * 8, 0);
+            digitNode.position = CGPointMake(4 + ii * 9.75, 0);
             [sprite addChild:digitNode];
         }
         SKSpriteNode *digitNode = (SKSpriteNode *)sprite.children[ii];

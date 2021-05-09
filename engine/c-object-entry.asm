@@ -39,7 +39,7 @@ Object_Init:
             pshs        u,y,x
             tst         LibraryInit,pcr
             bne         Object_Skip_INILIB
-            lbsr        INILIB
+            lbsr        INITGL
             inc         LibraryInit,pcr
 Object_Skip_INILIB:
             lbsr        _ObjectInit

@@ -3,12 +3,17 @@
     {
       "BackgroundColor" : "ffffff",
       "ForegroundColor" : "1bb43a",
-      "ProgressColor" : "1bb43a"
+      "ProgressColor"   : "1bb43a"
     },
     {
       "BackgroundColor" : "ffffff",
       "ForegroundColor" : "000000",
-      "ProgressColor" : "67fb79"
+      "ProgressColor"   : "67fb79"
+    },
+    {
+      "BackgroundColor" : "ffffff",
+      "ForegroundColor" : "000000",
+      "ProgressColor"   : "67fb79"
     }
   ]
 }
