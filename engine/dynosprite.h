@@ -47,6 +47,7 @@ typedef struct DynospriteODT {
   void *reactivate;
   void *update;
   void *draw;
+  void *vpageAddr;
   byte res2[4];
 } DynospriteODT;
 
@@ -216,8 +217,7 @@ typedef struct DynospriteGlobals {
   byte Img_Random161[161];
   byte Img_Random200[200];
 
-  byte UserGlobals_Init;
-  byte UserGlobals[31];
+  byte UserGlobals[32];
 } DynospriteGlobals;
 
 
@@ -225,7 +225,7 @@ typedef struct DynospriteGlobals {
 #define DynospriteDirectPageGlobalsPtr ((DynospriteDirectPageGlobals *)0x2000)
 
 /** Pointer to the Dynopsprite Globals */
-#define DynospriteGlobalsPtr ((DynospriteGlobals *)0x2100)
+#define DynospriteGlobalsPtr ((void *)0x2620)
 
 
 asm void PlaySound(byte val) {

@@ -275,6 +275,7 @@ Img_Random200           fcb     154,113,57,130,163,17,86,168,108,37,79,94,69,192
 
 ***********************************************************
 * User Global Data
+UserGlobals
 UserGlobals_Init	fcb	0
-UserGlobals		rmb	31	
+                        rmb     31	
 

@@ -26,7 +26,7 @@ void BadmissileClassInit() {
 void BadmissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!didInit) {
         didInit = TRUE;
-        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
+        globals = (GameGlobals *)DynospriteGlobalsPtr;
     }
     DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
     shipCob = findObjectByGroup(obj, SHIP_GROUP_IDX);

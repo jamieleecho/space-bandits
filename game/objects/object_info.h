@@ -125,7 +125,7 @@ static void bumpScore(byte amount) {
         }
     }
 #else
-    byte *score0 = ((GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init))->score;
+    byte *score0 = ((GameGlobals *)DynospriteGlobalsPtr)->score;
     asm {
         ldx score0
 

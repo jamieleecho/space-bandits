@@ -23,7 +23,7 @@ void MissileClassInit() {
 void MissileInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (didNotInit) {
         didNotInit = FALSE;
-        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
+        globals = (GameGlobals *)DynospriteGlobalsPtr;
         endBadGuys = &(badGuys[sizeof(badGuys)/sizeof(badGuys[0])]);
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(badGuys)/sizeof(badGuys[0]); ii++) {

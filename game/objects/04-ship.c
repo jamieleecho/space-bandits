@@ -124,7 +124,7 @@ DynospriteCOB *findFreeMissile() {
 void ShipInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (didNotInit) {
         didNotInit = FALSE;
-        globals = (GameGlobals *)&(DynospriteGlobalsPtr->UserGlobals_Init);
+        globals = (GameGlobals *)DynospriteGlobalsPtr;
         DynospriteCOB *obj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr;
         for (byte ii=0; obj && ii<sizeof(missiles)/sizeof(missiles[0]); ii++) {
             obj = findObjectByGroup(obj, MISSILE_GROUP_IDX);
