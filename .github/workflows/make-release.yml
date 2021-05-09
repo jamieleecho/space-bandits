@@ -67,11 +67,11 @@ jobs:
           echo "RELEASE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
-      - name: Create a releae
+      - name: Create a release
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "./dsk-images/*.DSK,./tar-ball-apps/*.tgz"
+          artifacts: "./6809-dsk-image/*.DSK,./6309-dsk-image/*.DSK,./tar-ball-apps/*.tgz"
           allowUpdates: true
           draft: true
           name: "${{ format('{0} {1}', env.REPO_NAME, env.RELEASE_TAG) }}"
