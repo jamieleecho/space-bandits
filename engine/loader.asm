@@ -237,12 +237,16 @@ SetFrontBufBackground@
             jsr         System_SetPaletteAuto
             lda         #0
             jsr         Img_FadeIn
-            * Allocate 2 8k blocksto store Level and Object code, and map first to $6000
-            lda         #VH_LVLOBJCODE2
+            * Allocate 8k blocks to store Level and Object code, and map first to $6000
+            lda         #VH_LVLOBJCODEX
+!           pshs        a
             jsr         MemMgr_AllocateBlock
-            lda         #VH_LVLOBJCODE1
-            sta         ObjCodeVirtualPage
-            jsr         MemMgr_AllocateBlock
+            puls        a
+            cmpa        #VH_LVLOBJCODE1
+            beq         >
+            deca
+            bra         <
+!           sta         ObjCodeVirtualPage
             stb         $FFA3
             ldd         #$6000
             std         Ldr_LvlObjCodeEndPtr
@@ -897,20 +901,20 @@ SpriteLoop@
             std         ObjCodePtr@
             addd        GroupObjCodeSize@
  IFDEF DEBUG
-            cmpd        #$7e00                  * reserve 0x100 bytes at top for C stack
+            cmpd        #$8000-OBJPAGEGUARD     * are we beyond the page - the guard space?
             bls         LoadObject@
  ENDC
 *
             lda         ObjCodeVirtualPage      * Did we already hit the second page?
-	    cmpa        #VH_LVLOBJCODE2
+	    cmpa        #VH_LVLOBJCODEX
             bne         >                       * No, nothing to see here
             swi                                 * Error: out of memory for level / object code
 *
 * We have to map in another page and record the fact that we are doing that
-!           lda         <MemMgr_VirtualTable+VH_LVLOBJCODE2 * Map in the second page
+!           inc         ObjCodeVirtualPage      * increment to the next virtual page
+	    ldx         ObjCodeVirtualPage-1
+            lda         MemMgr_VirtualTable,x   * Map in the second page
             sta         $FFA3
-	    lda         #VH_LVLOBJCODE2         * Record the virtual page
-	    sta         ObjCodeVirtualPage 
 	    ldd         #$6000                  * Store code at the beggining of the page
 	    tfr	        d,u
             std         ObjCodePtr@
@@ -1116,7 +1120,7 @@ Ldr_Unload_Level
             * 1. Start by freeing all of the 8k blocks allocated
             lda         #VH_LVLOBJCODE1         * free the level/object code page
             jsr         MemMgr_FreeBlock
-            lda         #VH_LVLOBJCODE2
+            lda         #VH_LVLOBJCODEX
             jsr         MemMgr_FreeBlock
             ldb         Ldr_NumSpriteCodePages  * free the Sprite Draw/Erase code pages
             lda         #VH_SPRCODE

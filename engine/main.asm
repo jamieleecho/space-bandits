@@ -137,11 +137,15 @@ DrawObjLoop@
             beq         SkipDraw@
             pshs        a,x
             ldu         COB.odtPtr,x
-            ldb         [ODT.vpageAddr,u]       * load the page number
-            stb         $FFA3                   * Map the Level/Object code page to $6000
             ldb         ODT.drawType,u
             bne         >
             * custom drawing function
+ IFEQ       OBJPAGES-1
+            lda         <MemMgr_VirtualTable+VH_LVLOBJCODE1
+ ELSE
+            lda         [ODT.vpageAddr,u]       * load the page number
+ ENDC
+            sta         $FFA3                   * Map the Level/Object code page to $6000
             jsr         [ODT.draw,u]
             bra         ThisObjDrawn@
 !           cmpb        #1
@@ -243,8 +247,10 @@ InputDone@
 UpdateObjLoop@
             pshs        a,x
             ldu         COB.odtPtr,x
+ IFNE       OBJPAGES-1
             ldb         [ODT.vpageAddr,u]       * load the page number
             stb         $FFA3
+ ENDC
             ldb         COB.active,x
             andb        #1
             beq         >
