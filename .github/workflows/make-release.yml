@@ -6,17 +6,31 @@ on:
       - '*'
 
 jobs:
-  build-dsk-images:
+  build-6809-dsk-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: Build *.dsk images
         run: ./forge all
 
-      - name: 'Upload *.dsk Images'
+      - name: 'Upload 6809 *.dsk Images'
         uses: actions/upload-artifact@v2
         with:
-          name: dsk-images
+          name: 6809-dsk-image
+          path: build/*.DSK
+          retention-days: 1
+
+  build-6309-dsk-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build *.dsk images
+        run: ./forge CPU=6309 all
+
+      - name: 'Upload 6309 *.dsk Images'
+        uses: actions/upload-artifact@v2
+        with:
+          name: 6309-dsk-image
           path: build/*.DSK
           retention-days: 1
  
@@ -43,7 +57,7 @@ jobs:
 
   upload-artifacts:
     runs-on: ubuntu-latest
-    needs: [build-dsk-images, build-and-test-macos]
+    needs: [build-6809-dsk-image, build-6309-dsk-image, build-and-test-macos]
     steps:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v2
