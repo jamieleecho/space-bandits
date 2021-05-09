@@ -132,7 +132,7 @@ void BadguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         
         firstBadGuy = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, BADGUY_GROUP_IDX);
         shipState = (ShipObjectState *)findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, SHIP_GROUP_IDX)->statePtr;
-        globals->gameWave = GameWavePerseiBoss;
+        globals->gameWave = GameWavePerseiMoveInUnison;
         groupDirection = DirectionModeRight;
         memset(columnGroupDirection, DirectionModeRight, sizeof(columnGroupDirection));
         memset(rowGroupDirection, DirectionModeRight, sizeof(rowGroupDirection));

@@ -71,6 +71,8 @@ byte Boss1Reactivate(DynospriteCOB *cob, DynospriteODT *odt) {
     if (globals->gameWave == GameWavePerseiBoss) {
         if (((Boss1ObjectState *)cob->statePtr)->hitsRemaining > 0) {
             cob->active = OBJECT_ACTIVE;
+        } else if (globals->numInvaders == 0) {
+            return 2;
         }
     }
     return 0;

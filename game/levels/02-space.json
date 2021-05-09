@@ -1,0 +1,78 @@
+{
+  "Level": {
+    "Name": "Love and Space",
+    "Description": "... actually just space",
+    "ObjectGroups": [1, 6, 8],
+    "MaxObjectTableSize": 65,
+    "Tileset": 2,
+    "TilemapImage": "../tiles/02-space.png",
+    "TilemapStart": [0, 0],
+    "TilemapSize": [320, 208],
+    "BkgrndStartX": 0,
+    "BkgrndStartY": 0
+  },
+
+  "Objects": [
+    {
+      "_comment": "***** Game Over",
+      "GroupID": 6,
+      "ObjectID": 0,
+      "Active": 0,
+      "globalX": 168,
+      "globalY": 98,
+      "InitData": []
+    },
+
+
+    {
+      "_comment": "***** Score",
+      "GroupID": 1,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 68,
+      "globalY": 0,
+      "InitData": []
+    },
+
+    
+    {
+      "_comment": "***** ShipCounter1",
+      "GroupID": 8,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 314,
+      "globalY": 4,
+      "InitData": [1]
+    },
+    {
+      "_comment": "ShipCounter2",
+      "GroupID": 8,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 306,
+      "globalY": 4,
+      "InitData": [2]
+    },
+    {
+      "_comment": "ShipCounter3",
+      "GroupID": 8,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 298,
+      "globalY": 4,
+      "InitData": [3]
+    },
+    {
+      "_comment": "ShipCounter4",
+      "GroupID": 8,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 290,
+      "globalY": 4,
+      "InitData": [4]
+    }
+  ]
+}
+
+
+

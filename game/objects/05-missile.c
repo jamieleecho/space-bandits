@@ -69,20 +69,25 @@ static void checkHitBadGuy(DynospriteCOB *cob, byte bossMode) {
                 statePtr->resetPhase = statePtr->currentPhase;
                 if (--statePtr->hitsRemaining == 0) {
                     obj->active = OBJECT_INACTIVE;
+                    bumpScore(50);
+                    bumpScore(50);
+                    bumpScore(50);
+                    bumpScore(50);
+                    bumpScore(50);
+                    statePtr->spriteIdx = BOSS1_SPRITE_EXPLOSTION_INDEX;
+                    CreateBadGuyWithSpriteIdx(cob->globalX - BOSS1_HALF_WIDTH / 2,
+                                              (byte)cob->globalY - BOSS1_HALF_HEIGHT / 2,
+                                              BADGUY_SPRITE_EXPLOSION_INDEX);
+                    CreateBadGuyWithSpriteIdx(cob->globalX - BOSS1_HALF_WIDTH / 2,
+                                              (byte)cob->globalY + BOSS1_HALF_HEIGHT / 2,
+                                              BADGUY_SPRITE_EXPLOSION_INDEX);
+                    CreateBadGuyWithSpriteIdx(cob->globalX + BOSS1_HALF_WIDTH / 2,
+                                              (byte)cob->globalY - BOSS1_HALF_HEIGHT / 2,
+                                              BADGUY_SPRITE_EXPLOSION_INDEX);
+                    CreateBadGuyWithSpriteIdx(cob->globalX + BOSS1_HALF_WIDTH / 2,
+                                              (byte)cob->globalY + BOSS1_HALF_HEIGHT / 2,
+                                              BADGUY_SPRITE_EXPLOSION_INDEX);
                     PlaySound(SOUND_EXPLOSION);
-                    
-                    CreateBadGuyWithSpriteIdx(cob->globalX - BOSS1_HALF_WIDTH / 4,
-                                              (byte)cob->globalY - BOSS1_HALF_HEIGHT / 4,
-                                              BADGUY_SPRITE_EXPLOSION_INDEX);
-                    CreateBadGuyWithSpriteIdx(cob->globalX - BOSS1_HALF_WIDTH / 4,
-                                              (byte)cob->globalY + BOSS1_HALF_HEIGHT / 4,
-                                              BADGUY_SPRITE_EXPLOSION_INDEX);
-                    CreateBadGuyWithSpriteIdx(cob->globalX + BOSS1_HALF_WIDTH / 4,
-                                              (byte)cob->globalY - BOSS1_HALF_HEIGHT / 4,
-                                              BADGUY_SPRITE_EXPLOSION_INDEX);
-                    CreateBadGuyWithSpriteIdx(cob->globalX + BOSS1_HALF_WIDTH / 4,
-                                              (byte)cob->globalY + BOSS1_HALF_HEIGHT / 4,
-                                              BADGUY_SPRITE_EXPLOSION_INDEX);
                 } else {
                     PlaySound(SOUND_CLICK);
                 }
