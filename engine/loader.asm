@@ -41,8 +41,6 @@ Ldr_ProgressBarPtr      zmb     2
 Ldr_ProgressBarPage     zmb     1
 Ldr_CurProgressSec      zmb     2
 Ldr_CurProgressPct      zmb     1
-                        zmb     1
-ObjCodeVirtualPage      zmb     1
 
 ***********************************************************
 * Ldr_Jump_To_New_Level:
@@ -239,15 +237,12 @@ SetFrontBufBackground@
             jsr         Img_FadeIn
             * Allocate 8k blocks to store Level and Object code, and map first to $6000
             lda         #VH_LVLOBJCODEX
-!           pshs        a
-            jsr         MemMgr_AllocateBlock
-            puls        a
+!           jsr         MemMgr_AllocateBlock
             cmpa        #VH_LVLOBJCODE1
             beq         >
             deca
             bra         <
-!           sta         ObjCodeVirtualPage
-            stb         $FFA3
+!           stb         $FFA3
             ldd         #$6000
             std         Ldr_LvlObjCodeEndPtr
             * Start the SectorsToLoad calculation with the size of the level data
@@ -784,12 +779,16 @@ GroupObjCodeSize@       zmb     2
 GroupCompSpriteCode@    zmb     2
 GroupCompObjectCode@    zmb     2
 ObjCodePtr@             zmb     2
+ObjCodeVirtualPage@     zmb     2
 *
 Ldr_Load_SpriteGroup
             * Start by setting up this group's entry in the Sprite Group Table
             lda         <Gfx_NumSpriteGroups    * calculate starting pointer to this group's SGT entry
-            inc         <Gfx_NumSpriteGroups
-            ldb         #sizeof{SGT}
+            bne         >                       * branch if ObjCodeVirtualPage@ already initialized?
+            ldb         #VH_LVLOBJCODE1         * initialize ObjCodeVirtualPage@ with first code page
+            stb         ObjCodeVirtualPage@+1
+!           inc         <Gfx_NumSpriteGroups    * increment to next group SGT entry for next call
+            ldb         #sizeof{SGT}            * resume calc of pointer to this group's SGT entry
             mul
             ldx         <Gfx_SpriteGroupsPtr
             ADD_D_TO_X
@@ -900,19 +899,19 @@ SpriteLoop@
             tfr         d,u
             std         ObjCodePtr@
             addd        GroupObjCodeSize@
- IFDEF DEBUG
             cmpd        #$8000-OBJPAGEGUARD     * are we beyond the page - the guard space?
             bls         LoadObject@
- ENDC
 *
-            lda         ObjCodeVirtualPage      * Did we already hit the second page?
+ IFDEF DEBUG
+            lda         ObjCodeVirtualPage@+1   * Did we already hit the second page?
 	    cmpa        #VH_LVLOBJCODEX
             bne         >                       * No, nothing to see here
             swi                                 * Error: out of memory for level / object code
+ ENDC
 *
 * We have to map in another page and record the fact that we are doing that
-!           inc         ObjCodeVirtualPage      * increment to the next virtual page
-	    ldx         ObjCodeVirtualPage-1
+!           inc         ObjCodeVirtualPage@+1   * increment to the next virtual page
+	    ldx         ObjCodeVirtualPage@
             lda         MemMgr_VirtualTable,x   * Map in the second page
             sta         $FFA3
 	    ldd         #$6000                  * Store code at the beggining of the page
@@ -949,7 +948,7 @@ ObjectLoop@
             ldd         ODT.draw,x
             addd        ObjCodePtr@
             std         ODT.draw,x
-            ldy         ObjCodeVirtualPage-1
+            ldy         ObjCodeVirtualPage@
             leay        MemMgr_VirtualTable,y
             sty         ODT.vpageAddr,x
             puls        a
@@ -1119,10 +1118,14 @@ ProgressDone@
 Ldr_Unload_Level
             * 1. Start by freeing all of the 8k blocks allocated
             lda         #VH_LVLOBJCODE1         * free the level/object code page
+!           pshs        a
             jsr         MemMgr_FreeBlock
-            lda         #VH_LVLOBJCODEX
-            jsr         MemMgr_FreeBlock
-            ldb         Ldr_NumSpriteCodePages  * free the Sprite Draw/Erase code pages
+            puls        a
+            cmpa        #VH_LVLOBJCODEX
+            beq         >
+            inca
+            bra         <
+!           ldb         Ldr_NumSpriteCodePages  * free the Sprite Draw/Erase code pages
             lda         #VH_SPRCODE
 FreeSpritePages@
             pshs        a,b,x
