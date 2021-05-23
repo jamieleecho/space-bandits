@@ -152,6 +152,13 @@
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
     self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + self.size.width / 2, -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
     
+#if 0
+    SKTexture *texture = [self.view textureFromNode:self];
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:texture];
+    [self.children.lastObject removeFromParent];
+    [self addChild:sprite];
+#endif
+    
     // Calculate the new frame position
     self.levelObj.backgroundNewXY();
 }
