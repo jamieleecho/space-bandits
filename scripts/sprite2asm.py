@@ -26,9 +26,9 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #********************************************************************************
 
+import copy
 import re
 import sys
-import copy
 
 # *************************************************************************************************
 # Assembly language output classes
@@ -302,6 +302,7 @@ class Sprite:
                                 # the byte to which the destination pointer is pointing when DrawLeft is called.
                                 # When DrawRight is called, this pixel will be written into the right (LSB) of the destination byte
         self.chunkHint = sys.maxsize # Chunk to process rows - this is a compromise between performance and 
+        self.saveBackground = True
         self.funcErase = AsmStream(f"Erase_{name}")
         self.funcDraw = [ None, None ]
 
@@ -323,6 +324,8 @@ class Sprite:
                 self.hotspot = (coords[0], coords[1])
             elif key == "chunkhint":
                 self.chunkHint = int(value)
+            elif key == "savebackground":
+                self.saveBackground = (value.lower() == "true")
             else:
                 print(f"illegal line in Sprite '{self.name}' definition: {line}")
         else:
@@ -465,19 +468,22 @@ class Sprite:
                     while strip[1] >= 4:
                         asmStripAccum.gen_loadstore_indexed(True, regQ, regX, SrcPtrOffAccum, "")
                         SrcPtrOffAccum += 4
-                        asmStripAccum.gen_loadstore_indexed(False, regQ, regY, strip[0] + 256*lineAdvanceAccum - DstCenterOffAccum, "")
+                        if self.saveBackground:
+                            asmStripAccum.gen_loadstore_indexed(False, regQ, regY, strip[0] + 256*lineAdvanceAccum - DstCenterOffAccum, "")
                         strip = (strip[0] + 4, strip[1] - 4)
                 # accum: copy strip in words
                 while strip[1] >= 2:
                     asmStripAccum.gen_loadstore_indexed(True, regD, regX, SrcPtrOffAccum, "")
                     SrcPtrOffAccum += 2
-                    asmStripAccum.gen_loadstore_indexed(False, regD, regY, strip[0] + 256*lineAdvanceAccum - DstCenterOffAccum, "")
+                    if self.saveBackground:
+                        asmStripAccum.gen_loadstore_indexed(False, regD, regY, strip[0] + 256*lineAdvanceAccum - DstCenterOffAccum, "")
                     strip = (strip[0] + 2, strip[1] - 2)
                 #        if strip is odd length, copy a byte
                 if strip[1] == 1:
                     asmStripAccum.gen_loadstore_indexed(True, regA, regX, SrcPtrOffAccum, "")
                     SrcPtrOffAccum += 1
-                    asmStripAccum.gen_loadstore_indexed(False, regA, regY, strip[0] + 256*lineAdvanceAccum - DstCenterOffAccum, "")
+                    if self.saveBackground:
+                        asmStripAccum.gen_loadstore_indexed(False, regA, regY, strip[0] + 256*lineAdvanceAccum - DstCenterOffAccum, "")
                     strip = (strip[0] + 1, strip[1] - 1)
                 # then try the erase operation with TFM instructions
                 if CPU == 6309:
@@ -494,7 +500,8 @@ class Sprite:
                     # tfm: if necessary, advance the destination (Y) pointer to start of copy output region
                     if lineAdvanceTfm > 0 or DstCenterOffTfm != strip[0]:
                         bytesToAdvance = (256 * lineAdvanceTfm) - DstCenterOffTfm + strip[0]
-                        asmStripTfm.gen_loadeffaddr_offset(regY, bytesToAdvance, regY, "")
+                        if self.saveBackground:
+                            asmStripTfm.gen_loadeffaddr_offset(regY, bytesToAdvance, regY, "")
                         lineAdvanceTfm = 0
                         DstCenterOffTfm = strip[0]
                     # tfm: load number of bytes to copy in W register
@@ -508,12 +515,14 @@ class Sprite:
                     DstCenterOffTfm += strip[1]
                 # finally, decide whether the Accumulator or TFM methods was faster, and renconcile our state accordingly
                 if CPU == 6309 and asmStripTfm.metrics.cycles < asmStripAccum.metrics.cycles:
-                    self.funcErase += asmStripTfm
+                    if self.saveBackground:
+                        self.funcErase += asmStripTfm
                     SrcPtrOffNew = SrcPtrOffTfm
                     lineAdvance = lineAdvanceTfm
                     DstCenterOff = DstCenterOffTfm
                 else:
-                    self.funcErase += asmStripAccum
+                    if self.saveBackground:
+                        self.funcErase += asmStripAccum
                     SrcPtrOffNew = SrcPtrOffAccum
                     lineAdvance = lineAdvanceAccum
                     DstCenterOff = DstCenterOffAccum
@@ -702,7 +711,8 @@ class Sprite:
             # advance the Y pointer if necessary
             if self.YPtrOffNew + totalBytesToSave > 64:
                 bytesToAdvance = self.YPtrOffNew + 16
-                funcDraw.gen_loadeffaddr_offset(regY, bytesToAdvance, regY, "")
+                if self.saveBackground:
+                    funcDraw.gen_loadeffaddr_offset(regY, bytesToAdvance, regY, "")
                 self.YPtrOffNew = -16
             # advance the X pointer if necessary
             if CPU == 6309:
@@ -873,7 +883,8 @@ class Sprite:
             offX = store4Cmds[0]
             offY = self.YPtrOffNew + store4Cmds[1]
             bestRowAsm.gen_loadstore_indexed(True, regQ, regX, offX, "")  # ldq off,x
-            bestRowAsm.gen_loadstore_indexed(False, regQ, regY, offY, "")
+            if self.saveBackground:
+                bestRowAsm.gen_loadstore_indexed(False, regQ, regY, offY, "")
             # if this 4-byte store contains command-2 bytes in the lower 2 positions, then crash
             if store4Cmds[2][2][0] == 2 or store4Cmds[2][3][0] == 2:
                 raise Exception("Error: word in 32-bit store command contains Command-2 bytes in low WORD!")
@@ -930,7 +941,8 @@ class Sprite:
             offX = store2Cmds[0]
             offY = self.YPtrOffNew + store2Cmds[1]
             bestRowAsm.gen_loadstore_indexed(True, regD, regX, offX, "")  # ldd off,x
-            bestRowAsm.gen_loadstore_indexed(False, regD, regY, offY, "")
+            if self.saveBackground:
+                bestRowAsm.gen_loadstore_indexed(False, regD, regY, offY, "")
             # if this 2-byte store contains no command-2 bytes, just add to the WriteByteList and continue with next DWORD
             if store2Cmds[2][0][0] != 2 and store2Cmds[2][1][0] != 2:
                 for byteIdx in range(2):
@@ -985,7 +997,8 @@ class Sprite:
             offX = store1Cmd[0]
             offY = self.YPtrOffNew + store1Cmd[1]
             bestRowAsm.gen_loadstore_indexed(True, scratchReg, regX, offX, "")
-            bestRowAsm.gen_loadstore_indexed(False, scratchReg, regY, offY, "")
+            if self.saveBackground:
+                bestRowAsm.gen_loadstore_indexed(False, scratchReg, regY, offY, "")
             # if this is Command-1 then we're done
             if store1Cmd[2] == 1:
                 continue
@@ -1242,7 +1255,8 @@ class Sprite:
             if byteCmd1[0] != 2 and byteCmd2[0] != 2:
                 # emit code to store the background word with U
                 rowAsm.gen_loadstore_indexed(True, regU, regX, offX + 256*self.lineAdvance, "")  # ldu off,x
-                rowAsm.gen_loadstore_indexed(False, regU, regY, offY, "")
+                if self.saveBackground:
+                    rowAsm.gen_loadstore_indexed(False, regU, regY, offY, "")
                 # move this command word into the cmdWordsToWrite or cmdBytesToWrite list
                 if byteCmd1[0] == 1:
                     cmdWordsToStore.pop(idx)
@@ -1282,7 +1296,8 @@ class Sprite:
         while len(cmdBytesToStore) > 0:
             (offX,offY,byteCmd) = cmdBytesToStore.pop(0)
             rowAsm.gen_loadstore_indexed(True, scratchReg, regX, offX + 256*self.lineAdvance, "")
-            rowAsm.gen_loadstore_indexed(False, scratchReg, regY, offY, "")
+            if self.saveBackground:
+                rowAsm.gen_loadstore_indexed(False, scratchReg, regY, offY, "")
             if byteCmd[0] == 2:
                 # we don't need to clear bits with AND mask if nybble we're writing is 15
                 if (byteCmd[1] | byteCmd[2]) != 0xff:
@@ -1313,7 +1328,8 @@ class Sprite:
         while len(cmdWordsToStore) > 0:
             (offX,offY,byteCmd1,byteCmd2) = cmdWordsToStore.pop(0)
             rowAsm.gen_loadstore_indexed(True, regD, regX, offX + 256*self.lineAdvance, "")  # ldd off,x
-            rowAsm.gen_loadstore_indexed(False, regD, regY, offY, "")
+            if self.saveBackground:
+                rowAsm.gen_loadstore_indexed(False, regD, regY, offY, "")
             if byteCmd1[0] == 2 and byteCmd2[0] == 2:
                 byteSplit = False
                 # we don't need to clear bits with AND mask if nybble we're writing is 15
@@ -1618,7 +1634,7 @@ class App:
                 continue
             Names.append(name)
             Pixels.append(sprite.numPixels)
-            Storage.append(sprite.numSavedBytes)
+            Storage.append(sprite.numSavedBytes if sprite.saveBackground else 0)
             EraseBytes.append(sprite.funcErase.metrics.bytes)
             EraseCycles.append(sprite.funcErase.metrics.cycles)
             DrawLBytes.append(sprite.funcDraw[0].metrics.bytes)
