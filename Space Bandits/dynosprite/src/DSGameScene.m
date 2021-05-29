@@ -51,6 +51,7 @@
 
 - (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager andSceneController:(DSSceneController *)sceneController {
     if (self = [super init]) {
+        self.backgroundColor = NSColor.clearColor;
         self.size = CGSizeMake(320, 200);
         self.anchorPoint = CGPointMake(0, 1);
         _levelObj = level;
@@ -62,6 +63,10 @@
         _textureManager = textureManager;
         _sceneController = sceneController;
         _sprites = @[];
+        _paintedBackgrounds = @[
+            [[SKSpriteNode alloc] initWithColor:NSColor.clearColor size:self.scene.size],
+            [[SKSpriteNode alloc] initWithColor:NSColor.clearColor size:self.scene.size]
+        ];
     }
     
     return self;
@@ -102,7 +107,9 @@
     SKCameraNode *camera = [[SKCameraNode alloc] init];
     self.camera = camera;
     [self addChild:camera];
-    
+    [self addChild:_paintedBackgrounds[0]];
+    [self addChild:_paintedBackgrounds[1]];
+
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = _levelObj.bkgrndStartX / 2;
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY = _levelObj.bkgrndStartY;
     self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + self.size.width / 2, -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
@@ -143,20 +150,26 @@
         
         return;
     }
-    for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
-        [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];
-    }
  
     // Set the new frame position
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
     self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + self.size.width / 2, -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
     
+    int paintedBackgroundIndex = (((int)self.camera.position.x) & 2) >> 1;
+    _paintedBackgrounds[paintedBackgroundIndex].hidden = NO;
+    _paintedBackgrounds[1 - paintedBackgroundIndex].hidden = YES;
+    _paintedBackgrounds[paintedBackgroundIndex].position = self.camera.position;
+
+    for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
+        [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];
+    }
+    
 #if 0
-    SKTexture *texture = [self.view textureFromNode:self];
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:texture];
-    [self.children.lastObject removeFromParent];
-    [self addChild:sprite];
+    self.backgroundColor = NSColor.clearColor;
+    self.children.firstObject.hidden = YES;
+    _paintedBackgrounds[paintedBackgroundIndex].texture = [self.view textureFromNode:self];
+    self.children.firstObject.hidden = NO;
 #endif
     
     // Calculate the new frame position

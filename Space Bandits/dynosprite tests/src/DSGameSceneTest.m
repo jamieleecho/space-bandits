@@ -95,6 +95,7 @@ static byte backgroundNewXY() {
 }
 
 - (void)testInit {
+    XCTAssertEqual(_target.backgroundColor.alphaComponent, 0.0f);
     XCTAssertTrue(CGSizeEqualToSize(_target.size, CGSizeMake(320, 200)));
     XCTAssertTrue(CGPointEqualToPoint(_target.anchorPoint, CGPointMake(0, 1)));
     XCTAssertEqual(_target.levelObj, _levelObj);
@@ -143,7 +144,7 @@ static byte backgroundNewXY() {
 
     OCMVerify([_objectCoordinator initializeObjects]);
     
-    XCTAssertEqual(_target.children.count, 5);
+    XCTAssertEqual(_target.children.count, 7);
     XCTAssertEqual(_target.sprites.count, 3);
     OCMVerify([_textureManager configureSprite:_target.sprites[0] forCob:_cobs + 0 andScene:_target andCamera:_target.camera]);
     OCMVerify([_textureManager configureSprite:_target.sprites[1] forCob:_cobs + 1 andScene:_target andCamera:_target.camera]);

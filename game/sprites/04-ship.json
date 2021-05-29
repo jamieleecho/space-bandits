@@ -9,15 +9,18 @@
   "Sprites": [{
     "Name": "Ship1",
     "Location": [178, 429],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "SaveBackground": false
   }, {
     "Name": "Ship2",
     "Location": [146, 429],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "SaveBackground": true
   }, {
     "Name": "Ship3",
     "Location": [114, 429],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "SaveBackground": false
   }, {
      "Name": "Explosion1",
       "Location": [230, 281],

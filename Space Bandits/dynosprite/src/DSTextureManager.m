@@ -39,7 +39,6 @@
     SKTexture *mainTexture = [SKTexture textureWithCGImage:filteredImage];
     
     NSMutableArray<DSTexture *> *textures = [NSMutableArray arrayWithCapacity:spriteObjectClass.sprites.count];
-    NSMutableArray<SKTexture *> *skTextures = [NSMutableArray arrayWithCapacity:textures.count];
     for(DSSpriteInfo *spriteInfo in spriteObjectClass.sprites) {
         DSImageUtilImageInfo imageInfo = DSImageUtilGetImagePixelData(filteredImage);
         CGRect rect = DSImageUtilFindSpritePixels(imageInfo, spriteInfo.name, CGPointMake(spriteInfo.location.x, spriteInfo.location.y));
@@ -49,7 +48,6 @@
         CGFloat offsetY = -(spriteInfo.location.y - rect.origin.y - (rect.size.height / 2));
         DSTexture *texture = [[DSTexture alloc] initWithTexture:spriteTexture andPoint:CGPointMake(offsetX, offsetY)];
         [textures addObject:texture];
-        [skTextures addObject:spriteTexture];
     }
 
     // Map the textures
