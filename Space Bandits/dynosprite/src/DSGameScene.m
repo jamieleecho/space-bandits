@@ -165,7 +165,7 @@
         [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];
     }
     
-#if 0
+#if 1
     self.backgroundColor = NSColor.clearColor;
     self.children.firstObject.hidden = YES;
     _paintedBackgrounds[paintedBackgroundIndex].texture = [self.view textureFromNode:self];

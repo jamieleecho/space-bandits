@@ -219,9 +219,6 @@ byte ShipUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = ExplosionOffsets[globals->counter/4 + 1];
         globals->counter -= delta;
         return 0;
-    } else {
-        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = 8;
-        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = 8;
     }
     globals->counter = 0;
     
