@@ -18,6 +18,7 @@
     if (self = [super init]) {
         self.bundle = NSBundle.mainBundle;
         _groupIdToTextures = [[NSMutableDictionary alloc] init];
+        _groupIdToSpriteInfo = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -52,17 +53,20 @@
 
     // Map the textures
     _groupIdToTextures[[NSNumber numberWithInt:spriteObjectClass.groupID]] = textures;
+    _groupIdToSpriteInfo[[NSNumber numberWithInt:spriteObjectClass.groupID]] = spriteObjectClass.sprites;
 
     CGImageRelease(filteredImage);
 }
 
-- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob andScene:(SKScene *)scene andCamera:(SKCameraNode *)camera {
+- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob andScene:(SKScene *)scene andCamera:(SKCameraNode *)camera includeBackgroundSavers:(BOOL)includeBackgroundSavers {
+    BOOL saveBackground = _groupIdToSpriteInfo[[NSNumber numberWithInt:cob->groupIdx]][cob->statePtr[0]].saveBackground;
+    bool hide = ((cob->active & 2) == 0) || (!includeBackgroundSavers && saveBackground);
     if (cob->odtPtr->draw) {
         NSArray<DSTexture *> *textures = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]];
-        cob->odtPtr->draw(cob, (__bridge void *)scene, (__bridge void *)camera, (__bridge void *)textures, (__bridge void *)node);
+        cob->odtPtr->draw(cob, (__bridge void *)scene, (__bridge void *)camera, (__bridge void *)textures, (__bridge void *)node, hide);
     } else {
         DSTexture *texture = _groupIdToTextures[[NSNumber numberWithInt:cob->groupIdx]][cob->statePtr[0]];
-        node.hidden = ((cob->active & 2) == 0);
+        node.hidden = hide;
         node.size = texture.texture.size;
         node.texture = texture.texture;
         node.position = CGPointMake(cob->globalX + texture.point.x, -((float)cob->globalY + texture.point.y));

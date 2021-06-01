@@ -23,7 +23,7 @@ typedef struct DynospriteODT {
     void(*init)(struct DynospriteCOB *, struct DynospriteODT *, byte *);
     byte(*reactivate)(struct DynospriteCOB *, struct DynospriteODT *);
     byte(*update)(struct DynospriteCOB *, struct DynospriteODT *);
-    void (*draw)(struct DynospriteCOB *, void *, void *, void *, void *);
+    void (*draw)(struct DynospriteCOB *, void *, void *, void *, void *, bool hide);
     byte res2[4];
 } DynospriteODT;
 

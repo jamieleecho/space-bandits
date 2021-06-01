@@ -32,6 +32,7 @@
     spriteInfo.name = spriteInfoData[@"Name"];
     spriteInfo.location = [DSLevelFileParser pointFromArray:spriteInfoData[@"Location"]];
     spriteInfo.singlePixelPosition = [spriteInfoData[@"SinglePixelPosition"] boolValue];
+    spriteInfo.saveBackground = [spriteInfoData objectForKey:@"SaveBackground"] ? [spriteInfoData[@"SaveBackground"] boolValue] : YES;
     return spriteInfo;
 }
 

@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSArray<SKSpriteNode *> *_sprites;
     DSSceneController *_sceneController;
     NSArray<SKSpriteNode *> *_paintedBackgrounds;
+    DSPoint _lastOffset;
 }
 
 - (DSLevel *)levelObj;

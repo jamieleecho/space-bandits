@@ -20,7 +20,7 @@ static void classInit(void) { }
 static void init(DynospriteCOB *cob, DynospriteODT *odt, byte *data) { }
 static byte reactivate(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 static byte update(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
-static void draw(struct DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite) { }
+static void draw(struct DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite, bool hide) { }
 
 
 @implementation DSObjectClassDataTest

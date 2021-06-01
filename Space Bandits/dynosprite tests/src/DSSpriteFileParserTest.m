@@ -83,6 +83,10 @@
     XCTAssertEqualObjects(_objectClass.sprites[0].name, @"Ship1");
     XCTAssertTrue(DSPointEqual(_objectClass.sprites[1].location, DSPointMake(137, 433)));
     XCTAssertTrue(_objectClass.sprites[2].singlePixelPosition);
+
+    XCTAssertTrue(_objectClass.sprites[0].saveBackground);
+    XCTAssertTrue(_objectClass.sprites[1].saveBackground);
+    XCTAssertFalse(_objectClass.sprites[2].saveBackground);
 }
 
 - (void)testParseFileForObjectClassWithBadFileThrows {
