@@ -1,0 +1,30 @@
+{
+  "Level": {
+    "Name": "Test Level",
+    "Description": "This is a test",
+    "ObjectGroups": [10],
+    "MaxObjectTableSize": 64,
+    "Tileset": 1,
+    "TilemapImage": "../tiles/01-moon.gif",
+    "TilemapStart": [8, 16],
+    "TilemapSize": [320, 208],
+    "BkgrndStartX": 40,
+    "BkgrndStartY": 12
+  },
+
+  "Objects": [
+    {
+      "_comment": "***** Good Guy",
+      "GroupID": 10,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 170,
+      "globalY": 175,
+      "InitData": []
+    }
+  ]
+}
+
+
+
+
