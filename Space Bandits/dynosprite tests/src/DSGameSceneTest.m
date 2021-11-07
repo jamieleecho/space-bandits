@@ -138,9 +138,9 @@ static byte backgroundNewXY() {
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[5], 0xff);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[6], 0xff);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix[7], 0xff);
-    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX, 50);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX, 101);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY, 237);
-    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX, 50);
+    XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX, 101);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY, 237);
 
     OCMVerify([_objectCoordinator initializeObjects]);
@@ -152,7 +152,7 @@ static byte backgroundNewXY() {
     OCMVerify([_textureManager configureSprite:_target.sprites[2] forCob:_cobs + 2 andScene:_target andCamera:_target.camera includeBackgroundSavers:YES]);
 
     // Does the background start at the right point?
-    XCTAssertTrue(CGPointEqualToPoint(_target.camera.position, CGPointMake(260, -337)));
+    XCTAssertTrue(CGPointEqualToPoint(_target.camera.position, CGPointMake(362, -337)));
 }
 
 - (void)testInitializeLevelWithJoystick {

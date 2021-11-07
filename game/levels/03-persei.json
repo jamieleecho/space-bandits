@@ -9,7 +9,7 @@
     "TilemapStart": [0, 0],
     "TilemapSize": [352, 224],
     "BkgrndStartX": 8,
-    "BkgrndStartY": 0
+    "BkgrndStartY": 8
   },
 
   "Objects": [

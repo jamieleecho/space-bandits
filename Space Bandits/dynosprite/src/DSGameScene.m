@@ -119,7 +119,7 @@
     [self addChild:_paintedBackgrounds[0]];
     [self addChild:_paintedBackgrounds[1]];
 
-    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = _levelObj.bkgrndStartX / 2;
+    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = _levelObj.bkgrndStartX;
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY = _levelObj.bkgrndStartY;
     self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + self.size.width / 2, -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
 
@@ -167,7 +167,7 @@
     // Set the new frame position
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
-    self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + self.size.width / 2, -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
+    self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + (self.size.width / 2), -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
     
     [self renderScene];
 
@@ -196,6 +196,7 @@
 
     // We have to crop texture if we moved up or down. First calculate in points
     int deltaY = 2 * (_lastOffset.y - DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY);
+    
     CGSize fullSize = self.size;
     CGRect croppedFullTextureRect = CGRectMake(
         0,
