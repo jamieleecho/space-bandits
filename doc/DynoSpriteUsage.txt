@@ -502,13 +502,32 @@ supply to the Sound_Play function.
 
 Creating Sprites
 ----------------
+Currently, sprites are defined in a JSON dictionary file with two main sections: Main and Sprites.
+The Main section defines another dictionary that contains 4 pieces of information, all of which are
+required. Here is an example Main section.
+  "Main": {
+    "Group": 10,
+    "Image": "marbles.png",
+    "Transparent": [128, 128, 128],
+    "Palette": 1
+  }
 
-Currently, the sprites must be defined in the proprietary and self-explanatory SPR files.  In order
-to make new sprites, you will need to manually copy the sprite pixel layout into an SPR file, or
-integrate DynoSprite into your workflow with a graphic sprite generation tool either by writing a
-custom conversion script to generate the SPR files, or modifying the 'sprite2asm.py' script to
-read the sprite definition file which is exported natively by your sprite tool.  I will probably do
-this later, once I start working on my own game with DynoSprite.
+The Sprites section defines a JSON array of dictionaries. Each dictionary has 3 required values and
+one optional value. "SaveBackground" is optional and defaults to true. A true value means that the
+sprite will erase itself like a proper sprite. A false value means that the sprite will NOT erase
+itself which means it will draw a bit faster and require less memory overall since the background
+will not have to be saved. This can be used for various effects such as drawing larger sprites.
+Here is an example Sprites section:
+  "Sprites": [{
+    "Name": "Whole",
+    "Location": [13, 16],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "Outline",
+    "Location": [34, 16],
+    "SinglePixelPosition": true,
+    "SaveBackground": false
+  }]
 
 Creating Splash Images
 ----------------------
