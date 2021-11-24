@@ -93,7 +93,7 @@ static byte updateObj3(DynospriteCOB *cob, DynospriteODT *odt) {
     return newUpdateLevel;
 }
 
-static void drawObj3(DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite) {
+static void drawObj3(DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite, bool hide) {
     numDraw3Calls++;
 }
 

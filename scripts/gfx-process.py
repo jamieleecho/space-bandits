@@ -255,6 +255,7 @@ class SpriteInfo:
         self.pixArray = [ ]
         self.hotspot = [0, 0]
         self.chunkHint = sys.maxsize
+        self.saveBackground = True
 
 class SpriteGroupInfo:
     def __init__(self):
@@ -282,6 +283,12 @@ def parseSpriteDescription(descFilename):
         curSprite.singlepixelpos = dataSprite['SinglePixelPosition']
         if 'ChunkHint' in dataSprite:
             curSprite.chunkHint = dataSprite['ChunkHint']
+        if 'SaveBackground' in dataSprite:
+            if not type(dataSprite['SaveBackground']) is bool:
+                raise Exception(
+                    f'SaveBackground in {descFilename} is {dataSprite["SaveBackground"]} but '
+                    f'must be True or False.')
+            curSprite.saveBackground = dataSprite['SaveBackground']
         info.sprites.append(curSprite)
     return info
 
@@ -838,6 +845,8 @@ def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
         f.write(f'Hotspot = ({sprite.hotspot[0]},{sprite.hotspot[1]})\n')
         if (sprite.chunkHint < sys.maxsize):
             f.write(f'ChunkHint = {sprite.chunkHint}\n')
+        if (not sprite.saveBackground):
+            f.write(f'SaveBackground = {sprite.saveBackground}\n')
         for pixLine in sprite.pixArray:
             f.write(' '.join([pixValMap[v] for v in pixLine]))
             f.write('\n')

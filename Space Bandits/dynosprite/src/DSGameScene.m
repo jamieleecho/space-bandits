@@ -11,6 +11,14 @@
 #import "DSInitScene.h"
 #import "DSTransitionScene.h"
 
+
+@interface DSGameScene()
+
+- (void)renderScene;
+
+@end
+
+
 @implementation DSGameScene
 
 - (DSLevel *)levelObj {
@@ -51,6 +59,7 @@
 
 - (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager andSceneController:(DSSceneController *)sceneController {
     if (self = [super init]) {
+        self.backgroundColor = NSColor.clearColor;
         self.size = CGSizeMake(320, 200);
         self.anchorPoint = CGPointMake(0, 1);
         _levelObj = level;
@@ -62,6 +71,11 @@
         _textureManager = textureManager;
         _sceneController = sceneController;
         _sprites = @[];
+        _paintedBackgrounds = @[
+            [[SKSpriteNode alloc] initWithColor:NSColor.clearColor size:self.scene.size],
+            [[SKSpriteNode alloc] initWithColor:NSColor.clearColor size:self.scene.size]
+        ];
+        self.backgroundColor = NSColor.clearColor;
     }
     
     return self;
@@ -102,8 +116,10 @@
     SKCameraNode *camera = [[SKCameraNode alloc] init];
     self.camera = camera;
     [self addChild:camera];
-    
-    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = _levelObj.bkgrndStartX / 2;
+    [self addChild:_paintedBackgrounds[0]];
+    [self addChild:_paintedBackgrounds[1]];
+
+    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = _levelObj.bkgrndStartX;
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY = _levelObj.bkgrndStartY;
     self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + self.size.width / 2, -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
 
@@ -113,9 +129,13 @@
         SKSpriteNode *sprite = [[SKSpriteNode alloc] initWithColor:NSColor.clearColor size:CGSizeMake(1, 1)];
         [sprites addObject:sprite];
         [self addChild:sprite];
-        [_textureManager configureSprite:sprite forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];
     }
     _sprites = sprites;
+    
+    _lastOffset.x = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2;
+    _lastOffset.y = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY;
+    _paintedBackgrounds[0].position = _paintedBackgrounds[1].position = self.camera.position;
+    [self renderScene];
     
     // Initialize the objects
     [_objectCoordinator initializeObjects];
@@ -143,15 +163,14 @@
         
         return;
     }
-    for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
-        [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];
-    }
  
     // Set the new frame position
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
     DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
-    self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + self.size.width / 2, -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
+    self.camera.position = CGPointMake((float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2 + (self.size.width / 2), -(float)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY - self.size.height / 2);
     
+    [self renderScene];
+
     // Calculate the new frame position
     self.levelObj.backgroundNewXY();
 }
@@ -159,6 +178,61 @@
 - (void)update:(NSTimeInterval)currentTime {
     [super update:currentTime];    
     [self runOneGameLoop];
+}
+
+- (void)renderScene {
+    // Find the sprite on which we will draw the non background saving sprites
+    int paintedBackgroundIndex = (((int)self.camera.position.x) & 2) >> 1;
+    SKSpriteNode *paintedBackground = _paintedBackgrounds[paintedBackgroundIndex];
+    paintedBackground.hidden = NO;
+    _paintedBackgrounds[1 - paintedBackgroundIndex].hidden = YES;
+    
+    // Render the non background saving sprites onto texture, exclude the tiles
+    self.children.firstObject.hidden = YES;
+    for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
+        [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera includeBackgroundSavers:NO];
+    }
+    SKTexture *texture = [self.view textureFromNode:self];
+
+    // We have to crop texture if we moved up or down. First calculate in points
+    int deltaY = 2 * (_lastOffset.y - DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY);
+    
+    CGSize fullSize = self.size;
+    CGRect croppedFullTextureRect = CGRectMake(
+        0,
+        (deltaY < 0) ? -deltaY : 0,
+        fullSize.width,
+        fullSize.height - fabs(deltaY)
+    );
+
+    // Calculate crop amounts in texture coordinates
+    CGRect textureRect = texture.textureRect;
+    CGRect croppedTextureRect = CGRectMake(
+        textureRect.origin.x + croppedFullTextureRect.origin.x / fullSize.width,
+        textureRect.origin.y + croppedFullTextureRect.origin.y / fullSize.height,
+        croppedFullTextureRect.size.width / fullSize.width,
+        croppedFullTextureRect.size.height / fullSize.height
+    );
+                                
+    // Crop and reposition the painting node
+    texture = texture ? [SKTexture textureWithRect:croppedTextureRect inTexture:texture] : nil;
+    paintedBackground.position = CGPointMake(self.camera.position.x, self.camera.position.y - deltaY / 2);
+    paintedBackground.texture = texture;
+    paintedBackground.size = CGSizeMake(self.size.width, self.size.height - fabs(deltaY));
+    
+#if 0
+    NSImage *img = [[NSImage alloc] initWithCGImage:texture.CGImage size:CGSizeZero];
+    [img.TIFFRepresentation writeToFile:@"/tmp/foo.tiff" atomically:YES];
+#endif
+
+    // Render the scene with the tiles
+    self.children.firstObject.hidden = NO;
+    for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
+        [_textureManager configureSprite:_sprites[ii] forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera includeBackgroundSavers:YES];
+    }
+
+    _lastOffset.x = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX * 2;
+    _lastOffset.y = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastY;
 }
 
 @end

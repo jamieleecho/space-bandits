@@ -79,13 +79,13 @@ static void classInit1() { }
 static void init1(DynospriteCOB *cob, DynospriteODT *odt, byte *data) { }
 static byte reactivate1(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 static byte update1(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
-static void draw1(struct DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite) { }
+static void draw1(struct DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite, bool hide) { }
 
 static void classInit2() { }
 static void init2(DynospriteCOB *cob, DynospriteODT *odt, byte *data) { }
 static byte reactivate2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
 static byte update2(DynospriteCOB *cob, DynospriteODT *odt) { return 0; }
-static void draw2(struct DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite) { }
+static void draw2(struct DynospriteCOB *cob, void *scene, void *camera, void *textures, void *sprite, bool hide) { }
 
 - (void)testAddsMethodsFromFile {
     XCTAssertEqual(1,  DSObjectClassDataRegistryRegisterClassData(classInit1, init1, 3, reactivate1, update1, draw1, 128, "32-hello.c"));

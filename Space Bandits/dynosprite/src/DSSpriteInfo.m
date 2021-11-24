@@ -15,6 +15,7 @@
         self.name = @"";
         self.location = DSPointMake(0, 0);
         self.singlePixelPosition = NO;
+        self.saveBackground = YES;
     }
     return self;
 }
