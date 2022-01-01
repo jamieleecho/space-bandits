@@ -749,6 +749,7 @@
 				52F1208121D7DD63008A7900 /* Frameworks */,
 				522336622432D0ED0065E264 /* CopyFiles */,
 				52F1208221D7DD63008A7900 /* Resources */,
+				5220F73B277FF8A8009D8723 /* Remove *.c and *.h source files from resource folder */,
 			);
 			buildRules = (
 			);
@@ -844,6 +845,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5220F73B277FF8A8009D8723 /* Remove *.c and *.h source files from resource folder */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Remove *.c and *.h source files from resource folder";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Remove *.c and *.h source files\nrm -f \"$BUILD_ROOT/$CONFIGURATION/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/*/*.c\nrm -f \"$BUILD_ROOT/$CONFIGURATION/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/*/*.h\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		52E7604A21D7F5410001F3A0 /* Sources */ = {
