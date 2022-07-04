@@ -1,7 +1,7 @@
 #!/bin/bash
 
 lstfile=`echo "$@" | grep -o -e "--script=.*.link" | sed "s/--script=//"`
-fixed_vars=`echo "$@" | sed "s/--format=decb/--format=raw/"`
+fixed_vars=`echo "$@" | sed "s/--format=decb/--format=raw2/"`
 sed -i.bak '$ d' $lstfile
 echo section define_the_object >> $lstfile
 echo entry program_start >> $lstfile

@@ -1,4 +1,4 @@
-FROM jamieleecho/coco-dev:0.42
+FROM jamieleecho/coco-dev:latest
 
 MAINTAINER Jamie Cho version: 0.5
 
