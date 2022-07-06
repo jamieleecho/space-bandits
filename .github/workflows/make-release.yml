@@ -56,7 +56,7 @@ jobs:
 
   upload-artifacts:
     runs-on: ubuntu-latest
-    needs: [build-6809-dsk-image, build-6309-dsk-image, build-and-test-macos]
+    needs: [build-6809-dsk-image, build-6309-dsk-image, build-macos]
     steps:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v2
