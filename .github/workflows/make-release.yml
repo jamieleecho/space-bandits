@@ -34,7 +34,7 @@ jobs:
           path: build/*.DSK
           retention-days: 1
  
-  build-and-test-macos:
+  build-macos:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v1
@@ -43,8 +43,7 @@ jobs:
         env:
           DEVELOPER_DIR: /Applications/Xcode_11.7.app/Contents/Developer
         run: |
-          xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits GitHub" test
-          xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" build CONFIGURATION_BUILD_DIR=`pwd`/build
+          xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -configuration Release -scheme "Space Bandits" build CONFIGURATION_BUILD_DIR=`pwd`/build
           cd build
           tar cvf space-bandits.tgz *.app
 
