@@ -5,4 +5,4 @@ fixed_vars=`echo "$@" | sed "s/--format=decb/--format=raw2/"`
 sed -i.bak '$ d' $lstfile
 echo section define_the_object >> $lstfile
 echo entry program_start >> $lstfile
-../../tools/lwlink $fixed_vars
+lwlink $fixed_vars

@@ -50,8 +50,7 @@ MAPSRC := $(patsubst $(LEVELDIR)/%.json, $(GENGFXDIR)/tilemap%.txt, $(LEVELDSC))
 SPRITEASMSRC := $(patsubst $(SPRITEDIR)/%.txt, $(GENASMDIR)/sprite%.asm, $(filter %.txt, $(SPRITEDSC)))
 
 # paths to dependencies
-COCODISKGEN = $(TOOLDIR)/file2dsk
-ASSEMBLER = $(TOOLDIR)/lwasm
+ASSEMBLER = lwasm
 EMULATOR = $(TOOLDIR)/mame64
 
 # make sure build products directories exist
@@ -176,10 +175,6 @@ test:
 
 # build rules
 
-# 0. Build dependencies
-$(COCODISKGEN): $(TOOLDIR)/src/file2dsk/main.c
-	gcc -o $@ $<
-
 # 1a. Generate text Palette and Tileset files from images
 $(GENGFXDIR)/tileset%.txt $(GENGFXDIR)/tilemask%.txt $(GENGFXDIR)/palette%.txt: $(TILEDIR)/%.json $(SCRIPTDIR)/gfx-process.py
 	$(SCRIPTDIR)/gfx-process.py gentileset $< $(GENGFXDIR)/palette$*.txt $(GENGFXDIR)/tileset$*.txt $(GENGFXDIR)/tilemask$*.txt
@@ -265,10 +260,12 @@ $(LOADERBIN): $(LOADERSRC) $(ASM_TILES) $(ASM_OBJECTS) $(ASM_LEVELS) $(ASM_SOUND
 $(READMEBAS): $(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt
 	$(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt $(READMEBAS)
 
-#16. Create Coco disk image (file2dsk))
-$(TARGET): $(COCODISKGEN) $(DISKFILES)
+#16. Create Coco disk image
+$(TARGET): $(DISKFILES)
 	rm -f $(TARGET)
-	$(COCODISKGEN) $(TARGET) $(DISKFILES)
+	imgtool create coco_jvc_rsdos $(TARGET)
+	for f in $(filter $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f` --ftype==basic --ascii=ascii; done
+	for f in $(filter-out $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f`; done
 
 .PHONY: all clean test
 
