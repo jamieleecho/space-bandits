@@ -108,6 +108,7 @@ SYMBOLASM = $(GENASMDIR)/dynosprite-symbols.asm
 AUDIORATE = $(shell grep -E "AudioSamplingRate\s+EQU\s+[0-9]+" $(SRCDIR)/globals.asm | grep -oE "[0-9]+")
 
 # options
+ASMFLAGS = -I $(GENASMDIR)
 ifneq ($(RELEASE), 1)
   ASMFLAGS += --define=DEBUG
   CFLAGS += -DDEBUG
@@ -174,6 +175,9 @@ test:
 	$(EMULATOR) $(MAMESYSTEM) -flop1 $(TARGET) $(MAMEFLAGS) -window -waitvsync -resolution 640x480 -video opengl -rompath ~/Applications/mame/roms
 
 # build rules
+# 0. Parse options file
+$(GENASMDIR)/json-config.asm: $(GAMEDIR)/json-config.json
+	$(SCRIPTDIR)/build-config.py $< $@
 
 # 1a. Generate text Palette and Tileset files from images
 $(GENGFXDIR)/tileset%.txt $(GENGFXDIR)/tilemask%.txt $(GENGFXDIR)/palette%.txt: $(TILEDIR)/%.json $(SCRIPTDIR)/gfx-process.py
@@ -196,7 +200,7 @@ $(GENOBJDIR)/sprite%.raw: $(GENASMDIR)/sprite%.asm
 	$(ASSEMBLER) $(ASMFLAGS) -r -o $@ --list=$(GENLISTDIR)/sprite$*.lst --symbols $<
 
 # 4. Run first-pass assembly of DynoSprite engine
-$(PASS1LIST): $(LOADERSRC)
+$(PASS1LIST): $(LOADERSRC) $(GENASMDIR)/json-config.asm
 	$(ASSEMBLER) $(ASMFLAGS) --define=PASS=1 -b -o /dev/null --list=$(PASS1LIST) --symbols $(SRCDIR)/main.asm
 
 # 5. Extract symbol addresses from DynoSprite engine
