@@ -134,7 +134,6 @@ Menu_RunMain
             ldx         #Menu_Internal
             bra         SoundMenuInitTextDone@
 !           ldx         #Menu_Orc90
-            ldx         #Menu_Internal
 SoundMenuInitTextDone@
             ldb         #5+8*4
             lda         #152

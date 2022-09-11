@@ -1,6 +1,6 @@
 {
     "FirstLevel": 2,
-    "MonitorIsRGB": false,
+    "MonitorIsRGB": true,
     "UseKeyboard": true,
-    "SoundOutputMode": "Internal"
+    "SoundOutputMode": 1
 }

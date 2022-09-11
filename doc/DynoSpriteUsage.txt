@@ -85,7 +85,7 @@ game/readme-bas.txt           - Template text file that is used to generate the 
                                 with "{X}" are centered, with the charater X filling in the left
                                 and right sides.
 
-game/config.json              - Contains basic configuration information about the game. 
+game/json-config.json         - Contains basic configuration information about the game. 
 
 game/images/images.json       - For each Splash image, this descriptive text file gives 24-bit RGB
                                 values for 3 different special colors: the foreground, background,

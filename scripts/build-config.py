@@ -55,8 +55,8 @@ def build_config(input_filename, output_filename):
         'UseKeyboard': str(0 if (not ('UseKeyboard' in config_json) or
                                 (not config_json['UseKeyboard']))
                               else 255),
-        'SoundMode': str(1 if not ('SoundMode' in config_json)
-                           else config_json['SoundMode'])
+        'SoundOutputMode': str(1 if (not ('SoundOutputMode' in config_json))
+                           else config_json['SoundOutputMode']),
     }
 
     with open(output_filename, 'w') as asm_file:
