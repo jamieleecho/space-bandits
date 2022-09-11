@@ -49,6 +49,7 @@ static DSSoundManager *_sharedInstance = nil;
         _cacheState = DSSoundManagerCacheStateEmpty;
         _soundIdToPath = NSMutableDictionary.dictionary;
         _soundIdToSounds = NSMutableDictionary.dictionary;
+        self.enabled = YES;
     }
     return self;
 }
@@ -83,6 +84,10 @@ static DSSoundManager *_sharedInstance = nil;
 }
 
 - (BOOL)playSound:(size_t)soundId {
+    if (!self.enabled) {
+        return NO;
+    }
+
     [self loadCache];
     
     if (_playingSounds.count >= _maxNumSounds) {

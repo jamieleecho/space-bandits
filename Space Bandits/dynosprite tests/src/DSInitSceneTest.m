@@ -246,10 +246,17 @@ enum DSInitSceneLabelIndices : short {
     [_target toggleSound];
     XCTAssertEqual(_target.sound, DSInitSceneSoundHigh);
     OCMVerify([_resourceController setHifiMode:YES]);
+    OCMVerify([_soundManager setEnabled:YES]);
     XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesSoundValue].text, @"HiFi");
+    [_target toggleSound];
+    XCTAssertEqual(_target.sound, DSInitSceneSoundNone);
+    OCMVerify([_resourceController setHifiMode:NO]);
+    OCMVerify([_soundManager setEnabled:NO]);
+    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesSoundValue].text, @"No Sound");
     [_target toggleSound];
     XCTAssertEqual(_target.sound, DSInitSceneSoundLow);
     OCMVerify([_resourceController setHifiMode:NO]);
+    OCMVerify([_soundManager setEnabled:YES]);
     XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesSoundValue].text, @"LoFi");
 }
 

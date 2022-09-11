@@ -1,5 +1,5 @@
 //
-//  DSSoundControllerTest.m
+//  DSSoundManagerTest.m
 //  DynospriteCoreTests
 //
 //  Created by Jamie Cho on 4/10/20.
@@ -28,6 +28,7 @@
     _target = [[DSSoundManager alloc] init];
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     XCTAssertNil(_target.resourceController);
+    XCTAssertTrue(_target.enabled);
     _target.bundle = _bundle;
     _target.resourceController = _resourceController;
     OCMStub([_bundle resourcePath]).andReturn([[NSBundle bundleForClass:self.class] resourcePath]);
@@ -220,6 +221,16 @@
     XCTAssertFalse([_target playSound:3]); // sound 4 should fail
     
     XCTAssertEqual(_target.onlyUseForUnitTestingSoundsIdToSounds[[NSNumber numberWithInt:1]][2].delegate, _target);
+}
+
+- (void)testCanDisableSound {
+    [self add1Sound];
+    [self add1Sound];
+    [self add2Sounds];
+    [self setUpToLoad1SoundWithHiFiMode:YES];
+    [self setUpToLoad2SoundsWithHiFiMode:YES];
+    _target.enabled = NO;
+    XCTAssertFalse([_target playSound:1]);
 }
 
 @end

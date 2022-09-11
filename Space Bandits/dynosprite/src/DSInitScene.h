@@ -18,10 +18,11 @@ typedef enum DSInitSceneDisplay {
 
 typedef enum DSInitSceneControl {
     DSInitSceneControlKeyboard,
-DSInitSceneControlJoystick
+    DSInitSceneControlJoystick
 } DSInitSceneControl;
 
 typedef enum DSInitSceneSound {
+    DSInitSceneSoundNone = -1,
     DSInitSceneSoundLow,
     DSInitSceneSoundHigh
 } DSInitSceneSound;
