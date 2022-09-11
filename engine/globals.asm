@@ -119,7 +119,7 @@ Obj_StateDataPtr        zmd     1
 * -- Input
 * -----------------------------------------------------------------------------
 
-Input_UseKeyboard       zmb     1
+Input_UseKeyboard       fcb     UseKeyboard
 
 Input_JoystickX         zmb     1       * these values are between 0 and 63
 Input_JoystickY         zmb     1

@@ -51,10 +51,10 @@ def build_config(input_filename, output_filename):
                           in config_json else 1),
         'MonitorIsRGB': str(0 if (not ('MonitorIsRGB' in config_json) or
                                  (not config_json['MonitorIsRGB']))
-                              else 1),
+                              else 255),
         'UseKeyboard': str(0 if (not ('UseKeyboard' in config_json) or
                                 (not config_json['UseKeyboard']))
-                              else 1),
+                              else 255),
         'SoundMode': str(1 if not ('SoundMode' in config_json)
                            else config_json['SoundMode'])
     }
