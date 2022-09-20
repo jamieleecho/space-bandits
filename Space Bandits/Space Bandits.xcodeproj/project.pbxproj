@@ -151,7 +151,7 @@
 		52C8C6F9243DF17200EC582C /* forest-hires.png in Resources */ = {isa = PBXBuildFile; fileRef = 52610C88243D64390052EE4F /* forest-hires.png */; };
 		52C8C6FB243EA1A500EC582C /* DSInitSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */; };
 		52CF9D422288FB2B0054EAD2 /* DSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CF9D412288FB2B0054EAD2 /* DSWindowController.m */; };
-		52D7E91128CE5D2F00E94712 /* json-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 52D7E91028CE5D2F00E94712 /* json-config.json */; };
+		52D7E91128CE5D2F00E94712 /* defaults-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 52D7E91028CE5D2F00E94712 /* defaults-config.json */; };
 		52DF473124355071008DC63F /* DSCoCoKeyboardJoystickTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */; };
 		52E447002464DCDC008B6488 /* DSScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E446FF2464DCDC008B6488 /* DSScene.m */; };
 		52E447072464F66D008B6488 /* DSSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E447062464F66D008B6488 /* DSSceneTest.m */; };
@@ -344,7 +344,7 @@
 		52C8C6FA243EA1A500EC582C /* DSInitSceneTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSInitSceneTest.m; sourceTree = "<group>"; };
 		52CF9D402288FB2B0054EAD2 /* DSWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSWindowController.h; sourceTree = "<group>"; };
 		52CF9D412288FB2B0054EAD2 /* DSWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSWindowController.m; sourceTree = "<group>"; };
-		52D7E91028CE5D2F00E94712 /* json-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "json-config.json"; path = "../../game/json-config.json"; sourceTree = "<group>"; };
+		52D7E91028CE5D2F00E94712 /* defaults-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "defaults-config.json"; path = "../../game/defaults-config.json"; sourceTree = "<group>"; };
 		52DF473024355071008DC63F /* DSCoCoKeyboardJoystickTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoKeyboardJoystickTest.m; sourceTree = "<group>"; };
 		52E446FE2464DCDC008B6488 /* DSScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSScene.h; sourceTree = "<group>"; };
 		52E446FF2464DCDC008B6488 /* DSScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSScene.m; sourceTree = "<group>"; };
@@ -679,7 +679,7 @@
 				52C0C2B525AB9D24001D619F /* sounds */,
 				7DA1789B2431528600AE39D8 /* sprites */,
 				7DA1789F2431529D00AE39D8 /* tiles */,
-				52D7E91028CE5D2F00E94712 /* json-config.json */,
+				52D7E91028CE5D2F00E94712 /* defaults-config.json */,
 				52F1209421D7DD65008A7900 /* Assets.xcassets */,
 				7D7EED7823BD626500804C26 /* Main.storyboardc */,
 				52F1209921D7DD65008A7900 /* Info.plist */,
@@ -842,7 +842,7 @@
 				7DA178A02431529D00AE39D8 /* tiles in Resources */,
 				52F1208D21D7DD63008A7900 /* Actions.sks in Resources */,
 				52C3FCE621EBD9C900AE268B /* Fonts in Resources */,
-				52D7E91128CE5D2F00E94712 /* json-config.json in Resources */,
+				52D7E91128CE5D2F00E94712 /* defaults-config.json in Resources */,
 				52C0C2B425AB896B001D619F /* Credits.html in Resources */,
 				7D7EED7923BD626500804C26 /* Main.storyboardc in Resources */,
 			);

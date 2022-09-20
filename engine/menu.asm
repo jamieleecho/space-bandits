@@ -285,7 +285,7 @@ Menu_Keypress_Space
             * mark the graphics aperature as free
             jsr         MemMgr_FreeGfxAperature
             * load and execute Level 1
-            lda         #FirstLevel             * Load the first level defined by json-config
+            lda         #FirstLevel             * Load the first level defined by defaults-config
 	    clr		UserGlobals_Init
             jmp         Ldr_Load_Level          * jump to loader (it does not return, but jumps to mainloop)
 

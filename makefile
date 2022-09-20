@@ -176,7 +176,7 @@ test:
 
 # build rules
 # 0. Parse options file
-$(GENASMDIR)/json-config.asm: $(GAMEDIR)/json-config.json
+$(GENASMDIR)/defaults-config.asm: $(GAMEDIR)/defaults-config.json
 	$(SCRIPTDIR)/build-config.py $< $@
 
 # 1a. Generate text Palette and Tileset files from images
@@ -200,7 +200,7 @@ $(GENOBJDIR)/sprite%.raw: $(GENASMDIR)/sprite%.asm
 	$(ASSEMBLER) $(ASMFLAGS) -r -o $@ --list=$(GENLISTDIR)/sprite$*.lst --symbols $<
 
 # 4. Run first-pass assembly of DynoSprite engine
-$(PASS1LIST): $(LOADERSRC) $(GENASMDIR)/json-config.asm
+$(PASS1LIST): $(LOADERSRC) $(GENASMDIR)/defaults-config.asm
 	$(ASSEMBLER) $(ASMFLAGS) --define=PASS=1 -b -o /dev/null --list=$(PASS1LIST) --symbols $(SRCDIR)/main.asm
 
 # 5. Extract symbol addresses from DynoSprite engine

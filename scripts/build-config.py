@@ -35,8 +35,9 @@ import json
 @click.argument('input_filename', type=click.Path(exists=True))
 @click.argument('output_filename', type=click.Path(exists=False))
 def build_config(input_filename, output_filename):
-    """DynoSprites config.asm builder. Build config.asm from config.json """
-    """specified by INPUT_FILENAME and output specified by OUTPUT_FILENAME"""
+    """DynoSprites defaults-config.asm builder. Build defaults-config.asm """
+    """from defaults-config.json specified by INPUT_FILENAME and output """
+    """specified by OUTPUT_FILENAME"""
     with open(input_filename, 'r') as json_file:
         config_json = json.load(json_file)
 

@@ -17,20 +17,6 @@ tools/mess64d
 tools/mess
 tools/messd
 
-game/objects/*.hex
-game/objects/*.lst
-game/objects/*.bin
-game/objects/*.i
-game/objects/*.tmp
-game/objects/*.cmd
-
-game/levels/*.hex
-game/levels/*.lst
-game/levels/*.bin
-game/levels/*.i
-game/levels/*.tmp
-game/levels/*.cmd
-game/levels/01-testlevel.asm
 .DS_Store
 
 assets/00-mainmenu.png
