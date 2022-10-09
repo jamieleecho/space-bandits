@@ -14,7 +14,7 @@
     if (self = [super init]) {
         self.bundle = NSBundle.mainBundle;
         self.registry = DSLevelRegistry.sharedInstance;
-        self.sceneInfos = [NSMutableArray array];
+        self.sceneInfos = [[DSMutableArrayWrapper alloc] init];
     }
     return self;
 }
@@ -156,12 +156,12 @@
 
 - (void)loadSceneInfos {
     NSString *sceneInfoPath = [self.resourceController pathForConfigFileWithName:@"images/images.json"];
-    [self.transitionSceneInfoFileParser parseFile:sceneInfoPath forTransitionInfo:self.sceneInfos];
-    NSCAssert((self.registry.count + 1) == self.sceneInfos.count, ([NSString stringWithFormat:@"%@ contains %lu entries but was expecting %lu because there must be an entry for the initial screen plus %lu entries for the game levels", sceneInfoPath, self.registry.count, (self.registry.count + 1), self.sceneInfos.count]));
+    [self.transitionSceneInfoFileParser parseFile:sceneInfoPath forTransitionInfo:self.sceneInfos.array];
+    NSCAssert((self.registry.count + 1) == self.sceneInfos.array.count, ([NSString stringWithFormat:@"%@ contains %lu entries but was expecting %lu because there must be an entry for the initial screen plus %lu entries for the game levels", sceneInfoPath, self.registry.count, (self.registry.count + 1), self.sceneInfos.array.count]));
 }
 
 - (void)loadTransitionSceneImages {
-    [self.imageLoader loadImagesForTransitionInfo:self.sceneInfos];
+    [self.imageLoader loadImagesForTransitionInfo:self.sceneInfos.array];
 }
 
 @end

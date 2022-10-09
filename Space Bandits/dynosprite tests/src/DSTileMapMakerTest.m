@@ -67,8 +67,8 @@
 }
 
 - (void)testHashForImage {
-    XCTAssertEqualObjects([_target hashForImage:_forestImage], @"7d19093f6755ba855f2642e33bb458be");
-    XCTAssertEqualObjects([_target hashForImage:_forestTileImage], @"7919e4b229453a778fd696be4554e6ac");
+    XCTAssertEqualObjects([_target hashForImage:_forestImage], @"db6aa5c40fc53928171d4ed025e9cbd748cf3e57908626fcb9c2ba9b2577c3c4");
+    XCTAssertEqualObjects([_target hashForImage:_forestTileImage], @"a0761949865d1b6fa8f3c5b8860034ea2eb8db1f50603e3959a10d557b35105d");
 }
 
 - (void)testImageIsEqualTo {
@@ -130,7 +130,7 @@
     XCTAssertEqual(tileMapNode.xScale, 1);
     XCTAssertEqual(tileMapNode.yScale, 1);
     XCTAssertTrue(CGSizeEqualToSize(tileMapNode.tileSize, CGSizeMake(16, 16)));
-    XCTAssertEqualObjects([tileMapNode tileGroupAtColumn:5 row:2].name, @"21165f3660b53aa0f64ccdfa74c90e97");
+    XCTAssertEqualObjects([tileMapNode tileGroupAtColumn:5 row:2].name, @"f4ff196e2ed5fc498c1a6fce3dea7bf805a5425c88f23f2eb3d140310abc4964");
     XCTAssertTrue(CGSizeEqualToSize(tileMapNode.mapSize, CGSizeMake(12 * 16, 10 * 16)));
     XCTAssertTrue(CGPointEqualToPoint(tileMapNode.anchorPoint, CGPointMake(0, 1)));
 }

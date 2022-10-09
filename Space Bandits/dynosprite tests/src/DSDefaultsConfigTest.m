@@ -53,4 +53,33 @@
     XCTAssertTrue(_target.hifiMode);
 }
 
+- (void)testIsEqualTo {
+    DSDefaultsConfig *config = [[DSDefaultsConfig alloc] init];
+
+    _target.firstLevel = 5;
+    XCTAssertNotEqualObjects(_target, config);
+    config.firstLevel = 5;
+    XCTAssertEqualObjects(_target, config);
+
+    _target.useKeyboard = NO;
+    XCTAssertNotEqualObjects(_target, config);
+    config.useKeyboard = NO;
+    XCTAssertEqualObjects(_target, config);
+
+    config.hiresMode = YES;
+    XCTAssertNotEqualObjects(_target, config);
+    _target.hiresMode = YES;
+    XCTAssertEqualObjects(_target, config);
+
+    _target.enableSound = NO;
+    XCTAssertNotEqualObjects(_target, config);
+    config.enableSound = NO;
+    XCTAssertEqualObjects(_target, config);
+
+    _target.hifiMode = YES;
+    XCTAssertNotEqualObjects(_target, config);
+    config.hifiMode = YES;
+    XCTAssertEqualObjects(_target, config);
+}
+
 @end

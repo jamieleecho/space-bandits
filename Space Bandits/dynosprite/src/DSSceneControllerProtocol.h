@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DSGameScene.h"
+#import "DSMutableArrayWrapper.h"
 
 @class DSGameScene;
 @class DSTransitionScene;
@@ -15,7 +16,7 @@
 
 @protocol DSSceneControllerProtocol <NSObject>
 
-- (NSArray<DSTransitionSceneInfo *> *)sceneInfos;
+- (DSMutableArrayWrapper<DSTransitionSceneInfo *> *)sceneInfos;
 
 - (DSGameScene *)gameSceneForLevel:(int)level;
 - (DSTransitionScene *)transitionSceneForLevel:(int)level;

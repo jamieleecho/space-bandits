@@ -23,9 +23,10 @@
     NSCAssert(defaultsConfigPath != nil, @"Could not find defaults-config.json resource.");
     
     NSInputStream *inStream = [[NSInputStream alloc] initWithFileAtPath:defaultsConfigPath];
+    NSCAssert(inStream != nil, @"Could not open defaults-config.json resource.");
     NSDictionary *defaultsConfigJson;
     @try {
-        NSCAssert(defaultsConfigPath != nil, @"Could not open defaults-config.json resource.");
+        [inStream open];
         NSError *err;
         id result = [NSJSONSerialization JSONObjectWithStream:inStream options:0 error:&err];
         if (!result || ![result isKindOfClass:NSDictionary.class]) {
@@ -43,15 +44,26 @@
         ];
         
         for(size_t ii=0; ii<properties.count; ii += 3) {
-            id value = defaultsConfigJson[properties[ii]];
-            if (value && ([value isKindOfClass:NSNumber.class])) {
-                SEL selector = NSSelectorFromString(properties[ii + 1]);
-                IMP imp = [defaultsConfig methodForSelector:selector];
-                void (*func)(id, SEL, id) = (void *)imp;
-                func(defaultsConfig, selector, value);
+            id val = defaultsConfigJson[properties[ii]];
+            if (val) {
+                if (([val isKindOfClass:NSNumber.class])) {
+                    NSNumber *value = (NSNumber *)val;
+                    SEL selector = NSSelectorFromString(properties[ii + 1]);
+                    IMP imp = [defaultsConfig methodForSelector:selector];
+                    if ([properties[ii + 2] boolValue]) {
+                        void (*func)(id, SEL, int) = (void *)imp;
+                        func(defaultsConfig, selector, (int)[value longValue]);
+                    } else {
+                        void (*func)(id, SEL, bool) = (void *)imp;
+                        func(defaultsConfig, selector, [value boolValue]);
+                    }
+                } else {
+                    NSLog(@"Weird value for %@s - value was %@s", properties[ii], val);
+                }
             }
         }
         
+        self.defaultsConfig = defaultsConfig;
     } @finally {
         [inStream close];
     }

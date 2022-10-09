@@ -44,7 +44,7 @@
 }
 
 - (NSString *)hashForImage:(NSImage *)image {
-    return image.TIFFRepresentation.MD5;
+    return image.TIFFRepresentation.SHA256;
 }
 
 - (BOOL)image:(NSImage *)image1 isEqualTo:(NSImage *)image2 {

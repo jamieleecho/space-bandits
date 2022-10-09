@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -691,7 +691,7 @@
                         <outlet property="levelFileParser" destination="4Pk-WU-M93" id="ZYc-bn-eVd"/>
                         <outlet property="objectParser" destination="LPq-ih-HUx" id="eVX-jm-ueV"/>
                         <outlet property="resourceController" destination="web-E3-IMn" id="IES-SH-Irf"/>
-                        <outlet property="sceneInfos" destination="jjS-RJ-pne" id="Zsh-y2-0YW"/>
+                        <outlet property="sceneInfos" destination="GaR-Sb-sn2" id="hwp-Qa-VZs"/>
                         <outlet property="soundManager" destination="2cP-OL-euM" id="uyL-gf-Ppt"/>
                         <outlet property="spriteObjectClassFactory" destination="5dS-7a-Ghz" id="EIK-U3-tSw"/>
                         <outlet property="tileInfoRegistry" destination="8lv-su-4yx" id="Thg-O9-1uX"/>
@@ -713,14 +713,13 @@
                     <connections>
                         <outlet property="joystickController" destination="Nki-Dk-Bhg" id="jc7-yr-SqC"/>
                         <outlet property="resourceController" destination="web-E3-IMn" id="yl9-le-aDQ"/>
-                        <outlet property="sceneInfos" destination="jjS-RJ-pne" id="qHo-jV-m0F"/>
+                        <outlet property="sceneInfos" destination="GaR-Sb-sn2" id="2RL-uc-rHe"/>
                         <outlet property="soundManager" destination="2cP-OL-euM" id="bp6-FP-tGz"/>
                         <outlet property="textureManager" destination="jjJ-YM-pJl" id="H4c-1v-u1u"/>
                         <outlet property="tileInfoRegistry" destination="8lv-su-4yx" id="mAw-iu-dc6"/>
                         <outlet property="tileMapMaker" destination="zlV-f7-gSm" id="DpJ-UM-LB6"/>
                     </connections>
                 </customObject>
-                <customObject id="jjS-RJ-pne" customClass="NSMutableArray"/>
                 <customObject id="2cP-OL-euM" customClass="DSSoundManager">
                     <connections>
                         <outlet property="resourceController" destination="web-E3-IMn" id="bmq-RI-pHP"/>
@@ -732,8 +731,10 @@
                     </connections>
                 </customObject>
                 <customObject id="8lv-su-4yx" customClass="DSTileInfoRegistry"/>
+                <customObject id="GaR-Sb-sn2" customClass="DSMutableArrayWrapper"/>
                 <customObject id="zlV-f7-gSm" customClass="DSTileMapMaker"/>
                 <customObject id="mI2-rC-MfV" customClass="DSTransitionSceneInfoFileParser"/>
+                <customObject id="m0H-jw-mi7" customClass="DSDefaultsConfigLoader"/>
             </objects>
             <point key="canvasLocation" x="63" y="-607"/>
         </scene>

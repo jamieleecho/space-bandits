@@ -13,7 +13,7 @@
 
 @interface DSAssetLoaderTest : XCTestCase {
     DSAssetLoader *_target;
-    NSMutableArray *_sceneInfos;
+    DSMutableArrayWrapper *_sceneInfos;
     id _bundle;
     id _imageLoader;
     id _levelRegistry;
@@ -33,7 +33,7 @@
 - (void)setUp {
     _target = [[DSAssetLoader alloc] init];
     XCTAssertEqual(_target.registry, DSLevelRegistry.sharedInstance);
-    XCTAssertTrue([_target.sceneInfos isKindOfClass:NSMutableArray.class]);
+    XCTAssertTrue([_target.sceneInfos isKindOfClass:DSMutableArrayWrapper.class]);
 
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     XCTAssertNil(_target.levelFileParser);
@@ -51,7 +51,7 @@
     _soundManager = OCMClassMock(DSSoundManager.class);
     _spriteClassObjectFactory = OCMClassMock(DSSpriteObjectClassFactory.class);
     _objectParser = OCMClassMock(DSSpriteFileParser.class);
-    _sceneInfos = [NSMutableArray array];
+    _sceneInfos = [[DSMutableArrayWrapper alloc] init];
     _resourceController = OCMClassMock(DSResourceController.class);
     _tileInfoRegistry = OCMClassMock(DSTileInfoRegistry.class);
     _transitionSceneInfoParser = OCMClassMock(DSTransitionSceneInfoFileParser.class);
@@ -308,22 +308,22 @@
 
 - (void)testLoadSceneInfos {
     OCMStub([_resourceController pathForConfigFileWithName:@"images/images.json"]).andReturn(@"/foo.app/Contents/Resources/images/images.json");
-    OCMStub([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos]).andDo(^(NSInvocation *invocation) {
-        [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
-        [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
-        [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
+    OCMStub([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos.array]).andDo(^(NSInvocation *invocation) {
+        [self->_sceneInfos.array addObject:[[DSTransitionSceneInfo alloc] init]];
+        [self->_sceneInfos.array addObject:[[DSTransitionSceneInfo alloc] init]];
+        [self->_sceneInfos.array addObject:[[DSTransitionSceneInfo alloc] init]];
     });
     OCMStub([_levelRegistry count]).andReturn(2);
     [_target loadSceneInfos];
-    OCMVerify([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos]);
+    OCMVerify([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos.array]);
 }
 
 - (void)testLoadSceneInfosThrowsWhenWrongNumberOfLevels {
     OCMStub([_resourceController pathForConfigFileWithName:@"images/images.json"]).andReturn(@"/foo.app/Contents/Resources/images/images.json");
-    OCMStub([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos]).andDo(^(NSInvocation *invocation) {
-        [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
-        [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
-        [self->_sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
+    OCMStub([(DSTransitionSceneInfoFileParser *)_transitionSceneInfoParser parseFile:@"/foo.app/Contents/Resources/images/images.json" forTransitionInfo:_sceneInfos.array]).andDo(^(NSInvocation *invocation) {
+        [self->_sceneInfos.array addObject:[[DSTransitionSceneInfo alloc] init]];
+        [self->_sceneInfos.array addObject:[[DSTransitionSceneInfo alloc] init]];
+        [self->_sceneInfos.array addObject:[[DSTransitionSceneInfo alloc] init]];
     });
     OCMStub([_levelRegistry count]).andReturn(3);
     XCTAssertThrows([_target loadSceneInfos]);
@@ -344,7 +344,7 @@
         [invocation getArgument:&objectClass atIndex:2];
         [invocation getArgument:&num atIndex:3];
         [objectClasses addObject:objectClass];
-        XCTAssertEqual(num, indices.lastObject);
+        XCTAssertEqualObjects(num, indices.lastObject);
         [indices removeLastObject];
     };
      
