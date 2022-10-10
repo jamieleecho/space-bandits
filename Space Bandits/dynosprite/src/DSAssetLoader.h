@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DSLevelFileParser.h"
+#import "DSMutableArrayWrapper.h"
 #import "DSResourceController.h"
 #import "DSSoundManager.h"
 #import "DSSpriteObjectClassFactory.h"
@@ -23,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) IBOutlet DSLevelFileParser *levelFileParser;
 @property (nonatomic, nonnull) IBOutlet DSTransitionSceneInfoFileParser *transitionSceneInfoFileParser;
 @property (nonatomic, nonnull) DSLevelRegistry *registry;
-@property (nonatomic, nonnull) IBOutlet NSMutableArray *sceneInfos;
+@property (nonatomic, nonnull) IBOutlet DSMutableArrayWrapper *sceneInfos;
 @property (nonatomic, nonnull) IBOutlet DSSoundManager *soundManager;
 @property (nonatomic, nonnull) IBOutlet DSSpriteObjectClassFactory *spriteObjectClassFactory;
 @property (nonatomic, nonnull) IBOutlet DSSpriteFileParser *objectParser;

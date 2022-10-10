@@ -14,10 +14,14 @@
 
 @interface DSAppDelegateTest : XCTestCase {
     DSAppDelegate *_target;
-    id _configFileParser;
-    id _sceneController;
+    DSDefaultsConfig *_defaultsConfig;
     id _assetLoader;
+    id _configFileParser;
+    id _defaultsConfigLoader;
+    id _joystickController;
+    id _sceneController;
     id _soundManager;
+    id _resourceController;
 }
 @end
 
@@ -26,13 +30,29 @@
 
 - (void)setUp {
     _target = [[DSAppDelegate alloc] init];
-    _configFileParser = OCMClassMock(DSConfigFileParser.class);
-    _target.configFileParser = _configFileParser;
-    _sceneController = OCMClassMock(DSSceneController.class);
-    _target.sceneController = _sceneController;
+    _defaultsConfig = [[DSDefaultsConfig alloc] init];
     _assetLoader = OCMClassMock(DSAssetLoader.class);
-    _target.assetLoader = _assetLoader;
+    _configFileParser = OCMClassMock(DSConfigFileParser.class);
+    _defaultsConfigLoader = OCMClassMock(DSDefaultsConfigLoader.class);
+    _joystickController = OCMClassMock(DSCoCoJoystickController.class);
+    _resourceController = OCMClassMock(DSResourceController.class);
+    _sceneController = OCMClassMock(DSSceneController.class);
     _soundManager = OCMClassMock(DSSoundManager.class);
+
+    _defaultsConfig.enableSound = YES;
+    _defaultsConfig.firstLevel = 32;
+    _defaultsConfig.hifiMode = YES;
+    _defaultsConfig.hiresMode = YES;
+    _defaultsConfig.useKeyboard = NO;
+    
+    OCMStub([_defaultsConfigLoader defaultsConfig]).andReturn(_defaultsConfig);
+    
+    _target.assetLoader = _assetLoader;
+    _target.configFileParser = _configFileParser;
+    _target.defaultsConfigLoader = _defaultsConfigLoader;
+    _target.joystickController = _joystickController;
+    _target.resourceController = _resourceController;
+    _target.sceneController = _sceneController;
     _target.soundManager = _soundManager;
 }
 
@@ -48,6 +68,15 @@
     [_target awakeFromNib];
     OCMVerify([_sceneController setClassRegistry:DSObjectClassDataRegistry.sharedInstance]);
     OCMVerify([_assetLoader setRegistry:DSLevelRegistry.sharedInstance]);
+    
+    OCMVerify([_defaultsConfigLoader loadDefaultsConfig]);
+    OCMVerify([_soundManager setEnabled:_defaultsConfig.enableSound]);
+    OCMVerify([_resourceController setHiresMode:_defaultsConfig.hiresMode]);
+    OCMVerify([_resourceController setHifiMode:_defaultsConfig.hifiMode]);
+    OCMVerify([_sceneController setFirstLevel:_defaultsConfig.firstLevel]);
+
+    OCMVerify([_joystickController setUseHardwareJoystick:!_defaultsConfig.useKeyboard]);
+
     OCMVerify([(DSAssetLoader *)_assetLoader loadLevels]);
     OCMVerify([(DSAssetLoader *)_assetLoader loadSceneInfos]);
     OCMVerify([(DSAssetLoader *)_assetLoader loadTransitionSceneImages]);

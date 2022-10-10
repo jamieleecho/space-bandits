@@ -18,7 +18,8 @@
     if (self = [super init]) {
         self.bundle = NSBundle.mainBundle;
         self.levelRegistry = DSLevelRegistry.sharedInstance;
-        self.sceneInfos = @[];
+        self.sceneInfos = [[DSMutableArrayWrapper alloc] init];
+        self.firstLevel = 1;
     }
     return self;
 }
@@ -28,12 +29,15 @@
         return nil;
     }
     DSTransitionScene *transitionScene = (level == 0) ? [[DSInitScene alloc] init] : [[DSLevelLoadingScene alloc] init];
+    if (level == 0) {
+        ((DSInitScene *)transitionScene).firstLevel = self.firstLevel;
+    }
     transitionScene.resourceController = self.resourceController;
     transitionScene.joystickController = self.joystickController;
-    transitionScene.backgroundColor = self.sceneInfos[level].backgroundColor;
-    transitionScene.foregroundColor = self.sceneInfos[level].foregroundColor;
-    transitionScene.progressBarColor = self.sceneInfos[level].progressColor;
-    transitionScene.backgroundImageName = [self.resourceController imageWithName:self.sceneInfos[level].backgroundImageName];
+    transitionScene.backgroundColor = self.sceneInfos.array[level].backgroundColor;
+    transitionScene.foregroundColor = self.sceneInfos.array[level].foregroundColor;
+    transitionScene.progressBarColor = self.sceneInfos.array[level].progressColor;
+    transitionScene.backgroundImageName = self.sceneInfos.array[level].backgroundImageName;
     transitionScene.levelNumber = level;
     transitionScene.soundManager = self.soundManager;
     transitionScene.sceneController = self;

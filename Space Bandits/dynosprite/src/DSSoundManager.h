@@ -29,6 +29,7 @@ typedef enum DSSoundManagerCacheState {
 + (void)setSharedInstance:(nullable DSSoundManager *)soundManager;
 
 @property NSBundle *bundle;
+@property BOOL enabled;
 @property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
 - (DSSoundManagerCacheState) cacheState;
 - (NSMutableDictionary<NSNumber *, NSArray<NSSound *> *> *) onlyUseForUnitTestingSoundsIdToSounds;

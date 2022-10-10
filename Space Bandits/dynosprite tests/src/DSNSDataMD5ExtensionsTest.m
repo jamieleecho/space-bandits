@@ -17,9 +17,9 @@
 
 - (void)testExample {
     NSData *data1 = [@"The quick brown fox jumped over the lazy typist" dataUsingEncoding:NSUTF8StringEncoding];
-    XCTAssertEqualObjects(data1.MD5, @"b3adf378422d9781f6562c5479d549cc");
+    XCTAssertEqualObjects(data1.SHA256, @"dcb3899968406d85b146ff186380f02eb4ed9952d101f603675650c79ab3266f");
     NSData *data2 = [@"" dataUsingEncoding:NSUTF8StringEncoding];
-    XCTAssertEqualObjects(data2.MD5, @"d41d8cd98f00b204e9800998ecf8427e");
+    XCTAssertEqualObjects(data2.SHA256, @"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
 }
 
 @end

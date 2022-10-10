@@ -85,6 +85,8 @@ game/readme-bas.txt           - Template text file that is used to generate the 
                                 with "{X}" are centered, with the charater X filling in the left
                                 and right sides.
 
+game/defaults-config.json     - Contains basic default game configuration information.
+
 game/images/images.json       - For each Splash image, this descriptive text file gives 24-bit RGB
                                 values for 3 different special colors: the foreground, background,
                                 and the 'progress bar' color.  This is used for the fade-in and
@@ -332,7 +334,6 @@ symbol-extract.py  - Helper script which parses an lwasm listing file (*.lst) an
 
 The build process is defined and documented inside of the Makefile.  Here are the steps:
 
-0.  Build 'file2dsk' dependency, which is used for generating the final output DSK image.
 1.  Compile all sprites to 6809 assembly code with "scripts/sprite2asm.py"
 2.  Assemble the sprite assembly code to raw machine code with "tools/lwasm"
 3.  Run first-pass assembly of DynoSprite engine with "tools/lwasm"
@@ -348,7 +349,7 @@ The build process is defined and documented inside of the Makefile.  Here are th
 13. Run final assembly pass of DynoSprite engine which includes final Game Data Directories,
     with "tools/lwasm", and relocate code sections with "scripts/binsectionmover.py"
 14. Generate the README.BAS document with "scripts/build-readme.py"
-15. Create complete Coco disk image with "tools/file2dsk"
+15. Create complete Coco disk image with "imgtool"
 
 ===================================================================================================
 =------------------------------------------  Main Loop  ------------------------------------------=

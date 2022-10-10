@@ -54,7 +54,7 @@ const float DefaultFontSize = 12.0f;
         self.anchorPoint = CGPointMake(0, 1);
         self.scaleMode = SKSceneScaleModeAspectFit;
         
-        _backgroundImageName = @"";
+        _backgroundImageName = nil;
         _backgroundImage = [SKSpriteNode spriteNodeWithColor:self.backgroundColor size:self.size];
         [self configureBackgroundImage:_backgroundImage];
         [self addChild:_backgroundImage];
@@ -63,6 +63,7 @@ const float DefaultFontSize = 12.0f;
         [self addObserver:self forKeyPath:@"resourceController" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
         [self addObserver:self forKeyPath:@"backgroundColor" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
         [self addObserver:self forKeyPath:@"foregroundColor" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+        [self addObserver:self forKeyPath:@"soundManager" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     }
     return self;
 }

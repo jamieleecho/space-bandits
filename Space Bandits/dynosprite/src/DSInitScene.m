@@ -13,8 +13,9 @@ static NSString *MenuControlJoystick = @"Joystick";
 static NSString *MenuControlKeyboard = @"Keyboard";
 static NSString *MenuDisplayHigh = @"High";
 static NSString *MenuDisplayLow = @"Low";
-static NSString *MenuSoundHigh = @"HiFi";
+static NSString *MenuSoundNone = @"No Sound";
 static NSString *MenuSoundLow = @"LoFi";
+static NSString *MenuSoundHigh = @"HiFi";
 
 
 @implementation DSInitScene {
@@ -29,7 +30,14 @@ static NSString *MenuSoundLow = @"LoFi";
 }
 
 + (NSString *)textFromSound:(DSInitSceneSound)sound {
-    return sound == DSInitSceneSoundHigh ? MenuSoundHigh : MenuSoundLow;
+    return sound == DSInitSceneSoundHigh ? MenuSoundHigh : (sound == DSInitSceneSoundNone ? MenuSoundNone : MenuSoundLow);
+}
+
+- (id)init {
+    if (self = [super init]) {
+        self.firstLevel = 1;
+    }
+    return self;
 }
 
 - (void)didMoveToView:(SKView *)view {
@@ -45,9 +53,9 @@ static NSString *MenuSoundLow = @"LoFi";
         _soundLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 152)];
         [self addLabelWithText:@"[Space] or joystick button to start" atPosition:CGPointMake(20, 184)];
         
-        _resolution = DSInitSceneDisplayLow;
-        _control = DSInitSceneControlKeyboard;
-        _sound = DSInitSceneSoundLow;
+        _resolution = self.resourceController.hiresMode ? DSInitSceneDisplayHigh : DSInitSceneDisplayLow;
+        _control = self.joystickController.useHardwareJoystick ? DSInitSceneControlJoystick : DSInitSceneControlKeyboard;
+        _sound = self.soundManager.enabled ? (self.resourceController.hifiMode ? DSInitSceneSoundHigh : DSInitSceneSoundLow) : DSInitSceneSoundNone;
     }
 
     [self refreshState];
@@ -92,7 +100,7 @@ static NSString *MenuSoundLow = @"LoFi";
 
 - (void)transitionToNextScreen {
     SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
-    DSTransitionScene *transitionScene = [self.sceneController transitionSceneForLevel:1];
+    DSTransitionScene *transitionScene = [self.sceneController transitionSceneForLevel:(int)self.firstLevel];
     [self.view presentScene:transitionScene transition:transition];
     [self.soundManager loadCache];
     self.soundManager.maxNumSounds = (self.resourceController.hifiMode) ? 10 : 2;
@@ -119,7 +127,7 @@ static NSString *MenuSoundLow = @"LoFi";
 }
 
 - (void)toggleSound {
-    _sound = (_sound >= DSInitSceneSoundHigh) ? DSInitSceneSoundLow : _sound + 1;
+    _sound = (_sound >= DSInitSceneSoundHigh) ? DSInitSceneSoundNone : _sound + 1;
     [self refreshState];
 }
 
@@ -141,7 +149,9 @@ static NSString *MenuSoundLow = @"LoFi";
     _resolutionLabelNode.text = [DSInitScene textFromResolution:_resolution];
     _controlLabelNode.text = [DSInitScene textFromControl:_control];
     _soundLabelNode.text = [DSInitScene textFromSound:_sound];
+
     self.joystickController.useHardwareJoystick = (_control == DSInitSceneControlJoystick);
+    self.soundManager.enabled = (_sound != DSInitSceneSoundNone);
     self.resourceController.hifiMode = (_sound == DSInitSceneSoundHigh);
     self.resourceController.hiresMode = (_resolution == DSInitSceneDisplayHigh);
 }

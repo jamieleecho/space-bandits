@@ -54,7 +54,7 @@
     };
 
     _target = [[DSSceneController alloc] init];
-    XCTAssertTrue([_target.sceneInfos isKindOfClass:NSArray.class]);
+    XCTAssertTrue([_target.sceneInfos isKindOfClass:DSMutableArrayWrapper.class]);
     XCTAssertEqual(_target.levelRegistry, DSLevelRegistry.sharedInstance);
     XCTAssertEqual(_target.bundle, NSBundle.mainBundle);
     XCTAssertNil(_target.joystickController);
@@ -65,11 +65,11 @@
     XCTAssertNil(_target.textureManager);
     XCTAssertNil(_target.classRegistry);
 
-    NSArray<DSTransitionSceneInfo *>*sceneInfos = @[
-        [[DSTransitionSceneInfo alloc] init],
-        [[DSTransitionSceneInfo alloc] init],
-        [[DSTransitionSceneInfo alloc] init]
-    ];
+    DSMutableArrayWrapper<DSTransitionSceneInfo *> *sceneInfosWrapper = [[DSMutableArrayWrapper alloc] init];
+    NSMutableArray<DSTransitionSceneInfo *>*sceneInfos = sceneInfosWrapper.array;
+    [sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
+    [sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
+    [sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
     sceneInfos[0].backgroundColor = [NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0f];
     sceneInfos[0].foregroundColor = [NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
     sceneInfos[0].progressColor = [NSColor colorWithCalibratedRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
@@ -81,7 +81,7 @@
     sceneInfos[2].backgroundColor = [NSColor colorWithCalibratedRed:0x2f/255.0f green:1.0f blue:1.0f alpha:1.0f];
     sceneInfos[2].foregroundColor = [NSColor colorWithCalibratedRed:0x20/255.0f green:0.0f blue:0.0f alpha:1.0f];
     sceneInfos[2].progressColor = [NSColor colorWithCalibratedRed:0x3b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
-    _target.sceneInfos = sceneInfos;
+    _target.sceneInfos = sceneInfosWrapper;
     
     _level.name = @"Omicron Persei 8";
     _level.levelDescription = @"Do Something!";
@@ -109,6 +109,7 @@
     _target.textureManager = _textureManager;
     _target.classRegistry = _classRegistry;
 
+    XCTAssertEqual(_target.firstLevel, 1);
     XCTAssertEqual(_target.bundle, _bundle);
     XCTAssertEqual(_target.joystickController, _joystickController);
     XCTAssertEqual(_target.levelRegistry, _levelRegistry);
@@ -129,12 +130,17 @@
 
 - (void)testCreatesLevels {
     DSInitScene *initScene = (DSInitScene *)[_target transitionSceneForLevel:0];
+    XCTAssertEqual(initScene.firstLevel, 1);
     XCTAssertEqualObjects(initScene.backgroundColor, [[NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0f] colorUsingColorSpace:initScene.backgroundColor.colorSpace]);
     XCTAssertEqualObjects(initScene.foregroundColor, [NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:1.0f]);
     XCTAssertEqualObjects(initScene.progressBarColor, [NSColor colorWithCalibratedRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1]);
     XCTAssertEqual(initScene.class, DSInitScene.class);
     XCTAssertEqual(initScene.sceneController, _target);
     
+    _target.firstLevel = 5;
+    DSInitScene *initScene2 = (DSInitScene *)[_target transitionSceneForLevel:0];
+    XCTAssertEqual(initScene2.firstLevel, 5);
+
     OCMStub([_levelRegistry levelForIndex:2]).andReturn(_level);
     DSLevelLoadingScene *loadingScene = (DSLevelLoadingScene *)[_target transitionSceneForLevel:2];
     XCTAssertEqual(loadingScene.class, DSLevelLoadingScene.class);

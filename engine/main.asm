@@ -29,6 +29,7 @@
 *           These initial assembly files don't emit any assembly code
 
             include     config.asm
+            include     defaults-config.asm
             include     constants.asm
             include     datastruct.asm
             include     macros.asm

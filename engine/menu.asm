@@ -134,7 +134,6 @@ Menu_RunMain
             ldx         #Menu_Internal
             bra         SoundMenuInitTextDone@
 !           ldx         #Menu_Orc90
-            ldx         #Menu_Internal
 SoundMenuInitTextDone@
             ldb         #5+8*4
             lda         #152
@@ -286,7 +285,7 @@ Menu_Keypress_Space
             * mark the graphics aperature as free
             jsr         MemMgr_FreeGfxAperature
             * load and execute Level 1
-            lda         #1                      * Level #1
+            lda         #FirstLevel             * Load the first level defined by defaults-config
 	    clr		UserGlobals_Init
             jmp         Ldr_Load_Level          * jump to loader (it does not return, but jumps to mainloop)
 

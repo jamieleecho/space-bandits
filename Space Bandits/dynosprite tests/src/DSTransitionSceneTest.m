@@ -51,7 +51,7 @@
     XCTAssertTrue(CGSizeEqualToSize(_target.size, CGSizeMake(320, 200)));
     XCTAssertTrue(CGPointEqualToPoint(_target.anchorPoint, CGPointMake(0, 1)));
     XCTAssertEqual(_target.scaleMode, SKSceneScaleModeAspectFit);
-    XCTAssertEqualObjects(_target.backgroundImageName, @"");
+    XCTAssertNil(_target.backgroundImageName);
     XCTAssertEqual(_target.yScale, 1);
     XCTAssertEqualObjects(((SKSpriteNode *)(_target.children[0])).color, _target.backgroundColor);
     

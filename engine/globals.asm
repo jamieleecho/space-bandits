@@ -103,7 +103,7 @@ Gfx_SpriteErasePtrPtr   zmd     1       * Pointer to Gfx_SpriteErasePtrs for fra
 Gfx_NumSpriteGroups     zmb     1       * number of active sprite/object groups loaded
 Gfx_SpriteGroupsPtr     zmd     1       * pointer to Sprite Group Table
 
-Gfx_MonitorIsRGB        zmb     1       * selects which palette to write to the hardware
+Gfx_MonitorIsRGB        fcb     MonitorIsRGB  * selects which palette to write to the hardware
 
 * -----------------------------------------------------------------------------
 * -- Object
@@ -119,7 +119,7 @@ Obj_StateDataPtr        zmd     1
 * -- Input
 * -----------------------------------------------------------------------------
 
-Input_UseKeyboard       zmb     1
+Input_UseKeyboard       fcb     UseKeyboard
 
 Input_JoystickX         zmb     1       * these values are between 0 and 63
 Input_JoystickY         zmb     1
@@ -142,7 +142,7 @@ Input_PressedKeyCodes   zmb     8
 
 AudioSamplingRate       EQU     2000
 
-Sound_OutputMode        zmb     1       * -1=no sound, 0=internal 6-bit DAC, 1=Orchestra-90
+Sound_OutputMode        fcb     SoundOutputMode * -1=no sound, 0=internal 6-bit DAC, 1=Orchestra-90
 
 Sound_NumWavePages      zmb     1
 Sound_WavePageEndPtrs   zmd     8

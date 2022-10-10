@@ -50,8 +50,7 @@ MAPSRC := $(patsubst $(LEVELDIR)/%.json, $(GENGFXDIR)/tilemap%.txt, $(LEVELDSC))
 SPRITEASMSRC := $(patsubst $(SPRITEDIR)/%.txt, $(GENASMDIR)/sprite%.asm, $(filter %.txt, $(SPRITEDSC)))
 
 # paths to dependencies
-COCODISKGEN = $(TOOLDIR)/file2dsk
-ASSEMBLER = $(TOOLDIR)/lwasm
+ASSEMBLER = lwasm
 EMULATOR = $(TOOLDIR)/mame64
 
 # make sure build products directories exist
@@ -109,6 +108,7 @@ SYMBOLASM = $(GENASMDIR)/dynosprite-symbols.asm
 AUDIORATE = $(shell grep -E "AudioSamplingRate\s+EQU\s+[0-9]+" $(SRCDIR)/globals.asm | grep -oE "[0-9]+")
 
 # options
+ASMFLAGS = -I $(GENASMDIR)
 ifneq ($(RELEASE), 1)
   ASMFLAGS += --define=DEBUG
   CFLAGS += -DDEBUG
@@ -175,10 +175,9 @@ test:
 	$(EMULATOR) $(MAMESYSTEM) -flop1 $(TARGET) $(MAMEFLAGS) -window -waitvsync -resolution 640x480 -video opengl -rompath ~/Applications/mame/roms
 
 # build rules
-
-# 0. Build dependencies
-$(COCODISKGEN): $(TOOLDIR)/src/file2dsk/main.c
-	gcc -o $@ $<
+# 0. Parse options file
+$(GENASMDIR)/defaults-config.asm: $(GAMEDIR)/defaults-config.json
+	$(SCRIPTDIR)/build-config.py $< $@
 
 # 1a. Generate text Palette and Tileset files from images
 $(GENGFXDIR)/tileset%.txt $(GENGFXDIR)/tilemask%.txt $(GENGFXDIR)/palette%.txt: $(TILEDIR)/%.json $(SCRIPTDIR)/gfx-process.py
@@ -201,7 +200,7 @@ $(GENOBJDIR)/sprite%.raw: $(GENASMDIR)/sprite%.asm
 	$(ASSEMBLER) $(ASMFLAGS) -r -o $@ --list=$(GENLISTDIR)/sprite$*.lst --symbols $<
 
 # 4. Run first-pass assembly of DynoSprite engine
-$(PASS1LIST): $(LOADERSRC)
+$(PASS1LIST): $(LOADERSRC) $(GENASMDIR)/defaults-config.asm
 	$(ASSEMBLER) $(ASMFLAGS) --define=PASS=1 -b -o /dev/null --list=$(PASS1LIST) --symbols $(SRCDIR)/main.asm
 
 # 5. Extract symbol addresses from DynoSprite engine
@@ -265,10 +264,12 @@ $(LOADERBIN): $(LOADERSRC) $(ASM_TILES) $(ASM_OBJECTS) $(ASM_LEVELS) $(ASM_SOUND
 $(READMEBAS): $(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt
 	$(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt $(READMEBAS)
 
-#16. Create Coco disk image (file2dsk))
-$(TARGET): $(COCODISKGEN) $(DISKFILES)
+#16. Create Coco disk image
+$(TARGET): $(DISKFILES)
 	rm -f $(TARGET)
-	$(COCODISKGEN) $(TARGET) $(DISKFILES)
+	imgtool create coco_jvc_rsdos $(TARGET)
+	for f in $(filter $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f` --ftype==basic --ascii=ascii; done
+	for f in $(filter-out $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f`; done
 
 .PHONY: all clean test
 

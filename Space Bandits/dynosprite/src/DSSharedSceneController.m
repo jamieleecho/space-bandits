@@ -27,7 +27,7 @@
     return self;
 }
 
-- (NSArray *)sceneInfos {
+- (DSMutableArrayWrapper<DSTransitionSceneInfo *> *)sceneInfos {
     return self.sceneController.sceneInfos;
 }
 

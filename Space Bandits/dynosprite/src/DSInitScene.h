@@ -18,10 +18,11 @@ typedef enum DSInitSceneDisplay {
 
 typedef enum DSInitSceneControl {
     DSInitSceneControlKeyboard,
-DSInitSceneControlJoystick
+    DSInitSceneControlJoystick
 } DSInitSceneControl;
 
 typedef enum DSInitSceneSound {
+    DSInitSceneSoundNone = -1,
     DSInitSceneSoundLow,
     DSInitSceneSoundHigh
 } DSInitSceneSound;
@@ -40,6 +41,8 @@ typedef enum DSInitSceneSound {
 + (NSString *)textFromResolution:(DSInitSceneDisplay)resolution;
 + (NSString *)textFromControl:(DSInitSceneControl)control;
 + (NSString *)textFromSound:(DSInitSceneSound)sound;
+
+@property (nonatomic) NSInteger firstLevel;
 
 - (void)didMoveToView:(SKView *)view;
 - (void)willMoveFromView:(SKView *)view;
