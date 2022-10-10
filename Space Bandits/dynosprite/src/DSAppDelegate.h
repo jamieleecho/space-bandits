@@ -8,17 +8,22 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "DSConfigFileParser.h"
-#import "DSLevelFileParser.h"
 #import "DSAssetLoader.h"
+#import "DSConfigFileParser.h"
+#import "DSDefaultsConfigLoader.h"
+#import "DSCoCoJoystickController.h"
+#import "DSLevelFileParser.h"
 #import "DSSceneController.h"
 #import "DSSoundManager.h"
 
 
 @interface DSAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (nonatomic, nonnull) IBOutlet DSConfigFileParser *configFileParser;
 @property (nonatomic, nonnull) IBOutlet DSAssetLoader *assetLoader;
+@property (nonatomic, nonnull) IBOutlet DSConfigFileParser *configFileParser;
+@property (nonatomic, nonnull) IBOutlet DSDefaultsConfigLoader *defaultsConfigLoader;
+@property (nonatomic, nonnull) IBOutlet DSCoCoJoystickController *joystickController;
+@property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
 @property (nonatomic, nonnull) IBOutlet DSSceneController *sceneController;
 @property (nonatomic, nonnull) IBOutlet DSSoundManager *soundManager;
 

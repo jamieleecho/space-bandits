@@ -42,6 +42,8 @@ typedef enum DSInitSceneSound {
 + (NSString *)textFromControl:(DSInitSceneControl)control;
 + (NSString *)textFromSound:(DSInitSceneSound)sound;
 
+@property (nonatomic) NSInteger firstLevel;
+
 - (void)didMoveToView:(SKView *)view;
 - (void)willMoveFromView:(SKView *)view;
 

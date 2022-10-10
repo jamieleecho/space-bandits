@@ -12,6 +12,7 @@
 #import "DSCoCoJoystickController.h"
 #import "DSInitScene.h"
 #import "DSResourceController.h"
+#import "DSSceneController.h"
 
 
 enum DSInitSceneLabelIndices : short {
@@ -30,6 +31,7 @@ enum DSInitSceneLabelIndices : short {
     id _joystickController;
     id _resourceController;
     id _soundManager;
+    id _sceneController;
 }
 @end
 
@@ -42,13 +44,27 @@ enum DSInitSceneLabelIndices : short {
     _soundManager = OCMClassMock(DSSoundManager.class);
     _target.resourceController = _resourceController;
     _target.joystickController = _joystickController;
+    _sceneController = OCMClassMock(DSSceneController.class);
     _view = OCMClassMock(SKView.class);
     
     OCMStub([_resourceController fontForDisplay]).andReturn(@"Courier");
     NSString *resourceImagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
     OCMStub([_resourceController imageWithName:@"Images/00-mainmenu.png"]).andReturn(resourceImagePath);
-    [_target didMoveToView:_view];
+    OCMStub([_soundManager enabled]).andReturn(YES);
+    OCMStub([_resourceController hiresMode]).andReturn(YES);
+    OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
+
     _target.soundManager = _soundManager;
+    [_target didMoveToView:_view];
+}
+
+- (void)testInit {
+    XCTAssertEqual(_target.firstLevel, 1);
+}
+
+- (void)testFirstLevel {
+    _target.firstLevel = 10;
+    XCTAssertEqual(_target.firstLevel, 10);
 }
 
 - (void)testTextFromResolution {
@@ -69,28 +85,28 @@ enum DSInitSceneLabelIndices : short {
 - (void)testDidMoveToView {
     XCTAssertEqual(_target.labels.count, 7);
     XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesDisplay].text, @"[D]isplay:");
-    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesDisplayValue].text, @"Low");
+    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesDisplayValue].text, @"High");
     XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesControl].text, @"[C]ontrol:");
-    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesControlValue].text, @"Keyboard");
+    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesControlValue].text, @"Joystick");
     XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesSound].text, @"[S]ound:");
     XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesSoundValue].text, @"LoFi");
     XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesStart].text, @"[Space] or joystick button to start");
     
-    XCTAssertEqual(_target.display, DSInitSceneDisplayLow);
-    XCTAssertEqual(_target.control, DSInitSceneControlKeyboard);
+    XCTAssertEqual(_target.display, DSInitSceneDisplayHigh);
+    XCTAssertEqual(_target.control, DSInitSceneControlJoystick);
     XCTAssertEqual(_target.sound, DSInitSceneSoundLow);
     XCTAssertFalse(_target.isDone);
     
-    OCMVerify([_joystickController setUseHardwareJoystick:NO]);
-    OCMVerify([_resourceController setHiresMode:NO]);
+    OCMVerify([_joystickController setUseHardwareJoystick:YES]);
+    OCMVerify([_resourceController setHiresMode:YES]);
 }
 
 - (void)testDidMoveToViewAgain {
     __block int hiresModeCount = 0, useHardwareJoystickCount = 0, hifiModeCount = 0;
-    OCMStub([_resourceController setHiresMode:NO]).andDo(^(NSInvocation *invocation) {
+    OCMStub([_resourceController setHiresMode:YES]).andDo(^(NSInvocation *invocation) {
         hiresModeCount++;
     });
-    OCMStub([_joystickController setUseHardwareJoystick:NO]).andDo(^(NSInvocation *invocation) {
+    OCMStub([_joystickController setUseHardwareJoystick:YES]).andDo(^(NSInvocation *invocation) {
         useHardwareJoystickCount++;
     });
     OCMStub([_resourceController setHifiMode:NO]).andDo(^(NSInvocation *invocation) {
@@ -108,10 +124,10 @@ enum DSInitSceneLabelIndices : short {
     [_target toggleControl];
     [_target toggleSound];
     __block int hiresModeCount = 0, useHardwareJoystickCount = 0, hifiModeCount = 0;
-    OCMStub([_resourceController setHiresMode:YES]).andDo(^(NSInvocation *invocation) {
+    OCMStub([_resourceController setHiresMode:NO]).andDo(^(NSInvocation *invocation) {
         hiresModeCount++;
     });
-    OCMStub([_joystickController setUseHardwareJoystick:YES]).andDo(^(NSInvocation *invocation) {
+    OCMStub([_joystickController setUseHardwareJoystick:NO]).andDo(^(NSInvocation *invocation) {
         useHardwareJoystickCount++;
     });
     OCMStub([_resourceController setHifiMode:YES]).andDo(^(NSInvocation *invocation) {
@@ -126,8 +142,8 @@ enum DSInitSceneLabelIndices : short {
 - (void)testKeyUpUnknownKey {
     NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"x" isARepeat:NO keyCode:123];
     [_target keyUp:keyEvent];
-    XCTAssertEqual(_target.display, DSInitSceneDisplayLow);
-    XCTAssertEqual(_target.control, DSInitSceneControlKeyboard);
+    XCTAssertEqual(_target.display, DSInitSceneDisplayHigh);
+    XCTAssertEqual(_target.control, DSInitSceneControlJoystick);
     XCTAssertEqual(_target.sound, DSInitSceneSoundLow);
 }
 
@@ -146,28 +162,29 @@ enum DSInitSceneLabelIndices : short {
     NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"d" isARepeat:NO keyCode:123];
     [_target keyUp:keyEvent];
     
-    XCTAssertEqual(_target.display, DSInitSceneDisplayHigh);
-    XCTAssertEqual(_target.control, DSInitSceneControlKeyboard);
+    XCTAssertEqual(_target.display, DSInitSceneDisplayLow);
+    XCTAssertEqual(_target.control, DSInitSceneControlJoystick);
     XCTAssertEqual(_target.sound, DSInitSceneSoundLow);
 }
 
 - (void)testKeyUpToggleKeyboard {
     NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"c" isARepeat:NO keyCode:123];
     [_target keyUp:keyEvent];
-    XCTAssertEqual(_target.display, DSInitSceneDisplayLow);
-    XCTAssertEqual(_target.control, DSInitSceneControlJoystick);
+    XCTAssertEqual(_target.display, DSInitSceneDisplayHigh);
+    XCTAssertEqual(_target.control, DSInitSceneControlKeyboard);
     XCTAssertEqual(_target.sound, DSInitSceneSoundLow);
 }
 
 - (void)testKeyUpToggleSound {
     NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"s" isARepeat:NO keyCode:123];
     [_target keyUp:keyEvent];
-    XCTAssertEqual(_target.display, DSInitSceneDisplayLow);
-    XCTAssertEqual(_target.control, DSInitSceneControlKeyboard);
+    XCTAssertEqual(_target.display, DSInitSceneDisplayHigh);
+    XCTAssertEqual(_target.control, DSInitSceneControlJoystick);
     XCTAssertEqual(_target.sound, DSInitSceneSoundHigh);
 }
 
 - (void)testTransitionToNextScene {
+    _target.sceneController = _sceneController;
     OCMStub([_resourceController hifiMode]).andReturn(YES);
     DynospriteGlobalsPtr->UserGlobals_Init = YES;
     [_target toggleSound];
@@ -176,6 +193,21 @@ enum DSInitSceneLabelIndices : short {
     XCTAssertTrue(_target.isDone);
     XCTAssertFalse(DynospriteGlobalsPtr->UserGlobals_Init);
     OCMVerify([_soundManager setMaxNumSounds:10]);
+    OCMVerify([_sceneController transitionSceneForLevel:1]);
+}
+
+- (void)testTransitionToDifferentScene {
+    _target.sceneController = _sceneController;
+    _target.firstLevel = 5;
+    OCMStub([_resourceController hifiMode]).andReturn(YES);
+    DynospriteGlobalsPtr->UserGlobals_Init = YES;
+    [_target toggleSound];
+    [_target transitionToNextScreen];
+    OCMVerify([_soundManager loadCache]);
+    XCTAssertTrue(_target.isDone);
+    XCTAssertFalse(DynospriteGlobalsPtr->UserGlobals_Init);
+    OCMVerify([_soundManager setMaxNumSounds:10]);
+    OCMVerify([_sceneController transitionSceneForLevel:5]);
 }
 
 - (void)testPollJoystickButtonNotPressed {
@@ -222,24 +254,24 @@ enum DSInitSceneLabelIndices : short {
 
 - (void)testToggleDisplay {
     [_target toggleDisplay];
-    XCTAssertEqual(_target.display, DSInitSceneDisplayHigh);
+    XCTAssertEqual(_target.display, DSInitSceneDisplayLow);
     OCMVerify([_resourceController setHiresMode:YES]);
-    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesDisplayValue].text, @"High");
+    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesDisplayValue].text, @"Low");
     [_target toggleDisplay];
     OCMVerify([_resourceController setHiresMode:NO]);
-    XCTAssertFalse([_resourceController hiresMode]);
-    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesDisplayValue].text, @"Low");
+    XCTAssertTrue([_resourceController hiresMode]);
+    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesDisplayValue].text, @"High");
 }
 
 - (void)testToggleControl {
     [_target toggleControl];
-    XCTAssertEqual(_target.control, DSInitSceneControlJoystick);
-    OCMVerify([_joystickController setUseHardwareJoystick:YES]);
-    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesControlValue].text, @"Joystick");
-    [_target toggleControl];
     XCTAssertEqual(_target.control, DSInitSceneControlKeyboard);
     OCMVerify([_joystickController setUseHardwareJoystick:NO]);
     XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesControlValue].text, @"Keyboard");
+    [_target toggleControl];
+    XCTAssertEqual(_target.control, DSInitSceneControlJoystick);
+    OCMVerify([_joystickController setUseHardwareJoystick:YES]);
+    XCTAssertEqualObjects(_target.labels[DSInitSceneLabelIndicesControlValue].text, @"Joystick");
 }
 
 - (void)testToggleSound {

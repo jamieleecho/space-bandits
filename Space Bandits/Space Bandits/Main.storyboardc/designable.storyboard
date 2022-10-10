@@ -681,6 +681,9 @@
                     <connections>
                         <outlet property="assetLoader" destination="0lT-tu-CK3" id="I7c-Wm-Ti1"/>
                         <outlet property="configFileParser" destination="wHX-XA-T7S" id="oag-Ug-zuw"/>
+                        <outlet property="defaultsConfigLoader" destination="m0H-jw-mi7" id="QRz-yY-nDy"/>
+                        <outlet property="joystickController" destination="Nki-Dk-Bhg" id="W76-2y-D93"/>
+                        <outlet property="resourceController" destination="web-E3-IMn" id="cmS-7a-dxU"/>
                         <outlet property="sceneController" destination="rDZ-CV-DhK" id="1e8-Ye-aRZ"/>
                         <outlet property="soundManager" destination="2cP-OL-euM" id="9C1-v0-7ag"/>
                     </connections>

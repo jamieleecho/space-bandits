@@ -16,6 +16,13 @@
     self.assetLoader.registry = DSLevelRegistry.sharedInstance;
     DSSoundManager.sharedInstance = self.soundManager;
 
+    [self.defaultsConfigLoader loadDefaultsConfig];
+    _soundManager.enabled = self.defaultsConfigLoader.defaultsConfig.enableSound;
+    self.resourceController.hifiMode = self.defaultsConfigLoader.defaultsConfig.hifiMode;
+    self.resourceController.hiresMode = self.defaultsConfigLoader.defaultsConfig.hiresMode;
+    self.sceneController.firstLevel = self.defaultsConfigLoader.defaultsConfig.firstLevel;
+    self.joystickController.useHardwareJoystick = !self.defaultsConfigLoader.defaultsConfig.useKeyboard;
+    
     [self.assetLoader loadLevels];
     [self.assetLoader loadSceneInfos];
     [self.assetLoader loadTransitionSceneImages];

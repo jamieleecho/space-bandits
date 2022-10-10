@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) IBOutlet DSSoundManager *soundManager;
 @property (nonatomic, nonnull) DSObjectClassDataRegistry *classRegistry;
 
+@property (nonatomic) NSInteger firstLevel;
+
 - (id)init;
 - (DSTransitionScene *)transitionSceneForLevel:(int)level;
 - (DSGameScene *)gameSceneForLevel:(int)level;
