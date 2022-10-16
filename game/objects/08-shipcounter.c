@@ -45,4 +45,4 @@ byte ShipcounterUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(ShipcounterClassInit, ShipcounterInit, 0, ShipcounterReactivate, ShipcounterUpdate, NULL, sizeof(ShipCounterObjectState));
+RegisterObject(ShipcounterClassInit, ShipcounterInit, 1, ShipcounterReactivate, ShipcounterUpdate, NULL, sizeof(ShipCounterObjectState));

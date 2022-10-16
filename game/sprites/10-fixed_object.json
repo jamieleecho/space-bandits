@@ -1,0 +1,16 @@
+{
+  "Main": {
+    "Group": 10,
+    "Image": "01-sprites.png",
+    "Transparent": [254, 0, 254],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "Random",
+    "Location": [194, 228],
+    "SinglePixelPosition": true,
+    "ChunkHint": 12
+  }]
+}
+

@@ -67,7 +67,7 @@ void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures,
 }
 
     
-RegisterObject(NumeralsClassInit, NumeralsInit, 3, NumeralsReactivate, NumeralsUpdate, NumeralsDraw, sizeof(NumeralsObjectState));
+RegisterObject(NumeralsClassInit, NumeralsInit, 0, NumeralsReactivate, NumeralsUpdate, NumeralsDraw, sizeof(NumeralsObjectState));
 
 #ifdef __cplusplus
 }

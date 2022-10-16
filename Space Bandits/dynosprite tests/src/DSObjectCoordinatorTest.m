@@ -14,6 +14,7 @@
     DSLevel *_level;
     DSObjectClassDataRegistry *_classRegistry;
     DSObjectCoordinator *_target;
+    DSObjectClassData *_classData2;
     DSObjectClassData *_classData3;
 }
 @end
@@ -145,6 +146,7 @@ static void drawObj3(DynospriteCOB *cob, void *scene, void *camera, void *textur
     classData2.stateSize = 1;
     classData2.reactivateMethod = reactivateObj2;
     classData2.updateMethod = updateObj2;
+    _classData2 = classData2;
 
     DSObjectClassData *classData3 = [[DSObjectClassData alloc] init];
     classData3.classInitMethod = classInit3;
@@ -179,12 +181,14 @@ static void drawObj3(DynospriteCOB *cob, void *scene, void *camera, void *textur
     XCTAssert(_target.odts[2].init == initializeObj2);
     XCTAssert(_target.odts[2].reactivate == reactivateObj2);
     XCTAssert(_target.odts[2].update == updateObj2);
+    XCTAssert(_target.odts[2].classData == (__bridge void *)_classData2);
     XCTAssertEqual(_target.odts[3].initSize, 0);
     XCTAssertEqual(_target.odts[3].drawType, 0);
     XCTAssertTrue(_target.odts[3].draw == drawObj3);
     XCTAssert(_target.odts[3].init == initializeObj3);
     XCTAssert(_target.odts[3].reactivate == reactivateObj3);
     XCTAssert(_target.odts[3].update == updateObj3);
+    XCTAssert(_target.odts[3].classData == (__bridge void *)_classData3);
     XCTAssertEqual(_target.odts[2].initSize, 2);
     XCTAssertEqual(_target.odts[2].drawType, 1);
     XCTAssertTrue(_target.odts[2].draw == NULL);

@@ -14,6 +14,7 @@
 struct DynospriteCOB;
 struct DynospriteODT;
 
+
 /** Object Data Table */
 typedef struct DynospriteODT {
     byte dataSize;
@@ -25,6 +26,7 @@ typedef struct DynospriteODT {
     byte(*update)(struct DynospriteCOB *, struct DynospriteODT *);
     void (*draw)(struct DynospriteCOB *, void *, void *, void *, void *);
     byte res2[4];
+    void *classData; /* DSObjectClassData */
 } DynospriteODT;
 
 /** Curent Object Buffer */
