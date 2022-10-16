@@ -184,6 +184,8 @@
 		7D3110E922FF018D00833374 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; };
 		7D3110EE22FF01D700833374 /* DSCoCoJoystick.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */; };
 		7D5BE99528FC447E00544DFF /* 10-fixed_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BE99328FC447E00544DFF /* 10-fixed_object.c */; };
+		7D5BE99828FC490600544DFF /* 11-velocity_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BE99628FC490600544DFF /* 11-velocity_object.c */; };
+		7D5BE99A28FC4F1B00544DFF /* universal_object.h in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BE99928FC4CBC00544DFF /* universal_object.h */; };
 		7D7EED6D23BCE63500804C26 /* hires in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED6C23BCE63500804C26 /* hires */; };
 		7D7EED7023BD0EB700804C26 /* DSResourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EED6F23BD0EB700804C26 /* DSResourceController.m */; };
 		7D7EED7923BD626500804C26 /* Main.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED7823BD626500804C26 /* Main.storyboardc */; };
@@ -406,6 +408,10 @@
 		7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DSCoCoJoystick.mm; sourceTree = "<group>"; };
 		7D5BE99328FC447E00544DFF /* 10-fixed_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "10-fixed_object.c"; path = "../../game/objects/10-fixed_object.c"; sourceTree = "<group>"; };
 		7D5BE99428FC447E00544DFF /* 10-fixed_object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "10-fixed_object.h"; path = "../../game/objects/10-fixed_object.h"; sourceTree = "<group>"; };
+		7D5BE99628FC490600544DFF /* 11-velocity_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "11-velocity_object.c"; path = "../../game/objects/11-velocity_object.c"; sourceTree = "<group>"; };
+		7D5BE99728FC490600544DFF /* 11-velocity_object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "11-velocity_object.h"; path = "../../game/objects/11-velocity_object.h"; sourceTree = "<group>"; };
+		7D5BE99928FC4CBC00544DFF /* universal_object.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = universal_object.h; path = ../../game/objects/universal_object.h; sourceTree = "<group>"; };
+		7D5BE99B28FC4FAC00544DFF /* universal_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = universal_object.c; path = ../../game/objects/universal_object.c; sourceTree = "<group>"; };
 		7D7EED6C23BCE63500804C26 /* hires */ = {isa = PBXFileReference; lastKnownFileType = folder; name = hires; path = ../../game/hires; sourceTree = "<group>"; };
 		7D7EED6E23BD0EB700804C26 /* DSResourceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSResourceController.h; sourceTree = "<group>"; };
 		7D7EED6F23BD0EB700804C26 /* DSResourceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSResourceController.m; sourceTree = "<group>"; };
@@ -748,6 +754,10 @@
 				525ACDCF25FEFEF7001B5DC2 /* 09-boss1.c */,
 				7D5BE99428FC447E00544DFF /* 10-fixed_object.h */,
 				7D5BE99328FC447E00544DFF /* 10-fixed_object.c */,
+				7D5BE99728FC490600544DFF /* 11-velocity_object.h */,
+				7D5BE99628FC490600544DFF /* 11-velocity_object.c */,
+				7D5BE99928FC4CBC00544DFF /* universal_object.h */,
+				7D5BE99B28FC4FAC00544DFF /* universal_object.c */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -1056,8 +1066,10 @@
 				52169439245EE27800F4B880 /* DSNSDataMD5Extensions.m in Sources */,
 				524109E72455EF910005DF54 /* DSTransitionImageLoader.m in Sources */,
 				7D8022992431656C00496138 /* DSObject.m in Sources */,
+				7D5BE99828FC490600544DFF /* 11-velocity_object.c in Sources */,
 				7DC4E7F422FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */,
 				52E7605E21D802A20001F3A0 /* DSLevelRegistry.m in Sources */,
+				7D5BE99A28FC4F1B00544DFF /* universal_object.h in Sources */,
 				52A90E3421E2E8A700CC2643 /* DSConfigFileParser.m in Sources */,
 				52B1A162244D20CD008E7066 /* DSTileInfo.m in Sources */,
 				52E7604621D7EF440001F3A0 /* DSLevel.m in Sources */,

@@ -4,6 +4,9 @@
 #include <coco.h>
 
 
+/** fake out c++ [[maybed_unused]] */
+#define MAYBE_UNUSED
+
 /** Registers the object with the given functions */
 #define RegisterObject(classInit, init, initSize, reactivate, update, draw, stateSize)
 

@@ -10,7 +10,10 @@
 #define dynosprite_h
 
 #ifdef __cplusplus
+#define MAYBE_UNUSED [[maybe_unused]]
 extern "C" {
+#else
+#define MAYBE_UNUSED
 #endif
 
 #include <stdlib.h>

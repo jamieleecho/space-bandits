@@ -1,7 +1,7 @@
 {
     "FirstLevel": 2,
     "MonitorIsRGB": true,
-    "UseKeyboard": false,
+    "UseKeyboard": true,
     "SoundOutputMode": 0,
     "HifiMode": false,
     "HiresMode": false,

@@ -9,6 +9,7 @@
 #include "dynosprite.h"
 #include "object_info.h"
 #include "10-fixed_object.h"
+#include "universal_object.c"
 
 
 static GameGlobals *globals;
@@ -26,8 +27,7 @@ void Fixed_objectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         globals = (GameGlobals *)DynospriteGlobalsPtr;
     }
     
-    Fixed_objectObjectState *state = (Fixed_objectObjectState *)cob->statePtr;
-    state->spriteIdx = initData[0];
+    UniversalObjectFixedObjectInit(cob, odt, initData);
 }
 
 
@@ -41,4 +41,4 @@ byte Fixed_objectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(Fixed_objectClassInit, Fixed_objectInit, 1, Fixed_objectReactivate, Fixed_objectUpdate, NULL, sizeof(Fixed_objectObjectState));
+RegisterObject(Fixed_objectClassInit, Fixed_objectInit, 5, Fixed_objectReactivate, Fixed_objectUpdate, NULL, sizeof(Fixed_objectObjectState));

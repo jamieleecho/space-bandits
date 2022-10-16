@@ -1,5 +1,5 @@
 //
-//  10-fixed_object.h
+//  11-velocity_object.h
 //  Space Bandits
 //
 //  Created by Jamie Cho on 10/16/22.
@@ -13,27 +13,27 @@
 #include "universal_object.h"
 
 /** Defines at least the size of Fixedobject_State in bytes */
-#define DynospriteObject_DataSize 5
+#define DynospriteObject_DataSize 9
 
 /** Defines at least the number of initialization bytes */
-#define DynospriteObject_InitSize 5
+#define DynospriteObject_InitSize 9
 
 #else
 
-#ifndef _10_fixed_object_h
-#define _10_fixed_object_h
+#ifndef _11_velocity_object_h
+#define _11_velocity_object_h
 
 #include "dynosprite.h"
 #include "universal_object.h"
 
 
-/** State of Fixed Object */
-typedef struct Fixed_objectObjectState {
-    UniversalObject obj;
-} Fixed_objectObjectState;
+/** State of Velocity Object */
+typedef struct Velocity_objectObjectState {
+    UniversalObject *obj;
+} Velocity_objectObjectState;
 
 
-#endif /* _10_fixed_object_h */
+#endif /* _11_velocity_object_h */
 
 #endif /* DynospriteObject_DataDefinition */
 

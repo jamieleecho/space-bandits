@@ -2,7 +2,7 @@
   "Level": {
     "Name": "Love and Space",
     "Description": "... actually just space",
-    "ObjectGroups": [1, 6, 8, 10],
+    "ObjectGroups": [1, 6, 8, 10, 11],
     "MaxObjectTableSize": 65,
     "Tileset": 2,
     "TilemapImage": "../tiles/02-space.png",
@@ -73,13 +73,23 @@
     },
     
     {
-      "_comment": "***** Random",
+      "_comment": "***** Fixed Object",
       "GroupID": 10,
       "ObjectID": 0,
       "Active": 3,
       "globalX": 160,
       "globalY": 100,
-      "InitData": [0]
+      "InitData": [0, 0, 18, 0, 13]
+    },
+    
+    {
+      "_comment": "***** Velocity Object",
+      "GroupID": 11,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 20,
+      "globalY": 100,
+      "InitData": [0, 0, 9, 0, 9, 0, 1, 0, 0]
     }
   ]
 }

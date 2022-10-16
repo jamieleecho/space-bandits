@@ -112,9 +112,7 @@ typedef enum GameWavePersei {
  * @param groupIdx groupIdx to look for
  * @return new obj or NULL
  */
-#ifdef __cplusplus
-[[maybe_unused]]
-#endif
+MAYBE_UNUSED
 static DynospriteCOB *findObjectByGroup(DynospriteCOB *obj, byte groupIdx) {
     DynospriteCOB *endObj = DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr + DynospriteDirectPageGlobalsPtr->Obj_NumCurrent;
     for (; obj<endObj; ++obj) {
@@ -129,9 +127,7 @@ static DynospriteCOB *findObjectByGroup(DynospriteCOB *obj, byte groupIdx) {
 /**
  * Bumps the score by amount where amount must be a binary coded decimal number < 90.
  */
-#ifdef __cplusplus
-[[maybe_unused]]
-#endif
+MAYBE_UNUSED
 static void bumpScore(byte amount) {
 #if __APPLE__
     byte *score0 = (byte *)&((GameGlobals *)DynospriteGlobalsPtr)->score;
