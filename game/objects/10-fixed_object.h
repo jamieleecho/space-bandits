@@ -10,7 +10,7 @@
 /* This preprocessor conditional must be included for each object defined in C */
 #ifdef DynospriteObject_DataDefinition
 
-/** Defines at least the size of ShipObjectState in bytes */
+/** Defines at least the size of Fixedobject_State in bytes */
 #define DynospriteObject_DataSize 1
 
 /** Defines at least the number of initialization bytes */
@@ -25,9 +25,9 @@
 
 
 /** State of Fixed Object */
-typedef struct Fixed_objectState {
+typedef struct Fixed_objectObjectState {
     byte spriteIdx;
-} Fixed_objectState;
+} Fixed_objectObjectState;
 
 
 #endif /* _10_fixed_object_h */

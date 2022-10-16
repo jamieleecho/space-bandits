@@ -24,7 +24,7 @@
 /* This preprocessor conditional must be included for each object defined in C */
 #ifdef DynospriteObject_DataDefinition
 
-/** Defines at least the size of ShipObjectState in bytes */
+/** Defines at least the size of GameOverObjectState in bytes */
 #define DynospriteObject_DataSize 3
 
 /** Defines at least the number of initialization bytes */

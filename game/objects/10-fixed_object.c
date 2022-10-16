@@ -26,7 +26,7 @@ void Fixed_objectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
         globals = (GameGlobals *)DynospriteGlobalsPtr;
     }
     
-    Fixed_objectState *state = (Fixed_objectState *)cob->statePtr;
+    Fixed_objectObjectState *state = (Fixed_objectObjectState *)cob->statePtr;
     state->spriteIdx = initData[0];
 }
 
@@ -41,4 +41,4 @@ byte Fixed_objectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(Fixed_objectClassInit, Fixed_objectInit, 1, Fixed_objectReactivate, Fixed_objectUpdate, NULL, sizeof(Fixed_objectState));
+RegisterObject(Fixed_objectClassInit, Fixed_objectInit, 1, Fixed_objectReactivate, Fixed_objectUpdate, NULL, sizeof(Fixed_objectObjectState));
