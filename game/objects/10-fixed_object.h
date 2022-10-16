@@ -25,9 +25,9 @@
 
 
 /** State of Fixed Object */
-typedef struct FixedObjectState {
+typedef struct Fixed_objectState {
     byte spriteIdx;
-} FixedObjectState;
+} Fixed_objectState;
 
 
 #endif /* _10_fixed_object_h */

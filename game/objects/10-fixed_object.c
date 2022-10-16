@@ -15,30 +15,30 @@ static GameGlobals *globals;
 
 
 #ifdef __APPLE__
-void FixedObjectClassInit() {
+void Fixed_objectClassInit() {
     globals = NULL;
 }
 #endif
 
 
-void FixedObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
+void Fixed_objectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!globals) {
         globals = (GameGlobals *)DynospriteGlobalsPtr;
     }
     
-    FixedObjectState *state = (FixedObjectState *)cob->statePtr;
+    Fixed_objectState *state = (Fixed_objectState *)cob->statePtr;
     state->spriteIdx = initData[0];
 }
 
 
-byte FixedObjectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte Fixed_objectReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
     return 0;
 }
 
 
-byte FixedObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+byte Fixed_objectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     return 0;
 }
 
 
-RegisterObject(FixedObjectClassInit, FixedObjectInit, 1, FixedObjectReactivate, FixedObjectUpdate, NULL, sizeof(FixedObjectState));
+RegisterObject(Fixed_objectClassInit, Fixed_objectInit, 1, Fixed_objectReactivate, Fixed_objectUpdate, NULL, sizeof(Fixed_objectState));

@@ -183,7 +183,7 @@
 		52F845272442911300B1D70F /* DSLevelFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F845252442911300B1D70F /* DSLevelFileParser.m */; };
 		7D3110E922FF018D00833374 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; };
 		7D3110EE22FF01D700833374 /* DSCoCoJoystick.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */; };
-		7D68A75E28FC1546001BDC5B /* 10-fixed_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D68A75D28FC1546001BDC5B /* 10-fixed_object.c */; };
+		7D5BE99528FC447E00544DFF /* 10-fixed_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BE99328FC447E00544DFF /* 10-fixed_object.c */; };
 		7D7EED6D23BCE63500804C26 /* hires in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED6C23BCE63500804C26 /* hires */; };
 		7D7EED7023BD0EB700804C26 /* DSResourceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7EED6F23BD0EB700804C26 /* DSResourceController.m */; };
 		7D7EED7923BD626500804C26 /* Main.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = 7D7EED7823BD626500804C26 /* Main.storyboardc */; };
@@ -404,8 +404,8 @@
 		7D3110E822FF018D00833374 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		7D3110EC22FF01D700833374 /* DSCoCoJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystick.h; sourceTree = "<group>"; };
 		7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DSCoCoJoystick.mm; sourceTree = "<group>"; };
-		7D68A75C28FC1546001BDC5B /* 10-fixed_object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "10-fixed_object.h"; sourceTree = "<group>"; };
-		7D68A75D28FC1546001BDC5B /* 10-fixed_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = "10-fixed_object.c"; sourceTree = "<group>"; };
+		7D5BE99328FC447E00544DFF /* 10-fixed_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "10-fixed_object.c"; path = "../../game/objects/10-fixed_object.c"; sourceTree = "<group>"; };
+		7D5BE99428FC447E00544DFF /* 10-fixed_object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "10-fixed_object.h"; path = "../../game/objects/10-fixed_object.h"; sourceTree = "<group>"; };
 		7D7EED6C23BCE63500804C26 /* hires */ = {isa = PBXFileReference; lastKnownFileType = folder; name = hires; path = ../../game/hires; sourceTree = "<group>"; };
 		7D7EED6E23BD0EB700804C26 /* DSResourceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSResourceController.h; sourceTree = "<group>"; };
 		7D7EED6F23BD0EB700804C26 /* DSResourceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSResourceController.m; sourceTree = "<group>"; };
@@ -746,8 +746,8 @@
 				52A0C03525DE607100D807EC /* 08-shipcounter.c */,
 				525ACDCE25FEFEF7001B5DC2 /* 09-boss1.h */,
 				525ACDCF25FEFEF7001B5DC2 /* 09-boss1.c */,
-				7D68A75C28FC1546001BDC5B /* 10-fixed_object.h */,
-				7D68A75D28FC1546001BDC5B /* 10-fixed_object.c */,
+				7D5BE99428FC447E00544DFF /* 10-fixed_object.h */,
+				7D5BE99328FC447E00544DFF /* 10-fixed_object.c */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -1020,6 +1020,7 @@
 				7D80229E24316BB700496138 /* DSDirectPageGlobals.m in Sources */,
 				52E447002464DCDC008B6488 /* DSScene.m in Sources */,
 				527E7ACD21F016B90013E66A /* DSInitScene.m in Sources */,
+				7D5BE99528FC447E00544DFF /* 10-fixed_object.c in Sources */,
 				7DA178BB2431552E00AE39D8 /* 05-missile.c in Sources */,
 				52B1A159244CFE45008E7066 /* DSPoint.c in Sources */,
 				524402DF21ED65CF00B02D38 /* DSTransitionScene.m in Sources */,
@@ -1042,7 +1043,6 @@
 				52F491BA245E0544009123CE /* DSTileMapMaker.m in Sources */,
 				526AF4C024B35316003AB5EA /* DSSpriteObjectClassFactory.m in Sources */,
 				524109ED245614650005DF54 /* DSLevelLoadingScene.m in Sources */,
-				7D68A75E28FC1546001BDC5B /* 10-fixed_object.c in Sources */,
 				528A8294264816E300659810 /* 02-space.c in Sources */,
 				52B1A147244CC40C008E7066 /* DSSpriteFileParser.m in Sources */,
 				7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
