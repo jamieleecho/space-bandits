@@ -268,7 +268,7 @@ $(READMEBAS): $(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt
 $(TARGET): $(DISKFILES)
 	rm -f $(TARGET)
 	imgtool create coco_jvc_rsdos $(TARGET)
-	for f in $(filter $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f` --ftype==basic --ascii=ascii; done
+	for f in $(filter $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f` --ftype=basic --ascii=ascii; done
 	for f in $(filter-out $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f`; done
 
 .PHONY: all clean test
