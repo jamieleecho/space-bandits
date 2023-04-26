@@ -23,12 +23,22 @@
 MAYBE_UNUSED
 static void UniversalObjectFixedObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     UniversalObject *state = (UniversalObject *)cob->statePtr;
-    word ii = 0;
-    state->spriteIdx = initData[ii];
-    ii = ii + 1;
-    state->clip[0] = (((short)initData[ii]) << 8) | initData[ii+1];
+    byte ii = 0;
+    state->magicNumber = UNIVERSAL_OBJECT_MAGIC_NUMBER;
+    state->spriteIdx = initData[ii++];
+
+    state->depth = initData[ii++];
+
+    state->boundingBox[0] = initData[ii++];
+    state->boundingBox[1] = initData[ii++];
+    state->boundingBox[2] = initData[ii++];
+    state->boundingBox[3] = initData[ii++];
+
+    state->position[0] = (((short)initData[ii]) << 8) | initData[ii + 1];
     ii = ii + 2;
-    state->clip[1] = (((short)initData[ii]) << 8) | initData[ii+1];
+    state->position[1] = (((short)initData[ii]) << 8) | initData[ii + 1];
+    cob->globalX = state->position[0];
+    cob->globalY = state->position[1];
 }
 
 
@@ -41,7 +51,7 @@ MAYBE_UNUSED
 static void UniversalObjectVelocityObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     UniversalObjectFixedObjectInit(cob, odt, initData);
     UniversalObject *state = (UniversalObject *)cob->statePtr;
-    word ii = 5;
+    byte ii = UNIVERSAL_FIXED_OBJECT_INIT_SIZE;
     state->velocity[0] = (((short)initData[ii]) << 8) | initData[ii+1];
     ii = ii + 2;
     state->velocity[1] = (((short)initData[ii]) << 8) | initData[ii+1];
@@ -51,8 +61,12 @@ static void UniversalObjectVelocityObjectInit(DynospriteCOB *cob, DynospriteODT 
 MAYBE_UNUSED
 static void UniversalObjectVelocityObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     UniversalObject *state = (UniversalObject *)cob->statePtr;
-    cob->globalX = cob->globalX + state->velocity[0];
-    cob->globalY = cob->globalY + state->velocity[1];
+    state->position[0] = state->position[0] + state->velocity[0];
+    state->position[1] = state->position[1] + state->velocity[1];
+    
+    byte offset = state->depth - 1;
+    cob->globalX = state->position[0] >> offset;
+    cob->globalY = state->position[1] >> offset;
 }
 
 #endif /* _universal_object_c */

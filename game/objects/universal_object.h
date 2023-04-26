@@ -10,24 +10,38 @@
 #ifndef _universal_object_h
 #define _universal_object_h
 
-#define UNIVERSAL_FIXED_OBJECT_INIT_SIZE 5
-#define UNIVERSAL_VELOCITY_OBJECT_SIZE 9
+#define UNIVERSAL_FIXED_OBJECT_INIT_SIZE 10
+#define UNIVERSAL_FIXED_OBJECT_SIZE 12
 
-#define UNIVERSAL_FIXED_OBJECT_SIZE 5
-#define UNIVERSAL_VELOCITY_OBJECT_SIZE 9
+#define UNIVERSAL_VELOCITY_OBJECT_INIT_SIZE 14
+#define UNIVERSAL_VELOCITY_OBJECT_SIZE 16
+
+#define UNIVERSAL_OBJECT_MAGIC_NUMBER 0xf00f
 
 #ifndef DynospriteObject_DataDefinition
 
 #include "dynosprite.h"
 
-typedef word Vector[2];
+typedef sword Vector[2];
+typedef sbyte BoundingBox[4];
 
 typedef struct UniversalObject {
-    // All universal objects have these attributes
+    /** Index of current sprite to show */
     byte spriteIdx;
-    Vector clip;
     
-    // Velocity objects have these attributes
+    /** Magic numbers */
+    word magicNumber;
+    
+    /** Depth of object - 1 is closest to user, 4 is deepest depth.  */
+    byte depth;
+    
+    /** bounding box to use for intersections */
+    BoundingBox boundingBox;
+
+    /** actual position of the object before depth transformation */
+    Vector position;
+
+    /** velocity of the current object */
     Vector velocity;
 } UniversalObject;
 

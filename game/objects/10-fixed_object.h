@@ -13,10 +13,10 @@
 #include "universal_object.h"
 
 /** Defines at least the size of Fixedobject_State in bytes */
-#define DynospriteObject_DataSize 5
+#define DynospriteObject_DataSize 16
 
 /** Defines at least the number of initialization bytes */
-#define DynospriteObject_InitSize 5
+#define DynospriteObject_InitSize 12
 
 #else
 

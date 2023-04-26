@@ -42,4 +42,4 @@ byte Velocity_objectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(Velocity_objectClassInit, Velocity_objectInit, 9, Velocity_objectReactivate, Velocity_objectUpdate, NULL, sizeof(Velocity_objectObjectState));
+RegisterObject(Velocity_objectClassInit, Velocity_objectInit, UNIVERSAL_VELOCITY_OBJECT_INIT_SIZE, Velocity_objectReactivate, Velocity_objectUpdate, NULL, sizeof(Velocity_objectObjectState));

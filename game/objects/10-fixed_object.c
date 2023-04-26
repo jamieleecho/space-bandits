@@ -41,4 +41,4 @@ byte Fixed_objectUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
 
-RegisterObject(Fixed_objectClassInit, Fixed_objectInit, 5, Fixed_objectReactivate, Fixed_objectUpdate, NULL, sizeof(Fixed_objectObjectState));
+RegisterObject(Fixed_objectClassInit, Fixed_objectInit, UNIVERSAL_FIXED_OBJECT_INIT_SIZE, Fixed_objectReactivate, Fixed_objectUpdate, NULL, sizeof(Fixed_objectObjectState));
