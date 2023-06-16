@@ -89,11 +89,7 @@
       "Active": 3,
       "globalX": 20,
       "globalY": 100,
-<<<<<<< HEAD
       "InitData": [0, 1, 0, 9, 0, 9, 0, 20, 0, 100, 0, 1, 0, 1]
-=======
-      "InitData": [0, 0, 9, 0, 9, 0, 1, 0, 0]
->>>>>>> 412bc1d (add more generic object handling)
     }
   ]
 }
