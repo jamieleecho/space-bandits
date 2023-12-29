@@ -28,13 +28,13 @@ typedef sbyte BoundingBox[4];
 typedef struct UniversalObject {
     /** Index of current sprite to show */
     byte spriteIdx;
-    
+
     /** Magic numbers */
     word magicNumber;
-    
+
     /** Depth of object - 1 is closest to user, 4 is deepest depth.  */
     byte depth;
-    
+
     /** bounding box to use for intersections */
     BoundingBox boundingBox;
 
@@ -45,10 +45,14 @@ typedef struct UniversalObject {
     Vector velocity;
 } UniversalObject;
 
+MAYBE_UNUSED
 static void UniversalObjectFixedObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData);
+MAYBE_UNUSED
 static void UniversalObjectFixedObjectClip(DynospriteCOB *cob, DynospriteODT *odt);
 
+MAYBE_UNUSED
 static void UniversalObjectVelocityObjectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData);
+MAYBE_UNUSED
 static void UniversalObjectVelocityObjectUpdate(DynospriteCOB *cob, DynospriteODT *odt);
 
 #endif /* DynospriteObject_DataDefinition */

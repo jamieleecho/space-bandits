@@ -29,7 +29,7 @@
 
 /** State of Velocity Object */
 typedef struct Velocity_objectObjectState {
-    UniversalObject *obj;
+    UniversalObject obj;
 } Velocity_objectObjectState;
 
 

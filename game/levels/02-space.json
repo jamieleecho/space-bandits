@@ -23,7 +23,6 @@
       "InitData": []
     },
 
-
     {
       "_comment": "***** Score",
       "GroupID": 1,
@@ -34,7 +33,6 @@
       "InitData": []
     },
 
-    
     {
       "_comment": "***** ShipCounter1",
       "GroupID": 8,
@@ -71,7 +69,7 @@
       "globalY": 4,
       "InitData": [4]
     },
-    
+
     {
       "_comment": "***** Fixed Object",
       "GroupID": 10,
@@ -81,7 +79,7 @@
       "globalY": 100,
       "InitData": [0, 1, 0, 18, 0, 13, 0, 160, 0, 100]
     },
-    
+
     {
       "_comment": "***** Velocity Object",
       "GroupID": 11,

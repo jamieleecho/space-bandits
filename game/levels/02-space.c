@@ -6,7 +6,7 @@ extern "C" {
 #include "dynosprite.h"
 #include "../objects/object_info.h"
 
-    
+
 void SpaceInit() {
     GameGlobals *globals = (GameGlobals *)DynospriteGlobalsPtr;
     globals->gameState = GameStateOver;
@@ -25,8 +25,8 @@ byte SpaceCalculateBkgrndNewXY() {
         
         
     }
-    
-    
+
+
     return 0;
 }
 

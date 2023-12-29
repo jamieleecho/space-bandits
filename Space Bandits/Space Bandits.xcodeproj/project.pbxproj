@@ -183,6 +183,7 @@
 		52F845272442911300B1D70F /* DSLevelFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F845252442911300B1D70F /* DSLevelFileParser.m */; };
 		7D3110E922FF018D00833374 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D3110E822FF018D00833374 /* SDL2.framework */; };
 		7D3110EE22FF01D700833374 /* DSCoCoJoystick.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */; };
+		7D45E1422B3F48A9005E6F4B /* 12-shipx.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D45E1402B3F48A8005E6F4B /* 12-shipx.c */; };
 		7D5BE99528FC447E00544DFF /* 10-fixed_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BE99328FC447E00544DFF /* 10-fixed_object.c */; };
 		7D5BE99828FC490600544DFF /* 11-velocity_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BE99628FC490600544DFF /* 11-velocity_object.c */; };
 		7D5BE99A28FC4F1B00544DFF /* universal_object.h in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BE99928FC4CBC00544DFF /* universal_object.h */; };
@@ -200,8 +201,6 @@
 		7DA178BB2431552E00AE39D8 /* 05-missile.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178B32431552D00AE39D8 /* 05-missile.c */; };
 		7DA178BC2431552E00AE39D8 /* 06-gameover.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178B72431552E00AE39D8 /* 06-gameover.c */; };
 		7DA178BF243155A900AE39D8 /* 01-persei.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DA178BE243155A900AE39D8 /* 01-persei.c */; };
-		7DC1E70A29F4658000E620ED /* 12-ship.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1E70929F4658000E620ED /* 12-ship.c */; };
-		7DC1E70B29F4658000E620ED /* 12-ship.c in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1E70929F4658000E620ED /* 12-ship.c */; };
 		7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */; };
 		7DC4E7F422FFC33A00AE8AB4 /* DSCoCoJoystickController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4E7F322FFC33A00AE8AB4 /* DSCoCoJoystickController.m */; };
 /* End PBXBuildFile section */
@@ -408,6 +407,8 @@
 		7D3110E822FF018D00833374 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		7D3110EC22FF01D700833374 /* DSCoCoJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystick.h; sourceTree = "<group>"; };
 		7D3110ED22FF01D700833374 /* DSCoCoJoystick.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DSCoCoJoystick.mm; sourceTree = "<group>"; };
+		7D45E1402B3F48A8005E6F4B /* 12-shipx.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "12-shipx.c"; path = "../../game/objects/12-shipx.c"; sourceTree = "<group>"; };
+		7D45E1412B3F48A9005E6F4B /* 12-shipx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "12-shipx.h"; path = "../../game/objects/12-shipx.h"; sourceTree = "<group>"; };
 		7D5BE99328FC447E00544DFF /* 10-fixed_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "10-fixed_object.c"; path = "../../game/objects/10-fixed_object.c"; sourceTree = "<group>"; };
 		7D5BE99428FC447E00544DFF /* 10-fixed_object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "10-fixed_object.h"; path = "../../game/objects/10-fixed_object.h"; sourceTree = "<group>"; };
 		7D5BE99628FC490600544DFF /* 11-velocity_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "11-velocity_object.c"; path = "../../game/objects/11-velocity_object.c"; sourceTree = "<group>"; };
@@ -439,8 +440,6 @@
 		7DA178B62431552D00AE39D8 /* 06-gameover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "06-gameover.h"; path = "../../game/objects/06-gameover.h"; sourceTree = "<group>"; };
 		7DA178B72431552E00AE39D8 /* 06-gameover.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "06-gameover.c"; path = "../../game/objects/06-gameover.c"; sourceTree = "<group>"; };
 		7DA178BE243155A900AE39D8 /* 01-persei.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "01-persei.c"; path = "../../game/levels/01-persei.c"; sourceTree = "<group>"; };
-		7DC1E70929F4658000E620ED /* 12-ship.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = "12-ship.c"; path = "../../game/objects/12-ship.c"; sourceTree = "<group>"; };
-		7DC1E70C29F4735200E620ED /* 12-ship.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "12-ship.h"; sourceTree = "<group>"; };
 		7DC4E7E822FFB79A00AE8AB4 /* DSCoCoJoystickProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoJoystickProtocol.h; sourceTree = "<group>"; };
 		7DC4E7ED22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSCoCoKeyboardJoystick.h; sourceTree = "<group>"; };
 		7DC4E7EE22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoKeyboardJoystick.m; sourceTree = "<group>"; };
@@ -739,6 +738,8 @@
 		7DA178AC2431551D00AE39D8 /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				7D5BE99928FC4CBC00544DFF /* universal_object.h */,
+				7D5BE99B28FC4FAC00544DFF /* universal_object.c */,
 				7DA178B02431552D00AE39D8 /* object_info.h */,
 				523A6C5425DC1AA700C609B4 /* 01-numerals.h */,
 				523A6C5125DC198F00C609B4 /* 01-numerals.mm */,
@@ -760,10 +761,8 @@
 				7D5BE99328FC447E00544DFF /* 10-fixed_object.c */,
 				7D5BE99728FC490600544DFF /* 11-velocity_object.h */,
 				7D5BE99628FC490600544DFF /* 11-velocity_object.c */,
-				7D5BE99928FC4CBC00544DFF /* universal_object.h */,
-				7D5BE99B28FC4FAC00544DFF /* universal_object.c */,
-				7DC1E70C29F4735200E620ED /* 12-ship.h */,
-				7DC1E70929F4658000E620ED /* 12-ship.c */,
+				7D45E1402B3F48A8005E6F4B /* 12-shipx.c */,
+				7D45E1412B3F48A9005E6F4B /* 12-shipx.h */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -1011,7 +1010,6 @@
 				52B1A129244B8667008E7066 /* DSLevelFileParserTest.m in Sources */,
 				529201F0244150C1000B4D58 /* DSSoundManagerTest.m in Sources */,
 				521A84B321FE07A8006120E8 /* DSSceneControllerTest.m in Sources */,
-				7DC1E70B29F4658000E620ED /* 12-ship.c in Sources */,
 				52B1A166244D2213008E7066 /* DSTileInfoTest.m in Sources */,
 				529201F42441A63F000B4D58 /* DSResourceControllerTest.m in Sources */,
 				5279A4E72436B83B00A51D98 /* DSCoCoJoystickControllerTest.m in Sources */,
@@ -1038,7 +1036,6 @@
 				52E447002464DCDC008B6488 /* DSScene.m in Sources */,
 				527E7ACD21F016B90013E66A /* DSInitScene.m in Sources */,
 				7D5BE99528FC447E00544DFF /* 10-fixed_object.c in Sources */,
-				7DC1E70A29F4658000E620ED /* 12-ship.c in Sources */,
 				7DA178BB2431552E00AE39D8 /* 05-missile.c in Sources */,
 				52B1A159244CFE45008E7066 /* DSPoint.c in Sources */,
 				524402DF21ED65CF00B02D38 /* DSTransitionScene.m in Sources */,
@@ -1090,6 +1087,7 @@
 				52F1208921D7DD63008A7900 /* DSAppDelegate.m in Sources */,
 				52B1A13B244BD4F9008E7066 /* DSSpriteObjectClass.m in Sources */,
 				52796B27259E7EA900FF17B6 /* DSTexture.m in Sources */,
+				7D45E1422B3F48A9005E6F4B /* 12-shipx.c in Sources */,
 				52E9623F28E8B53F0086065F /* DSDefaultsConfigLoader.m in Sources */,
 				7DA178B82431552E00AE39D8 /* 03-badguy.c in Sources */,
 				7DA178BA2431552E00AE39D8 /* 07-badmissile.c in Sources */,
