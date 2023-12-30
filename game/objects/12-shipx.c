@@ -14,6 +14,7 @@
 //  objects that use it.
 
 #include "12-shipx.h"
+#include "universal_object.c"
 #include "../objects/object_info.h"
 
 
@@ -30,6 +31,7 @@ void ShipxClassInit() {
 void ShipxInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     if (!globals) {
     }
+    UniversalObjectFixedObjectInit(cob, odt, initData);
 }
 
 
@@ -39,9 +41,35 @@ byte ShipxReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 byte ShipxUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+    UniversalObject *state = (UniversalObject *)cob->statePtr;
+
+    byte joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
+    if (joyx < 16) {
+        state->position[0] = state->position[0] - 1;
+    } else if (joyx >= 48) {
+        state->position[0] = state->position[0] + 1;
+    }
+    if (state->position[0] >= 159) {
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = (state->position[0] - 159) / 2;
+    } else {
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = 0;
+    }
+
+    byte joyy = DynospriteDirectPageGlobalsPtr->Input_JoystickY;
+    if (joyy < 16) {
+        state->position[1] = state->position[1] - 1;
+    } else if (joyy >= 48) {
+        state->position[1] = state->position[1] + 1;
+    }
+    if (state->position[1] >= 99) {
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = (state->position[1] - 99);
+    } else {
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY = 0;
+    }
+
     return 0;
 }
 
 
-RegisterObject(ShipxClassInit, ShipxInit, 0, ShipxReactivate, ShipxUpdate, NULL, sizeof(ShipxObjectState));
+RegisterObject(ShipxClassInit, ShipxInit, UNIVERSAL_FIXED_OBJECT_INIT_SIZE, ShipxReactivate, ShipxUpdate, NULL, sizeof(ShipxObjectState));
 

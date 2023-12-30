@@ -6,15 +6,14 @@
 //  Copyright © 2023 Jamie Cho. All rights reserved.
 //
 
-
 /* This preprocessor conditional must be included for each object defined in C */
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of ShipCounterObjectState in bytes */
-#define DynospriteObject_DataSize 16
+#define DynospriteObject_DataSize 12
 
 /** Defines at least the number of initialization bytes */
-#define DynospriteObject_InitSize 14
+#define DynospriteObject_InitSize 10
 
 #else
 
@@ -22,11 +21,13 @@
 #define _12_shipx_h
 
 #include "dynosprite.h"
+#include "universal_object.h"
 
 
 /** State of Ship Object */
 typedef struct ShipxObjectState {
-} ShipxCounterObjectState;
+    UniversalObject obj;
+} ShipxObjectState;
 
 
 #endif /* _12_shipx_h */

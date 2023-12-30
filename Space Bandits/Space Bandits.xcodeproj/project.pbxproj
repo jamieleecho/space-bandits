@@ -299,7 +299,7 @@
 		5282AEDB259F773D004E29B6 /* 04-ship2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "04-ship2.json"; sourceTree = "<group>"; };
 		5282AEDD259F8A42004E29B6 /* ship.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ship.tiff; sourceTree = "<group>"; };
 		5284F5E424340FE300B2C2C5 /* DSCoCoJoystickTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSCoCoJoystickTest.m; sourceTree = "<group>"; };
-		528A8293264816E300659810 /* 02-space.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "02-space.c"; path = "../../game/levels/02-space.c"; sourceTree = "<group>"; };
+		528A8293264816E300659810 /* 02-space.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "02-space.c"; path = "../../game/levels/02-space.c"; sourceTree = "<group>"; };
 		529201E5243FF69E000B4D58 /* DSAppDelegateTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSAppDelegateTest.m; sourceTree = "<group>"; };
 		529201E724413F97000B4D58 /* DSViewControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSViewControllerTest.m; sourceTree = "<group>"; };
 		529201E924414521000B4D58 /* DSSharedSceneControllerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSharedSceneControllerTest.m; sourceTree = "<group>"; };

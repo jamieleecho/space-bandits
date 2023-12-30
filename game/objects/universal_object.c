@@ -63,10 +63,6 @@ static void UniversalObjectVelocityObjectUpdate(DynospriteCOB *cob, DynospriteOD
     UniversalObject *state = (UniversalObject *)cob->statePtr;
     state->position[0] = state->position[0] + state->velocity[0];
     state->position[1] = state->position[1] + state->velocity[1];
-    
-    byte offset = state->depth - 1;
-    cob->globalX = state->position[0] >> offset;
-    cob->globalY = state->position[1] >> offset;
 }
 
 #endif /* _universal_object_c */

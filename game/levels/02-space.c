@@ -22,10 +22,15 @@ byte SpaceCalculateBkgrndNewXY() {
         if (obj->active & OBJECT_ACTIVE) {
             continue;
         }
-        
-        
+        // Update the screen position of this object based on its location
+        UniversalObject *uobj = (UniversalObject *)obj->statePtr;
+        if (uobj->magicNumber != UNIVERSAL_OBJECT_MAGIC_NUMBER) {
+            continue;
+        }
+        word depth = uobj->depth - 1;
+        obj->globalX = uobj->position[0] + (uobj->position[0] - xoffset) * depth;
+        obj->globalY = uobj->position[1] + (uobj->position[1] - yoffset) * depth;
     }
-
 
     return 0;
 }
