@@ -1061,6 +1061,7 @@
 				52F491BA245E0544009123CE /* DSTileMapMaker.m in Sources */,
 				526AF4C024B35316003AB5EA /* DSSpriteObjectClassFactory.m in Sources */,
 				524109ED245614650005DF54 /* DSLevelLoadingScene.m in Sources */,
+				7D68A75E28FC1546001BDC5B /* 10-fixed_object.c in Sources */,
 				528A8294264816E300659810 /* 02-space.c in Sources */,
 				52B1A147244CC40C008E7066 /* DSSpriteFileParser.m in Sources */,
 				7DC4E7EF22FFB94000AE8AB4 /* DSCoCoKeyboardJoystick.m in Sources */,
