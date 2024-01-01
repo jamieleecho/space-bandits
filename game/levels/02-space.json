@@ -14,6 +14,16 @@
 
   "Objects": [
     {
+      "_comment": "***** Shipx Object",
+      "GroupID": 12,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 80,
+      "globalY": 95,
+      "InitData": [0, 1, 248, 248, 8, 8, 0, 160, 0, 100]
+    },
+
+    {
       "_comment": "***** Game Over",
       "GroupID": 6,
       "ObjectID": 0,
@@ -77,7 +87,7 @@
       "Active": 3,
       "globalX": 160,
       "globalY": 120,
-      "InitData": [0, 3, 0, 18, 0, 13, 0, 250, 0, 150]
+      "InitData": [0, 3, 244, 244, 12, 10, 0, 250, 0, 150]
     },
 
     {
@@ -87,17 +97,7 @@
       "Active": 3,
       "globalX": 20,
       "globalY": 100,
-      "InitData": [0, 2, 0, 9, 0, 9, 0, 245, 0, 150, 0, 0, 0, 0]
-    },
-    
-    {
-      "_comment": "***** Shipx Object",
-      "GroupID": 12,
-      "ObjectID": 0,
-      "Active": 3,
-      "globalX": 80,
-      "globalY": 95,
-      "InitData": [0, 1, 0, 9, 0, 9, 0, 160, 0, 100]
+      "InitData": [0, 2, 248, 248, 8, 8, 0, 245, 0, 150, 0, 0, 0, 0]
     }
   ]
 }
