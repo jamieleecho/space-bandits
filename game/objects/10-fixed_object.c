@@ -28,8 +28,8 @@ void Fixed_objectInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     }
     
     UniversalObjectFixedObjectInit(cob, odt, initData);
-    Fixed_objectState *state = (Fixed_objectState *)cob->statePtr;
-    state->spriteIdx = initData[0];
+    Fixed_objectObjectState *state = (Fixed_objectObjectState *)cob->statePtr;
+    state->obj.spriteIdx = initData[0];
 }
 
 
