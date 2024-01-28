@@ -267,9 +267,9 @@ $(READMEBAS): $(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt
 #16. Create Coco disk image
 $(TARGET): $(DISKFILES)
 	rm -f $(TARGET)
-	imgtool create coco_jvc_rsdos $(TARGET)
-	for f in $(filter $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f` --ftype=basic --ascii=ascii; done
-	for f in $(filter-out $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f`; done
+	decb dskini $(TARGET)
+	for f in $(filter $(READMEBAS), $(DISKFILES)); do decb copy $$f $(TARGET),`basename $$f` -0 -t; done
+	for f in $(filter-out $(READMEBAS), $(DISKFILES)); do decb copy $$f $(TARGET),`basename $$f` -2 -b; done
 
 .PHONY: all clean test
 
