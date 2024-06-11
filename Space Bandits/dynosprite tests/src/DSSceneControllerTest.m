@@ -70,17 +70,17 @@
     [sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
     [sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
     [sceneInfos addObject:[[DSTransitionSceneInfo alloc] init]];
-    sceneInfos[0].backgroundColor = [NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0f];
-    sceneInfos[0].foregroundColor = [NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
-    sceneInfos[0].progressColor = [NSColor colorWithCalibratedRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
+    sceneInfos[0].backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f];
+    sceneInfos[0].foregroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
+    sceneInfos[0].progressColor = [UIColor colorWithRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
 
-    sceneInfos[1].backgroundColor = [NSColor colorWithCalibratedRed:0x1f/255.0f green:1.0f blue:1.0f alpha:1.0f];
-    sceneInfos[1].foregroundColor = [NSColor colorWithCalibratedRed:0x10/255.0f green:0.0f blue:0.0f alpha:1.0f];
-    sceneInfos[1].progressColor = [NSColor colorWithCalibratedRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
+    sceneInfos[1].backgroundColor = [UIColor colorWithRed:0x1f/255.0f green:1.0f blue:1.0f alpha:1.0f];
+    sceneInfos[1].foregroundColor = [UIColor colorWithRed:0x10/255.0f green:0.0f blue:0.0f alpha:1.0f];
+    sceneInfos[1].progressColor = [UIColor colorWithRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
 
-    sceneInfos[2].backgroundColor = [NSColor colorWithCalibratedRed:0x2f/255.0f green:1.0f blue:1.0f alpha:1.0f];
-    sceneInfos[2].foregroundColor = [NSColor colorWithCalibratedRed:0x20/255.0f green:0.0f blue:0.0f alpha:1.0f];
-    sceneInfos[2].progressColor = [NSColor colorWithCalibratedRed:0x3b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
+    sceneInfos[2].backgroundColor = [UIColor colorWithRed:0x2f/255.0f green:1.0f blue:1.0f alpha:1.0f];
+    sceneInfos[2].foregroundColor = [UIColor colorWithRed:0x20/255.0f green:0.0f blue:0.0f alpha:1.0f];
+    sceneInfos[2].progressColor = [UIColor colorWithRed:0x3b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1.0f];
     _target.sceneInfos = sceneInfosWrapper;
     
     _level.name = @"Omicron Persei 8";
@@ -123,7 +123,7 @@
 
 - (void)testCreatesColors {
     XCTAssertEqualObjects([DSTransitionSceneInfoFileParser colorFromRGBString:@"f3Ab24"],
-                          [NSColor colorWithCalibratedRed:0xf3/255.0f green:0xab/255.0f blue:0x24/255.0f alpha:1]);
+                          [UIColor colorWithRed:0xf3/255.0f green:0xab/255.0f blue:0x24/255.0f alpha:1]);
     XCTAssertThrows([DSTransitionSceneInfoFileParser colorFromRGBString:@"#f3Ab24"]);
     XCTAssertThrows([DSTransitionSceneInfoFileParser colorFromRGBString:@"f3Ab24aa"]);
 }
@@ -131,9 +131,9 @@
 - (void)testCreatesLevels {
     DSInitScene *initScene = (DSInitScene *)[_target transitionSceneForLevel:0];
     XCTAssertEqual(initScene.firstLevel, 1);
-    XCTAssertEqualObjects(initScene.backgroundColor, [[NSColor colorWithCalibratedRed:1.0f green:1.0f blue:1.0f alpha:1.0f] colorUsingColorSpace:initScene.backgroundColor.colorSpace]);
-    XCTAssertEqualObjects(initScene.foregroundColor, [NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:1.0f]);
-    XCTAssertEqualObjects(initScene.progressBarColor, [NSColor colorWithCalibratedRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1]);
+    XCTAssertEqualObjects(initScene.backgroundColor, [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f]);
+    XCTAssertEqualObjects(initScene.foregroundColor, [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f]);
+    XCTAssertEqualObjects(initScene.progressBarColor, [UIColor colorWithRed:0x1b/255.0f green:0xb4/255.0f blue:0x3a/255.0f alpha:1]);
     XCTAssertEqual(initScene.class, DSInitScene.class);
     XCTAssertEqual(initScene.sceneController, _target);
     
@@ -168,10 +168,10 @@
     
     OCMStub([_levelRegistry levelForIndex:level]).andReturn(levelObj);
     OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"hires/tiles/mytile.png");
-    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
-    NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
+    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForResource:@"forest" ofType:@"png"];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:imagePath];
     OCMStub([_bundle pathForResource:@"hires/tiles/mytile" ofType:@"png"]).andReturn(imagePath);
-    NSRect tileRect = NSMakeRect(3, 7, 160, 64);
+    CGRect tileRect = CGRectMake(3, 7, 160, 64);
     SKNode *node = [[SKNode alloc] init];
     
     DSTileInfo *tileInfo = [[DSTileInfo alloc] init];
@@ -180,7 +180,7 @@
     tileInfo.tileSetSize = DSPointMake(160, 64);
     OCMStub([_tileInfoRegistry tileInfoForNumber:4]).andReturn(tileInfo);
     OCMStub([_tileMapMaker nodeFromImage:OCMArg.any withRect:tileRect usingTileImage:OCMArg.any withTileRect:tileRect]).andDo(^(NSInvocation *invocation) {
-        NSImage *loadedImage;
+        UIImage *loadedImage;
         [invocation getArgument:(void *)&loadedImage atIndex:2];
         XCTAssertTrue([DSTestUtils image:loadedImage isSameAsImage:image]);
     }).andReturn(node);

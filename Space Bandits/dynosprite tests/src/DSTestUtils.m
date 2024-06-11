@@ -6,51 +6,47 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import "UIImage+Misc.h"
+#import "DSNSDataMD5Extensions.h"
 #import "DSTestUtils.h"
 
 @implementation DSTestUtils
 
-+ (BOOL)color:(NSColor *)color1 isSameAs:(NSColor *)color2 {
-    return [[color1 colorUsingColorSpace:NSColorSpace.sRGBColorSpace] isEqual:[color2 colorUsingColorSpace:NSColorSpace.sRGBColorSpace]];
+/**
+ * Returns YES IFF color1 is the same as color2 in rgb space.
+ */
++ (BOOL)color:(UIColor *)color1 isSameAs:(UIColor *)color2 {
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+    CGColorRef cgcolor1 = color1.CGColor;
+    CGColorRef cgcolor2 = color2.CGColor;
+    CGColorRef cgcolor1p = CGColorCreateCopyByMatchingToColorSpace(rgb, kCGRenderingIntentDefault, cgcolor1, nil);
+    CGColorRef cgcolor2p = CGColorCreateCopyByMatchingToColorSpace(rgb, kCGRenderingIntentDefault, cgcolor2, nil);
+    UIColor *color1p = [UIColor colorWithCGColor:cgcolor1p];
+    UIColor *color2p = [UIColor colorWithCGColor:cgcolor2p];
+    CGColorRelease(cgcolor2p);
+    CGColorRelease(cgcolor1p);
+    CGColorSpaceRelease(rgb);
+    return [color1p isEqual:color2p];
 }
 
 /**
- * Converts NSImage equivalent to cgImage.
+ * Converts UIImage equivalent to cgImage.
  */
-+ (NSImage *)convertToNSImage:(CGImageRef)cgImage {
-    NSSize imageSize = CGSizeMake(CGImageGetWidth(cgImage), CGImageGetHeight(cgImage));
-    return [[NSImage alloc] initWithCGImage:cgImage size:imageSize];
-}
-
-/**
- * Converts NSImage equivalent to cgImage.
- */
-+ (NSImage *)convertToNSImage:(CGImageRef)cgImage withSize:(NSSize)size {
-    return [[NSImage alloc] initWithCGImage:cgImage size:size];
-}
-
-/**
- * Converts nsImage to an 8x4 Color NSBitmapImageRep.
- */
-+ (NSBitmapImageRep *)convertTo8x4ImageRep:(NSImage *)nsImage {
-    NSBitmapImageRep *nsImageRep = [[NSBitmapImageRep alloc]                                     initWithBitmapDataPlanes:NULL pixelsWide:nsImage.size.width pixelsHigh:nsImage.size.height bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bytesPerRow:nsImage.size.width * 4 bitsPerPixel:32];
-    [NSGraphicsContext saveGraphicsState];
-    NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep: nsImageRep];
-    [NSGraphicsContext setCurrentContext: ctx];
-    [nsImage drawInRect:NSMakeRect(0, 0, nsImage.size.width, nsImage.size.height)];
-    [ctx flushGraphics];
-    [NSGraphicsContext restoreGraphicsState];
-    return nsImageRep;
++ (UIImage *)convertToUIImage:(CGImageRef)cgImage {
+    return [[UIImage alloc] initWithCGImage:cgImage];
 }
 
 /**
  * Returns YES IFF image1 renders identically to image2 as an 8*3 BitmapImageRep.
  */
-+ (BOOL)image:(NSImage *)image1 isSameAsImage:(NSImage *)image2 {
-    NSBitmapImageRep *imageRep1 = [DSTestUtils convertTo8x4ImageRep:image1];
-    NSBitmapImageRep *imageRep2 = [DSTestUtils convertTo8x4ImageRep:image2];
-    return [imageRep1.TIFFRepresentation isEqual:imageRep2.TIFFRepresentation];
++ (BOOL)image:(UIImage *)image1 isSameAsImage:(UIImage *)image2 {
+    UIImage *image1p = image1.rgbImageWithAlpha;
+    UIImage *image2p = image2.rgbImageWithAlpha;
+    NSData *png1 = UIImagePNGRepresentation(image1p);
+    NSData *png2 = UIImagePNGRepresentation(image2p);
+    return [png1.SHA256 isEqualToString:png2.SHA256];
 }
 
 @end

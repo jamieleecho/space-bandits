@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *backgroundImageName;
 @property (strong, readonly) SKSpriteNode *backgroundImage;
-@property (strong, nonatomic) NSColor *foregroundColor;
-@property (strong, nonatomic) NSColor *progressBarColor;
+@property (strong, nonatomic) UIColor *foregroundColor;
+@property (strong, nonatomic) UIColor *progressBarColor;
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
 @property (strong, nonatomic) DSResourceController *resourceController;
 @property (strong, nonatomic) DSSoundManager *soundManager;

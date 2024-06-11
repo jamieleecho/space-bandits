@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "DSCoCoJoystick.h"
 
 @interface DSCoCoJoystickTest : XCTestCase {
@@ -16,9 +17,14 @@
 @end
 
 @implementation DSCoCoJoystickTest
-
 - (void)setUp {
-    _target = [[DSCoCoJoystick alloc] initWithJoystickIndex:65535];
+    id controller = OCMClassMock(GCController.class);
+    id gamepad = OCMClassMock(GCExtendedGamepad.class);
+    id device = OCMProtocolMock(@protocol(GCDevice));
+    OCMStub([controller extendedGamepad]).andReturn(gamepad);
+    OCMStub([gamepad device]).andReturn(device);
+    OCMStub([device vendorName]).andReturn(@"Unknown joystick");
+    _target = [[DSCoCoJoystick alloc] initWithController:controller];
 }
 
 - (void)tearDown {
@@ -30,10 +36,6 @@
     NSArray *joysticks = [DSCoCoJoystick availableJoysticks];
     XCTAssertNotNil(joysticks);
     [joysticks count];
-}
-
-- (void)testSampleNotHorriblyBroken {
-    [DSCoCoJoystick sample];
 }
 
 - (void)testName {
@@ -50,18 +52,7 @@
     XCTAssertFalse(_target.button1Pressed);
 }
 
-- (void)testReadAxisWithInitialPosition {
-    XCTAssertEqual(0x20, [_target readJoystickAxis:0 withInitialPosition:31]);
-    XCTAssertEqual(0x20, [_target readJoystickAxis:1 withInitialPosition:31]);
-}
-
-- (void)testReadButtonsWithInitialPressed {
-    XCTAssertFalse([_target readJoystickButton:0 withInitialPressed:false]);
-    XCTAssertFalse([_target readJoystickButton:1 withInitialPressed:false]);
-}
-
 - (void)testReset {
     [_target reset];
 }
-
 @end

@@ -47,8 +47,8 @@ typedef enum DSInitSceneSound {
 - (void)didMoveToView:(SKView *)view;
 - (void)willMoveFromView:(SKView *)view;
 
-- (void)mouseUp:(NSEvent *)theEvent;
-- (void)keyUp:(NSEvent *)theEvent;
+- (void)mouseUp:(UIEvent *)theEvent;
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(nullable UIPressesEvent *)event;
 
 - (void)transitionToNextScreen;
 

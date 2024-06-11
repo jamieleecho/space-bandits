@@ -14,10 +14,9 @@
 
 @implementation DSWindowController
 
-- (void)windowDidLoad {
-    [super windowDidLoad];
-    self.window.contentAspectRatio = self.window.contentView.frame.size;
-    self.window.contentMinSize = NSMakeSize(320, 200);
+- (void)viewDidLoad {
+    [self.view sizeToFit];
+    [super viewDidLoad];
 }
 
 @end

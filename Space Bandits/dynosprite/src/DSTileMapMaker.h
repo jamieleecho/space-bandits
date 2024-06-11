@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 
 #import "DSCons.h"
@@ -15,16 +15,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSTileMapMaker : NSObject
 
-- (NSImage *)subImage:(NSImage *)image withRect:(NSRect)rect;
-- (NSImage *)subImageForMap:(NSImage *)image withRect:(NSRect)rect;
-- (NSImage *)tileForImage:(NSImage *)image atPoint:(NSPoint)p0;
-- (NSString *)hashForImage:(NSImage *)image;
-- (BOOL)image:(NSImage *)image1 isEqualTo:(NSImage *)image2;
-- (NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)imageTileDictionaryFromImage:(NSImage *)image;
-- (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary;
-- (NSDictionary<NSNumber *, NSString *> *)tileIndexToTileHashFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary;
+- (UIImage *)subImage:(UIImage *)image withRect:(CGRect)rect;
+- (UIImage *)subImageForMap:(UIImage *)image withRect:(CGRect)rect;
+- (UIImage *)tileForImage:(UIImage *)image atPoint:(CGPoint)p0;
+- (NSString *)hashForImage:(UIImage *)image;
+- (BOOL)image:(UIImage *)image1 isEqualTo:(UIImage *)image2;
+- (NSDictionary<NSString *, DSCons<UIImage *, NSNumber *> *> *)imageTileDictionaryFromImage:(UIImage *)image;
+- (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, DSCons<UIImage *, NSNumber *> *> *)tileDictionary;
+- (NSDictionary<NSNumber *, NSString *> *)tileIndexToTileHashFromTileDictionary:(NSDictionary<NSString *, DSCons<UIImage *, NSNumber *> *> *)tileDictionary;
 - (SKTileSet *)tileSetFromTextureAtlas:(SKTextureAtlas *)textureAtlas;
-- (SKTileMapNode *)nodeFromImage:(NSImage *)image withRect:(NSRect)rect usingTileImage:(NSImage *)tileImage withTileRect:(NSRect)tileRect;
+- (SKTileMapNode *)nodeFromImage:(UIImage *)image withRect:(CGRect)rect usingTileImage:(UIImage *)tileImage withTileRect:(CGRect)tileRect;
 
 @end
 

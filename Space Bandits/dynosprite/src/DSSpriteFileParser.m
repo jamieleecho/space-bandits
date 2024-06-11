@@ -12,7 +12,7 @@
 
 @implementation DSSpriteFileParser
 
-+ (NSColor *)parseColorFromArray:(NSArray *)colorData {
++ (UIColor *)parseColorFromArray:(NSArray *)colorData {
     NSCAssert([colorData isKindOfClass:NSArray.class], @"Color is not an array");
     NSCAssert(colorData.count == 3, ([NSString stringWithFormat:@"Wrong number of elements in color array - expected 3, found %lu", colorData.count]));
     int ii = 0;
@@ -23,7 +23,7 @@
         colorElements[ii] = [element intValue] / 255.0f;
         ii++;
     }
-    return [NSColor colorWithRed:colorElements[0] green:colorElements[1] blue:colorElements[2] alpha:1.0];
+    return [UIColor colorWithRed:colorElements[0] green:colorElements[1] blue:colorElements[2] alpha:1.0];
 }
 
 + (DSSpriteInfo *)spriteInfoFromDictionary:(NSDictionary *)spriteInfoData {

@@ -7,13 +7,14 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 
 #import "DSWindowController.h"
 
 
 @interface DSWindowControllerTest : XCTestCase {
     DSWindowController *_target;
-    NSWindow *_window;
+    id _view;
 }
 @end
 
@@ -21,15 +22,18 @@
 @implementation DSWindowControllerTest
 
 - (void)setUp {
+#if TARGET_OS_MACCATALYST == 1
     _target = [[DSWindowController alloc] init];
-    _window = [[NSWindow alloc] init];
-    _target.window = _window;
+    _view = OCMClassMock(UIView.class);
+    _target.view = _view;
+#endif
 }
 
-- (void)testExample {
-    [_target windowDidLoad];
-    XCTAssertTrue(NSEqualSizes([_window contentAspectRatio], ((NSSize)[[_window contentView] frame].size)));
-    XCTAssertTrue(NSEqualSizes([_window contentMinSize], NSMakeSize(320, 200)));
+#if TARGET_OS_MACCATALYST == 1
+- (void)testSetsUpWindow {
+    [_target viewDidLoad];
+    OCMVerify([_view sizeToFit]);
 }
+#endif
 
 @end

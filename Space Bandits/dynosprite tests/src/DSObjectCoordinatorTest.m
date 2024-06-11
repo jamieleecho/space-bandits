@@ -44,7 +44,7 @@ static DynospriteODT *param2[maxNumCalls];
 static byte *param3[maxNumCalls];
 
 
-static void classInit2() {
+static void classInit2(void) {
     numClassInit2Calls++;
 }
 
@@ -69,7 +69,7 @@ static byte updateObj2(DynospriteCOB *cob, DynospriteODT *odt) {
     return 0;
 }
 
-static void classInit3() {
+static void classInit3(void) {
     numClassInit3Calls++;
 }
 

@@ -66,17 +66,20 @@ static NSString *MenuSoundHigh = @"HiFi";
     [self refreshState];
 }
 
-- (void)mouseUp:(NSEvent *)theEvent {
+- (void)mouseUp:(UIEvent *)theEvent {
     [self transitionToNextScreen];
 }
 
-- (void)keyUp:(NSEvent *)theEvent {
-    [super keyUp:theEvent];
-    
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    [self.joystickController pressesEnded:presses withEvent:event];
+    NSMutableString *chars = [[NSMutableString alloc] init];
+    for(UIPress *press in presses) {
+        [chars appendString:press.key.charactersIgnoringModifiers];
+    }
+
     // Now check the rest of the keyboard
-    NSString *characters = theEvent.charactersIgnoringModifiers;
-    for (int s = 0; s<[characters length]; s++) {
-        unichar character = [characters characterAtIndex:s];
+    for (int s = 0; s < chars.length; s++) {
+        unichar character = [chars characterAtIndex:s];
         switch (character) {
             case 'd':
                 [self toggleDisplay];

@@ -17,7 +17,7 @@
 @implementation DSSharedSceneController
 
 - (id) init {
-    return [self initWithSceneController:((DSAppDelegate *)(NSApplication.sharedApplication.delegate)).sceneController];
+    return [self initWithSceneController:((DSAppDelegate *)(UIApplication.sharedApplication.delegate)).sceneController];
 }
 
 - (id)initWithSceneController:(NSObject <DSSceneControllerProtocol> *)sceneController {

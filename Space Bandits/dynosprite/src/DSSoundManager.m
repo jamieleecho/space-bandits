@@ -28,7 +28,7 @@ static DSSoundManager *_sharedInstance = nil;
     return _cacheState;
 }
 
-- (NSMutableDictionary<NSNumber *, NSArray<NSSound *> *> *) onlyUseForUnitTestingSoundsIdToSounds {
+- (NSMutableDictionary<NSNumber *, NSArray<AVAudioPlayer *> *> *) onlyUseForUnitTestingSoundsIdToSounds {
     return _soundIdToSounds;
 }
 
@@ -64,7 +64,7 @@ static DSSoundManager *_sharedInstance = nil;
             NSMutableArray *sounds = [NSMutableArray arrayWithCapacity:_maxNumSounds];
             _soundIdToSounds[soundId] = sounds;
             for(size_t ii=0; ii<_maxNumSounds; ii++) {
-                NSSound *sound = [[NSSound alloc] initWithContentsOfFile:path byReference:NO];
+                AVAudioPlayer *sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
                 sound.delegate = self;
                 [sounds addObject:sound];
             }
@@ -79,7 +79,7 @@ static DSSoundManager *_sharedInstance = nil;
     [_soundIdToSounds removeAllObjects];
 }
 
-- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)didFinish {
+- (void)sound:(AVAudioPlayer *)sound didFinishPlaying:(BOOL)didFinish {
     [_playingSounds removeObject:sound];
 }
 
@@ -98,7 +98,7 @@ static DSSoundManager *_sharedInstance = nil;
     if (sounds == nil) {
         return NO;
     }
-    for(NSSound *sound in sounds) {
+    for(AVAudioPlayer *sound in sounds) {
         if (sound.isPlaying) {
             continue;
         }

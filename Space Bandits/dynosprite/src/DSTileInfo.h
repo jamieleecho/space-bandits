@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) DSPoint tileSetStart;
 @property (nonatomic) DSPoint tileSetSize;
 
-@property (nonatomic, nonnull) NSMutableDictionary<NSString *, NSImage *> *hashToImage;
+@property (nonatomic, nonnull) NSMutableDictionary<NSString *, UIImage *> *hashToImage;
 @property (nonatomic, nonnull) NSMutableDictionary<NSNumber *, NSString *> *numberToHash;
 @property (nonatomic, nonnull) SKTextureAtlas *atlas;
 

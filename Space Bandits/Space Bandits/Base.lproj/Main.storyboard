@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController id="BV1-FR-VrT" customClass="DSViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="hIb-aQ-Jvy" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <viewLayoutGuide key="safeArea" id="yF1-Kd-87U"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" allowsDirectInteraction="YES"/>
+                        </accessibility>
+                    </view>
+                    <connections>
+                        <outlet property="sceneController" destination="Pfp-pk-l3g" id="PRk-GO-AVs"/>
+                        <outlet property="skView" destination="hIb-aQ-Jvy" id="83f-IK-Foi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <customObject id="7oo-5b-BVo" customClass="DSAppDelegate">
+                    <connections>
+                        <outlet property="assetLoader" destination="x7o-KH-seS" id="P8o-4f-Nbn"/>
+                        <outlet property="configFileParser" destination="Fyi-su-Y9Y" id="Xly-0i-PFG"/>
+                        <outlet property="defaultsConfigLoader" destination="IUB-ly-Ium" id="GVP-da-MhK"/>
+                        <outlet property="joystickController" destination="N0A-Oh-drb" id="Yx4-CT-Iod"/>
+                        <outlet property="resourceController" destination="lGr-29-wB2" id="AwX-nV-m7N"/>
+                        <outlet property="sceneController" destination="Pfp-pk-l3g" id="98a-wa-KHE"/>
+                        <outlet property="soundManager" destination="FGm-SJ-i4q" id="kfW-HO-l21"/>
+                    </connections>
+                </customObject>
+                <customObject id="x7o-KH-seS" customClass="DSAssetLoader">
+                    <connections>
+                        <outlet property="imageLoader" destination="gkx-Df-aTe" id="rVP-cF-SNb"/>
+                        <outlet property="levelFileParser" destination="ZLl-dv-ri9" id="Jyj-8j-P7s"/>
+                        <outlet property="objectParser" destination="FZt-eY-J2V" id="GHO-81-N0D"/>
+                        <outlet property="resourceController" destination="lGr-29-wB2" id="nsn-1v-qVo"/>
+                        <outlet property="sceneInfos" destination="YLu-31-BCE" id="0Kt-vR-XIH"/>
+                        <outlet property="soundManager" destination="FGm-SJ-i4q" id="KnK-cb-USJ"/>
+                        <outlet property="spriteObjectClassFactory" destination="VWw-W1-jgt" id="zVq-js-a6E"/>
+                        <outlet property="tileInfoRegistry" destination="vTe-bs-J7r" id="IKF-SA-EwG"/>
+                        <outlet property="transitionSceneInfoFileParser" destination="H6y-Sp-yK3" id="viJ-7Z-GUP"/>
+                    </connections>
+                </customObject>
+                <customObject id="Fyi-su-Y9Y" customClass="DSConfigFileParser"/>
+                <customObject id="gkx-Df-aTe" customClass="DSTransitionImageLoader"/>
+                <customObject id="N0A-Oh-drb" customClass="DSCoCoJoystickController"/>
+                <customObject id="ZLl-dv-ri9" customClass="DSLevelFileParser"/>
+                <customObject id="VWw-W1-jgt" customClass="DSSpriteObjectClassFactory">
+                    <connections>
+                        <outlet property="textureManager" destination="8zq-sI-53H" id="k1e-WW-qYh"/>
+                    </connections>
+                </customObject>
+                <customObject id="FZt-eY-J2V" customClass="DSSpriteFileParser"/>
+                <customObject id="lGr-29-wB2" customClass="DSResourceController"/>
+                <customObject id="Pfp-pk-l3g" customClass="DSSceneController">
+                    <connections>
+                        <outlet property="joystickController" destination="N0A-Oh-drb" id="k6j-r8-27e"/>
+                        <outlet property="resourceController" destination="lGr-29-wB2" id="5Me-ug-yah"/>
+                        <outlet property="sceneInfos" destination="YLu-31-BCE" id="EU2-aJ-2y6"/>
+                        <outlet property="soundManager" destination="FGm-SJ-i4q" id="Eqn-zd-6eX"/>
+                        <outlet property="textureManager" destination="8zq-sI-53H" id="Lmd-Qj-BM6"/>
+                        <outlet property="tileInfoRegistry" destination="vTe-bs-J7r" id="hRj-Hb-WDN"/>
+                        <outlet property="tileMapMaker" destination="x5i-QI-93G" id="vat-mE-pTQ"/>
+                    </connections>
+                </customObject>
+                <customObject id="FGm-SJ-i4q" customClass="DSSoundManager">
+                    <connections>
+                        <outlet property="resourceController" destination="lGr-29-wB2" id="RgG-yQ-WTH"/>
+                    </connections>
+                </customObject>
+                <customObject id="8zq-sI-53H" customClass="DSTextureManager">
+                    <connections>
+                        <outlet property="resourceController" destination="lGr-29-wB2" id="7uE-wh-Vtg"/>
+                    </connections>
+                </customObject>
+                <customObject id="vTe-bs-J7r" customClass="DSTileInfoRegistry"/>
+                <customObject id="YLu-31-BCE" customClass="DSMutableArrayWrapper"/>
+                <customObject id="x5i-QI-93G" customClass="DSTileMapMaker"/>
+                <customObject id="H6y-Sp-yK3" customClass="DSTransitionSceneInfoFileParser"/>
+                <customObject id="IUB-ly-Ium" customClass="DSDefaultsConfigLoader"/>
+            </objects>
+            <point key="canvasLocation" x="6.8702290076335872" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

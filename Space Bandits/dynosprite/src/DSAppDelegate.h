@@ -6,7 +6,7 @@
 //  Copyright © 2018 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
 #import "DSAssetLoader.h"
 #import "DSConfigFileParser.h"
@@ -17,8 +17,9 @@
 #import "DSSoundManager.h"
 
 
-@interface DSAppDelegate : NSObject <NSApplicationDelegate>
+@interface DSAppDelegate : NSObject <UIApplicationDelegate>
 
+@property (nonatomic, nonnull) IBOutlet UIWindow *window;
 @property (nonatomic, nonnull) IBOutlet DSAssetLoader *assetLoader;
 @property (nonatomic, nonnull) IBOutlet DSConfigFileParser *configFileParser;
 @property (nonatomic, nonnull) IBOutlet DSDefaultsConfigLoader *defaultsConfigLoader;
@@ -28,6 +29,6 @@
 @property (nonatomic, nonnull) IBOutlet DSSoundManager *soundManager;
 
 - (void)awakeFromNib;
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *_Null_unspecified)sender;
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(UIApplication *_Null_unspecified)sender;
 
 @end

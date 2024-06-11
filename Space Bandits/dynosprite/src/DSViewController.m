@@ -15,9 +15,22 @@
     [super viewDidLoad];
 
     SKScene *scene = [self.sceneController transitionSceneForLevel:0];
+    scene.userInteractionEnabled = YES;
+    self.skView.userInteractionEnabled = YES;
+    self.skView.window.userInteractionEnabled = YES;
     
     // Present the scene
     [self.skView presentScene:scene];
 }
+
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(nullable UIPressesEvent *)event {
+    [self.skView.scene pressesBegan:presses withEvent:event];
+}
+
+
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    [self.skView.scene pressesEnded:presses withEvent:event];
+}
+
 
 @end

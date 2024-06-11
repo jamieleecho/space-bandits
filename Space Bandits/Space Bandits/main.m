@@ -2,12 +2,17 @@
 //  main.m
 //  Space Bandits
 //
-//  Created by Jamie Cho on 12/29/18.
-//  Copyright © 2018 Jamie Cho. All rights reserved.
+//  Created by Jamie Cho on 5/25/24.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
+#import "DSAppDelegate.h"
 
-int main(int argc, const char * argv[]) {
-    return NSApplicationMain(argc, argv);
+int main(int argc, char * argv[]) {
+    NSString * appDelegateClassName;
+    @autoreleasepool {
+        // Setup code that might create autoreleased objects goes here.
+        appDelegateClassName = NSStringFromClass(DSAppDelegate.class);
+    }
+    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
 }
