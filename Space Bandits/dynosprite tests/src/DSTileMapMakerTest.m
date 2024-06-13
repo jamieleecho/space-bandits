@@ -129,7 +129,7 @@
     XCTAssertEqual(tileMapNode.xScale, 1);
     XCTAssertEqual(tileMapNode.yScale, 1);
     XCTAssertTrue(CGSizeEqualToSize(tileMapNode.tileSize, CGSizeMake(16, 16)));
-#if TARGET_OS_MACCATALYST == 1
+#if TARGET_OS_MACCATALYST
     XCTAssertEqualObjects([tileMapNode tileGroupAtColumn:5 row:2].name, @"ad1b99eb69862956599425a4779d3744d47230d6f1b387db37e2b8ea09f499e0");
 #else
     XCTAssertEqualObjects([tileMapNode tileGroupAtColumn:5 row:2].name, @"7b4ed952385dc5e5ca3b63f30d541f73add7863c0896ffdec61869c29b7e94eb");

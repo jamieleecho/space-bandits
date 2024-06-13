@@ -190,7 +190,7 @@
     [_target observeValueForKeyPath:@"hiresMode" ofObject:_resourceController change:nil context:nil];
 
     // Verify that the font was updated
-#if TARGET_OS_MACCATALYST == 1
+#if TARGET_OS_MACCATALYST
     XCTAssertEqual(label.fontSize, 12.80000114440918);
 #else
     XCTAssertEqual(label.fontSize, 16);

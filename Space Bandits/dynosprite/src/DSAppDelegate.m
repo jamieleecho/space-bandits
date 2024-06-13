@@ -45,8 +45,11 @@
             break;
         }
     }
+    
+#if TARGET_OS_MACCATALYST
     windowScene.sizeRestrictions.minimumSize = CGSizeMake(320, 200);
     windowScene.titlebar.titleVisibility = UITitlebarTitleVisibilityHidden;
+#endif
 
     return YES;
 }
