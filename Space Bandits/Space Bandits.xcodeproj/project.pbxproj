@@ -81,7 +81,6 @@
 		525FE4922C053EC600E03391 /* DSTransitionSceneInfoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4632C053EC500E03391 /* DSTransitionSceneInfoTest.m */; };
 		525FE4932C053EC600E03391 /* DSTransitionSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4642C053EC500E03391 /* DSTransitionSceneTest.m */; };
 		525FE4942C053EC600E03391 /* DSViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4652C053EC500E03391 /* DSViewControllerTest.m */; };
-		525FE4952C053EC600E03391 /* DSWindowControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4662C053EC500E03391 /* DSWindowControllerTest.m */; };
 		526C332B2C16C7D2003FB16E /* pcgfont.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 526C33292C16C7D2003FB16E /* pcgfont.dfont */; };
 		5287C4712C0BCFDA00AD2369 /* hires in Resources */ = {isa = PBXBuildFile; fileRef = 5287C4702C0BCFDA00AD2369 /* hires */; };
 		52CC81A52C02172200CC3E38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52CC81A42C02172200CC3E38 /* Assets.xcassets */; };
@@ -176,8 +175,6 @@
 		52CC82B72C02179100CC3E38 /* DSTransitionSceneInfoFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC822A2C02179100CC3E38 /* DSTransitionSceneInfoFileParser.m */; };
 		52CC82B92C02179100CC3E38 /* DSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC822C2C02179100CC3E38 /* DSViewController.m */; };
 		52CC82BA2C02179100CC3E38 /* DSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC822C2C02179100CC3E38 /* DSViewController.m */; };
-		52CC82BC2C02179100CC3E38 /* DSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC822E2C02179100CC3E38 /* DSWindowController.m */; };
-		52CC82BD2C02179100CC3E38 /* DSWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC822E2C02179100CC3E38 /* DSWindowController.m */; };
 		52E0DB3D2C0C42A700AD5BDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52CC81A12C02172200CC3E38 /* Main.storyboard */; };
 		52E24A0F2C17E7E00098F87D /* 10-fixed_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E249FA2C17E7E00098F87D /* 10-fixed_object.c */; };
 		52E24A102C17E7E00098F87D /* 04-ship.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E249FB2C17E7E00098F87D /* 04-ship.c */; };
@@ -439,7 +436,6 @@
 		525FE4632C053EC500E03391 /* DSTransitionSceneInfoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneInfoTest.m; sourceTree = "<group>"; };
 		525FE4642C053EC500E03391 /* DSTransitionSceneTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneTest.m; sourceTree = "<group>"; };
 		525FE4652C053EC500E03391 /* DSViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSViewControllerTest.m; sourceTree = "<group>"; };
-		525FE4662C053EC500E03391 /* DSWindowControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSWindowControllerTest.m; sourceTree = "<group>"; };
 		525FE4992C05412000E03391 /* OCMock.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OCMock.xcframework; sourceTree = "<group>"; };
 		526C33282C16C77D003FB16E /* Space-Bandits-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Space-Bandits-Info.plist"; sourceTree = SOURCE_ROOT; };
 		526C33292C16C7D2003FB16E /* pcgfont.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = pcgfont.dfont; sourceTree = "<group>"; };
@@ -543,8 +539,6 @@
 		52CC822A2C02179100CC3E38 /* DSTransitionSceneInfoFileParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTransitionSceneInfoFileParser.m; sourceTree = "<group>"; };
 		52CC822B2C02179100CC3E38 /* DSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSViewController.h; sourceTree = "<group>"; };
 		52CC822C2C02179100CC3E38 /* DSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSViewController.m; sourceTree = "<group>"; };
-		52CC822D2C02179100CC3E38 /* DSWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSWindowController.h; sourceTree = "<group>"; };
-		52CC822E2C02179100CC3E38 /* DSWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSWindowController.m; sourceTree = "<group>"; };
 		52CC822F2C02179100CC3E38 /* DynospriteDirectPageGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynospriteDirectPageGlobals.h; sourceTree = "<group>"; };
 		52CC82BF2C021A4400CC3E38 /* Space Bandits.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space Bandits.entitlements"; sourceTree = "<group>"; };
 		52E249FA2C17E7E00098F87D /* 10-fixed_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "10-fixed_object.c"; path = "../../../../game/objects/10-fixed_object.c"; sourceTree = "<group>"; };
@@ -717,7 +711,6 @@
 				525FE4632C053EC500E03391 /* DSTransitionSceneInfoTest.m */,
 				525FE4642C053EC500E03391 /* DSTransitionSceneTest.m */,
 				525FE4652C053EC500E03391 /* DSViewControllerTest.m */,
-				525FE4662C053EC500E03391 /* DSWindowControllerTest.m */,
 				5218E5012C0BB72300F9B9A3 /* DSKeyEventBaseTest.h */,
 				5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */,
 			);
@@ -878,8 +871,6 @@
 				52CC822A2C02179100CC3E38 /* DSTransitionSceneInfoFileParser.m */,
 				52CC822B2C02179100CC3E38 /* DSViewController.h */,
 				52CC822C2C02179100CC3E38 /* DSViewController.m */,
-				52CC822D2C02179100CC3E38 /* DSWindowController.h */,
-				52CC822E2C02179100CC3E38 /* DSWindowController.m */,
 				52CC822F2C02179100CC3E38 /* DynospriteDirectPageGlobals.h */,
 				522A46F82C057C5E0094C68A /* UIImage+Misc.h */,
 				522A46F92C057C5E0094C68A /* UIImage+Misc.m */,
@@ -1217,7 +1208,6 @@
 				52CC82802C02179100CC3E38 /* DSResourceController.m in Sources */,
 				52E24A262C17E84E0098F87D /* 02-space.c in Sources */,
 				52CC82412C02179100CC3E38 /* DSCocoJoystickController.m in Sources */,
-				52CC82BC2C02179100CC3E38 /* DSWindowController.m in Sources */,
 				52CC82652C02179100CC3E38 /* DSLevelLoadingScene.m in Sources */,
 				52CC82532C02179100CC3E38 /* DSDirectPageGlobals.m in Sources */,
 				52CC82892C02179100CC3E38 /* DSSharedSceneController.m in Sources */,
@@ -1261,7 +1251,6 @@
 				52CC82842C02179100CC3E38 /* DSScene.m in Sources */,
 				525FE4822C053EC500E03391 /* DSSceneTest.m in Sources */,
 				52CC826F2C02179100CC3E38 /* DSNSDataMD5Extensions.m in Sources */,
-				52CC82BD2C02179100CC3E38 /* DSWindowController.m in Sources */,
 				525FE4802C053EC500E03391 /* DSResourceControllerTest.m in Sources */,
 				52CC82902C02179100CC3E38 /* DSSpriteFileParser.m in Sources */,
 				52CC82B72C02179100CC3E38 /* DSTransitionSceneInfoFileParser.m in Sources */,
@@ -1303,7 +1292,6 @@
 				52CC824B2C02179100CC3E38 /* DSCons.m in Sources */,
 				525FE4712C053EC500E03391 /* DSDirectPageGlobalsTest.m in Sources */,
 				52CC82782C02179100CC3E38 /* DSObjectClassDataRegistry.m in Sources */,
-				525FE4952C053EC600E03391 /* DSWindowControllerTest.m in Sources */,
 				525FE4762C053EC500E03391 /* DSLevelLoadingSceneTest.m in Sources */,
 				525FE4912C053EC600E03391 /* DSTransitionSceneInfoFileParserTest.m in Sources */,
 				525FE4852C053EC500E03391 /* DSSpriteFileParserTest.m in Sources */,

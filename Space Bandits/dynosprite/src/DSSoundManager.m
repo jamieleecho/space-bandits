@@ -79,7 +79,7 @@ static DSSoundManager *_sharedInstance = nil;
     [_soundIdToSounds removeAllObjects];
 }
 
-- (void)sound:(AVAudioPlayer *)sound didFinishPlaying:(BOOL)didFinish {
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)sound successfully:(BOOL)flag {
     [_playingSounds removeObject:sound];
 }
 

@@ -49,10 +49,6 @@ const float DefaultFontSize = 12.0f;
         _foregroundColor = UIColor.blackColor;
         _progressBarColor = UIColor.greenColor;
         _labels = [[NSMutableArray alloc] init];
-
-        self.size = CGSizeMake(320, 200);
-        self.anchorPoint = CGPointMake(0, 1);
-        self.scaleMode = SKSceneScaleModeAspectFit;
         
         _backgroundImageName = nil;
         _backgroundImage = [SKSpriteNode spriteNodeWithColor:self.backgroundColor size:self.size];

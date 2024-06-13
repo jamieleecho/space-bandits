@@ -28,6 +28,10 @@
      row
      */
     if (self = [super init]) {
+        self.size = CGSizeMake(320, 200);
+        self.anchorPoint = CGPointMake(0, 1);
+        self.scaleMode = SKSceneScaleModeAspectFit;
+        
         memset(_debouncedKeys, 0xff, sizeof(_debouncedKeys));
         _pressedKeys = [[NSMutableSet alloc] init];
         _keyCodeToMatrix = @{

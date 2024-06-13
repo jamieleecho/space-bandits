@@ -51,8 +51,6 @@
 
 - (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager andSceneController:(DSSceneController *)sceneController {
     if (self = [super init]) {
-        self.size = CGSizeMake(320, 200);
-        self.anchorPoint = CGPointMake(0, 1);
         _levelObj = level;
         _resourceController = resourceController;
         _tileInfo = tileInfo;

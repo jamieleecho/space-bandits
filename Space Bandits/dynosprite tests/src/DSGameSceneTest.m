@@ -94,8 +94,6 @@ static byte backgroundNewXY(void) {
 }
 
 - (void)testInit {
-    XCTAssertTrue(CGSizeEqualToSize(self.target.size, CGSizeMake(320, 200)));
-    XCTAssertTrue(CGPointEqualToPoint(self.target.anchorPoint, CGPointMake(0, 1)));
     XCTAssertEqual(self.target.levelObj, _levelObj);
     XCTAssertEqual(self.target.resourceController, _resourceController);
     XCTAssertEqual(self.target.tileInfo, _tileInfo);

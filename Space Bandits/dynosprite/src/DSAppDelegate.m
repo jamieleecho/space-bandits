@@ -37,7 +37,17 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    UIWindowScene *windowScene = nil;
+    for (UIScene *scene in application.connectedScenes) {
+        if ([scene isKindOfClass:UIWindowScene.class]) {
+            windowScene = (UIWindowScene *)scene;
+            break;
+        }
+    }
+    windowScene.sizeRestrictions.minimumSize = CGSizeMake(320, 200);
+    windowScene.titlebar.titleVisibility = UITitlebarTitleVisibilityHidden;
+
     return YES;
 }
 

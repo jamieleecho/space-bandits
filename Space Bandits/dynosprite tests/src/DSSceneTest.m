@@ -28,6 +28,10 @@
 }
 
 - (void)testInit {
+    XCTAssertTrue(CGSizeEqualToSize(self.target.size, CGSizeMake(320, 200)));
+    XCTAssertTrue(CGPointEqualToPoint(self.target.anchorPoint, CGPointMake(0, 1)));
+    XCTAssertEqual(self.target.scaleMode, SKSceneScaleModeAspectFit);
+
     XCTAssertEqual(self.target.debouncedKeys[0], 0xff);
     XCTAssertEqual(self.target.debouncedKeys[1], 0xff);
     XCTAssertEqual(self.target.debouncedKeys[2], 0xff);
