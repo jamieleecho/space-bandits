@@ -18,6 +18,6 @@ jobs:
 
       - name: Build and test macOS application
         run: |
-          sudo xcode-select -switch /Applications/Xcode_14.2.app
+          sudo xcode-select -switch /Applications/Xcode_15.app
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits GitHub" test
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" build CONFIGURATION_BUILD_DIR=`pwd`/build
