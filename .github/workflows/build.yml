@@ -22,5 +22,5 @@ jobs:
 
       - name: Build and test macOS application
         run: |
-          xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits GitHub" test
+          xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits Github" test
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" build CONFIGURATION_BUILD_DIR=`pwd`/build
