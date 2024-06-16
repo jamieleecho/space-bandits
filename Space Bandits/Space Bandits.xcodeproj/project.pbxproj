@@ -10,6 +10,8 @@
 		5218E5002C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */; };
 		522A46FA2C057C5E0094C68A /* UIImage+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 522A46F92C057C5E0094C68A /* UIImage+Misc.m */; };
 		522A46FB2C057C5E0094C68A /* UIImage+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 522A46F92C057C5E0094C68A /* UIImage+Misc.m */; };
+		523978372C1F5D1300301419 /* pcgfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 523978362C1F5D1300301419 /* pcgfont.ttf */; };
+		523978382C1F5D1300301419 /* pcgfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 523978362C1F5D1300301419 /* pcgfont.ttf */; };
 		5257B6742C055799005BA808 /* OCMock.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525FE4992C05412000E03391 /* OCMock.xcframework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5257B6792C055957005BA808 /* OCMock.xcframework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 525FE4992C05412000E03391 /* OCMock.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		525FE4202C053EB200E03391 /* 01-foo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 525FE4042C053EB200E03391 /* 01-foo.wav */; };
@@ -81,7 +83,6 @@
 		525FE4922C053EC600E03391 /* DSTransitionSceneInfoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4632C053EC500E03391 /* DSTransitionSceneInfoTest.m */; };
 		525FE4932C053EC600E03391 /* DSTransitionSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4642C053EC500E03391 /* DSTransitionSceneTest.m */; };
 		525FE4942C053EC600E03391 /* DSViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4652C053EC500E03391 /* DSViewControllerTest.m */; };
-		526C332B2C16C7D2003FB16E /* pcgfont.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 526C33292C16C7D2003FB16E /* pcgfont.dfont */; };
 		5287C4712C0BCFDA00AD2369 /* hires in Resources */ = {isa = PBXBuildFile; fileRef = 5287C4702C0BCFDA00AD2369 /* hires */; };
 		52CC81A52C02172200CC3E38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52CC81A42C02172200CC3E38 /* Assets.xcassets */; };
 		52CC81AA2C02172200CC3E38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC81A92C02172200CC3E38 /* main.m */; };
@@ -366,6 +367,8 @@
 		5218E5012C0BB72300F9B9A3 /* DSKeyEventBaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSKeyEventBaseTest.h; sourceTree = "<group>"; };
 		522A46F82C057C5E0094C68A /* UIImage+Misc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Misc.h"; sourceTree = "<group>"; };
 		522A46F92C057C5E0094C68A /* UIImage+Misc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Misc.m"; sourceTree = "<group>"; };
+		523978362C1F5D1300301419 /* pcgfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pcgfont.ttf; sourceTree = "<group>"; };
+		523978402C1F654100301419 /* readme-bas.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "readme-bas.txt"; path = "../../../game/readme-bas.txt"; sourceTree = "<group>"; };
 		525FE4042C053EB200E03391 /* 01-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "01-foo.wav"; sourceTree = "<group>"; };
 		525FE4052C053EB200E03391 /* 01-moon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "01-moon.gif"; sourceTree = "<group>"; };
 		525FE4062C053EB200E03391 /* 01-moon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "01-moon.json"; sourceTree = "<group>"; };
@@ -439,7 +442,6 @@
 		525FE4992C05412000E03391 /* OCMock.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OCMock.xcframework; sourceTree = "<group>"; };
 		5268AC2B2C1A998D00365852 /* dynosprite-github.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "dynosprite-github.xctestplan"; sourceTree = "<group>"; };
 		526C33282C16C77D003FB16E /* Space-Bandits-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Space-Bandits-Info.plist"; sourceTree = SOURCE_ROOT; };
-		526C33292C16C7D2003FB16E /* pcgfont.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = pcgfont.dfont; sourceTree = "<group>"; };
 		5287C4702C0BCFDA00AD2369 /* hires */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hires; sourceTree = "<group>"; };
 		52CC81912C02172200CC3E38 /* Space Bandits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Bandits.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52CC81A22C02172200CC3E38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -721,7 +723,7 @@
 		526C332A2C16C7D2003FB16E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				526C33292C16C7D2003FB16E /* pcgfont.dfont */,
+				523978362C1F5D1300301419 /* pcgfont.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -901,6 +903,7 @@
 				52E24A662C1808210098F87D /* sprites */,
 				52E24A8F2C18094D0098F87D /* tiles */,
 				52E24A2A2C1805500098F87D /* defaults-config.json */,
+				523978402C1F654100301419 /* readme-bas.txt */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -1059,6 +1062,7 @@
 				52E24A762C1808AA0098F87D /* Copy sounds Files */,
 				52E24A7A2C1808E20098F87D /* Copy sprites Files */,
 				52E24A8A2C1809360098F87D /* Copy tiles Files */,
+				5239783D2C1F622700301419 /* Create Credits */,
 			);
 			buildRules = (
 			);
@@ -1130,7 +1134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52CC82352C02179100CC3E38 /* Actions.sks in Resources */,
-				526C332B2C16C7D2003FB16E /* pcgfont.dfont in Resources */,
+				523978372C1F5D1300301419 /* pcgfont.ttf in Resources */,
 				52CC81A52C02172200CC3E38 /* Assets.xcassets in Resources */,
 				52E0DB3D2C0C42A700AD5BDC /* Main.storyboard in Resources */,
 				52E24A2B2C1805500098F87D /* defaults-config.json in Resources */,
@@ -1146,6 +1150,7 @@
 				525FE4272C053EB200E03391 /* 04-ship.json in Resources */,
 				525FE4262C053EB200E03391 /* 03-foo.wav in Resources */,
 				525FE4212C053EB200E03391 /* 01-moon.gif in Resources */,
+				523978382C1F5D1300301419 /* pcgfont.ttf in Resources */,
 				5287C4712C0BCFDA00AD2369 /* hires in Resources */,
 				525FE4332C053EB200E03391 /* JSONBad in Resources */,
 				525FE42F2C053EB200E03391 /* forest.png in Resources */,
@@ -1171,6 +1176,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5239783D2C1F622700301419 /* Create Credits */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../game/readme-bas.txt",
+			);
+			name = "Create Credits";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$UNLOCALIZED_RESOURCES_FOLDER_PATH/Credits.rtf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sed 1,3d \"$SCRIPT_INPUT_FILE_0\" | textutil -convert rtf -stdin -output \"$SCRIPT_OUTPUT_FILE_0\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		52CC818D2C02172200CC3E38 /* Sources */ = {
@@ -1486,7 +1514,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space Bandits/Space Bandits.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = v0.16;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Space-Bandits-Info.plist";
@@ -1502,7 +1530,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = v0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-Bandits";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1522,7 +1550,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space Bandits/Space Bandits.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = v0.16;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Space-Bandits-Info.plist";
@@ -1538,7 +1566,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = v0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-Bandits";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

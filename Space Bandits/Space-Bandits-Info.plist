@@ -4,7 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>pcgfont.dfont</string>
+		<string>pcgfont.ttf</string>
 	</array>
 </dict>
 </plist>

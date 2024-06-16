@@ -25,9 +25,6 @@ const float DefaultFontSize = 12.0f;
     label.fontSize = DefaultFontSize;
     CGRect rect = CGRectMake(position.x, position.y, label.text.length * 8, 8);
     float scalingFactor = rect.size.width / label.frame.size.width;
-
-    // Change the fontSize.
-    label.fontSize *= scalingFactor;
 }
 
 - (NSString *)backgroundImageName {

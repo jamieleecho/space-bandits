@@ -102,13 +102,13 @@ static NSString *MenuSoundHigh = @"HiFi";
 }
 
 - (void)transitionToNextScreen {
-    SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
-    DSTransitionScene *transitionScene = [self.sceneController transitionSceneForLevel:(int)self.firstLevel];
-    [self.view presentScene:transitionScene transition:transition];
     [self.soundManager loadCache];
     self.soundManager.maxNumSounds = (self.resourceController.hifiMode) ? 10 : 2;
     DynospriteGlobalsPtr->UserGlobals_Init = NO;
     self.isDone = YES;
+    DSTransitionScene *transitionScene = [self.sceneController transitionSceneForLevel:(int)self.firstLevel];
+    SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
+    [self.view presentScene:transitionScene transition:transition];
 }
 
 - (void)toggleDisplay {
