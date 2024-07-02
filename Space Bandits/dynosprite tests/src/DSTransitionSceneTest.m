@@ -64,7 +64,7 @@
     XCTAssertEqual(label.horizontalAlignmentMode, SKLabelHorizontalAlignmentModeLeft);
     XCTAssertEqual(label.verticalAlignmentMode, SKLabelVerticalAlignmentModeTop);
     XCTAssertTrue(CGPointEqualToPoint(label.position, CGPointMake(0, 0)));
-    XCTAssertEqual(label.fontSize, 13.037036895751953f);
+    XCTAssertEqual(label.fontSize, 12);
     XCTAssertTrue([DSTestUtils color:label.fontColor isSameAs:_target.foregroundColor]);
     SKSpriteNode *background = (SKSpriteNode *)label.parent;
     XCTAssertEqualObjects(background.parent, _target);
@@ -156,11 +156,8 @@
     XCTAssertTrue([DSTestUtils image:hiresImage isSameAsImage:hiresBackgroundImage]);
     
     // Verify that the font was updated
-#if TARGET_OS_MACCATALYST
-    XCTAssertEqual(label.fontSize, 12.80000114440918);
-#else
-    XCTAssertEqual(label.fontSize, 16);
-#endif
+    XCTAssertEqual(label.fontSize, 12);
+
     SKSpriteNode *background = (SKSpriteNode *)label.parent;
     XCTAssert(label.fontName, @"Monaco");
     XCTAssertTrue(CGPointEqualToPoint(background.position, CGPointMake(100.0f, -201.19999694824219)));
@@ -190,11 +187,8 @@
     [_target observeValueForKeyPath:@"hiresMode" ofObject:_resourceController change:nil context:nil];
 
     // Verify that the font was updated
-#if TARGET_OS_MACCATALYST
-    XCTAssertEqual(label.fontSize, 12.80000114440918);
-#else
-    XCTAssertEqual(label.fontSize, 16);
-#endif
+    XCTAssertEqual(label.fontSize, 12);
+
     SKSpriteNode *background = (SKSpriteNode *)label.parent;
     XCTAssert(label.fontName, @"Monaco");
     XCTAssertTrue(CGPointEqualToPoint(background.position, CGPointMake(100.0f, -201.19999694824219)));
