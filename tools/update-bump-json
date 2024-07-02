@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+# Updates bump-info.json with the line numbers in project.pbxproj with
+# versions that must be updated
+
+# pbxproj file with version numbers that must be updated
+PBXPROJ="Space Bandits/Space Bandits.xcodeproj/project.pbxproj"
+
+# JSON file that must be updated to point to the correct line numbers in PBXPROJ
+BUMP_FILE=bump-info.json
+
+# Line numbers in pbxproj that must be updated
+LINE_NUMBERS=`grep -n '\(CURRENT_PROJECT_VERSION\|MARKETING_VERSION\)' ${PBXPROJ} | sed 's/\:/ /' | awk '{print $1}'`
+
+# Contents of bump-info.json without pbxproj locations
+BUMP_JSON=`jq 'del(.files[] | select(.path == "${PBXPROJ}"))' ${BUMP_FILE}`
+
+# Update BUMP_JSON contents to point to line_numbers in pbxproj
+echo ${LINE_NUMBERS} | while read linenum; do
+BUMP_JSON=`echo ${BUMP_JSON} | jq '.files[.files | length] |= . + {"path":"'${PBXPROJ}'","line":'${linenum}'}'`
+done
+
+# Create the updated bump-info.json
+rm -f "${BUMP_FILE}"
+echo ${BUMP_JSON} > "${BUMP_FILE}"
