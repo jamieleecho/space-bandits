@@ -16,9 +16,11 @@ LINE_NUMBERS=`grep -n '\(CURRENT_PROJECT_VERSION\|MARKETING_VERSION\)' "${PBXPRO
 BUMP_JSON=`jq 'del(.files[] | select(.path == "${PBXPROJ}"))' ${BUMP_FILE}`
 
 # Update BUMP_JSON contents to point to line_numbers in pbxproj
-echo "${LINE_NUMBERS}" | while read linenum; do
+while read linenum; do
 BUMP_JSON=`echo ${BUMP_JSON} | jq '.files[.files | length] |= . + {"path":"'"${PBXPROJ}"'","line":'${linenum}'}'`
-done
+# Changes the first / to // to create unique filenames to trick bumper that the files are different
+PBXPROJ=${PBXPROJ/\//\/\/}
+done < <(echo "${LINE_NUMBERS}")
 
 # Create the updated bump-info.json
 rm -f "${BUMP_FILE}"
