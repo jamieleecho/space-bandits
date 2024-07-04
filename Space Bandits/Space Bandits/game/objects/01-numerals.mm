@@ -45,7 +45,8 @@ byte NumeralsUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
 }
 
     
-void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures, void *node) {
+void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures, void *node, bool
+                  hide) {
     SKSpriteNode *sprite = (__bridge SKSpriteNode *)node;
     NSArray<DSTexture *> *textureArray = (__bridge NSArray<DSTexture *> *)textures;
     sprite.anchorPoint = CGPointMake(0, 1);
@@ -60,6 +61,7 @@ void NumeralsDraw(DynospriteCOB *cob, void *scene, void *camera, void *textures,
             [sprite addChild:digitNode];
         }
         SKSpriteNode *digitNode = (SKSpriteNode *)sprite.children[ii];
+        digitNode.hidden = hide;
         byte msb = (ii + 1) & 1;
         byte digit = (msb ? score[ii / 2] >> 4 : score[ii / 2]) & 0xf;
         digitNode.texture = textureArray[digit].texture;

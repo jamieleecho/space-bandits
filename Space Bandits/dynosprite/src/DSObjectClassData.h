@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) size_t initSize;
 @property (nonatomic) byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *);
 @property (nonatomic) byte(*updateMethod)(DynospriteCOB *, DynospriteODT *);
-@property (nonatomic) void(*drawMethod)(struct DynospriteCOB *, void *, void *, void *, void *);
+@property (nonatomic) void(*drawMethod)(struct DynospriteCOB *, void *, void *, void *, void *, bool);
 @property (nonatomic) size_t stateSize;
 
 @end
