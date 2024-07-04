@@ -94,23 +94,23 @@ static byte backgroundNewXY(void) {
 }
 
 - (void)testInit {
-    XCTAssertEqual(_target.backgroundColor.alphaComponent, 0.0f);
-    XCTAssertTrue(CGSizeEqualToSize(_target.size, CGSizeMake(320, 200)));
-    XCTAssertTrue(CGPointEqualToPoint(_target.anchorPoint, CGPointMake(0, 1)));
-    XCTAssertEqual(_target.levelObj, _levelObj);
-    XCTAssertEqual(_target.resourceController, _resourceController);
-    XCTAssertEqual(_target.tileInfo, _tileInfo);
-    XCTAssertEqual(_target.tileMapMaker, _tileMapMaker);
-    XCTAssertEqual(_target.bundle, _bundle);
-    XCTAssertEqual(_target.objectCoordinator, _objectCoordinator);
-    XCTAssertEqual(_target.textureManager, _textureManager);
-    XCTAssertNotNil(_target.sprites);
-    XCTAssertEqual(_target.sprites.count, 0);
+    XCTAssertEqual(CGColorGetAlpha(self.target.backgroundColor.CGColor), 0.0f);
+    XCTAssertTrue(CGSizeEqualToSize(self.target.size, CGSizeMake(320, 200)));
+    XCTAssertTrue(CGPointEqualToPoint(self.target.anchorPoint, CGPointMake(0, 1)));
+    XCTAssertEqual(self.target.levelObj, _levelObj);
+    XCTAssertEqual(self.target.resourceController, _resourceController);
+    XCTAssertEqual(self.target.tileInfo, _tileInfo);
+    XCTAssertEqual(self.target.tileMapMaker, _tileMapMaker);
+    XCTAssertEqual(self.target.bundle, _bundle);
+    XCTAssertEqual(self.target.objectCoordinator, _objectCoordinator);
+    XCTAssertEqual(self.target.textureManager, _textureManager);
+    XCTAssertNotNil(self.target.sprites);
+    XCTAssertEqual(self.target.sprites.count, 0);
 }
 
 - (void)testInitializeLevel {
     [self commonInit];
-    XCTAssertEqual(_target.backgroundColor.alphaComponent, 0.0f);
+    XCTAssertEqual(CGColorGetAlpha(self.target.backgroundColor.CGColor), 0.0f);
     OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
     id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
     OCMStub([_joystickController joystick]).andReturn(joystick);
@@ -144,14 +144,14 @@ static byte backgroundNewXY(void) {
 
     OCMVerify([_objectCoordinator initializeObjects]);
     
-    XCTAssertEqual(_target.children.count, 7);
-    XCTAssertEqual(_target.sprites.count, 3);
-    OCMVerify([_textureManager configureSprite:_target.sprites[0] forCob:_cobs + 0 andScene:_target andCamera:_target.camera includeBackgroundSavers:YES]);
-    OCMVerify([_textureManager configureSprite:_target.sprites[1] forCob:_cobs + 1 andScene:_target andCamera:_target.camera includeBackgroundSavers:YES]);
-    OCMVerify([_textureManager configureSprite:_target.sprites[2] forCob:_cobs + 2 andScene:_target andCamera:_target.camera includeBackgroundSavers:YES]);
+    XCTAssertEqual(self.target.children.count, 7);
+    XCTAssertEqual(self.target.sprites.count, 3);
+    OCMVerify([_textureManager configureSprite:self.target.sprites[0] forCob:_cobs + 0 andScene:self.target andCamera:self.target.camera includeBackgroundSavers:YES]);
+    OCMVerify([_textureManager configureSprite:self.target.sprites[1] forCob:_cobs + 1 andScene:self.target andCamera:self.target.camera includeBackgroundSavers:YES]);
+    OCMVerify([_textureManager configureSprite:self.target.sprites[2] forCob:_cobs + 2 andScene:self.target andCamera:self.target.camera includeBackgroundSavers:YES]);
 
     // Does the background start at the right point?
-    XCTAssertTrue(CGPointEqualToPoint(_target.camera.position, CGPointMake(362, -337)));
+    XCTAssertTrue(CGPointEqualToPoint(self.target.camera.position, CGPointMake(362, -337)));
 }
 
 - (void)testInitializeLevelWithJoystick {
@@ -209,8 +209,8 @@ static byte backgroundNewXY(void) {
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 41);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2);
     for(size_t ii=0; ii<3; ii++) {
-        OCMVerify( [_textureManager configureSprite:_target.sprites[ii] forCob:_cobs + ii andScene:_target andCamera:_target.camera includeBackgroundSavers:NO]);
-        OCMVerify( [_textureManager configureSprite:_target.sprites[ii] forCob:_cobs + ii andScene:_target andCamera:_target.camera includeBackgroundSavers:YES]);
+        OCMVerify( [_textureManager configureSprite:self.target.sprites[ii] forCob:_cobs + ii andScene:self.target andCamera:self.target.camera includeBackgroundSavers:NO]);
+        OCMVerify( [_textureManager configureSprite:self.target.sprites[ii] forCob:_cobs + ii andScene:self.target andCamera:self.target.camera includeBackgroundSavers:YES]);
     }
     
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX, 27);
