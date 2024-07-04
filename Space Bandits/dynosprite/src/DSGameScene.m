@@ -51,8 +51,6 @@
 
 - (id)initWithLevel:(DSLevel *)level andResourceController:(DSResourceController *)resourceController andTileInfo:(DSTileInfo *)tileInfo andTileMapMaker:(DSTileMapMaker *)tileMapMaker andBundle:(NSBundle *)bundle andObjectCoordinator:(DSObjectCoordinator *)coordinator andTextureManager:(DSTextureManager *)textureManager andSceneController:(DSSceneController *)sceneController {
     if (self = [super init]) {
-        self.size = CGSizeMake(320, 200);
-        self.anchorPoint = CGPointMake(0, 1);
         _levelObj = level;
         _resourceController = resourceController;
         _tileInfo = tileInfo;
@@ -84,8 +82,8 @@
         tileImagePath = [tileImagePath substringWithRange:NSMakeRange(3, tileImagePath.length - 3)];
     }
     tileImagePath = [NSString pathWithComponents:@[_bundle.resourcePath, [_resourceController imageWithName:tileImagePath]]];
-    NSImage *tileImage = [[NSImage alloc] initWithContentsOfFile:tileImagePath];
-    NSRect tileImageRect = NSMakeRect(_tileInfo.tileSetStart.x, _tileInfo.tileSetStart.y, _tileInfo.tileSetSize.x, _tileInfo.tileSetSize.y);
+    UIImage *tileImage = [[UIImage alloc] initWithContentsOfFile:tileImagePath];
+    CGRect tileImageRect = CGRectMake(_tileInfo.tileSetStart.x, _tileInfo.tileSetStart.y, _tileInfo.tileSetSize.x, _tileInfo.tileSetSize.y);
     
     // Get the image used to create the map (screen)
     NSString *mapImagePath = _levelObj.tilemapImagePath;
@@ -93,8 +91,8 @@
         mapImagePath = [mapImagePath substringWithRange:NSMakeRange(3, mapImagePath.length - 3)];
     }
     mapImagePath = [NSString pathWithComponents:@[_bundle.resourcePath, [_resourceController imageWithName:mapImagePath]]];
-    NSImage *mapImage = [[NSImage alloc] initWithContentsOfFile:mapImagePath];
-    NSRect mapImageRect = NSMakeRect(_levelObj.tilemapStart.x, _levelObj.tilemapStart.y, _levelObj.tilemapSize.x, _levelObj.tilemapSize.y);
+    UIImage *mapImage = [[UIImage alloc] initWithContentsOfFile:mapImagePath];
+    CGRect mapImageRect = CGRectMake(_levelObj.tilemapStart.x, _levelObj.tilemapStart.y, _levelObj.tilemapSize.x, _levelObj.tilemapSize.y);
 
     // Create the background
     SKTileMapNode *tileMapNode = [_tileMapMaker nodeFromImage:mapImage withRect:mapImageRect usingTileImage:tileImage withTileRect:tileImageRect];
@@ -110,7 +108,7 @@
     // Create the sprites
     NSMutableArray *sprites = [NSMutableArray arrayWithCapacity:_objectCoordinator.count];
     for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
-        SKSpriteNode *sprite = [[SKSpriteNode alloc] initWithColor:NSColor.clearColor size:CGSizeMake(1, 1)];
+        SKSpriteNode *sprite = [[SKSpriteNode alloc] initWithColor:UIColor.clearColor size:CGSizeMake(1, 1)];
         [sprites addObject:sprite];
         [self addChild:sprite];
         [_textureManager configureSprite:sprite forCob:_objectCoordinator.cobs + ii andScene:self andCamera:self.camera];

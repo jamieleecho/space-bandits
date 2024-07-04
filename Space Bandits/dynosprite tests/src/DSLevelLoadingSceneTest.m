@@ -76,12 +76,12 @@
     
     // Cheap hack to verify colors since SK framework changes them:
     //   get the color, set object colors to what we think they should be and compare
-    NSColor *progressBarOutlineStrokeColor = progressBarOutline.strokeColor;
-    progressBarOutline.strokeColor = NSColor.lightGrayColor;
-    NSColor *progressBarOutlineFillColor = progressBarOutline.fillColor;
-    progressBarOutline.fillColor = [NSColor colorWithWhite:0 alpha:0];
-    NSColor *progressBarColor = progressBar.color;
-    progressBar.color = NSColor.blueColor;
+    UIColor *progressBarOutlineStrokeColor = progressBarOutline.strokeColor;
+    progressBarOutline.strokeColor = UIColor.lightGrayColor;
+    UIColor *progressBarOutlineFillColor = progressBarOutline.fillColor;
+    progressBarOutline.fillColor = [UIColor colorWithWhite:0 alpha:0];
+    UIColor *progressBarColor = progressBar.color;
+    progressBar.color = UIColor.blueColor;
     XCTAssertEqualObjects(progressBarOutline.strokeColor, progressBarOutlineStrokeColor);
     XCTAssertEqualObjects(progressBarOutline.fillColor, progressBarOutlineFillColor);
     XCTAssertEqualObjects(progressBar.color, progressBarColor);
@@ -101,9 +101,9 @@
     _target.bundle = _bundle;
     _target.levelName = @"Level 1";
     _target.levelDescription = @"My Level Description";
-    _target.backgroundColor = NSColor.purpleColor;
-    _target.foregroundColor = NSColor.lightGrayColor;
-    _target.progressBarColor = NSColor.blueColor;
+    _target.backgroundColor = UIColor.purpleColor;
+    _target.foregroundColor = UIColor.lightGrayColor;
+    _target.progressBarColor = UIColor.blueColor;
     _target.resourceController = _resourceController;
     OCMStub([_resourceController fontForDisplay]).andReturn(@"Courier");
 }

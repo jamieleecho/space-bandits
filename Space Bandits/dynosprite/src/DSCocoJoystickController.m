@@ -52,16 +52,12 @@
     return _joystick;
 }
 
-- (void)handleKeyDown:(NSEvent *)event {
-    [_keyboardJoystick handleKeyDown:event];
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    [_keyboardJoystick pressesBegan:presses withEvent:event];
 }
 
-- (void)handleKeyUp:(NSEvent *)event {
-    [_keyboardJoystick handleKeyUp:event];
-}
-
-- (void)sample {
-    [_hardwareJoystickClass sample];
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    [_keyboardJoystick pressesEnded:presses withEvent:event];
 }
 
 @end

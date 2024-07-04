@@ -135,8 +135,8 @@
     [self add1Sound];
     [self setUpToLoad1SoundWithHiFiMode:NO];
     
-    id sound1 = OCMClassMock(NSSound.class);
-    id sound2 = OCMClassMock(NSSound.class);
+    AVAudioPlayer *sound1 = OCMClassMock(AVAudioPlayer.class);
+    AVAudioPlayer *sound2 = OCMClassMock(AVAudioPlayer.class);
     [_target loadCache];
     _target.onlyUseForUnitTestingSoundsIdToSounds[[NSNumber numberWithLong:3]] = @[sound1, sound2];
     OCMStub([sound1 play]).andReturn(YES);
@@ -155,8 +155,8 @@
     [self add1Sound];
     [self setUpToLoad1SoundWithHiFiMode:YES];
     
-    id sound1 = OCMClassMock(NSSound.class);
-    id sound2 = OCMClassMock(NSSound.class);
+    AVAudioPlayer *sound1 = OCMClassMock(AVAudioPlayer.class);
+    AVAudioPlayer *sound2 = OCMClassMock(AVAudioPlayer.class);
     [_target loadCache];
     _target.onlyUseForUnitTestingSoundsIdToSounds[[NSNumber numberWithLong:3]] = @[sound1, sound2];
     OCMStub([sound1 play]).andReturn(NO);
@@ -170,8 +170,8 @@
     [self add1Sound];
     [self setUpToLoad1SoundWithHiFiMode:YES];
     
-    id sound1 = OCMClassMock(NSSound.class);
-    id sound2 = OCMClassMock(NSSound.class);
+    AVAudioPlayer *sound1 = OCMClassMock(AVAudioPlayer.class);
+    AVAudioPlayer *sound2 = OCMClassMock(AVAudioPlayer.class);
     [_target loadCache];
     _target.onlyUseForUnitTestingSoundsIdToSounds[[NSNumber numberWithLong:3]] = @[sound1, sound2];
     OCMStub([sound1 play]).andReturn(NO);

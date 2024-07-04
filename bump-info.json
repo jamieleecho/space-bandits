@@ -2,15 +2,47 @@
   "scheme": "custom",
   "schemeDefinition": "major.minor[.build][->patch]",
   "versionFile": "./package.json",
-  "files": [{
-    "path": "Space Bandits/Space Bandits/Info.plist",
-    "line": 22
-  }],
-  "rules": [{
+  "files": [
+    {
+      "path": "Space Bandits/Space Bandits.xcodeproj/project.pbxproj",
+      "line": 1517
+    },
+    {
+      "path": "Space Bandits/Space Bandits.xcodeproj/project.pbxproj",
+      "line": 1533
+    },
+    {
+      "path": "Space Bandits/Space Bandits.xcodeproj/project.pbxproj",
+      "line": 1553
+    },
+    {
+      "path": "Space Bandits/Space Bandits.xcodeproj/project.pbxproj",
+      "line": 1569
+    },
+    {
+      "path": "Space Bandits/Space Bandits.xcodeproj/project.pbxproj",
+      "line": 1586
+    },
+    {
+      "path": "Space Bandits/Space Bandits.xcodeproj/project.pbxproj",
+      "line": 1591
+    },
+    {
+      "path": "Space Bandits/Space Bandits.xcodeproj/project.pbxproj",
+      "line": 1608
+    },
+    {
+      "path": "Space Bandits/Space Bandits.xcodeproj/project.pbxproj",
+      "line": 1613
+    }
+  ],
+  "rules": [
+    {
       "trigger": "manual",
       "bump": "minor",
       "branch": "main",
       "reset": "build",
       "tag": true
-  }]
+    }
+  ]
 }

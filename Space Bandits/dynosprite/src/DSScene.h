@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 #import "DSCoCoJoystickController.h"
 
@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DSScene : SKScene {
     @private
     SKAction *_pollAction;
-    NSDictionary<NSNumber *, NSArray<NSNumber *> *> *_keyCodeToMatrix;
-    NSMutableSet<NSNumber *> *_pressedKeys;
+    NSDictionary<NSString *, NSArray<NSNumber *> *> *_keyCodeToMatrix;
+    NSMutableSet<NSString *> *_pressedKeys;
     uint8_t _debouncedKeys[8];
 }
 
@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateDebouncedKeys;
 - (uint8_t *)debouncedKeys;
 
-- (void)keyDown:(NSEvent *)theEvent;
-- (void)keyUp:(NSEvent *)theEvent;
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(nullable UIPressesEvent *)event;
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(nullable UIPressesEvent *)event;
 
 - (void)didMoveToView:(SKView *)view;
 - (void)willMoveFromView:(SKView *)view;

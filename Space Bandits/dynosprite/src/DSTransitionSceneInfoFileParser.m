@@ -11,7 +11,7 @@
 
 @implementation DSTransitionSceneInfoFileParser
 
-+ (NSColor *)colorFromRGBString:(NSString *)color {
++ (UIColor *)colorFromRGBString:(NSString *)color {
     NSError *err;
     NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:@"^[0-9a-f]{6}$" options:NSRegularExpressionCaseInsensitive error:&err];
     NSCAssert(err == nil, @"Failed to create NSRegularExpression.");
@@ -25,7 +25,7 @@
     r = rgb >> 16;
     g = (rgb >> 8) & 0xff;
     b = rgb & 0xff;
-    return [NSColor colorWithCalibratedRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1.0f];
+    return [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1.0f];
 }
 
 - (void)parseFile:(NSString *)path forTransitionInfo:(NSMutableArray <DSTransitionSceneInfo *>*)info {

@@ -8,7 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "DSImageUtil.h"
-#import "DSTestUtils.h"
 #import "DSTextureManager.h"
 
 
@@ -25,15 +24,16 @@
 - (void)addSpriteObjectClass:(DSSpriteObjectClass *)spriteObjectClass {
     // Get pixels in a format that is easy to manipulate
     NSString *path = [NSString pathWithComponents:@[self.bundle.resourcePath, [self.resourceController spriteImageWithName:spriteObjectClass.imagePath]]];
-    NSImage *spriteNSImage = [[NSImage alloc] initWithContentsOfFile:path];
-    NSCAssert(spriteNSImage != nil, @"Could not open %@ for sprite group %d.", spriteObjectClass.imagePath, spriteObjectClass.groupID);
-    CGImageRef spriteCGImage = [spriteNSImage CGImageForProposedRect:NULL context:NULL hints:NULL];
+    UIImage *spriteUIImage = [[UIImage alloc] initWithContentsOfFile:path];
+    NSCAssert(spriteUIImage != nil, @"Could not open %@ for sprite group %d.", spriteObjectClass.imagePath, spriteObjectClass.groupID);
+    CGImageRef spriteCGImage = spriteUIImage.CGImage;
     DSImageUtilImageInfo imageInfo = DSImageUtilGetImagePixelData(spriteCGImage);
     
     // Remove the transparent color
     const DSImageUtilARGB8 transparentColor = {0, 0, 0, 0};
-    const NSColor *remapColor = spriteObjectClass.transparentColor;
-    const DSImageUtilARGB8 transparentColorToMap = {0xff, (uint8_t)(remapColor.redComponent * 0xff), (uint8_t)(remapColor.greenComponent * 0xff), (uint8_t)(remapColor.blueComponent * 0xff)};
+    const UIColor *remapColor = spriteObjectClass.transparentColor;
+    const CGFloat* components = CGColorGetComponents(remapColor.CGColor);
+    const DSImageUtilARGB8 transparentColorToMap = {0xff, (uint8_t)(components[0] * 0xff), (uint8_t)(components[1] * 0xff), (uint8_t)(components[2] * 0xff)};
     DSImageUtilReplaceColor(imageInfo, transparentColorToMap, transparentColor);
     CGImageRef filteredImage = DSImageUtilMakeCGImage(imageInfo);
     SKTexture *mainTexture = [SKTexture textureWithCGImage:filteredImage];

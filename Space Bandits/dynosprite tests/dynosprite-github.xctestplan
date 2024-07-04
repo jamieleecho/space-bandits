@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "03B9A0B0-B4B0-49C4-87AF-283618BFB00E",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "DSLevelLoadingSceneTest\/testDidMoveToView",
+        "DSSceneTest\/testClearsMatrixWhenMovedFromView",
+        "DSTextureManagerTest"
+      ],
+      "target" : {
+        "containerPath" : "container:Space Bandits.xcodeproj",
+        "identifier" : "52CC81AE2C02172200CC3E38",
+        "name" : "dynosprite tests"
+      }
+    }
+  ],
+  "version" : 1
+}

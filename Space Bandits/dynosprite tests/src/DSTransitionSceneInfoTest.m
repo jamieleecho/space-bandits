@@ -6,7 +6,6 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
 #import "DSTransitionSceneInfo.h"
 
@@ -24,20 +23,20 @@
 }
 
 - (void)testInit {
-    XCTAssertEqual(_target.backgroundColor, NSColor.whiteColor);
-    XCTAssertEqual(_target.foregroundColor, NSColor.blackColor);
-    XCTAssertEqual(_target.progressColor, NSColor.greenColor);
+    XCTAssertEqual(_target.backgroundColor, UIColor.whiteColor);
+    XCTAssertEqual(_target.foregroundColor, UIColor.blackColor);
+    XCTAssertEqual(_target.progressColor, UIColor.greenColor);
     XCTAssertEqualObjects(_target.backgroundImageName, @"");
 }
 
 - (void)testProperties {
-    _target.backgroundColor = NSColor.brownColor;
-    _target.foregroundColor = NSColor.blueColor;
-    _target.progressColor = NSColor.redColor;
+    _target.backgroundColor = UIColor.brownColor;
+    _target.foregroundColor = UIColor.blueColor;
+    _target.progressColor = UIColor.redColor;
     _target.backgroundImageName = @"/foo/bar/baz";
-    XCTAssertEqual(_target.backgroundColor, NSColor.brownColor);
-    XCTAssertEqual(_target.foregroundColor, NSColor.blueColor);
-    XCTAssertEqual(_target.progressColor, NSColor.redColor);
+    XCTAssertEqual(_target.backgroundColor, UIColor.brownColor);
+    XCTAssertEqual(_target.foregroundColor, UIColor.blueColor);
+    XCTAssertEqual(_target.progressColor, UIColor.redColor);
     XCTAssertEqualObjects(_target.backgroundImageName, @"/foo/bar/baz");
 }
 

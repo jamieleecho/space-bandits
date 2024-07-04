@@ -6,7 +6,9 @@
 //  Copyright © 2019 Jamie Cho. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIApplication.h>
+#import <UIKit/UIResponder.h>
+#import <UIKit/UIKey.h>
 #import "DSCoCoJoystickProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -26,10 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init;
 
 /** Must be called to handle keyboard events */
-- (void)handleKeyDown:(NSEvent *)event;
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event;
 
 /** Must be called to handle keyboard events */
-- (void)handleKeyUp:(NSEvent *)event;
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event;
 
 @end
 

@@ -27,9 +27,9 @@
 
 - (void)testParseColorFromArray {
     NSArray *arr1 = @[@0, @127, @255];
-    XCTAssertEqualObjects([NSColor colorWithRed:0 green:127.0f/255.0f blue:1.0f alpha:1.0f], [DSSpriteFileParser parseColorFromArray:arr1]);
+    XCTAssertEqualObjects([UIColor colorWithRed:0 green:127.0f/255.0f blue:1.0f alpha:1.0f], [DSSpriteFileParser parseColorFromArray:arr1]);
     NSArray *arr2 = @[@4.5f, @50.25f, @254.75f];
-    XCTAssertEqualObjects([NSColor colorWithRed:4.0f/255.0f green:50.0f/255.0f blue:254.0f/255.0f alpha:1.0f], [DSSpriteFileParser parseColorFromArray:arr2]);
+    XCTAssertEqualObjects([UIColor colorWithRed:4.0f/255.0f green:50.0f/255.0f blue:254.0f/255.0f alpha:1.0f], [DSSpriteFileParser parseColorFromArray:arr2]);
     
     XCTAssertThrows([DSSpriteFileParser parseColorFromArray:(NSArray *)@""]);
     XCTAssertThrows(([DSSpriteFileParser parseColorFromArray:@[@0, @127, @255, @255]]));
@@ -76,7 +76,7 @@
     XCTAssertEqual(_objectClass.groupID, 4);
 
     XCTAssertEqualObjects(_objectClass.imagePath, @"../tiles/01-moon.gif");
-    XCTAssertEqualObjects(_objectClass.transparentColor, [NSColor colorWithRed:254/255.0f green:1/255.0f blue:252/255.0f alpha:1.0f]);
+    XCTAssertEqualObjects(_objectClass.transparentColor, [UIColor colorWithRed:254/255.0f green:1/255.0f blue:252/255.0f alpha:1.0f]);
     XCTAssertEqual(_objectClass.palette, 1);
 
     XCTAssertEqual(_objectClass.sprites.count, 3);

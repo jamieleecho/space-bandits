@@ -13,7 +13,7 @@
 - (id)init {
     if (self = [super init]) {
         self.imagePath = @"";
-        self.transparentColor = [NSColor colorNamed:@"black"];
+        self.transparentColor = [UIColor colorNamed:@"black"];
         self.sprites = @[];
     }
     return self;

@@ -16,8 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest
+
       - name: Build and test macOS application
         run: |
-          sudo xcode-select -switch /Applications/Xcode_14.2.app
-          xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits GitHub" test
+          xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits Github" -destination 'platform=OS X,arch=x86_64' test
           xcodebuild -project Space\ Bandits/Space\ Bandits.xcodeproj -scheme "Space Bandits" build CONFIGURATION_BUILD_DIR=`pwd`/build

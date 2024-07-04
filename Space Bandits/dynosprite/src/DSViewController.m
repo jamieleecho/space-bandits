@@ -14,10 +14,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    SKScene *scene = [self.sceneController transitionSceneForLevel:0];
-    
     // Present the scene
+    SKScene *scene = [self.sceneController transitionSceneForLevel:0];
     [self.skView presentScene:scene];
+}
+
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(nullable UIPressesEvent *)event {
+    [self.skView.scene pressesBegan:presses withEvent:event];
+}
+
+
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    [self.skView.scene pressesEnded:presses withEvent:event];
 }
 
 @end

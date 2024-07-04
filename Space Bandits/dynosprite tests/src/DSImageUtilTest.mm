@@ -16,13 +16,12 @@
 @end
 
 @implementation DSImageUtilTest
-
 - (void)setUp {
     NSBundle *bundle = [NSBundle bundleForClass:self.class];
-    NSImage *forestImage = [bundle imageForResource:@"forest"];
-    NSImage *moonImage = [bundle imageForResource:@"moon"];
-    _forestImage = [forestImage CGImageForProposedRect:NULL context:NULL hints:NULL];
-    _moonImage = [moonImage CGImageForProposedRect:NULL context:NULL hints:NULL];
+    UIImage *forestImage = [UIImage imageWithContentsOfFile:[bundle pathForResource:@"forest" ofType:@"png"]];
+    UIImage *moonImage = [UIImage imageWithContentsOfFile:[bundle pathForResource:@"moon" ofType:@"gif"]];
+    _forestImage = forestImage.CGImage;
+    _moonImage = moonImage.CGImage;
 }
 
 - (void)testGetsImageContents {
@@ -35,19 +34,19 @@
     XCTAssertEqual(info.imageData[0].r, 255);
     XCTAssertEqual(info.imageData[0].g, 255);
     XCTAssertEqual(info.imageData[0].b, 0);
-
+    
     // Check the top right corner
     XCTAssertEqual(info.imageData[319].a, 255);
     XCTAssertEqual(info.imageData[319].r, 0);
     XCTAssertEqual(info.imageData[319].g, 170);
     XCTAssertEqual(info.imageData[319].b, 255);
-
+    
     // Check the bottom left corner
     XCTAssertEqual(info.imageData[320 * 191].a, 255);
     XCTAssertEqual(info.imageData[320 * 191].r, 0);
     XCTAssertEqual(info.imageData[320 * 191].g, 170);
     XCTAssertEqual(info.imageData[320 * 191].b, 255);
-
+    
     // Check the bottom right corner
     XCTAssertEqual(info.imageData[320 * 191 + 319].a, 255);
     XCTAssertEqual(info.imageData[320 * 191 + 319].r, 85);
@@ -61,7 +60,7 @@
     XCTAssertEqual(target0.r, 0);
     XCTAssertEqual(target0.g, 0);
     XCTAssertEqual(target0.b, 0);
-
+    
     DSImageUtilARGB8 target1(1, 2, 127, 255);
     XCTAssertEqual(target1.a, 1);
     XCTAssertEqual(target1.r, 2);
@@ -72,7 +71,7 @@
 - (void)testDSImageUtilIsTransparent {
     DSImageUtilARGB8 target0;
     XCTAssertTrue(target0.isTransparent());
-
+    
     DSImageUtilARGB8 target1(1, 2, 127, 255);
     XCTAssertFalse(target1.isTransparent());
     
@@ -88,7 +87,7 @@
     XCTAssertTrue(DSImageUtilARGB8::transparentColor == DSImageUtilARGB8::transparentColor);
     DSImageUtilARGB8 target0;
     XCTAssertTrue(target0 == DSImageUtilARGB8::transparentColor);
-
+    
     DSImageUtilARGB8 target1(0, 2, 127, 255);
     DSImageUtilARGB8 target2(1, 2, 127, 255);
     DSImageUtilARGB8 target3(0, 3, 127, 255);
@@ -107,7 +106,7 @@
     XCTAssertFalse(DSImageUtilARGB8::transparentColor != DSImageUtilARGB8::transparentColor);
     DSImageUtilARGB8 target0;
     XCTAssertFalse(target0 != DSImageUtilARGB8::transparentColor);
-
+    
     DSImageUtilARGB8 target1(0, 2, 127, 255);
     DSImageUtilARGB8 target2(1, 2, 127, 255);
     DSImageUtilARGB8 target3(0, 3, 127, 255);
@@ -125,7 +124,7 @@
 - (void)testDSImageUtilReplaceColor {
     DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(_forestImage);
     DSImageWrapper<DSImageUtilARGB8> image(info.imageData, info.width, info.height);
-
+    
     DSImageUtilReplaceColor(info, DSImageUtilARGB8(255, 255, 255, 0), DSImageUtilARGB8::transparentColor);
     XCTAssertEqual(image(0, 0), DSImageUtilARGB8::transparentColor);
     XCTAssertEqual(image(19, 25), DSImageUtilARGB8::transparentColor);
@@ -134,20 +133,20 @@
 - (void)testDSImageWrapper {
     DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(_forestImage);
     DSImageWrapper<DSImageUtilARGB8> target(info.imageData, info.width, info.height);
-
+    
     XCTAssertEqual(target.data(), info.imageData);
     XCTAssertEqual(target.width(), info.width);
     XCTAssertEqual(target.height(), info.height);
     
     // Check the top left corner
     XCTAssertEqual(target(0, 0), DSImageUtilARGB8(255, 255, 255, 0));
-
+    
     // Check the top right corner
     XCTAssertEqual(target(319, 0), DSImageUtilARGB8(255, 0, 170, 255));
-
+    
     // Check the bottom left corner
     XCTAssertEqual(target(0, 191), DSImageUtilARGB8(255, 0, 170, 255));
-
+    
     // Check the bottom right corner
     XCTAssertEqual(target(319, 191), DSImageUtilARGB8(255, 85, 0, 255));
     
@@ -171,7 +170,7 @@
     XCTAssertEqual(info.height, targetInfo.height);
     DSImageWrapper<DSImageUtilARGB8> wrapper(info.imageData, info.width, info.height);
     DSImageWrapper<DSImageUtilARGB8> targetWrapper(targetInfo.imageData, targetInfo.width, targetInfo.height);
-
+    
     XCTAssertEqual(targetWrapper(0, 0), wrapper(0, 0));
     XCTAssertEqual(targetWrapper(319, 0), wrapper(319, 0));
     XCTAssertEqual(targetWrapper(0, 191), wrapper(0, 191));
@@ -181,10 +180,10 @@
 - (void) testDSImageUtilFindSpritePixels {
     DSImageUtilImageInfo info = DSImageUtilGetImagePixelData(_moonImage);
     DSImageUtilReplaceColor(info, DSImageUtilARGB8(255, 254, 0, 254), DSImageUtilARGB8::transparentColor);
-    NSRect explosion1 = DSImageUtilFindSpritePixels(info, @"explosion1", NSMakePoint(231, 283));
-    XCTAssertTrue(NSEqualRects(explosion1, NSMakeRect(222, 272, 18, 20)));
-    NSRect explosion2 = DSImageUtilFindSpritePixels(info, @"explosion2", NSMakePoint(254, 283));
-    XCTAssertTrue(NSEqualRects(explosion2, NSMakeRect(245, 272, 20, 21)));
+    CGRect explosion1 = DSImageUtilFindSpritePixels(info, @"explosion1", CGPointMake(231, 283));
+    XCTAssertTrue(CGRectEqualToRect(explosion1, CGRectMake(222, 272, 18, 20)));
+    CGRect explosion2 = DSImageUtilFindSpritePixels(info, @"explosion2", CGPointMake(254, 283));
+    XCTAssertTrue(CGRectEqualToRect(explosion2, CGRectMake(245, 272, 20, 21)));
 }
 
 @end

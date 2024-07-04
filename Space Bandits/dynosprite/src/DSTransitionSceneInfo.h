@@ -6,15 +6,15 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSTransitionSceneInfo : NSObject
 
-@property (nonatomic, nonnull) NSColor *backgroundColor;
-@property (nonatomic, nonnull) NSColor *foregroundColor;
-@property (nonatomic, nonnull) NSColor *progressColor;
+@property (nonatomic, nonnull) UIColor *backgroundColor;
+@property (nonatomic, nonnull) UIColor *foregroundColor;
+@property (nonatomic, nonnull) UIColor *progressColor;
 @property (nonatomic, nonnull) NSString *backgroundImageName;
 
 - (id)init;

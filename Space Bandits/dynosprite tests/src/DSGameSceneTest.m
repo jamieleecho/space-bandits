@@ -7,7 +7,7 @@
 //
 
 #import <OCMock/OCMock.h>
-#import <XCTest/XCTest.h>
+#import "DSKeyEventBaseTest.h"
 #import "DSCoCoJoystickController.h"
 #import "DSInitScene.h"
 #import "DSGameScene.h"
@@ -15,8 +15,7 @@
 #import "DSTestUtils.h"
 
 
-@interface DSGameSceneTest : XCTestCase {
-    DSGameScene *_target;
+@interface DSGameSceneTest : DSKeyEventBaseTest<DSGameScene *> {
     DSLevel *_levelObj;
     id _resourceController;
     DSTileInfo *_tileInfo;
@@ -34,11 +33,11 @@
 
 
 static int initLevelCount = 0;
-static void initLevel() {
+static void initLevel(void) {
     initLevelCount++;
 }
 static int backgroundNewXYCount = 0;
-static byte backgroundNewXY() {
+static byte backgroundNewXY(void) {
     return backgroundNewXYCount++;
 }
 
@@ -55,8 +54,8 @@ static byte backgroundNewXY() {
     _objectCoordinator = OCMClassMock(DSObjectCoordinator.class);
     _textureManager = OCMClassMock(DSTextureManager.class);
     _sceneController = OCMClassMock(DSSceneController.class);
-    _target = [[DSGameScene alloc] initWithLevel:_levelObj andResourceController:_resourceController andTileInfo:_tileInfo andTileMapMaker:_tileMapMaker andBundle:_bundle andObjectCoordinator:_objectCoordinator andTextureManager:_textureManager andSceneController:_sceneController];
-    _target.joystickController = _joystickController;
+    self.target = [[DSGameScene alloc] initWithLevel:_levelObj andResourceController:_resourceController andTileInfo:_tileInfo andTileMapMaker:_tileMapMaker andBundle:_bundle andObjectCoordinator:_objectCoordinator andTextureManager:_textureManager andSceneController:_sceneController];
+    self.target.joystickController = _joystickController;
     _node = [[SKNode alloc] init];
     
     backgroundNewXYCount = 0;
@@ -76,16 +75,16 @@ static byte backgroundNewXY() {
     _levelObj.bkgrndStartY = 237;
 
     OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"forest.png");
-    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
-    NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
-    NSRect tileRect = NSMakeRect(3, 7, 160, 64);
+    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForResource:@"forest" ofType:@"png"];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:imagePath];
+    CGRect tileRect = CGRectMake(3, 7, 160, 64);
     
     _tileInfo.imagePath = @"tiles/mytile.png";
     _tileInfo.tileSetStart = DSPointMake(3, 7);
     _tileInfo.tileSetSize = DSPointMake(160, 64);
     _tileInfo.imagePath = @"tiles/mytile.png";
     OCMStub([_tileMapMaker nodeFromImage:OCMArg.any withRect:tileRect usingTileImage:OCMArg.any withTileRect:tileRect]).andDo(^(NSInvocation *invocation) {
-        NSImage *loadedImage;
+        UIImage *loadedImage;
         [invocation getArgument:(void *)&loadedImage atIndex:2];
         XCTAssertTrue([DSTestUtils image:loadedImage isSameAsImage:image]);
     }).andReturn(_node);
@@ -95,17 +94,15 @@ static byte backgroundNewXY() {
 }
 
 - (void)testInit {
-    XCTAssertTrue(CGSizeEqualToSize(_target.size, CGSizeMake(320, 200)));
-    XCTAssertTrue(CGPointEqualToPoint(_target.anchorPoint, CGPointMake(0, 1)));
-    XCTAssertEqual(_target.levelObj, _levelObj);
-    XCTAssertEqual(_target.resourceController, _resourceController);
-    XCTAssertEqual(_target.tileInfo, _tileInfo);
-    XCTAssertEqual(_target.tileMapMaker, _tileMapMaker);
-    XCTAssertEqual(_target.bundle, _bundle);
-    XCTAssertEqual(_target.objectCoordinator, _objectCoordinator);
-    XCTAssertEqual(_target.textureManager, _textureManager);
-    XCTAssertNotNil(_target.sprites);
-    XCTAssertEqual(_target.sprites.count, 0);
+    XCTAssertEqual(self.target.levelObj, _levelObj);
+    XCTAssertEqual(self.target.resourceController, _resourceController);
+    XCTAssertEqual(self.target.tileInfo, _tileInfo);
+    XCTAssertEqual(self.target.tileMapMaker, _tileMapMaker);
+    XCTAssertEqual(self.target.bundle, _bundle);
+    XCTAssertEqual(self.target.objectCoordinator, _objectCoordinator);
+    XCTAssertEqual(self.target.textureManager, _textureManager);
+    XCTAssertNotNil(self.target.sprites);
+    XCTAssertEqual(self.target.sprites.count, 0);
 }
 
 - (void)testInitializeLevel {
@@ -115,9 +112,9 @@ static byte backgroundNewXY() {
     OCMStub([_joystickController joystick]).andReturn(joystick);
     OCMStub([joystick xaxisPosition]).andReturn(25);
     OCMStub([joystick yaxisPosition]).andReturn(52);
-    [_target initializeLevel];
+    [self.target initializeLevel];
     
-    XCTAssertEqual(_target.children.firstObject, _node);
+    XCTAssertEqual(self.target.children.firstObject, _node);
     XCTAssertEqual(initLevelCount, 1);
     XCTAssertEqual(backgroundNewXYCount, 0);
     
@@ -143,20 +140,20 @@ static byte backgroundNewXY() {
 
     OCMVerify([_objectCoordinator initializeObjects]);
     
-    XCTAssertEqual(_target.children.count, 5);
-    XCTAssertEqual(_target.sprites.count, 3);
-    OCMVerify([_textureManager configureSprite:_target.sprites[0] forCob:_cobs + 0 andScene:_target andCamera:_target.camera]);
-    OCMVerify([_textureManager configureSprite:_target.sprites[1] forCob:_cobs + 1 andScene:_target andCamera:_target.camera]);
-    OCMVerify([_textureManager configureSprite:_target.sprites[2] forCob:_cobs + 2 andScene:_target andCamera:_target.camera]);
+    XCTAssertEqual(self.target.children.count, 5);
+    XCTAssertEqual(self.target.sprites.count, 3);
+    OCMVerify([_textureManager configureSprite:self.target.sprites[0] forCob:_cobs + 0 andScene:self.target andCamera:self.target.camera]);
+    OCMVerify([_textureManager configureSprite:self.target.sprites[1] forCob:_cobs + 1 andScene:self.target andCamera:self.target.camera]);
+    OCMVerify([_textureManager configureSprite:self.target.sprites[2] forCob:_cobs + 2 andScene:self.target andCamera:self.target.camera]);
 
     // Does the background start at the right point?
-    XCTAssertTrue(CGPointEqualToPoint(_target.camera.position, CGPointMake(260, -337)));
+    XCTAssertTrue(CGPointEqualToPoint(self.target.camera.position, CGPointMake(260, -337)));
 }
 
 - (void)testInitializeLevelWithJoystick {
     [self commonInit];
     OCMStub([_joystickController useHardwareJoystick]).andReturn(NO);
-    [_target initializeLevel];
+    [self.target initializeLevel];
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_UseKeyboard, 1);
 }
 
@@ -167,18 +164,18 @@ static byte backgroundNewXY() {
     levelObj.tilemapStart = DSPointMake(3, 7);
     
     OCMStub([_resourceController imageWithName:@"tiles/mytile.png"]).andReturn(@"hires/tiles/mytile.png");
-    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
-    NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
+    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForResource:@"forest" ofType:@"png"];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:imagePath];
     OCMStub([_bundle pathForResource:@"hires/tiles/mytile" ofType:@"png"]).andReturn(imagePath);
-    NSRect tileMapRect = NSMakeRect(3, 7, 160, 64);
+    CGRect tileMapRect = CGRectMake(3, 7, 160, 64);
     SKNode *node = [[SKNode alloc] init];
     OCMStub([_tileMapMaker nodeFromImage:OCMArg.any withRect:tileMapRect usingTileImage:OCMArg.any withTileRect:tileMapRect]).andDo(^(NSInvocation *invocation) {
-        NSImage *loadedImage;
+        UIImage *loadedImage;
         [invocation getArgument:(void *)&loadedImage atIndex:2];
         XCTAssertTrue([DSTestUtils image:loadedImage isSameAsImage:image]);
     }).andReturn(node);
     
-    XCTAssertThrows([_target initializeLevel]);
+    XCTAssertThrows([self.target initializeLevel]);
     XCTAssertEqual(initLevelCount, 0);
     XCTAssertEqual(backgroundNewXYCount, 0);
 }
@@ -187,7 +184,7 @@ static byte backgroundNewXY() {
     [self commonInit];
     OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
     id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
-    [_target initializeLevel];
+    [self.target initializeLevel];
     
     _levelObj.bkgrndStartX = 50;
     _levelObj.bkgrndStartY = 100;
@@ -200,15 +197,15 @@ static byte backgroundNewXY() {
     OCMStub([joystick button0Pressed]).andReturn(NO);
     OCMStub([joystick button1Pressed]).andReturn(NO);
 
-    [_target runOneGameLoop];
+    [self.target runOneGameLoop];
     OCMVerify([_objectCoordinator updateOrReactivateObjects]);
-    XCTAssertEqual(_target.camera.position.x, 214);
-    XCTAssertEqual(_target.camera.position.y, -201);
+    XCTAssertEqual(self.target.camera.position.x, 214);
+    XCTAssertEqual(self.target.camera.position.y, -201);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickX, 20);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_JoystickY, 41);
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy1Button2 | Joy2Button1 | Joy2Button2);
     for(size_t ii=0; ii<3; ii++) {
-        OCMVerify( [_textureManager configureSprite:_target.sprites[ii] forCob:_cobs + ii andScene:_target andCamera:_target.camera]);
+        OCMVerify( [_textureManager configureSprite:self.target.sprites[ii] forCob:_cobs + ii andScene:self.target andCamera:self.target.camera]);
     }
     
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX, 27);
@@ -218,36 +215,36 @@ static byte backgroundNewXY() {
 
 - (void) testRunOneGameLoopTransitionToInit {
     [self commonInit];
-    [_target initializeLevel];
+    [self.target initializeLevel];
     SKScene *scene = [[SKScene alloc] init];
     OCMStub([_sceneController transitionSceneForLevel:0]).andReturn(scene);
     OCMStub([_objectCoordinator updateOrReactivateObjects]).andReturn(255);
-    [_target runOneGameLoop];
+    [self.target runOneGameLoop];
     OCMVerify([_sceneController transitionSceneForLevel:0]);
-    XCTAssertTrue(_target.isDone);
+    XCTAssertTrue(self.target.isDone);
 }
 
 - (void) testRunOneGameLoopTransitionToNewScene {
     [self commonInit];
-    [_target initializeLevel];
+    [self.target initializeLevel];
     SKScene *scene = [[SKScene alloc] init];
     OCMStub([_sceneController transitionSceneForLevel:3]).andReturn(scene);
     OCMStub([_objectCoordinator updateOrReactivateObjects]).andReturn(3);
-    [_target runOneGameLoop];
+    [self.target runOneGameLoop];
     OCMVerify([_sceneController transitionSceneForLevel:3]);
-    XCTAssertTrue(_target.isDone);
+    XCTAssertTrue(self.target.isDone);
 }
 
 - (void)testRunOneGameLoopButton0Pressed {
     [self commonInit];
     OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
     id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
-    [_target initializeLevel];
+    [self.target initializeLevel];
     
     OCMStub([_joystickController joystick]).andReturn(joystick);
     OCMStub([joystick button0Pressed]).andReturn(YES);
     OCMStub([joystick button1Pressed]).andReturn(NO);
-    [_target runOneGameLoop];
+    [self.target runOneGameLoop];
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button2 | Joy2Button1 | Joy2Button2);
 }
 
@@ -255,12 +252,12 @@ static byte backgroundNewXY() {
     [self commonInit];
     OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
     id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
-    [_target initializeLevel];
+    [self.target initializeLevel];
     
     OCMStub([_joystickController joystick]).andReturn(joystick);
     OCMStub([joystick button0Pressed]).andReturn(NO);
     OCMStub([joystick button1Pressed]).andReturn(YES);
-    [_target runOneGameLoop];
+    [self.target runOneGameLoop];
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button1 | Joy2Button1 | Joy2Button2);
 }
 
@@ -268,34 +265,38 @@ static byte backgroundNewXY() {
     [self commonInit];
     OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
     id joystick = OCMClassMock(DSCoCoKeyboardJoystick.class);
-    [_target initializeLevel];
+    [self.target initializeLevel];
     
     OCMStub([_joystickController joystick]).andReturn(joystick);
     OCMStub([joystick button0Pressed]).andReturn(YES);
     OCMStub([joystick button1Pressed]).andReturn(NO);
-    [_target update:1];
+    [self.target update:1];
     XCTAssertEqual(DynospriteDirectPageGlobalsPtr->Input_Buttons, Joy1Button2 | Joy2Button1 | Joy2Button2);
 }
 
 - (void)testRunOneGameLoopTransfersButtonPresses {
     [self commonInit];
-    [_target initializeLevel];
+    [self.target initializeLevel];
     byte *matrix = DynospriteDirectPageGlobalsPtr->Input_KeyMatrix;
     memset(matrix, 0, sizeof(DynospriteDirectPageGlobalsPtr->Input_KeyMatrix));
     
-    NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"p\x1byn" isARepeat:NO keyCode:0];
-    [_target keyDown:keyEvent];
-    [_target runOneGameLoop];
+    [self pressKey:@"p" modifiedChars:@""];
+    [self pressKey:UIKeyInputEscape modifiedChars:@""];
+    [self pressKey:@"y" modifiedChars:@""];
+    [self pressKey:@"n" modifiedChars:@""];
+    [self.target runOneGameLoop];
     XCTAssertEqual(matrix[0], 0xff & ~0x04);
     XCTAssertEqual(matrix[2], 0xff & ~0x40);
     XCTAssertEqual(matrix[1], 0xff & ~0x08);
     XCTAssertEqual(matrix[6], 0xff & ~0x02);
-    [_target keyUp:keyEvent];
-    [_target runOneGameLoop];
+    [self unpressKey:@"p" modifiedChars:@""];
+    [self unpressKey:UIKeyInputEscape modifiedChars:@""];
+    [self unpressKey:@"y" modifiedChars:@""];
+    [self unpressKey:@"n" modifiedChars:@""];
+    [self.target runOneGameLoop];
     XCTAssertEqual(matrix[0], 0xff);
     XCTAssertEqual(matrix[2], 0xff);
     XCTAssertEqual(matrix[1], 0xff);
     XCTAssertEqual(matrix[6], 0xff);
 }
-
 @end

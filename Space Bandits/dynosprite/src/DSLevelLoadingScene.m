@@ -31,7 +31,7 @@
     [super didMoveToView:view];
     self.isDone = NO;
     if (self.labels.count == 0) {
-        NSImage *backgroundImage = [[NSImage alloc] initWithContentsOfFile:[self.bundle pathForResource:@"images/01-level1" ofType:@"png"]];
+        UIImage *backgroundImage = [[UIImage alloc] initWithContentsOfFile:[self.bundle pathForResource:@"images/01-level1" ofType:@"png"]];
         
         const float y0 = ((((200 - 64) - backgroundImage.size.height) / 3) / 2);
         const float y1 = y0 + backgroundImage.size.height;
