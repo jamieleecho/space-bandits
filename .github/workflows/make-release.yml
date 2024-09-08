@@ -1,9 +1,7 @@
 name: Make a New Release
 
 on:
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:
 
 jobs:
   build-6809-dsk-image:
