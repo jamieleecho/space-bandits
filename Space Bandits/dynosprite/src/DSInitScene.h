@@ -37,6 +37,7 @@ typedef enum DSInitSceneSound {
     DSInitSceneSound _sound;
     
     bool _alwaysPressed;
+    bool _isTransitioning;
 }
 + (NSString *)textFromResolution:(DSInitSceneDisplay)resolution;
 + (NSString *)textFromControl:(DSInitSceneControl)control;
@@ -47,7 +48,6 @@ typedef enum DSInitSceneSound {
 - (void)didMoveToView:(SKView *)view;
 - (void)willMoveFromView:(SKView *)view;
 
-- (void)mouseUp:(UIEvent *)theEvent;
 - (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(nullable UIPressesEvent *)event;
 
 - (void)transitionToNextScreen;

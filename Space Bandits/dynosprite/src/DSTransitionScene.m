@@ -23,8 +23,6 @@ const float DefaultFontSize = 12.0f;
 + (void)adjustLabel:(SKLabelNode *)label forPosition:(CGPoint)position {
     // Determine the font scaling factor that should let the label text fit in the given rectangle.
     label.fontSize = DefaultFontSize;
-    CGRect rect = CGRectMake(position.x, position.y, label.text.length * 8, 8);
-    float scalingFactor = rect.size.width / label.frame.size.width;
 }
 
 - (NSString *)backgroundImageName {

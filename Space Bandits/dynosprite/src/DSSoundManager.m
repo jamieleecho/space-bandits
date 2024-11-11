@@ -49,6 +49,8 @@ static DSSoundManager *_sharedInstance = nil;
         _cacheState = DSSoundManagerCacheStateEmpty;
         _soundIdToPath = NSMutableDictionary.dictionary;
         _soundIdToSounds = NSMutableDictionary.dictionary;
+        _soundQueue = [[NSOperationQueue alloc] init];
+        _soundQueue.name = @"DSSoundManager Queue";
         self.enabled = YES;
     }
     return self;
@@ -65,6 +67,7 @@ static DSSoundManager *_sharedInstance = nil;
             _soundIdToSounds[soundId] = sounds;
             for(size_t ii=0; ii<_maxNumSounds; ii++) {
                 AVAudioPlayer *sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+                [sound prepareToPlay];
                 sound.delegate = self;
                 [sounds addObject:sound];
             }
@@ -80,34 +83,42 @@ static DSSoundManager *_sharedInstance = nil;
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)sound successfully:(BOOL)flag {
-    [_playingSounds removeObject:sound];
+    @synchronized (_playingSounds) {
+        [_playingSounds removeObject:sound];
+    }
 }
 
-- (BOOL)playSound:(size_t)soundId {
+- (void)playSound:(size_t)soundId {
     if (!self.enabled) {
-        return NO;
+        return;
     }
 
     [self loadCache];
     
-    if (_playingSounds.count >= _maxNumSounds) {
-        return NO;
+    @synchronized(_playingSounds) {
+        if (_playingSounds.count >= _maxNumSounds) {
+            return;
+        }
     }
     
     NSArray *sounds = _soundIdToSounds[[NSNumber numberWithLong:soundId]];
     if (sounds == nil) {
-        return NO;
+        return;
     }
     for(AVAudioPlayer *sound in sounds) {
         if (sound.isPlaying) {
             continue;
         }
-        if ([sound play]) {
-            [_playingSounds addObject:sound];
-            return YES;
-        }
+        [_soundQueue addOperationWithBlock: ^(){
+            if ([sound play]) {
+                @synchronized (self->_playingSounds) {
+                    [self->_playingSounds addObject:sound];
+                }
+            }
+        }];
+        return;
     }
-    return NO;
+    return;
 }
 
 @end

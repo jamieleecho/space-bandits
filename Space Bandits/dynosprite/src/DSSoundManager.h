@@ -24,6 +24,7 @@ typedef enum DSSoundManagerCacheState {
     size_t _maxNumSounds;
     NSMutableDictionary<NSNumber *, NSString *> *_soundIdToPath;
     NSMutableDictionary<NSNumber *, NSArray<AVAudioPlayer *> *> *_soundIdToSounds;
+    NSOperationQueue *_soundQueue;
 }
 
 + (DSSoundManager *)sharedInstance;
@@ -32,6 +33,7 @@ typedef enum DSSoundManagerCacheState {
 @property NSBundle *bundle;
 @property BOOL enabled;
 @property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
+
 - (DSSoundManagerCacheState) cacheState;
 - (NSMutableDictionary<NSNumber *, NSArray<AVAudioPlayer *> *> *) onlyUseForUnitTestingSoundsIdToSounds;
 - (size_t)maxNumSounds;
@@ -40,7 +42,7 @@ typedef enum DSSoundManagerCacheState {
 - (id)init;
 - (void)loadCache;
 - (void)addSound:(NSString *)path forId:(size_t)soundId;
-- (BOOL)playSound:(size_t)soundId;
+- (void)playSound:(size_t)soundId;
 
 @end
 

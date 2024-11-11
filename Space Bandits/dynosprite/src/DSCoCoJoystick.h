@@ -22,9 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
     @private
     /** Joystick opaque type */
     GCController *_controller;
-
-    /** False until joystick registers a new value */
-    GCControllerInputState *_inputState;
 }
 
 /** NSArray with all of the joysticks available to the program */

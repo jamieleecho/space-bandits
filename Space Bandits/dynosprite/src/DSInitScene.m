@@ -43,6 +43,7 @@ static NSString *MenuSoundHigh = @"HiFi";
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
     _alwaysPressed = YES;
+    _isTransitioning = NO;
     self.isDone = NO;
     if (self.labels.count < 1) {
         [self addLabelWithText:@"[D]isplay:" atPosition:CGPointMake(3, 120)];
@@ -64,10 +65,6 @@ static NSString *MenuSoundHigh = @"HiFi";
 - (void)willMoveFromView:(SKView *)view {
     [super willMoveFromView:view];
     [self refreshState];
-}
-
-- (void)mouseUp:(UIEvent *)theEvent {
-    [self transitionToNextScreen];
 }
 
 - (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
@@ -94,7 +91,6 @@ static NSString *MenuSoundHigh = @"HiFi";
                 break;
                 
             case ' ':
-                [self transitionToNextScreen];
                 break;
         }
     }
@@ -102,6 +98,7 @@ static NSString *MenuSoundHigh = @"HiFi";
 }
 
 - (void)transitionToNextScreen {
+    _isTransitioning = YES;
     [self.soundManager loadCache];
     self.soundManager.maxNumSounds = (self.resourceController.hifiMode) ? 10 : 2;
     DynospriteGlobalsPtr->UserGlobals_Init = NO;
@@ -140,7 +137,7 @@ static NSString *MenuSoundHigh = @"HiFi";
 
 - (void)poll {
     if (self.joystickController.joystick.button0Pressed) {
-        if (!_alwaysPressed) {
+        if (!_alwaysPressed && !_isTransitioning && !self.isDone) {
             [self transitionToNextScreen];
         }
     } else {
