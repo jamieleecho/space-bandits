@@ -41,16 +41,13 @@ def build_config(input_filename, output_filename):
     with open(input_filename, "r") as json_file:
         config_json = json.load(json_file)
 
-
     config_dict = {
         "FirstLevel": str(
             config_json["FirstLevel"] if "FirstLevel" in config_json else 1
         ),
         "MonitorIsRGB": str(
             0
-            if (
-                "MonitorIsRGB" not in config_json or (not config_json["MonitorIsRGB"])
-            )
+            if ("MonitorIsRGB" not in config_json or (not config_json["MonitorIsRGB"]))
             else 255
         ),
         "UseKeyboard": str(

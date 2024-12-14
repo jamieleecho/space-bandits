@@ -91,14 +91,18 @@ if __name__ == "__main__":
     f_sounds = open(os.path.join(asmdir, "gamedir-sounds.asm"), "w")
     f_sounds.write("Gamedir_Sounds\n")
     s = str(maxNumber + 1)
-    f_sounds.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of sound waveforms\n")
+    f_sounds.write(
+        f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of sound waveforms\n"
+    )
     for i in range(maxNumber + 1):
         if i not in soundRawNumbers:
             f_sounds.write((" " * 24) + f"* Waveform: {int(i):02} - [empty]\n")
             f_sounds.write(f"{' ' * 24}fdb     0,0\n")
             continue
         idx = soundRawNumbers.index(i)
-        f_sounds.write((" " * 24) + f"* Waveform: {int(i):02} - {soundRawFiles[idx][8:-4]}\n")
+        f_sounds.write(
+            (" " * 24) + f"* Waveform: {int(i):02} - {soundRawFiles[idx][8:-4]}\n"
+        )
         s = str(allSoundSizes[i][0])
         f_sounds.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Uncompressed size (bytes) of waveform\n"

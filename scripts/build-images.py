@@ -373,13 +373,17 @@ if __name__ == "__main__":
             continue
         idx = imgPngNumbers.index(i)
         SpecialColors = ImageColorDict[i]
-        games_images_f.write((" " * 24) + f"* Image: {int(i):02} - {imgPngFiles[idx][3:-4]}\n")
+        games_images_f.write(
+            (" " * 24) + f"* Image: {int(i):02} - {imgPngFiles[idx][3:-4]}\n"
+        )
         s = str(allImageSizes[i][0] // 2)
         games_images_f.write(
             f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* width of image (in bytes)\n"
         )
         s = str(allImageSizes[i][1])
-        games_images_f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* height of image\n")
+        games_images_f.write(
+            f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* height of image\n"
+        )
         s = str(allImageSizes[i][2])
         games_images_f.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Compressed size in bytes\n"

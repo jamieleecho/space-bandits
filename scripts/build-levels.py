@@ -369,13 +369,21 @@ if __name__ == "__main__":
     f_game_levels = open(os.path.join(asmdir, "gamedir-levels.asm"), "w")
     f_game_levels.write("Gamedir_Levels\n")
     s = str(len(allLevels))
-    f_game_levels.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* total number of levels\n")
+    f_game_levels.write(
+        f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* total number of levels\n"
+    )
     for lvl in allLevels:
-        f_game_levels.write(f"{' ' * 24}* Level {lvl.LvlNumber}: {lvl.ParamDict['name']}\n")
+        f_game_levels.write(
+            f"{' ' * 24}* Level {lvl.LvlNumber}: {lvl.ParamDict['name']}\n"
+        )
         s = str(lvl.LvlNumber)
-        f_game_levels.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* Level number\n")
+        f_game_levels.write(
+            f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* Level number\n"
+        )
         s = f"Level{int(lvl.LvlNumber):02}Name"
-        f_game_levels.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level name\n")
+        f_game_levels.write(
+            f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level name\n"
+        )
         s = f"Level{int(lvl.LvlNumber):02}Desc"
         f_game_levels.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level description\n"
@@ -401,7 +409,9 @@ if __name__ == "__main__":
             f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of objects to initialize from Init Stream\n"
         )
         s = str(int(lvl.ParamDict["tileset"]))
-        f_game_levels.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* tileset number to load\n")
+        f_game_levels.write(
+            f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* tileset number to load\n"
+        )
         s = str(lvl.tilemapwidth)
         f_game_levels.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* width of background tilemap\n"

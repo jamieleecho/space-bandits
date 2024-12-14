@@ -30,8 +30,11 @@ import os
 import sys
 import json
 import math
+
 from typing import List
 import numpy
+import numpy.typing
+
 from collections import deque
 from PIL import Image
 
@@ -41,6 +44,9 @@ import coco
 # ******************************************************************************
 # Helper functions and classes for graphics processing script
 #
+
+CocoLuvByRGB: List[int]
+CocoLuvByCMP: List[int]
 
 
 def GenerateCocoPalettes(ColorsUsed, ImagePalette):
@@ -270,7 +276,7 @@ def parsePaletteRGB(paletteFilename):
 
 class SpriteInfo:
     name: str
-    location: List[float]
+    location: List[int]
     singlepixelpos: bool
     pixArray: List[List[int]]
     hotspot: List[float]
@@ -359,7 +365,14 @@ def NonRecursivePaint(ImgData, Width, Height, x, y, transparentIdx, pixCoordColo
         hitlist.append((x - 1, y - 1))
 
 
-def FindSpritePixels(sprite, ImgData, Width, Height, ImageToCocoColor, transparentIdx):
+def FindSpritePixels(
+    sprite: SpriteInfo,
+    ImgData: numpy.typing.NDArray[numpy.int8],
+    Width: int,
+    Height: int,
+    ImageToCocoColor: List[int],
+    transparentIdx: int,
+) -> None:
     # start by searching around the starting point in a spiral pattern until we find a non-transparent pixel
     # direction is up, right, down, left
     x = sprite.location[0]
@@ -399,7 +412,7 @@ def FindSpritePixels(sprite, ImgData, Width, Height, ImageToCocoColor, transpare
         )
         sys.exit(2)
     # now we apply a painting algoritm to produce a list of all of the touching non-transparent pixels
-    pixCoordColorList = []
+    pixCoordColorList: List[List[int]] = []
     NonRecursivePaint(ImgData, Width, Height, x, y, transparentIdx, pixCoordColorList)
     # get lists of all X coordinates and Y coordinates, then calculate width and height of sprite matrix
     Xcoords = [v[0] for v in pixCoordColorList]
@@ -749,7 +762,9 @@ def GenerateTileset(tiledesc_fname, palette_fname, tileset_fname, maskset_fname)
     )
 
 
-def GenerateTilemap(leveldesc_fname, tileset_path, tilemap_fname):
+def GenerateTilemap(
+    leveldesc_fname: str, tileset_path: str, tilemap_fname: str
+) -> None:
     # parse tileset description file
     info = parseLevelDescription(leveldesc_fname)
     # validate tilemap parameters
@@ -832,7 +847,7 @@ def GenerateTilemap(leveldesc_fname, tileset_path, tilemap_fname):
     ImgData = im.getdata()
     PalData = im.getpalette()
     PalSize = len(PalData) // 3
-    ImageToCocoColor = []
+    ImageToCocoColor: List[int] = []
     for i in range(PalSize):
         thisRGB = (PalData[i * 3], PalData[i * 3 + 1], PalData[i * 3 + 2])
         thisLuv = ConvertRGBtoLuv(thisRGB[0], thisRGB[1], thisRGB[2])
@@ -867,22 +882,25 @@ def GenerateTilemap(leveldesc_fname, tileset_path, tilemap_fname):
             tileIdx = Tileset.index(tilePix)
             TileLine.append(tileIdx)
         TileMap.append(TileLine)
+
     # now write out the tilemap file
-    f = open(tilemap_fname, "w")
-    f.write(
+    timemap_f = open(tilemap_fname, "w")
+    timemap_f.write(
         f"* The contents of this file were automatically generated with\n* gfx-process.py by processing the tilemap image file {ImageFilename}\n*\n"
     )
     for tileLine in TileMap:
-        f.write(" ".join(["%02x" % v for v in tileLine]))
-        f.write("\n")
-    f.close()
+        timemap_f.write(" ".join(["%02x" % v for v in tileLine]))
+        timemap_f.write("\n")
+    timemap_f.close()
     # all done!
     print(
         f"Tilemap {tilemap_fname} generated from image {ImageFilename}, with size {len(TileMap[0])}x{len(TileMap)}"
     )
 
 
-def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
+def GenerateSprites(
+    spritedesc_fname: str, palette_path: str, sprite_fname: str
+) -> None:
     # parse sprite description file
     info = parseSpriteDescription(spritedesc_fname)
     # validate sprite parameters
@@ -938,7 +956,7 @@ def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
     im = Image.open(ImageFilename)
     width = im.size[0]
     height = im.size[1]
-    ImgData = numpy.array(im)
+    ImgData: numpy.typing.NDArray[numpy.int8] = numpy.array(im)
     PalData = im.getpalette()
     PalSize = len(PalData) // 3
     ImageToCocoColor = []
@@ -1018,7 +1036,6 @@ def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
 #
 
 if __name__ == "__main__":
-    global CocoLuvByRGB, CocoLuvByCMP
     print("DynoSprite Graphics Processing script")
     # get script mode
     commandList = ["mixtiles", "gentileset", "gentilemap", "gensprites"]
