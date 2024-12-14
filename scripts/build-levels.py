@@ -45,7 +45,7 @@ class ObjectInit:
 
     def Validate(self):
         for key in self.params:
-            if self.params[key] == None:
+            if self.params[key] is None:
                 print(f"****Error: Object init section missing parameter '{key}'")
                 return False
         return True

@@ -41,11 +41,6 @@ def build_config(input_filename, output_filename):
     with open(input_filename, "r") as json_file:
         config_json = json.load(json_file)
 
-    sound_modes = {
-        "NoSound": 0,
-        "Internal": 1,
-        "Orc90": 2,
-    }
 
     config_dict = {
         "FirstLevel": str(

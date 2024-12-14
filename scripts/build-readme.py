@@ -113,7 +113,7 @@ def GenerateReadme(textin, basout):
         for word in line.split(" "):
             word = word.upper()
             if curLine == "":
-                if ListMode == True and word[0] != "*":
+                if ListMode is True and word[0] != "*":
                     word = "  " + word
                 elif word[0] == "*":
                     ListMode = True
@@ -125,7 +125,7 @@ def GenerateReadme(textin, basout):
                 curLine += word + " "
                 continue
             outLines.append(curLine + " " * (32 - len(curLine)))
-            if ListMode == True and word[0] != "*":
+            if ListMode is True and word[0] != "*":
                 curLine = "  " + word + " "
             else:
                 curLine = word + " "

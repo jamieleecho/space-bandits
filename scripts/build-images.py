@@ -60,9 +60,9 @@ def GenerateCocoPalettes(ColorsUsed, ImagePalette):
             bHasBlack = True
         if rgbsum == 255 * 3:
             bHasWhite = True
-    if len(ColorsUsed) < 16 and bHasBlack == False:
+    if len(ColorsUsed) < 16 and bHasBlack is False:
         ColorsUsed.append(PalSize)
-    if len(ColorsUsed) < 16 and bHasWhite == False:
+    if len(ColorsUsed) < 16 and bHasWhite is False:
         ColorsUsed.append(PalSize + 1)
     # convert colors used in our input image into Luv
     PaletteLuv = []
@@ -87,10 +87,10 @@ def GenerateCocoPalettes(ColorsUsed, ImagePalette):
         for j in range(64):
             JDistRGB = Vector3Distance(PaletteLuv[i], CocoLuvByRGB[j])
             JDistCMP = Vector3Distance(PaletteLuv[i], CocoLuvByCMP[j])
-            if BestRGBIdx == None or JDistRGB <= BestRGBDist:
+            if BestRGBIdx is None or JDistRGB <= BestRGBDist:
                 BestRGBIdx = j
                 BestRGBDist = JDistRGB
-            if BestCMPIdx == None or JDistCMP <= BestCMPDist:
+            if BestCMPIdx is None or JDistCMP <= BestCMPDist:
                 BestCMPIdx = j
                 BestCMPDist = JDistCMP
         # we must sort our Coco palettes in the same way, so that the source image pixels get
@@ -208,7 +208,7 @@ def ClosestColorOf16(LuvColor, CocoPalette, PaletteColorset):
     BestDist = -1
     for i in range(16):
         IDistCMP = Vector3Distance(LuvColor, PaletteColorset[CocoPalette[i]])
-        if BestIdx == None or IDistCMP <= BestDist:
+        if BestIdx is None or IDistCMP <= BestDist:
             BestIdx = i
             BestDist = IDistCMP
     return BestIdx

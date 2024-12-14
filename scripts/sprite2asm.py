@@ -117,12 +117,12 @@ class AsmRegisters:
 class AsmStream:
     def __init__(self, name, regState=None):
         self.name = name
-        if name == None:
+        if name is None:
             self.text = ""
         else:
             self.text = f"{'*' * 60}\n* {name}:\n{'*' * 60}\n{name}\n"
         self.metrics = AsmMetrics()
-        if regState == None:
+        if regState is None:
             self.reg = AsmRegisters()
         else:
             self.reg = regState
@@ -524,16 +524,16 @@ class Sprite:
                 isTransparent = self.matrix[y][x] == -1
                 if not isTransparent:
                     self.numPixels += 1
-                if not isTransparent and stripStart == None:
+                if not isTransparent and stripStart is None:
                     # start new strip here
                     stripStart = x
-                elif isTransparent and stripStart != None:
+                elif isTransparent and stripStart is not None:
                     # strip ends here
                     stripLen = x - stripStart
                     stripList.append((stripStart, stripLen))
                     stripStart = None
             # handle strip which ends on last column of row
-            if stripStart != None:
+            if stripStart is not None:
                 stripLen = self.width - stripStart
                 stripList.append((stripStart, stripLen))
             # append this strip array to the row list
@@ -627,7 +627,7 @@ class Sprite:
                     SrcPtrOffAccum = -16
                 # accum: if necessary, advance the destination (Y) pointer across lines
                 if lineAdvanceAccum > 0 and numLoadCommands > 2:
-                    if nextTFMStart == None:
+                    if nextTFMStart is None:
                         nextDstCenterOff = 0
                     else:
                         nextDstCenterOff = nextTFMStart
@@ -829,13 +829,13 @@ class Sprite:
                 byteOff = byteOffStart + idx
                 if idx == numBytes or byteCmds[idx][0] == 0:
                     # command 0 - ignore this byte
-                    if byteCmdStart != None:
+                    if byteCmdStart is not None:
                         byteStrips.append((byteCmdStart, thisStrip))
                         byteCmdStart = None
                         thisStrip = []
                     continue
                 # command 1, 2, or 3
-                if byteCmdStart == None:
+                if byteCmdStart is None:
                     byteCmdStart = byteOff
                 thisStrip.append(byteCmds[idx])
             byteStripsByRow.append(byteStrips)
@@ -1301,7 +1301,7 @@ class Sprite:
         if storeSize != 1:
             raise Exception("Error: storeSize != 1 at end of Permute6309StoreCodeGen!")
         # figure out whiche register to use as scratch for the byte stores
-        if scratchReg == None:
+        if scratchReg is None:
             if not bestRowAsm.reg.IsValid(regA):
                 scratchReg = regA
             elif not bestRowAsm.reg.IsValid(regB):
@@ -1612,7 +1612,7 @@ class Sprite:
                 rowNum, regState, layoutList, nextByteCmdStrips
             )
             layoutList.pop()
-            if bestAsm == None or trialAsm.metrics.cycles < bestAsm.metrics.cycles:
+            if bestAsm is None or trialAsm.metrics.cycles < bestAsm.metrics.cycles:
                 # if bestAsm != None:   # fixme debug
                 #    print("%s: row layout with (cyc=%i,bytes=%i) is better than (cyc=%i,bytes=%i)" % (self.name, trialAsm.metrics.cycles, trialAsm.metrics.bytes, bestAsm.metrics.cycles, bestAsm.metrics.bytes))
                 bestAsm = trialAsm
@@ -1841,7 +1841,7 @@ class Sprite:
                     regB
                 ):
                     matchReg = regB
-                if matchReg == None:
+                if matchReg is None:
                     idx += 1
                     continue
                 # we found a match.  Write 2 pixels
@@ -1934,7 +1934,7 @@ class Sprite:
                     matchReg = regA
                 elif byteCmd[1] == rowAsm.reg.GetValue(regB):
                     matchReg = regB
-                if matchReg == None:
+                if matchReg is None:
                     idx += 1
                     continue
                 # we found a match.  Write 2 pixels
@@ -1999,7 +1999,7 @@ class Sprite:
             tryScore, tryOrder = self.PermuteWordWriteOrder(
                 rowNum, regState, uniqWordValues, wordOrder
             )
-            if bestOrder == None or tryScore > bestScore:
+            if bestOrder is None or tryScore > bestScore:
                 bestScore = tryScore
                 bestOrder = tryOrder
             wordOrder.pop()
@@ -2032,13 +2032,13 @@ class App:
                 continue
             if line[0] == "[" and line[-1] == "]":
                 # new sprite definiton
-                if curSprite != None:
+                if curSprite is not None:
                     curSprite.FinishDefinition()
                 newSpriteName = line[1:-1]
                 curSprite = Sprite(newSpriteName)
                 self.spriteList.append(curSprite)
                 continue
-            if curSprite == None:
+            if curSprite is None:
                 pivot = line.find("=")
                 if pivot != -1:
                     key = line[0:pivot].strip().lower()
@@ -2049,7 +2049,7 @@ class App:
                 print(f"Warning: ignore line before sprite section: {line}")
                 continue
             curSprite.ReadInputLine(line)
-        if curSprite != None:
+        if curSprite is not None:
             curSprite.FinishDefinition()
 
     def PrintRow(self, RowName, Values, datatype):
@@ -2059,7 +2059,7 @@ class App:
             RowName = RowName[:16]
         print(RowName, end=" ")
         for val in Values:
-            if val == None:
+            if val is None:
                 s = ""
             elif datatype == str:
                 s = val
@@ -2172,7 +2172,7 @@ class App:
 
     def WriteAsm(self):
         # make sure we have a group number
-        if self.groupNumber == None:
+        if self.groupNumber is None:
             raise Exception(
                 f"No group number was given in input file {self.spriteFilename}"
             )
@@ -2180,7 +2180,6 @@ class App:
         f = open(self.asmFilename, "w")
         origin = 0
         # dump out the draw/erase routines
-        bHasDrawRight = False
         for sprite in self.spriteList:
             # drawLeft
             length = sprite.funcDraw[0].metrics.bytes
@@ -2193,7 +2192,6 @@ class App:
                 f.write(f"* (Origin: ${origin:04X}  Length: {int(length)} bytes)\n")
                 f.write(f"{sprite.funcDraw[1].text}\n")
                 origin += length
-                bHasDrawRight = True
             # erase
             length = sprite.funcErase.metrics.bytes
             f.write(f"* (Origin: ${origin:04X}  Length: {int(length)} bytes)\n")

@@ -46,7 +46,7 @@ class Tileset:
         palNames = ["Composite", "RGB"]
         # check palette arrays
         for p in range(2):
-            if self.palettes[p] == None:
+            if self.palettes[p] is None:
                 print(
                     f"****Error: missing {palNames[p]} palette in file '{self.palfilename}'"
                 )
@@ -114,7 +114,7 @@ def SaveMatrix(tileset, section, matrix):
         tileset.palettes[0] = matrix
     elif section == "palette-rgb":
         tileset.palettes[1] = matrix
-    elif section != None:
+    elif section is not None:
         print(
             f"****Error: Invalid section '{section}' in palette file '{tileset.palfilename}'"
         )

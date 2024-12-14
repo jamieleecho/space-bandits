@@ -72,10 +72,10 @@ def GenerateCocoPalettes(ColorsUsed, ImagePalette):
         for j in range(64):
             JDistRGB = Vector3Distance(PaletteLuv[i], CocoLuvByRGB[j])
             JDistCMP = Vector3Distance(PaletteLuv[i], CocoLuvByCMP[j])
-            if BestRGBIdx == None or JDistRGB <= BestRGBDist:
+            if BestRGBIdx is None or JDistRGB <= BestRGBDist:
                 BestRGBIdx = j
                 BestRGBDist = JDistRGB
-            if BestCMPIdx == None or JDistCMP <= BestCMPDist:
+            if BestCMPIdx is None or JDistCMP <= BestCMPDist:
                 BestCMPIdx = j
                 BestCMPDist = JDistCMP
         # we must sort our Coco palettes in the same way, so that the source image pixels get
@@ -91,11 +91,11 @@ def GenerateCocoPalettes(ColorsUsed, ImagePalette):
             bHasBlack = True
         if ClosestRGB[i][2] == 63:
             bHasWhite = True
-    if NumColorsUsed < 16 and bHasBlack == False:
+    if NumColorsUsed < 16 and bHasBlack is False:
         ClosestRGB.append((0.0, -1, 0))
         ClosestCMP.append((0.0, -1, 0))
         NumColorsUsed += 1
-    if NumColorsUsed < 16 and bHasWhite == False:
+    if NumColorsUsed < 16 and bHasWhite is False:
         ClosestRGB.append((100.0, -1, 63))
         ClosestCMP.append((100.0, -1, 63))
         NumColorsUsed += 1
@@ -178,7 +178,7 @@ def ClosestColorOf16(LuvColor, CocoPalette, PaletteColorset):
     BestDist = -1
     for i in range(16):
         IDistCMP = Vector3Distance(LuvColor, PaletteColorset[CocoPalette[i]])
-        if BestIdx == None or IDistCMP < BestDist:
+        if BestIdx is None or IDistCMP < BestDist:
             BestIdx = i
             BestDist = IDistCMP
     return BestIdx
@@ -480,14 +480,14 @@ def GenerateTileset(tiledesc_fname, palette_fname, tileset_fname, maskset_fname)
         print("****Error: tilemap size not divisible by 16!")
         sys.exit(3)
     ImageFilename = os.path.join(os.path.dirname(tiledesc_fname), info.filename)
-    if os.path.exists(ImageFilename) == False:
+    if os.path.exists(ImageFilename) is False:
         print(f"****Error: image file '{ImageFilename}' for tileset doesn't exist!")
         sys.exit(3)
     MaskFilename = None
     MaskList = []
     if info.maskFilename != "":
         MaskFilename = os.path.join(os.path.dirname(tiledesc_fname), info.maskFilename)
-    if MaskFilename is not None and os.path.exists(MaskFilename) == False:
+    if MaskFilename is not None and os.path.exists(MaskFilename) is False:
         print(
             f"****Error: collision mask file '{MaskFilename}' for tileset doesn't exist!"
         )
@@ -697,7 +697,6 @@ def GenerateTileset(tiledesc_fname, palette_fname, tileset_fname, maskset_fname)
         CollisionTable = [None] * len(TileList)
         # generate a list of all the unique masks
         MaskList = []
-        MaskIdxByLocation = []
         for y0 in range(0, height, 16):
             if (
                 y0 < info.tilesetStart[1]
@@ -794,7 +793,7 @@ def GenerateTilemap(leveldesc_fname, tileset_path, tilemap_fname):
         print("****Error: tilemap size not divisible by 16!")
         sys.exit(3)
     ImageFilename = os.path.join(os.path.dirname(leveldesc_fname), info.mapfilename)
-    if os.path.exists(ImageFilename) == False:
+    if os.path.exists(ImageFilename) is False:
         print("****Error: image file '{ImageFilename}' for tilemap doesn't exist!")
         sys.exit(3)
     # find the palette and tileset files
@@ -814,12 +813,12 @@ def GenerateTilemap(leveldesc_fname, tileset_path, tilemap_fname):
             and fname[-4:] == ".txt"
         ):
             tileset_fname = fname
-    if tileset_fname == None:
+    if tileset_fname is None:
         print(
             f"****Error: couldn't find tileset {info.tilesetidx} file in directory {tileset_path}"
         )
         sys.exit(3)
-    if palette_fname == None:
+    if palette_fname is None:
         print(
             f"****Error: couldn't find palette {info.tilesetidx} file in directory {tileset_path}"
         )
@@ -938,7 +937,7 @@ def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
             )
             sys.exit(3)
     ImageFilename = os.path.join(os.path.dirname(spritedesc_fname), info.imagefilename)
-    if os.path.exists(ImageFilename) == False:
+    if os.path.exists(ImageFilename) is False:
         print(
             f"****Error: image file '{ImageFilename}' for sprite group doesn't exist!"
         )
@@ -953,7 +952,7 @@ def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
             and fname[-4:] == ".txt"
         ):
             palette_fname = fname
-    if palette_fname == None:
+    if palette_fname is None:
         print(
             f"****Error: couldn't find palette {info.paletteidx} file in directory {palette_path}"
         )
@@ -986,7 +985,7 @@ def GenerateSprites(spritedesc_fname, palette_path, sprite_fname):
         ):
             transparentIdx = i
             break
-    if transparentIdx == None:
+    if transparentIdx is None:
         print(
             f"****Error: transparent RGB color {str(info.transparentRGB)} not found in sprite image {ImageFilename}"
         )

@@ -280,7 +280,7 @@ class Compressor:
         return nodeList[0]
 
     def InvertHuffNode(self, huffCodes, node, preBits, preVal):
-        if node.value != None:
+        if node.value is not None:
             huffCodes[node.value] = (preBits, preVal)
             return
         self.InvertHuffNode(huffCodes, node.child0, preBits + 1, preVal * 2 + 0)
@@ -289,7 +289,7 @@ class Compressor:
     def InvertHuffmanTree(self, huffTree, maxSymbol, maxBits):
         huffCodes = [(0, 0) for i in range(maxSymbol)]
         # handle special case
-        if huffTree.value != None:
+        if huffTree.value is not None:
             huffCodes[huffTree.value] = (1, 0)
         else:
             # let somebody else do the work
@@ -303,7 +303,7 @@ class Compressor:
         return huffCodes
 
     def GenHuffmanCodesFromLengths(self, huffLengths):
-        numCodes = len(huffLengths)
+        len(huffLengths)
         maxLength = max(huffLengths)
         # count number of codes with each given length
         popByLength = [0] * (maxLength + 1)

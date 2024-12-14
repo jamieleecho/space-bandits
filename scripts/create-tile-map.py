@@ -119,7 +119,7 @@ def create_tile_and_tile_map_files(
     """
     # Get the RGB8 colors defined in tiles
     rgb8_color_map = tile_color_map(tiles)
-    rev_rgb8_color_map = {v: k for k, v in rgb8_color_map.items()}
+    {v: k for k, v in rgb8_color_map.items()}
     if len(rgb8_color_map) > 16:
         raise Exception(
             "Too many unique colors ({}) in tiles!".format(len(rgb8_color_map))
@@ -133,9 +133,7 @@ def create_tile_and_tile_map_files(
     pal1 = [
         rgb8_to_palette[rgb8_color_map[ii]] for ii in xrange(0, len(rgb8_color_map))
     ] + [0] * (16 - len(rgb8_color_map))
-    pal2 = [pal_to_other_palette[pal] for pal in pal1]
-    rgb_pal = pal2 if cmp else pal1
-    cmp_pal = pal1 if cmp else pal2
+    [pal_to_other_palette[pal] for pal in pal1]
 
     # Get the set of unique tiles
     tile_list = tile_set(tiles)
