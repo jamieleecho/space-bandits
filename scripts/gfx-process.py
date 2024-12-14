@@ -208,7 +208,7 @@ def parseTilesetDescription(descFilename):
     data = json.loads("".join(info.tiledesc_lines))
     info.filename = data["Image"]
     if "CollisionMask" in data:
-        info.maskFilename = value
+        info.maskFilename = data["CollisionMask"]
     info.tilesetStart = data["TileSetStart"]
     info.tilesetSize = data["TileSetSize"]
     return info

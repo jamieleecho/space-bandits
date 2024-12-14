@@ -28,7 +28,7 @@
 
 import os
 import sys
-from compression import *
+from compression import Compressor
 
 
 class Tileset:
@@ -204,7 +204,7 @@ if __name__ == "__main__":
             pix = "".join(line.split())
             if (len(pix) & 1) == 1:
                 print(
-                    f"****Error: invalid tile pixel line length ({len(pix)}) in tileset '{filename}'"
+                    f"****Error: invalid tile pixel line length ({len(pix)}) in tileset '{tilesetfilename}'"
                 )
                 sys.exit(1)
             for i in range(0, len(pix), 2):

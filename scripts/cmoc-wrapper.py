@@ -44,7 +44,7 @@ def move_or_remove(src, dest):
     except Exception as err:
         try:
             os.remove(src)
-        except:
+        except OSError:
             pass
         return str(err)
     return None

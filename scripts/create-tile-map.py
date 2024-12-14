@@ -23,10 +23,10 @@ def tile_image(image, width=16, height=16, image_size=None):
     if image_size_tiles[0] == 0 or image_size_tiles[1] == 0:
         raise Exception("Image too small")
     tiles = [[None] * image_size_tiles[1] for xx in range(0, image_size_tiles[0])]
-    for xx in xrange(0, image_size_tiles[0]):
+    for xx in range(0, image_size_tiles[0]):
         start_x = xx * width
         end_x = start_x + width
-        for yy in xrange(0, image_size_tiles[1]):
+        for yy in range(0, image_size_tiles[1]):
             start_y = yy * height
             end_y = start_y + height
             tiles[xx][yy] = image[start_x:end_x, start_y:end_y]
@@ -39,11 +39,11 @@ def reduce_tiles(tiles, threshold=0.01):
     :param tiles: images returned by tile_image
     :return: tiles modified with a reduced number of unique tiles
     """
-    for xx1 in xrange(0, len(tiles)):
-        for yy1 in xrange(0, len(tiles[0])):
+    for xx1 in range(0, len(tiles)):
+        for yy1 in range(0, len(tiles[0])):
             image1 = tiles[xx1][yy1]
-            for xx2 in xrange(0, len(tiles)):
-                for yy2 in xrange(0, len(tiles[0])):
+            for xx2 in range(0, len(tiles)):
+                for yy2 in range(0, len(tiles[0])):
                     image2 = tiles[xx2][yy2]
                     if (
                         image1.compare(image2, metric="root_mean_square")[1]
@@ -68,9 +68,9 @@ def rebuild_image(img, tiles):
     )
     with Drawing() as draw:
         draw.composite("copy", 0, 0, img.width, img.height, img)
-        for xx in xrange(0, len(tiles)):
+        for xx in range(0, len(tiles)):
             start_x = xx * width
-            for yy in xrange(0, len(tiles[0])):
+            for yy in range(0, len(tiles[0])):
                 start_y = yy * height
                 draw.composite("copy", start_x, start_y, width, height, tiles[xx][yy])
         draw(image)
@@ -92,8 +92,8 @@ def tile_color_map(tiles):
     """
     color_set = set()
     for img in tile_set(tiles):
-        for yy in xrange(0, img.size[1]):
-            for xx in xrange(0, img.size[0]):
+        for yy in range(0, img.size[1]):
+            for xx in range(0, img.size[0]):
                 color_set.add(img[xx, yy])
     return {
         ii: (color.red_int8, color.green_int8, color.blue_int8)
@@ -131,7 +131,7 @@ def create_tile_and_tile_map_files(
     )
     pal_to_other_palette = coco.COCO_CMP_TO_RGB if cmp else coco.COCO_RGB_TO_CMP
     pal1 = [
-        rgb8_to_palette[rgb8_color_map[ii]] for ii in xrange(0, len(rgb8_color_map))
+        rgb8_to_palette[rgb8_color_map[ii]] for ii in range(0, len(rgb8_color_map))
     ] + [0] * (16 - len(rgb8_color_map))
     [pal_to_other_palette[pal] for pal in pal1]
 
@@ -154,10 +154,10 @@ def create_tile_and_tile_map_files(
             tile_map_file.write("*" * 59 + "\n")
             tile_map_file.write("* This file gives the tilemap for the level\n")
             tile_map_file.write("\n")
-            for yy in xrange(0, len(tiles[0])):
+            for yy in range(0, len(tiles[0])):
                 tile_row = [
                     "{:02x}".format(tile_to_index[tiles[xx][yy]])
-                    for xx in xrange(0, len(tiles))
+                    for xx in range(0, len(tiles))
                 ]
                 tile_map_file.write(" ".join(tile_row) + "\n")
 
@@ -186,7 +186,7 @@ def output_tile(tile_file, img, rev_rgb8_color_map):
     :param img: 16x16 tile to output
     :param rev_rgb8_color_map: color map to use to output data
     """
-    for yy in xrange(0, img.size[1]):
+    for yy in range(0, img.size[1]):
         row = extract_row(img, yy, rev_rgb8_color_map)
         hex_line = convert_to_hex_line(row)
         tile_file.write(f"{hex_line}")
@@ -200,7 +200,7 @@ def extract_row(img, row, rev_rgb8_color_map):
     :param row: Integer row number to extract
     :param rev_rgb8_color_map: color map to use to output data
     """
-    colors = [img[xx, row] for xx in xrange(0, img.size[0])]
+    colors = [img[xx, row] for xx in range(0, img.size[0])]
     rgb8 = [(color.red_int8, color.green_int8, color.blue_int8) for color in colors]
     pal_slots = [rev_rgb8_color_map[rgb8_color] for rgb8_color in rgb8]
     return pal_slots

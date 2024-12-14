@@ -2061,11 +2061,11 @@ class App:
         for val in Values:
             if val is None:
                 s = ""
-            elif datatype == str:
+            elif datatype is str:
                 s = val
-            elif datatype == int:
+            elif datatype is int:
                 s = str(val)
-            elif datatype == float:
+            elif datatype is float:
                 s = f"{val:.2f}"
             else:
                 raise Exception("Invalid data type")

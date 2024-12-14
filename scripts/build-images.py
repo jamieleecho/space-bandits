@@ -30,7 +30,7 @@ import os
 import json
 import sys
 import math
-from compression import *
+from compression import Compressor
 from PIL import Image
 
 # ******************************************************************************

@@ -30,7 +30,7 @@ import json
 import os
 import re
 import sys
-from compression import *
+from compression import Compressor
 
 
 class ObjectInit:

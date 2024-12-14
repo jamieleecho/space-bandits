@@ -28,7 +28,7 @@
 
 import os
 import sys
-from compression import *
+from compression import Compressor
 
 # ******************************************************************************
 # main function for standard script execution
