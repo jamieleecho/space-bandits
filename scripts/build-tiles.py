@@ -165,9 +165,9 @@ if __name__ == "__main__":
         mode = None
         curSet = Tileset(palettefilename, tilesetfilename, tilemaskfilename)
         # load palettes
-        f = open(os.path.join(gfxdir, palettefilename)).read()
-        matrix = []
-        for line in f.split("\n"):
+        palette_file = open(os.path.join(gfxdir, palettefilename)).read()
+        matrix: list[int] = []
+        for line in palette_file.split("\n"):
             # remove comments and whitespace from line
             pivot = line.find("*")
             if pivot != -1:
@@ -190,9 +190,9 @@ if __name__ == "__main__":
         if len(matrix) > 0:
             SaveMatrix(curSet, mode, matrix)
         # load tiles
-        f = open(os.path.join(gfxdir, tilesetfilename)).read()
+        tile_file = open(os.path.join(gfxdir, tilesetfilename)).read()
         matrix = []
-        for line in f.split("\n"):
+        for line in tile_file.split("\n"):
             # remove comments and whitespace from line
             pivot = line.find("*")
             if pivot != -1:
@@ -214,9 +214,9 @@ if __name__ == "__main__":
                 curSet.tiles.append(matrix)
                 matrix = []
         # load masks
-        f = open(os.path.join(gfxdir, tilemaskfilename)).read()
+        mask_file = open(os.path.join(gfxdir, tilemaskfilename)).read()
         matrix = []
-        for line in f.split("\n"):
+        for line in mask_file.split("\n"):
             # remove comments and whitespace from line
             pivot = line.find("*")
             if pivot != -1:
@@ -272,21 +272,22 @@ if __name__ == "__main__":
         compressedTilesetLength.append(len(zipData))
         f.write(zipData)
     f.close()
+
     # write tile directory table to include in DynoSprite core
-    f = open(os.path.join(asmdir, "gamedir-tiles.asm"), "w")
-    f.write("Gamedir_Tiles\n")
+    tile_writer = open(os.path.join(asmdir, "gamedir-tiles.asm"), "w")
+    tile_writer.write("Gamedir_Tiles\n")
     s = str(len(tilesets))
-    f.write(
+    tile_writer.write(
         (" " * 24) + "fcb     " + s + (" " * (16 - len(s))) + "* number of tilesets\n"
     )
     for i in range(len(tilesets)):
-        f.write((" " * 24) + "* " + tilesets[i].tilesetfilename + "\n")
+        tile_writer.write((" " * 24) + "* " + tilesets[i].tilesetfilename + "\n")
         s = str(tilesets[i].number)
-        f.write(
+        tile_writer.write(
             (" " * 24) + "fcb     " + s + (" " * (16 - len(s))) + "* tileset number\n"
         )
         s = str(len(tilesets[i].tiles))
-        f.write(
+        tile_writer.write(
             (" " * 24)
             + "fcb     "
             + s
@@ -294,7 +295,7 @@ if __name__ == "__main__":
             + "* number of tiles in tileset\n"
         )
         s = str(len(tilesets[i].masks))
-        f.write(
+        tile_writer.write(
             (" " * 24)
             + "fcb     "
             + s
@@ -302,11 +303,11 @@ if __name__ == "__main__":
             + "* number of masks in tilemask\n"
         )
         s = str(compressedTilesetLength[i])
-        f.write(
+        tile_writer.write(
             (" " * 24)
             + "fdb     "
             + s
             + (" " * (16 - len(s)))
             + "* compressed tileset size on disk in bytes\n"
         )
-    f.close()
+    tile_writer.close()

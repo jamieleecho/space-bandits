@@ -268,11 +268,12 @@ if __name__ == "__main__":
     for grp in allGroups:
         f.write(grp.rawData)
     f.close()
+
     # write tile directory table to include in DynoSprite core
-    f = open(os.path.join(asmdir, "gamedir-objects.asm"), "w")
-    f.write("Gamedir_Objects\n")
+    f_objects = open(os.path.join(asmdir, "gamedir-objects.asm"), "w")
+    f_objects.write("Gamedir_Objects\n")
     s = str(len(allGroups))
-    f.write(
+    f_objects.write(
         (" " * 24)
         + "fcb     "
         + s
@@ -281,17 +282,17 @@ if __name__ == "__main__":
     )
     for grpIdx in range(numGroups):
         grp = allGroups[grpIdx]
-        f.write(
+        f_objects.write(
             (" " * 24)
             + f"* Group {int(grp.GrpNumber)}: ({spriteRawFiles[grpIdx]}, {objectRawFiles[grpIdx]})"
             + "\n"
         )
         s = str(grp.GrpNumber)
-        f.write(
+        f_objects.write(
             (" " * 24) + "fcb     " + s + (" " * (16 - len(s))) + "* Group number\n"
         )
         s = str(len(grp.rawData))
-        f.write(
+        f_objects.write(
             (" " * 24)
             + "fdb     "
             + s
@@ -299,7 +300,7 @@ if __name__ == "__main__":
             + "* Group size on disk in bytes\n"
         )
         s = str(grp.objCodeLength)
-        f.write(
+        f_objects.write(
             (" " * 24)
             + "fdb     "
             + s
@@ -307,7 +308,7 @@ if __name__ == "__main__":
             + "* Object code size in bytes\n"
         )
         s = str(len(grp.compSpriteCode))
-        f.write(
+        f_objects.write(
             (" " * 24)
             + "fdb     "
             + s
@@ -315,7 +316,7 @@ if __name__ == "__main__":
             + "* Size of compressed sprite code block in bytes\n"
         )
         s = str(len(grp.compObjectCode))
-        f.write(
+        f_objects.write(
             (" " * 24)
             + "fdb     "
             + s
@@ -323,7 +324,7 @@ if __name__ == "__main__":
             + "* Size of compressed object code block in bytes\n"
         )
         s = str(grp.numSprites)
-        f.write(
+        f_objects.write(
             (" " * 24)
             + "fcb     "
             + s
@@ -331,11 +332,11 @@ if __name__ == "__main__":
             + "* number of sprites in group\n"
         )
         s = str(grp.numObjects)
-        f.write(
+        f_objects.write(
             (" " * 24)
             + "fcb     "
             + s
             + (" " * (16 - len(s)))
             + "* number of objects in group\n"
         )
-    f.close()
+    f_objects.close()

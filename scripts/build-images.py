@@ -30,12 +30,16 @@ import os
 import json
 import sys
 import math
+from typing import List
 from compression import Compressor
 from PIL import Image
 
 # ******************************************************************************
 # Helper functions for image building script
 #
+
+CocoLuvByRGB: List[int]
+CocoLuvByCMP: List[int]
 
 
 def GenerateCocoPalettes(ColorsUsed, ImagePalette):
@@ -248,7 +252,6 @@ def parseDescription(descFilename):
 #
 
 if __name__ == "__main__":
-    global CocoLuvByRGB, CocoLuvByCMP
     print("DynoSprite Splash Image Builder script")
     # get input paths
     if len(sys.argv) != 4:
@@ -349,42 +352,44 @@ if __name__ == "__main__":
         )
         print(f"        CMP Palette: {' '.join([('%02i' % i) for i in CMPPalette])}")
         print(f"        RGB Palette: {' '.join([('%02i' % i) for i in RGBPalette])}")
+
     # write out the data file
-    f = open(os.path.join(cc3dir, "IMAGES.DAT"), "wb")
-    f.write(allCompImageData)
-    f.close()
+    images_dat_f = open(os.path.join(cc3dir, "IMAGES.DAT"), "wb")
+    images_dat_f.write(allCompImageData)
+    images_dat_f.close()
+
     # write image directory table to include in DynoSprite core
-    f = open(os.path.join(asmdir, "gamedir-images.asm"), "w")
-    f.write("Gamedir_Images\n")
+    games_images_f = open(os.path.join(asmdir, "gamedir-images.asm"), "w")
+    games_images_f.write("Gamedir_Images\n")
     s = str(maxNumber + 1)
-    f.write(
+    games_images_f.write(
         f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of splash images in directory\n"
     )
     for i in range(maxNumber + 1):
         if i not in imgPngNumbers:
-            f.write((" " * 24) + f"* Image: {int(i):02} - [empty]\n")
-            f.write(f"{' ' * 24}fdb     0,0\n")
-            f.write(f"{' ' * 24}fcb     0,0,0\n")
+            games_images_f.write((" " * 24) + f"* Image: {int(i):02} - [empty]\n")
+            games_images_f.write(f"{' ' * 24}fdb     0,0\n")
+            games_images_f.write(f"{' ' * 24}fcb     0,0,0\n")
             continue
         idx = imgPngNumbers.index(i)
         SpecialColors = ImageColorDict[i]
-        f.write((" " * 24) + f"* Image: {int(i):02} - {imgPngFiles[idx][3:-4]}\n")
+        games_images_f.write((" " * 24) + f"* Image: {int(i):02} - {imgPngFiles[idx][3:-4]}\n")
         s = str(allImageSizes[i][0] // 2)
-        f.write(
+        games_images_f.write(
             f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* width of image (in bytes)\n"
         )
         s = str(allImageSizes[i][1])
-        f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* height of image\n")
+        games_images_f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* height of image\n")
         s = str(allImageSizes[i][2])
-        f.write(
+        games_images_f.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Compressed size in bytes\n"
         )
         """ The special color indices could alteratively be put in the Gamedir_Images instead of the file
         s = str(SpecialColors.indices[0])
-        f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* Background color index\n")
+        games_images_f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* Background color index\n")
         s = str(SpecialColors.indices[1])
-        f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* Foreground color index\n")
+        games_images_f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* Foreground color index\n")
         s = str(SpecialColors.indices[2])
-        f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* Progress bar color index\n")
+        games_images_f.write((" " * 24) + "fcb     " + s + (" " * (16-len(s))) + "* Progress bar color index\n")
         """
-    f.close()
+    games_images_f.close()

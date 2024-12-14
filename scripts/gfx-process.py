@@ -288,6 +288,12 @@ class SpriteInfo:
 
 
 class SpriteGroupInfo:
+    imagefilename: str
+    groupidx: int
+    paletteidx: int
+    transparentRGB: List[int]
+    sprites: List[SpriteInfo]
+
     def __init__(self):
         self.imagefilename = ""
         self.groupidx = -1
@@ -296,7 +302,7 @@ class SpriteGroupInfo:
         self.sprites = []
 
 
-def parseSpriteDescription(descFilename: str) -> SpriteInfo:
+def parseSpriteDescription(descFilename: str) -> SpriteGroupInfo:
     with open(descFilename) as f:
         data = json.load(f)
 

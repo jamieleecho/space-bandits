@@ -169,7 +169,7 @@ SECONDARY: $(SPRITESRC) $(SPRITEASMSRC)
 all: $(TARGET)
 
 clean:
-	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(GENTMPDIR)
+	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(GENTMPDIR) $(TARGET)
 
 test:
 	$(EMULATOR) $(MAMESYSTEM) -flop1 $(TARGET) $(MAMEFLAGS) -window -waitvsync -resolution 640x480 -video opengl -rompath ~/Applications/mame/roms

@@ -364,67 +364,68 @@ if __name__ == "__main__":
     for lvl in allLevels:
         f.write(lvl.cc3Data)
     f.close()
+
     # write level directory table to include in DynoSprite core
-    f = open(os.path.join(asmdir, "gamedir-levels.asm"), "w")
-    f.write("Gamedir_Levels\n")
+    f_game_levels = open(os.path.join(asmdir, "gamedir-levels.asm"), "w")
+    f_game_levels.write("Gamedir_Levels\n")
     s = str(len(allLevels))
-    f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* total number of levels\n")
+    f_game_levels.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* total number of levels\n")
     for lvl in allLevels:
-        f.write(f"{' ' * 24}* Level {lvl.LvlNumber}: {lvl.ParamDict['name']}\n")
+        f_game_levels.write(f"{' ' * 24}* Level {lvl.LvlNumber}: {lvl.ParamDict['name']}\n")
         s = str(lvl.LvlNumber)
-        f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* Level number\n")
+        f_game_levels.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* Level number\n")
         s = f"Level{int(lvl.LvlNumber):02}Name"
-        f.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level name\n")
+        f_game_levels.write(f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level name\n")
         s = f"Level{int(lvl.LvlNumber):02}Desc"
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Pointer to level description\n"
         )
         s = str(len(lvl.cc3Data))
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* Level size on disk in bytes\n"
         )
         s = str(len(lvl.ObjectGroups))
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of object groups to load with level\n"
         )
         s = f"Level{int(lvl.LvlNumber):02}Groups"
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* pointer to group number list to load\n"
         )
         s = str(int(lvl.ParamDict["maxobjecttablesize"]))
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* Maximum number of objects in Current Object Table\n"
         )
         s = str(lvl.NumInitObjects)
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* number of objects to initialize from Init Stream\n"
         )
         s = str(int(lvl.ParamDict["tileset"]))
-        f.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* tileset number to load\n")
+        f_game_levels.write(f"{' ' * 24}fcb     {s}{' ' * (16 - len(s))}* tileset number to load\n")
         s = str(lvl.tilemapwidth)
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* width of background tilemap\n"
         )
         s = str(lvl.tilemapheight)
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* height of background tilemap\n"
         )
         s = str(int(lvl.ParamDict["bkgrndstartx"]))
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* background tilemap starting position X\n"
         )
         s = str(int(lvl.ParamDict["bkgrndstarty"]))
-        f.write(
+        f_game_levels.write(
             f"{' ' * 24}fdb     {s}{' ' * (16 - len(s))}* background tilemap starting position Y\n"
         )
     for lvl in allLevels:
-        f.write(
+        f_game_levels.write(
             f"{'Level%02iName             fcn     ' % lvl.LvlNumber + StringOut(lvl.ParamDict['name'])}\n"
         )
-        f.write(
+        f_game_levels.write(
             f"{'Level%02iDesc             fcn     ' % lvl.LvlNumber + StringOut(lvl.ParamDict['description'])}\n"
         )
-        f.write(
+        f_game_levels.write(
             f"{'Level%02iGroups           fcb     ' % lvl.LvlNumber + ','.join([str(og) for og in lvl.ObjectGroups])}\n"
         )
-    f.close()
+    f_game_levels.close()
