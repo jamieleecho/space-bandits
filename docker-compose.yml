@@ -1,10 +1,9 @@
-version: '3'
-
 services:
   dynosprite:
     build: .
     environment:
       - HOME=/home/dynosprite
+    working_dir: /home/dynosprite
     volumes:
       - ./build:/home/dynosprite/build
       - ./cfg:/home/dynosprite/cfg

@@ -174,6 +174,18 @@ clean:
 test:
 	$(EMULATOR) $(MAMESYSTEM) -flop1 $(TARGET) $(MAMEFLAGS) -window -waitvsync -resolution 640x480 -video opengl -rompath ~/Applications/mame/roms
 
+check-scripts: lint-scripts type-check-scripts
+	ruff format scripts
+
+format-scripts:
+	ruff format scripts
+
+lint-scripts:
+	ruff check scripts
+
+type-check-scripts:
+	mypy scripts
+
 # build rules
 # 0. Parse options file
 $(GENASMDIR)/defaults-config.asm: $(GAMEDIR)/defaults-config.json
@@ -271,7 +283,6 @@ $(TARGET): $(DISKFILES)
 	for f in $(filter $(READMEBAS), $(DISKFILES)); do decb copy $$f $(TARGET),`basename $$f` -0 -t; done
 	for f in $(filter-out $(READMEBAS), $(DISKFILES)); do decb copy $$f $(TARGET),`basename $$f` -2 -b; done
 
-.PHONY: all clean test
+.PHONY: all clean test check-scripts format-scripts lint-check-scripts type-check-scripts
 
 .PRECIOUS: $(OBJECTCSRC2ASM) $(LEVELCSRC2ASM)
-

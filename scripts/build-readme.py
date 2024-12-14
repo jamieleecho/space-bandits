@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#********************************************************************************
+# ********************************************************************************
 # DynoSprite - scripts/build-readme.py
 # Copyright (c) 2013-2014, Richard Goedeken
 # All rights reserved.
@@ -24,7 +24,7 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#********************************************************************************
+# ********************************************************************************
 
 import sys
 
@@ -85,34 +85,37 @@ BASICPROG = """
 99 CLS:END
 """
 
+
 def GenerateReadme(textin, basout):
     # read the input text file
     inLines = open(textin).read().split("\n")
     if inLines[-1] == "":
         inLines = inLines[:-1]
     # generate the output data lines
-    outLines = [ ]
+    outLines = []
     ListMode = False
     for line in inLines:
         if len(line) == 0:
             outLines.append(" " * 32)
             ListMode = False
             continue
-        if len(line) > 3 and line[0] == '{' and line[2] == '}':
+        if len(line) > 3 and line[0] == "{" and line[2] == "}":
             padchar = line[1]
             line = line[3:]
             numpad = 32 - len(line)
             halfpad = numpad // 2
-            outLines.append((padchar * halfpad) + line.upper() + (padchar * (numpad-halfpad)))
+            outLines.append(
+                (padchar * halfpad) + line.upper() + (padchar * (numpad - halfpad))
+            )
             ListMode = False
             continue
         curLine = ""
         for word in line.split(" "):
             word = word.upper()
             if curLine == "":
-                if ListMode == True and word[0] != '*':
+                if ListMode == True and word[0] != "*":
                     word = "  " + word
-                elif word[0] == '*':
+                elif word[0] == "*":
                     ListMode = True
             if len(curLine) + len(word) == 32:
                 outLines.append(curLine + word)
@@ -122,7 +125,7 @@ def GenerateReadme(textin, basout):
                 curLine += word + " "
                 continue
             outLines.append(curLine + " " * (32 - len(curLine)))
-            if ListMode == True and word[0] != '*':
+            if ListMode == True and word[0] != "*":
                 curLine = "  " + word + " "
             else:
                 curLine = word + " "
@@ -131,14 +134,15 @@ def GenerateReadme(textin, basout):
     # write the output basic program
     f = open(basout, "w")
     f.write(chr(13))
-    #f.write(BASICPROG)
-    f.write(BASICPROG.replace("\n","\r").replace("#NUMLINES",str(len(outLines))))
+    # f.write(BASICPROG)
+    f.write(BASICPROG.replace("\n", "\r").replace("#NUMLINES", str(len(outLines))))
     for idx in range(len(outLines)):
-        #f.write('%i DATA "%s"\n' % (100 + idx * 10, outLines[idx]))
+        # f.write('%i DATA "%s"\n' % (100 + idx * 10, outLines[idx]))
         f.write(f'{int(100 + idx * 10)} DATA "{outLines[idx]}"\r')
     f.close()
 
-#******************************************************************************
+
+# ******************************************************************************
 # main function call for standard script execution
 #
 
@@ -151,4 +155,3 @@ if __name__ == "__main__":
     textin = sys.argv[1]
     basout = sys.argv[2]
     GenerateReadme(textin, basout)
-

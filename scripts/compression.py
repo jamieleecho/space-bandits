@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-#********************************************************************************
+# ********************************************************************************
 # DynoSprite - scripts/compression.py
 # Copyright (c) 2013-2014, Richard Goedeken
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 # * Redistributions of source code must retain the above copyright notice, this
 #   list of conditions and the following disclaimer.
-# 
+#
 # * Redistributions in binary form must reproduce the above copyright notice,
 #   this list of conditions and the following disclaimer in the documentation
 #   and/or other materials provided with the distribution.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -24,11 +24,11 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#********************************************************************************
+# ********************************************************************************
 
-import os
 import sys
 import subprocess
+
 
 class HuffNode:
     def __init__(self):
@@ -36,6 +36,7 @@ class HuffNode:
         self.value = None
         self.child0 = None
         self.child1 = None
+
 
 class BitReader:
     def __init__(self, inputData):
@@ -55,14 +56,16 @@ class BitReader:
                 if self.curByteIdx < len(self.inBuffer):
                     self.curByte = self.inBuffer[self.curByteIdx]
                 else:
-                    self.curByte = None # throw an exception if we try to read one more bit
+                    self.curByte = (
+                        None  # throw an exception if we try to read one more bit
+                    )
         return value
 
     def GetSymbol(self, huffRoot):
         # loop until we get a symbol value
         while True:
             # get 1 bit
-            newBit = ((self.curByte >> self.nextBitIdx) & 1)
+            newBit = (self.curByte >> self.nextBitIdx) & 1
             self.nextBitIdx += 1
             if self.nextBitIdx == 8:
                 self.nextBitIdx = 0
@@ -70,7 +73,9 @@ class BitReader:
                 if self.curByteIdx < len(self.inBuffer):
                     self.curByte = self.inBuffer[self.curByteIdx]
                 else:
-                    self.curByte = None # throw an exception if we try to read one more bit
+                    self.curByte = (
+                        None  # throw an exception if we try to read one more bit
+                    )
             # traverse one level down in the tree
             if newBit == 0:
                 huffRoot = huffRoot.child0
@@ -81,19 +86,22 @@ class BitReader:
                 return huffRoot.value
             # otherwise we will get another bit
 
+
 class BitWriter:
     def __init__(self):
-        self.outBuffer = b''
+        self.outBuffer = b""
         self.curByte = 0
         self.nextBitIdx = 0
 
     def AddBits(self, numBits, value, bIsCode):
         # check to make sure input is valid
         if (value >> numBits) != 0:
-            raise Exception(f"BitWriter::AddBits error: the value {int(value)} doesn't fit within {int(numBits)} bits")
+            raise Exception(
+                f"BitWriter::AddBits error: the value {int(value)} doesn't fit within {int(numBits)} bits"
+            )
         # pack the bits in our accumulator
         if bIsCode:
-            for bitIdxIn in range(numBits-1,-1,-1):
+            for bitIdxIn in range(numBits - 1, -1, -1):
                 self.curByte |= ((value >> bitIdxIn) & 1) << self.nextBitIdx
                 self.nextBitIdx += 1
                 if self.nextBitIdx == 8:
@@ -119,6 +127,7 @@ class BitWriter:
     def GetData(self):
         return self.outBuffer
 
+
 class Compressor:
     def __init__(self, inputdata):
         self.inputdata = inputdata
@@ -133,12 +142,12 @@ class Compressor:
     def GenerateSymbolList(self):
         inDataLen = len(self.inputdata)
         # this is an expensive operation, so use a hash table
-        matchHash = { }
+        matchHash = {}
         # first symbol is always a byte value
         self.lz77SymbolList.append(((self.inputdata[0]), None, None, None))
         inIdx = 1
         if inDataLen >= 3:
-            matchHash[self.inputdata[0:3]] = [ 0 ]
+            matchHash[self.inputdata[0:3]] = [0]
         while inIdx < inDataLen:
             # if fewer than 3 bytes remaining, then we will write literals
             if (inDataLen - inIdx) < 3:
@@ -147,7 +156,7 @@ class Compressor:
                 continue
             # search for the best string copy
             bestCopy = (0, 0)  # length, distance
-            matchKey = self.inputdata[inIdx:inIdx+3]
+            matchKey = self.inputdata[inIdx : inIdx + 3]
             if matchKey in matchHash:
                 matchList = matchHash[matchKey]
                 for origIdx in matchList[:]:
@@ -157,7 +166,11 @@ class Compressor:
                     i1 = origIdx
                     i2 = inIdx
                     copylen = 0
-                    while i2 < inDataLen and self.inputdata[i1] == self.inputdata[i2] and copylen < 258:
+                    while (
+                        i2 < inDataLen
+                        and self.inputdata[i1] == self.inputdata[i2]
+                        and copylen < 258
+                    ):
                         i1 += 1
                         i2 += 1
                         copylen += 1
@@ -170,17 +183,17 @@ class Compressor:
                 if matchKey in matchHash:
                     matchHash[matchKey].append(inIdx)
                 else:
-                    matchHash[matchKey] = [ inIdx ]
+                    matchHash[matchKey] = [inIdx]
                 inIdx += 1
                 continue
             # update our match hash table for all the intermediate bytes
             for i in range(copylen):
                 if (inDataLen - inIdx - i) >= 3:
-                    newKey = self.inputdata[inIdx+i:inIdx+i+3]
+                    newKey = self.inputdata[inIdx + i : inIdx + i + 3]
                     if newKey in matchHash:
-                        matchHash[newKey].append(inIdx+i)
+                        matchHash[newKey].append(inIdx + i)
                     else:
-                        matchHash[newKey] = [ inIdx+i ]
+                        matchHash[newKey] = [inIdx + i]
             # calculate a length code (symbol number, # of extra bits, value of extra bits)
             if copylen <= 10:
                 lengthCode = 254 + copylen
@@ -215,11 +228,18 @@ class Compressor:
                 distCode = (distBitsNum + 1) * 2 + (valBase >> distBitsNum)
                 distBitsVal = valBase & ((1 << distBitsNum) - 1)
             # output a (length, distance) string copy symbol
-            self.lz77SymbolList.append((lengthCode, (lengthBitsNum, lengthBitsVal), distCode, (distBitsNum, distBitsVal)))
+            self.lz77SymbolList.append(
+                (
+                    lengthCode,
+                    (lengthBitsNum, lengthBitsVal),
+                    distCode,
+                    (distBitsNum, distBitsVal),
+                )
+            )
             # advance our current index value
             inIdx += copylen
         # output the termination code
-        self.lz77SymbolList.append((256, None, None, None))   
+        self.lz77SymbolList.append((256, None, None, None))
 
     def GenerateHuffmanTree(self, histogram):
         # make list of 'loose' huffman nodes
@@ -244,7 +264,7 @@ class Compressor:
             else:
                 small = 1
                 smallest = 0
-            for idx in range(2,len(nodeList)):
+            for idx in range(2, len(nodeList)):
                 if nodeList[idx].weight < nodeList[smallest].weight:
                     small = smallest
                     smallest = idx
@@ -263,11 +283,11 @@ class Compressor:
         if node.value != None:
             huffCodes[node.value] = (preBits, preVal)
             return
-        self.InvertHuffNode(huffCodes, node.child0, preBits+1, preVal*2 + 0)
-        self.InvertHuffNode(huffCodes, node.child1, preBits+1, preVal*2 + 1)
+        self.InvertHuffNode(huffCodes, node.child0, preBits + 1, preVal * 2 + 0)
+        self.InvertHuffNode(huffCodes, node.child1, preBits + 1, preVal * 2 + 1)
 
     def InvertHuffmanTree(self, huffTree, maxSymbol, maxBits):
-        huffCodes = [ (0,0) for i in range(maxSymbol) ]
+        huffCodes = [(0, 0) for i in range(maxSymbol)]
         # handle special case
         if huffTree.value != None:
             huffCodes[huffTree.value] = (1, 0)
@@ -275,32 +295,34 @@ class Compressor:
             # let somebody else do the work
             self.InvertHuffNode(huffCodes, huffTree, 0, 0)
         # check to make sure it's legal
-        for (bits,codeval) in huffCodes:
+        for bits, codeval in huffCodes:
             if bits is not None and bits > maxBits:
-                raise Exception(f"Huffman tree contains codes longer than maximum allowed ({int(maxBits)})")
+                raise Exception(
+                    f"Huffman tree contains codes longer than maximum allowed ({int(maxBits)})"
+                )
         return huffCodes
 
     def GenHuffmanCodesFromLengths(self, huffLengths):
         numCodes = len(huffLengths)
         maxLength = max(huffLengths)
         # count number of codes with each given length
-        popByLength = [0] * (maxLength+1)
+        popByLength = [0] * (maxLength + 1)
         for codeLength in huffLengths:
             if codeLength > 0:
                 popByLength[codeLength] += 1
         # calculate the starting value for each code length
-        nextVal = [0] * (maxLength+1)
+        nextVal = [0] * (maxLength + 1)
         curVal = 0
-        for codeLength in range(1,maxLength+1):
-            curVal = (curVal + popByLength[codeLength-1]) << 1
+        for codeLength in range(1, maxLength + 1):
+            curVal = (curVal + popByLength[codeLength - 1]) << 1
             nextVal[codeLength] = curVal
         # now assign values for each code
-        huffCodes = [ ]
+        huffCodes = []
         for codeLength in huffLengths:
             if codeLength == 0:
-                huffCodes.append((0,0))
+                huffCodes.append((0, 0))
             else:
-                huffCodes.append((codeLength,nextVal[codeLength]))
+                huffCodes.append((codeLength, nextVal[codeLength]))
                 nextVal[codeLength] += 1
         return huffCodes
 
@@ -308,27 +330,35 @@ class Compressor:
     def CompressHistogramRLE(self, histCodes, numHistCodes):
         # handle trivial cases
         if numHistCodes < 4:
-            return [ (literal,None) for literal in histCodes[:numHistCodes] ]
-        histRLE = [ ]
+            return [(literal, None) for literal in histCodes[:numHistCodes]]
+        histRLE = []
         idx = 0
         while idx < numHistCodes:
             # can we insert a multi-zero code?
             numZeros = 0
-            while idx+numZeros < numHistCodes and histCodes[idx+numZeros] == 0 and numZeros < 138:
+            while (
+                idx + numZeros < numHistCodes
+                and histCodes[idx + numZeros] == 0
+                and numZeros < 138
+            ):
                 numZeros += 1
             if numZeros >= 11:
-                histRLE.append((18, numZeros-11))
+                histRLE.append((18, numZeros - 11))
                 idx += numZeros
                 continue
             elif numZeros >= 3:
-                histRLE.append((17, numZeros-3))
+                histRLE.append((17, numZeros - 3))
                 idx += numZeros
                 continue
             # can we insert a prev-copy code?
             if idx > 0:
                 numCopy = 0
-                prevVal = histCodes[idx-1]
-                while idx+numCopy < numHistCodes and histCodes[idx+numCopy] == prevVal and numCopy < 6:
+                prevVal = histCodes[idx - 1]
+                while (
+                    idx + numCopy < numHistCodes
+                    and histCodes[idx + numCopy] == prevVal
+                    and numCopy < 6
+                ):
                     numCopy += 1
                 if numCopy >= 3:
                     histRLE.append((16, numCopy - 3))
@@ -342,7 +372,7 @@ class Compressor:
 
     def DeflateWithGzip(self, bPrintInfo):
         # call 'gzip' to compress the input data
-        args = [ b"gzip", b"-9", b"-" ]
+        args = [b"gzip", b"-9", b"-"]
         p = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         (compData, errData) = p.communicate(self.inputdata)
         # strip the gzip headers/footer
@@ -361,9 +391,9 @@ class Compressor:
         if bPrintInfo:
             print(f"{int(len(self.lz77SymbolList))} LZ77 symbols generated")
         # now generate histograms of value/length codes and distance codes
-        lenCodeHist = [ 0 for i in range(286) ]
-        distCodeHist = [ 0 for i in range(30) ]
-        for (lengthCode, lengthBits, distCode, distBits) in self.lz77SymbolList:
+        lenCodeHist = [0 for i in range(286)]
+        distCodeHist = [0 for i in range(30)]
+        for lengthCode, lengthBits, distCode, distBits in self.lz77SymbolList:
             lenCodeHist[lengthCode] += 1
             if distCode is not None:
                 distCodeHist[distCode] += 1
@@ -375,101 +405,116 @@ class Compressor:
         lenHuffCodes = self.InvertHuffmanTree(lenHuffTree, 286, 15)
         distHuffCodes = self.InvertHuffmanTree(distHuffTree, 30, 15)
         # now re-order the codes so that the tree can be exactly re-generated with only the lengths
-        lenHuffCodes = self.GenHuffmanCodesFromLengths([lenHuffCodes[i][0] for i in range(286)])
-        distHuffCodes = self.GenHuffmanCodesFromLengths([distHuffCodes[i][0] for i in range(30)])
+        lenHuffCodes = self.GenHuffmanCodesFromLengths(
+            [lenHuffCodes[i][0] for i in range(286)]
+        )
+        distHuffCodes = self.GenHuffmanCodesFromLengths(
+            [distHuffCodes[i][0] for i in range(30)]
+        )
         del lenHuffTree  # the tree is no longer correct
         del distHuffTree
         # calculate number of non-zero literal/length codes and distance codes
         numLenCodes = 286
-        while lenHuffCodes[numLenCodes-1][0] == 0:
+        while lenHuffCodes[numLenCodes - 1][0] == 0:
             numLenCodes -= 1
         if sum(distCodeHist) == 0:
             numDistCodes = 1
         else:
             numDistCodes = 30
-            while distHuffCodes[numDistCodes-1][0] == 0:
+            while distHuffCodes[numDistCodes - 1][0] == 0:
                 numDistCodes -= 1
         # now RLE compress the huffman code lengths
-        lenCodeLengths = [ lenHuffCodes[i][0] for i in range(286) ]
+        lenCodeLengths = [lenHuffCodes[i][0] for i in range(286)]
         lenHistRLE = self.CompressHistogramRLE(lenCodeLengths, numLenCodes)
-        distCodeLengths = [ distHuffCodes[i][0] for i in range(30) ]
+        distCodeLengths = [distHuffCodes[i][0] for i in range(30)]
         distHistRLE = self.CompressHistogramRLE(distCodeLengths, numDistCodes)
         # generate a histogram of the RLE codes
-        rleCodeHist = [ 0 for i in range(19) ]
-        for (code, extraBits) in lenHistRLE:
+        rleCodeHist = [0 for i in range(19)]
+        for code, extraBits in lenHistRLE:
             rleCodeHist[code] += 1
-        for (code, extraBits) in distHistRLE:
+        for code, extraBits in distHistRLE:
             rleCodeHist[code] += 1
         # generate a Huffman binary tree for this histogram
         rleHuffTree = self.GenerateHuffmanTree(rleCodeHist)
         # invert the Huffman trees to get the codes by their symbols
         rleHuffCodes = self.InvertHuffmanTree(rleHuffTree, 19, 7)
         # now re-order the codes so that the tree can be exactly re-generated with only the lengths
-        rleHuffCodes = self.GenHuffmanCodesFromLengths([rleHuffCodes[i][0] for i in range(19)])
+        rleHuffCodes = self.GenHuffmanCodesFromLengths(
+            [rleHuffCodes[i][0] for i in range(19)]
+        )
         del rleHuffTree
         # reorder the RLE histogram and calculate number of non-zero codes
-        newOrder = [16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15]
-        rleCodeLengths = [ rleHuffCodes[i][0] for i in range(19) ]
-        rleCodeLengthsReorder = [ rleCodeLengths[newOrder[i]] for i in range(19) ]
+        newOrder = [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]
+        rleCodeLengths = [rleHuffCodes[i][0] for i in range(19)]
+        rleCodeLengthsReorder = [rleCodeLengths[newOrder[i]] for i in range(19)]
         numRleCodes = 19
-        while rleCodeLengths[numRleCodes-1] == 0:
+        while rleCodeLengths[numRleCodes - 1] == 0:
             numRleCodes -= 1
         if numRleCodes < 4:
             numRleCodes = 4
         # finally, we can start writing the compressed bitstream
         # start with the 3-bit block header
-        self.outputbitstream.AddBits(1, 1, False) # we only write 1 compressed block
-        self.outputbitstream.AddBits(2, 2, False) # always dynamic huffman tables
+        self.outputbitstream.AddBits(1, 1, False)  # we only write 1 compressed block
+        self.outputbitstream.AddBits(2, 2, False)  # always dynamic huffman tables
         # write the number of huffman codes in each tree
-        self.outputbitstream.AddBits(5, numLenCodes-257, False)
-        self.outputbitstream.AddBits(5, numDistCodes-1, False)
-        self.outputbitstream.AddBits(4, numRleCodes-4, False)
+        self.outputbitstream.AddBits(5, numLenCodes - 257, False)
+        self.outputbitstream.AddBits(5, numDistCodes - 1, False)
+        self.outputbitstream.AddBits(4, numRleCodes - 4, False)
         # next, give 3-bit code length for each RLE huffman code, in the special ordering
         for i in range(numRleCodes):
             self.outputbitstream.AddBits(3, rleCodeLengthsReorder[i], False)
         # now give the literal/length huffman code lengths, given via RLE symbols encoded with RLE huffman tree
         numExtraBits = [2, 3, 7]
-        for (rleCode, extraBits) in lenHistRLE:
+        for rleCode, extraBits in lenHistRLE:
             huffCode = rleHuffCodes[rleCode]
             self.outputbitstream.AddBits(huffCode[0], huffCode[1], True)
             if rleCode >= 16:
-                self.outputbitstream.AddBits(numExtraBits[rleCode-16], extraBits, False)
+                self.outputbitstream.AddBits(
+                    numExtraBits[rleCode - 16], extraBits, False
+                )
         # next, do the Distance huffman code lengths, via RLE symbols encoded with RLE huffman tree
-        for (rleCode, extraBits) in distHistRLE:
+        for rleCode, extraBits in distHistRLE:
             huffCode = rleHuffCodes[rleCode]
             self.outputbitstream.AddBits(huffCode[0], huffCode[1], True)
             if rleCode >= 16:
-                self.outputbitstream.AddBits(numExtraBits[rleCode-16], extraBits, False)
+                self.outputbitstream.AddBits(
+                    numExtraBits[rleCode - 16], extraBits, False
+                )
         # finally, encode the LZ77 symbols
-        for (lengthCode, lengthBits, distCode, distBits) in self.lz77SymbolList:
+        for lengthCode, lengthBits, distCode, distBits in self.lz77SymbolList:
             huffCode = lenHuffCodes[lengthCode]
             self.outputbitstream.AddBits(huffCode[0], huffCode[1], True)
             if lengthBits is not None and lengthBits[0] > 0:
-                self.outputbitstream.AddBits(lengthBits[0], lengthBits[1], False) # raw bits to give length for codes 265-284
+                self.outputbitstream.AddBits(
+                    lengthBits[0], lengthBits[1], False
+                )  # raw bits to give length for codes 265-284
             if distCode is not None:
                 huffCode = distHuffCodes[distCode]
                 self.outputbitstream.AddBits(huffCode[0], huffCode[1], True)
                 if distBits[0] > 0:
-                    self.outputbitstream.AddBits(distBits[0], distBits[1], False) # raw bits to give distance for codes 4-29
+                    self.outputbitstream.AddBits(
+                        distBits[0], distBits[1], False
+                    )  # raw bits to give distance for codes 4-29
         # finalize the bitstream and return the binary data
         self.outputbitstream.Finalize()
         return self.outputbitstream.GetData()
 
+
 class Decompressor:
     def __init__(self, inputdata):
         self.inputBitstream = BitReader(inputdata)
-        self.outputData = b''
+        self.outputData = b""
 
     @staticmethod
     def StripGZ(inputdata, bPrintInfo):
         # check data format
-        if inputdata[0] != 0x1f or inputdata[1] != 0x8b or inputdata[2] != 8:
+        if inputdata[0] != 0x1F or inputdata[1] != 0x8B or inputdata[2] != 8:
             raise Exception("This is not a GZIP format file")
         # find the start of the compressed stream
         flags = inputdata[3]
         zipIdx = 10
         if (flags & 4) != 0:
-            extralen = inputdata[zipIdx] * 256 + inputdata[zipIdx+1]
+            extralen = inputdata[zipIdx] * 256 + inputdata[zipIdx + 1]
             zipIdx += 2 + extralen
         if (flags & 8) != 0:
             startNameIdx = zipIdx
@@ -477,16 +522,20 @@ class Decompressor:
                 zipIdx += 1
             zipIdx += 1
             if bPrintInfo:
-                print(f"    Original .GZ filename: {inputdata[startNameIdx:zipIdx - 1]}")
+                print(
+                    f"    Original .GZ filename: {inputdata[startNameIdx:zipIdx - 1]}"
+                )
         if (flags & 16) != 0:
             startCommentIdx = zipIdx
             while inputdata[zipIdx] != 0:
                 zipIdx += 1
             zipIdx += 1
             if bPrintInfo:
-                print(f"    Original .GZ file comment: {inputdata[startCommentIdx:zipIdx - 1]}")
+                print(
+                    f"    Original .GZ file comment: {inputdata[startCommentIdx:zipIdx - 1]}"
+                )
         if (flags & 2) != 0:
-            zipIdx += 2 # CRC
+            zipIdx += 2  # CRC
         # return just the DEFLATE stream
         return inputdata[zipIdx:-8]  # CRC32 and ISIZE are on the end
 
@@ -494,7 +543,7 @@ class Decompressor:
         numCodes = len(huffLengths)
         maxLength = max(huffLengths)
         # count number of codes with each given length
-        popByLength = [0] * (maxLength+1)
+        popByLength = [0] * (maxLength + 1)
         for codeLength in huffLengths:
             if codeLength > 0:
                 popByLength[codeLength] += 1
@@ -504,14 +553,14 @@ class Decompressor:
         huffRoot.child1 = HuffNode()
         levelList = [huffRoot.child0, huffRoot.child1]
         # now iterate through each level, creating the tree
-        for level in range(1,maxLength+1):
+        for level in range(1, maxLength + 1):
             # codes which are on this level go on the left side of the tree
             for codeVal in range(numCodes):
                 if huffLengths[codeVal] == level:
                     thisNode = levelList.pop(0)
                     thisNode.value = codeVal
             # all remaining nodes are decision nodes and have 2 children, which go to the next level
-            nextLevelList = [ ]
+            nextLevelList = []
             for node in levelList:
                 node.child0 = HuffNode()
                 node.child1 = HuffNode()
@@ -525,19 +574,41 @@ class Decompressor:
         # read consecutive blocks until we complete the final one
         while True:
             # 3-bit block header
-            bFinalBlock = (self.inputBitstream.GetBits(1) == 1)
+            bFinalBlock = self.inputBitstream.GetBits(1) == 1
             blockType = self.inputBitstream.GetBits(2)
             if blockType == 1:
                 numLenCodes = 288
                 numDistCodes = 32
-                codeLengths = ([8] * 144) + ([9] * 112) + ([7] * 24) + ([8] * 8) + ([5] * 32)
+                codeLengths = (
+                    ([8] * 144) + ([9] * 112) + ([7] * 24) + ([8] * 8) + ([5] * 32)
+                )
             elif blockType == 2:
                 # read in the number of (non-zero) huffman codes in each category
                 numLenCodes = self.inputBitstream.GetBits(5) + 257
                 numDistCodes = self.inputBitstream.GetBits(5) + 1
                 numRleCodes = self.inputBitstream.GetBits(4) + 4
                 # read in and generate the code length list for the RLE codes
-                rleCodeOrder = [16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15]
+                rleCodeOrder = [
+                    16,
+                    17,
+                    18,
+                    0,
+                    8,
+                    7,
+                    9,
+                    6,
+                    10,
+                    5,
+                    11,
+                    4,
+                    12,
+                    3,
+                    13,
+                    2,
+                    14,
+                    1,
+                    15,
+                ]
                 rleCodeLengths = [0] * 19
                 for i in range(numRleCodes):
                     rleCodeLengths[rleCodeOrder[i]] = self.inputBitstream.GetBits(3)
@@ -545,7 +616,7 @@ class Decompressor:
                 rleHuffTree = self.GenerateHuffmanTreeFromLengths(rleCodeLengths)
                 # decompress the huffman code lengths for Literal/Length and Distance trees
                 totalCodeLengths = numLenCodes + numDistCodes
-                codeLengths = [ ]
+                codeLengths = []
                 while len(codeLengths) < totalCodeLengths:
                     rleSymbol = self.inputBitstream.GetSymbol(rleHuffTree)
                     if rleSymbol < 16:
@@ -561,14 +632,20 @@ class Decompressor:
                         repeatCount = self.inputBitstream.GetBits(7) + 11
                         codeLengths.extend([0] * repeatCount)
                     else:
-                        raise Exception(f"Invalid RLE Code length symbol {int(rleSymbol)}")
+                        raise Exception(
+                            f"Invalid RLE Code length symbol {int(rleSymbol)}"
+                        )
                 if len(codeLengths) != totalCodeLengths:
-                    raise Exception("Unexpected number of literal/distance huffman code lengths extracted from compressed RLE symbols")
+                    raise Exception(
+                        "Unexpected number of literal/distance huffman code lengths extracted from compressed RLE symbols"
+                    )
             else:
                 raise Exception(f"Unsupported DEFLATE block type {int(blockType)}")
             # generate the literal/length and distance huffman trees
             lenHuffTree = self.GenerateHuffmanTreeFromLengths(codeLengths[:numLenCodes])
-            distHuffTree = self.GenerateHuffmanTreeFromLengths(codeLengths[numLenCodes:])
+            distHuffTree = self.GenerateHuffmanTreeFromLengths(
+                codeLengths[numLenCodes:]
+            )
             # now decompress the LZ77 symbols and reconstruct the uncompressed data
             while True:
                 lenSymbol = self.inputBitstream.GetSymbol(lenHuffTree)
@@ -587,7 +664,12 @@ class Decompressor:
                 else:
                     extrabits = (lenSymbol - 261) >> 2
                     quadrant = (lenSymbol - 261) & 3
-                    copylen = (4 << extrabits) + (quadrant * (1 << extrabits)) + 3 + self.inputBitstream.GetBits(extrabits)
+                    copylen = (
+                        (4 << extrabits)
+                        + (quadrant * (1 << extrabits))
+                        + 3
+                        + self.inputBitstream.GetBits(extrabits)
+                    )
                 # then get the distance code and calculate the distance backwards to start copying
                 distSymbol = self.inputBitstream.GetSymbol(distHuffTree)
                 if distSymbol < 4:
@@ -595,7 +677,12 @@ class Decompressor:
                 else:
                     extrabits = (distSymbol - 2) >> 1
                     parity = (distSymbol - 2) & 1
-                    copydist = (2 << extrabits) + (parity * (1 << extrabits)) + 1 + self.inputBitstream.GetBits(extrabits)
+                    copydist = (
+                        (2 << extrabits)
+                        + (parity * (1 << extrabits))
+                        + 1
+                        + self.inputBitstream.GetBits(extrabits)
+                    )
                 # perform the copy operation
                 copyIdx = len(self.outputData) - copydist
                 for i in range(copylen):
@@ -607,20 +694,27 @@ class Decompressor:
                 break
         return self.outputData
 
-#******************************************************************************
+
+# ******************************************************************************
 # main function for standard script execution
 #
 
 if __name__ == "__main__":
     print("DynoSprite DEFLATE Compressor Script")
     # get input paths
-    if len(sys.argv) != 4 or (sys.argv[1].lower() != 'zip' and sys.argv[1].lower() != 'gzip' and sys.argv[1].lower() != 'unzip'):
+    if len(sys.argv) != 4 or (
+        sys.argv[1].lower() != "zip"
+        and sys.argv[1].lower() != "gzip"
+        and sys.argv[1].lower() != "unzip"
+    ):
         print(f"****Usage: {sys.argv[0]} <command> <input-file> <output-file>")
         print("    <command> is either 'zip', 'gzip', or 'unzip'")
-        print("    <input-file> for 'unzip' command can be in .gz format or raw compressed stream")
+        print(
+            "    <input-file> for 'unzip' command can be in .gz format or raw compressed stream"
+        )
         sys.exit(1)
-    bCompress = not (sys.argv[1].lower() == 'unzip')
-    bUseGzip = (sys.argv[1].lower() == 'gzip')
+    bCompress = not (sys.argv[1].lower() == "unzip")
+    bUseGzip = sys.argv[1].lower() == "gzip"
     infilename = sys.argv[2]
     outfilename = sys.argv[3]
     if bCompress:
@@ -630,7 +724,9 @@ if __name__ == "__main__":
         comp = Compressor(ifdata)
         ofdata = comp.Deflate(True, bUseGzip)
         open(outfilename, "wb").write(ofdata)
-        print(f"Input file was compressed from {int(len(ifdata))} bytes down to {int(len(ofdata))} bytes.")
+        print(
+            f"Input file was compressed from {int(len(ifdata))} bytes down to {int(len(ofdata))} bytes."
+        )
     else:
         # read the input (compressed) file
         ifdata = open(infilename, "rb").read()
@@ -641,5 +737,6 @@ if __name__ == "__main__":
         decomp = Decompressor(ifdata)
         ofdata = decomp.Inflate()
         open(outfilename, "wb").write(ofdata)
-        print(f"Input file was decompressed from {int(len(ifdata))} bytes to {int(len(ofdata))} bytes.")
-
+        print(
+            f"Input file was decompressed from {int(len(ifdata))} bytes to {int(len(ofdata))} bytes."
+        )

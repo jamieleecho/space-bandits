@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#******************************************************************************
+# ******************************************************************************
 # DynoSprite - scripts/build-config.py
 # Copyright (c) 2022, Jamie Cho
 # All rights reserved.
@@ -25,45 +25,54 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#******************************************************************************
+# ******************************************************************************
 
 import click
 import json
 
 
 @click.command()
-@click.argument('input_filename', type=click.Path(exists=True))
-@click.argument('output_filename', type=click.Path(exists=False))
+@click.argument("input_filename", type=click.Path(exists=True))
+@click.argument("output_filename", type=click.Path(exists=False))
 def build_config(input_filename, output_filename):
-    """DynoSprites defaults-config.asm builder. Build defaults-config.asm """
+    """DynoSprites defaults-config.asm builder. Build defaults-config.asm"""
     """from defaults-config.json specified by INPUT_FILENAME and output """
     """specified by OUTPUT_FILENAME"""
-    with open(input_filename, 'r') as json_file:
+    with open(input_filename, "r") as json_file:
         config_json = json.load(json_file)
 
     sound_modes = {
-        'NoSound': 0,
-        'Internal': 1,
-        'Orc90': 2,
+        "NoSound": 0,
+        "Internal": 1,
+        "Orc90": 2,
     }
 
     config_dict = {
-        'FirstLevel': str(config_json['FirstLevel'] if 'FirstLevel'
-                          in config_json else 1),
-        'MonitorIsRGB': str(0 if (not ('MonitorIsRGB' in config_json) or
-                                 (not config_json['MonitorIsRGB']))
-                              else 255),
-        'UseKeyboard': str(0 if (not ('UseKeyboard' in config_json) or
-                                (not config_json['UseKeyboard']))
-                              else 255),
-        'SoundOutputMode': str(1 if (not ('SoundOutputMode' in config_json))
-                           else config_json['SoundOutputMode']),
+        "FirstLevel": str(
+            config_json["FirstLevel"] if "FirstLevel" in config_json else 1
+        ),
+        "MonitorIsRGB": str(
+            0
+            if (
+                "MonitorIsRGB" not in config_json or (not config_json["MonitorIsRGB"])
+            )
+            else 255
+        ),
+        "UseKeyboard": str(
+            0
+            if ("UseKeyboard" not in config_json or (not config_json["UseKeyboard"]))
+            else 255
+        ),
+        "SoundOutputMode": str(
+            1
+            if ("SoundOutputMode" not in config_json)
+            else config_json["SoundOutputMode"]
+        ),
     }
 
-    with open(output_filename, 'w') as asm_file:
+    with open(output_filename, "w") as asm_file:
         for key, value in config_dict.items():
-            asm_file.write(f'{key}\tequ\t{value}\n')
-    
+            asm_file.write(f"{key}\tequ\t{value}\n")
 
 
 if __name__ == "__main__":
