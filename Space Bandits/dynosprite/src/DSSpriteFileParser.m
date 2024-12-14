@@ -52,7 +52,7 @@
     // Extract the sprite info
     NSArray *spriteData = [objectDict objectForKey:@"Sprites"];
     NSCAssert([spriteData isKindOfClass:NSArray.class], @"Sprite key is not an NSArray");
-    NSMutableArray *sprites = [[NSMutableArray alloc] initWithCapacity:spriteData.count];
+    NSMutableArray<DSSpriteInfo *> *sprites = [[NSMutableArray alloc] initWithCapacity:spriteData.count];
     for(NSDictionary *spriteInfoData in spriteData) {
         DSSpriteInfo *spriteInfo = [DSSpriteFileParser spriteInfoFromDictionary:spriteInfoData];
         [sprites addObject:spriteInfo];

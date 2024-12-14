@@ -9,7 +9,7 @@ game-*
 *.o
 *.s
 *.link
-
+**/*.xcodeproj/*.xcworkspace/xcuserdata
 *.pyc
 
 tools/mess64
