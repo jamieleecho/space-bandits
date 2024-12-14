@@ -3,11 +3,11 @@
 case "$(uname -s)" in
 
    Darwin)
-     docker-compose -f docker-compose.yml run --rm dynosprite bash
+     docker compose -f docker-compose.yml run --rm dynosprite bash
      ;;
 
    Linux)
-     docker-compose -f docker-compose.yml run --rm dynosprite bash
+     docker compose -f docker-compose.yml run --rm dynosprite bash
      ;;
 
    CYGWIN*|MINGW32*|MSYS*)

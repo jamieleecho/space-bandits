@@ -1,7 +1,6 @@
 FROM jamieleecho/coco-dev:latest
 
-MAINTAINER Jamie Cho version: 0.5
+LABEL org.opencontainers.image.authors="Jamie Cho"
 
 # Setup tools folder
 ADD . /home/dynosprite/
-WORKDIR ..
