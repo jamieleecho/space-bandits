@@ -48,6 +48,7 @@
     DSSpriteInfo *spriteInfo1 = [DSSpriteFileParser spriteInfoFromDictionary:dict1];
     XCTAssertEqual(spriteInfo1.name, @"Ship1");
     XCTAssertTrue(DSPointEqual(spriteInfo1.location, DSPointMake(137, 433)));
+    XCTAssertFalse(spriteInfo1.hasRectangle);
     XCTAssertTrue(spriteInfo1.singlePixelPosition);
 
     NSDictionary *dict2 = @{
@@ -58,6 +59,7 @@
     DSSpriteInfo *spriteInfo2 = [DSSpriteFileParser spriteInfoFromDictionary:dict2];
     XCTAssertEqual(spriteInfo2.name, @"Ship2");
     XCTAssertTrue(DSPointEqual(spriteInfo2.location, DSPointMake(1370, 4330)));
+    XCTAssertFalse(spriteInfo2.hasRectangle);
     XCTAssertFalse(spriteInfo2.singlePixelPosition);
     
     NSDictionary *dict3 = @{
@@ -67,6 +69,43 @@
     };
     XCTAssertThrows([DSSpriteFileParser spriteInfoFromDictionary:dict3]);
     XCTAssertThrows([DSSpriteFileParser spriteInfoFromDictionary:(NSDictionary *)@[]]);
+
+    NSDictionary *dict4 = @{
+        @"Name": @"Ship4",
+        @"Location": @[@1370, @4330],
+        @"Rectangle": @[@20, @21, @22, @23],
+        @"SinglePixelPosition": @YES
+    };
+    DSSpriteInfo *spriteInfo4 = [DSSpriteFileParser spriteInfoFromDictionary:dict4];
+    XCTAssertEqual(spriteInfo4.name, @"Ship4");
+    XCTAssertTrue(DSPointEqual(spriteInfo4.location, DSPointMake(1370, 4330)));
+    XCTAssertTrue(spriteInfo4.hasRectangle);
+    XCTAssertTrue(CGRectEqualToRect(spriteInfo4.rectangle, CGRectMake(20, 21, 22, 23)));
+    XCTAssertTrue(spriteInfo4.singlePixelPosition);
+
+    NSDictionary *dict5 = @{
+        @"Name": @"Ship2",
+        @"Location": @[@1370, @4330],
+        @"Rectangle": @[@20, @21, @22, @"23.2"],
+        @"SinglePixelPosition": @YES
+    };
+    XCTAssertThrows([DSSpriteFileParser spriteInfoFromDictionary:dict5]);
+
+    NSDictionary *dict6 = @{
+        @"Name": @"Ship2",
+        @"Location": @[@1370, @4330],
+        @"Rectangle": @[@20, @21, @22],
+        @"SinglePixelPosition": @YES
+    };
+    XCTAssertThrows([DSSpriteFileParser spriteInfoFromDictionary:dict6]);
+
+    NSDictionary *dict7 = @{
+        @"Name": @"Ship2",
+        @"Location": @[@1370, @4330],
+        @"Rectangle": @22,
+        @"SinglePixelPosition": @YES
+    };
+    XCTAssertThrows([DSSpriteFileParser spriteInfoFromDictionary:dict7]);
 }
 
 - (void)testParseFileForObjectClass {

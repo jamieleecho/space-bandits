@@ -31,6 +31,16 @@
     NSCAssert([spriteInfoData isKindOfClass:NSDictionary.class], @"Sprite data is not an NSDictionary");
     spriteInfo.name = spriteInfoData[@"Name"];
     spriteInfo.location = [DSLevelFileParser pointFromArray:spriteInfoData[@"Location"]];
+    spriteInfo.hasRectangle = [spriteInfoData objectForKey:@"Rectangle"] != nil;
+    if (spriteInfo.hasRectangle) {
+        NSArray<NSNumber *> *dsRect = spriteInfoData[@"Rectangle"];
+        bool validRectangle = [dsRect isKindOfClass: NSArray.class] && dsRect.count == 4;
+        for(NSNumber *coord in dsRect) {
+            validRectangle = validRectangle && (coord.intValue == coord.doubleValue);
+        }
+        NSCAssert(validRectangle, ([NSString stringWithFormat: @"\"Rectangle:\" %@ must be an Array with 4 integers", dsRect]));
+        spriteInfo.rectangle = CGRectMake(dsRect[0].intValue, dsRect[1].intValue, dsRect[2].intValue, dsRect[3].intValue);
+    }
     spriteInfo.singlePixelPosition = [spriteInfoData[@"SinglePixelPosition"] boolValue];
     spriteInfo.saveBackground = [spriteInfoData objectForKey:@"SaveBackground"] ? [spriteInfoData[@"SaveBackground"] boolValue] : YES;
     return spriteInfo;

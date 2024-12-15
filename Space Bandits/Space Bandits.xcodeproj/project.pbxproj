@@ -365,6 +365,7 @@
 /* Begin PBXFileReference section */
 		5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSKeyEventBaseTest.m; sourceTree = "<group>"; };
 		5218E5012C0BB72300F9B9A3 /* DSKeyEventBaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSKeyEventBaseTest.h; sourceTree = "<group>"; };
+		5229475E2D0E81A9006870DC /* Space Bandits.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Space Bandits.xctestplan"; sourceTree = "<group>"; };
 		522A46F82C057C5E0094C68A /* UIImage+Misc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Misc.h"; sourceTree = "<group>"; };
 		522A46F92C057C5E0094C68A /* UIImage+Misc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Misc.m"; sourceTree = "<group>"; };
 		523978362C1F5D1300301419 /* pcgfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pcgfont.ttf; sourceTree = "<group>"; };
@@ -731,6 +732,7 @@
 		52CC81882C02172200CC3E38 = {
 			isa = PBXGroup;
 			children = (
+				5229475E2D0E81A9006870DC /* Space Bandits.xctestplan */,
 				52CC82312C02179100CC3E38 /* dynosprite */,
 				52CC81B22C02172200CC3E38 /* dynosprite tests */,
 				52CC81932C02172200CC3E38 /* Space Bandits */,
