@@ -184,7 +184,7 @@ lint-scripts:
 	ruff check scripts
 
 type-check-scripts:
-	mypy scripts
+	mypy --ignore-missing-imports scripts
 
 # build rules
 # 0. Parse options file

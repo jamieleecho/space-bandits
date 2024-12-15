@@ -31,7 +31,7 @@ import sys
 import json
 import math
 
-from typing import List
+from typing import Any, List, Tuple
 import numpy
 import numpy.typing
 
@@ -274,9 +274,43 @@ def parsePaletteRGB(paletteFilename):
     return matrix
 
 
+class Point:
+    x: int
+    y: int
+
+    def __init__(self, x: int = 0, y: int = 0):
+        self.x = x
+        self.y = y
+
+    def __add__(self, point: "Point") -> "Point":
+        return Point(self.x + point.x, self.y + point.y)
+
+
+class Size:
+    width: int
+    height: int
+
+    def __init__(self, width: int = 0, height: int = 0):
+        self.width = width
+        self.height = height
+
+
+class Rectangle:
+    origin: Point
+    size: Size
+
+    def __init__(self, origin: Point, size: Size):
+        self.origin = origin
+        self.size = size
+
+    def translation(self, translation: Point) -> "Rectangle":
+        return Rectangle(self.origin + translation, self.size)
+
+
 class SpriteInfo:
     name: str
     location: List[int]
+    rectangle: Rectangle | None
     singlepixelpos: bool
     pixArray: List[List[int]]
     hotspot: List[float]
@@ -286,6 +320,7 @@ class SpriteInfo:
     def __init__(self):
         self.name = ""
         self.location = [0, 0]
+        self.rectangle = None
         self.singlepixelpos = False
         self.pixArray = []
         self.hotspot = [0, 0]
@@ -323,6 +358,18 @@ def parseSpriteDescription(descFilename: str) -> SpriteGroupInfo:
         curSprite = SpriteInfo()
         curSprite.name = dataSprite["Name"]
         curSprite.location = dataSprite["Location"]
+        if "Rectangle" in dataSprite:
+            dsRect: List[int] = dataSprite["Rectangle"]
+            if (
+                not isinstance(dsRect, list)
+                or len(dsRect) != 4
+                or all(int(coord) != int(coord) for coord in dsRect)
+            ):
+                raise Exception(f'"Rectangle:" {json.dumps(dsRect)} must an Array with 4 integers')
+            curSprite.rectangle = Rectangle(
+                Point(dsRect[0], dsRect[1]),
+                Size(dsRect[2], dsRect[3]),
+            )
         curSprite.singlepixelpos = dataSprite["SinglePixelPosition"]
         if "ChunkHint" in dataSprite:
             curSprite.chunkHint = dataSprite["ChunkHint"]
@@ -337,8 +384,32 @@ def parseSpriteDescription(descFilename: str) -> SpriteGroupInfo:
     return info
 
 
-def NonRecursivePaint(ImgData, Width, Height, x, y, transparentIdx, pixCoordColorList):
-    hitlist = deque()
+def GetPixels(
+    ImgData: numpy.typing.NDArray[numpy.int8],
+    absolute_rect: Rectangle,
+    transparentIdx: int,
+    pixCoordColorList: List[Tuple[int, int, Any]],
+) -> None:
+    for y in range(absolute_rect.origin.y, absolute_rect.origin.y + absolute_rect.size.height):
+        for x in range(absolute_rect.origin.x, absolute_rect.origin.x + absolute_rect.size.width):
+            # return if pixel at current coordinate is transparent
+            pixColor = ImgData[y][x] if x >= 0 and y >= 0 else transparentIdx
+            if pixColor == transparentIdx:
+                continue
+            # we have a non-transparent pixel, so record the color and coordinate
+            pixCoordColorList.append((x, y, pixColor))
+
+
+def Paint(
+    ImgData: numpy.typing.NDArray[numpy.int8],
+    Width: int,
+    Height: int,
+    x: int,
+    y: int,
+    transparentIdx: int,
+    pixCoordColorList: List[Tuple[int, int, Any]],
+) -> None:
+    hitlist: deque[Tuple[int, int]] = deque()
     hitlist.append((x, y))
     while hitlist:
         # get coordinates of pixel to examine
@@ -412,15 +483,25 @@ def FindSpritePixels(
         )
         sys.exit(2)
     # now we apply a painting algoritm to produce a list of all of the touching non-transparent pixels
-    pixCoordColorList: List[List[int]] = []
-    NonRecursivePaint(ImgData, Width, Height, x, y, transparentIdx, pixCoordColorList)
-    # get lists of all X coordinates and Y coordinates, then calculate width and height of sprite matrix
-    Xcoords = [v[0] for v in pixCoordColorList]
-    Ycoords = [v[1] for v in pixCoordColorList]
-    minX = min(Xcoords)
-    minY = min(Ycoords)
-    matrixWidth = max(Xcoords) - minX + 1
-    matrixHeight = max(Ycoords) - minY + 1
+    pixCoordColorList: List[Tuple[int, int, Any]] = []
+    if sprite.rectangle:
+        absolute_rect = sprite.rectangle.translation(Point(x, y))
+        GetPixels(ImgData, absolute_rect, transparentIdx, pixCoordColorList)
+        matrixWidth = absolute_rect.size.width
+        matrixHeight = absolute_rect.size.height
+        minX = absolute_rect.origin.x
+        minY = absolute_rect.origin.y
+    else:
+        Paint(ImgData, Width, Height, x, y, transparentIdx, pixCoordColorList)
+
+        # get lists of all X coordinates and Y coordinates, then calculate width and height of sprite matrix
+        Xcoords = [v[0] for v in pixCoordColorList]
+        Ycoords = [v[1] for v in pixCoordColorList]
+        minX = min(Xcoords)
+        minY = min(Ycoords)
+        matrixWidth = max(Xcoords) - minX + 1
+        matrixHeight = max(Ycoords) - minY + 1
+
     # generate the matrix
     pixMatrix = [[-1] * matrixWidth for y in range(matrixHeight)]
     for coordColor in pixCoordColorList:
@@ -428,6 +509,7 @@ def FindSpritePixels(
         y = coordColor[1] - minY
         color = ImageToCocoColor[coordColor[2]]
         pixMatrix[y][x] = color
+
     # set the matrix and the hotspot in the sprite info struct and we're done!
     sprite.pixArray = pixMatrix
     sprite.hotspot = [sprite.location[0] - minX, sprite.location[1] - minY]
@@ -845,7 +927,11 @@ def GenerateTilemap(
     width = im.size[0]
     height = im.size[1]
     ImgData = im.getdata()
+    if ImgData is None:
+        raise Exception(f"{ImageFilename} generated an image with no data")
     PalData = im.getpalette()
+    if PalData is None:
+        raise Exception(f"{ImageFilename} generated an image with no palette data")
     PalSize = len(PalData) // 3
     ImageToCocoColor: List[int] = []
     for i in range(PalSize):
@@ -958,6 +1044,8 @@ def GenerateSprites(
     height = im.size[1]
     ImgData: numpy.typing.NDArray[numpy.int8] = numpy.array(im)
     PalData = im.getpalette()
+    if PalData is None:
+        raise Exception(f"{ImageFilename} generated an image with no palette data")
     PalSize = len(PalData) // 3
     ImageToCocoColor = []
     for i in range(PalSize):
