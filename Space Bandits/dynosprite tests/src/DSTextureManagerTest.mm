@@ -99,7 +99,7 @@ static void draw(DynospriteCOB *cob, void *scene, void *camera, void *textures, 
 }
 
 
-- (void)testConfigureSprite {
+- (void)testConfigureSpriteNoRectangle {
     XCTAssertEqual(_target.resourceController, _resourceController);
     MockSKSpriteNode *sprite = [[MockSKSpriteNode alloc] init];
     _cob.groupIdx = 4;
@@ -133,6 +133,43 @@ static void draw(DynospriteCOB *cob, void *scene, void *camera, void *textures, 
     _spriteObjectClass1.sprites[1].saveBackground = NO;
     [_target configureSprite:(id)sprite forCob:&_cob andScene:_scene andCamera:_camera includeBackgroundSavers:NO];
     XCTAssertEqual(sprite.hidden, NO);
+}
+
+
+- (void)testConfigureSpriteWithRectangle {
+    XCTAssertEqual(_target.resourceController, _resourceController);
+    MockSKSpriteNode *sprite = [[MockSKSpriteNode alloc] init];
+    _cob.groupIdx = 3;
+    _cob.statePtr[0] = 1;
+    _cob.globalX = 23;
+    _cob.globalY = 99;
+    _cob.active = 1;
+    [_target configureSprite:(id)sprite forCob:&_cob andScene:_scene andCamera:_camera includeBackgroundSavers:YES];
+    
+    XCTAssertEqual(sprite.position.x, 29);
+    XCTAssertEqual(sprite.position.y, -105);
+    XCTAssertEqual(sprite.hidden, YES);
+    XCTAssertEqual(sprite.anchorPoint.x, 0.0f);
+    XCTAssertEqual(sprite.anchorPoint.y, 0.0f);
+    UIImage *spriteImage = [DSTestUtils convertToUIImage:sprite.texture.CGImage];
+    UIImage *swathImage = [UIImage imageWithContentsOfFile:[[NSBundle bundleForClass:self.class] pathForResource:@"swath" ofType:@"png"]];
+    XCTAssertTrue([DSTestUtils image:spriteImage isSameAsImage:swathImage]);
+    XCTAssertEqual(drawArgs.size(), 0);
+    
+    _cob.active = 0;
+    [_target configureSprite:(id)sprite forCob:&_cob andScene:_scene andCamera:_camera includeBackgroundSavers:YES];
+    XCTAssertEqual(sprite.hidden, YES);
+
+    _cob.active = 2;
+    [_target configureSprite:(id)sprite forCob:&_cob andScene:_scene andCamera:_camera includeBackgroundSavers:YES];
+    XCTAssertEqual(sprite.hidden, NO);
+
+    [_target configureSprite:(id)sprite forCob:&_cob andScene:_scene andCamera:_camera includeBackgroundSavers:NO];
+    XCTAssertEqual(sprite.hidden, YES);
+
+    _spriteObjectClass1.sprites[1].saveBackground = NO;
+    [_target configureSprite:(id)sprite forCob:&_cob andScene:_scene andCamera:_camera includeBackgroundSavers:NO];
+    XCTAssertEqual(sprite.hidden, YES);
 }
 
 

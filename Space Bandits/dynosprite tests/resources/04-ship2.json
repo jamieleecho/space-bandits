@@ -22,7 +22,6 @@
   }, {
       "Name": "Ship4",
       "Location": [106, 433],
-      "Rectangle": [20, 21, 22, 23],
       "SinglePixelPosition": true
   }]
 }

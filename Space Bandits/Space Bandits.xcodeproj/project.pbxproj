@@ -84,6 +84,7 @@
 		525FE4932C053EC600E03391 /* DSTransitionSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4642C053EC500E03391 /* DSTransitionSceneTest.m */; };
 		525FE4942C053EC600E03391 /* DSViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4652C053EC500E03391 /* DSViewControllerTest.m */; };
 		5287C4712C0BCFDA00AD2369 /* hires in Resources */ = {isa = PBXBuildFile; fileRef = 5287C4702C0BCFDA00AD2369 /* hires */; };
+		52BAAA8A2D0E951E00BEAF90 /* swath.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BAAA892D0E951E00BEAF90 /* swath.png */; };
 		52CC81A52C02172200CC3E38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52CC81A42C02172200CC3E38 /* Assets.xcassets */; };
 		52CC81AA2C02172200CC3E38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC81A92C02172200CC3E38 /* main.m */; };
 		52CC82352C02179100CC3E38 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 52CC81D12C02179100CC3E38 /* Actions.sks */; };
@@ -444,6 +445,7 @@
 		5268AC2B2C1A998D00365852 /* dynosprite-github.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "dynosprite-github.xctestplan"; sourceTree = "<group>"; };
 		526C33282C16C77D003FB16E /* Space-Bandits-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Space-Bandits-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5287C4702C0BCFDA00AD2369 /* hires */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hires; sourceTree = "<group>"; };
+		52BAAA892D0E951E00BEAF90 /* swath.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swath.png; sourceTree = "<group>"; };
 		52CC81912C02172200CC3E38 /* Space Bandits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Bandits.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52CC81A22C02172200CC3E38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52CC81A42C02172200CC3E38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				525FE4192C053EB200E03391 /* JSONList.json */,
 				525FE41A2C053EB200E03391 /* moon.gif */,
 				525FE41B2C053EB200E03391 /* ship.tiff */,
+				52BAAA892D0E951E00BEAF90 /* swath.png */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -1173,6 +1176,7 @@
 				525FE4292C053EB200E03391 /* defaults-config.json in Resources */,
 				525FE4342C053EB200E03391 /* JSONDict.json in Resources */,
 				525FE4282C053EB200E03391 /* 04-ship2.json in Resources */,
+				52BAAA8A2D0E951E00BEAF90 /* swath.png in Resources */,
 				525FE4252C053EB200E03391 /* 03-badguys.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

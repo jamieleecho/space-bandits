@@ -42,7 +42,13 @@
     NSMutableArray<DSTexture *> *textures = [NSMutableArray arrayWithCapacity:spriteObjectClass.sprites.count];
     for(DSSpriteInfo *spriteInfo in spriteObjectClass.sprites) {
         DSImageUtilImageInfo imageInfo = DSImageUtilGetImagePixelData(filteredImage);
-        CGRect rect = DSImageUtilFindSpritePixels(imageInfo, spriteInfo.name, CGPointMake(spriteInfo.location.x, spriteInfo.location.y));
+        
+        CGRect rect;
+        if (spriteInfo.hasRectangle) {
+            rect = CGRectOffset(spriteInfo.rectangle, spriteInfo.location.x, spriteInfo.location.y);
+        } else {
+            rect = DSImageUtilFindSpritePixels(imageInfo, spriteInfo.name, CGPointMake(spriteInfo.location.x, spriteInfo.location.y));
+        }
         CGRect convertedRect = CGRectMake(rect.origin.x / imageInfo.width, 1.0f - (rect.origin.y + rect.size.height) / imageInfo.height, rect.size.width / imageInfo.width, rect.size.height / imageInfo.height);
         SKTexture *spriteTexture = [SKTexture textureWithRect:convertedRect inTexture:mainTexture];
         CGFloat offsetX = -(spriteInfo.location.x - rect.origin.x - (rect.size.width / 2));
