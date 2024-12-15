@@ -12,7 +12,7 @@
     "SinglePixelPosition": true
   }, {
     "Name": "EnemySwath2",
-    "Rectangle": [-4, -4, 20, 20],
+    "Location": [19, 236],
     "SinglePixelPosition": true
   }, {
     "Name": "EnemySwath3",
