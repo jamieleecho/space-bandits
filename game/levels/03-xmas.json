@@ -1,0 +1,29 @@
+{
+  "Level": {
+    "Name": "Christmas 2024",
+    "Description": "Merry Christmas",
+    "ObjectGroups": [6],
+    "MaxObjectTableSize": 65,
+    "Tileset": 3,
+    "TilemapImage": "../tiles/03-xmas.png",
+    "TilemapStart": [0, 0],
+    "TilemapSize": [320, 208],
+    "BkgrndStartX": 0,
+    "BkgrndStartY": 0
+  },
+
+  "Objects": [
+    {
+      "_comment": "***** Game Over",
+      "GroupID": 6,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 168,
+      "globalY": 98,
+      "InitData": []
+    }
+  ]
+}
+
+
+

@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		5218E5002C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */; };
+		522103422D0FD87F00C2DBF6 /* 03-xmas.c in Sources */ = {isa = PBXBuildFile; fileRef = 522103402D0FD87F00C2DBF6 /* 03-xmas.c */; };
+		522103542D0FDC7D00C2DBF6 /* 03-level3.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = 522103532D0FDC7D00C2DBF6 /* 03-level3.png */; };
+		522103572D0FDCEE00C2DBF6 /* 03-xmas.json in Copy levels Files */ = {isa = PBXBuildFile; fileRef = 522103412D0FD87F00C2DBF6 /* 03-xmas.json */; };
+		522103582D0FDDE200C2DBF6 /* 03-xmas.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 5221034D2D0FDB7800C2DBF6 /* 03-xmas.json */; };
+		522103592D0FDDE500C2DBF6 /* 03-xmas.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 5221034E2D0FDB7800C2DBF6 /* 03-xmas.png */; };
+		5221035B2D0FE4E200C2DBF6 /* 03-xmas.png in Resources */ = {isa = PBXBuildFile; fileRef = 5221035A2D0FE4E200C2DBF6 /* 03-xmas.png */; };
 		522A46FA2C057C5E0094C68A /* UIImage+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 522A46F92C057C5E0094C68A /* UIImage+Misc.m */; };
 		522A46FB2C057C5E0094C68A /* UIImage+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 522A46F92C057C5E0094C68A /* UIImage+Misc.m */; };
 		523978372C1F5D1300301419 /* pcgfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 523978362C1F5D1300301419 /* pcgfont.ttf */; };
@@ -257,6 +263,7 @@
 			files = (
 				52E24A2D2C1805D80098F87D /* 01-persei.json in Copy levels Files */,
 				52E24A2E2C1805DE0098F87D /* 02-space.json in Copy levels Files */,
+				522103572D0FDCEE00C2DBF6 /* 03-xmas.json in Copy levels Files */,
 			);
 			name = "Copy levels Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +277,7 @@
 				52E24A392C1806D90098F87D /* 00-mainmenu.png in Copy images Files */,
 				52E24A3A2C1806DD0098F87D /* 01-level1.png in Copy images Files */,
 				52E24A3B2C1806DF0098F87D /* 02-level2.png in Copy images Files */,
+				522103542D0FDC7D00C2DBF6 /* 03-level3.png in Copy images Files */,
 				52E24A3C2C1806E10098F87D /* images.json in Copy images Files */,
 			);
 			name = "Copy images Files";
@@ -357,6 +365,8 @@
 				52E24A962C18096C0098F87D /* 01-moon.png in Copy tiles Files */,
 				52E24A952C1809690098F87D /* 02-space.json in Copy tiles Files */,
 				52E24A942C1809670098F87D /* 02-space.png in Copy tiles Files */,
+				522103582D0FDDE200C2DBF6 /* 03-xmas.json in Copy tiles Files */,
+				522103592D0FDDE500C2DBF6 /* 03-xmas.png in Copy tiles Files */,
 			);
 			name = "Copy tiles Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +376,12 @@
 /* Begin PBXFileReference section */
 		5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSKeyEventBaseTest.m; sourceTree = "<group>"; };
 		5218E5012C0BB72300F9B9A3 /* DSKeyEventBaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSKeyEventBaseTest.h; sourceTree = "<group>"; };
+		522103402D0FD87F00C2DBF6 /* 03-xmas.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = "03-xmas.c"; path = "../../../../game/levels/03-xmas.c"; sourceTree = "<group>"; };
+		522103412D0FD87F00C2DBF6 /* 03-xmas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "03-xmas.json"; path = "../../../../game/levels/03-xmas.json"; sourceTree = "<group>"; };
+		5221034D2D0FDB7800C2DBF6 /* 03-xmas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "03-xmas.json"; sourceTree = "<group>"; };
+		5221034E2D0FDB7800C2DBF6 /* 03-xmas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-xmas.png"; sourceTree = "<group>"; };
+		522103532D0FDC7D00C2DBF6 /* 03-level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "03-level3.png"; path = "../../../../game/images/03-level3.png"; sourceTree = "<group>"; };
+		5221035A2D0FE4E200C2DBF6 /* 03-xmas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-xmas.png"; sourceTree = "<group>"; };
 		5229475E2D0E81A9006870DC /* Space Bandits.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Space Bandits.xctestplan"; sourceTree = "<group>"; };
 		522A46F82C057C5E0094C68A /* UIImage+Misc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Misc.h"; sourceTree = "<group>"; };
 		522A46F92C057C5E0094C68A /* UIImage+Misc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Misc.m"; sourceTree = "<group>"; };
@@ -952,6 +968,8 @@
 				52E24A202C17E84E0098F87D /* 01-persei.json */,
 				52E24A222C17E84E0098F87D /* 02-space.c */,
 				52E24A1F2C17E84E0098F87D /* 02-space.json */,
+				522103402D0FD87F00C2DBF6 /* 03-xmas.c */,
+				522103412D0FD87F00C2DBF6 /* 03-xmas.json */,
 			);
 			path = levels;
 			sourceTree = "<group>";
@@ -962,6 +980,7 @@
 				52E24A312C18068E0098F87D /* 00-mainmenu.png */,
 				52E24A322C18068E0098F87D /* 01-level1.png */,
 				52E24A332C18068E0098F87D /* 02-level2.png */,
+				522103532D0FDC7D00C2DBF6 /* 03-level3.png */,
 				52E24A342C18068E0098F87D /* images.json */,
 			);
 			path = images;
@@ -988,6 +1007,7 @@
 			children = (
 				52E24A412C1807090098F87D /* 01-moon.png */,
 				52E24A422C1807090098F87D /* 02-space.png */,
+				5221035A2D0FE4E200C2DBF6 /* 03-xmas.png */,
 			);
 			path = tiles;
 			sourceTree = "<group>";
@@ -1044,6 +1064,8 @@
 				52E24A8C2C18094D0098F87D /* 01-moon.png */,
 				52E24A8D2C18094D0098F87D /* 02-space.json */,
 				52E24A8E2C18094D0098F87D /* 02-space.png */,
+				5221034D2D0FDB7800C2DBF6 /* 03-xmas.json */,
+				5221034E2D0FDB7800C2DBF6 /* 03-xmas.png */,
 			);
 			name = tiles;
 			path = ../../../game/tiles;
@@ -1142,6 +1164,7 @@
 				523978372C1F5D1300301419 /* pcgfont.ttf in Resources */,
 				52CC81A52C02172200CC3E38 /* Assets.xcassets in Resources */,
 				52E0DB3D2C0C42A700AD5BDC /* Main.storyboard in Resources */,
+				5221035B2D0FE4E200C2DBF6 /* 03-xmas.png in Resources */,
 				52E24A2B2C1805500098F87D /* defaults-config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1228,6 +1251,7 @@
 				52CC827A2C02179100CC3E38 /* DSObjectCoordinator.m in Sources */,
 				52CC82AD2C02179100CC3E38 /* DSTransitionImageLoader.m in Sources */,
 				52CC82472C02179100CC3E38 /* DSConfigFileParser.m in Sources */,
+				522103422D0FD87F00C2DBF6 /* 03-xmas.c in Sources */,
 				52CC826E2C02179100CC3E38 /* DSNSDataMD5Extensions.m in Sources */,
 				52E24A102C17E7E00098F87D /* 04-ship.c in Sources */,
 				52CC81AA2C02172200CC3E38 /* main.m in Sources */,

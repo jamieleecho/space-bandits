@@ -365,7 +365,7 @@ def parseSpriteDescription(descFilename: str) -> SpriteGroupInfo:
                 or len(dsRect) != 4
                 or all(int(coord) != int(coord) for coord in dsRect)
             ):
-                raise Exception(f'"Rectangle:" {json.dumps(dsRect)} must an Array with 4 integers')
+                raise Exception(f'"Rectangle:" {json.dumps(dsRect)} must be an Array with 4 integers')
             curSprite.rectangle = Rectangle(
                 Point(dsRect[0], dsRect[1]),
                 Size(dsRect[2], dsRect[3]),

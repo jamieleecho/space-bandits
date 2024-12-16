@@ -38,3 +38,9 @@ Space
 www.istockphoto.com
 Svetlana Malysheva
 
+Candles
+www.freepik.com
+
+Outdoor Christmas Scene
+openai.com
+DALL-E generated image
