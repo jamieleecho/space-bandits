@@ -1,0 +1,16 @@
+{
+  "Main": {
+    "Group": 13,
+    "Image": "../tiles/03-xmas.png",
+    "Transparent": [0, 0, 0],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "Candle1",
+    "Location": [28, 647],
+    "Rectangle": [-12, -19, 25, 38],
+    "SinglePixelPosition": true
+  }]
+}
+
