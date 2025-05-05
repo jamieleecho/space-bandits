@@ -11,6 +11,7 @@ game-*
 *.link
 **/*.xcodeproj/*.xcworkspace/xcuserdata
 *.pyc
+assets/*_colormap.png
 
 tools/mess64
 tools/mess64d

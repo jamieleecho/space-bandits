@@ -1,5 +1,5 @@
 {
   "Image": "02-space.png",
   "TileSetStart": [0, 0],
-  "TileSetSize": [640, 640]
+  "TileSetSize": [480, 480]
 }

@@ -2,7 +2,7 @@
   "Main": {
     "Group": 9,
     "Image": "01-sprites.png",
-    "Transparent": [254, 0, 254],
+    "Transparent": [255, 0, 255],
     "Palette": 1
   },
 
