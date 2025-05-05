@@ -1,14 +1,14 @@
 {
   "Main": {
     "Group": 13,
-    "Image": "../tiles/03-xmas.png",
-    "Transparent": [0, 0, 0],
+    "Image": "03-candles.png",
+    "Transparent": [255, 0, 255],
     "Palette": 1
   },
 
   "Sprites": [{
     "Name": "Candle1",
-    "Location": [35, 361],
+    "Location": [39, 361],
     "Rectangle": [-17, -25, 34, 50],
     "SinglePixelPosition": true
   }]

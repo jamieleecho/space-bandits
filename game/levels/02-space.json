@@ -7,7 +7,7 @@
     "Tileset": 2,
     "TilemapImage": "../tiles/02-space.png",
     "TilemapStart": [0, 0],
-    "TilemapSize": [480, 480],
+    "TilemapSize": [480, 320],
     "BkgrndStartX": 0,
     "BkgrndStartY": 0
   },

@@ -3,7 +3,7 @@
     "Name": "Christmas 2024",
     "Description": "Merry Christmas",
     "ObjectGroups": [6, 13],
-    "MaxObjectTableSize": 65,
+    "MaxObjectTableSize": 10,
     "Tileset": 3,
     "TilemapImage": "../tiles/03-xmas.png",
     "TilemapStart": [0, 0],

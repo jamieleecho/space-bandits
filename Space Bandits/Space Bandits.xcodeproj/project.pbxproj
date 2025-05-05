@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5218E5002C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */; };
+		5219F0CC2DC87B0100948DD9 /* 03-candles.png in Resources */ = {isa = PBXBuildFile; fileRef = 5219F0CB2DC87B0100948DD9 /* 03-candles.png */; };
+		5219F0CD2DC87B3D00948DD9 /* 03-candles.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 5219F0CB2DC87B0100948DD9 /* 03-candles.png */; };
 		522103422D0FD87F00C2DBF6 /* 03-xmas.c in Sources */ = {isa = PBXBuildFile; fileRef = 522103402D0FD87F00C2DBF6 /* 03-xmas.c */; };
 		522103572D0FDCEE00C2DBF6 /* 03-xmas.json in Copy levels Files */ = {isa = PBXBuildFile; fileRef = 522103412D0FD87F00C2DBF6 /* 03-xmas.json */; };
 		522103582D0FDDE200C2DBF6 /* 03-xmas.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 5221034D2D0FDB7800C2DBF6 /* 03-xmas.json */; };
@@ -339,6 +341,7 @@
 			dstPath = sprites;
 			dstSubfolderSpec = 7;
 			files = (
+				5219F0CD2DC87B3D00948DD9 /* 03-candles.png in Copy sprites Files */,
 				52AE471A2DC7FB67003AED29 /* 13-candles.json in Copy sprites Files */,
 				52E24A892C18091C0098F87D /* 01-numerals.json in Copy sprites Files */,
 				52E24A882C18091A0098F87D /* 01-sprites.png in Copy sprites Files */,
@@ -380,6 +383,7 @@
 /* Begin PBXFileReference section */
 		5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSKeyEventBaseTest.m; sourceTree = "<group>"; };
 		5218E5012C0BB72300F9B9A3 /* DSKeyEventBaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSKeyEventBaseTest.h; sourceTree = "<group>"; };
+		5219F0CB2DC87B0100948DD9 /* 03-candles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-candles.png"; sourceTree = "<group>"; };
 		522103402D0FD87F00C2DBF6 /* 03-xmas.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = "03-xmas.c"; path = "../../../../game/levels/03-xmas.c"; sourceTree = "<group>"; };
 		522103412D0FD87F00C2DBF6 /* 03-xmas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "03-xmas.json"; path = "../../../../game/levels/03-xmas.json"; sourceTree = "<group>"; };
 		5221034D2D0FDB7800C2DBF6 /* 03-xmas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "03-xmas.json"; sourceTree = "<group>"; };
@@ -1048,6 +1052,7 @@
 			isa = PBXGroup;
 			children = (
 				52E24A582C1808210098F87D /* 01-sprites.png */,
+				5219F0CB2DC87B0100948DD9 /* 03-candles.png */,
 				52E24A642C1808210098F87D /* marbles.png */,
 				52E24A652C1808210098F87D /* numerals.png */,
 				52E24A572C1808210098F87D /* 01-numerals.json */,
@@ -1174,6 +1179,7 @@
 				52CC82352C02179100CC3E38 /* Actions.sks in Resources */,
 				523978372C1F5D1300301419 /* pcgfont.ttf in Resources */,
 				52AE47132DC7F0D1003AED29 /* 13-candles.json in Resources */,
+				5219F0CC2DC87B0100948DD9 /* 03-candles.png in Resources */,
 				52CC81A52C02172200CC3E38 /* Assets.xcassets in Resources */,
 				52E0DB3D2C0C42A700AD5BDC /* Main.storyboard in Resources */,
 				5221035B2D0FE4E200C2DBF6 /* 03-xmas.png in Resources */,
