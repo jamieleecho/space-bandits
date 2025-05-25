@@ -9,22 +9,20 @@ function create_color_map_with_magenta {
 
 
 # Level 1
-convert images/01-level1.png +dither -remap coco3-palette.png -colors 15 +dither -remap coco3-palette.png ../game/images/01-level1.png
+convert images/01-level1.png +dither -remap coco3-palette.png -colors 16 ../game/images/01-level1.png
 cp images/01-level1.png ../game/hires/images
-convert tiles/01-moon.png -remap coco3-palette.png +dither -colors 15 -remap coco3-palette.png +dither -fuzz 50% -background magenta -alpha remove +dither -colors 15 -remap coco3-palette.png ../game/tiles/01-moon.png
+convert tiles/01-moon.png +dither -remap coco3-palette.png -colors 16 -remap coco3-palette.png ../game/tiles/01-moon.png
 cp tiles/01-moon.png ../game/hires/tiles
 create_color_map_with_magenta ../game/tiles/01-moon.png
-
-convert tiles/01-moon.png -background magenta -alpha remove -remap 01-moon_colormap.png +dither ../game/tiles/01-moon.png
-convert sprites/01-sprites.png -background magenta -alpha remove -remap 01-moon_colormap.png +dither  ../game/sprites/01-sprites.png
+convert sprites/01-sprites.png +dither -background magenta -alpha remove -remap 01-moon_colormap.png  ../game/sprites/01-sprites.png
 
 # Level 2
-convert tiles/02-space.png -resize 480x480 +dither -remap coco3-palette.png +dither -colors 15 +dither -remap coco3-palette.png ../game/tiles/02-space.png
+convert images/02-level2.png +dither -remap coco3-palette.png -colors 16 ../game/images/02-level2.png
+convert tiles/02-space.png +dither -resize 480x480 -remap coco3-palette.png -colors 16 -remap coco3-palette.png ../game/tiles/02-space.png
 cp tiles/02-space.png ../game/hires/tiles
 
 # Level 3
-convert tiles/03-xmas.png -resize 352x400 +dither -remap coco3-palette.png -colors 15 -remap coco3-palette.png ../game/tiles/03-xmas.png
+convert images/03-level3.png +dither -remap coco3-palette.png -colors 16 ../game/images/03-level3.png
+convert tiles/03-xmas.png +dither -resize 352x400 -remap coco3-palette.png -colors 16 -remap coco3-palette.png ../game/tiles/03-xmas.png
 create_color_map_with_magenta ../game/tiles/03-xmas.png
-convert ../game/tiles/03-xmas.png -colors 15 -remap 03-xmas_colormap.png ../game/tiles/03-xmas.png
-convert tiles/03-xmas.png -background magenta -resize 352x400 -alpha remove -remap 03-xmas_colormap.png +dither ../game/sprites/03-candles.png
-#../scripts/create-indexed-image.py ../game/sprites/03-candles.png ../game/sprites/03-candles.png
+convert tiles/03-xmas.png +dither -background magenta -resize 352x400 -alpha remove -remap 03-xmas_colormap.png ../game/sprites/03-candles.png
