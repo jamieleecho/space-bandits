@@ -2,7 +2,7 @@
   "Main": {
     "Group": 3,
     "Image": "01-moon.gif",
-    "Transparent": [255, 0, 255],
+    "Transparent": [254, 0, 254],
     "Palette": 1
   },
 

@@ -219,11 +219,6 @@
     paintedBackground.texture = texture;
     paintedBackground.size = CGSizeMake(self.size.width, self.size.height - fabs(deltaY));
     
-#if 0
-    NSImage *img = [[NSImage alloc] initWithCGImage:texture.CGImage size:CGSizeZero];
-    [img.TIFFRepresentation writeToFile:@"/tmp/foo.tiff" atomically:YES];
-#endif
-
     // Render the scene with the tiles
     self.children.firstObject.hidden = NO;
     for(size_t ii=0; ii<_objectCoordinator.count; ii++) {
