@@ -118,9 +118,11 @@ def GenerateCocoPalettes(ColorsUsed, ImagePalette):
         if ClosestRGB[i][1] != -1:
             ImageToCocoMap[ClosestRGB[i][1]] = i
     # pad them out to 16 colors if necessary
+    remaining_cmp_colors = set(range(64)) - set(CMPPalette)
+    remaining_rgb_colors = set(range(64)) - set(RGBPalette)
     while len(CMPPalette) < 16:
-        CMPPalette.append(63)
-        RGBPalette.append(63)
+        CMPPalette.append(remaining_cmp_colors.pop())
+        RGBPalette.append(remaining_rgb_colors.pop())
     # all done
     return (CMPPalette, RGBPalette, ImageToCocoMap)
 
@@ -591,12 +593,14 @@ def GenerateTileset(tiledesc_fname, palette_fname, tileset_fname, maskset_fname)
             f"****Error: image '{ImageFilename}' uses more than 16 colors! (actual={len(NewPalette)}"
         )
         sys.exit(4)
+    print(len(NewPalette))
     # generate palettes and palette mappings for both Composite and RGB mode on Coco
     (CMPPalette, RGBPalette, ImageToCocoMap) = GenerateCocoPalettes(
         NewPalette, im.palette.getdata()[1]
     )
     # validate that there are no duplicate RGB palette entries (this would cause problems with tilesets and sprites)
     ColorDupList = []
+    print(RGBPalette)
     for i in range(len(NewPalette)):
         ColorIdx = RGBPalette[i]
         if ColorIdx in ColorDupList:

@@ -34,6 +34,12 @@ byte CandleReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 
 byte CandleUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
+    CandleObjectState *state = ((CandleObjectState *)(cob->statePtr));
+    state->spriteIdx = state->spriteIdx + 1;
+    if (state->spriteIdx >= 14) {
+        state->spriteIdx = 0;
+    }
+
     return 0;
 }
 
