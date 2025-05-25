@@ -12,6 +12,7 @@
 #import "DSScene.h"
 #import "DSSceneControllerProtocol.h"
 #import "DSSoundManager.h"
+#import "DSSpriteObjectClassFactory.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
 @property (strong, nonatomic) DSResourceController *resourceController;
 @property (strong, nonatomic) DSSoundManager *soundManager;
+@property (strong, nonatomic) DSSpriteObjectClassFactory *spriteObjectClassFactory;
 @property (nonatomic) id<DSSceneControllerProtocol> sceneController;
 
 - (id)init;

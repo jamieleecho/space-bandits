@@ -16,6 +16,7 @@
 - (id)init {
     if (self = [super init]) {
         self.bundle = NSBundle.mainBundle;
+        _spriteObjectClasses = [[NSMutableArray alloc] init];
         _groupIdToTextures = [[NSMutableDictionary alloc] init];
         _groupIdToSpriteInfo = [[NSMutableDictionary alloc] init];
     }
@@ -23,6 +24,10 @@
 }
 
 - (void)addSpriteObjectClass:(DSSpriteObjectClass *)spriteObjectClass {
+    [_spriteObjectClasses addObject:spriteObjectClass];
+}
+
+- (void)cacheSpriteObjectClass:(DSSpriteObjectClass *)spriteObjectClass {
     // Get pixels in a format that is easy to manipulate
     NSString *path = [NSString pathWithComponents:@[self.bundle.resourcePath, [self.resourceController spriteImageWithName:spriteObjectClass.imagePath]]];
     UIImage *spriteUIImage = [[UIImage alloc] initWithContentsOfFile:path];
@@ -62,6 +67,14 @@
     _groupIdToSpriteInfo[[NSNumber numberWithInt:spriteObjectClass.groupID]] = spriteObjectClass.sprites;
 
     CGImageRelease(filteredImage);
+}
+
+- (void)loadCache {
+    [_groupIdToTextures removeAllObjects];
+    [_groupIdToSpriteInfo removeAllObjects];
+    for (DSSpriteObjectClass *spriteObjectClass in self->_spriteObjectClasses) {
+        [self cacheSpriteObjectClass: spriteObjectClass];
+    }
 }
 
 - (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob andScene:(SKScene *)scene andCamera:(SKCameraNode *)camera includeBackgroundSavers:(BOOL)includeBackgroundSavers {

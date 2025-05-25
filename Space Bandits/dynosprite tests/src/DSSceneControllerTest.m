@@ -13,6 +13,7 @@
 #import "DSSceneController.h"
 #import "DSTestUtils.h"
 #import "DSTransitionSceneInfoFileParser.h"
+#import "DSSpriteObjectClassFactory.h"
 
 
 @interface DSSceneControllerTest : XCTestCase {
@@ -26,6 +27,7 @@
     id _levelRegistry;
     id _resourceController;
     id _soundManager;
+    id _spriteObjectClassFactory;
     id _tileInfoRegistry;
     id _tileMapMaker;
     id _transitionSceneController;
@@ -94,6 +96,7 @@
     _levelRegistry = OCMClassMock(DSLevelRegistry.class);
     _resourceController = OCMClassMock(DSResourceController.class);
     _soundManager = OCMClassMock(DSSoundManager.class);
+    _spriteObjectClassFactory = OCMClassMock(DSSpriteObjectClassFactory.class);
     _tileInfoRegistry = OCMClassMock(DSTileInfoRegistry.class);
     _tileMapMaker = OCMClassMock(DSTileMapMaker.class);
     _textureManager = OCMClassMock(DSTextureManager.class);
@@ -104,6 +107,7 @@
     _target.levelRegistry = _levelRegistry;
     _target.resourceController = _resourceController;
     _target.soundManager = _soundManager;
+    _target.spriteObjectClassFactory = _spriteObjectClassFactory;
     _target.tileInfoRegistry = _tileInfoRegistry;
     _target.tileMapMaker = _tileMapMaker;
     _target.textureManager = _textureManager;
@@ -115,6 +119,7 @@
     XCTAssertEqual(_target.levelRegistry, _levelRegistry);
     XCTAssertEqual(_target.resourceController, _resourceController);
     XCTAssertEqual(_target.soundManager, _soundManager);
+    XCTAssertEqual(_target.spriteObjectClassFactory, _spriteObjectClassFactory);
     XCTAssertEqual(_target.tileInfoRegistry, _tileInfoRegistry);
     XCTAssertEqual(_target.tileMapMaker, _tileMapMaker);
     XCTAssertEqual(_target.textureManager, _textureManager);
@@ -149,6 +154,7 @@
     XCTAssertEqual(loadingScene.levelNumber, 2);
     XCTAssertEqual(loadingScene.levelDescription, _level.levelDescription);
     XCTAssertEqual(loadingScene.soundManager, _target.soundManager);
+    XCTAssertEqual(loadingScene.spriteObjectClassFactory, _target.spriteObjectClassFactory);
     XCTAssertEqual(loadingScene.sceneController, _target);
 }
 

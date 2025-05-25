@@ -69,42 +69,52 @@
   }, {
     "Name": "Explosion1",
     "Location": [230, 281],
+    "Rectangle": [-13, -13, 26, 26],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion2",
     "Location": [254, 282],
+    "Rectangle": [-13, -13, 26, 26],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion3",
     "Location": [278, 282],
+    "Rectangle": [-13, -13, 26, 26],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion4",
     "Location": [302, 282],
+    "Rectangle": [-13, -13, 26, 26],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion5",
     "Location": [230, 306],
+    "Rectangle": [-11, -11, 22, 22],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion6",
     "Location": [254, 306],
+    "Rectangle": [-11, -11, 22, 22],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion7",
     "Location": [278, 307],
+    "Rectangle": [-11, -11, 22, 22],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion8",
     "Location": [303, 307],
+    "Rectangle": [-11, -11, 22, 22],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion9",
     "Location": [230, 331],
+    "Rectangle": [-10, -10, 20, 20],
     "SinglePixelPosition": false
   }, {
     "Name": "Explosion10",
     "Location": [254, 331],
+    "Rectangle": [-10, -10, 20, 20],
     "SinglePixelPosition": false
   }]
 }

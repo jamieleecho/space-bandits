@@ -115,6 +115,7 @@
         NSLog(@"([spriteObjectClassFactory addSpriteObjectClass:%@ forNumber:%@]", path, objectClassNumber);
         [self.spriteObjectClassFactory addSpriteObjectClass:spriteObjectClass forNumber:objectClassNumber];
     }
+    [self.spriteObjectClassFactory loadCache];
 }
 
 - (void)loadTileSets {

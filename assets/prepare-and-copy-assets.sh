@@ -14,7 +14,8 @@ cp images/01-level1.png ../game/hires/images
 convert tiles/01-moon.png +dither -remap coco3-palette.png -colors 16 -remap coco3-palette.png ../game/tiles/01-moon.png
 cp tiles/01-moon.png ../game/hires/tiles
 create_color_map_with_magenta ../game/tiles/01-moon.png
-convert sprites/01-sprites.png +dither -background magenta -alpha remove -remap 01-moon_colormap.png  ../game/sprites/01-sprites.png
+convert sprites/01-sprites.png +dither -channel matte -threshold 0% -background magenta -alpha remove -remap 01-moon_colormap.png  ../game/sprites/01-sprites.png
+convert sprites/01-sprites.png -channel matte -threshold 0% -background magenta -alpha remove ../game/hires/sprites/01-sprites.png
 
 # Level 2
 convert images/02-level2.png +dither -remap coco3-palette.png -colors 16 ../game/images/02-level2.png

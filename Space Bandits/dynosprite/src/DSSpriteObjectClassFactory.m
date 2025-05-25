@@ -22,4 +22,8 @@
     [_textureManager addSpriteObjectClass:objectClass];
 }
 
+- (void)loadCache {
+    [_textureManager loadCache];
+}
+
 @end

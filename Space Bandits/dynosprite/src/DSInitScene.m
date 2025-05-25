@@ -100,6 +100,7 @@ static NSString *MenuSoundHigh = @"HiFi";
 - (void)transitionToNextScreen {
     _isTransitioning = YES;
     [self.soundManager loadCache];
+    [self.spriteObjectClassFactory loadCache];
     self.soundManager.maxNumSounds = (self.resourceController.hifiMode) ? 10 : 2;
     DynospriteGlobalsPtr->UserGlobals_Init = NO;
     self.isDone = YES;

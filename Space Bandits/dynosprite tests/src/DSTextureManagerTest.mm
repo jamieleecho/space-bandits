@@ -96,6 +96,13 @@ static void draw(DynospriteCOB *cob, void *scene, void *camera, void *textures, 
     _cob.odtPtr = &_odt;
     _odt.draw = NULL;
     drawArgs.clear();
+
+    // Confirm that we only try loading resources when loadCache is called
+    OCMVerify(never(), [_resourceController spriteImageWithName:@"../tiles/01-moon.gif"]);
+    [_target loadCache];
+    OCMVerify(times(1), [_resourceController spriteImageWithName:@"../tiles/01-moon.gif"]);
+    [_target loadCache];
+    OCMVerify(times(2), [_resourceController spriteImageWithName:@"../tiles/01-moon.gif"]);
 }
 
 

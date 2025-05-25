@@ -13,6 +13,7 @@
 #import "DSInitScene.h"
 #import "DSResourceController.h"
 #import "DSSceneController.h"
+#import "DSSpriteObjectClassFactory.h"
 
 
 enum DSInitSceneLabelIndices : short {
@@ -30,6 +31,7 @@ enum DSInitSceneLabelIndices : short {
     id _joystickController;
     id _resourceController;
     id _soundManager;
+    id _spriteObjectClassFactory;
     id _sceneController;
 }
 @end
@@ -41,6 +43,7 @@ enum DSInitSceneLabelIndices : short {
     _joystickController = OCMClassMock(DSCoCoJoystickController.class);
     _resourceController = OCMClassMock(DSResourceController.class);
     _soundManager = OCMClassMock(DSSoundManager.class);
+    _spriteObjectClassFactory = OCMClassMock(DSSpriteObjectClassFactory.class);
     self.target.resourceController = _resourceController;
     self.target.joystickController = _joystickController;
     _sceneController = OCMClassMock(DSSceneController.class);
@@ -54,6 +57,7 @@ enum DSInitSceneLabelIndices : short {
     OCMStub([_joystickController useHardwareJoystick]).andReturn(YES);
     
     self.target.soundManager = _soundManager;
+    self.target.spriteObjectClassFactory = _spriteObjectClassFactory;
     [self.target didMoveToView:_view];
 }
 
@@ -184,7 +188,8 @@ enum DSInitSceneLabelIndices : short {
     DynospriteGlobalsPtr->UserGlobals_Init = YES;
     [self.target toggleSound];
     [self.target transitionToNextScreen];
-    OCMVerify([_soundManager loadCache]);
+    OCMVerify(times(1), [_soundManager loadCache]);
+    OCMVerify(times(1), [_spriteObjectClassFactory loadCache]);
     XCTAssertTrue(self.target.isDone);
     XCTAssertFalse(DynospriteGlobalsPtr->UserGlobals_Init);
     OCMVerify([_soundManager setMaxNumSounds:10]);
@@ -198,7 +203,8 @@ enum DSInitSceneLabelIndices : short {
     DynospriteGlobalsPtr->UserGlobals_Init = YES;
     [self.target toggleSound];
     [self.target transitionToNextScreen];
-    OCMVerify([_soundManager loadCache]);
+    OCMVerify(times(1), [_soundManager loadCache]);
+    OCMVerify(times(1), [_spriteObjectClassFactory loadCache]);
     XCTAssertTrue(self.target.isDone);
     XCTAssertFalse(DynospriteGlobalsPtr->UserGlobals_Init);
     OCMVerify([_soundManager setMaxNumSounds:10]);
