@@ -10,7 +10,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Defines at least the size of CandleObjectState in bytes */
-#define DynospriteObject_DataSize 1
+#define DynospriteObject_DataSize 4
 
 /** Defines at least the number of initialization bytes */
 #define DynospriteObject_InitSize 0
@@ -21,11 +21,12 @@
 #define _13_candle_h
 
 #include "dynosprite.h"
+#include "sprite_state_machine.h"
+
 
 /** State of Ship Object */
 typedef struct CandleObjectState {
-    /** Index of current sprite to show */
-    byte spriteIdx;
+    SpriteState spriteState;
 } CandleObjectState;
 
 

@@ -236,6 +236,7 @@
 		52E24A952C1809690098F87D /* 02-space.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8D2C18094D0098F87D /* 02-space.json */; };
 		52E24A962C18096C0098F87D /* 01-moon.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8C2C18094D0098F87D /* 01-moon.png */; };
 		52E24A972C18096D0098F87D /* 01-moon.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8B2C18094D0098F87D /* 01-moon.json */; };
+		52EE7C972DE4982700011C11 /* sprite_state_machine.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EE7C962DE4982700011C11 /* sprite_state_machine.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -634,6 +635,8 @@
 		52E24A8C2C18094D0098F87D /* 01-moon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-moon.png"; sourceTree = "<group>"; };
 		52E24A8D2C18094D0098F87D /* 02-space.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "02-space.json"; sourceTree = "<group>"; };
 		52E24A8E2C18094D0098F87D /* 02-space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "02-space.png"; sourceTree = "<group>"; };
+		52EE7C952DE4982700011C11 /* sprite_state_machine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = sprite_state_machine.h; path = ../game/objects/sprite_state_machine.h; sourceTree = SOURCE_ROOT; };
+		52EE7C962DE4982700011C11 /* sprite_state_machine.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = sprite_state_machine.c; path = ../game/objects/sprite_state_machine.c; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -943,6 +946,8 @@
 		52E249F92C17E7CB0098F87D /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				52EE7C952DE4982700011C11 /* sprite_state_machine.h */,
+				52EE7C962DE4982700011C11 /* sprite_state_machine.c */,
 				52E24A1B2C17E7FB0098F87D /* 01-numerals.h */,
 				52E24A1A2C17E7FB0098F87D /* 01-numerals.mm */,
 				52E24A012C17E7E00098F87D /* 03-badguy.c */,
@@ -1296,6 +1301,7 @@
 				52CC828F2C02179100CC3E38 /* DSSpriteFileParser.m in Sources */,
 				52E24A192C17E7E00098F87D /* 11-velocity_object.c in Sources */,
 				52CC82832C02179100CC3E38 /* DSScene.m in Sources */,
+				52EE7C972DE4982700011C11 /* sprite_state_machine.c in Sources */,
 				52CC82B32C02179100CC3E38 /* DSTransitionSceneInfo.m in Sources */,
 				52CC82A42C02179100CC3E38 /* DSTileInfo.m in Sources */,
 				52E24A1C2C17E7FB0098F87D /* 01-numerals.mm in Sources */,

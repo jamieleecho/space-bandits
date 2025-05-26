@@ -13,7 +13,13 @@
 //  version of Space Bandits, this file must be included directly by
 //  objects that use it.
 
+
 #include "13-candle.h"
+#include "sprite_state_machine.c"
+
+static byte sprites0[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+static SpriteStateMachineState state0 = {0, 0, 14, sprites0};
+static SpriteStateMachineState spriteStateMachine[1];
 
 
 #ifdef __APPLE__
@@ -23,8 +29,10 @@ void CandleClassInit(void) {
 
 
 void CandleInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
+    spriteStateMachine[0] = state0;
+    
     CandleObjectState *state = ((CandleObjectState *)(cob->statePtr));
-    state->spriteIdx = 0;
+    SpriteStateInit(&(state->spriteState), spriteStateMachine);
 }
 
 
@@ -35,10 +43,7 @@ byte CandleReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 byte CandleUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     CandleObjectState *state = ((CandleObjectState *)(cob->statePtr));
-    state->spriteIdx = state->spriteIdx + 1;
-    if (state->spriteIdx >= 14) {
-        state->spriteIdx = 0;
-    }
+    SpriteStateIncrement(&(state->spriteState), spriteStateMachine, 1);
 
     return 0;
 }
