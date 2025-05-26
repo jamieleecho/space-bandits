@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-from coco import create_color_map_image
 
+from coco import create_color_map_image
 
 # Setup parser
 parser = argparse.ArgumentParser(

@@ -179,6 +179,7 @@ check-scripts: lint-scripts type-check-scripts
 
 format-scripts:
 	ruff format scripts
+	ruff check --select I --fix
 
 lint-scripts:
 	ruff check scripts

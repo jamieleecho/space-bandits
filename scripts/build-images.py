@@ -26,11 +26,12 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # ********************************************************************************
 
-import os
 import json
-import sys
 import math
+import os
+import sys
 from typing import List
+
 from compression import Compressor
 from PIL import Image
 

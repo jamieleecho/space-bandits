@@ -4,7 +4,6 @@ import ctypes
 from wand.api import library
 from wand.image import Image
 
-
 # Register C-type arguments
 library.MagickQuantizeImage.argtypes = [
     ctypes.c_void_p,

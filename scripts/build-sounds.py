@@ -28,6 +28,7 @@
 
 import os
 import sys
+
 from compression import Compressor
 
 # ******************************************************************************

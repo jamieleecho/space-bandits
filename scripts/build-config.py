@@ -27,8 +27,9 @@
 # POSSIBILITY OF SUCH DAMAGE.
 # ******************************************************************************
 
-import click
 import json
+
+import click
 
 
 @click.command()

@@ -2,11 +2,10 @@
 import argparse
 from os import path
 
-from wand.drawing import Drawing
-from wand.image import Image
-
 import coco
 import wand_util
+from wand.drawing import Drawing
+from wand.image import Image
 
 
 def tile_image(image, width=16, height=16, image_size=None):

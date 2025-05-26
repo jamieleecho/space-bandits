@@ -26,20 +26,17 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # ********************************************************************************
 
-import os
-import sys
 import json
 import math
-
-from typing import Any, List, Tuple
-import numpy
-import numpy.typing
-
+import os
+import sys
 from collections import deque
-from PIL import Image
+from typing import Any, List, Tuple
 
 import coco
-
+import numpy
+import numpy.typing
+from PIL import Image
 
 # ******************************************************************************
 # Helper functions and classes for graphics processing script
@@ -367,7 +364,9 @@ def parseSpriteDescription(descFilename: str) -> SpriteGroupInfo:
                 or len(dsRect) != 4
                 or all(int(coord) != int(coord) for coord in dsRect)
             ):
-                raise Exception(f'"Rectangle:" {json.dumps(dsRect)} must be an Array with 4 integers')
+                raise Exception(
+                    f'"Rectangle:" {json.dumps(dsRect)} must be an Array with 4 integers'
+                )
             curSprite.rectangle = Rectangle(
                 Point(dsRect[0], dsRect[1]),
                 Size(dsRect[2], dsRect[3]),
@@ -392,8 +391,12 @@ def GetPixels(
     transparentIdx: int,
     pixCoordColorList: List[Tuple[int, int, Any]],
 ) -> None:
-    for y in range(absolute_rect.origin.y, absolute_rect.origin.y + absolute_rect.size.height):
-        for x in range(absolute_rect.origin.x, absolute_rect.origin.x + absolute_rect.size.width):
+    for y in range(
+        absolute_rect.origin.y, absolute_rect.origin.y + absolute_rect.size.height
+    ):
+        for x in range(
+            absolute_rect.origin.x, absolute_rect.origin.x + absolute_rect.size.width
+        ):
             # return if pixel at current coordinate is transparent
             pixColor = ImgData[y][x] if x >= 0 and y >= 0 else transparentIdx
             if pixColor == transparentIdx:

@@ -188,11 +188,11 @@ def _rgb_val(c1: int, c0: int) -> int:
 COCO_RGB_RGB8_COLORS = [
     (_rgb_val(r1, r0), _rgb_val(g1, g0), _rgb_val(b1, b0))
     for r1 in range(2)
-        for g1 in range(2)
-            for b1 in range(2)
-                for r0 in range(2)
-                    for g0 in range(2)
-                        for b0 in range(2)
+    for g1 in range(2)
+    for b1 in range(2)
+    for r0 in range(2)
+    for g0 in range(2)
+    for b0 in range(2)
 ]
 
 
