@@ -237,6 +237,10 @@
 		52E24A962C18096C0098F87D /* 01-moon.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8C2C18094D0098F87D /* 01-moon.png */; };
 		52E24A972C18096D0098F87D /* 01-moon.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8B2C18094D0098F87D /* 01-moon.json */; };
 		52EE7C972DE4982700011C11 /* sprite_state_machine.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EE7C962DE4982700011C11 /* sprite_state_machine.c */; };
+		52EE7C9A2DE4E87F00011C11 /* 03-level3.png in Resources */ = {isa = PBXBuildFile; fileRef = 52EE7C992DE4E87F00011C11 /* 03-level3.png */; };
+		52EE7C9B2DE4E87F00011C11 /* 01-level1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
+		52EE7C9C2DE4E90D00011C11 /* 01-level1.png in Copy hires/images Files */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
+		52EE7C9D2DE4E90F00011C11 /* 03-level3.png in Copy hires/images Files */ = {isa = PBXBuildFile; fileRef = 52EE7C992DE4E87F00011C11 /* 03-level3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -296,6 +300,8 @@
 			dstSubfolderSpec = 7;
 			files = (
 				52E24A4A2C18076E0098F87D /* 00-mainmenu.png in Copy hires/images Files */,
+				52EE7C9C2DE4E90D00011C11 /* 01-level1.png in Copy hires/images Files */,
+				52EE7C9D2DE4E90F00011C11 /* 03-level3.png in Copy hires/images Files */,
 			);
 			name = "Copy hires/images Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,6 +643,8 @@
 		52E24A8E2C18094D0098F87D /* 02-space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "02-space.png"; sourceTree = "<group>"; };
 		52EE7C952DE4982700011C11 /* sprite_state_machine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = sprite_state_machine.h; path = ../game/objects/sprite_state_machine.h; sourceTree = SOURCE_ROOT; };
 		52EE7C962DE4982700011C11 /* sprite_state_machine.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = sprite_state_machine.c; path = ../game/objects/sprite_state_machine.c; sourceTree = SOURCE_ROOT; };
+		52EE7C982DE4E87F00011C11 /* 01-level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-level1.png"; sourceTree = "<group>"; };
+		52EE7C992DE4E87F00011C11 /* 03-level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-level3.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1009,6 +1017,8 @@
 			isa = PBXGroup;
 			children = (
 				52E24A3D2C1807090098F87D /* 00-mainmenu.png */,
+				52EE7C982DE4E87F00011C11 /* 01-level1.png */,
+				52EE7C992DE4E87F00011C11 /* 03-level3.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -1189,6 +1199,8 @@
 				52E0DB3D2C0C42A700AD5BDC /* Main.storyboard in Resources */,
 				5221035B2D0FE4E200C2DBF6 /* 03-xmas.png in Resources */,
 				52E24A2B2C1805500098F87D /* defaults-config.json in Resources */,
+				52EE7C9A2DE4E87F00011C11 /* 03-level3.png in Resources */,
+				52EE7C9B2DE4E87F00011C11 /* 01-level1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

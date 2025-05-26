@@ -23,7 +23,8 @@ convert tiles/02-space.png +dither -resize 480x480 -remap coco3-palette.png -col
 cp tiles/02-space.png ../game/hires/tiles
 
 # Level 3
-convert images/03-level3.png +dither -remap coco3-palette.png -colors 16 ../game/images/03-level3.png
+convert images/03-level3.png -resize 96x96 -remap coco3-palette.png -colors 16 ../game/images/03-level3.png
+cp images/03-level3.png ../game/hires/images
 convert tiles/03-xmas.png +dither -resize 352x400 -remap coco3-palette.png -colors 16 -remap coco3-palette.png ../game/tiles/03-xmas.png
 create_color_map_with_magenta ../game/tiles/03-xmas.png
-convert tiles/03-xmas.png +dither -background magenta -resize 352x400 -alpha remove -remap 03-xmas_colormap.png ../game/sprites/03-candles.png
+convert tiles/03-xmas.png +dither -channel matte -threshold 0% -background magenta -resize 352x400 -alpha remove -remap 03-xmas_colormap.png ../game/sprites/03-candles.png

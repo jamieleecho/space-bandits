@@ -26,6 +26,7 @@
 
 - (void)setUp {
     _target = [[DSLevelLoadingScene alloc] init];
+    _target.backgroundImageName = @"swath.png";
     _bundle = OCMClassMock(NSBundle.class);
     _resourceController = OCMClassMock(DSResourceController.class);
     _sceneController = OCMClassMock(DSSceneController.class);
@@ -60,14 +61,14 @@
     XCTAssertFalse(_target.isDone);
     XCTAssertEqual(_target.labels.count, 3);
     XCTAssertEqualObjects(_target.labels[0].text, @"Level 1");
-    XCTAssertTrue([self isPoint:_target.labels[0].parent.position aboutEqualToPoint:CGPointMake(133, -34.86)]);
+    XCTAssertTrue([self isPoint:_target.labels[0].parent.position aboutEqualToPoint:CGPointMake(133, -12.199999809265137)]);
     XCTAssertEqualObjects(_target.labels[1].text, @"My Level Description");
-    XCTAssertTrue([self isPoint:_target.labels[1].parent.position aboutEqualToPoint:CGPointMake(86, -53.86)]);
+    XCTAssertTrue([self isPoint:_target.labels[1].parent.position aboutEqualToPoint:CGPointMake(86, -31.200000762939453)]);
     XCTAssertEqualObjects(_target.labels[2].text, @"Loading...");
-    XCTAssertTrue([self isPoint:_target.labels[2].parent.position aboutEqualToPoint:CGPointMake(123, -85.86)]);
+    XCTAssertTrue([self isPoint:_target.labels[2].parent.position aboutEqualToPoint:CGPointMake(123, -63.200000762939453)]);
     SKShapeNode *progressBarOutline = (SKShapeNode *)_target.children.lastObject;
     XCTAssertTrue([progressBarOutline isKindOfClass:SKShapeNode.class]);
-    XCTAssertTrue([self isPoint:progressBarOutline.position aboutEqualToPoint:CGPointMake(126, -82.66)]);
+    XCTAssertTrue([self isPoint:progressBarOutline.position aboutEqualToPoint:CGPointMake(126, -60)]);
     XCTAssertEqual(progressBarOutline.lineWidth, 2);
     SKSpriteNode *progressBar = (SKSpriteNode *)progressBarOutline.children.firstObject;
     XCTAssertTrue([progressBar isKindOfClass:SKSpriteNode.class]);

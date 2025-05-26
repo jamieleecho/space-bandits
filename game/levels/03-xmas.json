@@ -18,8 +18,44 @@
       "GroupID": 13,
       "ObjectID": 0,
       "Active": 3,
+      "globalX": 139,
+      "globalY": 78,
+      "InitData": []
+    },
+    {
+      "_comment": "***** Candle 2",
+      "GroupID": 13,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 179,
+      "globalY": 78,
+      "InitData": []
+    },
+    {
+      "_comment": "***** Candle 3",
+      "GroupID": 13,
+      "ObjectID": 0,
+      "Active": 3,
       "globalX": 159,
-      "globalY": 98,
+      "globalY": 100,
+      "InitData": []
+    },
+    {
+      "_comment": "***** Candle 4",
+      "GroupID": 13,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 139,
+      "globalY": 122,
+      "InitData": []
+    },
+    {
+      "_comment": "***** Candle 5",
+      "GroupID": 13,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 179,
+      "globalY": 122,
       "InitData": []
     }
   ]
