@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -256,33 +256,28 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		5257B6782C055952005BA808 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolder = Frameworks;
 			files = (
 				5257B6792C055957005BA808 /* OCMock.xcframework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52E24A2C2C1805A90098F87D /* Copy levels Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = levels;
-			dstSubfolderSpec = 7;
+			dstSubfolder = Resources;
 			files = (
 				52E24A2D2C1805D80098F87D /* 01-persei.json in Copy levels Files */,
 				52E24A2E2C1805DE0098F87D /* 02-space.json in Copy levels Files */,
 				522103572D0FDCEE00C2DBF6 /* 03-xmas.json in Copy levels Files */,
 			);
 			name = "Copy levels Files";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52E24A2F2C1806390098F87D /* Copy images Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = images;
-			dstSubfolderSpec = 7;
+			dstSubfolder = Resources;
 			files = (
 				52AE470D2DC7EF88003AED29 /* 00-mainmenu.png in Copy images Files */,
 				52AE470E2DC7EF8A003AED29 /* 01-level1.png in Copy images Files */,
@@ -291,62 +286,52 @@
 				52AE47112DC7EF97003AED29 /* images.json in Copy images Files */,
 			);
 			name = "Copy images Files";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52E24A492C18074C0098F87D /* Copy hires/images Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = hires/images;
-			dstSubfolderSpec = 7;
+			dstSubfolder = Resources;
 			files = (
 				52E24A4A2C18076E0098F87D /* 00-mainmenu.png in Copy hires/images Files */,
 				52EE7C9C2DE4E90D00011C11 /* 01-level1.png in Copy hires/images Files */,
 				52EE7C9D2DE4E90F00011C11 /* 03-level3.png in Copy hires/images Files */,
 			);
 			name = "Copy hires/images Files";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52E24A4B2C1807830098F87D /* Copy hires/sprites Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = hires/sprites;
-			dstSubfolderSpec = 7;
+			dstSubfolder = Resources;
 			files = (
 				52E24A4C2C1807980098F87D /* 01-sprites.png in Copy hires/sprites Files */,
 			);
 			name = "Copy hires/sprites Files";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52E24A4D2C1807A70098F87D /* Copy hires/tiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = hires/tiles;
-			dstSubfolderSpec = 7;
+			dstSubfolder = Resources;
 			files = (
 				52E24A4E2C1807CC0098F87D /* 01-moon.png in Copy hires/tiles */,
 				52E24A4F2C1807CE0098F87D /* 02-space.png in Copy hires/tiles */,
 			);
 			name = "Copy hires/tiles";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52E24A762C1808AA0098F87D /* Copy sounds Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = sounds;
-			dstSubfolderSpec = 7;
+			dstSubfolder = Resources;
 			files = (
 				52E24A772C1808C10098F87D /* 01-laser.wav in Copy sounds Files */,
 				52E24A782C1808C30098F87D /* 02-explosion.wav in Copy sounds Files */,
 				52E24A792C1808C40098F87D /* 03-click.wav in Copy sounds Files */,
 			);
 			name = "Copy sounds Files";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52E24A7A2C1808E20098F87D /* Copy sprites Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = sprites;
-			dstSubfolderSpec = 7;
+			dstSubfolder = Resources;
 			files = (
 				5219F0CD2DC87B3D00948DD9 /* 03-candles.png in Copy sprites Files */,
 				52AE471A2DC7FB67003AED29 /* 13-candles.json in Copy sprites Files */,
@@ -367,13 +352,11 @@
 				52E24A7B2C1808FE0098F87D /* numerals.png in Copy sprites Files */,
 			);
 			name = "Copy sprites Files";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52E24A8A2C1809360098F87D /* Copy tiles Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = tiles;
-			dstSubfolderSpec = 7;
+			dstSubfolder = Resources;
 			files = (
 				52E24A972C18096D0098F87D /* 01-moon.json in Copy tiles Files */,
 				52E24A962C18096C0098F87D /* 01-moon.png in Copy tiles Files */,
@@ -383,7 +366,6 @@
 				522103592D0FDDE500C2DBF6 /* 03-xmas.png in Copy tiles Files */,
 			);
 			name = "Copy tiles Files";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -650,18 +632,14 @@
 /* Begin PBXFrameworksBuildPhase section */
 		52CC818E2C02172200CC3E38 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52CC81AC2C02172200CC3E38 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				5257B6742C055799005BA808 /* OCMock.xcframework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -1124,8 +1102,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = "Space Bandits";
 			productName = "Space Bandits";
 			productReference = 52CC81912C02172200CC3E38 /* Space Bandits.app */;
@@ -1168,7 +1144,6 @@
 				};
 			};
 			buildConfigurationList = 52CC818C2C02172200CC3E38 /* Build configuration list for PBXProject "Space Bandits" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1176,6 +1151,7 @@
 				Base,
 			);
 			mainGroup = 52CC81882C02172200CC3E38;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 52CC81922C02172200CC3E38 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1189,7 +1165,6 @@
 /* Begin PBXResourcesBuildPhase section */
 		52CC818F2C02172200CC3E38 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				52CC82352C02179100CC3E38 /* Actions.sks in Resources */,
 				523978372C1F5D1300301419 /* pcgfont.ttf in Resources */,
@@ -1202,11 +1177,9 @@
 				52EE7C9A2DE4E87F00011C11 /* 03-level3.png in Resources */,
 				52EE7C9B2DE4E87F00011C11 /* 01-level1.png in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52CC81AD2C02172200CC3E38 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				525FE42A2C053EB200E03391 /* empty.json in Resources */,
 				525FE4232C053EB200E03391 /* 01-test-level.json in Resources */,
@@ -1237,37 +1210,30 @@
 				52BAAA8A2D0E951E00BEAF90 /* swath.png in Resources */,
 				525FE4252C053EB200E03391 /* 03-badguys.json in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		5239783D2C1F622700301419 /* Create Credits */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"$(SRCROOT)/../game/readme-bas.txt",
 			);
 			name = "Create Credits";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(TARGET_BUILD_DIR)/$UNLOCALIZED_RESOURCES_FOLDER_PATH/Credits.rtf",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sed 1,3d \"$SCRIPT_INPUT_FILE_0\" | textutil -convert rtf -stdin -output \"$SCRIPT_OUTPUT_FILE_0\"\n";
+			shellScript = (
+				"sed 1,3d \"$SCRIPT_INPUT_FILE_0\" | textutil -convert rtf -stdin -output \"$SCRIPT_OUTPUT_FILE_0\"",
+				"",
+			);
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		52CC818D2C02172200CC3E38 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				52CC82682C02179100CC3E38 /* DSLevelRegistry.m in Sources */,
 				52CC826B2C02179100CC3E38 /* DSMutableArrayWrapper.m in Sources */,
@@ -1333,11 +1299,9 @@
 				52E24A142C17E7E00098F87D /* 12-shipx.c in Sources */,
 				52CC82A12C02179100CC3E38 /* DSTileFileParser.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		52CC81AB2C02172200CC3E38 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				52CC82812C02179100CC3E38 /* DSResourceController.m in Sources */,
 				52CC82602C02179100CC3E38 /* DSLevel.m in Sources */,
@@ -1431,7 +1395,6 @@
 				52CC82BA2C02179100CC3E38 /* DSViewController.m in Sources */,
 				52CC82872C02179100CC3E38 /* DSSceneController.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -1455,7 +1418,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		52CC81C12C02172200CC3E38 /* Debug */ = {
+		52CC81C12C02172200CC3E38 /* Debug configuration for PBXProject "Space Bandits" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1517,7 +1480,7 @@
 			};
 			name = Debug;
 		};
-		52CC81C22C02172200CC3E38 /* Release */ = {
+		52CC81C22C02172200CC3E38 /* Release configuration for PBXProject "Space Bandits" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1573,7 +1536,7 @@
 			};
 			name = Release;
 		};
-		52CC81C42C02172200CC3E38 /* Debug */ = {
+		52CC81C42C02172200CC3E38 /* Debug configuration for PBXNativeTarget "Space Bandits" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1591,7 +1554,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1609,7 +1572,7 @@
 			};
 			name = Debug;
 		};
-		52CC81C52C02172200CC3E38 /* Release */ = {
+		52CC81C52C02172200CC3E38 /* Release configuration for PBXNativeTarget "Space Bandits" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1627,7 +1590,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1645,7 +1608,7 @@
 			};
 			name = Release;
 		};
-		52CC81C72C02172200CC3E38 /* Debug */ = {
+		52CC81C72C02172200CC3E38 /* Debug configuration for PBXNativeTarget "dynosprite tests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1667,7 +1630,7 @@
 			};
 			name = Debug;
 		};
-		52CC81C82C02172200CC3E38 /* Release */ = {
+		52CC81C82C02172200CC3E38 /* Release configuration for PBXNativeTarget "dynosprite tests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -1695,28 +1658,25 @@
 		52CC818C2C02172200CC3E38 /* Build configuration list for PBXProject "Space Bandits" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				52CC81C12C02172200CC3E38 /* Debug */,
-				52CC81C22C02172200CC3E38 /* Release */,
+				52CC81C12C02172200CC3E38 /* Debug configuration for PBXProject "Space Bandits" */,
+				52CC81C22C02172200CC3E38 /* Release configuration for PBXProject "Space Bandits" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		52CC81C32C02172200CC3E38 /* Build configuration list for PBXNativeTarget "Space Bandits" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				52CC81C42C02172200CC3E38 /* Debug */,
-				52CC81C52C02172200CC3E38 /* Release */,
+				52CC81C42C02172200CC3E38 /* Debug configuration for PBXNativeTarget "Space Bandits" */,
+				52CC81C52C02172200CC3E38 /* Release configuration for PBXNativeTarget "Space Bandits" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		52CC81C62C02172200CC3E38 /* Build configuration list for PBXNativeTarget "dynosprite tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				52CC81C72C02172200CC3E38 /* Debug */,
-				52CC81C82C02172200CC3E38 /* Release */,
+				52CC81C72C02172200CC3E38 /* Debug configuration for PBXNativeTarget "dynosprite tests" */,
+				52CC81C82C02172200CC3E38 /* Release configuration for PBXNativeTarget "dynosprite tests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

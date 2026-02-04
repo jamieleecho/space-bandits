@@ -27,7 +27,7 @@ typedef struct Group3State {
 } Group3State;
 
 
-static const size_t maxNumCalls = 10;
+#define maxNumCalls (10)
 static size_t numClassInit2Calls = 0;
 static size_t numInitialize2Calls = 0;
 static size_t numReactivate2Calls = 0;

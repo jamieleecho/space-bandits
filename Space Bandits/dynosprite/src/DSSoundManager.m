@@ -9,7 +9,7 @@
 #import "DSSoundManager.h"
 
 void PlaySound(int soundIndex) {
-    [DSSoundManager.sharedInstance playSound:soundIndex];
+    [DSSoundManager.sharedInstance playSoundId:soundIndex];
 }
 
 static DSSoundManager *_sharedInstance = nil;
@@ -88,7 +88,7 @@ static DSSoundManager *_sharedInstance = nil;
     }
 }
 
-- (void)playSound:(size_t)soundId {
+- (void)playSoundId:(size_t)soundId {
     if (!self.enabled) {
         return;
     }

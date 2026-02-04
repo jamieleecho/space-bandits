@@ -42,7 +42,7 @@ typedef enum DSSoundManagerCacheState {
 - (id)init;
 - (void)loadCache;
 - (void)addSound:(NSString *)path forId:(size_t)soundId;
-- (void)playSound:(size_t)soundId;
+- (void)playSoundId:(size_t)soundId;
 
 @end
 
