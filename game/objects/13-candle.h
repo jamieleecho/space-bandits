@@ -27,6 +27,9 @@
 /** State of Ship Object */
 typedef struct CandleObjectState {
     SpriteState spriteState;
+    uint8_t angleIdx; // Track the current angle index for circular motion
+    int centerX;      // Center X coordinate for the circle
+    int centerY;      // Center Y coordinate for the circle
 } CandleObjectState;
 
 
