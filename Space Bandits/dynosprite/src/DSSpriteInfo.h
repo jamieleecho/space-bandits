@@ -15,7 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, nonnull) NSString *name;
 @property (nonatomic) DSPoint location;
+@property (nonatomic) bool hasRectangle;
+@property (nonatomic) CGRect rectangle;
 @property (nonatomic) BOOL singlePixelPosition;
+@property (nonatomic) BOOL saveBackground;
 
 - (id)init;
 

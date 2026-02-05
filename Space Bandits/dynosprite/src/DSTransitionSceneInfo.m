@@ -12,9 +12,9 @@
 
 - (id)init {
     if (self = [super init]) {
-        self.backgroundColor = NSColor.whiteColor;
-        self.foregroundColor = NSColor.blackColor;
-        self.progressColor = NSColor.greenColor;
+        self.backgroundColor = UIColor.whiteColor;
+        self.foregroundColor = UIColor.blackColor;
+        self.progressColor = UIColor.greenColor;
         self.backgroundImageName = @"";
     }
     return self;

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1320"
+   LastUpgradeVersion = "1540"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "All">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52F1208321D7DD63008A7900"
+               BlueprintIdentifier = "52CC81902C02172200CC3E38"
                BuildableName = "Space Bandits.app"
                BlueprintName = "Space Bandits"
                ReferencedContainer = "container:Space Bandits.xcodeproj">
@@ -27,41 +28,28 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52F1208321D7DD63008A7900"
-            BuildableName = "Space Bandits.app"
-            BlueprintName = "Space Bandits"
-            ReferencedContainer = "container:Space Bandits.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <TestPlans>
          <TestPlanReference
-            reference = "container:Dynosprite (GitHub).xctestplan"
+            reference = "container:dynosprite tests/dynosprite-github.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52F120AB21D7DD65008A7900"
-               BuildableName = "DynospriteUITests.xctest"
-               BlueprintName = "DynospriteUITests"
+               BlueprintIdentifier = "52CC81AE2C02172200CC3E38"
+               BuildableName = "dynosprite tests.xctest"
+               BlueprintName = "dynosprite tests"
                ReferencedContainer = "container:Space Bandits.xcodeproj">
             </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52E7604D21D7F5410001F3A0"
-               BuildableName = "DynospriteCoreTests.xctest"
-               BlueprintName = "DynospriteCoreTests"
-               ReferencedContainer = "container:Space Bandits.xcodeproj">
-            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "DSTextureManagerTest">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
@@ -79,7 +67,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52F1208321D7DD63008A7900"
+            BlueprintIdentifier = "52CC81902C02172200CC3E38"
             BuildableName = "Space Bandits.app"
             BlueprintName = "Space Bandits"
             ReferencedContainer = "container:Space Bandits.xcodeproj">
@@ -96,7 +84,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52F1208321D7DD63008A7900"
+            BlueprintIdentifier = "52CC81902C02172200CC3E38"
             BuildableName = "Space Bandits.app"
             BlueprintName = "Space Bandits"
             ReferencedContainer = "container:Space Bandits.xcodeproj">
@@ -104,7 +92,7 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Release">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"

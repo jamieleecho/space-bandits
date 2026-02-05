@@ -40,6 +40,7 @@
     transitionScene.backgroundImageName = self.sceneInfos.array[level].backgroundImageName;
     transitionScene.levelNumber = level;
     transitionScene.soundManager = self.soundManager;
+    transitionScene.spriteObjectClassFactory = self.spriteObjectClassFactory;
     transitionScene.sceneController = self;
     if (level != 0) {
         DSLevelLoadingScene *levelLoadingScene = (DSLevelLoadingScene *)transitionScene;

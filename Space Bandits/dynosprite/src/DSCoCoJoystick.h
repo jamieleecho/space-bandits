@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SDL2/SDL.h>
+#import <GameController/GameController.h>
 #import "DSCoCoJoystickProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,54 +20,37 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface DSCoCoJoystick : NSObject<DSCoCoJoystickProtocol> {
     @private
-    /** Joystick device index returned by SDL */
-    int _joystick_index;
-    
     /** Joystick opaque type */
-    SDL_Joystick *_joystick;
-
-    /** False until joystick registers a new value */
-    BOOL _readingsAreValid;
-
-    /** Initial x axis reading */
-    Sint16 _initialXAxisPosition;
-    
-    /** Initial y axis reading */
-    Sint16 _initialYAxisPosition;
-    
-    /** Whether or not button 0 was initially pressed */
-    BOOL _initialButton0Pressed;
-    
-    /** Whether or not button 1 was initially pressed*/
-    BOOL _initialButton1Pressed;
+    GCController *_controller;
 }
 
 /** NSArray with all of the joysticks available to the program */
 + (NSArray<DSCoCoJoystick *> *)availableJoysticks;
 
-/** Periodically call this to sample the state of the joysticks */
-+ (void)sample;
-
-/* Private methods */
-
-/** Initialize ths joystick from the SDL joystick index */
-- (instancetype)initWithJoystickIndex:(int)index;
-
-/** Human readable name of the joystick */
-@property (nonatomic, assign, readonly) NSString *name;
-
 /** Human readable name of the joystick */
 - (NSString *)toString;
 
-/**
- * Reads the given joystick axis - 0 is X and 1 is Y.
- */
-- (unsigned char)readJoystickAxis:(int)axis withInitialPosition:(SInt16)initialPosition;
+- (BOOL)open;
 
-/**
- * Reads the given joystick button
- */
-- (unsigned char)readJoystickButton:(int)button withInitialPressed:(BOOL)initialPressed;
+- (void)reset;
+
+- (void)close;
+
+- (unsigned char)xaxisPosition;
+
+- (unsigned char)yaxisPosition;
+
+- (BOOL)button0Pressed;
+
+- (BOOL)button1Pressed;
+
+/* Private methods */
+
+/** Initialize ths joystick from the GCController */
+- (instancetype)initWithController:(nonnull GCController *)controller;
+
+/** Human readable name of the joystick */
+@property (nonatomic, assign, readonly) NSString *name;
 
 @end
 

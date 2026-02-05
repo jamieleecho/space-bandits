@@ -375,4 +375,10 @@
     XCTAssertThrows([_target loadSprites]);
 }
 
+- (void)testCallsSpriteClassObjectFactoryLoadCache {
+    OCMVerify(never(), [_spriteClassObjectFactory loadCache]);
+    [_target loadSprites];
+    OCMVerify(times(1), [_spriteClassObjectFactory loadCache]);
+}
+
 @end

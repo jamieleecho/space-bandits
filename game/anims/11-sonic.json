@@ -1,0 +1,14 @@
+{
+    "FrameSets": [
+        {
+            "Name": "Crouching-Right",
+            "Frames": [
+                { "ImageIndex": 0, "Counts": 1 },
+                { "ImageIndex": 1, "Counts": 2 },
+                { "ImageIndex": 2, "Counts": 2 },
+                { "ImageIndex": 3, "Counts": 2 }        
+            ],
+            "Exit": "_Reverse"
+        }
+    ]
+}

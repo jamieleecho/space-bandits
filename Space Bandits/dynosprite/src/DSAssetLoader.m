@@ -115,6 +115,7 @@
         NSLog(@"([spriteObjectClassFactory addSpriteObjectClass:%@ forNumber:%@]", path, objectClassNumber);
         [self.spriteObjectClassFactory addSpriteObjectClass:spriteObjectClass forNumber:objectClassNumber];
     }
+    [self.spriteObjectClassFactory loadCache];
 }
 
 - (void)loadTileSets {
@@ -142,7 +143,7 @@
     
     // Make sure there are no missing tile sets
     NSArray<NSNumber *> *tileSets = [tileSetToPath.allKeys sortedArrayUsingSelector:@selector(compare:)];
-    NSCAssert(tileSets.count >= 1, @"No level files found.");
+    NSCAssert(tileSets.count >= 1, @"No tile files found.");
     NSCAssert([tileSets[0] isEqualToNumber:@1], ([NSString stringWithFormat:@"First tile set starts at number %@ not number 1", tileSets[0]]));
     NSCAssert([tileSets[tileSets.count - 1] isEqualToNumber:[NSNumber numberWithUnsignedLong:tileSets.count]], ([NSString stringWithFormat:@"Last tile set should be number %@ not number %lu", tileSets[tileSets.count - 1], tileSets.count]));
     

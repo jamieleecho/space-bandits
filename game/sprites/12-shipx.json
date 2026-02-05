@@ -1,0 +1,15 @@
+{
+  "Main": {
+    "Group": 12,
+    "Image": "marbles.png",
+    "Transparent": [128, 128, 128],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "Cycle_2",
+    "Location": [54, 39],
+    "SinglePixelPosition": true
+  }]
+}
+

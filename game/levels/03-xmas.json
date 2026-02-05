@@ -1,0 +1,62 @@
+{
+  "Level": {
+    "Name": "Christmas 2024",
+    "Description": "Merry Christmas",
+    "ObjectGroups": [13],
+    "MaxObjectTableSize": 10,
+    "Tileset": 3,
+    "TilemapImage": "../tiles/03-xmas.png",
+    "TilemapStart": [0, 0],
+    "TilemapSize": [320, 208],
+    "BkgrndStartX": 0,
+    "BkgrndStartY": 0
+  },
+
+  "Objects": [
+    {
+      "_comment": "***** Candle 1",
+      "GroupID": 13,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 139,
+      "globalY": 78,
+      "InitData": []
+    },
+    {
+      "_comment": "***** Candle 2",
+      "GroupID": 13,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 179,
+      "globalY": 78,
+      "InitData": []
+    },
+    {
+      "_comment": "***** Candle 3",
+      "GroupID": 13,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 159,
+      "globalY": 100,
+      "InitData": []
+    },
+    {
+      "_comment": "***** Candle 4",
+      "GroupID": 13,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 139,
+      "globalY": 122,
+      "InitData": []
+    },
+    {
+      "_comment": "***** Candle 5",
+      "GroupID": 13,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 179,
+      "globalY": 122,
+      "InitData": []
+    }
+  ]
+}

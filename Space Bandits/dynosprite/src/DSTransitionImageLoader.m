@@ -20,7 +20,7 @@
 - (void)loadImagesForTransitionInfo:(NSMutableArray <DSTransitionSceneInfo *>*)info {
     NSError *error;
     NSRegularExpression *levelFilenameRegex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d\\d)\\-.*\\.png$" options:NSRegularExpressionCaseInsensitive error:&error];
-    
+
     // Make sure the files in paths specify valid filenames
     NSArray<NSString *> *paths = [self.bundle pathsForResourcesOfType:@"png" inDirectory:@"images"];
     NSMutableDictionary<NSNumber *, NSString *> *levelToPath = [NSMutableDictionary dictionary];

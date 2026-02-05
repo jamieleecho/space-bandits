@@ -26,6 +26,7 @@
 
 - (void)setUp {
     _target = [[DSLevelLoadingScene alloc] init];
+    _target.backgroundImageName = @"swath.png";
     _bundle = OCMClassMock(NSBundle.class);
     _resourceController = OCMClassMock(DSResourceController.class);
     _sceneController = OCMClassMock(DSSceneController.class);
@@ -60,14 +61,14 @@
     XCTAssertFalse(_target.isDone);
     XCTAssertEqual(_target.labels.count, 3);
     XCTAssertEqualObjects(_target.labels[0].text, @"Level 1");
-    XCTAssertTrue([self isPoint:_target.labels[0].parent.position aboutEqualToPoint:CGPointMake(133, -34.86)]);
+    XCTAssertTrue([self isPoint:_target.labels[0].parent.position aboutEqualToPoint:CGPointMake(133, -12.199999809265137)]);
     XCTAssertEqualObjects(_target.labels[1].text, @"My Level Description");
-    XCTAssertTrue([self isPoint:_target.labels[1].parent.position aboutEqualToPoint:CGPointMake(86, -53.86)]);
+    XCTAssertTrue([self isPoint:_target.labels[1].parent.position aboutEqualToPoint:CGPointMake(86, -31.200000762939453)]);
     XCTAssertEqualObjects(_target.labels[2].text, @"Loading...");
-    XCTAssertTrue([self isPoint:_target.labels[2].parent.position aboutEqualToPoint:CGPointMake(123, -85.86)]);
+    XCTAssertTrue([self isPoint:_target.labels[2].parent.position aboutEqualToPoint:CGPointMake(123, -63.200000762939453)]);
     SKShapeNode *progressBarOutline = (SKShapeNode *)_target.children.lastObject;
     XCTAssertTrue([progressBarOutline isKindOfClass:SKShapeNode.class]);
-    XCTAssertTrue([self isPoint:progressBarOutline.position aboutEqualToPoint:CGPointMake(126, -82.66)]);
+    XCTAssertTrue([self isPoint:progressBarOutline.position aboutEqualToPoint:CGPointMake(126, -60)]);
     XCTAssertEqual(progressBarOutline.lineWidth, 2);
     SKSpriteNode *progressBar = (SKSpriteNode *)progressBarOutline.children.firstObject;
     XCTAssertTrue([progressBar isKindOfClass:SKSpriteNode.class]);
@@ -76,12 +77,12 @@
     
     // Cheap hack to verify colors since SK framework changes them:
     //   get the color, set object colors to what we think they should be and compare
-    NSColor *progressBarOutlineStrokeColor = progressBarOutline.strokeColor;
-    progressBarOutline.strokeColor = NSColor.lightGrayColor;
-    NSColor *progressBarOutlineFillColor = progressBarOutline.fillColor;
-    progressBarOutline.fillColor = [NSColor colorWithWhite:0 alpha:0];
-    NSColor *progressBarColor = progressBar.color;
-    progressBar.color = NSColor.blueColor;
+    UIColor *progressBarOutlineStrokeColor = progressBarOutline.strokeColor;
+    progressBarOutline.strokeColor = UIColor.lightGrayColor;
+    UIColor *progressBarOutlineFillColor = progressBarOutline.fillColor;
+    progressBarOutline.fillColor = [UIColor colorWithWhite:0 alpha:0];
+    UIColor *progressBarColor = progressBar.color;
+    progressBar.color = UIColor.blueColor;
     XCTAssertEqualObjects(progressBarOutline.strokeColor, progressBarOutlineStrokeColor);
     XCTAssertEqualObjects(progressBarOutline.fillColor, progressBarOutlineFillColor);
     XCTAssertEqualObjects(progressBar.color, progressBarColor);
@@ -101,9 +102,9 @@
     _target.bundle = _bundle;
     _target.levelName = @"Level 1";
     _target.levelDescription = @"My Level Description";
-    _target.backgroundColor = NSColor.purpleColor;
-    _target.foregroundColor = NSColor.lightGrayColor;
-    _target.progressBarColor = NSColor.blueColor;
+    _target.backgroundColor = UIColor.purpleColor;
+    _target.foregroundColor = UIColor.lightGrayColor;
+    _target.progressBarColor = UIColor.blueColor;
     _target.resourceController = _resourceController;
     OCMStub([_resourceController fontForDisplay]).andReturn(@"Courier");
 }

@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "DCFA5DFA-67CB-4159-B00D-71E3149AC105",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Space Bandits.xcodeproj",
+      "identifier" : "52CC81902C02172200CC3E38",
+      "name" : "Space Bandits"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Space Bandits.xcodeproj",
+        "identifier" : "52CC81AE2C02172200CC3E38",
+        "name" : "dynosprite tests"
+      }
+    }
+  ],
+  "version" : 1
+}

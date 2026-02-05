@@ -1,0 +1,95 @@
+{
+  "Main": {
+    "Group": 13,
+    "Image": "03-candles.png",
+    "Transparent": [255, 0, 255],
+    "Palette": 3
+  },
+
+  "Sprites": [
+      {
+          "Name": "Candle1",
+          "Location": [36, 361],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle2",
+          "Location": [81, 361],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle3",
+          "Location": [126, 361],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle4",
+          "Location": [172, 361],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle5",
+          "Location": [218, 361],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle6",
+          "Location": [263, 361],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle7",
+          "Location": [309, 361],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle8",
+          "Location": [36, 301],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle9",
+          "Location": [81, 301],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle10",
+          "Location": [126, 301],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle11",
+          "Location": [172, 301],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle12",
+          "Location": [218, 301],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle13",
+          "Location": [263, 301],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      },
+      {
+          "Name": "Candle14",
+          "Location": [309, 301],
+          "Rectangle": [-17, -27, 39, 53],
+          "SinglePixelPosition": true
+      }  ]
+}
+

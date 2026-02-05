@@ -58,9 +58,7 @@ typedef struct BadGuyObjectState {
 } BadGuyObjectState;
 
 
-#ifdef __cplusplus
-[[maybe_unused]]
-#endif
+MAYBE_UNUSED
 static DynospriteCOB *CreateBadGuy(word x, byte y, byte direction) {
     DynospriteCOB *cob = NULL;
     DynospriteCOB *firstBadGuy = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, BADGUY_GROUP_IDX);
@@ -85,9 +83,7 @@ static DynospriteCOB *CreateBadGuy(word x, byte y, byte direction) {
 }
 
 
-#ifdef __cplusplus
-[[maybe_unused]]
-#endif
+MAYBE_UNUSED
 static DynospriteCOB *CreateBadGuyWithSpriteIdx(word x, byte y, byte spriteIdx) {
     DynospriteCOB *cob = CreateBadGuy(x, y, 0);
     ((BadGuyObjectState *)cob->statePtr)->spriteIdx = spriteIdx;

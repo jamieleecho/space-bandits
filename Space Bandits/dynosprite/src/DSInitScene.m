@@ -43,6 +43,7 @@ static NSString *MenuSoundHigh = @"HiFi";
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
     _alwaysPressed = YES;
+    _isTransitioning = NO;
     self.isDone = NO;
     if (self.labels.count < 1) {
         [self addLabelWithText:@"[D]isplay:" atPosition:CGPointMake(3, 120)];
@@ -66,17 +67,16 @@ static NSString *MenuSoundHigh = @"HiFi";
     [self refreshState];
 }
 
-- (void)mouseUp:(NSEvent *)theEvent {
-    [self transitionToNextScreen];
-}
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    [self.joystickController pressesEnded:presses withEvent:event];
+    NSMutableString *chars = [[NSMutableString alloc] init];
+    for(UIPress *press in presses) {
+        [chars appendString:press.key.charactersIgnoringModifiers];
+    }
 
-- (void)keyUp:(NSEvent *)theEvent {
-    [super keyUp:theEvent];
-    
     // Now check the rest of the keyboard
-    NSString *characters = theEvent.charactersIgnoringModifiers;
-    for (int s = 0; s<[characters length]; s++) {
-        unichar character = [characters characterAtIndex:s];
+    for (int s = 0; s < chars.length; s++) {
+        unichar character = [chars characterAtIndex:s];
         switch (character) {
             case 'd':
                 [self toggleDisplay];
@@ -91,7 +91,6 @@ static NSString *MenuSoundHigh = @"HiFi";
                 break;
                 
             case ' ':
-                [self transitionToNextScreen];
                 break;
         }
     }
@@ -99,13 +98,15 @@ static NSString *MenuSoundHigh = @"HiFi";
 }
 
 - (void)transitionToNextScreen {
-    SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
-    DSTransitionScene *transitionScene = [self.sceneController transitionSceneForLevel:(int)self.firstLevel];
-    [self.view presentScene:transitionScene transition:transition];
+    _isTransitioning = YES;
     [self.soundManager loadCache];
+    [self.spriteObjectClassFactory loadCache];
     self.soundManager.maxNumSounds = (self.resourceController.hifiMode) ? 10 : 2;
     DynospriteGlobalsPtr->UserGlobals_Init = NO;
     self.isDone = YES;
+    DSTransitionScene *transitionScene = [self.sceneController transitionSceneForLevel:(int)self.firstLevel];
+    SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
+    [self.view presentScene:transitionScene transition:transition];
 }
 
 - (void)toggleDisplay {
@@ -137,7 +138,7 @@ static NSString *MenuSoundHigh = @"HiFi";
 
 - (void)poll {
     if (self.joystickController.joystick.button0Pressed) {
-        if (!_alwaysPressed) {
+        if (!_alwaysPressed && !_isTransitioning && !self.isDone) {
             [self transitionToNextScreen];
         }
     } else {

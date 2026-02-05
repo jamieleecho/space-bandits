@@ -19,6 +19,7 @@
 #import "DSTextureManager.h"
 #import "DSTileInfoRegistry.h"
 #import "DSTransitionSceneInfo.h"
+#import "DSSpriteObjectClassFactory.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) IBOutlet DSTileMapMaker *tileMapMaker;
 @property (nonatomic, nonnull) IBOutlet DSTextureManager *textureManager;
 @property (nonatomic, nonnull) IBOutlet DSSoundManager *soundManager;
+@property (nonatomic, nonnull) IBOutlet DSSpriteObjectClassFactory *spriteObjectClassFactory;
 @property (nonatomic, nonnull) DSObjectClassDataRegistry *classRegistry;
 
 @property (nonatomic) NSInteger firstLevel;

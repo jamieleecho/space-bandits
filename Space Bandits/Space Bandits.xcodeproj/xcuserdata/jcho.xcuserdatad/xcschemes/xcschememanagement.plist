@@ -4,10 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Space Bandits GitHub.xcscheme_^#shared#^_</key>
+		<key>Space Bandits Github.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Space Bandits.xcscheme_^#shared#^_</key>
 		<dict>
@@ -17,22 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>52E7604D21D7F5410001F3A0</key>
+		<key>52CC81902C02172200CC3E38</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>52F1208321D7DD63008A7900</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>52F120A021D7DD65008A7900</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>52F120AB21D7DD65008A7900</key>
+		<key>52CC81AE2C02172200CC3E38</key>
 		<dict>
 			<key>primary</key>
 			<true/>
