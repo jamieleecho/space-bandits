@@ -8,13 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5218E5002C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */; };
-		5219F0CC2DC87B0100948DD9 /* 03-candles.png in Resources */ = {isa = PBXBuildFile; fileRef = 5219F0CB2DC87B0100948DD9 /* 03-candles.png */; };
-		5219F0CD2DC87B3D00948DD9 /* 03-candles.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 5219F0CB2DC87B0100948DD9 /* 03-candles.png */; };
-		522103422D0FD87F00C2DBF6 /* 03-xmas.c in Sources */ = {isa = PBXBuildFile; fileRef = 522103402D0FD87F00C2DBF6 /* 03-xmas.c */; };
-		522103572D0FDCEE00C2DBF6 /* 03-xmas.json in Copy levels Files */ = {isa = PBXBuildFile; fileRef = 522103412D0FD87F00C2DBF6 /* 03-xmas.json */; };
-		522103582D0FDDE200C2DBF6 /* 03-xmas.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 5221034D2D0FDB7800C2DBF6 /* 03-xmas.json */; };
-		522103592D0FDDE500C2DBF6 /* 03-xmas.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 5221034E2D0FDB7800C2DBF6 /* 03-xmas.png */; };
-		5221035B2D0FE4E200C2DBF6 /* 03-xmas.png in Resources */ = {isa = PBXBuildFile; fileRef = 5221035A2D0FE4E200C2DBF6 /* 03-xmas.png */; };
 		522A46FA2C057C5E0094C68A /* UIImage+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 522A46F92C057C5E0094C68A /* UIImage+Misc.m */; };
 		522A46FB2C057C5E0094C68A /* UIImage+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 522A46F92C057C5E0094C68A /* UIImage+Misc.m */; };
 		523978372C1F5D1300301419 /* pcgfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 523978362C1F5D1300301419 /* pcgfont.ttf */; };
@@ -94,11 +87,8 @@
 		52AE470D2DC7EF88003AED29 /* 00-mainmenu.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = 52E24A312C18068E0098F87D /* 00-mainmenu.png */; };
 		52AE470E2DC7EF8A003AED29 /* 01-level1.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = 52E24A322C18068E0098F87D /* 01-level1.png */; };
 		52AE470F2DC7EF8E003AED29 /* 02-level2.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = 52E24A332C18068E0098F87D /* 02-level2.png */; };
-		52AE47102DC7EF92003AED29 /* 03-level3.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = 522103532D0FDC7D00C2DBF6 /* 03-level3.png */; };
 		52AE47112DC7EF97003AED29 /* images.json in Copy images Files */ = {isa = PBXBuildFile; fileRef = 52E24A342C18068E0098F87D /* images.json */; };
-		52AE47132DC7F0D1003AED29 /* 13-candles.json in Resources */ = {isa = PBXBuildFile; fileRef = 52AE47122DC7F0C7003AED29 /* 13-candles.json */; };
 		52AE47192DC7FB38003AED29 /* 13-candle.c in Sources */ = {isa = PBXBuildFile; fileRef = 52AE47182DC7FB38003AED29 /* 13-candle.c */; };
-		52AE471A2DC7FB67003AED29 /* 13-candles.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52AE47122DC7F0C7003AED29 /* 13-candles.json */; };
 		52BAAA8A2D0E951E00BEAF90 /* swath.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BAAA892D0E951E00BEAF90 /* swath.png */; };
 		52CC81A52C02172200CC3E38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52CC81A42C02172200CC3E38 /* Assets.xcassets */; };
 		52CC81AA2C02172200CC3E38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC81A92C02172200CC3E38 /* main.m */; };
@@ -237,10 +227,8 @@
 		52E24A962C18096C0098F87D /* 01-moon.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8C2C18094D0098F87D /* 01-moon.png */; };
 		52E24A972C18096D0098F87D /* 01-moon.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8B2C18094D0098F87D /* 01-moon.json */; };
 		52EE7C972DE4982700011C11 /* sprite_state_machine.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EE7C962DE4982700011C11 /* sprite_state_machine.c */; };
-		52EE7C9A2DE4E87F00011C11 /* 03-level3.png in Resources */ = {isa = PBXBuildFile; fileRef = 52EE7C992DE4E87F00011C11 /* 03-level3.png */; };
 		52EE7C9B2DE4E87F00011C11 /* 01-level1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
 		52EE7C9C2DE4E90D00011C11 /* 01-level1.png in Copy hires/images Files */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
-		52EE7C9D2DE4E90F00011C11 /* 03-level3.png in Copy hires/images Files */ = {isa = PBXBuildFile; fileRef = 52EE7C992DE4E87F00011C11 /* 03-level3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,7 +258,6 @@
 			files = (
 				52E24A2D2C1805D80098F87D /* 01-persei.json in Copy levels Files */,
 				52E24A2E2C1805DE0098F87D /* 02-space.json in Copy levels Files */,
-				522103572D0FDCEE00C2DBF6 /* 03-xmas.json in Copy levels Files */,
 			);
 			name = "Copy levels Files";
 		};
@@ -282,7 +269,6 @@
 				52AE470D2DC7EF88003AED29 /* 00-mainmenu.png in Copy images Files */,
 				52AE470E2DC7EF8A003AED29 /* 01-level1.png in Copy images Files */,
 				52AE470F2DC7EF8E003AED29 /* 02-level2.png in Copy images Files */,
-				52AE47102DC7EF92003AED29 /* 03-level3.png in Copy images Files */,
 				52AE47112DC7EF97003AED29 /* images.json in Copy images Files */,
 			);
 			name = "Copy images Files";
@@ -294,7 +280,6 @@
 			files = (
 				52E24A4A2C18076E0098F87D /* 00-mainmenu.png in Copy hires/images Files */,
 				52EE7C9C2DE4E90D00011C11 /* 01-level1.png in Copy hires/images Files */,
-				52EE7C9D2DE4E90F00011C11 /* 03-level3.png in Copy hires/images Files */,
 			);
 			name = "Copy hires/images Files";
 		};
@@ -333,8 +318,6 @@
 			dstPath = sprites;
 			dstSubfolder = Resources;
 			files = (
-				5219F0CD2DC87B3D00948DD9 /* 03-candles.png in Copy sprites Files */,
-				52AE471A2DC7FB67003AED29 /* 13-candles.json in Copy sprites Files */,
 				52E24A892C18091C0098F87D /* 01-numerals.json in Copy sprites Files */,
 				52E24A882C18091A0098F87D /* 01-sprites.png in Copy sprites Files */,
 				52E24A872C1809190098F87D /* 02-balls.json in Copy sprites Files */,
@@ -362,8 +345,6 @@
 				52E24A962C18096C0098F87D /* 01-moon.png in Copy tiles Files */,
 				52E24A952C1809690098F87D /* 02-space.json in Copy tiles Files */,
 				52E24A942C1809670098F87D /* 02-space.png in Copy tiles Files */,
-				522103582D0FDDE200C2DBF6 /* 03-xmas.json in Copy tiles Files */,
-				522103592D0FDDE500C2DBF6 /* 03-xmas.png in Copy tiles Files */,
 			);
 			name = "Copy tiles Files";
 		};
@@ -372,13 +353,6 @@
 /* Begin PBXFileReference section */
 		5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSKeyEventBaseTest.m; sourceTree = "<group>"; };
 		5218E5012C0BB72300F9B9A3 /* DSKeyEventBaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSKeyEventBaseTest.h; sourceTree = "<group>"; };
-		5219F0CB2DC87B0100948DD9 /* 03-candles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-candles.png"; sourceTree = "<group>"; };
-		522103402D0FD87F00C2DBF6 /* 03-xmas.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = "03-xmas.c"; path = "../../../../game/levels/03-xmas.c"; sourceTree = "<group>"; };
-		522103412D0FD87F00C2DBF6 /* 03-xmas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "03-xmas.json"; path = "../../../../game/levels/03-xmas.json"; sourceTree = "<group>"; };
-		5221034D2D0FDB7800C2DBF6 /* 03-xmas.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "03-xmas.json"; sourceTree = "<group>"; };
-		5221034E2D0FDB7800C2DBF6 /* 03-xmas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-xmas.png"; sourceTree = "<group>"; };
-		522103532D0FDC7D00C2DBF6 /* 03-level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-level3.png"; sourceTree = "<group>"; };
-		5221035A2D0FE4E200C2DBF6 /* 03-xmas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-xmas.png"; sourceTree = "<group>"; };
 		5229475E2D0E81A9006870DC /* Space Bandits.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Space Bandits.xctestplan"; sourceTree = "<group>"; };
 		522A46F82C057C5E0094C68A /* UIImage+Misc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Misc.h"; sourceTree = "<group>"; };
 		522A46F92C057C5E0094C68A /* UIImage+Misc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Misc.m"; sourceTree = "<group>"; };
@@ -458,7 +432,6 @@
 		5268AC2B2C1A998D00365852 /* dynosprite-github.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "dynosprite-github.xctestplan"; sourceTree = "<group>"; };
 		526C33282C16C77D003FB16E /* Space-Bandits-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Space-Bandits-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5287C4702C0BCFDA00AD2369 /* hires */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hires; sourceTree = "<group>"; };
-		52AE47122DC7F0C7003AED29 /* 13-candles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "13-candles.json"; sourceTree = "<group>"; };
 		52AE47172DC7FB38003AED29 /* 13-candle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "13-candle.h"; path = "../game/objects/13-candle.h"; sourceTree = SOURCE_ROOT; };
 		52AE47182DC7FB38003AED29 /* 13-candle.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = "13-candle.c"; path = "../game/objects/13-candle.c"; sourceTree = SOURCE_ROOT; };
 		52BAAA892D0E951E00BEAF90 /* swath.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swath.png; sourceTree = "<group>"; };
@@ -626,7 +599,6 @@
 		52EE7C952DE4982700011C11 /* sprite_state_machine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = sprite_state_machine.h; path = ../game/objects/sprite_state_machine.h; sourceTree = SOURCE_ROOT; };
 		52EE7C962DE4982700011C11 /* sprite_state_machine.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = sprite_state_machine.c; path = ../game/objects/sprite_state_machine.c; sourceTree = SOURCE_ROOT; };
 		52EE7C982DE4E87F00011C11 /* 01-level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-level1.png"; sourceTree = "<group>"; };
-		52EE7C992DE4E87F00011C11 /* 03-level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-level3.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -972,8 +944,6 @@
 				52E24A202C17E84E0098F87D /* 01-persei.json */,
 				52E24A222C17E84E0098F87D /* 02-space.c */,
 				52E24A1F2C17E84E0098F87D /* 02-space.json */,
-				522103402D0FD87F00C2DBF6 /* 03-xmas.c */,
-				522103412D0FD87F00C2DBF6 /* 03-xmas.json */,
 			);
 			path = levels;
 			sourceTree = "<group>";
@@ -984,7 +954,6 @@
 				52E24A312C18068E0098F87D /* 00-mainmenu.png */,
 				52E24A322C18068E0098F87D /* 01-level1.png */,
 				52E24A332C18068E0098F87D /* 02-level2.png */,
-				522103532D0FDC7D00C2DBF6 /* 03-level3.png */,
 				52E24A342C18068E0098F87D /* images.json */,
 			);
 			name = images;
@@ -996,7 +965,6 @@
 			children = (
 				52E24A3D2C1807090098F87D /* 00-mainmenu.png */,
 				52EE7C982DE4E87F00011C11 /* 01-level1.png */,
-				52EE7C992DE4E87F00011C11 /* 03-level3.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -1014,7 +982,6 @@
 			children = (
 				52E24A412C1807090098F87D /* 01-moon.png */,
 				52E24A422C1807090098F87D /* 02-space.png */,
-				5221035A2D0FE4E200C2DBF6 /* 03-xmas.png */,
 			);
 			path = tiles;
 			sourceTree = "<group>";
@@ -1045,7 +1012,6 @@
 			isa = PBXGroup;
 			children = (
 				52E24A582C1808210098F87D /* 01-sprites.png */,
-				5219F0CB2DC87B0100948DD9 /* 03-candles.png */,
 				52E24A642C1808210098F87D /* marbles.png */,
 				52E24A652C1808210098F87D /* numerals.png */,
 				52E24A572C1808210098F87D /* 01-numerals.json */,
@@ -1060,7 +1026,6 @@
 				52E24A612C1808210098F87D /* 10-fixed_object.json */,
 				52E24A622C1808210098F87D /* 11-velocity-object.json */,
 				52E24A632C1808210098F87D /* 12-shipx.json */,
-				52AE47122DC7F0C7003AED29 /* 13-candles.json */,
 			);
 			name = sprites;
 			path = ../../../game/sprites;
@@ -1073,8 +1038,6 @@
 				52E24A8C2C18094D0098F87D /* 01-moon.png */,
 				52E24A8D2C18094D0098F87D /* 02-space.json */,
 				52E24A8E2C18094D0098F87D /* 02-space.png */,
-				5221034D2D0FDB7800C2DBF6 /* 03-xmas.json */,
-				5221034E2D0FDB7800C2DBF6 /* 03-xmas.png */,
 			);
 			name = tiles;
 			path = ../../../game/tiles;
@@ -1168,13 +1131,9 @@
 			files = (
 				52CC82352C02179100CC3E38 /* Actions.sks in Resources */,
 				523978372C1F5D1300301419 /* pcgfont.ttf in Resources */,
-				52AE47132DC7F0D1003AED29 /* 13-candles.json in Resources */,
-				5219F0CC2DC87B0100948DD9 /* 03-candles.png in Resources */,
 				52CC81A52C02172200CC3E38 /* Assets.xcassets in Resources */,
 				52E0DB3D2C0C42A700AD5BDC /* Main.storyboard in Resources */,
-				5221035B2D0FE4E200C2DBF6 /* 03-xmas.png in Resources */,
 				52E24A2B2C1805500098F87D /* defaults-config.json in Resources */,
-				52EE7C9A2DE4E87F00011C11 /* 03-level3.png in Resources */,
 				52EE7C9B2DE4E87F00011C11 /* 01-level1.png in Resources */,
 			);
 		};
@@ -1253,7 +1212,6 @@
 				52CC827A2C02179100CC3E38 /* DSObjectCoordinator.m in Sources */,
 				52CC82AD2C02179100CC3E38 /* DSTransitionImageLoader.m in Sources */,
 				52CC82472C02179100CC3E38 /* DSConfigFileParser.m in Sources */,
-				522103422D0FD87F00C2DBF6 /* 03-xmas.c in Sources */,
 				52CC826E2C02179100CC3E38 /* DSNSDataMD5Extensions.m in Sources */,
 				52E24A102C17E7E00098F87D /* 04-ship.c in Sources */,
 				52CC81AA2C02172200CC3E38 /* main.m in Sources */,
