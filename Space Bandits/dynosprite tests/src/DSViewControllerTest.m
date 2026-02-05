@@ -17,6 +17,7 @@
 @interface DSViewControllerTest : XCTestCase {
     DSViewController *_target;
     id _skView;
+    id _scene;
     id _transitionSceneController;
 }
 @end
@@ -26,6 +27,8 @@
 
 - (void)setUp {
     _skView = OCMClassMock(SKView.class);
+    _scene = OCMClassMock(SKScene.class);
+    OCMStub([_skView scene]).andReturn(_scene);
     _transitionSceneController = OCMClassMock(DSSceneController.class);
     _target = [[DSViewController alloc] init];
     _target.sceneController = _transitionSceneController;
@@ -38,6 +41,20 @@
     [_target viewDidLoad];
     OCMVerify([_transitionSceneController transitionSceneForLevel:0]);
     OCMVerify([_skView presentScene:scene]);
+}
+
+- (void)testForwardsPressesBegan {
+    NSSet<UIPress *> *presses = [NSSet new];
+    UIPressesEvent *event = [UIPressesEvent new];
+    [_target pressesBegan:presses withEvent:event];
+    OCMVerify([_scene pressesBegan:presses withEvent:event]);
+}
+
+- (void)testForwardsPressesEnded {
+    NSSet<UIPress *> *presses = [NSSet new];
+    UIPressesEvent *event = [UIPressesEvent new];
+    [_target pressesEnded:presses withEvent:event];
+    OCMVerify([_scene pressesEnded:presses withEvent:event]);
 }
 
 @end

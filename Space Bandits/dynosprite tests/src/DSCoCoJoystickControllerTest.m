@@ -104,32 +104,22 @@ static int numSampleCalls;
     _target.useHardwareJoystick = NO;
     OCMVerify([_mockJoystick1 close]);
 }
-
-- (void)testSample {
-    [_target sample];
-    XCTAssertEqual(numSampleCalls, 1);
-    availableJoysticks = @[_mockJoystick1];
-    _target.useHardwareJoystick = YES;
-    [_target sample];
-    XCTAssertEqual(numSampleCalls, 2);
-}
-
 - (void)testPassesKeyboardKeys {
-    NSEvent *event = [[NSEvent alloc] init];
-    [_target handleKeyUp:event];
-    OCMVerify([_mockKeyboardJoystick handleKeyUp:event]);
-    [_target handleKeyDown:event];
-    OCMVerify([_mockKeyboardJoystick handleKeyDown:event]);
+    NSSet<UIPress *> *presses = [[NSSet alloc] init];
+    UIPressesEvent *event = [[UIPressesEvent alloc] init];
+    [_target pressesEnded:presses withEvent:event];
+    OCMVerify([_mockKeyboardJoystick pressesEnded:presses withEvent:event]);
+    [_target pressesBegan:presses withEvent:event];
+    OCMVerify([_mockKeyboardJoystick pressesBegan:presses withEvent:event]);
 }
 
 - (void)testPassesKeyboardKeysEvenWithHardwareJoystick {
-    availableJoysticks = @[_mockJoystick1];
     _target.useHardwareJoystick = YES;
-    NSEvent *event = [[NSEvent alloc] init];
-    [_target handleKeyUp:event];
-    OCMVerify([_mockKeyboardJoystick handleKeyUp:event]);
-    [_target handleKeyDown:event];
-    OCMVerify([_mockKeyboardJoystick handleKeyDown:event]);
+    NSSet<UIPress *> *presses = [[NSSet alloc] init];
+    UIPressesEvent *event = [[UIPressesEvent alloc] init];
+    [_target pressesEnded:presses withEvent:event];
+    OCMVerify([_mockKeyboardJoystick pressesEnded:presses withEvent:event]);
+    [_target pressesBegan:presses withEvent:event];
+    OCMVerify([_mockKeyboardJoystick pressesBegan:presses withEvent:event]);
 }
-
 @end

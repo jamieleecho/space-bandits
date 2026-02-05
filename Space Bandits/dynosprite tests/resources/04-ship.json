@@ -13,10 +13,12 @@
   }, {
     "Name": "Ship2",
     "Location": [137, 433],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "SaveBackground": true
   }, {
     "Name": "Ship3",
     "Location": [106, 433],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "SaveBackground": false
   }]
 }

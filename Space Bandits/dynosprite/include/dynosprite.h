@@ -10,7 +10,10 @@
 #define dynosprite_h
 
 #ifdef __cplusplus
+#define MAYBE_UNUSED [[maybe_unused]]
 extern "C" {
+#else
+#define MAYBE_UNUSED
 #endif
 
 #include <stdlib.h>
@@ -63,7 +66,7 @@ int DSLevelRegistryRegister(void init(void), byte backgroundNewXY(void), const c
   * @param path location of the object
   * @return some value
  */
-int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), void(*drawMethod)(struct DynospriteCOB *, void *, void *, void *, void *), size_t stateSize, const char *path);
+int DSObjectClassDataRegistryRegisterClassData(void(*classInitMethod)(void), void(*initMethod)(DynospriteCOB *, DynospriteODT *, byte *), size_t initSize, byte(*reactivateMethod)(DynospriteCOB *, DynospriteODT *), byte(*updateMethod)(DynospriteCOB *, DynospriteODT *), void(*drawMethod)(struct DynospriteCOB *, void *, void *, void *, void *, bool), size_t stateSize, const char *path);
 
 
 #define RegisterLevel(init, calcuateBackgroundNewXY) static int levelInit = DSLevelRegistryRegister(init, calcuateBackgroundNewXY, __FILE__)

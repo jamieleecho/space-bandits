@@ -14,7 +14,7 @@
 
 @implementation DSTileMapMaker
 
-- (NSImage *)subImage:(NSImage *)image withRect:(NSRect)rect; {
+- (UIImage *)subImage:(UIImage *)image withRect:(CGRect)rect; {
     NSCAssert(rect.origin.x >= 0, @"SubImage X origin must be >= 0");
     NSCAssert(rect.origin.y >= 0, @"SubImage Y origin must be >= 0");
     NSCAssert(rect.size.width >= 0, @"SubImage width must be >= 0");
@@ -23,15 +23,15 @@
     NSCAssert(rect.origin.y + rect.size.height <= image.size.height, @"SubImage Y origin and height larger than the image height");
 
     // Get the conversions we need for the CGImageRef
-    CGImageRef imageRef = [image CGImageForProposedRect:nil context:nil hints:nil];
+    CGImageRef imageRef = image.CGImage;
     CGImageRef cutImageRef = CGImageCreateWithImageInRect(imageRef, CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height));
     
-    NSImage *cutImage = [[NSImage alloc] initWithCGImage:cutImageRef size:NSZeroSize];
+    UIImage *cutImage = [[UIImage alloc] initWithCGImage:cutImageRef];
     CGImageRelease(cutImageRef);
     return cutImage;
 }
 
-- (NSImage *)subImageForMap:(NSImage *)image withRect:(NSRect)rect {
+- (UIImage *)subImageForMap:(UIImage *)image withRect:(CGRect)rect {
     NSCAssert((((int)rect.size.width / DSTileSize) * DSTileSize) == rect.size.width, @"TilemapSize width must be a multiple of 16");
     NSCAssert((((int)rect.size.height / DSTileSize) * DSTileSize) == rect.size.height, @"TilemapSize height must be a multiple of 16");
     NSCAssert(rect.origin.x + rect.size.width <= image.size.width, @"Tilemap X origin and width larger than the image width");
@@ -39,26 +39,26 @@
     return [self subImage:image withRect:rect];
 }
 
-- (NSImage *)tileForImage:(NSImage *)image atPoint:(NSPoint)p0 {
-    return [self subImageForMap:image withRect:NSMakeRect(p0.x, p0.y, DSTileSize, DSTileSize)];
+- (UIImage *)tileForImage:(UIImage *)image atPoint:(CGPoint)p0 {
+    return [self subImageForMap:image withRect:CGRectMake(p0.x, p0.y, DSTileSize, DSTileSize)];
 }
 
-- (NSString *)hashForImage:(NSImage *)image {
-    return image.TIFFRepresentation.SHA256;
+- (NSString *)hashForImage:(UIImage *)image {
+    return UIImagePNGRepresentation(image).SHA256;
 }
 
-- (BOOL)image:(NSImage *)image1 isEqualTo:(NSImage *)image2 {
-    return [image1.TIFFRepresentation isEqualToData:image2.TIFFRepresentation];
+- (BOOL)image:(UIImage *)image1 isEqualTo:(UIImage *)image2 {
+    return [[self hashForImage:image1] isEqualToString:[self hashForImage:image2]];
 }
 
-- (NSDictionary<NSString *, NSImage *> *)imageTileDictionaryFromImage:(NSImage *)image {
+- (NSDictionary<NSString *, UIImage *> *)imageTileDictionaryFromImage:(UIImage *)image {
     NSCAssert((((int)image.size.width / DSTileSize) * DSTileSize) == image.size.width, @"TilemapSize width must be a multiple of 16");
     NSCAssert((((int)image.size.height / DSTileSize) * DSTileSize) == image.size.height, @"TilemapSize height must be a multiple of 16");
     
     NSMutableDictionary *hashToImage = [NSMutableDictionary dictionary];
     for(int yy = 0; yy < image.size.height; yy += DSTileSize) {
         for(int xx = 0; xx < image.size.width; xx += DSTileSize) {
-            NSImage *tile = [self tileForImage:image atPoint:NSMakePoint(xx, yy)];
+            UIImage *tile = [self tileForImage:image atPoint:CGPointMake(xx, yy)];
             NSString *hash = [self hashForImage:tile];
             if (hashToImage[hash] == nil) {
                 hashToImage[hash] = [[DSCons alloc] initWithCar:tile andCdr:[NSNumber numberWithUnsignedLong:hashToImage.count]];
@@ -69,19 +69,19 @@
     return hashToImage;
 }
 
-- (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary {
-    NSMutableDictionary<NSString *, NSImage *> *hashToImage = [NSMutableDictionary dictionary];
+- (SKTextureAtlas *)atlasFromTileDictionary:(NSDictionary<NSString *, DSCons<UIImage *, NSNumber *> *> *)tileDictionary {
+    NSMutableDictionary<NSString *, UIImage *> *hashToImage = [NSMutableDictionary dictionary];
     for(NSString *key in tileDictionary.allKeys) {
-        DSCons<NSImage *, NSNumber *> *imageIndexPair = tileDictionary[key];
+        DSCons<UIImage *, NSNumber *> *imageIndexPair = tileDictionary[key];
         hashToImage[key] = imageIndexPair.car;
     }
     return [SKTextureAtlas atlasWithDictionary:hashToImage];
 }
 
-- (NSDictionary<NSNumber *, NSString *> *)tileIndexToTileHashFromTileDictionary:(NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *)tileDictionary {
+- (NSDictionary<NSNumber *, NSString *> *)tileIndexToTileHashFromTileDictionary:(NSDictionary<NSString *, DSCons<UIImage *, NSNumber *> *> *)tileDictionary {
     NSMutableDictionary<NSNumber *, NSString *> *tileIndexToTileHash = [NSMutableDictionary dictionary];
     for(NSString *key in tileDictionary.allKeys) {
-        DSCons<NSImage *, NSNumber *> *imageIndexPair = tileDictionary[key];
+        DSCons<UIImage *, NSNumber *> *imageIndexPair = tileDictionary[key];
         tileIndexToTileHash[imageIndexPair.cdr] = key;
     }
     return tileIndexToTileHash;
@@ -99,9 +99,9 @@
     return [SKTileSet tileSetWithTileGroups:tileGroups];
 }
 
-- (SKTileMapNode *)nodeFromImage:(NSImage *)image withRect:(NSRect)rect usingTileImage:(NSImage *)tileImage withTileRect:(NSRect)tileRect {
-    NSImage *imageForTiles = [self subImageForMap:tileImage withRect:tileRect];
-    NSDictionary<NSString *, DSCons<NSImage *, NSNumber *> *> *map = [self imageTileDictionaryFromImage:imageForTiles];
+- (SKTileMapNode *)nodeFromImage:(UIImage *)image withRect:(CGRect)rect usingTileImage:(UIImage *)tileImage withTileRect:(CGRect)tileRect {
+    UIImage *imageForTiles = [self subImageForMap:tileImage withRect:tileRect];
+    NSDictionary<NSString *, DSCons<UIImage *, NSNumber *> *> *map = [self imageTileDictionaryFromImage:imageForTiles];
     SKTextureAtlas *atlas = [self atlasFromTileDictionary:map];
     SKTileSet *tileSet = [self tileSetFromTextureAtlas:atlas];
 
@@ -112,10 +112,10 @@
         hashToTileGroup[group.name] = group;
     }
     
-    NSImage *mapImage = [self subImageForMap:image withRect:rect];
+    UIImage *mapImage = [self subImageForMap:image withRect:rect];
     for(int jj = 0; jj < tileMapNode.numberOfRows; jj++) {
         for(int ii = 0; ii < tileMapNode.numberOfColumns; ii++) {
-            NSImage *tileImage = [self tileForImage:mapImage atPoint:NSMakePoint(ii * DSTileSize, jj * DSTileSize)];
+            UIImage *tileImage = [self tileForImage:mapImage atPoint:CGPointMake(ii * DSTileSize, jj * DSTileSize)];
             NSString *hash = [self hashForImage:tileImage];
             SKTileGroup *group = hashToTileGroup[hash];
             NSCAssert(group != nil, ([NSString stringWithFormat:@"Could not locate background tile with hash %@ at tile map location (%d, %d)", hash, ii, jj]));

@@ -169,10 +169,23 @@ SECONDARY: $(SPRITESRC) $(SPRITEASMSRC)
 all: $(TARGET)
 
 clean:
-	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(GENTMPDIR)
+	rm -rf $(GENASMDIR) $(GENGFXDIR) $(GENOBJDIR) $(GENDISKDIR) $(GENLISTDIR) $(GENTMPDIR) $(TARGET)
 
 test:
 	$(EMULATOR) $(MAMESYSTEM) -flop1 $(TARGET) $(MAMEFLAGS) -window -waitvsync -resolution 640x480 -video opengl -rompath ~/Applications/mame/roms
+
+check-scripts: lint-scripts type-check-scripts
+	ruff format scripts
+
+format-scripts:
+	ruff format scripts
+	ruff check --select I --fix
+
+lint-scripts:
+	ruff check scripts
+
+type-check-scripts:
+	mypy --ignore-missing-imports scripts
 
 # build rules
 # 0. Parse options file
@@ -267,11 +280,10 @@ $(READMEBAS): $(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt
 #16. Create Coco disk image
 $(TARGET): $(DISKFILES)
 	rm -f $(TARGET)
-	imgtool create coco_jvc_rsdos $(TARGET)
-	for f in $(filter $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f` --ftype=basic --ascii=ascii; done
-	for f in $(filter-out $(READMEBAS), $(DISKFILES)); do imgtool put coco_jvc_rsdos $(TARGET) $$f `basename $$f`; done
+	decb dskini $(TARGET)
+	for f in $(filter $(READMEBAS), $(DISKFILES)); do decb copy $$f $(TARGET),`basename $$f` -0 -t; done
+	for f in $(filter-out $(READMEBAS), $(DISKFILES)); do decb copy $$f $(TARGET),`basename $$f` -2 -b; done
 
-.PHONY: all clean test
+.PHONY: all clean test check-scripts format-scripts lint-check-scripts type-check-scripts
 
 .PRECIOUS: $(OBJECTCSRC2ASM) $(LEVELCSRC2ASM)
-

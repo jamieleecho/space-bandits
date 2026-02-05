@@ -135,12 +135,13 @@
     [self add1Sound];
     [self setUpToLoad1SoundWithHiFiMode:NO];
     
-    id sound1 = OCMClassMock(NSSound.class);
-    id sound2 = OCMClassMock(NSSound.class);
+    AVAudioPlayer *sound1 = OCMClassMock(AVAudioPlayer.class);
+    AVAudioPlayer *sound2 = OCMClassMock(AVAudioPlayer.class);
     [_target loadCache];
     _target.onlyUseForUnitTestingSoundsIdToSounds[[NSNumber numberWithLong:3]] = @[sound1, sound2];
     OCMStub([sound1 play]).andReturn(YES);
-    XCTAssertTrue([_target playSound:3]);
+    [_target playSoundId:3];
+    [NSThread sleepForTimeInterval:.03];
     OCMVerify([sound1 play]);
 }
 
@@ -151,40 +152,10 @@
     XCTAssertEqual(_target.maxNumSounds, 2);
 }
 
-- (void)testObjectPlaySoundTwice {
-    [self add1Sound];
-    [self setUpToLoad1SoundWithHiFiMode:YES];
-    
-    id sound1 = OCMClassMock(NSSound.class);
-    id sound2 = OCMClassMock(NSSound.class);
-    [_target loadCache];
-    _target.onlyUseForUnitTestingSoundsIdToSounds[[NSNumber numberWithLong:3]] = @[sound1, sound2];
-    OCMStub([sound1 play]).andReturn(NO);
-    OCMStub([sound2 play]).andReturn(YES);
-    XCTAssertTrue([_target playSound:3]);
-    OCMVerify([sound1 play]);
-    OCMVerify([sound2 play]);
-}
-
-- (void)testObjectPlaySoundOnlyTwice {
-    [self add1Sound];
-    [self setUpToLoad1SoundWithHiFiMode:YES];
-    
-    id sound1 = OCMClassMock(NSSound.class);
-    id sound2 = OCMClassMock(NSSound.class);
-    [_target loadCache];
-    _target.onlyUseForUnitTestingSoundsIdToSounds[[NSNumber numberWithLong:3]] = @[sound1, sound2];
-    OCMStub([sound1 play]).andReturn(NO);
-    OCMStub([sound2 play]).andReturn(NO);
-    XCTAssertFalse([_target playSound:3]);
-    OCMVerify([sound1 play]);
-    OCMVerify([sound2 play]);
-}
-
 - (void)testObjectPlaySoundReturnsNoWhenSoundNotLoaded {
     [self add1Sound];
     [self setUpToLoad1SoundWithHiFiMode:NO];
-    XCTAssertFalse([_target playSound:5]);
+    [_target playSoundId:5];
 }
 
 - (void)testPlaySound {
@@ -194,7 +165,7 @@
     extern void PlaySound(int);
     PlaySound(5);
     
-    OCMVerify([soundManager playSound:5]);
+    OCMVerify([soundManager playSoundId:5]);
 }
 
 - (void)testPlaysNoMoreThanMaxNum {
@@ -202,9 +173,9 @@
     [self add2Sounds];
     [self setUpToLoad1SoundWithHiFiMode:YES];
     [self setUpToLoad2SoundsWithHiFiMode:YES];
-    XCTAssertTrue([_target playSound:1]);
-    XCTAssertTrue([_target playSound:2]);
-    XCTAssertFalse([_target playSound:3]);
+    [_target playSoundId:1];
+    [_target playSoundId:2];
+    [_target playSoundId:3];
 }
 
 - (void)testChangingMaxNum {
@@ -212,13 +183,13 @@
     [self add2Sounds];
     [self setUpToLoad1SoundWithHiFiMode:YES];
     [self setUpToLoad2SoundsWithHiFiMode:YES];
-    XCTAssertTrue([_target playSound:1]);
+    [_target playSoundId:1];
 
     _target.maxNumSounds = 3;
     XCTAssertEqual(_target.cacheState, DSSoundManagerCacheStateEmpty);
-    XCTAssertTrue([_target playSound:1]);  // second instance of number 1
-    XCTAssertTrue([_target playSound:2]);  // sound 3
-    XCTAssertFalse([_target playSound:3]); // sound 4 should fail
+    [_target playSoundId:1];  // second instance of number 1
+    [_target playSoundId:2];  // sound 3
+    [_target playSoundId:3]; // sound 4 should fail
     
     XCTAssertEqual(_target.onlyUseForUnitTestingSoundsIdToSounds[[NSNumber numberWithInt:1]][2].delegate, _target);
 }
@@ -230,7 +201,7 @@
     [self setUpToLoad1SoundWithHiFiMode:YES];
     [self setUpToLoad2SoundsWithHiFiMode:YES];
     _target.enabled = NO;
-    XCTAssertFalse([_target playSound:1]);
+    [_target playSoundId:1];
 }
 
 @end

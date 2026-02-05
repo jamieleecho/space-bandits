@@ -148,7 +148,7 @@ typedef enum FindSpriteDir {
 
 const static size_t DSImageUtilFindSpritePixelsMaxSteps = 40;
 
-static void nonRecursivePaint(DSImageWrapper<DSImageUtilARGB8> &image, CGPoint p, std::vector<CGPoint> &pixCoordColorList);
+static void paint(DSImageWrapper<DSImageUtilARGB8> &image, CGPoint p, std::vector<CGPoint> &pixCoordColorList);
 
 
 /**
@@ -200,7 +200,7 @@ extern "C" CGRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NS
 
     // now we apply a painting algoritm to produce a list of all of the touching non-transparent pixels
     std::vector<CGPoint> pixCoordColorList;
-    nonRecursivePaint(image, CGPointMake(x, y), pixCoordColorList);
+    paint(image, CGPointMake(x, y), pixCoordColorList);
     
     // get lists of all X coordinates and Y coordinates, then calculate width and height of sprite matrix
     std::vector<CGFloat> xCoords(pixCoordColorList.size());
@@ -228,7 +228,7 @@ extern "C" CGRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NS
 *  @param p point to start the flood fill
 *  @param pixCoordColorList list of found points
 */
-static void nonRecursivePaint(DSImageWrapper<DSImageUtilARGB8> &image, CGPoint p, std::vector<CGPoint> &pixCoordColorList) {
+static void paint(DSImageWrapper<DSImageUtilARGB8> &image, CGPoint p, std::vector<CGPoint> &pixCoordColorList) {
 
     std::deque<CGPoint> hitlist;
     hitlist.push_back(p);

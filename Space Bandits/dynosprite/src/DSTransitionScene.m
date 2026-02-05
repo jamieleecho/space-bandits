@@ -23,11 +23,6 @@ const float DefaultFontSize = 12.0f;
 + (void)adjustLabel:(SKLabelNode *)label forPosition:(CGPoint)position {
     // Determine the font scaling factor that should let the label text fit in the given rectangle.
     label.fontSize = DefaultFontSize;
-    NSRect rect = CGRectMake(position.x, position.y, label.text.length * 8, 8);
-    float scalingFactor = rect.size.width / label.frame.size.width;
-
-    // Change the fontSize.
-    label.fontSize *= scalingFactor;
 }
 
 - (NSString *)backgroundImageName {
@@ -46,13 +41,9 @@ const float DefaultFontSize = 12.0f;
 
 - (id)init {
     if (self = [super init]) {
-        _foregroundColor = NSColor.blackColor;
-        _progressBarColor = NSColor.greenColor;
+        _foregroundColor = UIColor.blackColor;
+        _progressBarColor = UIColor.greenColor;
         _labels = [[NSMutableArray alloc] init];
-
-        self.size = CGSizeMake(320, 200);
-        self.anchorPoint = CGPointMake(0, 1);
-        self.scaleMode = SKSceneScaleModeAspectFit;
         
         _backgroundImageName = nil;
         _backgroundImage = [SKSpriteNode spriteNodeWithColor:self.backgroundColor size:self.size];
@@ -65,6 +56,7 @@ const float DefaultFontSize = 12.0f;
         [self addObserver:self forKeyPath:@"foregroundColor" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
         [self addObserver:self forKeyPath:@"soundManager" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     }
+    
     return self;
 }
 
@@ -91,7 +83,7 @@ const float DefaultFontSize = 12.0f;
     background.anchorPoint = CGPointMake(0, 1);
 
     [self addChild:background];
-    [_labelToPoint setObject:[NSValue valueWithPoint:position] forKey:label];
+    [_labelToPoint setObject:[NSValue valueWithCGPoint:position] forKey:label];
     [_labels addObject:label];
     [DSTransitionScene adjustLabel:label forPosition:position];
     return label;
@@ -135,7 +127,7 @@ const float DefaultFontSize = 12.0f;
 - (void)updateDisplayForResolutionChange {
     for (SKLabelNode *label in _labels) {
         label.fontName = _resourceController.fontForDisplay;
-        [DSTransitionScene adjustLabel:label forPosition:[_labelToPoint objectForKey:label].pointValue];
+        [DSTransitionScene adjustLabel:label forPosition:[_labelToPoint objectForKey:label].CGPointValue];
     }
     if (_backgroundImageName != nil) {
         [self setBackgroundImageName:_backgroundImageName];

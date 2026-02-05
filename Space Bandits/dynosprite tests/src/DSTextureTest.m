@@ -20,10 +20,9 @@
 @implementation DSTextureTest
 
 - (void)setUp {
-    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForImageResource:@"forest"];
-    NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
-    CGImageRef imageRef = [image CGImageForProposedRect:NULL context:NULL hints:NULL];
-    _skTexture = [SKTexture textureWithCGImage:imageRef];
+    NSString *imagePath = [[NSBundle bundleForClass:self.class] pathForResource:@"forest" ofType:@"png"];
+    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    _skTexture = [SKTexture textureWithCGImage:image.CGImage];
     _target = [[DSTexture alloc] initWithTexture:_skTexture andPoint:CGPointMake(.2f, .3f)];
 }
 

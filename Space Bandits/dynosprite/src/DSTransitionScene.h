@@ -12,6 +12,7 @@
 #import "DSScene.h"
 #import "DSSceneControllerProtocol.h"
 #import "DSSoundManager.h"
+#import "DSSpriteObjectClassFactory.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,11 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) NSString *backgroundImageName;
 @property (strong, readonly) SKSpriteNode *backgroundImage;
-@property (strong, nonatomic) NSColor *foregroundColor;
-@property (strong, nonatomic) NSColor *progressBarColor;
+@property (strong, nonatomic) UIColor *foregroundColor;
+@property (strong, nonatomic) UIColor *progressBarColor;
 @property (strong, readonly) NSArray<SKLabelNode *> *labels;
 @property (strong, nonatomic) DSResourceController *resourceController;
 @property (strong, nonatomic) DSSoundManager *soundManager;
+@property (strong, nonatomic) DSSpriteObjectClassFactory *spriteObjectClassFactory;
 @property (nonatomic) id<DSSceneControllerProtocol> sceneController;
 
 - (id)init;

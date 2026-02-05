@@ -8,16 +8,20 @@
   },
 
   "Sprites": [{
-    "Name": "Ship1",
-    "Location": [170, 433],
-    "SinglePixelPosition": true
+      "Name": "Ship1",
+      "Location": [170, 433],
+      "SinglePixelPosition": true
   }, {
-    "Name": "Ship2",
-    "Location": [137, 433],
-    "SinglePixelPosition": true
+      "Name": "Ship2",
+      "Location": [137, 433],
+      "SinglePixelPosition": true
   }, {
-    "Name": "Ship3",
-    "Location": [106, 433],
-    "SinglePixelPosition": true
+      "Name": "Ship3",
+      "Location": [106, 433],
+      "SinglePixelPosition": true
+  }, {
+      "Name": "Ship4",
+      "Location": [106, 433],
+      "SinglePixelPosition": true
   }]
 }

@@ -14,7 +14,9 @@
     if (self = [super init]) {
         self.name = @"";
         self.location = DSPointMake(0, 0);
+        self.hasRectangle = NO;
         self.singlePixelPosition = NO;
+        self.saveBackground = YES;
     }
     return self;
 }

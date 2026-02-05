@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSTransitionSceneInfoFileParser : NSObject
 
-+ (NSColor *)colorFromRGBString:(NSString *)color;
++ (UIColor *)colorFromRGBString:(NSString *)color;
 
 - (void)parseFile:(NSString *)path forTransitionInfo:(NSMutableArray <DSTransitionSceneInfo *>*)info;
 

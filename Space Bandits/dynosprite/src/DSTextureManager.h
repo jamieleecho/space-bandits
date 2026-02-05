@@ -17,7 +17,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSTextureManager : NSObject {
+    NSMutableArray<DSSpriteObjectClass *> *_spriteObjectClasses;
     NSMutableDictionary<NSNumber *, NSArray<DSTexture *> *> *_groupIdToTextures;
+    NSMutableDictionary<NSNumber *, NSArray<DSSpriteInfo *> *> *_groupIdToSpriteInfo;
 }
 
 @property (nonatomic) NSBundle *bundle;
@@ -25,7 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)init;
 - (void)addSpriteObjectClass:(DSSpriteObjectClass *)spriteObjectClass;
-- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob andScene:(SKScene *)scene andCamera:(SKCameraNode *)camera;
+- (void)loadCache;
+- (void)configureSprite:(SKSpriteNode *)node forCob:(DynospriteCOB *)cob andScene:(SKScene *)scene andCamera:(SKCameraNode *)camera includeBackgroundSavers:(BOOL)includeBackgroundSavers;
 
 @end
 

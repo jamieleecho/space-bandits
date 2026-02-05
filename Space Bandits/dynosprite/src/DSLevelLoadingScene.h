@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import "DSTransitionScene.h"
 
 NS_ASSUME_NONNULL_BEGIN

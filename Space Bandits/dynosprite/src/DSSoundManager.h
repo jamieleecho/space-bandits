@@ -6,7 +6,8 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
+#import <AVKit/AVKit.h>
 #import "DSResourceController.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,12 +18,13 @@ typedef enum DSSoundManagerCacheState {
     DSSoundManagerCacheStateHiFiCached
 } DSSoundManagerCacheState;
 
-@interface DSSoundManager : NSObject<NSSoundDelegate> {
+@interface DSSoundManager : NSObject<AVAudioPlayerDelegate> {
     NSMutableSet *_playingSounds;
     DSSoundManagerCacheState _cacheState;
     size_t _maxNumSounds;
     NSMutableDictionary<NSNumber *, NSString *> *_soundIdToPath;
-    NSMutableDictionary<NSNumber *, NSArray<NSSound *> *> *_soundIdToSounds;
+    NSMutableDictionary<NSNumber *, NSArray<AVAudioPlayer *> *> *_soundIdToSounds;
+    NSOperationQueue *_soundQueue;
 }
 
 + (DSSoundManager *)sharedInstance;
@@ -31,15 +33,16 @@ typedef enum DSSoundManagerCacheState {
 @property NSBundle *bundle;
 @property BOOL enabled;
 @property (nonatomic, nonnull) IBOutlet DSResourceController *resourceController;
+
 - (DSSoundManagerCacheState) cacheState;
-- (NSMutableDictionary<NSNumber *, NSArray<NSSound *> *> *) onlyUseForUnitTestingSoundsIdToSounds;
+- (NSMutableDictionary<NSNumber *, NSArray<AVAudioPlayer *> *> *) onlyUseForUnitTestingSoundsIdToSounds;
 - (size_t)maxNumSounds;
 - (void)setMaxNumSounds:(size_t)maxNumSounds;
 
 - (id)init;
 - (void)loadCache;
 - (void)addSound:(NSString *)path forId:(size_t)soundId;
-- (BOOL)playSound:(size_t)soundId;
+- (void)playSoundId:(size_t)soundId;
 
 @end
 

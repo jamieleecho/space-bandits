@@ -6,7 +6,7 @@
 //  Copyright © 2019 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import "DSCoCoKeyboardJoystick.h"
 
 @implementation DSCoCoKeyboardJoystick
@@ -29,64 +29,48 @@ const static unsigned char JOYSTICK_AXIS_DEFAULT_POSITION = 31;
     return self;
 }
 
-- (void)handleKeyDown:(NSEvent *)event {
-    NSString *theArrow = [event charactersIgnoringModifiers];
-    for(NSUInteger ii=0; ii != theArrow.length; ii++) {
-        const unichar keyChar = [theArrow characterAtIndex:ii];
-        switch (keyChar) {
-            case NSUpArrowFunctionKey:
-                _yAxisPosition = JOYSTICK_AXIS_MIN_POSITION;
-                _upKeyIsPressed = YES;
-                break;
-            case NSLeftArrowFunctionKey:
-                _xAxisPosition = JOYSTICK_AXIS_MIN_POSITION;
-                _leftKeyIsPressed = YES;
-                break;
-            case NSRightArrowFunctionKey:
-                _xAxisPosition = JOYSTICK_AXIS_MAX_POSITION;
-                _rightKeyIsPressed = YES;
-                break;
-            case NSDownArrowFunctionKey:
-                _yAxisPosition = JOYSTICK_AXIS_MAX_POSITION;
-                _downKeyIsPressed = YES;
-                break;
-            case ' ':
-                _button0Pressed = YES;
-                break;
-            case 'x':
-                _button1Pressed = YES;
-                break;
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    for(UIPress *press in presses) {
+        NSString *keyChar = press.key.charactersIgnoringModifiers;
+        if ([keyChar isEqualToString:UIKeyInputUpArrow]) {
+            _yAxisPosition = JOYSTICK_AXIS_MIN_POSITION;
+            _upKeyIsPressed = YES;
+        } else if ([keyChar isEqualToString:UIKeyInputLeftArrow]) {
+            _xAxisPosition = JOYSTICK_AXIS_MIN_POSITION;
+            _leftKeyIsPressed = YES;
+        } else if ([keyChar isEqualToString:UIKeyInputRightArrow]) {
+            _xAxisPosition = JOYSTICK_AXIS_MAX_POSITION;
+            _rightKeyIsPressed = YES;
+        } else if ([keyChar isEqualToString:UIKeyInputDownArrow]) {
+            _yAxisPosition = JOYSTICK_AXIS_MAX_POSITION;
+            _downKeyIsPressed = YES;
+        } else if ([keyChar isEqualToString:@" "]) {
+            _button0Pressed = YES;
+        } else if ([keyChar isEqualToString:@"x"]) {
+            _button1Pressed = YES;
         }
-    };
+    }
 }
 
-- (void)handleKeyUp:(NSEvent *)event {
-    NSString *theArrow = [event charactersIgnoringModifiers];
-    for(NSUInteger ii=0; ii != theArrow.length; ii++) {
-        const unichar keyChar = [theArrow characterAtIndex:ii];
-        switch (keyChar) {
-            case NSUpArrowFunctionKey:
-                _yAxisPosition = _downKeyIsPressed ? JOYSTICK_AXIS_MAX_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
-                _upKeyIsPressed = NO;
-                break;
-            case NSLeftArrowFunctionKey:
-                _xAxisPosition = _rightKeyIsPressed ? JOYSTICK_AXIS_MAX_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
-                _leftKeyIsPressed = NO;
-                break;
-            case NSRightArrowFunctionKey:
-                _xAxisPosition = _leftKeyIsPressed ? JOYSTICK_AXIS_MIN_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
-                _rightKeyIsPressed = NO;
-                break;
-            case NSDownArrowFunctionKey:
-                _yAxisPosition = _upKeyIsPressed ? JOYSTICK_AXIS_MIN_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
-                _downKeyIsPressed = NO;
-                break;
-            case ' ':
-                _button0Pressed = NO;
-                break;
-            case 'x':
-                _button1Pressed = NO;
-                break;
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    for(UIPress *press in presses) {
+        NSString *keyChar = press.key.charactersIgnoringModifiers;
+        if ([keyChar isEqualToString:UIKeyInputUpArrow]) {
+            _yAxisPosition = _downKeyIsPressed ? JOYSTICK_AXIS_MAX_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
+            _upKeyIsPressed = NO;
+        } else if ([keyChar isEqualToString:UIKeyInputLeftArrow]) {
+            _xAxisPosition = _rightKeyIsPressed ? JOYSTICK_AXIS_MAX_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
+            _leftKeyIsPressed = NO;
+        } else if ([keyChar isEqualToString:UIKeyInputRightArrow]) {
+            _xAxisPosition = _leftKeyIsPressed ? JOYSTICK_AXIS_MIN_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
+            _rightKeyIsPressed = NO;
+        } else if ([keyChar isEqualToString:UIKeyInputDownArrow]) {
+            _yAxisPosition = _upKeyIsPressed ? JOYSTICK_AXIS_MIN_POSITION : JOYSTICK_AXIS_DEFAULT_POSITION;
+            _downKeyIsPressed = NO;
+        } else if ([keyChar isEqualToString:@" "]) {
+            _button0Pressed = NO;
+        } else if ([keyChar isEqualToString:@"x"]) {
+            _button1Pressed = NO;
         }
     }
 }

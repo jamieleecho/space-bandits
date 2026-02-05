@@ -37,4 +37,10 @@
     OCMVerify([_textureManager addSpriteObjectClass:spriteClassObj]);
 }
 
+- (void)testLoadCache {
+    OCMVerify(never(), [_textureManager loadCache]);
+    [_target loadCache];
+    OCMVerify(times(1), [_textureManager loadCache]);
+}
+
 @end

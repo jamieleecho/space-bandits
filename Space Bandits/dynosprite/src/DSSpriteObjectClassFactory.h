@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)init;
 - (void)addSpriteObjectClass:(DSSpriteObjectClass *)objectClass forNumber:(NSNumber *)levelNumber;
+- (void)loadCache;
 
 @end
 

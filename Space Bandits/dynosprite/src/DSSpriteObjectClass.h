@@ -6,7 +6,7 @@
 //  Copyright © 2020 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import "DSSpriteInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) int groupID;
 @property (nonatomic, nonnull) NSString *imagePath;
-@property (nonatomic, nonnull) NSColor *transparentColor;
+@property (nonatomic, nonnull) UIColor *transparentColor;
 @property (nonatomic) int palette;
 @property (nonatomic, nonnull) NSArray<DSSpriteInfo *> *sprites;
 

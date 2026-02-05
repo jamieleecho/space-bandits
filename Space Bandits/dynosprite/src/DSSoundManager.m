@@ -9,7 +9,7 @@
 #import "DSSoundManager.h"
 
 void PlaySound(int soundIndex) {
-    [DSSoundManager.sharedInstance playSound:soundIndex];
+    [DSSoundManager.sharedInstance playSoundId:soundIndex];
 }
 
 static DSSoundManager *_sharedInstance = nil;
@@ -28,7 +28,7 @@ static DSSoundManager *_sharedInstance = nil;
     return _cacheState;
 }
 
-- (NSMutableDictionary<NSNumber *, NSArray<NSSound *> *> *) onlyUseForUnitTestingSoundsIdToSounds {
+- (NSMutableDictionary<NSNumber *, NSArray<AVAudioPlayer *> *> *) onlyUseForUnitTestingSoundsIdToSounds {
     return _soundIdToSounds;
 }
 
@@ -49,6 +49,8 @@ static DSSoundManager *_sharedInstance = nil;
         _cacheState = DSSoundManagerCacheStateEmpty;
         _soundIdToPath = NSMutableDictionary.dictionary;
         _soundIdToSounds = NSMutableDictionary.dictionary;
+        _soundQueue = [[NSOperationQueue alloc] init];
+        _soundQueue.name = @"DSSoundManager Queue";
         self.enabled = YES;
     }
     return self;
@@ -64,7 +66,8 @@ static DSSoundManager *_sharedInstance = nil;
             NSMutableArray *sounds = [NSMutableArray arrayWithCapacity:_maxNumSounds];
             _soundIdToSounds[soundId] = sounds;
             for(size_t ii=0; ii<_maxNumSounds; ii++) {
-                NSSound *sound = [[NSSound alloc] initWithContentsOfFile:path byReference:NO];
+                AVAudioPlayer *sound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:NULL];
+                [sound prepareToPlay];
                 sound.delegate = self;
                 [sounds addObject:sound];
             }
@@ -79,35 +82,43 @@ static DSSoundManager *_sharedInstance = nil;
     [_soundIdToSounds removeAllObjects];
 }
 
-- (void)sound:(NSSound *)sound didFinishPlaying:(BOOL)didFinish {
-    [_playingSounds removeObject:sound];
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)sound successfully:(BOOL)flag {
+    @synchronized (_playingSounds) {
+        [_playingSounds removeObject:sound];
+    }
 }
 
-- (BOOL)playSound:(size_t)soundId {
+- (void)playSoundId:(size_t)soundId {
     if (!self.enabled) {
-        return NO;
+        return;
     }
 
     [self loadCache];
     
-    if (_playingSounds.count >= _maxNumSounds) {
-        return NO;
+    @synchronized(_playingSounds) {
+        if (_playingSounds.count >= _maxNumSounds) {
+            return;
+        }
     }
     
     NSArray *sounds = _soundIdToSounds[[NSNumber numberWithLong:soundId]];
     if (sounds == nil) {
-        return NO;
+        return;
     }
-    for(NSSound *sound in sounds) {
+    for(AVAudioPlayer *sound in sounds) {
         if (sound.isPlaying) {
             continue;
         }
-        if ([sound play]) {
-            [_playingSounds addObject:sound];
-            return YES;
-        }
+        [_soundQueue addOperationWithBlock: ^(){
+            if ([sound play]) {
+                @synchronized (self->_playingSounds) {
+                    [self->_playingSounds addObject:sound];
+                }
+            }
+        }];
+        return;
     }
-    return NO;
+    return;
 }
 
 @end

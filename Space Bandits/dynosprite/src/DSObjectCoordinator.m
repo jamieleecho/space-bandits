@@ -42,6 +42,7 @@
             odt->reactivate = classData.reactivateMethod;
             odt->update = classData.updateMethod;
             odt->draw = classData.drawMethod;
+            odt->classData = (__bridge void *)classData;
             
             // initialize the class
             classData.classInitMethod();
@@ -62,6 +63,9 @@
 
             /* initialize the initialization data structures */
             byte *initData = _initData[ii] = malloc(odt->initSize);
+            DSObjectClassData *classData = (__bridge DSObjectClassData *)(odt->classData);
+            NSCAssert(obj.initialData.count == classData.initSize, ([NSString stringWithFormat:@"Initialization data size (%lu) for object %zu in group %d not equal to amount set for that group (%d).", (unsigned long)obj.initialData.count, ii, obj.groupID, odt->initSize]));
+            
             for(size_t jj=0; jj<obj.initialData.count; jj++) {
                 initData[jj] = (byte)[obj.initialData[jj] intValue];
             }
@@ -75,6 +79,7 @@
             cob->groupIdx = obj.groupID;
             cob->objectIdx = obj.objectID;
             cob->odtPtr = odt;
+            
             cob->statePtr = malloc(odt->dataSize);
             assert(cob->statePtr != NULL);
             memset(cob->statePtr, 0, sizeof(cob->statePtr[0]));

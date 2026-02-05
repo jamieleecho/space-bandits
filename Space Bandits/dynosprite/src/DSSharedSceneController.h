@@ -6,7 +6,7 @@
 //  Copyright © 2019 Jamie Cho. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 #import "DSSceneControllerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN

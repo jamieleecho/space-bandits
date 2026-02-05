@@ -30,7 +30,7 @@
 
 - (void)testInitInitializesWithSharedTransitionController {
     DSSharedSceneController *target = [[DSSharedSceneController alloc] init];
-    XCTAssertEqual(target.sceneController, ((DSAppDelegate *)(NSApplication.sharedApplication.delegate)).sceneController);
+    XCTAssertEqual(target.sceneController, ((DSAppDelegate *)(UIApplication.sharedApplication.delegate)).sceneController);
 }
 
 - (void)testInit {

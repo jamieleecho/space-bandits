@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSSpriteFileParser : NSObject
 
-+ (NSColor *)parseColorFromArray:(NSArray *)colorData;
++ (UIColor *)parseColorFromArray:(NSArray *)colorData;
 + (DSSpriteInfo *)spriteInfoFromDictionary:(NSDictionary *)spriteInfoData;
 
 - (void)parseFile:(NSString *)path forObjectClass:(DSSpriteObjectClass *)objectClass;

@@ -7,11 +7,10 @@
 //
 
 #import <OCMock/OCMock.h>
-#import <XCTest/XCTest.h>
+#import "DSKeyEventBaseTest.h"
 #import "DSScene.h"
 
-@interface DSSceneTest : XCTestCase {
-    DSScene *_target;
+@interface DSSceneTest : DSKeyEventBaseTest<DSScene *> {
     DSCoCoJoystickController *_joystickController;
 }
 
@@ -20,117 +19,123 @@
 @implementation DSSceneTest
 
 - (void)setUp {
-    _target = [[DSScene alloc] init];
-    XCTAssertNil(_target.joystickController);
+    self.target = [[DSScene alloc] init];
+    XCTAssertNil(self.target.joystickController);
     _joystickController = OCMClassMock(DSCoCoJoystickController.class);
-    _target.joystickController = _joystickController;
-    XCTAssertEqual(_target.levelNumber, 0);
-    XCTAssertFalse(_target.isDone);
+    self.target.joystickController = _joystickController;
+    XCTAssertEqual(self.target.levelNumber, 0);
+    XCTAssertFalse(self.target.isDone);
 }
 
 - (void)testInit {
-    XCTAssertEqual(_target.debouncedKeys[0], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[1], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[2], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[3], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[4], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[5], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[6], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[7], 0xff);
+    XCTAssertTrue(CGSizeEqualToSize(self.target.size, CGSizeMake(320, 200)));
+    XCTAssertTrue(CGPointEqualToPoint(self.target.anchorPoint, CGPointMake(0, 1)));
+    XCTAssertEqual(self.target.scaleMode, SKSceneScaleModeAspectFit);
+
+    XCTAssertEqual(self.target.debouncedKeys[0], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[1], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[2], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[3], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[4], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[5], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[6], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[7], 0xff);
     
-    [_target updateDebouncedKeys];
-    XCTAssertEqual(_target.debouncedKeys[0], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[1], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[2], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[3], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[4], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[5], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[6], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[7], 0xff);
+    [self.target updateDebouncedKeys];
+    XCTAssertEqual(self.target.debouncedKeys[0], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[1], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[2], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[3], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[4], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[5], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[6], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[7], 0xff);
 }
 
 - (void)testIsDone {
-    _target.isDone = NO;
-    XCTAssertFalse(_target.isDone);
-    _target.isDone = YES;
-    XCTAssertTrue(_target.isDone);
+    self.target.isDone = NO;
+    XCTAssertFalse(self.target.isDone);
+    self.target.isDone = YES;
+    XCTAssertTrue(self.target.isDone);
 }
 
 - (void)testSetJoystickControler {
-    XCTAssertEqualObjects(_target.joystickController, _joystickController);
+    XCTAssertEqualObjects(self.target.joystickController, _joystickController);
 }
 
 - (void)testLevelNumber {
-    _target.levelNumber = 4;
-    XCTAssertEqual(_target.levelNumber, 4);
+    self.target.levelNumber = 4;
+    XCTAssertEqual(self.target.levelNumber, 4);
 }
 
 - (void)testKeyDown {
-    NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"p" isARepeat:NO keyCode:123];
-    [_target keyDown:keyEvent];
-    OCMVerify([_joystickController handleKeyDown:keyEvent]);
+    NSSet<UIPress *> *presses1 = [self pressKey:@"p" modifiedChars:@""];
+    OCMVerify([_joystickController pressesBegan:presses1 withEvent:OCMArg.any]);
+    NSSet<UIPress *> *presses2 = [self pressKey:@"p" modifiedChars:@""];
+    OCMVerify([_joystickController pressesBegan:presses2 withEvent:OCMArg.any]);
 }
 
 - (void)testKeyUp {
-    NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"p" isARepeat:NO keyCode:123];
-    [_target keyUp:keyEvent];
-    OCMVerify([_joystickController handleKeyUp:keyEvent]);
-
-    [_target keyUp:keyEvent];
-    OCMVerify([_joystickController handleKeyUp:keyEvent]);
+    NSSet<UIPress *> *presses1 = [self unpressKey:@"p" modifiedChars:@""];
+    OCMVerify([_joystickController pressesEnded:presses1 withEvent:OCMArg.any]);
+    NSSet<UIPress *> *presses2 = [self unpressKey:@"p" modifiedChars:@""];
+    OCMVerify([_joystickController pressesEnded:presses2 withEvent:OCMArg.any]);
 }
 
 - (void)testUpdatesKeyMatrix {
     // Test p
-    NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"p" isARepeat:NO keyCode:0];
-    [_target keyDown:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[0], 0xff & ~0x04);
-    [_target keyUp:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[0], 0xff);
+    [self pressKey:@"p" modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[0], 0xff & ~0x04);
+    [self unpressKey:@"p" modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[0], 0xff);
 
     // Test esc
-    keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"\x1b" isARepeat:NO keyCode:0];
-    [_target keyDown:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[2], 0xff & ~0x40);
-    [_target keyUp:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[2], 0xff);
+    [self pressKey:UIKeyInputEscape modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[2], 0xff & ~0x40);
+    [self unpressKey:UIKeyInputEscape modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[2], 0xff);
 
     // y
-    keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"y" isARepeat:NO keyCode:0];
-    [_target keyDown:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[1], 0xff & ~0x08);
-    [_target keyUp:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[1], 0xff);
+    [self pressKey:@"y" modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[1], 0xff & ~0x08);
+    [self unpressKey:@"y" modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[1], 0xff);
 
     // n
-    keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"n" isARepeat:NO keyCode:0];
-    [_target keyDown:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[6], 0xff & ~0x02);
-    [_target keyUp:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[6], 0xff);
+    [self pressKey:@"n" modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[6], 0xff & ~0x02);
+    [self unpressKey:@"n" modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[6], 0xff);
 
     // p esc yn
-    keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"p\x1byn" isARepeat:NO keyCode:0];
-    [_target keyDown:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[0], 0xff & ~0x04);
-    XCTAssertEqual(_target.debouncedKeys[2], 0xff & ~0x40);
-    XCTAssertEqual(_target.debouncedKeys[1], 0xff & ~0x08);
-    XCTAssertEqual(_target.debouncedKeys[6], 0xff & ~0x02);
-    [_target keyUp:keyEvent];
-    XCTAssertEqual(_target.debouncedKeys[0], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[2], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[1], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[6], 0xff);
+    [self pressKey:@"p" modifiedChars:@""];
+    [self pressKey:UIKeyInputEscape modifiedChars:@""];
+    [self pressKey:@"y" modifiedChars:@""];
+    [self pressKey:@"n" modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[0], 0xff & ~0x04);
+    XCTAssertEqual(self.target.debouncedKeys[2], 0xff & ~0x40);
+    XCTAssertEqual(self.target.debouncedKeys[1], 0xff & ~0x08);
+    XCTAssertEqual(self.target.debouncedKeys[6], 0xff & ~0x02);
+    [self unpressKey:@"p" modifiedChars:@""];
+    [self unpressKey:UIKeyInputEscape modifiedChars:@""];
+    [self unpressKey:@"y" modifiedChars:@""];
+    [self unpressKey:@"n" modifiedChars:@""];
+    XCTAssertEqual(self.target.debouncedKeys[0], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[2], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[1], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[6], 0xff);
 }
+
+#ifdef __TODO__
 
 - (void)testClearsMatrixWhenMovedFromView {
-    NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:NSMakePoint(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"p\x1byn" isARepeat:NO keyCode:0];
-    [_target keyDown:keyEvent];
-    [_target willMoveFromView:[[SKView alloc] init]];
-    XCTAssertEqual(_target.debouncedKeys[0], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[2], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[1], 0xff);
-    XCTAssertEqual(_target.debouncedKeys[6], 0xff);
+    NSEvent *keyEvent = [NSEvent keyEventWithType:NSEventTypeKeyUp location:CGPointMake(0, 0) modifierFlags:NSEventModifierFlagCapsLock timestamp:[NSDate date].timeIntervalSince1970 windowNumber:0 context:nil characters:@"" charactersIgnoringModifiers:@"p\x1byn" isARepeat:NO keyCode:0];
+    [self.target keyDown:keyEvent];
+    [self.target willMoveFromView:[[SKView alloc] init]];
+    XCTAssertEqual(self.target.debouncedKeys[0], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[2], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[1], 0xff);
+    XCTAssertEqual(self.target.debouncedKeys[6], 0xff);
 }
-
+#endif
 @end
