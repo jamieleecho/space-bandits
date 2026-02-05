@@ -19,7 +19,7 @@ typedef signed char sbyte;
 typedef short sword;
 typedef int sdword;
 
-#define FALSE 0
-#define TRUE 1
+#define FALSE (0)
+#define TRUE (1)
 
 #endif /* coco_h */

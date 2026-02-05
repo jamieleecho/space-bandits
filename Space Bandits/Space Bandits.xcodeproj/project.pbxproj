@@ -88,7 +88,6 @@
 		52AE470E2DC7EF8A003AED29 /* 01-level1.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = 52E24A322C18068E0098F87D /* 01-level1.png */; };
 		52AE470F2DC7EF8E003AED29 /* 02-level2.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = 52E24A332C18068E0098F87D /* 02-level2.png */; };
 		52AE47112DC7EF97003AED29 /* images.json in Copy images Files */ = {isa = PBXBuildFile; fileRef = 52E24A342C18068E0098F87D /* images.json */; };
-		52AE47192DC7FB38003AED29 /* 13-candle.c in Sources */ = {isa = PBXBuildFile; fileRef = 52AE47182DC7FB38003AED29 /* 13-candle.c */; };
 		52BAAA8A2D0E951E00BEAF90 /* swath.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BAAA892D0E951E00BEAF90 /* swath.png */; };
 		52CC81A52C02172200CC3E38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52CC81A42C02172200CC3E38 /* Assets.xcassets */; };
 		52CC81AA2C02172200CC3E38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC81A92C02172200CC3E38 /* main.m */; };
@@ -183,16 +182,13 @@
 		52CC82B92C02179100CC3E38 /* DSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC822C2C02179100CC3E38 /* DSViewController.m */; };
 		52CC82BA2C02179100CC3E38 /* DSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CC822C2C02179100CC3E38 /* DSViewController.m */; };
 		52E0DB3D2C0C42A700AD5BDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52CC81A12C02172200CC3E38 /* Main.storyboard */; };
-		52E24A0F2C17E7E00098F87D /* 10-fixed_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E249FA2C17E7E00098F87D /* 10-fixed_object.c */; };
 		52E24A102C17E7E00098F87D /* 04-ship.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E249FB2C17E7E00098F87D /* 04-ship.c */; };
 		52E24A112C17E7E00098F87D /* 07-badmissile.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E249FE2C17E7E00098F87D /* 07-badmissile.c */; };
 		52E24A122C17E7E00098F87D /* 03-badguy.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A012C17E7E00098F87D /* 03-badguy.c */; };
 		52E24A132C17E7E00098F87D /* 09-boss1.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A022C17E7E00098F87D /* 09-boss1.c */; };
-		52E24A142C17E7E00098F87D /* 12-shipx.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A032C17E7E00098F87D /* 12-shipx.c */; };
 		52E24A152C17E7E00098F87D /* 06-gameover.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A052C17E7E00098F87D /* 06-gameover.c */; };
 		52E24A172C17E7E00098F87D /* 08-shipcounter.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A072C17E7E00098F87D /* 08-shipcounter.c */; };
 		52E24A182C17E7E00098F87D /* 05-missile.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A092C17E7E00098F87D /* 05-missile.c */; };
-		52E24A192C17E7E00098F87D /* 11-velocity_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A0B2C17E7E00098F87D /* 11-velocity_object.c */; };
 		52E24A1C2C17E7FB0098F87D /* 01-numerals.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A1A2C17E7FB0098F87D /* 01-numerals.mm */; };
 		52E24A252C17E84E0098F87D /* 01-persei.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A212C17E84E0098F87D /* 01-persei.c */; };
 		52E24A262C17E84E0098F87D /* 02-space.c in Sources */ = {isa = PBXBuildFile; fileRef = 52E24A222C17E84E0098F87D /* 02-space.c */; };
@@ -209,9 +205,6 @@
 		52E24A792C1808C40098F87D /* 03-click.wav in Copy sounds Files */ = {isa = PBXBuildFile; fileRef = 52E24A522C1808100098F87D /* 03-click.wav */; };
 		52E24A7B2C1808FE0098F87D /* numerals.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A652C1808210098F87D /* numerals.png */; };
 		52E24A7C2C1809020098F87D /* marbles.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A642C1808210098F87D /* marbles.png */; };
-		52E24A7D2C1809040098F87D /* 12-shipx.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A632C1808210098F87D /* 12-shipx.json */; };
-		52E24A7E2C1809060098F87D /* 11-velocity-object.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A622C1808210098F87D /* 11-velocity-object.json */; };
-		52E24A7F2C18090B0098F87D /* 10-fixed_object.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A612C1808210098F87D /* 10-fixed_object.json */; };
 		52E24A802C18090D0098F87D /* 09-boss1.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A602C1808210098F87D /* 09-boss1.json */; };
 		52E24A812C18090F0098F87D /* 08-shipcounter.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A5F2C1808210098F87D /* 08-shipcounter.json */; };
 		52E24A822C1809110098F87D /* 07-badmissile.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A5E2C1808210098F87D /* 07-badmissile.json */; };
@@ -328,9 +321,6 @@
 				52E24A822C1809110098F87D /* 07-badmissile.json in Copy sprites Files */,
 				52E24A812C18090F0098F87D /* 08-shipcounter.json in Copy sprites Files */,
 				52E24A802C18090D0098F87D /* 09-boss1.json in Copy sprites Files */,
-				52E24A7F2C18090B0098F87D /* 10-fixed_object.json in Copy sprites Files */,
-				52E24A7E2C1809060098F87D /* 11-velocity-object.json in Copy sprites Files */,
-				52E24A7D2C1809040098F87D /* 12-shipx.json in Copy sprites Files */,
 				52E24A7C2C1809020098F87D /* marbles.png in Copy sprites Files */,
 				52E24A7B2C1808FE0098F87D /* numerals.png in Copy sprites Files */,
 			);
@@ -432,8 +422,6 @@
 		5268AC2B2C1A998D00365852 /* dynosprite-github.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "dynosprite-github.xctestplan"; sourceTree = "<group>"; };
 		526C33282C16C77D003FB16E /* Space-Bandits-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Space-Bandits-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5287C4702C0BCFDA00AD2369 /* hires */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hires; sourceTree = "<group>"; };
-		52AE47172DC7FB38003AED29 /* 13-candle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "13-candle.h"; path = "../game/objects/13-candle.h"; sourceTree = SOURCE_ROOT; };
-		52AE47182DC7FB38003AED29 /* 13-candle.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = "13-candle.c"; path = "../game/objects/13-candle.c"; sourceTree = SOURCE_ROOT; };
 		52BAAA892D0E951E00BEAF90 /* swath.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swath.png; sourceTree = "<group>"; };
 		52CC81912C02172200CC3E38 /* Space Bandits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Bandits.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52CC81A22C02172200CC3E38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -536,24 +524,18 @@
 		52CC822C2C02179100CC3E38 /* DSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSViewController.m; sourceTree = "<group>"; };
 		52CC822F2C02179100CC3E38 /* DynospriteDirectPageGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynospriteDirectPageGlobals.h; sourceTree = "<group>"; };
 		52CC82BF2C021A4400CC3E38 /* Space Bandits.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space Bandits.entitlements"; sourceTree = "<group>"; };
-		52E249FA2C17E7E00098F87D /* 10-fixed_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "10-fixed_object.c"; path = "../../../../game/objects/10-fixed_object.c"; sourceTree = "<group>"; };
 		52E249FB2C17E7E00098F87D /* 04-ship.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "04-ship.c"; path = "../../../../game/objects/04-ship.c"; sourceTree = "<group>"; };
 		52E249FC2C17E7E00098F87D /* 04-ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "04-ship.h"; path = "../../../../game/objects/04-ship.h"; sourceTree = "<group>"; };
 		52E249FD2C17E7E00098F87D /* 09-boss1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "09-boss1.h"; path = "../../../../game/objects/09-boss1.h"; sourceTree = "<group>"; };
 		52E249FE2C17E7E00098F87D /* 07-badmissile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "07-badmissile.c"; path = "../../../../game/objects/07-badmissile.c"; sourceTree = "<group>"; };
 		52E249FF2C17E7E00098F87D /* 08-shipcounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "08-shipcounter.h"; path = "../../../../game/objects/08-shipcounter.h"; sourceTree = "<group>"; };
-		52E24A002C17E7E00098F87D /* 11-velocity_object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "11-velocity_object.h"; path = "../../../../game/objects/11-velocity_object.h"; sourceTree = "<group>"; };
 		52E24A012C17E7E00098F87D /* 03-badguy.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "03-badguy.c"; path = "../../../../game/objects/03-badguy.c"; sourceTree = "<group>"; };
 		52E24A022C17E7E00098F87D /* 09-boss1.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "09-boss1.c"; path = "../../../../game/objects/09-boss1.c"; sourceTree = "<group>"; };
-		52E24A032C17E7E00098F87D /* 12-shipx.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "12-shipx.c"; path = "../../../../game/objects/12-shipx.c"; sourceTree = "<group>"; };
 		52E24A042C17E7E00098F87D /* 07-badmissile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "07-badmissile.h"; path = "../../../../game/objects/07-badmissile.h"; sourceTree = "<group>"; };
 		52E24A052C17E7E00098F87D /* 06-gameover.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "06-gameover.c"; path = "../../../../game/objects/06-gameover.c"; sourceTree = "<group>"; };
 		52E24A072C17E7E00098F87D /* 08-shipcounter.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "08-shipcounter.c"; path = "../../../../game/objects/08-shipcounter.c"; sourceTree = "<group>"; };
 		52E24A082C17E7E00098F87D /* 06-gameover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "06-gameover.h"; path = "../../../../game/objects/06-gameover.h"; sourceTree = "<group>"; };
 		52E24A092C17E7E00098F87D /* 05-missile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "05-missile.c"; path = "../../../../game/objects/05-missile.c"; sourceTree = "<group>"; };
-		52E24A0A2C17E7E00098F87D /* 10-fixed_object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "10-fixed_object.h"; path = "../../../../game/objects/10-fixed_object.h"; sourceTree = "<group>"; };
-		52E24A0B2C17E7E00098F87D /* 11-velocity_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "11-velocity_object.c"; path = "../../../../game/objects/11-velocity_object.c"; sourceTree = "<group>"; };
-		52E24A0C2C17E7E00098F87D /* 12-shipx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "12-shipx.h"; path = "../../../../game/objects/12-shipx.h"; sourceTree = "<group>"; };
 		52E24A0D2C17E7E00098F87D /* 03-badguy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "03-badguy.h"; path = "../../../../game/objects/03-badguy.h"; sourceTree = "<group>"; };
 		52E24A0E2C17E7E00098F87D /* 05-missile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "05-missile.h"; path = "../../../../game/objects/05-missile.h"; sourceTree = "<group>"; };
 		52E24A1A2C17E7FB0098F87D /* 01-numerals.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = "01-numerals.mm"; sourceTree = "<group>"; };
@@ -587,9 +569,6 @@
 		52E24A5E2C1808210098F87D /* 07-badmissile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "07-badmissile.json"; sourceTree = "<group>"; };
 		52E24A5F2C1808210098F87D /* 08-shipcounter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "08-shipcounter.json"; sourceTree = "<group>"; };
 		52E24A602C1808210098F87D /* 09-boss1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "09-boss1.json"; sourceTree = "<group>"; };
-		52E24A612C1808210098F87D /* 10-fixed_object.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "10-fixed_object.json"; sourceTree = "<group>"; };
-		52E24A622C1808210098F87D /* 11-velocity-object.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "11-velocity-object.json"; sourceTree = "<group>"; };
-		52E24A632C1808210098F87D /* 12-shipx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "12-shipx.json"; sourceTree = "<group>"; };
 		52E24A642C1808210098F87D /* marbles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marbles.png; sourceTree = "<group>"; };
 		52E24A652C1808210098F87D /* numerals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = numerals.png; sourceTree = "<group>"; };
 		52E24A8B2C18094D0098F87D /* 01-moon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "01-moon.json"; sourceTree = "<group>"; };
@@ -922,14 +901,6 @@
 				52E249FF2C17E7E00098F87D /* 08-shipcounter.h */,
 				52E24A022C17E7E00098F87D /* 09-boss1.c */,
 				52E249FD2C17E7E00098F87D /* 09-boss1.h */,
-				52E249FA2C17E7E00098F87D /* 10-fixed_object.c */,
-				52E24A0A2C17E7E00098F87D /* 10-fixed_object.h */,
-				52E24A0B2C17E7E00098F87D /* 11-velocity_object.c */,
-				52E24A002C17E7E00098F87D /* 11-velocity_object.h */,
-				52E24A032C17E7E00098F87D /* 12-shipx.c */,
-				52E24A0C2C17E7E00098F87D /* 12-shipx.h */,
-				52AE47172DC7FB38003AED29 /* 13-candle.h */,
-				52AE47182DC7FB38003AED29 /* 13-candle.c */,
 				52E24A1D2C17E8210098F87D /* object_info.h */,
 				52E24A272C17E8750098F87D /* universal_object.c */,
 				52E24A282C17E8750098F87D /* universal_object.h */,
@@ -1023,9 +994,6 @@
 				52E24A5E2C1808210098F87D /* 07-badmissile.json */,
 				52E24A5F2C1808210098F87D /* 08-shipcounter.json */,
 				52E24A602C1808210098F87D /* 09-boss1.json */,
-				52E24A612C1808210098F87D /* 10-fixed_object.json */,
-				52E24A622C1808210098F87D /* 11-velocity-object.json */,
-				52E24A632C1808210098F87D /* 12-shipx.json */,
 			);
 			name = sprites;
 			path = ../../../game/sprites;
@@ -1202,9 +1170,7 @@
 				52E24A152C17E7E00098F87D /* 06-gameover.c in Sources */,
 				52E24A182C17E7E00098F87D /* 05-missile.c in Sources */,
 				52CC823E2C02179100CC3E38 /* DSCoCoJoystick.mm in Sources */,
-				52E24A0F2C17E7E00098F87D /* 10-fixed_object.c in Sources */,
 				52CC828C2C02179100CC3E38 /* DSSoundManager.m in Sources */,
-				52AE47192DC7FB38003AED29 /* 13-candle.c in Sources */,
 				52CC825F2C02179100CC3E38 /* DSLevel.m in Sources */,
 				52E24A132C17E7E00098F87D /* 09-boss1.c in Sources */,
 				52CC82502C02179100CC3E38 /* DSDefaultsConfigLoader.m in Sources */,
@@ -1235,7 +1201,6 @@
 				52CC82862C02179100CC3E38 /* DSSceneController.m in Sources */,
 				52E24A122C17E7E00098F87D /* 03-badguy.c in Sources */,
 				52CC828F2C02179100CC3E38 /* DSSpriteFileParser.m in Sources */,
-				52E24A192C17E7E00098F87D /* 11-velocity_object.c in Sources */,
 				52CC82832C02179100CC3E38 /* DSScene.m in Sources */,
 				52EE7C972DE4982700011C11 /* sprite_state_machine.c in Sources */,
 				52CC82B32C02179100CC3E38 /* DSTransitionSceneInfo.m in Sources */,
@@ -1254,7 +1219,6 @@
 				52CC82592C02179100CC3E38 /* DSImageUtil.mm in Sources */,
 				52CC825C2C02179100CC3E38 /* DSInitScene.m in Sources */,
 				52CC827D2C02179100CC3E38 /* DSPoint.c in Sources */,
-				52E24A142C17E7E00098F87D /* 12-shipx.c in Sources */,
 				52CC82A12C02179100CC3E38 /* DSTileFileParser.m in Sources */,
 			);
 		};
