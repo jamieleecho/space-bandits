@@ -106,5 +106,15 @@
     "Location": [303, 307],
     "Rectangle": [-11, -11, 22, 22],
     "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion9",
+    "Location": [230, 331],
+    "Rectangle": [-10, -10, 20, 20],
+    "SinglePixelPosition": false
+  }, {
+    "Name": "Explosion10",
+    "Location": [254, 331],
+    "Rectangle": [-10, -10, 20, 20],
+    "SinglePixelPosition": false
   }]
 }
