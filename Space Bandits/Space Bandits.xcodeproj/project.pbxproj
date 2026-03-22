@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4954788B6C426C1BAC31489C /* 03-chirico.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = E33C67DBDEE5FF43FAB8500F /* 03-chirico.png */; };
 		5218E5002C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */; };
 		522A46FA2C057C5E0094C68A /* UIImage+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 522A46F92C057C5E0094C68A /* UIImage+Misc.m */; };
 		522A46FB2C057C5E0094C68A /* UIImage+Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 522A46F92C057C5E0094C68A /* UIImage+Misc.m */; };
 		523978372C1F5D1300301419 /* pcgfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 523978362C1F5D1300301419 /* pcgfont.ttf */; };
 		523978382C1F5D1300301419 /* pcgfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 523978362C1F5D1300301419 /* pcgfont.ttf */; };
+		525733AE2F704E3600EA8195 /* 10-littleguy.c in Sources */ = {isa = PBXBuildFile; fileRef = 525733AD2F704E3600EA8195 /* 10-littleguy.c */; };
 		5257B6742C055799005BA808 /* OCMock.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525FE4992C05412000E03391 /* OCMock.xcframework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5257B6792C055957005BA808 /* OCMock.xcframework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 525FE4992C05412000E03391 /* OCMock.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		525FE4202C053EB200E03391 /* 01-foo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 525FE4042C053EB200E03391 /* 01-foo.wav */; };
@@ -222,6 +224,12 @@
 		52EE7C972DE4982700011C11 /* sprite_state_machine.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EE7C962DE4982700011C11 /* sprite_state_machine.c */; };
 		52EE7C9B2DE4E87F00011C11 /* 01-level1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
 		52EE7C9C2DE4E90D00011C11 /* 01-level1.png in Copy hires/images Files */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
+		6E2DCD3E71CE9B5CECD6F491 /* 03-chirico.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 10AFC3F723CE9EDB66C2BF31 /* 03-chirico.json */; };
+		980166E7A641F06B9BB7D881 /* 03-chirico.json in Copy levels Files */ = {isa = PBXBuildFile; fileRef = 25876B7ED40C4D1F1DA23D9B /* 03-chirico.json */; };
+		9A638EF4F93D819B8BA1650E /* 10-littleguy.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 99B09234ECD1D2B00123BF2E /* 10-littleguy.json */; };
+		AC5E787487C591D1B15263E2 /* 03-level3.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = B9D5B09187D4EE761CA69163 /* 03-level3.png */; };
+		C0C73783A1A243373C2F53B8 /* 10-littleguy.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 313DBC5509D15A2A58A26496 /* 10-littleguy.png */; };
+		EC38768E713E4B8CD0EDF6E5 /* 03-chirico.c in Sources */ = {isa = PBXBuildFile; fileRef = ED37586DB1F94C41AACE54D9 /* 03-chirico.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -251,6 +259,7 @@
 			files = (
 				52E24A2D2C1805D80098F87D /* 01-persei.json in Copy levels Files */,
 				52E24A2E2C1805DE0098F87D /* 02-space.json in Copy levels Files */,
+				980166E7A641F06B9BB7D881 /* 03-chirico.json in Copy levels Files */,
 			);
 			name = "Copy levels Files";
 		};
@@ -262,6 +271,7 @@
 				52AE470D2DC7EF88003AED29 /* 00-mainmenu.png in Copy images Files */,
 				52AE470E2DC7EF8A003AED29 /* 01-level1.png in Copy images Files */,
 				52AE470F2DC7EF8E003AED29 /* 02-level2.png in Copy images Files */,
+				AC5E787487C591D1B15263E2 /* 03-level3.png in Copy images Files */,
 				52AE47112DC7EF97003AED29 /* images.json in Copy images Files */,
 			);
 			name = "Copy images Files";
@@ -323,6 +333,8 @@
 				52E24A802C18090D0098F87D /* 09-boss1.json in Copy sprites Files */,
 				52E24A7C2C1809020098F87D /* marbles.png in Copy sprites Files */,
 				52E24A7B2C1808FE0098F87D /* numerals.png in Copy sprites Files */,
+				9A638EF4F93D819B8BA1650E /* 10-littleguy.json in Copy sprites Files */,
+				C0C73783A1A243373C2F53B8 /* 10-littleguy.png in Copy sprites Files */,
 			);
 			name = "Copy sprites Files";
 		};
@@ -335,12 +347,17 @@
 				52E24A962C18096C0098F87D /* 01-moon.png in Copy tiles Files */,
 				52E24A952C1809690098F87D /* 02-space.json in Copy tiles Files */,
 				52E24A942C1809670098F87D /* 02-space.png in Copy tiles Files */,
+				6E2DCD3E71CE9B5CECD6F491 /* 03-chirico.json in Copy tiles Files */,
+				4954788B6C426C1BAC31489C /* 03-chirico.png in Copy tiles Files */,
 			);
 			name = "Copy tiles Files";
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		10AFC3F723CE9EDB66C2BF31 /* 03-chirico.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "03-chirico.json"; sourceTree = "<group>"; };
+		25876B7ED40C4D1F1DA23D9B /* 03-chirico.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "03-chirico.json"; path = "../../../../game/levels/03-chirico.json"; sourceTree = "<group>"; };
+		313DBC5509D15A2A58A26496 /* 10-littleguy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10-littleguy.png"; sourceTree = "<group>"; };
 		5218E4FF2C0BB6FC00F9B9A3 /* DSKeyEventBaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSKeyEventBaseTest.m; sourceTree = "<group>"; };
 		5218E5012C0BB72300F9B9A3 /* DSKeyEventBaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSKeyEventBaseTest.h; sourceTree = "<group>"; };
 		5229475E2D0E81A9006870DC /* Space Bandits.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Space Bandits.xctestplan"; sourceTree = "<group>"; };
@@ -348,6 +365,8 @@
 		522A46F92C057C5E0094C68A /* UIImage+Misc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Misc.m"; sourceTree = "<group>"; };
 		523978362C1F5D1300301419 /* pcgfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pcgfont.ttf; sourceTree = "<group>"; };
 		523978402C1F654100301419 /* readme-bas.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "readme-bas.txt"; path = "../../../game/readme-bas.txt"; sourceTree = "<group>"; };
+		525733AC2F704E3600EA8195 /* 10-littleguy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "10-littleguy.h"; path = "../game/objects/10-littleguy.h"; sourceTree = SOURCE_ROOT; };
+		525733AD2F704E3600EA8195 /* 10-littleguy.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "10-littleguy.c"; path = "../game/objects/10-littleguy.c"; sourceTree = SOURCE_ROOT; };
 		525FE4042C053EB200E03391 /* 01-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "01-foo.wav"; sourceTree = "<group>"; };
 		525FE4052C053EB200E03391 /* 01-moon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "01-moon.gif"; sourceTree = "<group>"; };
 		525FE4062C053EB200E03391 /* 01-moon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "01-moon.json"; sourceTree = "<group>"; };
@@ -578,6 +597,10 @@
 		52EE7C952DE4982700011C11 /* sprite_state_machine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = sprite_state_machine.h; path = ../game/objects/sprite_state_machine.h; sourceTree = SOURCE_ROOT; };
 		52EE7C962DE4982700011C11 /* sprite_state_machine.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = sprite_state_machine.c; path = ../game/objects/sprite_state_machine.c; sourceTree = SOURCE_ROOT; };
 		52EE7C982DE4E87F00011C11 /* 01-level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-level1.png"; sourceTree = "<group>"; };
+		99B09234ECD1D2B00123BF2E /* 10-littleguy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "10-littleguy.json"; sourceTree = "<group>"; };
+		B9D5B09187D4EE761CA69163 /* 03-level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-level3.png"; sourceTree = "<group>"; };
+		E33C67DBDEE5FF43FAB8500F /* 03-chirico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-chirico.png"; sourceTree = "<group>"; };
+		ED37586DB1F94C41AACE54D9 /* 03-chirico.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "03-chirico.c"; path = "../../../../game/levels/03-chirico.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -901,6 +924,8 @@
 				52E249FF2C17E7E00098F87D /* 08-shipcounter.h */,
 				52E24A022C17E7E00098F87D /* 09-boss1.c */,
 				52E249FD2C17E7E00098F87D /* 09-boss1.h */,
+				525733AC2F704E3600EA8195 /* 10-littleguy.h */,
+				525733AD2F704E3600EA8195 /* 10-littleguy.c */,
 				52E24A1D2C17E8210098F87D /* object_info.h */,
 				52E24A272C17E8750098F87D /* universal_object.c */,
 				52E24A282C17E8750098F87D /* universal_object.h */,
@@ -915,6 +940,8 @@
 				52E24A202C17E84E0098F87D /* 01-persei.json */,
 				52E24A222C17E84E0098F87D /* 02-space.c */,
 				52E24A1F2C17E84E0098F87D /* 02-space.json */,
+				ED37586DB1F94C41AACE54D9 /* 03-chirico.c */,
+				25876B7ED40C4D1F1DA23D9B /* 03-chirico.json */,
 			);
 			path = levels;
 			sourceTree = "<group>";
@@ -925,6 +952,7 @@
 				52E24A312C18068E0098F87D /* 00-mainmenu.png */,
 				52E24A322C18068E0098F87D /* 01-level1.png */,
 				52E24A332C18068E0098F87D /* 02-level2.png */,
+				B9D5B09187D4EE761CA69163 /* 03-level3.png */,
 				52E24A342C18068E0098F87D /* images.json */,
 			);
 			name = images;
@@ -994,6 +1022,8 @@
 				52E24A5E2C1808210098F87D /* 07-badmissile.json */,
 				52E24A5F2C1808210098F87D /* 08-shipcounter.json */,
 				52E24A602C1808210098F87D /* 09-boss1.json */,
+				99B09234ECD1D2B00123BF2E /* 10-littleguy.json */,
+				313DBC5509D15A2A58A26496 /* 10-littleguy.png */,
 			);
 			name = sprites;
 			path = ../../../game/sprites;
@@ -1006,6 +1036,8 @@
 				52E24A8C2C18094D0098F87D /* 01-moon.png */,
 				52E24A8D2C18094D0098F87D /* 02-space.json */,
 				52E24A8E2C18094D0098F87D /* 02-space.png */,
+				10AFC3F723CE9EDB66C2BF31 /* 03-chirico.json */,
+				E33C67DBDEE5FF43FAB8500F /* 03-chirico.png */,
 			);
 			name = tiles;
 			path = ../../../game/tiles;
@@ -1186,6 +1218,7 @@
 				52CC82B02C02179100CC3E38 /* DSTransitionScene.m in Sources */,
 				52CC82772C02179100CC3E38 /* DSObjectClassDataRegistry.m in Sources */,
 				52CC82B92C02179100CC3E38 /* DSViewController.m in Sources */,
+				525733AE2F704E3600EA8195 /* 10-littleguy.c in Sources */,
 				52CC82982C02179100CC3E38 /* DSSpriteObjectClassFactory.m in Sources */,
 				52CC82712C02179100CC3E38 /* DSObject.m in Sources */,
 				52CC82B62C02179100CC3E38 /* DSTransitionSceneInfoFileParser.m in Sources */,
@@ -1193,6 +1226,7 @@
 				52CC824D2C02179100CC3E38 /* DSDefaultsConfig.m in Sources */,
 				52CC82802C02179100CC3E38 /* DSResourceController.m in Sources */,
 				52E24A262C17E84E0098F87D /* 02-space.c in Sources */,
+				EC38768E713E4B8CD0EDF6E5 /* 03-chirico.c in Sources */,
 				52CC82412C02179100CC3E38 /* DSCocoJoystickController.m in Sources */,
 				52CC82652C02179100CC3E38 /* DSLevelLoadingScene.m in Sources */,
 				52CC82532C02179100CC3E38 /* DSDirectPageGlobals.m in Sources */,
