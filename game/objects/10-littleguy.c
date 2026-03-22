@@ -89,17 +89,14 @@ byte LittleguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         }
     }
 
-    /* Scroll the background when little guy passes screen center */
-    unsigned int screenX = (cob->globalX / 2) - DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
-    if (screenX >= 160) {
-        unsigned int scroll = (cob->globalX / 2) - 160;
-        if (scroll > LITTLEGUY_MAX_SCROLL) {
-            scroll = LITTLEGUY_MAX_SCROLL;
-        }
-        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = scroll;
-    } else {
-        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = 0;
+    /* Scroll the background to keep little guy at screen center */
+    int scroll = (int)(cob->globalX / 2) - 80;
+    if (scroll < 0) {
+        scroll = 0;
+    } else if (scroll > LITTLEGUY_MAX_SCROLL) {
+        scroll = LITTLEGUY_MAX_SCROLL;
     }
+    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = scroll;
 
     return 0;
 }
