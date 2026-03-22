@@ -40,7 +40,7 @@ byte CloudUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
      * So: globalX = 2 * (CLOUD_CENTER_SCREEN_X + scroll - scroll/8)
      *             = 2 * (CLOUD_CENTER_SCREEN_X + scroll * 7 / 8)
      */
-    unsigned int scroll = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndLastX;
+    unsigned int scroll = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
     cob->globalX = 2 * (CLOUD_CENTER_SCREEN_X + scroll - (scroll >> 3));
 
     return 0;

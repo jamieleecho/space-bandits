@@ -9,7 +9,6 @@ extern "C" {
 #define LITTLEGUY_PLAY_AREA_WIDTH 640
 #define LITTLEGUY_MIN_X (LITTLEGUY_HALF_WIDTH + 1)
 #define LITTLEGUY_MAX_X (LITTLEGUY_PLAY_AREA_WIDTH - LITTLEGUY_HALF_WIDTH - 1)
-#define LITTLEGUY_MAX_SCROLL ((LITTLEGUY_PLAY_AREA_WIDTH - SCREEN_WIDTH) / 2)
 #define LITTLEGUY_HALF_HEIGHT 14
 #define LITTLEGUY_GROUND_Y 170
 #define LITTLEGUY_JUMP_VELOCITY -6
@@ -125,15 +124,6 @@ byte LittleguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
             }
         }
     }
-
-    /* Scroll the background to keep little guy at screen center */
-    int scroll = (int)(cob->globalX / 2) - 80;
-    if (scroll < 0) {
-        scroll = 0;
-    } else if (scroll > LITTLEGUY_MAX_SCROLL) {
-        scroll = LITTLEGUY_MAX_SCROLL;
-    }
-    DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = scroll;
 
     return 0;
 }
