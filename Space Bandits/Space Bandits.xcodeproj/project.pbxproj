@@ -238,6 +238,9 @@
 		F1CA7012F80000000000001 /* 12-cat.c in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7002F80000000000002 /* 12-cat.c */; };
 		F1CA7032F80000000000003 /* 12-cat.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1CA7042F80000000000004 /* 12-cat.json */; };
 		F1CA7052F80000000000005 /* 12-cat.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1CA7062F80000000000006 /* 12-cat.png */; };
+		F1CL0D12F80000000000001 /* 13-cloud.c in Sources */ = {isa = PBXBuildFile; fileRef = F1CL0D02F80000000000002 /* 13-cloud.c */; };
+		F1CL0D32F80000000000003 /* 13-cloud.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1CL0D42F80000000000004 /* 13-cloud.json */; };
+		F1CL0D52F80000000000005 /* 13-cloud.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1CL0D62F80000000000006 /* 13-cloud.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,6 +352,8 @@
 				F1B1RD052F80000000000005 /* 11-bird.png in Copy sprites Files */,
 				F1CA7032F80000000000003 /* 12-cat.json in Copy sprites Files */,
 				F1CA7052F80000000000005 /* 12-cat.png in Copy sprites Files */,
+				F1CL0D32F80000000000003 /* 13-cloud.json in Copy sprites Files */,
+				F1CL0D52F80000000000005 /* 13-cloud.png in Copy sprites Files */,
 			);
 			name = "Copy sprites Files";
 		};
@@ -389,6 +394,10 @@
 		F1CA7002F80000000000002 /* 12-cat.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "12-cat.c"; path = "../game/objects/12-cat.c"; sourceTree = SOURCE_ROOT; };
 		F1CA7042F80000000000004 /* 12-cat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "12-cat.json"; sourceTree = "<group>"; };
 		F1CA7062F80000000000006 /* 12-cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "12-cat.png"; sourceTree = "<group>"; };
+		F1CL0D72F80000000000007 /* 13-cloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "13-cloud.h"; path = "../game/objects/13-cloud.h"; sourceTree = SOURCE_ROOT; };
+		F1CL0D02F80000000000002 /* 13-cloud.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "13-cloud.c"; path = "../game/objects/13-cloud.c"; sourceTree = SOURCE_ROOT; };
+		F1CL0D42F80000000000004 /* 13-cloud.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "13-cloud.json"; sourceTree = "<group>"; };
+		F1CL0D62F80000000000006 /* 13-cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13-cloud.png"; sourceTree = "<group>"; };
 		525FE4042C053EB200E03391 /* 01-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "01-foo.wav"; sourceTree = "<group>"; };
 		525FE4052C053EB200E03391 /* 01-moon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "01-moon.gif"; sourceTree = "<group>"; };
 		525FE4062C053EB200E03391 /* 01-moon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "01-moon.json"; sourceTree = "<group>"; };
@@ -954,6 +963,8 @@
 				F1B1RD002F80000000000002 /* 11-bird.c */,
 				F1CA7072F80000000000007 /* 12-cat.h */,
 				F1CA7002F80000000000002 /* 12-cat.c */,
+				F1CL0D72F80000000000007 /* 13-cloud.h */,
+				F1CL0D02F80000000000002 /* 13-cloud.c */,
 				52E24A1D2C17E8210098F87D /* object_info.h */,
 				52E24A272C17E8750098F87D /* universal_object.c */,
 				52E24A282C17E8750098F87D /* universal_object.h */,
@@ -1058,6 +1069,8 @@
 				F1B1RD062F80000000000006 /* 11-bird.png */,
 				F1CA7042F80000000000004 /* 12-cat.json */,
 				F1CA7062F80000000000006 /* 12-cat.png */,
+				F1CL0D42F80000000000004 /* 13-cloud.json */,
+				F1CL0D62F80000000000006 /* 13-cloud.png */,
 			);
 			name = sprites;
 			path = ../../../game/sprites;
@@ -1255,6 +1268,7 @@
 				525733AE2F704E3600EA8195 /* 10-littleguy.c in Sources */,
 				F1B1RD012F80000000000001 /* 11-bird.c in Sources */,
 				F1CA7012F80000000000001 /* 12-cat.c in Sources */,
+				F1CL0D12F80000000000001 /* 13-cloud.c in Sources */,
 				52CC82982C02179100CC3E38 /* DSSpriteObjectClassFactory.m in Sources */,
 				52CC82712C02179100CC3E38 /* DSObject.m in Sources */,
 				52CC82B62C02179100CC3E38 /* DSTransitionSceneInfoFileParser.m in Sources */,
