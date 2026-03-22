@@ -19,6 +19,11 @@
       "BackgroundColor" : "005555",
       "ForegroundColor" : "ffaa00",
       "ProgressColor"   : "ffaa00"
+    },
+    {
+      "BackgroundColor" : "005555",
+      "ForegroundColor" : "ffff55",
+      "ProgressColor"   : "ffff55"
     }
   ]
 }

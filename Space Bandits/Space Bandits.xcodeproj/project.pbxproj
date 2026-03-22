@@ -230,6 +230,7 @@
 		980166E7A641F06B9BB7D881 /* 03-chirico.json in Copy levels Files */ = {isa = PBXBuildFile; fileRef = 25876B7ED40C4D1F1DA23D9B /* 03-chirico.json */; };
 		9A638EF4F93D819B8BA1650E /* 10-littleguy.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 99B09234ECD1D2B00123BF2E /* 10-littleguy.json */; };
 		AC5E787487C591D1B15263E2 /* 03-level3.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = B9D5B09187D4EE761CA69163 /* 03-level3.png */; };
+		AC5E787487C591D1B15263E3 /* 04-level4.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = B9D5B09187D4EE761CA69164 /* 04-level4.png */; };
 		C0C73783A1A243373C2F53B8 /* 10-littleguy.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 313DBC5509D15A2A58A26496 /* 10-littleguy.png */; };
 		EC38768E713E4B8CD0EDF6E5 /* 03-chirico.c in Sources */ = {isa = PBXBuildFile; fileRef = ED37586DB1F94C41AACE54D9 /* 03-chirico.c */; };
 		F1B1RD012F80000000000001 /* 11-bird.c in Sources */ = {isa = PBXBuildFile; fileRef = F1B1RD002F80000000000002 /* 11-bird.c */; };
@@ -241,6 +242,16 @@
 		F1CL0D12F80000000000001 /* 13-cloud.c in Sources */ = {isa = PBXBuildFile; fileRef = F1CL0D02F80000000000002 /* 13-cloud.c */; };
 		F1CL0D32F80000000000003 /* 13-cloud.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1CL0D42F80000000000004 /* 13-cloud.json */; };
 		F1CL0D52F80000000000005 /* 13-cloud.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1CL0D62F80000000000006 /* 13-cloud.png */; };
+		F1JPN012F80000000000001 /* 04-japan.c in Sources */ = {isa = PBXBuildFile; fileRef = F1JPN002F80000000000002 /* 04-japan.c */; };
+		F1JPN032F80000000000003 /* 04-japan.json in Copy levels Files */ = {isa = PBXBuildFile; fileRef = F1JPN042F80000000000004 /* 04-japan.json */; };
+		F1JPN052F80000000000005 /* 04-japan.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = F1JPN062F80000000000006 /* 04-japan.json */; };
+		F1JPN072F80000000000007 /* 04-japan.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = F1JPN082F80000000000008 /* 04-japan.png */; };
+		F1M00N12F80000000000001 /* 15-moon.c in Sources */ = {isa = PBXBuildFile; fileRef = F1M00N02F80000000000002 /* 15-moon.c */; };
+		F1M00N32F80000000000003 /* 15-moon.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1M00N42F80000000000004 /* 15-moon.json */; };
+		F1M00N52F80000000000005 /* 15-moon.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1M00N62F80000000000006 /* 15-moon.png */; };
+		F1NINJA12F80000000000001 /* 14-ninja.c in Sources */ = {isa = PBXBuildFile; fileRef = F1NINJA02F80000000000002 /* 14-ninja.c */; };
+		F1NINJA32F80000000000003 /* 14-ninja.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1NINJA42F80000000000004 /* 14-ninja.json */; };
+		F1NINJA52F80000000000005 /* 14-ninja.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1NINJA62F80000000000006 /* 14-ninja.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,6 +282,7 @@
 				52E24A2D2C1805D80098F87D /* 01-persei.json in Copy levels Files */,
 				52E24A2E2C1805DE0098F87D /* 02-space.json in Copy levels Files */,
 				980166E7A641F06B9BB7D881 /* 03-chirico.json in Copy levels Files */,
+				F1JPN032F80000000000003 /* 04-japan.json in Copy levels Files */,
 			);
 			name = "Copy levels Files";
 		};
@@ -283,6 +295,7 @@
 				52AE470E2DC7EF8A003AED29 /* 01-level1.png in Copy images Files */,
 				52AE470F2DC7EF8E003AED29 /* 02-level2.png in Copy images Files */,
 				AC5E787487C591D1B15263E2 /* 03-level3.png in Copy images Files */,
+				AC5E787487C591D1B15263E3 /* 04-level4.png in Copy images Files */,
 				52AE47112DC7EF97003AED29 /* images.json in Copy images Files */,
 			);
 			name = "Copy images Files";
@@ -354,6 +367,10 @@
 				F1CA7052F80000000000005 /* 12-cat.png in Copy sprites Files */,
 				F1CL0D32F80000000000003 /* 13-cloud.json in Copy sprites Files */,
 				F1CL0D52F80000000000005 /* 13-cloud.png in Copy sprites Files */,
+				F1NINJA32F80000000000003 /* 14-ninja.json in Copy sprites Files */,
+				F1NINJA52F80000000000005 /* 14-ninja.png in Copy sprites Files */,
+				F1M00N32F80000000000003 /* 15-moon.json in Copy sprites Files */,
+				F1M00N52F80000000000005 /* 15-moon.png in Copy sprites Files */,
 			);
 			name = "Copy sprites Files";
 		};
@@ -368,6 +385,8 @@
 				52E24A942C1809670098F87D /* 02-space.png in Copy tiles Files */,
 				6E2DCD3E71CE9B5CECD6F491 /* 03-chirico.json in Copy tiles Files */,
 				4954788B6C426C1BAC31489C /* 03-chirico.png in Copy tiles Files */,
+				F1JPN052F80000000000005 /* 04-japan.json in Copy tiles Files */,
+				F1JPN072F80000000000007 /* 04-japan.png in Copy tiles Files */,
 			);
 			name = "Copy tiles Files";
 		};
@@ -632,8 +651,21 @@
 		52EE7C982DE4E87F00011C11 /* 01-level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-level1.png"; sourceTree = "<group>"; };
 		99B09234ECD1D2B00123BF2E /* 10-littleguy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "10-littleguy.json"; sourceTree = "<group>"; };
 		B9D5B09187D4EE761CA69163 /* 03-level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-level3.png"; sourceTree = "<group>"; };
+		B9D5B09187D4EE761CA69164 /* 04-level4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04-level4.png"; sourceTree = "<group>"; };
 		E33C67DBDEE5FF43FAB8500F /* 03-chirico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-chirico.png"; sourceTree = "<group>"; };
 		ED37586DB1F94C41AACE54D9 /* 03-chirico.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "03-chirico.c"; path = "../../../../game/levels/03-chirico.c"; sourceTree = "<group>"; };
+		F1JPN002F80000000000002 /* 04-japan.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "04-japan.c"; path = "../../../../game/levels/04-japan.c"; sourceTree = "<group>"; };
+		F1JPN042F80000000000004 /* 04-japan.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "04-japan.json"; path = "../../../../game/levels/04-japan.json"; sourceTree = "<group>"; };
+		F1JPN062F80000000000006 /* 04-japan.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "04-japan.json"; sourceTree = "<group>"; };
+		F1JPN082F80000000000008 /* 04-japan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04-japan.png"; sourceTree = "<group>"; };
+		F1M00N02F80000000000002 /* 15-moon.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "15-moon.c"; path = "../game/objects/15-moon.c"; sourceTree = SOURCE_ROOT; };
+		F1M00N42F80000000000004 /* 15-moon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "15-moon.json"; sourceTree = "<group>"; };
+		F1M00N62F80000000000006 /* 15-moon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "15-moon.png"; sourceTree = "<group>"; };
+		F1M00N72F80000000000007 /* 15-moon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "15-moon.h"; path = "../game/objects/15-moon.h"; sourceTree = SOURCE_ROOT; };
+		F1NINJA02F80000000000002 /* 14-ninja.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "14-ninja.c"; path = "../game/objects/14-ninja.c"; sourceTree = SOURCE_ROOT; };
+		F1NINJA42F80000000000004 /* 14-ninja.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "14-ninja.json"; sourceTree = "<group>"; };
+		F1NINJA62F80000000000006 /* 14-ninja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "14-ninja.png"; sourceTree = "<group>"; };
+		F1NINJA72F80000000000007 /* 14-ninja.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "14-ninja.h"; path = "../game/objects/14-ninja.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -965,6 +997,10 @@
 				F1CA7002F80000000000002 /* 12-cat.c */,
 				F1CL0D72F80000000000007 /* 13-cloud.h */,
 				F1CL0D02F80000000000002 /* 13-cloud.c */,
+				F1NINJA72F80000000000007 /* 14-ninja.h */,
+				F1NINJA02F80000000000002 /* 14-ninja.c */,
+				F1M00N72F80000000000007 /* 15-moon.h */,
+				F1M00N02F80000000000002 /* 15-moon.c */,
 				52E24A1D2C17E8210098F87D /* object_info.h */,
 				52E24A272C17E8750098F87D /* universal_object.c */,
 				52E24A282C17E8750098F87D /* universal_object.h */,
@@ -981,6 +1017,8 @@
 				52E24A1F2C17E84E0098F87D /* 02-space.json */,
 				ED37586DB1F94C41AACE54D9 /* 03-chirico.c */,
 				25876B7ED40C4D1F1DA23D9B /* 03-chirico.json */,
+				F1JPN002F80000000000002 /* 04-japan.c */,
+				F1JPN042F80000000000004 /* 04-japan.json */,
 			);
 			path = levels;
 			sourceTree = "<group>";
@@ -992,6 +1030,7 @@
 				52E24A322C18068E0098F87D /* 01-level1.png */,
 				52E24A332C18068E0098F87D /* 02-level2.png */,
 				B9D5B09187D4EE761CA69163 /* 03-level3.png */,
+				B9D5B09187D4EE761CA69164 /* 04-level4.png */,
 				52E24A342C18068E0098F87D /* images.json */,
 			);
 			name = images;
@@ -1071,6 +1110,10 @@
 				F1CA7062F80000000000006 /* 12-cat.png */,
 				F1CL0D42F80000000000004 /* 13-cloud.json */,
 				F1CL0D62F80000000000006 /* 13-cloud.png */,
+				F1NINJA42F80000000000004 /* 14-ninja.json */,
+				F1NINJA62F80000000000006 /* 14-ninja.png */,
+				F1M00N42F80000000000004 /* 15-moon.json */,
+				F1M00N62F80000000000006 /* 15-moon.png */,
 			);
 			name = sprites;
 			path = ../../../game/sprites;
@@ -1085,6 +1128,8 @@
 				52E24A8E2C18094D0098F87D /* 02-space.png */,
 				10AFC3F723CE9EDB66C2BF31 /* 03-chirico.json */,
 				E33C67DBDEE5FF43FAB8500F /* 03-chirico.png */,
+				F1JPN062F80000000000006 /* 04-japan.json */,
+				F1JPN082F80000000000008 /* 04-japan.png */,
 			);
 			name = tiles;
 			path = ../../../game/tiles;
@@ -1269,6 +1314,9 @@
 				F1B1RD012F80000000000001 /* 11-bird.c in Sources */,
 				F1CA7012F80000000000001 /* 12-cat.c in Sources */,
 				F1CL0D12F80000000000001 /* 13-cloud.c in Sources */,
+				F1NINJA12F80000000000001 /* 14-ninja.c in Sources */,
+				F1M00N12F80000000000001 /* 15-moon.c in Sources */,
+				F1JPN012F80000000000001 /* 04-japan.c in Sources */,
 				52CC82982C02179100CC3E38 /* DSSpriteObjectClassFactory.m in Sources */,
 				52CC82712C02179100CC3E38 /* DSObject.m in Sources */,
 				52CC82B62C02179100CC3E38 /* DSTransitionSceneInfoFileParser.m in Sources */,

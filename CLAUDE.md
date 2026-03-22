@@ -174,9 +174,12 @@ typedef struct GameGlobals {
 - Max value: `(play_area_width - 320) / 2`.
 
 ### Screen Coordinate Calculation
-- Screen X (in half-pixel units) = `globalX / 2 - Gfx_BkgrndNewX`
-- The screen is 160 units wide (320 pixels) in these units.
-- To check if an object is on-screen, compare its screen X against `[0, SCREEN_WIDTH]` accounting for the object's half-width.
+- **Horizontal:** Screen X (in half-pixel units) = `globalX / 2 - Gfx_BkgrndNewX`. The screen is 160 units wide (320 pixels). Each increment of `Gfx_BkgrndNewX` = 2 pixels.
+- **Vertical:** Screen Y = `globalY - Gfx_BkgrndNewY`. No multiplication — `Gfx_BkgrndNewY` is in pixels directly. Value of 0 = top of play area. Max = `play_area_height - 200`.
+- To check if an object is on-screen, compare its screen X/Y against `[0, SCREEN_WIDTH]`/`[0, SCREEN_HEIGHT]` accounting for the object's half-width/half-height.
+
+### Scroll Speed Limitation
+The CoCo 3 can scroll at most **2 units of `Gfx_BkgrndNewX` (4 pixels) horizontally** or **4 pixels of `Gfx_BkgrndNewY` vertically** per frame. Rather than snapping the camera to the target position, `CalculateBkgrndNewXY` should clamp the per-frame scroll delta to these maximums, creating a smooth "catch up" effect when the player moves fast or jumps.
 
 ### Parallax
 - For parallax effects (e.g., clouds), objects can compute their `globalX` based on `Gfx_BkgrndNewX` with a reduced ratio (e.g., move 1 pixel per 8 scroll increments).
@@ -195,12 +198,12 @@ Call `PlaySound(SOUND_ID)` from any object's C code. On CoCo 3 this invokes `Sou
 
 ## Object Visibility and Off-Screen Hiding
 
-For scrolling levels, objects that move off-screen should stop being drawn but continue updating their state. Use the `active` field on the COB:
+For scrolling levels, objects must not be drawn if **any part** of the sprite would be clipped **vertically** by the top or bottom screen edges. Horizontal clipping is handled by the engine. Use the `active` field on the COB:
 
 ```c
 /* In the object's Update function, after all state updates: */
-int screenX = (int)(cob->globalX / 2) - (int)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
-if (screenX + HALF_WIDTH < 0 || screenX - HALF_WIDTH > SCREEN_WIDTH) {
+int screenY = (int)cob->globalY - (int)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
+if (screenY - HALF_HEIGHT < 0 || screenY + HALF_HEIGHT > SCREEN_HEIGHT) {
     cob->active = OBJECT_UPDATE_ACTIVE;  /* update only, don't draw */
 } else {
     cob->active = OBJECT_ACTIVE;         /* update and draw */
@@ -208,6 +211,8 @@ if (screenX + HALF_WIDTH < 0 || screenX - HALF_WIDTH > SCREEN_WIDTH) {
 ```
 
 Active flag values: `OBJECT_INACTIVE` (0), `OBJECT_UPDATE_ACTIVE` (1), `OBJECT_DRAW_ACTIVE` (2), `OBJECT_ACTIVE` (3).
+
+**Important:** The `Active` value in the level JSON must match the object's initial visibility. If an object starts off-screen (based on `BkgrndStartX`/`BkgrndStartY`), set its `Active` to `1` (`OBJECT_UPDATE_ACTIVE`) in the JSON, not `3`. The object's Update function will set it to `OBJECT_ACTIVE` once it scrolls into view.
 
 ## Collision Detection
 
@@ -251,9 +256,19 @@ for (; obj < endObj; obj++) {
 ### Adding Game Content
 - **New object:** Create `game/objects/XX-name/` with JSON descriptor + C or ASM source. Follow existing patterns.
 - **New sprite:** Add PNG to `game/sprites/`, create JSON descriptor. The build pipeline compiles sprites to ASM automatically.
-- **New level:** Create `game/levels/XX-name/` with JSON config, tilemap image, and level code (C or ASM).
+- **New level:** Create `game/levels/XX-name.json` (config) + `XX-name.c` (level code with Init and CalculateBkgrndNewXY). Also requires:
+  - A level image `game/images/XX-levelN.png` (132x96 indexed PNG, preview/splash for the level)
+  - A corresponding entry in `game/images/images.json` (one entry per level, with BackgroundColor, ForegroundColor, ProgressColor for the loading screen)
+  - Set `FirstLevel` in `game/defaults-config.json` to change the default level
 - **New sound:** Add WAV to `game/sounds/`. ffmpeg resamples automatically during build.
-- **New tileset:** Add PNG + JSON to `game/tiles/`.
+- **New tileset:** Add PNG + JSON to `game/tiles/`. The background is tiled using 16x16 pixel tiles extracted from the tileset image. **Maximum 127 unique tiles** per tileset. The tileset JSON format is:
+  ```json
+  {
+    "Image": "XX-name.png",
+    "TileSetStart": [0, 0],
+    "TileSetSize": [width, height]
+  }
+  ```
 - See `doc/DynoSpriteUsage.txt` for detailed content creation guides.
 
 ### Adding Files to the Xcode Project (pbxproj)

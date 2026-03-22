@@ -1,0 +1,34 @@
+{
+  "Main": {
+    "Group": 14,
+    "Image": "14-ninja.png",
+    "Transparent": [255, 0, 255],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "NinjaLeftWalkA",
+    "Location": [16, 18],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "NinjaLeftWalkB",
+    "Location": [48, 18],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "NinjaCenter",
+    "Location": [80, 18],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "NinjaRightWalkA",
+    "Location": [112, 18],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "NinjaRightWalkB",
+    "Location": [144, 18],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "NinjaJump",
+    "Location": [176, 18],
+    "SinglePixelPosition": true
+  }]
+}

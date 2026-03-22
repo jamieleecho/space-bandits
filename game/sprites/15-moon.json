@@ -1,0 +1,14 @@
+{
+  "Main": {
+    "Group": 15,
+    "Image": "15-moon.png",
+    "Transparent": [255, 0, 255],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "Moon",
+    "Location": [13, 13],
+    "SinglePixelPosition": true
+  }]
+}

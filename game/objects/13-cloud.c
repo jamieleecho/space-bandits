@@ -43,6 +43,14 @@ byte CloudUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     unsigned int scroll = DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
     cob->globalX = 2 * (CLOUD_CENTER_SCREEN_X + scroll - (scroll >> 3));
 
+    /* Hide cloud when vertically clipped */
+    int screenY = (int)cob->globalY - (int)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
+    if (screenY - CLOUD_HALF_WIDTH < 0 || screenY + CLOUD_HALF_WIDTH > SCREEN_HEIGHT) {
+        cob->active = OBJECT_UPDATE_ACTIVE;
+    } else {
+        cob->active = OBJECT_ACTIVE;
+    }
+
     return 0;
 }
 

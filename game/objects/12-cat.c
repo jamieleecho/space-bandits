@@ -217,9 +217,9 @@ byte CatUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         cob->globalX = CAT_MAX_X;
     }
 
-    /* Hide cat when scrolled off screen */
-    int screenX = (int)(cob->globalX / 2) - (int)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
-    if (screenX + CAT_HALF_WIDTH < 0 || screenX - CAT_HALF_WIDTH > SCREEN_WIDTH) {
+    /* Hide cat when vertically clipped */
+    int screenY = (int)cob->globalY - (int)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewY;
+    if (screenY - CAT_HALF_HEIGHT < 0 || screenY + CAT_HALF_HEIGHT > SCREEN_HEIGHT) {
         cob->active = OBJECT_UPDATE_ACTIVE;
     } else {
         cob->active = OBJECT_ACTIVE;

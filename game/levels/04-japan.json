@@ -1,0 +1,46 @@
+{
+  "Level": {
+    "Name": "Moonlit Edo",
+    "Description": "A moonlit path through medieval Japan",
+    "ObjectGroups": [1, 14, 15],
+    "MaxObjectTableSize": 5,
+    "Tileset": 4,
+    "TilemapImage": "../tiles/04-japan.png",
+    "TilemapStart": [0, 0],
+    "TilemapSize": [1280, 400],
+    "BkgrndStartX": 0,
+    "BkgrndStartY": 50
+  },
+
+  "Objects": [
+    {
+      "_comment": "***** Ninja",
+      "GroupID": 14,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 160,
+      "globalY": 150,
+      "InitData": []
+    },
+
+    {
+      "_comment": "***** Moon",
+      "GroupID": 15,
+      "ObjectID": 0,
+      "Active": 1,
+      "globalX": 240,
+      "globalY": 130,
+      "InitData": []
+    },
+
+    {
+      "_comment": "***** Score",
+      "GroupID": 1,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 68,
+      "globalY": 0,
+      "InitData": []
+    }
+  ]
+}
