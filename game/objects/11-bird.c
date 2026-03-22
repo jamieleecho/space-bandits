@@ -82,6 +82,14 @@ byte BirdUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         statePtr->spriteIdx = BIRD_SPRITE_WINGS_DOWN;
     }
 
+    /* Hide bird when scrolled off screen */
+    int screenX = (int)(cob->globalX / 2) - (int)DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
+    if (screenX + BIRD_HALF_WIDTH < 0 || screenX - BIRD_HALF_WIDTH > SCREEN_WIDTH) {
+        cob->active = OBJECT_UPDATE_ACTIVE;
+    } else {
+        cob->active = OBJECT_ACTIVE;
+    }
+
     return 0;
 }
 
