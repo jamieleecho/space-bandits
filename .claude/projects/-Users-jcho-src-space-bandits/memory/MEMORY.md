@@ -1,0 +1,3 @@
+- [user_profile.md](user_profile.md) - Game developer working on Space Bandits for CoCo 3
+- [feedback_xcode_project.md](feedback_xcode_project.md) - Correct conventions for adding game files to the Xcode pbxproj (sourceTree, file types, paths)
+- [feedback_project_structure.md](feedback_project_structure.md) - Checklist and conventions for adding levels, objects, sprites, tilesets (numbering, flat layout, palette constraints)
