@@ -1,0 +1,22 @@
+{
+  "Main": {
+    "Group": 10,
+    "Image": "10-littleguy.png",
+    "Transparent": [255, 0, 255],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "GuyLeft",
+    "Location": [5, 5],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "GuyCenter",
+    "Location": [25, 5],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "GuyRight",
+    "Location": [45, 5],
+    "SinglePixelPosition": true
+  }]
+}

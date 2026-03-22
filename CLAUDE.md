@@ -140,6 +140,13 @@ typedef struct GameGlobals {
 - **New tileset:** Add PNG + JSON to `game/tiles/`.
 - See `doc/DynoSpriteUsage.txt` for detailed content creation guides.
 
+### Adding Files to the Xcode Project (pbxproj)
+When adding new game source/resource files, the Xcode project file (`Space Bandits/Space Bandits.xcodeproj/project.pbxproj`) must be updated. Key conventions:
+- **Source files (.c, .h):** Use `sourceTree = SOURCE_ROOT` with paths like `../game/objects/filename.c`. Game `.c` files must use `explicitFileType = sourcecode.cpp.objcpp` (Objective-C++) because they contain `#ifdef __cplusplus` blocks. Headers use `lastKnownFileType = sourcecode.c.h`.
+- **Resource files (.json, .png):** The group paths are already set (e.g., `../../../game/sprites`), so children just use the filename with `sourceTree = "<group>"`.
+- **Build phases:** Source files go in `PBXSourcesBuildPhase`. Resources go in the appropriate `PBXCopyFilesBuildPhase` (Copy levels/sprites/tiles/images/sounds Files).
+- Always validate after editing: `plutil -lint "Space Bandits/Space Bandits.xcodeproj/project.pbxproj"`
+
 ### Code Style
 - Engine code: 6809/6309 assembly (lwasm syntax)
 - Game object/level code: CMOC C (subset of C targeting 6809) or assembly
