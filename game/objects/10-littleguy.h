@@ -24,7 +24,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Size of LittleGuyObjectState in bytes */
-#define DynospriteObject_DataSize 1
+#define DynospriteObject_DataSize 4
 
 /** Number of initialization bytes */
 #define DynospriteObject_InitSize 0
@@ -47,6 +47,9 @@
 /** State of Little Guy Object */
 typedef struct LittleGuyObjectState {
     byte spriteIdx;
+    signed char jumpVelocity;
+    byte isJumping;
+    byte lastButtonState;
 } LittleGuyObjectState;
 
 #endif /* _10_littleguy_h */

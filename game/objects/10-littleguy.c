@@ -7,6 +7,9 @@ extern "C" {
 
 #define LITTLEGUY_MIN_X (PLAYFIELD_CENTER_WIDTH_OFFSET + LITTLEGUY_HALF_WIDTH + 1)
 #define LITTLEGUY_MAX_X (SCREEN_WIDTH + PLAYFIELD_CENTER_WIDTH_OFFSET - LITTLEGUY_HALF_WIDTH - 1)
+#define LITTLEGUY_GROUND_Y 183
+#define LITTLEGUY_JUMP_VELOCITY -6
+#define LITTLEGUY_GRAVITY 1
 
 static byte didNotInit = TRUE;
 static GameGlobals *globals;
@@ -27,6 +30,9 @@ void LittleguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
 
     LittleGuyObjectState *statePtr = (LittleGuyObjectState *)(cob->statePtr);
     statePtr->spriteIdx = LITTLEGUY_SPRITE_CENTER;
+    statePtr->jumpVelocity = 0;
+    statePtr->isJumping = 0;
+    statePtr->lastButtonState = 0;
 }
 
 
@@ -58,6 +64,27 @@ byte LittleguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         statePtr->spriteIdx = LITTLEGUY_SPRITE_RIGHT;
     } else {
         statePtr->spriteIdx = LITTLEGUY_SPRITE_CENTER;
+    }
+
+    /* Jump when fire button pressed (edge-triggered) */
+    byte buttonDown = !(DynospriteDirectPageGlobalsPtr->Input_Buttons & Joy1Button1);
+    if (buttonDown && !statePtr->lastButtonState && !statePtr->isJumping) {
+        statePtr->isJumping = 1;
+        statePtr->jumpVelocity = LITTLEGUY_JUMP_VELOCITY;
+        PlaySound(SOUND_BOINK);
+    }
+    statePtr->lastButtonState = buttonDown;
+
+    /* Apply jump physics */
+    if (statePtr->isJumping) {
+        cob->globalY += statePtr->jumpVelocity;
+        statePtr->jumpVelocity += LITTLEGUY_GRAVITY;
+
+        if (cob->globalY >= LITTLEGUY_GROUND_Y) {
+            cob->globalY = LITTLEGUY_GROUND_Y;
+            statePtr->isJumping = 0;
+            statePtr->jumpVelocity = 0;
+        }
     }
 
     return 0;
