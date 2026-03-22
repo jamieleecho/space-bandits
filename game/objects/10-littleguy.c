@@ -10,8 +10,8 @@ extern "C" {
 #define LITTLEGUY_MIN_X (LITTLEGUY_HALF_WIDTH + 1)
 #define LITTLEGUY_MAX_X (LITTLEGUY_PLAY_AREA_WIDTH - LITTLEGUY_HALF_WIDTH - 1)
 #define LITTLEGUY_MAX_SCROLL ((LITTLEGUY_PLAY_AREA_WIDTH - SCREEN_WIDTH) / 2)
-#define LITTLEGUY_HALF_HEIGHT 7
-#define LITTLEGUY_GROUND_Y 183
+#define LITTLEGUY_HALF_HEIGHT 14
+#define LITTLEGUY_GROUND_Y 170
 #define LITTLEGUY_JUMP_VELOCITY -6
 #define LITTLEGUY_GRAVITY 1
 
@@ -37,6 +37,7 @@ void LittleguyInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     statePtr->jumpVelocity = 0;
     statePtr->isJumping = 0;
     statePtr->lastButtonState = 0;
+    statePtr->walkCounter = 0;
 }
 
 
@@ -47,7 +48,7 @@ byte LittleguyReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 byte LittleguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     LittleGuyObjectState *statePtr = (LittleGuyObjectState *)(cob->statePtr);
-    byte delta = DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2;
+    byte delta = (DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2) * 2;
 
     unsigned int joyx = DynospriteDirectPageGlobalsPtr->Input_JoystickX;
 
@@ -58,16 +59,32 @@ byte LittleguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
         } else {
             cob->globalX -= delta;
         }
-        statePtr->spriteIdx = LITTLEGUY_SPRITE_LEFT;
+        statePtr->walkCounter++;
+        if ((statePtr->walkCounter >> 2) & 1) {
+            statePtr->spriteIdx = LITTLEGUY_SPRITE_LEFT_WALK_A;
+        } else {
+            statePtr->spriteIdx = LITTLEGUY_SPRITE_LEFT_WALK_B;
+        }
     } else if (joyx > 48) {
         /* Move right */
         cob->globalX += delta;
         if (cob->globalX > LITTLEGUY_MAX_X) {
             cob->globalX = LITTLEGUY_MAX_X;
         }
-        statePtr->spriteIdx = LITTLEGUY_SPRITE_RIGHT;
+        statePtr->walkCounter++;
+        if ((statePtr->walkCounter >> 2) & 1) {
+            statePtr->spriteIdx = LITTLEGUY_SPRITE_RIGHT_WALK_A;
+        } else {
+            statePtr->spriteIdx = LITTLEGUY_SPRITE_RIGHT_WALK_B;
+        }
     } else {
+        statePtr->walkCounter = 0;
         statePtr->spriteIdx = LITTLEGUY_SPRITE_CENTER;
+    }
+
+    /* Override sprite when jumping */
+    if (statePtr->isJumping) {
+        statePtr->spriteIdx = LITTLEGUY_SPRITE_JUMP;
     }
 
     /* Jump when fire button pressed (edge-triggered) */

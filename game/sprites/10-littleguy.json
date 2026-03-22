@@ -7,16 +7,36 @@
   },
 
   "Sprites": [{
-    "Name": "GuyLeft",
-    "Location": [5, 5],
+    "Name": "GuyLeftStand",
+    "Location": [10, 10],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "GuyLeftWalkA",
+    "Location": [50, 10],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "GuyLeftWalkB",
+    "Location": [90, 10],
     "SinglePixelPosition": true
   }, {
     "Name": "GuyCenter",
-    "Location": [25, 5],
+    "Location": [130, 10],
     "SinglePixelPosition": true
   }, {
-    "Name": "GuyRight",
-    "Location": [45, 5],
+    "Name": "GuyRightStand",
+    "Location": [170, 10],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "GuyRightWalkA",
+    "Location": [210, 10],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "GuyRightWalkB",
+    "Location": [250, 10],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "GuyJump",
+    "Location": [290, 10],
     "SinglePixelPosition": true
   }]
 }

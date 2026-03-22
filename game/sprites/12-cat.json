@@ -1,0 +1,66 @@
+{
+  "Main": {
+    "Group": 12,
+    "Image": "12-cat.png",
+    "Transparent": [255, 0, 255],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "CatSleep1",
+    "Location": [20, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatSleep2",
+    "Location": [60, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatSleep3",
+    "Location": [100, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatSit",
+    "Location": [140, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatWalkRightA",
+    "Location": [180, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatWalkRightB",
+    "Location": [220, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatWalkLeftA",
+    "Location": [260, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatWalkLeftB",
+    "Location": [300, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatSnuggle1",
+    "Location": [340, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatSnuggle2",
+    "Location": [380, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatChaseRightA",
+    "Location": [420, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatChaseRightB",
+    "Location": [460, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatChaseLeftA",
+    "Location": [500, 14],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "CatChaseLeftB",
+    "Location": [540, 14],
+    "SinglePixelPosition": true
+  }]
+}

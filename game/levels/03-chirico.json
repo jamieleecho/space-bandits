@@ -2,8 +2,8 @@
   "Level": {
     "Name": "Piazza Metafisica",
     "Description": "A surreal de Chirico dreamscape",
-    "ObjectGroups": [1, 10, 11],
-    "MaxObjectTableSize": 5,
+    "ObjectGroups": [1, 10, 11, 12],
+    "MaxObjectTableSize": 8,
     "Tileset": 3,
     "TilemapImage": "../tiles/03-chirico.png",
     "TilemapStart": [0, 0],
@@ -19,7 +19,7 @@
       "ObjectID": 0,
       "Active": 3,
       "globalX": 168,
-      "globalY": 183,
+      "globalY": 170,
       "InitData": []
     },
 
@@ -29,7 +29,37 @@
       "ObjectID": 0,
       "Active": 3,
       "globalX": 200,
-      "globalY": 155,
+      "globalY": 140,
+      "InitData": []
+    },
+
+    {
+      "_comment": "***** Bird 2",
+      "GroupID": 11,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 400,
+      "globalY": 140,
+      "InitData": []
+    },
+
+    {
+      "_comment": "***** Bird 3",
+      "GroupID": 11,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 550,
+      "globalY": 140,
+      "InitData": []
+    },
+
+    {
+      "_comment": "***** Cat",
+      "GroupID": 12,
+      "ObjectID": 0,
+      "Active": 3,
+      "globalX": 300,
+      "globalY": 175,
       "InitData": []
     },
 

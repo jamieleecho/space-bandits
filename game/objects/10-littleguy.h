@@ -24,7 +24,7 @@
 #ifdef DynospriteObject_DataDefinition
 
 /** Size of LittleGuyObjectState in bytes */
-#define DynospriteObject_DataSize 4
+#define DynospriteObject_DataSize 5
 
 /** Number of initialization bytes */
 #define DynospriteObject_InitSize 0
@@ -37,11 +37,16 @@
 #include "dynosprite.h"
 
 /** Sprite indices for the little guy */
-#define LITTLEGUY_SPRITE_LEFT   0
-#define LITTLEGUY_SPRITE_CENTER 1
-#define LITTLEGUY_SPRITE_RIGHT  2
+#define LITTLEGUY_SPRITE_LEFT_STAND  0
+#define LITTLEGUY_SPRITE_LEFT_WALK_A 1
+#define LITTLEGUY_SPRITE_LEFT_WALK_B 2
+#define LITTLEGUY_SPRITE_CENTER      3
+#define LITTLEGUY_SPRITE_RIGHT_STAND 4
+#define LITTLEGUY_SPRITE_RIGHT_WALK_A 5
+#define LITTLEGUY_SPRITE_RIGHT_WALK_B 6
+#define LITTLEGUY_SPRITE_JUMP        7
 
-#define LITTLEGUY_HALF_WIDTH  5
+#define LITTLEGUY_HALF_WIDTH  10
 #define LITTLEGUY_GROUP_IDX   10
 
 /** State of Little Guy Object */
@@ -50,6 +55,7 @@ typedef struct LittleGuyObjectState {
     signed char jumpVelocity;
     byte isJumping;
     byte lastButtonState;
+    byte walkCounter;
 } LittleGuyObjectState;
 
 #endif /* _10_littleguy_h */
