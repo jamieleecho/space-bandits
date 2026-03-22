@@ -1,0 +1,22 @@
+{
+  "Main": {
+    "Group": 11,
+    "Image": "11-bird.png",
+    "Transparent": [255, 0, 255],
+    "Palette": 1
+  },
+
+  "Sprites": [{
+    "Name": "BirdWingsUp",
+    "Location": [3, 2],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "BirdWingsLevel",
+    "Location": [23, 2],
+    "SinglePixelPosition": true
+  }, {
+    "Name": "BirdWingsDown",
+    "Location": [43, 2],
+    "SinglePixelPosition": true
+  }]
+}

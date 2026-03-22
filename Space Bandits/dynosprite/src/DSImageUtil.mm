@@ -139,7 +139,7 @@ extern "C" void DSImageUtilReplaceColor(DSImageUtilImageInfo imageInfo, DSImageU
 }
 
 typedef enum FindSpriteDir {
-  FindSpriteDirUp = 1,
+  FindSpriteDirUp = 0,
   FindSpriteDirRight,
   FindSpriteDirDown,
   FindSpriteDirLeft,
@@ -160,17 +160,17 @@ static void paint(DSImageWrapper<DSImageUtilARGB8> &image, CGPoint p, std::vecto
 extern "C" CGRect DSImageUtilFindSpritePixels(DSImageUtilImageInfo imageInfo, NSString *name, CGPoint point) {
     DSImageWrapper<DSImageUtilARGB8> image(imageInfo.imageData, imageInfo.width, imageInfo.height);
     
-    size_t x = point.x;
-    size_t y = point.y;
+    long x = point.x;
+    long y = point.y;
     FindSpriteDir dir = FindSpriteDirUp;
     
     // start by searching around the starting point in a spiral pattern until we find a non-transparent pixel
     // direction is up, right, down, left
-    size_t totalSteps = 1;
-    size_t curSteps = 0;
+    long totalSteps = 1;
+    long curSteps = 0;
     while (totalSteps < DSImageUtilFindSpritePixelsMaxSteps) {
         // test for opaque pixel
-        if ((x < 0) || (y < 0) || (x >= image.width()) || (y >= image.height()) || !image(x, y).isTransparent()) {
+        if ((x >= 0) && (y >= 0) && (x < image.width()) && (y < image.height()) && !image(x, y).isTransparent()) {
             break;
         }
 

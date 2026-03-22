@@ -230,6 +230,9 @@
 		AC5E787487C591D1B15263E2 /* 03-level3.png in Copy images Files */ = {isa = PBXBuildFile; fileRef = B9D5B09187D4EE761CA69163 /* 03-level3.png */; };
 		C0C73783A1A243373C2F53B8 /* 10-littleguy.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 313DBC5509D15A2A58A26496 /* 10-littleguy.png */; };
 		EC38768E713E4B8CD0EDF6E5 /* 03-chirico.c in Sources */ = {isa = PBXBuildFile; fileRef = ED37586DB1F94C41AACE54D9 /* 03-chirico.c */; };
+		F1B1RD012F80000000000001 /* 11-bird.c in Sources */ = {isa = PBXBuildFile; fileRef = F1B1RD002F80000000000002 /* 11-bird.c */; };
+		F1B1RD032F80000000000003 /* 11-bird.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1B1RD042F80000000000004 /* 11-bird.json */; };
+		F1B1RD052F80000000000005 /* 11-bird.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1B1RD062F80000000000006 /* 11-bird.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -335,6 +338,8 @@
 				52E24A7B2C1808FE0098F87D /* numerals.png in Copy sprites Files */,
 				9A638EF4F93D819B8BA1650E /* 10-littleguy.json in Copy sprites Files */,
 				C0C73783A1A243373C2F53B8 /* 10-littleguy.png in Copy sprites Files */,
+				F1B1RD032F80000000000003 /* 11-bird.json in Copy sprites Files */,
+				F1B1RD052F80000000000005 /* 11-bird.png in Copy sprites Files */,
 			);
 			name = "Copy sprites Files";
 		};
@@ -367,6 +372,10 @@
 		523978402C1F654100301419 /* readme-bas.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "readme-bas.txt"; path = "../../../game/readme-bas.txt"; sourceTree = "<group>"; };
 		525733AC2F704E3600EA8195 /* 10-littleguy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "10-littleguy.h"; path = "../game/objects/10-littleguy.h"; sourceTree = SOURCE_ROOT; };
 		525733AD2F704E3600EA8195 /* 10-littleguy.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "10-littleguy.c"; path = "../game/objects/10-littleguy.c"; sourceTree = SOURCE_ROOT; };
+		F1B1RD072F80000000000007 /* 11-bird.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "11-bird.h"; path = "../game/objects/11-bird.h"; sourceTree = SOURCE_ROOT; };
+		F1B1RD002F80000000000002 /* 11-bird.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "11-bird.c"; path = "../game/objects/11-bird.c"; sourceTree = SOURCE_ROOT; };
+		F1B1RD042F80000000000004 /* 11-bird.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "11-bird.json"; sourceTree = "<group>"; };
+		F1B1RD062F80000000000006 /* 11-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-bird.png"; sourceTree = "<group>"; };
 		525FE4042C053EB200E03391 /* 01-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "01-foo.wav"; sourceTree = "<group>"; };
 		525FE4052C053EB200E03391 /* 01-moon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "01-moon.gif"; sourceTree = "<group>"; };
 		525FE4062C053EB200E03391 /* 01-moon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "01-moon.json"; sourceTree = "<group>"; };
@@ -926,6 +935,8 @@
 				52E249FD2C17E7E00098F87D /* 09-boss1.h */,
 				525733AC2F704E3600EA8195 /* 10-littleguy.h */,
 				525733AD2F704E3600EA8195 /* 10-littleguy.c */,
+				F1B1RD072F80000000000007 /* 11-bird.h */,
+				F1B1RD002F80000000000002 /* 11-bird.c */,
 				52E24A1D2C17E8210098F87D /* object_info.h */,
 				52E24A272C17E8750098F87D /* universal_object.c */,
 				52E24A282C17E8750098F87D /* universal_object.h */,
@@ -1024,6 +1035,8 @@
 				52E24A602C1808210098F87D /* 09-boss1.json */,
 				99B09234ECD1D2B00123BF2E /* 10-littleguy.json */,
 				313DBC5509D15A2A58A26496 /* 10-littleguy.png */,
+				F1B1RD042F80000000000004 /* 11-bird.json */,
+				F1B1RD062F80000000000006 /* 11-bird.png */,
 			);
 			name = sprites;
 			path = ../../../game/sprites;
@@ -1219,6 +1232,7 @@
 				52CC82772C02179100CC3E38 /* DSObjectClassDataRegistry.m in Sources */,
 				52CC82B92C02179100CC3E38 /* DSViewController.m in Sources */,
 				525733AE2F704E3600EA8195 /* 10-littleguy.c in Sources */,
+				F1B1RD012F80000000000001 /* 11-bird.c in Sources */,
 				52CC82982C02179100CC3E38 /* DSSpriteObjectClassFactory.m in Sources */,
 				52CC82712C02179100CC3E38 /* DSObject.m in Sources */,
 				52CC82B62C02179100CC3E38 /* DSTransitionSceneInfoFileParser.m in Sources */,
