@@ -5,8 +5,10 @@ extern "C" {
 #include "10-littleguy.h"
 #include "object_info.h"
 
-#define LITTLEGUY_MIN_X (PLAYFIELD_CENTER_WIDTH_OFFSET + LITTLEGUY_HALF_WIDTH + 1)
-#define LITTLEGUY_MAX_X (SCREEN_WIDTH + PLAYFIELD_CENTER_WIDTH_OFFSET - LITTLEGUY_HALF_WIDTH - 1)
+#define LITTLEGUY_PLAY_AREA_WIDTH 640
+#define LITTLEGUY_MIN_X (LITTLEGUY_HALF_WIDTH + 1)
+#define LITTLEGUY_MAX_X (LITTLEGUY_PLAY_AREA_WIDTH - LITTLEGUY_HALF_WIDTH - 1)
+#define LITTLEGUY_MAX_SCROLL ((LITTLEGUY_PLAY_AREA_WIDTH - SCREEN_WIDTH) / 2)
 #define LITTLEGUY_GROUND_Y 183
 #define LITTLEGUY_JUMP_VELOCITY -6
 #define LITTLEGUY_GRAVITY 1
@@ -85,6 +87,18 @@ byte LittleguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
             statePtr->isJumping = 0;
             statePtr->jumpVelocity = 0;
         }
+    }
+
+    /* Scroll the background when little guy passes screen center */
+    unsigned int screenX = (cob->globalX / 2) - DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX;
+    if (screenX >= 160) {
+        unsigned int scroll = (cob->globalX / 2) - 160;
+        if (scroll > LITTLEGUY_MAX_SCROLL) {
+            scroll = LITTLEGUY_MAX_SCROLL;
+        }
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = scroll;
+    } else {
+        DynospriteDirectPageGlobalsPtr->Gfx_BkgrndNewX = 0;
     }
 
     return 0;

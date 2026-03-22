@@ -7,8 +7,8 @@
     "Tileset": 3,
     "TilemapImage": "../tiles/03-chirico.png",
     "TilemapStart": [0, 0],
-    "TilemapSize": [352, 224],
-    "BkgrndStartX": 8,
+    "TilemapSize": [640, 224],
+    "BkgrndStartX": 0,
     "BkgrndStartY": 8
   },
 
