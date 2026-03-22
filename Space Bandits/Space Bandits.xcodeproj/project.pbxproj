@@ -206,6 +206,7 @@
 		52E24A782C1808C30098F87D /* 02-explosion.wav in Copy sounds Files */ = {isa = PBXBuildFile; fileRef = 52E24A512C1808100098F87D /* 02-explosion.wav */; };
 		52E24A792C1808C40098F87D /* 03-click.wav in Copy sounds Files */ = {isa = PBXBuildFile; fileRef = 52E24A522C1808100098F87D /* 03-click.wav */; };
 		52E24A7A2C1808C50098F870 /* 04-boink.wav in Copy sounds Files */ = {isa = PBXBuildFile; fileRef = 52E24A532C1808100098F870 /* 04-boink.wav */; };
+		52E24A7B2C1808C60098F870 /* 05-ouch.wav in Copy sounds Files */ = {isa = PBXBuildFile; fileRef = 52E24A542C1808100098F870 /* 05-ouch.wav */; };
 		52E24A7B2C1808FE0098F87D /* numerals.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A652C1808210098F87D /* numerals.png */; };
 		52E24A7C2C1809020098F87D /* marbles.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A642C1808210098F87D /* marbles.png */; };
 		52E24A802C18090D0098F87D /* 09-boss1.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A602C1808210098F87D /* 09-boss1.json */; };
@@ -318,6 +319,7 @@
 				52E24A782C1808C30098F87D /* 02-explosion.wav in Copy sounds Files */,
 				52E24A792C1808C40098F87D /* 03-click.wav in Copy sounds Files */,
 				52E24A7A2C1808C50098F870 /* 04-boink.wav in Copy sounds Files */,
+				52E24A7B2C1808C60098F870 /* 05-ouch.wav in Copy sounds Files */,
 			);
 			name = "Copy sounds Files";
 		};
@@ -590,6 +592,7 @@
 		52E24A512C1808100098F87D /* 02-explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "02-explosion.wav"; sourceTree = "<group>"; };
 		52E24A522C1808100098F87D /* 03-click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "03-click.wav"; sourceTree = "<group>"; };
 		52E24A532C1808100098F870 /* 04-boink.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "04-boink.wav"; sourceTree = "<group>"; };
+		52E24A542C1808100098F870 /* 05-ouch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "05-ouch.wav"; sourceTree = "<group>"; };
 		52E24A572C1808210098F87D /* 01-numerals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "01-numerals.json"; sourceTree = "<group>"; };
 		52E24A582C1808210098F87D /* 01-sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-sprites.png"; sourceTree = "<group>"; };
 		52E24A592C1808210098F87D /* 02-balls.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "02-balls.json"; sourceTree = "<group>"; };
@@ -1017,6 +1020,7 @@
 				52E24A512C1808100098F87D /* 02-explosion.wav */,
 				52E24A522C1808100098F87D /* 03-click.wav */,
 				52E24A532C1808100098F870 /* 04-boink.wav */,
+				52E24A542C1808100098F870 /* 05-ouch.wav */,
 			);
 			name = sounds;
 			path = ../../../game/sounds;

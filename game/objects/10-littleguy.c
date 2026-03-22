@@ -3,12 +3,14 @@ extern "C" {
 #endif
 
 #include "10-littleguy.h"
+#include "11-bird.h"
 #include "object_info.h"
 
 #define LITTLEGUY_PLAY_AREA_WIDTH 640
 #define LITTLEGUY_MIN_X (LITTLEGUY_HALF_WIDTH + 1)
 #define LITTLEGUY_MAX_X (LITTLEGUY_PLAY_AREA_WIDTH - LITTLEGUY_HALF_WIDTH - 1)
 #define LITTLEGUY_MAX_SCROLL ((LITTLEGUY_PLAY_AREA_WIDTH - SCREEN_WIDTH) / 2)
+#define LITTLEGUY_HALF_HEIGHT 7
 #define LITTLEGUY_GROUND_Y 183
 #define LITTLEGUY_JUMP_VELOCITY -6
 #define LITTLEGUY_GRAVITY 1
@@ -86,6 +88,24 @@ byte LittleguyUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
             cob->globalY = LITTLEGUY_GROUND_Y;
             statePtr->isJumping = 0;
             statePtr->jumpVelocity = 0;
+        }
+    }
+
+    /* Check collision with bird */
+    DynospriteCOB *birdCob = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, BIRD_GROUP_IDX);
+    if (birdCob) {
+        BirdObjectState *birdState = (BirdObjectState *)(birdCob->statePtr);
+        if (birdState->hideCounter == 0) {
+            int dx = (int)cob->globalX - (int)birdCob->globalX;
+            int dy = (int)cob->globalY - (int)birdCob->globalY;
+            if (dx < 0) dx = -dx;
+            if (dy < 0) dy = -dy;
+            if (dx < (LITTLEGUY_HALF_WIDTH + BIRD_HALF_WIDTH) &&
+                dy < (LITTLEGUY_HALF_HEIGHT + BIRD_HALF_HEIGHT)) {
+                PlaySound(SOUND_OUCH);
+                bumpScore(1);
+                birdState->hideCounter = BIRD_HIDE_DURATION;
+            }
         }
     }
 

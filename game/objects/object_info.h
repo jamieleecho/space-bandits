@@ -29,6 +29,7 @@
 #define SOUND_EXPLOSION 2
 #define SOUND_CLICK 3
 #define SOUND_BOINK 4
+#define SOUND_OUCH 5
 
 #define NUM_BAD_GUYS 45
 #define BAD_GUY_ROWS 5

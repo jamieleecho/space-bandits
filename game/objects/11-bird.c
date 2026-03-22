@@ -37,6 +37,7 @@ void BirdInit(DynospriteCOB *cob, DynospriteODT *odt, byte *initData) {
     statePtr->direction = 1;
     statePtr->flapCounter = 0;
     statePtr->bobCounter = 0;
+    statePtr->hideCounter = 0;
 }
 
 
@@ -47,6 +48,19 @@ byte BirdReactivate(DynospriteCOB *cob, DynospriteODT *odt) {
 
 byte BirdUpdate(DynospriteCOB *cob, DynospriteODT *odt) {
     BirdObjectState *statePtr = (BirdObjectState *)(cob->statePtr);
+
+    /* If hiding after being hit, count down and respawn */
+    if (statePtr->hideCounter > 0) {
+        statePtr->hideCounter--;
+        cob->active = OBJECT_UPDATE_ACTIVE;
+        if (statePtr->hideCounter == 0) {
+            /* Respawn at a pseudo-random horizontal location */
+            cob->globalX = BIRD_MIN_X + ((cob->globalY * 137 + statePtr->flapCounter * 79) % (BIRD_MAX_X - BIRD_MIN_X));
+            statePtr->bobCounter = 0;
+        }
+        return 0;
+    }
+
     byte delta = DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 2;
 
     /* Horizontal movement: fly back and forth */
