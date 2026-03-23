@@ -248,15 +248,14 @@ static asm byte Random() {
   }
 }
 
-/** Start playing a square wave tone.
- *  phaseInc = frequency * 65536 / 2000
- *  e.g. 440 Hz (A4) = 14435 */
+/** Start playing a tone.
+ *  phaseInc = frequency * 65536 / AudioSamplingRate */
 static asm void MusicStart(word phaseInc) {
   asm {
   ldd 2,s
-  pshs u
+  pshs u,y
   jsr Music_Start
-  puls u
+  puls u,y
   }
 }
 

@@ -14,15 +14,18 @@ void PlaySound(int soundIndex) {
     [DSSoundManager.sharedInstance playSoundId:soundIndex];
 }
 
-/* --- Music synthesis engine (square wave via Core Audio) --- */
+/* --- Music synthesis engine (sine wave via Core Audio) --- */
 
 static AVAudioEngine *_musicEngine = nil;
 static AVAudioSourceNode *_musicSourceNode = nil;
 static double _musicPhase = 0;
 static double _musicPhaseIncrement = 0;
-static BOOL _musicPlaying = NO;
+static int _musicState = 0;       /* 0=stopped, 1=playing, 2=fading out */
+static float _musicFadeGain = 1.0f;
 static const double kMusicSampleRate = 44100.0;
-static const float kMusicAmplitude = 0.25f;
+static const float kMusicAmplitude = 0.125f;
+/* Fade out over ~5ms (220 samples at 44100 Hz) */
+static const float kMusicFadeStep = 1.0f / 220.0f;
 
 static void ensureMusicEngine(void) {
     if (_musicEngine) return;
@@ -33,7 +36,8 @@ static void ensureMusicEngine(void) {
     _musicSourceNode = [[AVAudioSourceNode alloc] initWithFormat:format renderBlock:
         ^OSStatus(BOOL *isSilence, const AudioTimeStamp *timestamp,
                   AVAudioFrameCount frameCount, AudioBufferList *outputData) {
-        if (!_musicPlaying) {
+        int state = _musicState;
+        if (state == 0) {
             *isSilence = YES;
             memset(outputData->mBuffers[0].mData, 0,
                    outputData->mBuffers[0].mDataByteSize);
@@ -43,14 +47,29 @@ static void ensureMusicEngine(void) {
         float *buffer = (float *)outputData->mBuffers[0].mData;
         double phase = _musicPhase;
         double phaseInc = _musicPhaseIncrement;
+        float gain = _musicFadeGain;
 
         for (AVAudioFrameCount i = 0; i < frameCount; i++) {
-            buffer[i] = kMusicAmplitude * sinf((float)(phase * 2.0 * M_PI));
+            float sample = kMusicAmplitude * sinf((float)(phase * 2.0 * M_PI));
+            buffer[i] = sample * gain;
             phase += phaseInc;
             if (phase >= 1.0) phase -= 1.0;
+            if (state == 2) {
+                gain -= kMusicFadeStep;
+                if (gain <= 0.0f) {
+                    gain = 0.0f;
+                    /* Fill rest with silence */
+                    for (AVAudioFrameCount j = i + 1; j < frameCount; j++) {
+                        buffer[j] = 0.0f;
+                    }
+                    _musicState = 0;
+                    break;
+                }
+            }
         }
 
         _musicPhase = phase;
+        _musicFadeGain = gain;
         *isSilence = NO;
         return noErr;
     }];
@@ -73,12 +92,15 @@ void MusicStart(int phaseInc) {
        So:   freq = phaseInc * 2000.0 / 65536.0 */
     double freq = phaseInc * 2000.0 / 65536.0;
     _musicPhaseIncrement = freq / kMusicSampleRate;
-    _musicPhase = 0;
-    _musicPlaying = YES;
+    /* Don't reset _musicPhase — continuous waveform avoids pops */
+    _musicFadeGain = 1.0f;
+    _musicState = 1;
 }
 
 void MusicStop(void) {
-    _musicPlaying = NO;
+    if (_musicState == 1) {
+        _musicState = 2;  /* begin fade-out */
+    }
 }
 
 static DSSoundManager *_sharedInstance = nil;

@@ -10,7 +10,9 @@
 
 ***********************************************************
 * Music_Start
-*   Begin playing a square wave tone at the given frequency.
+*   Begin playing a tone at the given frequency.
+*   Phase accumulator is NOT reset, so note transitions are
+*   click-free (waveform continues smoothly).
 *
 * - IN:      D = Phase increment (frequency * 65536 / AudioSamplingRate)
 *            For example: 440 Hz = 440 * 65536 / 2000 = 14418 = $3852
@@ -20,8 +22,15 @@
 *
 Music_Start
             std         Music_PhaseInc
-            clr         Music_PhaseAccum
-            clr         Music_PhaseAccum+1
+            * If music is already running, just update the frequency.
+            * The next buffer refill will pick up the new phase increment
+            * seamlessly — no pointer reset, no timer restart, no pop.
+            lda         Music_Playing
+            beq         MusicColdStart@
+            lda         #1                      * cancel any fade-out (state 2 -> 1)
+            sta         Music_Playing
+            rts
+MusicColdStart@
             lda         #1
             sta         Music_Playing
             * If sound effects are already running, the FIRQ is active and
@@ -53,7 +62,9 @@ MusicStartDone@
 
 ***********************************************************
 * Music_Stop
-*   Stop music playback.
+*   Begin fade-out: Music_RefillBuffer will continue generating
+*   samples until the waveform crosses center, then stop.
+*   This avoids pops from abrupt amplitude changes.
 *
 * - IN:      none
 * - OUT:     none
@@ -61,18 +72,10 @@ MusicStartDone@
 ***********************************************************
 *
 Music_Stop
-            clr         Music_Playing
-            * If sound effects are still playing, let them finish naturally
-            tst         Sound_ChannelsPlaying
-            bne         MusicStopDone@
-            * No sound effects: shut down audio
-            orcc        #$50                    * disable interrupts
- IFEQ SOUND_METHOD-2
-            lda         #(PIA1B_Ctrl&$F7)       * clear CB2 (disable audio on SC77526)
-            sta         $FF23
- ENDC
-            jsr         System_DisableAudioInterrupt
-            andcc       #$AF                    * re-enable interrupts
+            lda         Music_Playing
+            beq         MusicStopDone@          * already stopped
+            lda         #2                      * set fade-out state
+            sta         Music_Playing
 MusicStopDone@
             rts
 
@@ -152,25 +155,25 @@ MUSIC_OCTAVE_5          equ     48
 ***********************************************************
 * Music_WaveTable
 *   256-byte sine wave lookup table.
-*   Values range from $20 (low) to $E0 (high), centered at $80.
+*   Values range from $50 (low) to $B0 (high), centered at $80.
 *   The phase accumulator high byte (0-255) indexes this table.
 ***********************************************************
 *
 Music_WaveTable
-            fcb     $80,$82,$85,$87,$89,$8C,$8E,$90,$93,$95,$97,$9A,$9C,$9E,$A0,$A3
-            fcb     $A5,$A7,$A9,$AB,$AD,$AF,$B1,$B3,$B5,$B7,$B9,$BB,$BD,$BF,$C0,$C2
-            fcb     $C4,$C6,$C7,$C9,$CA,$CC,$CD,$CE,$D0,$D1,$D2,$D4,$D5,$D6,$D7,$D8
-            fcb     $D9,$DA,$DA,$DB,$DC,$DD,$DD,$DE,$DE,$DF,$DF,$DF,$E0,$E0,$E0,$E0
-            fcb     $E0,$E0,$E0,$E0,$E0,$DF,$DF,$DF,$DE,$DE,$DD,$DD,$DC,$DB,$DA,$DA
-            fcb     $D9,$D8,$D7,$D6,$D5,$D4,$D2,$D1,$D0,$CE,$CD,$CC,$CA,$C9,$C7,$C6
-            fcb     $C4,$C2,$C0,$BF,$BD,$BB,$B9,$B7,$B5,$B3,$B1,$AF,$AD,$AB,$A9,$A7
-            fcb     $A5,$A3,$A0,$9E,$9C,$9A,$97,$95,$93,$90,$8E,$8C,$89,$87,$85,$82
-            fcb     $80,$7E,$7B,$79,$77,$74,$72,$70,$6D,$6B,$69,$66,$64,$62,$60,$5D
-            fcb     $5B,$59,$57,$55,$53,$51,$4F,$4D,$4B,$49,$47,$45,$43,$41,$40,$3E
-            fcb     $3C,$3A,$39,$37,$36,$34,$33,$32,$30,$2F,$2E,$2C,$2B,$2A,$29,$28
-            fcb     $27,$26,$26,$25,$24,$23,$23,$22,$22,$21,$21,$21,$20,$20,$20,$20
-            fcb     $20,$20,$20,$20,$20,$21,$21,$21,$22,$22,$23,$23,$24,$25,$26,$26
-            fcb     $27,$28,$29,$2A,$2B,$2C,$2E,$2F,$30,$32,$33,$34,$36,$37,$39,$3A
-            fcb     $3C,$3E,$40,$41,$43,$45,$47,$49,$4B,$4D,$4F,$51,$53,$55,$57,$59
-            fcb     $5B,$5D,$60,$62,$64,$66,$69,$6B,$6D,$70,$72,$74,$77,$79,$7B,$7E
+            fcb     $80,$81,$82,$84,$85,$86,$87,$88,$89,$8B,$8C,$8D,$8E,$8F,$90,$91
+            fcb     $92,$93,$95,$96,$97,$98,$99,$9A,$9B,$9C,$9D,$9E,$9E,$9F,$A0,$A1
+            fcb     $A2,$A3,$A4,$A4,$A5,$A6,$A7,$A7,$A8,$A9,$A9,$AA,$AA,$AB,$AB,$AC
+            fcb     $AC,$AD,$AD,$AE,$AE,$AE,$AF,$AF,$AF,$AF,$AF,$B0,$B0,$B0,$B0,$B0
+            fcb     $B0,$B0,$B0,$B0,$B0,$B0,$AF,$AF,$AF,$AF,$AF,$AE,$AE,$AE,$AD,$AD
+            fcb     $AC,$AC,$AB,$AB,$AA,$AA,$A9,$A9,$A8,$A7,$A7,$A6,$A5,$A4,$A4,$A3
+            fcb     $A2,$A1,$A0,$9F,$9E,$9E,$9D,$9C,$9B,$9A,$99,$98,$97,$96,$95,$93
+            fcb     $92,$91,$90,$8F,$8E,$8D,$8C,$8B,$89,$88,$87,$86,$85,$84,$82,$81
+            fcb     $80,$7F,$7E,$7C,$7B,$7A,$79,$78,$77,$75,$74,$73,$72,$71,$70,$6F
+            fcb     $6E,$6D,$6B,$6A,$69,$68,$67,$66,$65,$64,$63,$62,$62,$61,$60,$5F
+            fcb     $5E,$5D,$5C,$5C,$5B,$5A,$59,$59,$58,$57,$57,$56,$56,$55,$55,$54
+            fcb     $54,$53,$53,$52,$52,$52,$51,$51,$51,$51,$51,$50,$50,$50,$50,$50
+            fcb     $50,$50,$50,$50,$50,$50,$51,$51,$51,$51,$51,$52,$52,$52,$53,$53
+            fcb     $54,$54,$55,$55,$56,$56,$57,$57,$58,$59,$59,$5A,$5B,$5C,$5C,$5D
+            fcb     $5E,$5F,$60,$61,$62,$62,$63,$64,$65,$66,$67,$68,$69,$6A,$6B,$6D
+            fcb     $6E,$6F,$70,$71,$72,$73,$74,$75,$77,$78,$79,$7A,$7B,$7C,$7E,$7F
 

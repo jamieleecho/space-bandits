@@ -14,21 +14,22 @@ extern "C" {
 #define TWINKLE_LENGTH 48
 #define TWINKLE_TEMPO 18   /* frames per note (~3.3 notes/sec at 60fps) */
 
-/* Phase increments for notes in octave 4 */
-#define PHASE_C4 8573
-#define PHASE_D4 9623
-#define PHASE_E4 10801
-#define PHASE_F4 11444
-#define PHASE_G4 12845
-#define PHASE_A4 14418
+/* Phase increments for notes in octave 3 */
+#define PHASE_C4 4286
+#define PHASE_D4 4811
+#define PHASE_E4 5400
+#define PHASE_F4 5722
+#define PHASE_G4 6423
+#define PHASE_A4 7209
 
 /*
  * Twinkle Twinkle Little Star melody (6 phrases of 8 beats):
  *   C C G G A A G .  F F E E D D C .
  *   G G F F E E D .  G G F F E E D .
  *   C C G G A A G .  F F E E D D C .
- * Each phrase has pattern: X X Y Y Z Z Y rest
- * Phrases: A(C,G,A) B(F,E,D) C(G,F,E), sequence: A B C C A B
+ * Beat pattern per phrase: n0 n0 n1 n1 n2 n2 n3 rest
+ * Phrase A: C,G,A,G   Phrase B: F,E,D,C   Phrase C: G,F,E,D
+ * Sequence: A B C C A B
  */
 static word getTwinkleNote(byte pos) {
     byte beat = pos & 7;
@@ -37,28 +38,30 @@ static word getTwinkleNote(byte pos) {
 
     if (beat == 7) return 0;  /* rest beat */
 
-    /* Map beat to note slot: 0 0 1 1 2 2 1 */
+    /* Map beat to note slot: 0 0 1 1 2 2 3 */
     if (beat < 2) slot = 0;
     else if (beat < 4) slot = 1;
     else if (beat < 6) slot = 2;
-    else slot = 1;
+    else slot = 3;
 
-    /* Phrase A: C G A */
+    /* Phrase A: C G A G */
     if (phrase == 0 || phrase == 4) {
         if (slot == 0) return PHASE_C4;
-        if (slot == 1) return PHASE_G4;
-        return PHASE_A4;
+        if (slot == 2) return PHASE_A4;
+        return PHASE_G4;  /* slots 1 and 3 */
     }
-    /* Phrase B: F E D */
+    /* Phrase B: F E D C */
     if (phrase == 1 || phrase == 5) {
         if (slot == 0) return PHASE_F4;
         if (slot == 1) return PHASE_E4;
-        return PHASE_D4;
+        if (slot == 2) return PHASE_D4;
+        return PHASE_C4;
     }
-    /* Phrase C: G F E */
+    /* Phrase C: G F E D */
     if (slot == 0) return PHASE_G4;
     if (slot == 1) return PHASE_F4;
-    return PHASE_E4;
+    if (slot == 2) return PHASE_E4;
+    return PHASE_D4;
 }
 
 
