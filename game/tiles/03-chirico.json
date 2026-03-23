@@ -1,5 +1,5 @@
 {
   "Image": "03-chirico.png",
-  "TileSetStart": [0, 0],
+  "TileSetStart": [0, 16],
   "TileSetSize": [352, 224]
 }

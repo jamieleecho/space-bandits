@@ -3,7 +3,7 @@
     "Group": 12,
     "Image": "12-cat.png",
     "Transparent": [255, 0, 255],
-    "Palette": 1
+    "Palette": 3
   },
 
   "Sprites": [{

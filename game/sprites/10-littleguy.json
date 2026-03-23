@@ -3,7 +3,7 @@
     "Group": 10,
     "Image": "10-littleguy.png",
     "Transparent": [255, 0, 255],
-    "Palette": 1
+    "Palette": 3
   },
 
   "Sprites": [{

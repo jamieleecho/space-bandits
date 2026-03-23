@@ -255,7 +255,7 @@ for (; obj < endObj; obj++) {
 
 ### Adding Game Content
 - **New object:** Create `game/objects/XX-name/` with JSON descriptor + C or ASM source. Follow existing patterns.
-- **New sprite:** Add PNG to `game/sprites/`, create JSON descriptor. The build pipeline compiles sprites to ASM automatically.
+- **New sprite:** Add PNG to `game/sprites/`, create JSON descriptor. The build pipeline compiles sprites to ASM automatically. **Important:** Sprite PNGs must be indexed-color images whose palette indices match the tileset image for the level they appear on. The transparent color (typically `(255,0,255)` magenta) does not need to be in the tileset palette but must still be at a consistent index in the sprite's PNG palette.
 - **New level:** Create `game/levels/XX-name.json` (config) + `XX-name.c` (level code with Init and CalculateBkgrndNewXY). Also requires:
   - A level image `game/images/XX-levelN.png` (132x96 indexed PNG, preview/splash for the level)
   - A corresponding entry in `game/images/images.json` (one entry per level, with BackgroundColor, ForegroundColor, ProgressColor for the loading screen)
@@ -265,10 +265,44 @@ for (; obj < endObj; obj++) {
   ```json
   {
     "Image": "XX-name.png",
-    "TileSetStart": [0, 0],
+    "TileSetStart": [0, 1],
     "TileSetSize": [width, height]
   }
   ```
+  Note: `TileSetStart` Y is `16` to skip the palette block (see below).
+
+### Tileset Palette Convention
+The 16-color CoCo 3 palette for each level is defined by the **first 16 rows** of the tileset PNG image.
+
+#### Palette Block Layout
+- The top 16 rows encode palette indices 0–15, left to right.
+- Each color is `image_width / 16` pixels wide and 16 pixels tall (one tile height).
+- **Index 0 must be the background color.**
+- Actual tile data starts at row 16. Set `TileSetStart` Y to `16` in the tileset JSON.
+- `TileSetSize` height covers only the tile area (excludes the palette block).
+
+#### Color Values
+- RGB channel values must be **0, 1, 2, or 3** (CoCo 3 native 2-bit-per-channel, 64 colors total).
+- In 8-bit PNG terms: 0→0, 1→85, 2→170, 3→255.
+- The build pipeline's auto-matcher (`gfx-process.py`) will find exact matches since these are valid CoCo 3 colors.
+
+#### Unused Palette Slots
+If fewer than 16 colors are needed, fill remaining slots in this priority order:
+1. White (3,3,3)
+2. Black (0,0,0)
+3. Grey (2,2,2)
+4. Dark grey (1,1,1)
+5. Pure red shades
+6. Pure green shades
+7. Pure blue shades
+
+Skip any already present in the palette.
+
+#### Sprite Palette Matching
+Sprite PNGs must be **indexed-color images** that use the **same palette indices** as the tileset image for their level. For example, if palette index 5 is `(0,0,0)` black in the tileset, then black pixels in the sprite must also use index 5. The transparent color (typically `(255,0,255)` magenta) should be placed at **index 16** (outside the 16-color tileset palette). The sprite JSON's `"Palette"` value must be set to the **tileset number** for the level (e.g., `3` for level 3, `4` for level 4).
+
+#### Choosing the Best Palette
+When creating a tileset, analyze all pixels across **both** the tileset image and the sprite PNGs used on that level (excluding transparent key colors like `(255,0,255)`). Sort by pixel count to prioritize the most-used colors. This ensures the shared 16-color palette is optimized for the full visual output of the level.
 - See `doc/DynoSpriteUsage.txt` for detailed content creation guides.
 
 ### Adding Files to the Xcode Project (pbxproj)

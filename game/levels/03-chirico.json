@@ -6,7 +6,7 @@
     "MaxObjectTableSize": 9,
     "Tileset": 3,
     "TilemapImage": "../tiles/03-chirico.png",
-    "TilemapStart": [0, 0],
+    "TilemapStart": [0, 16],
     "TilemapSize": [640, 224],
     "BkgrndStartX": 0,
     "BkgrndStartY": 8

@@ -3,7 +3,7 @@
     "Group": 11,
     "Image": "11-bird.png",
     "Transparent": [255, 0, 255],
-    "Palette": 1
+    "Palette": 3
   },
 
   "Sprites": [{

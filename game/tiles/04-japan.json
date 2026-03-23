@@ -1,5 +1,5 @@
 {
   "Image": "04-japan.png",
-  "TileSetStart": [0, 0],
+  "TileSetStart": [0, 16],
   "TileSetSize": [1280, 400]
 }

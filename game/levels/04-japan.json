@@ -6,7 +6,7 @@
     "MaxObjectTableSize": 5,
     "Tileset": 4,
     "TilemapImage": "../tiles/04-japan.png",
-    "TilemapStart": [0, 0],
+    "TilemapStart": [0, 16],
     "TilemapSize": [1280, 400],
     "BkgrndStartX": 0,
     "BkgrndStartY": 50

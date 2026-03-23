@@ -3,7 +3,7 @@
     "Group": 15,
     "Image": "15-moon.png",
     "Transparent": [255, 0, 255],
-    "Palette": 1
+    "Palette": 4
   },
 
   "Sprites": [{
