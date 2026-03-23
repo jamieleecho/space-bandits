@@ -71,7 +71,8 @@ Music_Stop
             lda         #(PIA1B_Ctrl&$F7)       * clear CB2 (disable audio on SC77526)
             sta         $FF23
  ENDC
-            jmp         System_DisableAudioInterrupt
+            jsr         System_DisableAudioInterrupt
+            andcc       #$AF                    * re-enable interrupts
 MusicStopDone@
             rts
 
