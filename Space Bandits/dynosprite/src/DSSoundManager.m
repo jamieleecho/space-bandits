@@ -8,6 +8,7 @@
 
 #import "DSSoundManager.h"
 #import <AVFoundation/AVFoundation.h>
+#import <math.h>
 
 void PlaySound(int soundIndex) {
     [DSSoundManager.sharedInstance playSoundId:soundIndex];
@@ -44,7 +45,7 @@ static void ensureMusicEngine(void) {
         double phaseInc = _musicPhaseIncrement;
 
         for (AVAudioFrameCount i = 0; i < frameCount; i++) {
-            buffer[i] = (phase < 0.5) ? -kMusicAmplitude : kMusicAmplitude;
+            buffer[i] = kMusicAmplitude * sinf((float)(phase * 2.0 * M_PI));
             phase += phaseInc;
             if (phase >= 1.0) phase -= 1.0;
         }

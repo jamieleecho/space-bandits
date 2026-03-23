@@ -15,7 +15,7 @@
 * - IN:      D = Phase increment (frequency * 65536 / AudioSamplingRate)
 *            For example: 440 Hz = 440 * 65536 / 2000 = 14418 = $3852
 * - OUT:     none
-* - Trashed: A, B, X
+* - Trashed: A, B, X, Y, U
 ***********************************************************
 *
 Music_Start
@@ -147,4 +147,30 @@ MUSIC_NOTE_B            equ     22
 MUSIC_OCTAVE_3          equ     0
 MUSIC_OCTAVE_4          equ     24
 MUSIC_OCTAVE_5          equ     48
+
+
+***********************************************************
+* Music_WaveTable
+*   256-byte sine wave lookup table.
+*   Values range from $20 (low) to $E0 (high), centered at $80.
+*   The phase accumulator high byte (0-255) indexes this table.
+***********************************************************
+*
+Music_WaveTable
+            fcb     $80,$82,$85,$87,$89,$8C,$8E,$90,$93,$95,$97,$9A,$9C,$9E,$A0,$A3
+            fcb     $A5,$A7,$A9,$AB,$AD,$AF,$B1,$B3,$B5,$B7,$B9,$BB,$BD,$BF,$C0,$C2
+            fcb     $C4,$C6,$C7,$C9,$CA,$CC,$CD,$CE,$D0,$D1,$D2,$D4,$D5,$D6,$D7,$D8
+            fcb     $D9,$DA,$DA,$DB,$DC,$DD,$DD,$DE,$DE,$DF,$DF,$DF,$E0,$E0,$E0,$E0
+            fcb     $E0,$E0,$E0,$E0,$E0,$DF,$DF,$DF,$DE,$DE,$DD,$DD,$DC,$DB,$DA,$DA
+            fcb     $D9,$D8,$D7,$D6,$D5,$D4,$D2,$D1,$D0,$CE,$CD,$CC,$CA,$C9,$C7,$C6
+            fcb     $C4,$C2,$C0,$BF,$BD,$BB,$B9,$B7,$B5,$B3,$B1,$AF,$AD,$AB,$A9,$A7
+            fcb     $A5,$A3,$A0,$9E,$9C,$9A,$97,$95,$93,$90,$8E,$8C,$89,$87,$85,$82
+            fcb     $80,$7E,$7B,$79,$77,$74,$72,$70,$6D,$6B,$69,$66,$64,$62,$60,$5D
+            fcb     $5B,$59,$57,$55,$53,$51,$4F,$4D,$4B,$49,$47,$45,$43,$41,$40,$3E
+            fcb     $3C,$3A,$39,$37,$36,$34,$33,$32,$30,$2F,$2E,$2C,$2B,$2A,$29,$28
+            fcb     $27,$26,$26,$25,$24,$23,$23,$22,$22,$21,$21,$21,$20,$20,$20,$20
+            fcb     $20,$20,$20,$20,$20,$21,$21,$21,$22,$22,$23,$23,$24,$25,$26,$26
+            fcb     $27,$28,$29,$2A,$2B,$2C,$2E,$2F,$30,$32,$33,$34,$36,$37,$39,$3A
+            fcb     $3C,$3E,$40,$41,$43,$45,$47,$49,$4B,$4D,$4F,$51,$53,$55,$57,$59
+            fcb     $5B,$5D,$60,$62,$64,$66,$69,$6B,$6D,$70,$72,$74,$77,$79,$7B,$7E
 
