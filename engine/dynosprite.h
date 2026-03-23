@@ -241,10 +241,31 @@ static asm void PlaySound(byte val) {
 }
 
 static asm byte Random() {
-  asm { 
+  asm {
   jsr Util_Random
   tfr b,a
   rts
+  }
+}
+
+/** Start playing a square wave tone.
+ *  phaseInc = frequency * 65536 / 2000
+ *  e.g. 440 Hz (A4) = 14435 */
+static asm void MusicStart(word phaseInc) {
+  asm {
+  ldd 2,s
+  pshs u
+  jsr Music_Start
+  puls u
+  }
+}
+
+/** Stop music playback */
+static asm void MusicStop() {
+  asm {
+  pshs u
+  jsr Music_Stop
+  puls u
   }
 }
 

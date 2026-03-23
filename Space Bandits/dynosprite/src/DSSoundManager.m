@@ -12,6 +12,15 @@ void PlaySound(int soundIndex) {
     [DSSoundManager.sharedInstance playSoundId:soundIndex];
 }
 
+void MusicStart(int phaseInc) {
+    /* TODO: macOS music synthesis - stub for now */
+    (void)phaseInc;
+}
+
+void MusicStop(void) {
+    /* TODO: macOS music synthesis - stub for now */
+}
+
 static DSSoundManager *_sharedInstance = nil;
 
 @implementation DSSoundManager

@@ -277,5 +277,12 @@ Img_Random200           fcb     154,113,57,130,163,17,86,168,108,37,79,94,69,192
 * User Global Data
 UserGlobals
 UserGlobals_Init	fcb	0
-                        rmb     31	
+                        rmb     31
+
+***********************************************************
+* Music Engine State
+
+Music_Playing           zmb     1       * nonzero if music is active
+Music_PhaseAccum        zmd     1       * 16-bit phase accumulator
+Music_PhaseInc          zmd     1       * 16-bit phase increment (determines frequency)
 

@@ -76,6 +76,8 @@ extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
 extern DynospriteGlobals *DynospriteGlobalsPtr;
 
 void PlaySound(int soundIndex);
+void MusicStart(int phaseInc);
+void MusicStop(void);
 
 #ifdef __cplusplus
 }

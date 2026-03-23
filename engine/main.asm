@@ -47,6 +47,7 @@
             include     loader.asm
             include     input.asm
             include     sound.asm
+            include     music.asm
             include     menu.asm
             include     graphics-sprite.asm
 
@@ -331,6 +332,7 @@ HeapStartAddress        EQU     *
             include     graphics-text.asm
             include     disk.asm
             include     decompress.asm
+            include     music-commands.asm
 
  IFGT *-$FE00
     Error "In main.asm: Secondary code page ($E000-FDFF) is too big!"

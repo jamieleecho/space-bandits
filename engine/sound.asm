@@ -135,6 +135,8 @@ Channel0TestDone@
 Channel1TestDone@
             sta         Sound_ChannelsPlaying
             bne         StillRunning@
+            tst         Music_Playing           * if music is active, generate music samples
+            lbne        Music_RefillBuffer      * instead of disabling audio
  IFEQ SOUND_METHOD-2
             lda         #(PIA1B_Ctrl&$F7)       * clear CB2 output (disable audio on SC77526 chip)
             sta         $FF23
