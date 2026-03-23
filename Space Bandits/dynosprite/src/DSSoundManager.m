@@ -7,18 +7,77 @@
 //
 
 #import "DSSoundManager.h"
+#import <AVFoundation/AVFoundation.h>
 
 void PlaySound(int soundIndex) {
     [DSSoundManager.sharedInstance playSoundId:soundIndex];
 }
 
+/* --- Music synthesis engine (square wave via Core Audio) --- */
+
+static AVAudioEngine *_musicEngine = nil;
+static AVAudioSourceNode *_musicSourceNode = nil;
+static double _musicPhase = 0;
+static double _musicPhaseIncrement = 0;
+static BOOL _musicPlaying = NO;
+static const double kMusicSampleRate = 44100.0;
+static const float kMusicAmplitude = 0.25f;
+
+static void ensureMusicEngine(void) {
+    if (_musicEngine) return;
+
+    _musicEngine = [[AVAudioEngine alloc] init];
+    AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:kMusicSampleRate channels:1];
+
+    _musicSourceNode = [[AVAudioSourceNode alloc] initWithFormat:format renderBlock:
+        ^OSStatus(BOOL *isSilence, const AudioTimeStamp *timestamp,
+                  AVAudioFrameCount frameCount, AudioBufferList *outputData) {
+        if (!_musicPlaying) {
+            *isSilence = YES;
+            memset(outputData->mBuffers[0].mData, 0,
+                   outputData->mBuffers[0].mDataByteSize);
+            return noErr;
+        }
+
+        float *buffer = (float *)outputData->mBuffers[0].mData;
+        double phase = _musicPhase;
+        double phaseInc = _musicPhaseIncrement;
+
+        for (AVAudioFrameCount i = 0; i < frameCount; i++) {
+            buffer[i] = (phase < 0.5) ? -kMusicAmplitude : kMusicAmplitude;
+            phase += phaseInc;
+            if (phase >= 1.0) phase -= 1.0;
+        }
+
+        _musicPhase = phase;
+        *isSilence = NO;
+        return noErr;
+    }];
+
+    [_musicEngine attachNode:_musicSourceNode];
+    [_musicEngine connect:_musicSourceNode to:_musicEngine.mainMixerNode format:format];
+
+    NSError *error = nil;
+    if (![_musicEngine startAndReturnError:&error]) {
+        NSLog(@"Music engine failed to start: %@", error);
+        _musicEngine = nil;
+        _musicSourceNode = nil;
+    }
+}
+
 void MusicStart(int phaseInc) {
-    /* TODO: macOS music synthesis - stub for now */
-    (void)phaseInc;
+    ensureMusicEngine();
+    /* Convert CoCo phase increment to frequency:
+       CoCo: phaseInc = freq * 65536 / 2000
+       So:   freq = phaseInc * 2000.0 / 65536.0 */
+    double freq = phaseInc * 2000.0 / 65536.0;
+    _musicPhaseIncrement = freq / kMusicSampleRate;
+    _musicPhase = 0;
+    _musicPlaying = YES;
 }
 
 void MusicStop(void) {
-    /* TODO: macOS music synthesis - stub for now */
+    _musicPlaying = NO;
 }
 
 static DSSoundManager *_sharedInstance = nil;
