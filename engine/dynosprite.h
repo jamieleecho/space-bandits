@@ -248,7 +248,7 @@ static asm byte Random() {
   }
 }
 
-/** Start playing a tone.
+/** Start playing a tone on voice 0.
  *  phaseInc = frequency * 65536 / AudioSamplingRate */
 static asm void MusicStart(word phaseInc) {
   asm {
@@ -259,11 +259,49 @@ static asm void MusicStart(word phaseInc) {
   }
 }
 
-/** Stop music playback */
+/** Start playing a tone on voice 1. */
+static asm void MusicStart1(word phaseInc) {
+  asm {
+  ldd 2,s
+  pshs u,y
+  jsr Music_Start1
+  puls u,y
+  }
+}
+
+/** Start playing a tone on voice 2. */
+static asm void MusicStart2(word phaseInc) {
+  asm {
+  ldd 2,s
+  pshs u,y
+  jsr Music_Start2
+  puls u,y
+  }
+}
+
+/** Stop all music voices (fade-out) */
 static asm void MusicStop() {
   asm {
   pshs u
   jsr Music_Stop
+  puls u
+  }
+}
+
+/** Stop voice 1 only */
+static asm void MusicStop1() {
+  asm {
+  pshs u
+  jsr Music_Stop1
+  puls u
+  }
+}
+
+/** Stop voice 2 only */
+static asm void MusicStop2() {
+  asm {
+  pshs u
+  jsr Music_Stop2
   puls u
   }
 }

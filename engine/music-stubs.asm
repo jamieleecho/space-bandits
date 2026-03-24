@@ -13,10 +13,9 @@
 
 
 ***********************************************************
-* Music_Start (stub)
-*   Swap in the music code page and call Music_Start_Impl.
+* Music_Start (stub) — set voice 0 frequency
 *
-* - IN:      D = Phase increment (frequency * 65536 / AudioSamplingRate)
+* - IN:      D = Phase increment
 * - OUT:     none
 * - Trashed: A, B, X, Y, U
 ***********************************************************
@@ -35,8 +34,49 @@ Music_Start
 
 
 ***********************************************************
-* Music_Stop (stub)
-*   Swap in the music code page and call Music_Stop_Impl.
+* Music_Start1 (stub) — set voice 1 frequency
+*
+* - IN:      D = Phase increment
+* - OUT:     none
+* - Trashed: A, B
+***********************************************************
+*
+Music_Start1
+            pshs        a
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            lda         1,s
+            jsr         Music_Start1_Impl
+            puls        a
+            sta         $FFA2
+            puls        a,pc
+
+
+***********************************************************
+* Music_Start2 (stub) — set voice 2 frequency
+*
+* - IN:      D = Phase increment
+* - OUT:     none
+* - Trashed: A, B
+***********************************************************
+*
+Music_Start2
+            pshs        a
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            lda         1,s
+            jsr         Music_Start2_Impl
+            puls        a
+            sta         $FFA2
+            puls        a,pc
+
+
+***********************************************************
+* Music_Stop (stub) — stop all voices (fade-out)
 *
 * - IN:      none
 * - OUT:     none
@@ -44,29 +84,77 @@ Music_Start
 ***********************************************************
 *
 Music_Stop
-            lda         $FFA2               * read current $4000-$5FFF page
-            pshs        a                   * save it on stack
+            lda         $FFA2
+            pshs        a
             lda         #MUSIC_CODE_PHYS_PAGE
-            sta         $FFA2               * map music code page to $4000
-            jsr         Music_Stop_Impl     * call implementation at $4000
-            puls        a                   * restore saved $FFA2 value
-            sta         $FFA2               * restore previous $4000-$5FFF mapping
+            sta         $FFA2
+            jsr         Music_Stop_Impl
+            puls        a
+            sta         $FFA2
             rts
 
 
 ***********************************************************
-* Music_MixIntoBuffer
-*   Add music samples into an existing Sound_PageBuffer that
-*   already contains sound effect data. Each music sample is
-*   converted to a signed offset from center ($80) and added
-*   to the existing buffer contents.
+* Music_Stop1 (stub) — stop voice 1 only
 *
-*   Called as a tail-call from Sound_RefillBuffer when both
-*   SFX and music are active simultaneously.
+* - IN:      none
+* - OUT:     none
+* - Trashed: A
+***********************************************************
 *
-*   This lives in the secondary code page (not primary) to save
-*   space. The secondary page is always mapped at $E000 during
-*   FIRQ since disk I/O disables interrupts before unmapping it.
+Music_Stop1
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            jsr         Music_Stop1_Impl
+            puls        a
+            sta         $FFA2
+            rts
+
+
+***********************************************************
+* Music_Stop2 (stub) — stop voice 2 only
+*
+* - IN:      none
+* - OUT:     none
+* - Trashed: A
+***********************************************************
+*
+Music_Stop2
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            jsr         Music_Stop2_Impl
+            puls        a
+            sta         $FFA2
+            rts
+
+
+***********************************************************
+* Music_RefillBuffer (stub)
+*   Swap in the tertiary code page and call Music_RefillBuffer_Impl.
+*
+* - IN:      none (DP may be invalid if called from FIRQ)
+* - OUT:     none
+* - Trashed: A, B, X, Y, U
+***********************************************************
+*
+Music_RefillBuffer
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            jsr         Music_RefillBuffer_Impl
+            puls        a
+            sta         $FFA2
+            rts
+
+
+***********************************************************
+* Music_MixIntoBuffer (stub)
+*   Swap in the tertiary code page and call Music_MixIntoBuffer_Impl.
 *
 * - IN:      none (DP may be invalid if called from FIRQ)
 * - OUT:     none
@@ -74,66 +162,13 @@ Music_Stop
 ***********************************************************
 *
 Music_MixIntoBuffer
-            ldu         #Sound_PageBuffer       * U = buffer pointer
-            ldy         Music_PhaseAccum        * Y = 16-bit phase accumulator
-            lda         Music_Playing
-            cmpa        #2
-            beq         MusicMixFade
-            andcc       #$AF                    * re-enable interrupts so VSync is not delayed
-* --- Normal playback: add music to existing SFX buffer ---
-MusicMixLoop@
-            ldd         Music_PhaseInc          * D = phase increment
-            leay        d,y                     * Y += D (advance phase)
-            tfr         y,d                     * A = phase high byte
-            tfr         a,b                     * B = phase high byte (for ABX)
-            andb        #$7F                    * B = half-table index (0-127)
-            ldx         #Music_WaveTable        * X = wavetable base (128 entries)
-            abx                                 * X = table + index
-            ldb         ,x                      * B = waveform sample from first half
-            tsta                                * test bit 7 of original phase byte
-            bpl         MusicMixStore@          * if positive half (0-127), use sample as-is
-            negb                                * negate for second half (128-255)
-MusicMixStore@
-            subb        #$80                    * convert to signed offset from center
-            addb        ,u                      * add to existing SFX sample
-            stb         ,u+                     * store mixed result
-            cmpu        #Sound_PageBuffer+256
-            bne         MusicMixLoop@
-            sty         Music_PhaseAccum
-            rts
-
-* --- Fade-out path: mix with fade until zero crossing ---
-MusicMixFade
-            andcc       #$AF                    * re-enable interrupts so VSync is not delayed
-MusicMixFadeLoop@
-            ldd         Music_PhaseInc
-            leay        d,y
-            tfr         y,d
-            tfr         a,b
-            andb        #$7F
-            ldx         #Music_WaveTable
-            abx
-            ldb         ,x
-            tsta
-            bpl         MusicMixFadeCheck@
-            negb
-MusicMixFadeCheck@
-            cmpb        #$7C                    * near center?
-            blo         MusicMixFadeStore@      * no, below range
-            cmpb        #$84
-            blo         MusicMixFadeCross@      * yes, at zero crossing
-MusicMixFadeStore@
-            subb        #$80                    * convert to signed offset from center
-            addb        ,u                      * add to existing SFX sample
-            stb         ,u+                     * store mixed result
-            cmpu        #Sound_PageBuffer+256
-            bne         MusicMixFadeLoop@
-            sty         Music_PhaseAccum        * didn't cross yet, try next buffer
-            rts
-MusicMixFadeCross@
-            * Zero crossing reached — stop music. Remaining buffer keeps SFX only.
-            clr         Music_Playing
-            sty         Music_PhaseAccum
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            jsr         Music_MixIntoBuffer_Impl
+            puls        a
+            sta         $FFA2
             rts
 
 
@@ -147,7 +182,7 @@ MusicMixFadeCross@
 *   is symmetric: sample[128+i] = $100 - sample[i].
 *
 *   This MUST remain in the secondary code page because
-*   Music_RefillBuffer (primary page, FIRQ context) references it
+*   Music_RefillBuffer (FIRQ context) references it
 *   and $4000 may not have the music code page mapped at that time.
 ***********************************************************
 *

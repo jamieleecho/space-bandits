@@ -77,7 +77,11 @@ extern DynospriteGlobals *DynospriteGlobalsPtr;
 
 void PlaySound(int soundIndex);
 void MusicStart(int phaseInc);
+void MusicStart1(int phaseInc);
+void MusicStart2(int phaseInc);
 void MusicStop(void);
+void MusicStop1(void);
+void MusicStop2(void);
 
 #ifdef __cplusplus
 }

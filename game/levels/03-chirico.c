@@ -14,13 +14,19 @@ extern "C" {
 #define TWINKLE_LENGTH 48
 #define TWINKLE_TEMPO 18   /* frames per note (~3.3 notes/sec at 60fps) */
 
-/* Phase increments for notes in octave 3 */
-#define PHASE_C4 4286
-#define PHASE_D4 4811
-#define PHASE_E4 5400
-#define PHASE_F4 5722
-#define PHASE_G4 6423
-#define PHASE_A4 7209
+/* Phase increments: freq * 65536 / 2000 */
+/* Octave 3 (melody) */
+#define PHASE_C3 4286
+#define PHASE_D3 4811
+#define PHASE_E3 5400
+#define PHASE_F3 5722
+#define PHASE_G3 6423
+#define PHASE_A3 7209
+#define PHASE_B3 8092
+/* Octave 4 (harmony) */
+#define PHASE_C4 8573
+#define PHASE_E4 10801
+#define PHASE_G4 12845
 
 /*
  * Twinkle Twinkle Little Star melody (6 phrases of 8 beats):
@@ -46,22 +52,51 @@ static word getTwinkleNote(byte pos) {
 
     /* Phrase A: C G A G */
     if (phrase == 0 || phrase == 4) {
-        if (slot == 0) return PHASE_C4;
-        if (slot == 2) return PHASE_A4;
-        return PHASE_G4;  /* slots 1 and 3 */
+        if (slot == 0) return PHASE_C3;
+        if (slot == 2) return PHASE_A3;
+        return PHASE_G3;  /* slots 1 and 3 */
     }
     /* Phrase B: F E D C */
     if (phrase == 1 || phrase == 5) {
-        if (slot == 0) return PHASE_F4;
-        if (slot == 1) return PHASE_E4;
-        if (slot == 2) return PHASE_D4;
-        return PHASE_C4;
+        if (slot == 0) return PHASE_F3;
+        if (slot == 1) return PHASE_E3;
+        if (slot == 2) return PHASE_D3;
+        return PHASE_C3;
     }
     /* Phrase C: G F E D */
-    if (slot == 0) return PHASE_G4;
-    if (slot == 1) return PHASE_F4;
-    if (slot == 2) return PHASE_E4;
-    return PHASE_D4;
+    if (slot == 0) return PHASE_G3;
+    if (slot == 1) return PHASE_F3;
+    if (slot == 2) return PHASE_E3;
+    return PHASE_D3;
+}
+
+/*
+ * Get chord tones (3rd and 5th) for each phrase.
+ * Returns the two harmony notes via pointers.
+ * Chords:
+ *   Phrase A (C,G,A,G): C major (C-E-G) for C slots, G for G, Am for A
+ *   Phrase B (F,E,D,C): F major for F, C major for C/E, Dm for D
+ *   Phrase C (G,F,E,D): G major for G, F for F, C for E, Dm for D
+ *
+ * Simplified: one chord per phrase for a clean sound.
+ *   Phrase A: C major (E3, G3)
+ *   Phrase B: F major (A3, C4)
+ *   Phrase C: G major (B3, D3) — but we use (B3, G4/2) for a lighter voicing
+ */
+static void getTwinkleChord(byte phrase, word *v1, word *v2) {
+    if (phrase == 0 || phrase == 4) {
+        /* C major: E + G */
+        *v1 = PHASE_E3;
+        *v2 = PHASE_G3;
+    } else if (phrase == 1 || phrase == 5) {
+        /* F major: A + C */
+        *v1 = PHASE_A3;
+        *v2 = PHASE_C4;
+    } else {
+        /* G major: B + D */
+        *v1 = PHASE_B3;
+        *v2 = PHASE_D3;
+    }
 }
 
 
@@ -95,8 +130,11 @@ byte ChiricoCalculateBkgrndNewXY() {
         globals->counter++;
         if (globals->counter >= TWINKLE_TEMPO) {
             word note;
+            word chord1, chord2;
+            byte phrase;
             globals->counter = 0;
             note = getTwinkleNote(globals->gameWave);
+            phrase = globals->gameWave >> 3;
             if (globals->gameWave < TWINKLE_LENGTH - 1) {
                 globals->gameWave++;
             } else {
@@ -104,6 +142,9 @@ byte ChiricoCalculateBkgrndNewXY() {
             }
             if (note) {
                 MusicStart(note);
+                getTwinkleChord(phrase, &chord1, &chord2);
+                MusicStart1(chord1);
+                MusicStart2(chord2);
             } else {
                 MusicStop();
             }

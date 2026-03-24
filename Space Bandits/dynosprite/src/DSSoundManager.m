@@ -16,10 +16,14 @@ void PlaySound(int soundIndex) {
 
 /* --- Music synthesis engine (sine wave via Core Audio) --- */
 
+/* --- Music synthesis engine (3-voice sine wave via Core Audio) --- */
+
+#define MUSIC_NUM_VOICES 3
+
 static AVAudioEngine *_musicEngine = nil;
 static AVAudioSourceNode *_musicSourceNode = nil;
-static double _musicPhase = 0;
-static double _musicPhaseIncrement = 0;
+static double _musicPhase[MUSIC_NUM_VOICES] = {0, 0, 0};
+static double _musicPhaseIncrement[MUSIC_NUM_VOICES] = {0, 0, 0};
 static int _musicState = 0;       /* 0=stopped, 1=playing, 2=fading out */
 static float _musicFadeGain = 1.0f;
 static const double kMusicSampleRate = 44100.0;
@@ -45,20 +49,26 @@ static void ensureMusicEngine(void) {
         }
 
         float *buffer = (float *)outputData->mBuffers[0].mData;
-        double phase = _musicPhase;
-        double phaseInc = _musicPhaseIncrement;
+        double phase[MUSIC_NUM_VOICES];
+        double phaseInc[MUSIC_NUM_VOICES];
+        for (int v = 0; v < MUSIC_NUM_VOICES; v++) {
+            phase[v] = _musicPhase[v];
+            phaseInc[v] = _musicPhaseIncrement[v];
+        }
         float gain = _musicFadeGain;
 
         for (AVAudioFrameCount i = 0; i < frameCount; i++) {
-            float sample = kMusicAmplitude * sinf((float)(phase * 2.0 * M_PI));
+            float sample = 0.0f;
+            for (int v = 0; v < MUSIC_NUM_VOICES; v++) {
+                sample += kMusicAmplitude * sinf((float)(phase[v] * 2.0 * M_PI));
+                phase[v] += phaseInc[v];
+                if (phase[v] >= 1.0) phase[v] -= 1.0;
+            }
             buffer[i] = sample * gain;
-            phase += phaseInc;
-            if (phase >= 1.0) phase -= 1.0;
             if (state == 2) {
                 gain -= kMusicFadeStep;
                 if (gain <= 0.0f) {
                     gain = 0.0f;
-                    /* Fill rest with silence */
                     for (AVAudioFrameCount j = i + 1; j < frameCount; j++) {
                         buffer[j] = 0.0f;
                     }
@@ -68,7 +78,9 @@ static void ensureMusicEngine(void) {
             }
         }
 
-        _musicPhase = phase;
+        for (int v = 0; v < MUSIC_NUM_VOICES; v++) {
+            _musicPhase[v] = phase[v];
+        }
         _musicFadeGain = gain;
         *isSilence = NO;
         return noErr;
@@ -85,23 +97,26 @@ static void ensureMusicEngine(void) {
     }
 }
 
-void MusicStart(int phaseInc) {
+static void musicStartVoice(int voice, int phaseInc) {
     ensureMusicEngine();
-    /* Convert CoCo phase increment to frequency:
-       CoCo: phaseInc = freq * 65536 / 2000
-       So:   freq = phaseInc * 2000.0 / 65536.0 */
     double freq = phaseInc * 2000.0 / 65536.0;
-    _musicPhaseIncrement = freq / kMusicSampleRate;
-    /* Don't reset _musicPhase — continuous waveform avoids pops */
+    _musicPhaseIncrement[voice] = freq / kMusicSampleRate;
     _musicFadeGain = 1.0f;
     _musicState = 1;
 }
+
+void MusicStart(int phaseInc)  { musicStartVoice(0, phaseInc); }
+void MusicStart1(int phaseInc) { musicStartVoice(1, phaseInc); }
+void MusicStart2(int phaseInc) { musicStartVoice(2, phaseInc); }
 
 void MusicStop(void) {
     if (_musicState == 1) {
         _musicState = 2;  /* begin fade-out */
     }
 }
+
+void MusicStop1(void) { _musicPhaseIncrement[1] = 0; }
+void MusicStop2(void) { _musicPhaseIncrement[2] = 0; }
 
 static DSSoundManager *_sharedInstance = nil;
 
