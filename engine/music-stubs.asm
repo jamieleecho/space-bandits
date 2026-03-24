@@ -9,15 +9,28 @@
 *
 * Music_WaveTable remains here (secondary page) because it is accessed by
 * Music_RefillBuffer during FIRQ, when $4000 may have sprite code mapped.
+*
+* Controlled by MUSIC_VOICES (0-3). When 0, all stubs are no-ops.
 *********************************************************************************
 
 
+ IFEQ MUSIC_VOICES
+* --- MUSIC_VOICES=0: all stubs are no-ops ---
+Music_Start
+Music_Start1
+Music_Start2
+Music_Stop
+Music_Stop1
+Music_Stop2
+Music_RefillBuffer
+Music_MixIntoBuffer
+            rts
+
+ ELSE
+* --- MUSIC_VOICES >= 1 ---
+
 ***********************************************************
 * Music_Start (stub) — set voice 0 frequency
-*
-* - IN:      D = Phase increment
-* - OUT:     none
-* - Trashed: A, B, X, Y, U
 ***********************************************************
 *
 Music_Start
@@ -32,13 +45,51 @@ Music_Start
             sta         $FFA2               * restore previous $4000-$5FFF mapping
             puls        a,pc                * discard saved A and return
 
+***********************************************************
+* Music_Stop (stub) — stop all voices (fade-out)
+***********************************************************
+*
+Music_Stop
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            jsr         Music_Stop_Impl
+            puls        a
+            sta         $FFA2
+            rts
 
 ***********************************************************
-* Music_Start1 (stub) — set voice 1 frequency
+* Music_RefillBuffer (stub)
+***********************************************************
 *
-* - IN:      D = Phase increment
-* - OUT:     none
-* - Trashed: A, B
+Music_RefillBuffer
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            jsr         Music_RefillBuffer_Impl
+            puls        a
+            sta         $FFA2
+            rts
+
+***********************************************************
+* Music_MixIntoBuffer (stub)
+***********************************************************
+*
+Music_MixIntoBuffer
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            jsr         Music_MixIntoBuffer_Impl
+            puls        a
+            sta         $FFA2
+            rts
+
+ IFGE MUSIC_VOICES-2
+***********************************************************
+* Music_Start1 (stub) — set voice 1 frequency
 ***********************************************************
 *
 Music_Start1
@@ -53,13 +104,30 @@ Music_Start1
             sta         $FFA2
             puls        a,pc
 
+***********************************************************
+* Music_Stop1 (stub) — stop voice 1 only
+***********************************************************
+*
+Music_Stop1
+            lda         $FFA2
+            pshs        a
+            lda         #MUSIC_CODE_PHYS_PAGE
+            sta         $FFA2
+            jsr         Music_Stop1_Impl
+            puls        a
+            sta         $FFA2
+            rts
 
+ ELSE
+* MUSIC_VOICES=1: voice 1 stubs are no-ops
+Music_Start1
+Music_Stop1
+            rts
+ ENDC
+
+ IFGE MUSIC_VOICES-3
 ***********************************************************
 * Music_Start2 (stub) — set voice 2 frequency
-*
-* - IN:      D = Phase increment
-* - OUT:     none
-* - Trashed: A, B
 ***********************************************************
 *
 Music_Start2
@@ -74,51 +142,8 @@ Music_Start2
             sta         $FFA2
             puls        a,pc
 
-
-***********************************************************
-* Music_Stop (stub) — stop all voices (fade-out)
-*
-* - IN:      none
-* - OUT:     none
-* - Trashed: A
-***********************************************************
-*
-Music_Stop
-            lda         $FFA2
-            pshs        a
-            lda         #MUSIC_CODE_PHYS_PAGE
-            sta         $FFA2
-            jsr         Music_Stop_Impl
-            puls        a
-            sta         $FFA2
-            rts
-
-
-***********************************************************
-* Music_Stop1 (stub) — stop voice 1 only
-*
-* - IN:      none
-* - OUT:     none
-* - Trashed: A
-***********************************************************
-*
-Music_Stop1
-            lda         $FFA2
-            pshs        a
-            lda         #MUSIC_CODE_PHYS_PAGE
-            sta         $FFA2
-            jsr         Music_Stop1_Impl
-            puls        a
-            sta         $FFA2
-            rts
-
-
 ***********************************************************
 * Music_Stop2 (stub) — stop voice 2 only
-*
-* - IN:      none
-* - OUT:     none
-* - Trashed: A
 ***********************************************************
 *
 Music_Stop2
@@ -131,45 +156,14 @@ Music_Stop2
             sta         $FFA2
             rts
 
-
-***********************************************************
-* Music_RefillBuffer (stub)
-*   Swap in the tertiary code page and call Music_RefillBuffer_Impl.
-*
-* - IN:      none (DP may be invalid if called from FIRQ)
-* - OUT:     none
-* - Trashed: A, B, X, Y, U
-***********************************************************
-*
-Music_RefillBuffer
-            lda         $FFA2
-            pshs        a
-            lda         #MUSIC_CODE_PHYS_PAGE
-            sta         $FFA2
-            jsr         Music_RefillBuffer_Impl
-            puls        a
-            sta         $FFA2
+ ELSE
+* MUSIC_VOICES<3: voice 2 stubs are no-ops
+Music_Start2
+Music_Stop2
             rts
+ ENDC
 
-
-***********************************************************
-* Music_MixIntoBuffer (stub)
-*   Swap in the tertiary code page and call Music_MixIntoBuffer_Impl.
-*
-* - IN:      none (DP may be invalid if called from FIRQ)
-* - OUT:     none
-* - Trashed: A, B, X, Y, U
-***********************************************************
-*
-Music_MixIntoBuffer
-            lda         $FFA2
-            pshs        a
-            lda         #MUSIC_CODE_PHYS_PAGE
-            sta         $FFA2
-            jsr         Music_MixIntoBuffer_Impl
-            puls        a
-            sta         $FFA2
-            rts
+ ENDC
 
 
 ***********************************************************
@@ -187,6 +181,7 @@ Music_MixIntoBuffer
 *   and $4000 may not have the music code page mapped at that time.
 ***********************************************************
 *
+ IFGE MUSIC_VOICES-1
 Music_WaveTable
             fcb     $80,$80,$80,$81,$81,$81,$81,$82,$82,$82,$82,$83,$83,$83,$83,$84
             fcb     $84,$84,$84,$84,$85,$85,$85,$85,$86,$86,$86,$86,$86,$87,$87,$87
@@ -196,4 +191,5 @@ Music_WaveTable
             fcb     $89,$89,$89,$89,$89,$89,$89,$88,$88,$88,$88,$88,$88,$88,$87,$87
             fcb     $87,$87,$87,$87,$86,$86,$86,$86,$86,$85,$85,$85,$85,$84,$84,$84
             fcb     $84,$84,$83,$83,$83,$83,$82,$82,$82,$82,$81,$81,$81,$81,$80,$80
+ ENDC
 

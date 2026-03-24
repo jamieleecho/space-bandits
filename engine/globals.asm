@@ -280,13 +280,19 @@ UserGlobals_Init	fcb	0
                         rmb     31
 
 ***********************************************************
-* Music Engine State (3 voices)
+* Music Engine State (MUSIC_VOICES voices)
 
 Music_Playing           zmb     1       * nonzero if music is active (1=playing, 2=fading)
+ IFGE MUSIC_VOICES-1
 Music_PhaseAccum0       zmd     1       * voice 0: 16-bit phase accumulator
 Music_PhaseInc0         zmd     1       * voice 0: 16-bit phase increment (0 = silent)
+ ENDC
+ IFGE MUSIC_VOICES-2
 Music_PhaseAccum1       zmd     1       * voice 1: 16-bit phase accumulator
 Music_PhaseInc1         zmd     1       * voice 1: 16-bit phase increment (0 = silent)
+ ENDC
+ IFGE MUSIC_VOICES-3
 Music_PhaseAccum2       zmd     1       * voice 2: 16-bit phase accumulator
 Music_PhaseInc2         zmd     1       * voice 2: 16-bit phase increment (0 = silent)
+ ENDC
 

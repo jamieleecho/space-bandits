@@ -7,10 +7,10 @@
 * ($4000). These are called via stubs in the secondary code page (music-stubs.asm)
 * that swap this page in/out of $4000-$5FFF via $FFA2.
 *
-* Music_WaveTable remains in the secondary code page (music-stubs.asm)
-* for accessibility during FIRQ and from game code.
+* Controlled by MUSIC_VOICES (0-3). When 0, this file emits nothing.
 *********************************************************************************
 
+ IFGE MUSIC_VOICES-1
 
 ***********************************************************
 * Music_Start_Impl — set voice 0 frequency and start music
@@ -57,33 +57,26 @@ MusicStartDone@
             rts
 
 
+ IFGE MUSIC_VOICES-2
 ***********************************************************
 * Music_Start1_Impl — set voice 1 frequency
-*   If music is not playing, starts it.
-*
-* - IN:      D = Phase increment
-* - OUT:     none
-* - Trashed: A, B
 ***********************************************************
 *
 Music_Start1_Impl
             std         Music_PhaseInc1
             tst         Music_Playing
             bne         >
-            * Music not yet active — start it via voice 0 path
             ldd         Music_PhaseInc0
             bra         Music_Start_Impl
-!           lda         #1                      * cancel any fade-out
+!           lda         #1
             sta         Music_Playing
             rts
+ ENDC
 
 
+ IFGE MUSIC_VOICES-3
 ***********************************************************
 * Music_Start2_Impl — set voice 2 frequency
-*
-* - IN:      D = Phase increment
-* - OUT:     none
-* - Trashed: A, B
 ***********************************************************
 *
 Music_Start2_Impl
@@ -95,81 +88,62 @@ Music_Start2_Impl
 !           lda         #1
             sta         Music_Playing
             rts
+ ENDC
 
 
 ***********************************************************
 * Music_Stop_Impl — stop all voices (begin fade-out)
-*
-* - IN:      none
-* - OUT:     none
-* - Trashed: A
 ***********************************************************
 *
 Music_Stop_Impl
             lda         Music_Playing
-            beq         MusicStopDone@          * already stopped
-            lda         #2                      * set fade-out state
+            beq         MusicStopDone@
+            lda         #2
             sta         Music_Playing
 MusicStopDone@
             rts
 
 
+ IFGE MUSIC_VOICES-2
 ***********************************************************
 * Music_Stop1_Impl — silence voice 1 only
-*
-* - IN:      none
-* - OUT:     none
-* - Trashed: A, B
 ***********************************************************
 *
 Music_Stop1_Impl
             ldd         #0
             std         Music_PhaseInc1
             rts
+ ENDC
 
 
+ IFGE MUSIC_VOICES-3
 ***********************************************************
 * Music_Stop2_Impl — silence voice 2 only
-*
-* - IN:      none
-* - OUT:     none
-* - Trashed: A, B
 ***********************************************************
 *
 Music_Stop2_Impl
             ldd         #0
             std         Music_PhaseInc2
             rts
+ ENDC
 
 
 ***********************************************************
 * Music_RefillBuffer_Impl
-*   Generate 256 samples into Sound_PageBuffer by mixing 3 voices.
-*   Each voice uses the half-wavetable with its own phase accumulator.
-*   Voices with PhaseInc=0 are silent (phase stays at 0, table[0]=$80,
-*   offset=0 after centering).
-*
-*   When Music_Playing = 2 (fade-out), generates samples until the
-*   mixed waveform is near center, then fills with center value.
-*
-*   Note: serial bit ($02) is always OR'd into samples.
-*
-* - IN:      none (DP may be invalid if called from FIRQ)
-* - OUT:     none
-* - Trashed: A, B, X, Y, U
+*   Generate 256 samples into Sound_PageBuffer.
+*   Number of voices depends on MUSIC_VOICES setting.
 ***********************************************************
 *
 Music_Sample    rmb     1
 *
 Music_RefillBuffer_Impl
-            ldu         #Sound_PageBuffer       * U = output buffer pointer
+            ldu         #Sound_PageBuffer
             lda         Music_Playing
             cmpa        #2
             lbeq        MusicRefillFade
-            andcc       #$AF                    * re-enable interrupts so VSync is not delayed
-* --- Normal 3-voice playback ---
+            andcc       #$AF
 MusicRefillLoop@
-            lda         #$80                    * A = running sum, start at center
+            lda         #$80
             sta         Music_Sample
             * --- Voice 0 ---
             ldy         Music_PhaseAccum0
@@ -187,6 +161,7 @@ MusicRefillLoop@
             negb
 V0Store@    subb        #$80
             addb        Music_Sample
+ IFGE MUSIC_VOICES-2
             stb         Music_Sample
             * --- Voice 1 ---
             ldy         Music_PhaseAccum1
@@ -204,6 +179,8 @@ V0Store@    subb        #$80
             negb
 V1Store@    subb        #$80
             addb        Music_Sample
+ ENDC
+ IFGE MUSIC_VOICES-3
             stb         Music_Sample
             * --- Voice 2 ---
             ldy         Music_PhaseAccum2
@@ -221,15 +198,16 @@ V1Store@    subb        #$80
             negb
 V2Store@    subb        #$80
             addb        Music_Sample
-            orb         #2                      * serial out bit
-            stb         ,u+                     * store mixed sample
+ ENDC
+            orb         #2
+            stb         ,u+
             cmpu        #Sound_PageBuffer+256
             bne         MusicRefillLoop@
             rts
 
-* --- Fade-out path (Music_Playing = 2) ---
+* --- Fade-out path ---
 MusicRefillFade
-            andcc       #$AF                    * re-enable interrupts so VSync is not delayed
+            andcc       #$AF
 MusicFadeLoop@
             lda         #$80
             sta         Music_Sample
@@ -249,6 +227,7 @@ MusicFadeLoop@
             negb
 FV0Store@   subb        #$80
             addb        Music_Sample
+ IFGE MUSIC_VOICES-2
             stb         Music_Sample
             * --- Voice 1 ---
             ldy         Music_PhaseAccum1
@@ -266,6 +245,8 @@ FV0Store@   subb        #$80
             negb
 FV1Store@   subb        #$80
             addb        Music_Sample
+ ENDC
+ IFGE MUSIC_VOICES-3
             stb         Music_Sample
             * --- Voice 2 ---
             ldy         Music_PhaseAccum2
@@ -283,7 +264,7 @@ FV1Store@   subb        #$80
             negb
 FV2Store@   subb        #$80
             addb        Music_Sample
-            * B = final mixed sample — check if near center
+ ENDC
             cmpb        #$7C
             blo         MusicFadeStore@
             cmpb        #$84
@@ -293,9 +274,9 @@ MusicFadeStore@
             stb         ,u+
             cmpu        #Sound_PageBuffer+256
             lbne        MusicFadeLoop@
-            rts                                 * didn't cross yet, try next buffer
+            rts
 MusicFadeCross@
-            lda         #$82                    * center ($80) + serial bit
+            lda         #$82
 MusicFadeFill@
             sta         ,u+
             cmpu        #Sound_PageBuffer+256
@@ -306,12 +287,7 @@ MusicFadeFill@
 
 ***********************************************************
 * Music_MixIntoBuffer_Impl
-*   Add 3-voice music samples into an existing Sound_PageBuffer
-*   that already contains sound effect data.
-*
-* - IN:      none (DP may be invalid if called from FIRQ)
-* - OUT:     none
-* - Trashed: A, B, X, Y, U
+*   Add music samples into an existing Sound_PageBuffer.
 ***********************************************************
 *
 Music_MixSample     rmb     1
@@ -322,9 +298,8 @@ Music_MixIntoBuffer_Impl
             cmpa        #2
             beq         MusicMixFade
             andcc       #$AF
-* --- Normal 3-voice mix into SFX buffer ---
 MusicMixLoop@
-            clr         Music_MixSample         * signed offset accumulator starts at 0
+            clr         Music_MixSample
             * --- Voice 0 ---
             ldy         Music_PhaseAccum0
             ldd         Music_PhaseInc0
@@ -341,6 +316,7 @@ MusicMixLoop@
             negb
 MV0Store@   subb        #$80
             addb        Music_MixSample
+ IFGE MUSIC_VOICES-2
             stb         Music_MixSample
             * --- Voice 1 ---
             ldy         Music_PhaseAccum1
@@ -358,6 +334,8 @@ MV0Store@   subb        #$80
             negb
 MV1Store@   subb        #$80
             addb        Music_MixSample
+ ENDC
+ IFGE MUSIC_VOICES-3
             stb         Music_MixSample
             * --- Voice 2 ---
             ldy         Music_PhaseAccum2
@@ -375,13 +353,14 @@ MV1Store@   subb        #$80
             negb
 MV2Store@   subb        #$80
             addb        Music_MixSample
-            addb        ,u                      * add to existing SFX sample
+ ENDC
+            addb        ,u
             stb         ,u+
             cmpu        #Sound_PageBuffer+256
             bne         MusicMixLoop@
             rts
 
-* --- Fade-out path: mix 3 voices with fade until zero crossing ---
+* --- Fade-out path ---
 MusicMixFade
             andcc       #$AF
 MusicMixFadeLoop@
@@ -402,6 +381,7 @@ MusicMixFadeLoop@
             negb
 MFV0Store@  subb        #$80
             addb        Music_MixSample
+ IFGE MUSIC_VOICES-2
             stb         Music_MixSample
             * --- Voice 1 ---
             ldy         Music_PhaseAccum1
@@ -419,6 +399,8 @@ MFV0Store@  subb        #$80
             negb
 MFV1Store@  subb        #$80
             addb        Music_MixSample
+ ENDC
+ IFGE MUSIC_VOICES-3
             stb         Music_MixSample
             * --- Voice 2 ---
             ldy         Music_PhaseAccum2
@@ -436,18 +418,20 @@ MFV1Store@  subb        #$80
             negb
 MFV2Store@  subb        #$80
             addb        Music_MixSample
-            * B = signed music offset sum — check if near center (0)
-            cmpb        #$FC                    * -4 in signed
+ ENDC
+            cmpb        #$FC
             blt         MusicMixFadeStore@
             cmpb        #$04
             blt         MusicMixFadeCross@
 MusicMixFadeStore@
-            addb        ,u                      * add to existing SFX sample
+            addb        ,u
             stb         ,u+
             cmpu        #Sound_PageBuffer+256
             lbne        MusicMixFadeLoop@
-            rts                                 * didn't cross yet, try next buffer
+            rts
 MusicMixFadeCross@
             clr         Music_Playing
             rts
+
+ ENDC
 

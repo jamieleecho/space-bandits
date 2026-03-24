@@ -142,6 +142,11 @@ endif
 ifeq ($(FAST_BACKGROUND), 1)
   ASMFLAGS += --define=FAST_BACKGROUND
 endif
+ifeq ($(MUSIC_VOICES),)
+  ASMFLAGS += --define=MUSIC_VOICES=3
+else
+  ASMFLAGS += --define=MUSIC_VOICES=$(MUSIC_VOICES)
+endif
 ifneq ($(VERBOSE_ERRORS), 0)
   ASMFLAGS += --define=VERBOSE_ERRORS
 endif
