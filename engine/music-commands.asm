@@ -206,7 +206,7 @@ Music_RefillBuffer_Impl
             ldu         #Sound_PageBuffer
             lda         Music_Playing
             cmpa        #2
-            lbeq        MusicRefillFade
+            beq         MusicRefillFade
             andcc       #$AF
 MusicRefillLoop@
             * --- Voice 0 (stores raw value, no centering needed) ---
@@ -337,7 +337,7 @@ MusicFadeStore@
             orb         #2
             stb         ,u+
             cmpu        #Sound_PageBuffer+256
-            lbne        MusicFadeLoop@
+            bne         MusicFadeLoop@
             rts
 MusicFadeCross@
             lda         #$82
@@ -488,7 +488,7 @@ MusicMixFadeStore@
             addb        ,u
             stb         ,u+
             cmpu        #Sound_PageBuffer+256
-            lbne        MusicMixFadeLoop@
+            bne         MusicMixFadeLoop@
             rts
 MusicMixFadeCross@
             clr         Music_Playing
