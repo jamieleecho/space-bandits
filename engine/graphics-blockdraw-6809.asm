@@ -704,21 +704,17 @@ Gfx_DrawBlockRows
             sta         RowCount@
             leau        $3FFF,y                 * U = odd buffer dest (offset -1 from even)
 DrawSafeLoop@
-            ldd         ,x                      * copy 8 bytes to even buffer
+            ldd         ,x                      * load 2 bytes, write to both buffers
             std         ,y
-            ldd         2,x
-            std         2,y
-            ldd         4,x
-            std         4,y
-            ldd         6,x
-            std         6,y
-            ldd         ,x                      * copy 8 bytes to odd buffer
             std         ,u
             ldd         2,x
+            std         2,y
             std         2,u
             ldd         4,x
+            std         4,y
             std         4,u
             ldd         6,x
+            std         6,y
             std         6,u
             leax        8,x                     * advance source by 8 bytes
             leay        $100,y                  * advance even dest by 256 (next screen row)
