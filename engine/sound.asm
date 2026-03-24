@@ -194,7 +194,7 @@ CopyOneChannelLoop@
             inc         1,x                     * update Chan*Ptr
             lda         <PreMappedPages@,PCR
             sta         $FFA2                   * re-map the page that was previously at $4000
-            rts
+            lbra        SndRefill_CheckMusic@
 *
 PreMappedPages@         zmb     2
 *
@@ -366,5 +366,8 @@ CopyTwoChannelsDAC6_6809@
 TwoChannelsDone@
             ldd         PreMappedPages@,PCR
             std         $FFA2                   * re-map the pages that were previously at $4000 and $6000
+SndRefill_CheckMusic@
+            tst         Music_Playing
+            lbne        Music_MixIntoBuffer     * tail call — mix music into SFX buffer
             rts
 

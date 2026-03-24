@@ -57,6 +57,89 @@ Music_Stop
 
 
 ***********************************************************
+* Music_MixIntoBuffer
+*   Add music samples into an existing Sound_PageBuffer that
+*   already contains sound effect data. Each music sample is
+*   converted to a signed offset from center ($80) and added
+*   to the existing buffer contents.
+*
+*   Called as a tail-call from Sound_RefillBuffer when both
+*   SFX and music are active simultaneously.
+*
+*   This lives in the secondary code page (not primary) to save
+*   space. The secondary page is always mapped at $E000 during
+*   FIRQ since disk I/O disables interrupts before unmapping it.
+*
+* - IN:      none (DP may be invalid if called from FIRQ)
+* - OUT:     none
+* - Trashed: A, B, X, Y, U
+***********************************************************
+*
+Music_MixIntoBuffer
+            ldu         #Sound_PageBuffer       * U = buffer pointer
+            ldy         Music_PhaseAccum        * Y = 16-bit phase accumulator
+            lda         Music_Playing
+            cmpa        #2
+            beq         MusicMixFade
+            andcc       #$AF                    * re-enable interrupts so VSync is not delayed
+* --- Normal playback: add music to existing SFX buffer ---
+MusicMixLoop@
+            ldd         Music_PhaseInc          * D = phase increment
+            leay        d,y                     * Y += D (advance phase)
+            tfr         y,d                     * A = phase high byte
+            tfr         a,b                     * B = phase high byte (for ABX)
+            andb        #$7F                    * B = half-table index (0-127)
+            ldx         #Music_WaveTable        * X = wavetable base (128 entries)
+            abx                                 * X = table + index
+            ldb         ,x                      * B = waveform sample from first half
+            tsta                                * test bit 7 of original phase byte
+            bpl         MusicMixStore@          * if positive half (0-127), use sample as-is
+            negb                                * negate for second half (128-255)
+MusicMixStore@
+            subb        #$80                    * convert to signed offset from center
+            addb        ,u                      * add to existing SFX sample
+            stb         ,u+                     * store mixed result
+            cmpu        #Sound_PageBuffer+256
+            bne         MusicMixLoop@
+            sty         Music_PhaseAccum
+            rts
+
+* --- Fade-out path: mix with fade until zero crossing ---
+MusicMixFade
+            andcc       #$AF                    * re-enable interrupts so VSync is not delayed
+MusicMixFadeLoop@
+            ldd         Music_PhaseInc
+            leay        d,y
+            tfr         y,d
+            tfr         a,b
+            andb        #$7F
+            ldx         #Music_WaveTable
+            abx
+            ldb         ,x
+            tsta
+            bpl         MusicMixFadeCheck@
+            negb
+MusicMixFadeCheck@
+            cmpb        #$7C                    * near center?
+            blo         MusicMixFadeStore@      * no, below range
+            cmpb        #$84
+            blo         MusicMixFadeCross@      * yes, at zero crossing
+MusicMixFadeStore@
+            subb        #$80                    * convert to signed offset from center
+            addb        ,u                      * add to existing SFX sample
+            stb         ,u+                     * store mixed result
+            cmpu        #Sound_PageBuffer+256
+            bne         MusicMixFadeLoop@
+            sty         Music_PhaseAccum        * didn't cross yet, try next buffer
+            rts
+MusicMixFadeCross@
+            * Zero crossing reached — stop music. Remaining buffer keeps SFX only.
+            clr         Music_Playing
+            sty         Music_PhaseAccum
+            rts
+
+
+***********************************************************
 * Music_WaveTable
 *   128-byte half sine wave lookup table (first half only).
 *   Values range from $80 (center) up to $B0 (peak) and back.
