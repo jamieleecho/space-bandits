@@ -77,6 +77,9 @@ LOADERSRC = $(addprefix $(SRCDIR)/, constants.asm \
                                     math.asm \
                                     memory.asm \
                                     menu.asm \
+                                    music.asm \
+                                    music-commands.asm \
+                                    music-stubs.asm \
                                     object.asm \
                                     sound.asm \
                                     system.asm \
@@ -271,7 +274,7 @@ $(DATA_IMAGES) $(ASM_IMAGES): $(SCRIPTDIR)/build-images.py $(IMAGESRC)
 #14. Run final assembly pass of DynoSprite engine and relocate code sections
 $(LOADERBIN): $(LOADERSRC) $(ASM_TILES) $(ASM_OBJECTS) $(ASM_LEVELS) $(ASM_SOUNDS) $(ASM_IMAGES) $(SCRIPTDIR)/binsectionmover.py
 	$(ASSEMBLER) $(ASMFLAGS) --define=PASS=2 -b -I $(GENASMDIR)/ -o $(LOADERBIN) --list=$(PASS2LIST) $(SRCDIR)/main.asm
-	$(SCRIPTDIR)/binsectionmover.py $(LOADERBIN) 0e00-1fff 4000 e000-ffff 6000
+	$(SCRIPTDIR)/binsectionmover.py $(LOADERBIN) c000-dfff 4000 0e00-1fff 4e00 e000-ffff 6000
 
 #15. Generate the README.BAS document
 $(READMEBAS): $(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt

@@ -122,6 +122,9 @@ MemMgr_Init
             sta         $3F,x
             lda         #$3F
             sta         VH_HIGHROM,y
+            * mark the music code page as fixed (loaded at $4000, physical page $3A)
+            lda         #$FE
+            sta         $3A,x
             * initialize the heap
             ldd         #HeapStartAddress
             std         <MemMgr_HeapEndPtr
@@ -138,8 +141,8 @@ MemMgr_Init
 * - Trashed: A, B, X, Y, U
 ***********************************************************
 MemMgr_MoveCode
-            * Move the Game Directories first
-            ldx         #$4000
+            * Move the Game Directories first (relocated to $4E00 to make room for music code at $4000)
+            ldx         #$4E00
             ldu         #$0E00
             ldd         #HeapStartAddress-$E00  * round length upwards to even number
             incb
