@@ -194,7 +194,10 @@ Music_Stop2_Impl
 ***********************************************************
 * Music_RefillBuffer_Impl
 *   Generate 256 samples into Sound_PageBuffer.
-*   Number of voices depends on MUSIC_VOICES setting.
+*
+*   Optimized inner loop: uses addd for phase advance (saves 13 cycles
+*   per voice vs ldy/leay/sty/tfr), and voice 0 stores raw wavetable
+*   value (skips init + subb, saves 9 cycles per sample).
 ***********************************************************
 *
 Music_Sample    rmb     1
@@ -206,64 +209,64 @@ Music_RefillBuffer_Impl
             lbeq        MusicRefillFade
             andcc       #$AF
 MusicRefillLoop@
-            lda         #$80
-            sta         Music_Sample
-            * --- Voice 0 ---
-            ldy         Music_PhaseAccum0
-            ldd         Music_PhaseInc0
-            leay        d,y
-            sty         Music_PhaseAccum0
-            tfr         y,d
-            tfr         a,b
-            andb        #$7F
-            ldx         Music_WavePtr0
-            abx
-            ldb         ,x
-            tsta
-            bpl         V0Store@
-            negb
-V0Store@    subb        #$80
-            addb        Music_Sample
+            * --- Voice 0 (stores raw value, no centering needed) ---
+            ldd         Music_PhaseInc0         * 6
+            addd        Music_PhaseAccum0       * 7
+            std         Music_PhaseAccum0       * 6
+            tfr         a,b                     * 6
+            andb        #$7F                    * 2
+            ldx         Music_WavePtr0          * 6
+            abx                                 * 3
+            ldb         ,x                      * 4
+            tsta                                * 2
+            bpl         V0Store@                * 3
+            negb                                * 2
+V0Store@
+ IFEQ MUSIC_VOICES-1
+            orb         #2                      * 1 voice: write directly to output
+            stb         ,u+
+ ELSE
+            stb         Music_Sample            * multi-voice: save for accumulation
+ ENDC
  IFGE MUSIC_VOICES-2
-            stb         Music_Sample
             * --- Voice 1 ---
-            ldy         Music_PhaseAccum1
-            ldd         Music_PhaseInc1
-            leay        d,y
-            sty         Music_PhaseAccum1
-            tfr         y,d
-            tfr         a,b
-            andb        #$7F
-            ldx         Music_WavePtr1
-            abx
-            ldb         ,x
-            tsta
-            bpl         V1Store@
-            negb
-V1Store@    subb        #$80
-            addb        Music_Sample
+            ldd         Music_PhaseInc1         * 6
+            addd        Music_PhaseAccum1       * 7
+            std         Music_PhaseAccum1       * 6
+            tfr         a,b                     * 6
+            andb        #$7F                    * 2
+            ldx         Music_WavePtr1          * 6
+            abx                                 * 3
+            ldb         ,x                      * 4
+            tsta                                * 2
+            bpl         V1Store@                * 3
+            negb                                * 2
+V1Store@    subb        #$80                    * 2 (signed offset from center)
+            addb        Music_Sample            * 5
+  IFGE MUSIC_VOICES-3
+            stb         Music_Sample            * 5
+  ENDC
  ENDC
  IFGE MUSIC_VOICES-3
-            stb         Music_Sample
             * --- Voice 2 ---
-            ldy         Music_PhaseAccum2
-            ldd         Music_PhaseInc2
-            leay        d,y
-            sty         Music_PhaseAccum2
-            tfr         y,d
-            tfr         a,b
-            andb        #$7F
-            ldx         Music_WavePtr2
-            abx
-            ldb         ,x
-            tsta
-            bpl         V2Store@
-            negb
-V2Store@    subb        #$80
-            addb        Music_Sample
+            ldd         Music_PhaseInc2         * 6
+            addd        Music_PhaseAccum2       * 7
+            std         Music_PhaseAccum2       * 6
+            tfr         a,b                     * 6
+            andb        #$7F                    * 2
+            ldx         Music_WavePtr2          * 6
+            abx                                 * 3
+            ldb         ,x                      * 4
+            tsta                                * 2
+            bpl         V2Store@                * 3
+            negb                                * 2
+V2Store@    subb        #$80                    * 2
+            addb        Music_Sample            * 5
  ENDC
+ IFGE MUSIC_VOICES-2
             orb         #2
             stb         ,u+
+ ENDC
             cmpu        #Sound_PageBuffer+256
             bne         MusicRefillLoop@
             rts
@@ -272,14 +275,10 @@ V2Store@    subb        #$80
 MusicRefillFade
             andcc       #$AF
 MusicFadeLoop@
-            lda         #$80
-            sta         Music_Sample
             * --- Voice 0 ---
-            ldy         Music_PhaseAccum0
             ldd         Music_PhaseInc0
-            leay        d,y
-            sty         Music_PhaseAccum0
-            tfr         y,d
+            addd        Music_PhaseAccum0
+            std         Music_PhaseAccum0
             tfr         a,b
             andb        #$7F
             ldx         Music_WavePtr0
@@ -288,16 +287,17 @@ MusicFadeLoop@
             tsta
             bpl         FV0Store@
             negb
-FV0Store@   subb        #$80
-            addb        Music_Sample
- IFGE MUSIC_VOICES-2
+FV0Store@
+ IFEQ MUSIC_VOICES-1
+            stb         Music_Sample            * save for fade check
+ ELSE
             stb         Music_Sample
+ ENDC
+ IFGE MUSIC_VOICES-2
             * --- Voice 1 ---
-            ldy         Music_PhaseAccum1
             ldd         Music_PhaseInc1
-            leay        d,y
-            sty         Music_PhaseAccum1
-            tfr         y,d
+            addd        Music_PhaseAccum1
+            std         Music_PhaseAccum1
             tfr         a,b
             andb        #$7F
             ldx         Music_WavePtr1
@@ -308,15 +308,15 @@ FV0Store@   subb        #$80
             negb
 FV1Store@   subb        #$80
             addb        Music_Sample
+  IFGE MUSIC_VOICES-3
+            stb         Music_Sample
+  ENDC
  ENDC
  IFGE MUSIC_VOICES-3
-            stb         Music_Sample
             * --- Voice 2 ---
-            ldy         Music_PhaseAccum2
             ldd         Music_PhaseInc2
-            leay        d,y
-            sty         Music_PhaseAccum2
-            tfr         y,d
+            addd        Music_PhaseAccum2
+            std         Music_PhaseAccum2
             tfr         a,b
             andb        #$7F
             ldx         Music_WavePtr2
@@ -328,6 +328,7 @@ FV1Store@   subb        #$80
 FV2Store@   subb        #$80
             addb        Music_Sample
  ENDC
+            * B = final mixed sample — check if near center
             cmpb        #$7C
             blo         MusicFadeStore@
             cmpb        #$84
@@ -351,6 +352,7 @@ MusicFadeFill@
 ***********************************************************
 * Music_MixIntoBuffer_Impl
 *   Add music samples into an existing Sound_PageBuffer.
+*   Same optimizations as RefillBuffer.
 ***********************************************************
 *
 Music_MixSample     rmb     1
@@ -362,13 +364,10 @@ Music_MixIntoBuffer_Impl
             beq         MusicMixFade
             andcc       #$AF
 MusicMixLoop@
-            clr         Music_MixSample
-            * --- Voice 0 ---
-            ldy         Music_PhaseAccum0
+            * --- Voice 0 (raw value, subtract $80 for signed offset) ---
             ldd         Music_PhaseInc0
-            leay        d,y
-            sty         Music_PhaseAccum0
-            tfr         y,d
+            addd        Music_PhaseAccum0
+            std         Music_PhaseAccum0
             tfr         a,b
             andb        #$7F
             ldx         Music_WavePtr0
@@ -378,15 +377,17 @@ MusicMixLoop@
             bpl         MV0Store@
             negb
 MV0Store@   subb        #$80
-            addb        Music_MixSample
- IFGE MUSIC_VOICES-2
+ IFEQ MUSIC_VOICES-1
+            addb        ,u                      * 1 voice: add directly to SFX
+            stb         ,u+
+ ELSE
             stb         Music_MixSample
+ ENDC
+ IFGE MUSIC_VOICES-2
             * --- Voice 1 ---
-            ldy         Music_PhaseAccum1
             ldd         Music_PhaseInc1
-            leay        d,y
-            sty         Music_PhaseAccum1
-            tfr         y,d
+            addd        Music_PhaseAccum1
+            std         Music_PhaseAccum1
             tfr         a,b
             andb        #$7F
             ldx         Music_WavePtr1
@@ -397,15 +398,15 @@ MV0Store@   subb        #$80
             negb
 MV1Store@   subb        #$80
             addb        Music_MixSample
+  IFGE MUSIC_VOICES-3
+            stb         Music_MixSample
+  ENDC
  ENDC
  IFGE MUSIC_VOICES-3
-            stb         Music_MixSample
             * --- Voice 2 ---
-            ldy         Music_PhaseAccum2
             ldd         Music_PhaseInc2
-            leay        d,y
-            sty         Music_PhaseAccum2
-            tfr         y,d
+            addd        Music_PhaseAccum2
+            std         Music_PhaseAccum2
             tfr         a,b
             andb        #$7F
             ldx         Music_WavePtr2
@@ -417,8 +418,10 @@ MV1Store@   subb        #$80
 MV2Store@   subb        #$80
             addb        Music_MixSample
  ENDC
+ IFGE MUSIC_VOICES-2
             addb        ,u
             stb         ,u+
+ ENDC
             cmpu        #Sound_PageBuffer+256
             bne         MusicMixLoop@
             rts
@@ -427,13 +430,10 @@ MV2Store@   subb        #$80
 MusicMixFade
             andcc       #$AF
 MusicMixFadeLoop@
-            clr         Music_MixSample
             * --- Voice 0 ---
-            ldy         Music_PhaseAccum0
             ldd         Music_PhaseInc0
-            leay        d,y
-            sty         Music_PhaseAccum0
-            tfr         y,d
+            addd        Music_PhaseAccum0
+            std         Music_PhaseAccum0
             tfr         a,b
             andb        #$7F
             ldx         Music_WavePtr0
@@ -443,15 +443,12 @@ MusicMixFadeLoop@
             bpl         MFV0Store@
             negb
 MFV0Store@  subb        #$80
-            addb        Music_MixSample
- IFGE MUSIC_VOICES-2
             stb         Music_MixSample
+ IFGE MUSIC_VOICES-2
             * --- Voice 1 ---
-            ldy         Music_PhaseAccum1
             ldd         Music_PhaseInc1
-            leay        d,y
-            sty         Music_PhaseAccum1
-            tfr         y,d
+            addd        Music_PhaseAccum1
+            std         Music_PhaseAccum1
             tfr         a,b
             andb        #$7F
             ldx         Music_WavePtr1
@@ -462,15 +459,15 @@ MFV0Store@  subb        #$80
             negb
 MFV1Store@  subb        #$80
             addb        Music_MixSample
+  IFGE MUSIC_VOICES-3
+            stb         Music_MixSample
+  ENDC
  ENDC
  IFGE MUSIC_VOICES-3
-            stb         Music_MixSample
             * --- Voice 2 ---
-            ldy         Music_PhaseAccum2
             ldd         Music_PhaseInc2
-            leay        d,y
-            sty         Music_PhaseAccum2
-            tfr         y,d
+            addd        Music_PhaseAccum2
+            std         Music_PhaseAccum2
             tfr         a,b
             andb        #$7F
             ldx         Music_WavePtr2
@@ -482,6 +479,7 @@ MFV1Store@  subb        #$80
 MFV2Store@  subb        #$80
             addb        Music_MixSample
  ENDC
+            * B = signed music offset sum — check if near center
             cmpb        #$FC
             blt         MusicMixFadeStore@
             cmpb        #$04
