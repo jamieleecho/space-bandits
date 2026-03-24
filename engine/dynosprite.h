@@ -306,11 +306,18 @@ static asm void MusicStop2() {
   }
 }
 
-/** Set waveform for a voice using inline asm:
- *  asm {
- *      ldd  #Music_WaveTable_Sine       (or _Triangle, _Sawtooth, _Pulse)
- *      std  Music_WavePtr0              (or Music_WavePtr1, Music_WavePtr2)
- *  }
- */
+/** Set waveform for a voice. */
+static asm void MusicSetWaveSine0() { asm { ldd #Music_WaveTable_Sine \n std Music_WavePtr0 } }
+static asm void MusicSetWaveSine1() { asm { ldd #Music_WaveTable_Sine \n std Music_WavePtr1 } }
+static asm void MusicSetWaveSine2() { asm { ldd #Music_WaveTable_Sine \n std Music_WavePtr2 } }
+static asm void MusicSetWaveTriangle0() { asm { ldd #Music_WaveTable_Triangle \n std Music_WavePtr0 } }
+static asm void MusicSetWaveTriangle1() { asm { ldd #Music_WaveTable_Triangle \n std Music_WavePtr1 } }
+static asm void MusicSetWaveTriangle2() { asm { ldd #Music_WaveTable_Triangle \n std Music_WavePtr2 } }
+static asm void MusicSetWaveSawtooth0() { asm { ldd #Music_WaveTable_Sawtooth \n std Music_WavePtr0 } }
+static asm void MusicSetWaveSawtooth1() { asm { ldd #Music_WaveTable_Sawtooth \n std Music_WavePtr1 } }
+static asm void MusicSetWaveSawtooth2() { asm { ldd #Music_WaveTable_Sawtooth \n std Music_WavePtr2 } }
+static asm void MusicSetWavePulse0() { asm { ldd #Music_WaveTable_Pulse \n std Music_WavePtr0 } }
+static asm void MusicSetWavePulse1() { asm { ldd #Music_WaveTable_Pulse \n std Music_WavePtr1 } }
+static asm void MusicSetWavePulse2() { asm { ldd #Music_WaveTable_Pulse \n std Music_WavePtr2 } }
 
 #endif /* _Dynosprite_h */

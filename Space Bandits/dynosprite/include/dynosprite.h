@@ -83,6 +83,21 @@ void MusicStop(void);
 void MusicStop1(void);
 void MusicStop2(void);
 
+/** Set waveform for a voice */
+void MusicSetWaveformForVoice(int voice, int waveform);
+#define MusicSetWaveSine0()      MusicSetWaveformForVoice(0, 0)
+#define MusicSetWaveSine1()      MusicSetWaveformForVoice(1, 0)
+#define MusicSetWaveSine2()      MusicSetWaveformForVoice(2, 0)
+#define MusicSetWaveTriangle0()  MusicSetWaveformForVoice(0, 1)
+#define MusicSetWaveTriangle1()  MusicSetWaveformForVoice(1, 1)
+#define MusicSetWaveTriangle2()  MusicSetWaveformForVoice(2, 1)
+#define MusicSetWaveSawtooth0()  MusicSetWaveformForVoice(0, 2)
+#define MusicSetWaveSawtooth1()  MusicSetWaveformForVoice(1, 2)
+#define MusicSetWaveSawtooth2()  MusicSetWaveformForVoice(2, 2)
+#define MusicSetWavePulse0()     MusicSetWaveformForVoice(0, 3)
+#define MusicSetWavePulse1()     MusicSetWaveformForVoice(1, 3)
+#define MusicSetWavePulse2()     MusicSetWaveformForVoice(2, 3)
+
 #ifdef __cplusplus
 }
 #endif

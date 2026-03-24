@@ -139,24 +139,20 @@ void ChiricoInit() {
     globals->initialized = TRUE;
     globals->score[0] = globals->score[1] = globals->score[2] = 0;
     globals->gameState = GameStatePlaying;
-
-    /* Set waveforms: sine arpeggio, triangle sustain, sawtooth bass */
-    asm {
-        ldd     #Music_WaveTable_Sine
-        std     Music_WavePtr0
-        ldd     #Music_WaveTable_Triangle
-        std     Music_WavePtr1
-        ldd     #Music_WaveTable_Sawtooth
-        std     Music_WavePtr2
-    }
-
-    SequencerPlay(moon_v0_notes, moon_v0_durs,
-                  moon_v1_notes, moon_v1_durs,
-                  moon_v2_notes, moon_v2_durs, 20);
 }
 
 
 byte ChiricoCalculateBkgrndNewXY() {
+    /* Start music on first frame */
+    if (!seq_playing) {
+        MusicSetWaveSine0();
+        MusicSetWaveTriangle1();
+        MusicSetWaveSawtooth2();
+        SequencerPlay(moon_v0_notes, moon_v0_durs,
+                      moon_v1_notes, moon_v1_durs,
+                      moon_v2_notes, moon_v2_durs, 20);
+    }
+
     /* Scroll the background to keep little guy at screen center */
     DynospriteCOB *guyCob = findObjectByGroup(DynospriteDirectPageGlobalsPtr->Obj_CurrentTablePtr, LITTLEGUY_GROUP_IDX);
     if (guyCob) {
