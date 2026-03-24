@@ -9,58 +9,72 @@
   "Sprites": [{
     "Name": "CatSleep1",
     "Location": [20, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatSleep2",
     "Location": [60, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatSleep3",
     "Location": [100, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatSit",
     "Location": [140, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatWalkRightA",
     "Location": [180, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatWalkRightB",
     "Location": [220, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatWalkLeftA",
     "Location": [260, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatWalkLeftB",
     "Location": [300, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatSnuggle1",
     "Location": [340, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatSnuggle2",
     "Location": [380, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatChaseRightA",
     "Location": [420, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatChaseRightB",
     "Location": [460, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatChaseLeftA",
     "Location": [500, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }, {
     "Name": "CatChaseLeftB",
     "Location": [540, 14],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 15
   }]
 }

@@ -6,7 +6,6 @@ extern "C" {
 #include "04-ship.h"
 #include "05-missile.h"
 #include "07-badmissile.h"
-#include "object_info.h"
 #include "dynosprite.h"
 
 

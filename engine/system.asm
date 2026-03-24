@@ -469,6 +469,7 @@ STACKOFF_PC             EQU     10
 ***********************************************************
 * Locals:
 *
+ IFDEF VERBOSE_ERRORS
 Msg_Line1@  fcn         '**** Error (PC=0000 DP=00)'
  IFEQ CPU-6309
 Msg_Line2@  fcn         'A=00 B=00 E=00 F=00'
@@ -476,6 +477,9 @@ Msg_Line2@  fcn         'A=00 B=00 E=00 F=00'
 Msg_Line2@  fcn         'A=00 B=00'
  ENDC
 Msg_Line3@  fcn         'X=0000 Y=0000 U=0000 S=0000'
+ ELSE
+Msg_Line1@  fcn         '**** PC=0000 S=0000'
+ ENDC
 *
 System_PrintError
             ldd         ,x                      * write error type (4 characters) into Msg_Line1
@@ -484,6 +488,7 @@ System_PrintError
             std         Msg_Line1@+2
             lda         #$20                    * just in case DP got messed up
             tfr         a,dp
+ IFDEF VERBOSE_ERRORS
             ldd         STACKOFF_PC,s           * load address of next instruction after one which threw exception into X
             ldx         #Msg_Line1@+15
             jsr         Util_WordToAsciiHex     * write PC location into message string
@@ -517,6 +522,15 @@ System_PrintError
             addd        #STACKOFF_PC+2          * adjust stack pointer to value before exception
             leax        7,x
             jsr         Util_WordToAsciiHex     * write S register value
+ ELSE
+            ldd         STACKOFF_PC,s
+            ldx         #Msg_Line1@+7
+            jsr         Util_WordToAsciiHex     * write PC location into message string
+            tfr         s,d
+            addd        #STACKOFF_PC+2          * adjust stack pointer to value before exception
+            ldx         #Msg_Line1@+14
+            jsr         Util_WordToAsciiHex     * write S register value
+ ENDC
             orcc        #$50                    * permanently disable interrupts
             * in case we crash before the GIME start registers were set up, set them now
             ldb         Gfx_DisplayedFrame
@@ -549,6 +563,7 @@ System_PrintError
             ldx         #Msg_Line1@
             ldu         #15
             jsr         Gfx_DrawTextLine        * print error message at top left of screen
+ IFDEF VERBOSE_ERRORS
             * draw Line 2
             lda         #17                     * Y=17
             ldb         #8                      * X=16 (8 bytes)
@@ -581,6 +596,7 @@ System_PrintError
             ldx         #Msg_Line3@
             ldu         #15
             jsr         Gfx_DrawTextLine        * print error message at top left of screen
+ ENDC
 SWILoop@
             bra         SWILoop@
 

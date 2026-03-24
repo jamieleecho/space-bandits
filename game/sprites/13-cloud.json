@@ -9,6 +9,7 @@
   "Sprites": [{
     "Name": "Cloud",
     "Location": [24, 12],
-    "SinglePixelPosition": true
+    "SinglePixelPosition": true,
+    "ChunkHint": 8
   }]
 }

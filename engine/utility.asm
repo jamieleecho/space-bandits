@@ -41,9 +41,10 @@ StrLoop@
             bra         StrLoop@
 !           rts
 
+ IFDEF INCLUDE_RANDOM
 ***********************************************************
 * Util_Random:
-* - IN:      
+* - IN:
 * - OUT:     A=psuedo-random number
 * - Trashed: A
 ***********************************************************
@@ -60,7 +61,7 @@ Util_Random
             sta         VarA@
             adda        VarB@
             sta         VarB@
-            lsra             
+            lsra
             eora        VarA@
             adda        VarC@
             sta         VarC@
@@ -83,6 +84,7 @@ Util_RandomRange16
             jsr         Math_Multiply16by16
             ldd         Math_Product_32
             rts
+ ENDC
 
 
 ***********************************************************

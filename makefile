@@ -132,6 +132,12 @@ else
   LOADERSRC += $(SRCDIR)/graphics-blockdraw-6809.asm
   MAMESYSTEM = coco3
 endif
+ifeq ($(INCLUDE_RANDOM), 1)
+  ASMFLAGS += --define=INCLUDE_RANDOM
+endif
+ifneq ($(VERBOSE_ERRORS), 0)
+  ASMFLAGS += --define=VERBOSE_ERRORS
+endif
 ifeq ($(OBJPAGES),)
   ASMFLAGS += --define=OBJPAGES=2
 else
