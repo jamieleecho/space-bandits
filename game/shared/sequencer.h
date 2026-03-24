@@ -138,15 +138,20 @@ static void SequencerStop(void) {
 
 /*
  * SequencerTick — call once per frame from CalculateBkgrndNewXY.
- * Advances the sequencer by one frame. When the tick counter expires,
- * decrements each voice's remaining duration and advances to the next
- * note when a voice's duration reaches zero.
+ * Advances the sequencer by the number of elapsed 60Hz fields
+ * (Obj_MotionFactor + 1) to keep tempo consistent when frames drop.
+ * When the tick counter expires, decrements each voice's remaining
+ * duration and advances to the next note when it reaches zero.
  */
 static void SequencerTick(void) {
+    byte elapsed;
     if (!seq_playing) return;
 
-    seq_tickCounter--;
-    if (seq_tickCounter != 0) return;
+    elapsed = DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 1;
+    if (seq_tickCounter > elapsed) {
+        seq_tickCounter -= elapsed;
+        return;
+    }
     seq_tickCounter = seq_tempo;
 
     /* Advance each active voice */
