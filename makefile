@@ -274,7 +274,7 @@ $(DATA_TILES) $(ASM_TILES): $(SCRIPTDIR)/build-tiles.py $(TILESRC) $(PALSRC)
 #11. Resample audio files
 $(GENOBJDIR)/sound%.raw: $(SOUNDDIR)/%.wav
 	echo Converting audio waveform: $<
-	ffmpeg -v warning -i $< -acodec pcm_u8 -f u8 -ac 1 -ar $(AUDIORATE) -af aresample=$(AUDIORATE):filter_size=256:cutoff=1.0,volume=0.2 $@
+	ffmpeg -v warning -i $< -acodec pcm_u8 -f u8 -ac 1 -ar $(AUDIORATE) -af aresample=$(AUDIORATE):filter_size=256:cutoff=1.0,volume=0.12 $@
 
 #12. Build Sound data file and game directory assembler code
 $(DATA_SOUNDS) $(ASM_SOUNDS): $(SCRIPTDIR)/build-sounds.py $(SOUNDRAW)
