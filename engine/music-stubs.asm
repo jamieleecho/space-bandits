@@ -4,11 +4,11 @@
 * All rights reserved.
 *
 * Music engine stubs residing in the secondary code page ($E000).
-* These swap the tertiary music code page into $C000-$DFFF via $FFA6,
+* These swap the tertiary music code page into $4000-$5FFF via $FFA2,
 * call the implementation, then restore the previous page mapping.
 *
 * Music_WaveTable remains here (secondary page) because it is accessed by
-* Music_RefillBuffer during FIRQ, when $C000 may have sprite erase data mapped.
+* Music_RefillBuffer during FIRQ, when $4000 may have sprite code mapped.
 *********************************************************************************
 
 MUSIC_CODE_PHYS_PAGE    EQU     $3A     * physical page for music code (loaded at $4000)
@@ -25,14 +25,14 @@ MUSIC_CODE_PHYS_PAGE    EQU     $3A     * physical page for music code (loaded a
 *
 Music_Start
             pshs        a                   * save A (high byte of D parameter)
-            lda         $FFA6               * read current $C000-$DFFF page
+            lda         $FFA2               * read current $4000-$5FFF page
             pshs        a                   * save it on stack
             lda         #MUSIC_CODE_PHYS_PAGE
-            sta         $FFA6               * map music code page to $C000
+            sta         $FFA2               * map music code page to $4000
             lda         1,s                 * restore original A from stack
-            jsr         Music_Start_Impl    * call implementation at $C000 with D intact
-            puls        a                   * restore saved $FFA6 value
-            sta         $FFA6               * restore previous $C000-$DFFF mapping
+            jsr         Music_Start_Impl    * call implementation at $4000 with D intact
+            puls        a                   * restore saved $FFA2 value
+            sta         $FFA2               * restore previous $4000-$5FFF mapping
             puls        a,pc                * discard saved A and return
 
 
@@ -46,13 +46,13 @@ Music_Start
 ***********************************************************
 *
 Music_Stop
-            lda         $FFA6               * read current $C000-$DFFF page
+            lda         $FFA2               * read current $4000-$5FFF page
             pshs        a                   * save it on stack
             lda         #MUSIC_CODE_PHYS_PAGE
-            sta         $FFA6               * map music code page to $C000
-            jsr         Music_Stop_Impl     * call implementation at $C000
-            puls        a                   * restore saved $FFA6 value
-            sta         $FFA6               * restore previous $C000-$DFFF mapping
+            sta         $FFA2               * map music code page to $4000
+            jsr         Music_Stop_Impl     * call implementation at $4000
+            puls        a                   * restore saved $FFA2 value
+            sta         $FFA2               * restore previous $4000-$5FFF mapping
             rts
 
 

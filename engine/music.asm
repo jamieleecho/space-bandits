@@ -9,7 +9,7 @@
 * This file contains Music_RefillBuffer, which must reside in the primary
 * code page ($2000-$3FFF) since it is called from the FIRQ handler chain.
 * Music_Start/Stop implementations are in music-commands.asm (tertiary code
-* page at $C000), called via stubs in music-stubs.asm (secondary page $E000).
+* page at $4000), called via stubs in music-stubs.asm (secondary page $E000).
 * Music_WaveTable is in music-stubs.asm (secondary page) so it remains
 * accessible during FIRQ without page swapping.
 *

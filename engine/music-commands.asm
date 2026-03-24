@@ -4,8 +4,8 @@
 * All rights reserved.
 *
 * Music engine command implementations, residing in the tertiary code page
-* ($C000). These are called via stubs in the secondary code page (music-stubs.asm)
-* that swap this page in/out of $C000-$DFFF via $FFA6.
+* ($4000). These are called via stubs in the secondary code page (music-stubs.asm)
+* that swap this page in/out of $4000-$5FFF via $FFA2.
 *
 * Music_WaveTable and Music_NoteTable remain in the secondary code page
 * (music-stubs.asm) for accessibility during FIRQ and from game code.

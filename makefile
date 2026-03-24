@@ -135,6 +135,9 @@ endif
 ifeq ($(INCLUDE_RANDOM), 1)
   ASMFLAGS += --define=INCLUDE_RANDOM
 endif
+ifeq ($(DISK_DEBUG), 1)
+  ASMFLAGS += --define=DISK_DEBUG
+endif
 ifneq ($(VERBOSE_ERRORS), 0)
   ASMFLAGS += --define=VERBOSE_ERRORS
 endif
@@ -280,7 +283,7 @@ $(DATA_IMAGES) $(ASM_IMAGES): $(SCRIPTDIR)/build-images.py $(IMAGESRC)
 #14. Run final assembly pass of DynoSprite engine and relocate code sections
 $(LOADERBIN): $(LOADERSRC) $(ASM_TILES) $(ASM_OBJECTS) $(ASM_LEVELS) $(ASM_SOUNDS) $(ASM_IMAGES) $(SCRIPTDIR)/binsectionmover.py
 	$(ASSEMBLER) $(ASMFLAGS) --define=PASS=2 -b -I $(GENASMDIR)/ -o $(LOADERBIN) --list=$(PASS2LIST) $(SRCDIR)/main.asm
-	$(SCRIPTDIR)/binsectionmover.py $(LOADERBIN) c000-dfff 4000 0e00-1fff 4e00 e000-ffff 6000
+	$(SCRIPTDIR)/binsectionmover.py $(LOADERBIN) 0e00-1fff 4e00 e000-ffff 6000
 
 #15. Generate the README.BAS document
 $(READMEBAS): $(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt

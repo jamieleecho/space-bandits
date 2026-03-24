@@ -83,7 +83,7 @@ Disk_DirInit
 ***********************************************************
 DirSecLeft@ zmb         1
 Disk_FileOpen
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             lda         Disk_FileIsOpen
             beq         >
             swi                                 * error, previous file was not closed
@@ -132,7 +132,7 @@ LoadNextDirSector@
             bra         SearchDirSector@        * go look through the directory entries in the newly loaded sector
 DirEntryMatch@
             puls        x,u
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             inc         Disk_FileIsOpen
             clr         Disk_FileAtEnd
  ENDC
@@ -161,7 +161,7 @@ DirEntryMatch@
             ldb         Disk_FileCurGranule
 FileLengthLoop@
             lda         b,u
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             cmpa        #$ff
             bne         >
             swi                                 * error in FAT: file points to empty granule
@@ -196,7 +196,7 @@ Disk_FileSeekForward
             bne         NonZeroSeek@
             rts                                 * seek 0 is NOP
 NonZeroSeek@
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             tst         Disk_FileAtEnd
             beq         >
             swi                                 * seek past end of file
@@ -222,7 +222,7 @@ NotInThisGranule@
             cmpd        #0                      * no granules left, so we better be at end of file
             beq         >
             swi                                 * Error: seek past end of file
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
 !           inc         Disk_FileAtEnd
  ENDC
 !           rts
@@ -235,7 +235,7 @@ GetFATEntry@
             dec         Disk_FileGranulesLeft
             cmpx        #$900                   * is the seek end point in this granule?
             blo         InThisGranule@
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             cmpb        #$C0
             blo         >
             swi                                 * Error: seek past end of file
@@ -258,7 +258,7 @@ InThisGranule@
 !           ldd         #$900
 ReCalcPosition@
             subd        SeekDistance@
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             bhs         >
             swi                                 * Error: seek past end of file
  ENDC
@@ -293,7 +293,7 @@ Disk_FileRead
             bne         NonZeroRead@
             rts                                 * read 0 bytes is NOP
 NonZeroRead@
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             tst         Disk_FileIsOpen
             bne         >
             swi                                 * error, no file is open
@@ -320,7 +320,7 @@ CopyLoop@   lda         ,x+
             bne         CopyLoop@               * continue until no bytes remaining to copy
             lda         #$ff                    * D is negative number of bytes copied from this sector
             addd        Disk_FileBytesInCurGran
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             bpl         >
             swi                                 * Error: read past end of file
  ENDC
@@ -333,7 +333,7 @@ ReadNextSector@
             clr         Disk_FileCurByte        * next copy will start at beginning of sector
             lda         #$ff                    * D is negative number of bytes copied from this sector
             addd        Disk_FileBytesInCurGran
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             bpl         >
             swi                                 * Error: read past end of file
  ENDC
@@ -356,7 +356,7 @@ ReadNextGranule@
             ldb         a,u                     * B is next granule number
             cmpb        #$C0
             blo         NextGranValid@
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             cmpy        #1                      * Previous granule was last one, so we better be done copying
             beq         >
             swi                                 * Error: read past end of file
@@ -366,7 +366,7 @@ ReadNextGranule@
 NextGranValid@
             stb         Disk_FileCurGranule
             dec         Disk_FileGranulesLeft
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             bpl         >
             swi                                 * Error: broken FAT or internal logic
  ENDC
@@ -429,7 +429,7 @@ Disk_ReadSector
 * - Trashed: None
 ***********************************************************
 Disk_FileClose
- IFDEF DEBUG
+ IFDEF DISK_DEBUG
             tst         Disk_FileIsOpen
             bne         >
             swi                                 * error, no file is open

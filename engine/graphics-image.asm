@@ -34,6 +34,9 @@ Img_ImageFilename       fcc     'IMAGES  DAT'
 *   This function loads a given splash image at a given point on
 *   the back screen buffer
 *
+*   NOTE: This function could potentially be moved to the tertiary code page
+*   ($4000) since $FFA2 is not affected by disk I/O mode.
+*
 * - IN:      U = Image # to load
 *            A = Y coordinate (in rows) of upper edge of loaded image
 *            B = X coordinate (in bytes) of left edge of loaded image
