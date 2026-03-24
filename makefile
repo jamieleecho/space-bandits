@@ -65,6 +65,7 @@ LOADERSRC = $(addprefix $(SRCDIR)/, constants.asm \
                                     datastruct.asm \
                                     decompress.asm \
                                     disk.asm \
+                                    disk-commands.asm \
                                     globals.asm \
                                     graphics-bkgrnd.asm \
                                     graphics-image.asm \

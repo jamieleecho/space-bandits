@@ -11,8 +11,6 @@
 * Music_RefillBuffer during FIRQ, when $4000 may have sprite code mapped.
 *********************************************************************************
 
-MUSIC_CODE_PHYS_PAGE    EQU     $3A     * physical page for music code (loaded at $4000)
-
 
 ***********************************************************
 * Music_Start (stub)

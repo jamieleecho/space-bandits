@@ -84,3 +84,6 @@ KEY_F1                  EQU     $65
 KEY_F2                  EQU     $66
 KEY_SHIFT               EQU     $67
 
+* Tertiary code page physical block number (loaded at $4000, page $3A)
+MUSIC_CODE_PHYS_PAGE    EQU     $3A
+

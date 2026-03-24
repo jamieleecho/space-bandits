@@ -339,7 +339,7 @@ HeapStartAddress        EQU     *
  ENDC
 
 ***********************************************************
-*           The tertiary code page is used for the music engine ($4000-$5FFF)
+*           The tertiary code page is used for music and disk commands ($4000-$5FFF)
 
 *           This section is assembled directly at $4000 (physical page $3A), so no
 *           relocation is needed.  The game data directories are relocated to $4E00
@@ -350,6 +350,7 @@ HeapStartAddress        EQU     *
 
             org         $4000
             include     music-commands.asm
+            include     disk-commands.asm
 
  IFGT *-$4E00
     Error "In main.asm: Tertiary code page ($4000-$4DFF) is too big (would collide with game directories at $4E00)!"
