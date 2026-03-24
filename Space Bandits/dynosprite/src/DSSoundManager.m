@@ -39,22 +39,26 @@ static const float kMusicAmplitude = 0.125f;
 static const float kMusicFadeStep = 1.0f / 220.0f;
 
 /* Generate one sample for a given phase and waveform type.
-   Phase is 0.0 to 1.0. Output is -1.0 to 1.0. */
+   Phase is 0.0 to 1.0. Output is -1.0 to 1.0.
+   Non-sine waveforms are softened with a sine-shaped envelope to
+   round off sharp corners and reduce harsh harmonics. */
 static inline float musicSampleForWaveform(double phase, int waveform) {
     switch (waveform) {
         case MUSIC_WAVE_TRIANGLE: {
-            /* Triangle: linear ramp up 0->0.5, down 0.5->1.0 */
-            float p = (float)phase;
-            if (p < 0.25f) return p * 4.0f;
-            if (p < 0.75f) return 2.0f - p * 4.0f;
-            return p * 4.0f - 4.0f;
+            /* Sine-shaped triangle: use sin^3 for a rounded triangle feel */
+            float s = sinf((float)(phase * 2.0 * M_PI));
+            return 0.75f * (s > 0 ? powf(s, 0.6f) : -powf(-s, 0.6f));
         }
-        case MUSIC_WAVE_SAWTOOTH:
-            /* Sawtooth: linear ramp from -1 to +1 */
-            return (float)(phase * 2.0 - 1.0);
-        case MUSIC_WAVE_PULSE:
-            /* Pulse/square: +1 for first half, -1 for second */
-            return (phase < 0.5) ? 1.0f : -1.0f;
+        case MUSIC_WAVE_SAWTOOTH: {
+            /* Band-limited sawtooth approximation using first 4 harmonics */
+            float p = (float)(phase * 2.0 * M_PI);
+            return 0.5f * (sinf(p) - 0.5f*sinf(2.0f*p) + 0.333f*sinf(3.0f*p) - 0.25f*sinf(4.0f*p));
+        }
+        case MUSIC_WAVE_PULSE: {
+            /* Softened pulse: use tanh to smooth the transition */
+            float s = sinf((float)(phase * 2.0 * M_PI));
+            return 0.7f * tanhf(4.0f * s);
+        }
         default: /* MUSIC_WAVE_SINE */
             return sinf((float)(phase * 2.0 * M_PI));
     }
