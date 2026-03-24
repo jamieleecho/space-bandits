@@ -139,6 +139,9 @@ endif
 ifeq ($(DISK_DEBUG), 1)
   ASMFLAGS += --define=DISK_DEBUG
 endif
+ifeq ($(FAST_BACKGROUND), 1)
+  ASMFLAGS += --define=FAST_BACKGROUND
+endif
 ifneq ($(VERBOSE_ERRORS), 0)
   ASMFLAGS += --define=VERBOSE_ERRORS
 endif
@@ -271,7 +274,7 @@ $(DATA_TILES) $(ASM_TILES): $(SCRIPTDIR)/build-tiles.py $(TILESRC) $(PALSRC)
 #11. Resample audio files
 $(GENOBJDIR)/sound%.raw: $(SOUNDDIR)/%.wav
 	echo Converting audio waveform: $<
-	ffmpeg -v warning -i $< -acodec pcm_u8 -f u8 -ac 1 -ar $(AUDIORATE) -af aresample=$(AUDIORATE):filter_size=256:cutoff=1.0,volume=0.25 $@
+	ffmpeg -v warning -i $< -acodec pcm_u8 -f u8 -ac 1 -ar $(AUDIORATE) -af aresample=$(AUDIORATE):filter_size=256:cutoff=1.0,volume=0.2 $@
 
 #12. Build Sound data file and game directory assembler code
 $(DATA_SOUNDS) $(ASM_SOUNDS): $(SCRIPTDIR)/build-sounds.py $(SOUNDRAW)
