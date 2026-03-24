@@ -319,5 +319,18 @@ static asm void MusicSetWaveSawtooth2() { asm { ldd #Music_WaveTable_Sawtooth \n
 static asm void MusicSetWavePulse0() { asm { ldd #Music_WaveTable_Pulse \n std Music_WavePtr0 } }
 static asm void MusicSetWavePulse1() { asm { ldd #Music_WaveTable_Pulse \n std Music_WavePtr1 } }
 static asm void MusicSetWavePulse2() { asm { ldd #Music_WaveTable_Pulse \n std Music_WavePtr2 } }
+/** Quiet waveforms (±5 amplitude, half of normal) */
+static asm void MusicSetWaveSineQuiet0() { asm { ldd #Music_WaveTable_SineQuiet \n std Music_WavePtr0 } }
+static asm void MusicSetWaveSineQuiet1() { asm { ldd #Music_WaveTable_SineQuiet \n std Music_WavePtr1 } }
+static asm void MusicSetWaveSineQuiet2() { asm { ldd #Music_WaveTable_SineQuiet \n std Music_WavePtr2 } }
+static asm void MusicSetWaveTriangleQuiet0() { asm { ldd #Music_WaveTable_TriangleQuiet \n std Music_WavePtr0 } }
+static asm void MusicSetWaveTriangleQuiet1() { asm { ldd #Music_WaveTable_TriangleQuiet \n std Music_WavePtr1 } }
+static asm void MusicSetWaveTriangleQuiet2() { asm { ldd #Music_WaveTable_TriangleQuiet \n std Music_WavePtr2 } }
+static asm void MusicSetWaveSawtoothQuiet0() { asm { ldd #Music_WaveTable_SawtoothQuiet \n std Music_WavePtr0 } }
+static asm void MusicSetWaveSawtoothQuiet1() { asm { ldd #Music_WaveTable_SawtoothQuiet \n std Music_WavePtr1 } }
+static asm void MusicSetWaveSawtoothQuiet2() { asm { ldd #Music_WaveTable_SawtoothQuiet \n std Music_WavePtr2 } }
+static asm void MusicSetWavePulseQuiet0() { asm { ldd #Music_WaveTable_PulseQuiet \n std Music_WavePtr0 } }
+static asm void MusicSetWavePulseQuiet1() { asm { ldd #Music_WaveTable_PulseQuiet \n std Music_WavePtr1 } }
+static asm void MusicSetWavePulseQuiet2() { asm { ldd #Music_WaveTable_PulseQuiet \n std Music_WavePtr2 } }
 
 #endif /* _Dynosprite_h */

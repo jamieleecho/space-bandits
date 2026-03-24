@@ -110,9 +110,9 @@ void PerseiInit() {
 
 byte PerseiCalculateBkgrndNewXY() {
     if (!seq_playing) {
-        MusicSetWaveSine0();
-        MusicSetWaveTriangle1();
-        MusicSetWaveSawtooth2();
+        MusicSetWaveSineQuiet0();
+        MusicSetWaveTriangleQuiet1();
+        MusicSetWaveSawtoothQuiet2();
         SequencerPlay(persei_v0_notes, persei_v0_durs,
                       persei_v1_notes, persei_v1_durs,
                       persei_v2_notes, persei_v2_durs, 15);

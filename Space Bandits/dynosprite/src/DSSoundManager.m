@@ -23,7 +23,11 @@ enum MusicWaveform {
     MUSIC_WAVE_SINE = 0,
     MUSIC_WAVE_TRIANGLE = 1,
     MUSIC_WAVE_SAWTOOTH = 2,
-    MUSIC_WAVE_PULSE = 3
+    MUSIC_WAVE_PULSE = 3,
+    MUSIC_WAVE_SINE_QUIET = 4,
+    MUSIC_WAVE_TRIANGLE_QUIET = 5,
+    MUSIC_WAVE_SAWTOOTH_QUIET = 6,
+    MUSIC_WAVE_PULSE_QUIET = 7,
 };
 
 static AVAudioEngine *_musicEngine = nil;
@@ -43,6 +47,10 @@ static const float kMusicFadeStep = 1.0f / 220.0f;
    Non-sine waveforms are softened with a sine-shaped envelope to
    round off sharp corners and reduce harsh harmonics. */
 static inline float musicSampleForWaveform(double phase, int waveform) {
+    /* Quiet variants: compute normal then halve */
+    if (waveform >= 4 && waveform <= 7) {
+        return 0.5f * musicSampleForWaveform(phase, waveform - 4);
+    }
     switch (waveform) {
         case MUSIC_WAVE_TRIANGLE: {
             /* Sine-shaped triangle: use sin^3 for a rounded triangle feel */

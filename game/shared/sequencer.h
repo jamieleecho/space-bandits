@@ -148,6 +148,7 @@ static void SequencerTick(void) {
     if (!seq_playing) return;
 
     elapsed = DynospriteDirectPageGlobalsPtr->Obj_MotionFactor + 1;
+    if (elapsed == 0) elapsed = 1;  /* guard against underflow on macOS */
     if (seq_tickCounter > elapsed) {
         seq_tickCounter -= elapsed;
         return;
