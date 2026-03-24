@@ -216,14 +216,12 @@
 		52E24A842C1809130098F87D /* 05-missile.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A5C2C1808210098F87D /* 05-missile.json */; };
 		52E24A852C1809150098F87D /* 04-ship.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A5B2C1808210098F87D /* 04-ship.json */; };
 		52E24A862C1809170098F87D /* 03-badguy.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A5A2C1808210098F87D /* 03-badguy.json */; };
-		52E24A872C1809190098F87D /* 02-balls.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A592C1808210098F87D /* 02-balls.json */; };
 		52E24A882C18091A0098F87D /* 01-sprites.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A582C1808210098F87D /* 01-sprites.png */; };
 		52E24A892C18091C0098F87D /* 01-numerals.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = 52E24A572C1808210098F87D /* 01-numerals.json */; };
 		52E24A942C1809670098F87D /* 02-space.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8E2C18094D0098F87D /* 02-space.png */; };
 		52E24A952C1809690098F87D /* 02-space.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8D2C18094D0098F87D /* 02-space.json */; };
 		52E24A962C18096C0098F87D /* 01-moon.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8C2C18094D0098F87D /* 01-moon.png */; };
 		52E24A972C18096D0098F87D /* 01-moon.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8B2C18094D0098F87D /* 01-moon.json */; };
-		52EE7C972DE4982700011C11 /* sprite_state_machine.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EE7C962DE4982700011C11 /* sprite_state_machine.c */; };
 		52EE7C9B2DE4E87F00011C11 /* 01-level1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
 		52EE7C9C2DE4E90D00011C11 /* 01-level1.png in Copy hires/images Files */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
 		6E2DCD3E71CE9B5CECD6F491 /* 03-chirico.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 10AFC3F723CE9EDB66C2BF31 /* 03-chirico.json */; };
@@ -349,7 +347,6 @@
 			files = (
 				52E24A892C18091C0098F87D /* 01-numerals.json in Copy sprites Files */,
 				52E24A882C18091A0098F87D /* 01-sprites.png in Copy sprites Files */,
-				52E24A872C1809190098F87D /* 02-balls.json in Copy sprites Files */,
 				52E24A862C1809170098F87D /* 03-badguy.json in Copy sprites Files */,
 				52E24A852C1809150098F87D /* 04-ship.json in Copy sprites Files */,
 				52E24A842C1809130098F87D /* 05-missile.json in Copy sprites Files */,
@@ -405,18 +402,6 @@
 		523978402C1F654100301419 /* readme-bas.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "readme-bas.txt"; path = "../../../game/readme-bas.txt"; sourceTree = "<group>"; };
 		525733AC2F704E3600EA8195 /* 10-littleguy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "10-littleguy.h"; path = "../game/objects/10-littleguy.h"; sourceTree = SOURCE_ROOT; };
 		525733AD2F704E3600EA8195 /* 10-littleguy.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "10-littleguy.c"; path = "../game/objects/10-littleguy.c"; sourceTree = SOURCE_ROOT; };
-		F1B1RD072F80000000000007 /* 11-bird.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "11-bird.h"; path = "../game/objects/11-bird.h"; sourceTree = SOURCE_ROOT; };
-		F1B1RD002F80000000000002 /* 11-bird.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "11-bird.c"; path = "../game/objects/11-bird.c"; sourceTree = SOURCE_ROOT; };
-		F1B1RD042F80000000000004 /* 11-bird.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "11-bird.json"; sourceTree = "<group>"; };
-		F1B1RD062F80000000000006 /* 11-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-bird.png"; sourceTree = "<group>"; };
-		F1CA7072F80000000000007 /* 12-cat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "12-cat.h"; path = "../game/objects/12-cat.h"; sourceTree = SOURCE_ROOT; };
-		F1CA7002F80000000000002 /* 12-cat.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "12-cat.c"; path = "../game/objects/12-cat.c"; sourceTree = SOURCE_ROOT; };
-		F1CA7042F80000000000004 /* 12-cat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "12-cat.json"; sourceTree = "<group>"; };
-		F1CA7062F80000000000006 /* 12-cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "12-cat.png"; sourceTree = "<group>"; };
-		F1CL0D72F80000000000007 /* 13-cloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "13-cloud.h"; path = "../game/objects/13-cloud.h"; sourceTree = SOURCE_ROOT; };
-		F1CL0D02F80000000000002 /* 13-cloud.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "13-cloud.c"; path = "../game/objects/13-cloud.c"; sourceTree = SOURCE_ROOT; };
-		F1CL0D42F80000000000004 /* 13-cloud.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "13-cloud.json"; sourceTree = "<group>"; };
-		F1CL0D62F80000000000006 /* 13-cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13-cloud.png"; sourceTree = "<group>"; };
 		525FE4042C053EB200E03391 /* 01-foo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "01-foo.wav"; sourceTree = "<group>"; };
 		525FE4052C053EB200E03391 /* 01-moon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "01-moon.gif"; sourceTree = "<group>"; };
 		525FE4062C053EB200E03391 /* 01-moon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "01-moon.json"; sourceTree = "<group>"; };
@@ -632,7 +617,6 @@
 		52E24A542C1808100098F870 /* 05-ouch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "05-ouch.wav"; sourceTree = "<group>"; };
 		52E24A572C1808210098F87D /* 01-numerals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "01-numerals.json"; sourceTree = "<group>"; };
 		52E24A582C1808210098F87D /* 01-sprites.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-sprites.png"; sourceTree = "<group>"; };
-		52E24A592C1808210098F87D /* 02-balls.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "02-balls.json"; sourceTree = "<group>"; };
 		52E24A5A2C1808210098F87D /* 03-badguy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "03-badguy.json"; sourceTree = "<group>"; };
 		52E24A5B2C1808210098F87D /* 04-ship.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "04-ship.json"; sourceTree = "<group>"; };
 		52E24A5C2C1808210098F87D /* 05-missile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "05-missile.json"; sourceTree = "<group>"; };
@@ -646,14 +630,24 @@
 		52E24A8C2C18094D0098F87D /* 01-moon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-moon.png"; sourceTree = "<group>"; };
 		52E24A8D2C18094D0098F87D /* 02-space.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "02-space.json"; sourceTree = "<group>"; };
 		52E24A8E2C18094D0098F87D /* 02-space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "02-space.png"; sourceTree = "<group>"; };
-		52EE7C952DE4982700011C11 /* sprite_state_machine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = sprite_state_machine.h; path = ../game/objects/sprite_state_machine.h; sourceTree = SOURCE_ROOT; };
-		52EE7C962DE4982700011C11 /* sprite_state_machine.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = sprite_state_machine.c; path = ../game/objects/sprite_state_machine.c; sourceTree = SOURCE_ROOT; };
 		52EE7C982DE4E87F00011C11 /* 01-level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-level1.png"; sourceTree = "<group>"; };
 		99B09234ECD1D2B00123BF2E /* 10-littleguy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "10-littleguy.json"; sourceTree = "<group>"; };
 		B9D5B09187D4EE761CA69163 /* 03-level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-level3.png"; sourceTree = "<group>"; };
 		B9D5B09187D4EE761CA69164 /* 04-level4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04-level4.png"; sourceTree = "<group>"; };
 		E33C67DBDEE5FF43FAB8500F /* 03-chirico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-chirico.png"; sourceTree = "<group>"; };
 		ED37586DB1F94C41AACE54D9 /* 03-chirico.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "03-chirico.c"; path = "../../../../game/levels/03-chirico.c"; sourceTree = "<group>"; };
+		F1B1RD002F80000000000002 /* 11-bird.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "11-bird.c"; path = "../game/objects/11-bird.c"; sourceTree = SOURCE_ROOT; };
+		F1B1RD042F80000000000004 /* 11-bird.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "11-bird.json"; sourceTree = "<group>"; };
+		F1B1RD062F80000000000006 /* 11-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-bird.png"; sourceTree = "<group>"; };
+		F1B1RD072F80000000000007 /* 11-bird.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "11-bird.h"; path = "../game/objects/11-bird.h"; sourceTree = SOURCE_ROOT; };
+		F1CA7002F80000000000002 /* 12-cat.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "12-cat.c"; path = "../game/objects/12-cat.c"; sourceTree = SOURCE_ROOT; };
+		F1CA7042F80000000000004 /* 12-cat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "12-cat.json"; sourceTree = "<group>"; };
+		F1CA7062F80000000000006 /* 12-cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "12-cat.png"; sourceTree = "<group>"; };
+		F1CA7072F80000000000007 /* 12-cat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "12-cat.h"; path = "../game/objects/12-cat.h"; sourceTree = SOURCE_ROOT; };
+		F1CL0D02F80000000000002 /* 13-cloud.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "13-cloud.c"; path = "../game/objects/13-cloud.c"; sourceTree = SOURCE_ROOT; };
+		F1CL0D42F80000000000004 /* 13-cloud.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "13-cloud.json"; sourceTree = "<group>"; };
+		F1CL0D62F80000000000006 /* 13-cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13-cloud.png"; sourceTree = "<group>"; };
+		F1CL0D72F80000000000007 /* 13-cloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "13-cloud.h"; path = "../game/objects/13-cloud.h"; sourceTree = SOURCE_ROOT; };
 		F1JPN002F80000000000002 /* 04-japan.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = "04-japan.c"; path = "../../../../game/levels/04-japan.c"; sourceTree = "<group>"; };
 		F1JPN042F80000000000004 /* 04-japan.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "04-japan.json"; path = "../../../../game/levels/04-japan.json"; sourceTree = "<group>"; };
 		F1JPN062F80000000000006 /* 04-japan.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "04-japan.json"; sourceTree = "<group>"; };
@@ -971,8 +965,6 @@
 		52E249F92C17E7CB0098F87D /* objects */ = {
 			isa = PBXGroup;
 			children = (
-				52EE7C952DE4982700011C11 /* sprite_state_machine.h */,
-				52EE7C962DE4982700011C11 /* sprite_state_machine.c */,
 				52E24A1B2C17E7FB0098F87D /* 01-numerals.h */,
 				52E24A1A2C17E7FB0098F87D /* 01-numerals.mm */,
 				52E24A012C17E7E00098F87D /* 03-badguy.c */,
@@ -1094,7 +1086,6 @@
 				52E24A642C1808210098F87D /* marbles.png */,
 				52E24A652C1808210098F87D /* numerals.png */,
 				52E24A572C1808210098F87D /* 01-numerals.json */,
-				52E24A592C1808210098F87D /* 02-balls.json */,
 				52E24A5A2C1808210098F87D /* 03-badguy.json */,
 				52E24A5B2C1808210098F87D /* 04-ship.json */,
 				52E24A5C2C1808210098F87D /* 05-missile.json */,
@@ -1334,7 +1325,6 @@
 				52E24A122C17E7E00098F87D /* 03-badguy.c in Sources */,
 				52CC828F2C02179100CC3E38 /* DSSpriteFileParser.m in Sources */,
 				52CC82832C02179100CC3E38 /* DSScene.m in Sources */,
-				52EE7C972DE4982700011C11 /* sprite_state_machine.c in Sources */,
 				52CC82B32C02179100CC3E38 /* DSTransitionSceneInfo.m in Sources */,
 				52CC82A42C02179100CC3E38 /* DSTileInfo.m in Sources */,
 				52E24A1C2C17E7FB0098F87D /* 01-numerals.mm in Sources */,
