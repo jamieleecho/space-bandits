@@ -306,4 +306,11 @@ static asm void MusicStop2() {
   }
 }
 
+/** Set waveform for a voice using inline asm:
+ *  asm {
+ *      ldd  #Music_WaveTable_Sine       (or _Triangle, _Sawtooth, _Pulse)
+ *      std  Music_WavePtr0              (or Music_WavePtr1, Music_WavePtr2)
+ *  }
+ */
+
 #endif /* _Dynosprite_h */

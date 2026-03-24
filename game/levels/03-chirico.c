@@ -140,6 +140,16 @@ void ChiricoInit() {
     globals->score[0] = globals->score[1] = globals->score[2] = 0;
     globals->gameState = GameStatePlaying;
 
+    /* Set waveforms: sine arpeggio, triangle sustain, sawtooth bass */
+    asm {
+        ldd     #Music_WaveTable_Sine
+        std     Music_WavePtr0
+        ldd     #Music_WaveTable_Triangle
+        std     Music_WavePtr1
+        ldd     #Music_WaveTable_Sawtooth
+        std     Music_WavePtr2
+    }
+
     SequencerPlay(moon_v0_notes, moon_v0_durs,
                   moon_v1_notes, moon_v1_durs,
                   moon_v2_notes, moon_v2_durs, 20);

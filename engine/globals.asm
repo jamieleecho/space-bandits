@@ -286,13 +286,16 @@ Music_Playing           zmb     1       * nonzero if music is active (1=playing,
  IFGE MUSIC_VOICES-1
 Music_PhaseAccum0       zmd     1       * voice 0: 16-bit phase accumulator
 Music_PhaseInc0         zmd     1       * voice 0: 16-bit phase increment (0 = silent)
+Music_WavePtr0          zmd     1       * voice 0: pointer to 128-byte wavetable
  ENDC
  IFGE MUSIC_VOICES-2
 Music_PhaseAccum1       zmd     1       * voice 1: 16-bit phase accumulator
 Music_PhaseInc1         zmd     1       * voice 1: 16-bit phase increment (0 = silent)
+Music_WavePtr1          zmd     1       * voice 1: pointer to 128-byte wavetable
  ENDC
  IFGE MUSIC_VOICES-3
 Music_PhaseAccum2       zmd     1       * voice 2: 16-bit phase accumulator
 Music_PhaseInc2         zmd     1       * voice 2: 16-bit phase increment (0 = silent)
+Music_WavePtr2          zmd     1       * voice 2: pointer to 128-byte wavetable
  ENDC
 
