@@ -223,30 +223,22 @@ BothChannelsRunning@
 TwoChan_Orc90@
  IFEQ CPU-6309
             pshsw
-CopyTwoChannelsOrc90_6309@                      * Total: 2544
+CopyTwoChannelsOrc90_6309@
             ldq         ,u                      * 8
             addd        ,y                      * 5
-            rord                                * 2
             addw        2,y                     * 7
-            rorw                                * 2
             stq         ,x                      * 8
             ldq         4,u                     * 9
             addd        4,y                     * 6
-            rord                                * 2
             addw        6,y                     * 7
-            rorw                                * 2
             stq         4,x                     * 9
             ldq         8,u                     * 9
             addd        8,y                     * 6
-            rord                                * 2
             addw        10,y                    * 7
-            rorw                                * 2
             stq         8,x                     * 9
             ldq         12,u                    * 9
             addd        12,y                    * 6
-            rord                                * 2
             addw        14,y                    * 7
-            rorw                                * 2
             stq         12,x                    * 9
             leau        16,u                    * 5
             leay        16,y                    * 5
@@ -255,46 +247,30 @@ CopyTwoChannelsOrc90_6309@                      * Total: 2544
             bne         CopyTwoChannelsOrc90_6309@    * 3
             pulsw
  ELSE
-CopyTwoChannelsOrc90_6809@                      * Total: 3248
+CopyTwoChannelsOrc90_6809@
             ldd         ,u                      * 5
             addd        ,y                      * 6
-            rora                                * 2
-            rorb                                * 2
             std         ,x                      * 5
             ldd         2,u                     * 6
             addd        2,y                     * 7
-            rora                                * 2
-            rorb                                * 2
             std         2,x                     * 6
             ldd         4,u                     * 6
             addd        4,y                     * 7
-            rora                                * 2
-            rorb                                * 2
             std         4,x                     * 6
             ldd         6,u                     * 6
             addd        6,y                     * 7
-            rora                                * 2
-            rorb                                * 2
             std         6,x                     * 6
             ldd         8,u                     * 6
             addd        8,y                     * 7
-            rora                                * 2
-            rorb                                * 2
             std         8,x                     * 6
             ldd         10,u                    * 6
             addd        10,y                    * 7
-            rora                                * 2
-            rorb                                * 2
             std         10,x                    * 6
             ldd         12,u                    * 6
             addd        12,y                    * 7
-            rora                                * 2
-            rorb                                * 2
             std         12,x                    * 6
             ldd         14,u                    * 6
             addd        14,y                    * 7
-            rora                                * 2
-            rorb                                * 2
             std         14,x                    * 6
             leau        16,u                    * 5
             leay        16,y                    * 5
@@ -308,36 +284,28 @@ TwoChan_DAC6@
             pshsw
             ldd         #$0202
             tfr         d,v
-CopyTwoChannelsDAC6_6309@                       * Total: 3056
+CopyTwoChannelsDAC6_6309@
             ldq         ,u                      * 8
             addd        ,y                      * 5
-            rord                                * 2
             addw        2,y                     * 7
-            rorw                                * 2
             ord         #$0202                  * 4
             orr         v,w                     * 4
             stq         ,x                      * 8
             ldq         4,u                     * 9
             addd        4,y                     * 6
-            rord                                * 2
             addw        6,y                     * 7
-            rorw                                * 2
             ord         #$0202                  * 4
             orr         v,w                     * 4
             stq         4,x                     * 9
             ldq         8,u                     * 9
             addd        8,y                     * 6
-            rord                                * 2
             addw        10,y                    * 7
-            rorw                                * 2
             ord         #$0202                  * 4
             orr         v,w                     * 4
             stq         8,x                     * 9
             ldq         12,u                    * 9
             addd        12,y                    * 6
-            rord                                * 2
             addw        14,y                    * 7
-            rorw                                * 2
             ord         #$0202                  * 4
             orr         v,w                     * 4
             stq         12,x                    * 9
@@ -348,60 +316,44 @@ CopyTwoChannelsDAC6_6309@                       * Total: 3056
             bne         CopyTwoChannelsDAC6_6309@    * 3
             pulsw
  ELSE
-CopyTwoChannelsDAC6_6809@                       * Total: 3760
+CopyTwoChannelsDAC6_6809@
             ldd         ,u                      * 5
             addd        ,y                      * 6
-            rora                                * 2
-            rorb                                * 2
             ora         #2                      * 2
             orb         #2                      * 2
             std         ,x                      * 5
             ldd         2,u                     * 6
             addd        2,y                     * 7
-            rora                                * 2
-            rorb                                * 2
             ora         #2                      * 2
             orb         #2                      * 2
             std         2,x                     * 6
             ldd         4,u                     * 6
             addd        4,y                     * 7
-            rora                                * 2
-            rorb                                * 2
             ora         #2                      * 2
             orb         #2                      * 2
             std         4,x                     * 6
             ldd         6,u                     * 6
             addd        6,y                     * 7
-            rora                                * 2
-            rorb                                * 2
             ora         #2                      * 2
             orb         #2                      * 2
             std         6,x                     * 6
             ldd         8,u                     * 6
             addd        8,y                     * 7
-            rora                                * 2
-            rorb                                * 2
             ora         #2                      * 2
             orb         #2                      * 2
             std         8,x                     * 6
             ldd         10,u                    * 6
             addd        10,y                    * 7
-            rora                                * 2
-            rorb                                * 2
             ora         #2                      * 2
             orb         #2                      * 2
             std         10,x                    * 6
             ldd         12,u                    * 6
             addd        12,y                    * 7
-            rora                                * 2
-            rorb                                * 2
             ora         #2                      * 2
             orb         #2                      * 2
             std         12,x                    * 6
             ldd         14,u                    * 6
             addd        14,y                    * 7
-            rora                                * 2
-            rorb                                * 2
             ora         #2                      * 2
             orb         #2                      * 2
             std         14,x                    * 6
