@@ -12,7 +12,7 @@ jobs:
         run: ./forge all
 
       - name: 'Upload 6809 *.dsk Images'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: 6809-dsk-image
           path: build/*.DSK
@@ -26,7 +26,7 @@ jobs:
         run: ./forge CPU=6309 all
 
       - name: 'Upload 6309 *.dsk Images'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: 6309-dsk-image
           path: build/*.DSK
@@ -46,7 +46,7 @@ jobs:
           tar cvf space-bandits.tgz *.app
 
       - name: 'Upload Tar Ball Apps'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: tar-ball-apps
           path: build/*.tgz
@@ -57,7 +57,7 @@ jobs:
     needs: [build-6809-dsk-image, build-6309-dsk-image, build-macos]
     steps:
       - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
 
       - name: Get the tag
         run: |
