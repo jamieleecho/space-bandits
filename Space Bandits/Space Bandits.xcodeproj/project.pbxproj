@@ -69,6 +69,7 @@
 		525FE4822C053EC500E03391 /* DSSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4522C053EC500E03391 /* DSSceneTest.m */; };
 		525FE4832C053EC500E03391 /* DSSharedSceneControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4532C053EC500E03391 /* DSSharedSceneControllerTest.m */; };
 		525FE4842C053EC500E03391 /* DSSoundManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4542C053EC500E03391 /* DSSoundManagerTest.m */; };
+		F9EBC11F2EB20001 /* DSMusicEngineTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC11F2EB20000 /* DSMusicEngineTest.m */; };
 		525FE4852C053EC500E03391 /* DSSpriteFileParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4552C053EC500E03391 /* DSSpriteFileParserTest.m */; };
 		525FE4862C053EC500E03391 /* DSSpriteInfoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4562C053EC500E03391 /* DSSpriteInfoTest.m */; };
 		525FE4872C053EC500E03391 /* DSSpriteObjectClassFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4572C053EC500E03391 /* DSSpriteObjectClassFactoryTest.m */; };
@@ -455,6 +456,7 @@
 		525FE4522C053EC500E03391 /* DSSceneTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSceneTest.m; sourceTree = "<group>"; };
 		525FE4532C053EC500E03391 /* DSSharedSceneControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSharedSceneControllerTest.m; sourceTree = "<group>"; };
 		525FE4542C053EC500E03391 /* DSSoundManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSoundManagerTest.m; sourceTree = "<group>"; };
+		F9EBC11F2EB20000 /* DSMusicEngineTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSMusicEngineTest.m; sourceTree = "<group>"; };
 		525FE4552C053EC500E03391 /* DSSpriteFileParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSpriteFileParserTest.m; sourceTree = "<group>"; };
 		525FE4562C053EC500E03391 /* DSSpriteInfoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSpriteInfoTest.m; sourceTree = "<group>"; };
 		525FE4572C053EC500E03391 /* DSSpriteObjectClassFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSpriteObjectClassFactoryTest.m; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 				525FE4522C053EC500E03391 /* DSSceneTest.m */,
 				525FE4532C053EC500E03391 /* DSSharedSceneControllerTest.m */,
 				525FE4542C053EC500E03391 /* DSSoundManagerTest.m */,
+				F9EBC11F2EB20000 /* DSMusicEngineTest.m */,
 				525FE4552C053EC500E03391 /* DSSpriteFileParserTest.m */,
 				525FE4562C053EC500E03391 /* DSSpriteInfoTest.m */,
 				525FE4572C053EC500E03391 /* DSSpriteObjectClassFactoryTest.m */,
@@ -1382,6 +1385,7 @@
 				525FE4792C053EC500E03391 /* DSMutableArrayWrapperTest.m in Sources */,
 				525FE4812C053EC500E03391 /* DSSceneControllerTest.m in Sources */,
 				525FE4842C053EC500E03391 /* DSSoundManagerTest.m in Sources */,
+				F9EBC11F2EB20001 /* DSMusicEngineTest.m in Sources */,
 				52CC827B2C02179100CC3E38 /* DSObjectCoordinator.m in Sources */,
 				52CC829F2C02179100CC3E38 /* DSTextureManager.m in Sources */,
 				52CC823F2C02179100CC3E38 /* DSCoCoJoystick.mm in Sources */,

@@ -46,17 +46,20 @@ static NSString *MenuSoundHigh = @"HiFi";
     _isTransitioning = NO;
     self.isDone = NO;
     if (self.labels.count < 1) {
-        [self addLabelWithText:@"[D]isplay:" atPosition:CGPointMake(3, 120)];
-        _resolutionLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 120)];
-        [self addLabelWithText:@"[C]ontrol:" atPosition:CGPointMake(3, 136)];
-        _controlLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 136)];
-        [self addLabelWithText:@"[S]ound:" atPosition:CGPointMake(3, 152)];
-        _soundLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 152)];
+        [self addLabelWithText:@"[D]isplay:" atPosition:CGPointMake(3, 99)];
+        _resolutionLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 99)];
+        [self addLabelWithText:@"[C]ontrol:" atPosition:CGPointMake(3, 115)];
+        _controlLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 115)];
+        [self addLabelWithText:@"[S]ound:" atPosition:CGPointMake(3, 131)];
+        _soundLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 131)];
+        [self addLabelWithText:@"M[u]sic:" atPosition:CGPointMake(3, 147)];
+        _musicLabelNode = [self addLabelWithText:@"" atPosition:CGPointMake(120, 147)];
         [self addLabelWithText:@"[Space] or joystick button to start" atPosition:CGPointMake(20, 184)];
-        
+
         _resolution = self.resourceController.hiresMode ? DSInitSceneDisplayHigh : DSInitSceneDisplayLow;
         _control = self.joystickController.useHardwareJoystick ? DSInitSceneControlJoystick : DSInitSceneControlKeyboard;
         _sound = self.soundManager.enabled ? (self.resourceController.hifiMode ? DSInitSceneSoundHigh : DSInitSceneSoundLow) : DSInitSceneSoundNone;
+        _musicEnabled = MusicGetEnabled() ? YES : NO;
     }
 
     [self refreshState];
@@ -89,7 +92,11 @@ static NSString *MenuSoundHigh = @"HiFi";
             case 's':
                 [self toggleSound];
                 break;
-                
+
+            case 'u':
+                [self toggleMusic];
+                break;
+
             case ' ':
                 break;
         }
@@ -99,6 +106,7 @@ static NSString *MenuSoundHigh = @"HiFi";
 
 - (void)transitionToNextScreen {
     _isTransitioning = YES;
+    MusicSetEnabled(_musicEnabled ? 1 : 0);
     [self.soundManager loadCache];
     [self.spriteObjectClassFactory loadCache];
     self.soundManager.maxNumSounds = (self.resourceController.hifiMode) ? 10 : 2;
@@ -129,11 +137,24 @@ static NSString *MenuSoundHigh = @"HiFi";
 
 - (void)toggleSound {
     _sound = (_sound >= DSInitSceneSoundHigh) ? DSInitSceneSoundNone : _sound + 1;
+    if (_sound == DSInitSceneSoundNone) {
+        _musicEnabled = NO;
+    }
     [self refreshState];
 }
 
 - (DSInitSceneSound)sound {
     return _sound;
+}
+
+- (void)toggleMusic {
+    if (_sound == DSInitSceneSoundNone) return;  /* no toggle when sound is off */
+    _musicEnabled = !_musicEnabled;
+    [self refreshState];
+}
+
+- (bool)musicEnabled {
+    return _musicEnabled;
 }
 
 - (void)poll {
@@ -150,6 +171,7 @@ static NSString *MenuSoundHigh = @"HiFi";
     _resolutionLabelNode.text = [DSInitScene textFromResolution:_resolution];
     _controlLabelNode.text = [DSInitScene textFromControl:_control];
     _soundLabelNode.text = [DSInitScene textFromSound:_sound];
+    _musicLabelNode.text = _musicEnabled ? @"Yes" : @"No";
 
     self.joystickController.useHardwareJoystick = (_control == DSInitSceneControlJoystick);
     self.soundManager.enabled = (_sound != DSInitSceneSoundNone);

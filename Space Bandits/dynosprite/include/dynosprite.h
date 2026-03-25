@@ -83,6 +83,8 @@ void MusicStop(void);
 void MusicStop1(void);
 void MusicStop2(void);
 void MusicStopImmediate(void);
+void MusicSetEnabled(int enabled);
+int MusicGetEnabled(void);
 
 /** Set waveform for a voice */
 void MusicSetWaveformForVoice(int voice, int waveform);

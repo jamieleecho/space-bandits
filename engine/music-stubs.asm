@@ -34,6 +34,8 @@ Music_MixIntoBuffer
 ***********************************************************
 *
 Music_Start
+            tst         Menu_MusicEnabled
+            beq         Music_Start_Disabled
             pshs        a                   * save A (high byte of D parameter)
             lda         $FFA2               * read current $4000-$5FFF page
             pshs        a                   * save it on stack
@@ -44,6 +46,8 @@ Music_Start
             puls        a                   * restore saved $FFA2 value
             sta         $FFA2               * restore previous $4000-$5FFF mapping
             puls        a,pc                * discard saved A and return
+Music_Start_Disabled
+            rts
 
 ***********************************************************
 * Music_Stop (stub) — stop all voices (fade-out)
@@ -93,6 +97,8 @@ Music_MixIntoBuffer
 ***********************************************************
 *
 Music_Start1
+            tst         Menu_MusicEnabled
+            beq         Music_Start_Disabled
             pshs        a
             lda         $FFA2
             pshs        a
@@ -131,6 +137,8 @@ Music_Stop1
 ***********************************************************
 *
 Music_Start2
+            tst         Menu_MusicEnabled
+            beq         Music_Start_Disabled
             pshs        a
             lda         $FFA2
             pshs        a

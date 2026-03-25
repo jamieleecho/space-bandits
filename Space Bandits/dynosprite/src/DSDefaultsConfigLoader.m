@@ -40,7 +40,8 @@
             @"UseKeyboard", NSStringFromSelector(@selector(setUseKeyboard:)), @NO,
             @"HiresMode", NSStringFromSelector(@selector(setHiresMode:)), @NO,
             @"HifiMode", NSStringFromSelector(@selector(setHifiMode:)), @NO,
-            @"EnableSound", NSStringFromSelector(@selector(setEnableSound:)), @NO
+            @"EnableSound", NSStringFromSelector(@selector(setEnableSound:)), @NO,
+            @"EnableMusic", NSStringFromSelector(@selector(setEnableMusic:)), @NO
         ];
         
         for(size_t ii=0; ii<properties.count; ii += 3) {

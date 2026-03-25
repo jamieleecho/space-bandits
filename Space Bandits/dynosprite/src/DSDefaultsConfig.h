@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL hiresMode;
 @property (nonatomic) BOOL hifiMode;
 @property (nonatomic) BOOL enableSound;
+@property (nonatomic) BOOL enableMusic;
 
 @end
 

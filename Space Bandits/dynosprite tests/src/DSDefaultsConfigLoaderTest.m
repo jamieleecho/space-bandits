@@ -39,6 +39,7 @@
     XCTAssertFalse(_target.defaultsConfig.useKeyboard);
     XCTAssertTrue(_target.defaultsConfig.hiresMode);
     XCTAssertFalse(_target.defaultsConfig.enableSound);
+    XCTAssertFalse(_target.defaultsConfig.enableMusic);
     XCTAssertTrue(_target.defaultsConfig.hifiMode);
 }
 

@@ -140,12 +140,27 @@ static void ensureMusicEngine(void) {
     }
 }
 
+static int _musicGlobalEnabled = 1;  /* set to 0 by menu to disable music */
+void MusicStopImmediate(void);       /* forward declaration */
+
 static void musicStartVoice(int voice, int phaseInc) {
+    if (!_musicGlobalEnabled) return;
     ensureMusicEngine();
     double freq = phaseInc * 2000.0 / 65536.0;
     _musicPhaseIncrement[voice] = freq / kMusicSampleRate;
     _musicFadeGain = 1.0f;
     _musicState = 1;
+}
+
+void MusicSetEnabled(int enabled) {
+    _musicGlobalEnabled = enabled;
+    if (!enabled) {
+        MusicStopImmediate();
+    }
+}
+
+int MusicGetEnabled(void) {
+    return _musicGlobalEnabled;
 }
 
 void MusicStart(int phaseInc)  { musicStartVoice(0, phaseInc); }

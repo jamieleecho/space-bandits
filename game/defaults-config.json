@@ -5,5 +5,6 @@
     "SoundOutputMode": 0,
     "HifiMode": false,
     "HiresMode": false,
-    "EnableSound": true
+    "EnableSound": true,
+    "EnableMusic": true
 }

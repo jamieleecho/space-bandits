@@ -25,6 +25,7 @@
     XCTAssertTrue(_target.useKeyboard);
     XCTAssertFalse(_target.hiresMode);
     XCTAssertTrue(_target.enableSound);
+    XCTAssertTrue(_target.enableMusic);
     XCTAssertFalse(_target.hifiMode);
 }
 
@@ -53,6 +54,11 @@
     XCTAssertTrue(_target.hifiMode);
 }
 
+- (void)testUpdatesEnableMusic {
+    _target.enableMusic = NO;
+    XCTAssertFalse(_target.enableMusic);
+}
+
 - (void)testIsEqualTo {
     DSDefaultsConfig *config = [[DSDefaultsConfig alloc] init];
 
@@ -79,6 +85,11 @@
     _target.hifiMode = YES;
     XCTAssertNotEqualObjects(_target, config);
     config.hifiMode = YES;
+    XCTAssertEqualObjects(_target, config);
+
+    _target.enableMusic = NO;
+    XCTAssertNotEqualObjects(_target, config);
+    config.enableMusic = NO;
     XCTAssertEqualObjects(_target, config);
 }
 
