@@ -155,6 +155,7 @@
     // Update all the sprites
     byte newLevel = [_objectCoordinator updateOrReactivateObjects];
     if (newLevel) {
+        MusicStopImmediate();
         SKTransition *transition = [SKTransition doorwayWithDuration:1.0];
         DSTransitionScene *transitionScene = [_sceneController transitionSceneForLevel:(newLevel & 128) ? 0 : newLevel];
         self.isDone = YES;

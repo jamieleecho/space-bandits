@@ -128,7 +128,7 @@ static void SequencerPlay(word *notes0, byte *durs0,
 /*
  * SequencerStop — stop all voices with fade-out.
  */
-static void SequencerStop(void) {
+MAYBE_UNUSED static void SequencerStop(void) {
     if (seq_playing) {
         MusicStop();
         seq_playing = 0;

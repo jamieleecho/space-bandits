@@ -76,6 +76,9 @@ Object_GotoLevel:
             jmp         Ldr_Jump_To_New_Level 
 !           rts
 Object_GotoMenu:
+            jsr         System_DisableAudioInterrupt
+            clr         Sound_ChannelsPlaying
+            clr         Music_Playing
             jsr         Ldr_Unload_Level
 	    jmp	        Menu_RunMain
 

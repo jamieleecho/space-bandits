@@ -161,6 +161,13 @@ void MusicStop(void) {
 void MusicStop1(void) { _musicPhaseIncrement[1] = 0; }
 void MusicStop2(void) { _musicPhaseIncrement[2] = 0; }
 
+void MusicStopImmediate(void) {
+    _musicState = 0;
+    for (int v = 0; v < MUSIC_NUM_VOICES; v++) {
+        _musicPhaseIncrement[v] = 0;
+    }
+}
+
 void MusicSetWaveformForVoice(int voice, int waveform) {
     if (voice >= 0 && voice < MUSIC_NUM_VOICES) {
         _musicWaveform[voice] = waveform;

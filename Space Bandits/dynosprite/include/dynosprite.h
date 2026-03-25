@@ -82,6 +82,7 @@ void MusicStart2(int phaseInc);
 void MusicStop(void);
 void MusicStop1(void);
 void MusicStop2(void);
+void MusicStopImmediate(void);
 
 /** Set waveform for a voice */
 void MusicSetWaveformForVoice(int voice, int waveform);
