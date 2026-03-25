@@ -61,8 +61,8 @@ DynoSprite makefile.
     SPEEDTEST=1    == run loop during idle and count time for analysis
     VISUALTIME=1   == set screen width to 256 and change border color
     CPU=6309       == build with faster 6309-specific instructions
-    OBJPAGES=1     == num of pages to use levels and objects
-    OBJPAGEGUARD=0 == num bytes to reserve at top of each object code page
+    OBJPAGES=N     == num of pages to use levels and objects (default 2)
+    OBJPAGEGUARD=N == num bytes to reserve at top of each object code page (default 256)
     MUSIC_VOICES=N == num of music voices, 0-3 (default 3)
     FAST_BACKGROUND=1 == use fast CC-register tile drawing
     VERBOSE_ERRORS=0  == reduce error display to save primary page space
