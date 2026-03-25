@@ -584,18 +584,46 @@ Using the Sequencer:
   This avoids memory mapping issues since the sequencer and song data both live
   in the level's own code page.
 
+Waveform Selection:
+
+  Each voice can use a different wavetable waveform. Set waveforms before starting
+  music. Available waveforms (each has a normal and quiet variant):
+
+    MusicSetWaveSine0();          MusicSetWaveSineQuiet0();
+    MusicSetWaveTriangle0();      MusicSetWaveTriangleQuiet0();
+    MusicSetWaveSawtooth0();      MusicSetWaveSawtoothQuiet0();
+    MusicSetWavePulse0();         MusicSetWavePulseQuiet0();
+
+  Replace the trailing 0 with 1 or 2 for voices 1 and 2. Normal waveforms have
+  ±10 amplitude; quiet waveforms have ±5 (half amplitude). On the CoCo's 6-bit DAC,
+  normal waveforms produce ±2-3 DAC levels and quiet waveforms ±1 DAC level.
+
+  On CoCo, these are static asm functions that set wavetable pointers in
+  Music_WavePtr0/1/2. On macOS, they call MusicSetWaveformForVoice() which
+  switches the render math in the Core Audio callback.
+
+Music Enable/Disable:
+
+  The title menu includes a M[u]sic: Yes/No toggle. When set to No, all
+  Music_Start stubs return immediately without starting music. When the sound
+  option is set to "No sound", music is automatically disabled.
+
+  The initial music state is controlled by the "EnableMusic" field in
+  game/defaults-config.json (default true). On macOS, MusicSetEnabled() and
+  MusicGetEnabled() control a global flag that persists across level transitions.
+
 Music Architecture:
 
   The music engine code is split across multiple memory pages:
 
-  - Secondary code page ($E000): Music_WaveTable (128-byte half-sine lookup
-    table), page-swapping stubs for all music APIs, and stubs for
-    Music_RefillBuffer and Music_MixIntoBuffer.
+  - Secondary code page ($E000): Page-swapping stubs for all music APIs,
+    and stubs for Music_RefillBuffer and Music_MixIntoBuffer.
 
-  - Tertiary code page ($4000): Music_Start/Stop implementations,
-    Music_RefillBuffer_Impl (generates 256 mixed samples from all active
-    voices), and Music_MixIntoBuffer_Impl (adds music to an existing SFX
-    buffer). This page is swapped into $4000-$5FFF via $FFA2 when needed.
+  - Tertiary code page ($4000): Wavetables (sine, triangle, sawtooth, pulse
+    in normal and quiet variants — 8 tables, 128 bytes each), Music_Start/Stop
+    implementations, Music_RefillBuffer_Impl (generates 256 mixed samples from
+    all active voices), and Music_MixIntoBuffer_Impl (adds music to an existing
+    SFX buffer). This page is swapped into $4000-$5FFF via $FFA2 when needed.
 
   When sound effects are playing, the audio FIRQ handler fills the buffer with
   SFX data first, then Music_MixIntoBuffer adds music on top by converting each

@@ -243,6 +243,23 @@ MusicStart1(0); /* equivalent to MusicStop1() */
 | C4   | 261.63    | 8573            |
 | A4   | 440.00    | 14418           |
 
+### Waveform Selection
+Each voice can use a different wavetable waveform. Available waveforms (normal ±10 amplitude and quiet ±5 amplitude):
+
+| Normal | Quiet | Sound |
+|--------|-------|-------|
+| `MusicSetWaveSine0()` | `MusicSetWaveSineQuiet0()` | Smooth, pure tone (default) |
+| `MusicSetWaveTriangle0()` | `MusicSetWaveTriangleQuiet0()` | Softer, mellower |
+| `MusicSetWaveSawtooth0()` | `MusicSetWaveSawtoothQuiet0()` | Bright, buzzy (good for bass) |
+| `MusicSetWavePulse0()` | `MusicSetWavePulseQuiet0()` | Hollow, reedy (square wave) |
+
+Replace `0` with `1` or `2` for voices 1 and 2. Set waveforms before calling `SequencerPlay` or `MusicStart`. On CoCo these are `static asm` functions that set wavetable pointers; on macOS they call `MusicSetWaveformForVoice()` which switches the render math.
+
+### Music Enable/Disable
+Music can be toggled on/off from the title menu (M[u]sic: Yes/No). The `EnableMusic` field in `game/defaults-config.json` sets the initial state (default `true`). When sound is set to "No sound", music is automatically disabled.
+
+On CoCo, `Menu_MusicEnabled` is checked by all `Music_Start` stubs — if zero, they return immediately. On macOS, `MusicSetEnabled()`/`MusicGetEnabled()` control a global flag checked by all voice start functions.
+
 ### Music Sequencer
 A reusable header-only sequencer is available in `game/shared/sequencer.h`. Include it in any level's C code to get automatic song playback with looping.
 
