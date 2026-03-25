@@ -159,11 +159,11 @@
     /* Verify some known phase increment values:
        phaseInc = freq * 65536 / 2000 */
     /* A4 = 440 Hz -> 440 * 65536 / 2000 = 14418 */
-    XCTAssertEqual((int)(440.0 * 65536.0 / 2000.0), 14418);
+    XCTAssertEqual((int)(440.0 * 65536.0 / 2000.0), 14417);
     /* C4 = 261.63 Hz -> ~8573 */
     XCTAssertTrue(abs((int)(261.63 * 65536.0 / 2000.0) - 8573) <= 1);
     /* A3 = 220 Hz -> 7209 */
-    XCTAssertEqual((int)(220.0 * 65536.0 / 2000.0), 7209);
+    XCTAssertEqual((int)(220.0 * 65536.0 / 2000.0), 7208);
 }
 
 #pragma mark - Rapid Start/Stop
