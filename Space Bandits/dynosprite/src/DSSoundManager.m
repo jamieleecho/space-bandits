@@ -7,9 +7,186 @@
 //
 
 #import "DSSoundManager.h"
+#import <AVFoundation/AVFoundation.h>
+#import <math.h>
 
 void PlaySound(int soundIndex) {
     [DSSoundManager.sharedInstance playSoundId:soundIndex];
+}
+
+/* --- Music synthesis engine (3-voice with waveform selection via Core Audio) --- */
+
+#define MUSIC_NUM_VOICES 3
+
+/* Waveform types */
+enum MusicWaveform {
+    MUSIC_WAVE_SINE = 0,
+    MUSIC_WAVE_TRIANGLE = 1,
+    MUSIC_WAVE_SAWTOOTH = 2,
+    MUSIC_WAVE_PULSE = 3,
+    MUSIC_WAVE_SINE_QUIET = 4,
+    MUSIC_WAVE_TRIANGLE_QUIET = 5,
+    MUSIC_WAVE_SAWTOOTH_QUIET = 6,
+    MUSIC_WAVE_PULSE_QUIET = 7,
+};
+
+static AVAudioEngine *_musicEngine = nil;
+static AVAudioSourceNode *_musicSourceNode = nil;
+static double _musicPhase[MUSIC_NUM_VOICES] = {0, 0, 0};
+static double _musicPhaseIncrement[MUSIC_NUM_VOICES] = {0, 0, 0};
+static int _musicWaveform[MUSIC_NUM_VOICES] = {MUSIC_WAVE_SINE, MUSIC_WAVE_SINE, MUSIC_WAVE_SINE};
+static int _musicState = 0;       /* 0=stopped, 1=playing, 2=fading out */
+static float _musicFadeGain = 1.0f;
+static const double kMusicSampleRate = 44100.0;
+static const float kMusicAmplitude = 0.125f;
+/* Fade out over ~5ms (220 samples at 44100 Hz) */
+static const float kMusicFadeStep = 1.0f / 220.0f;
+
+/* Generate one sample for a given phase and waveform type.
+   Phase is 0.0 to 1.0. Output is -1.0 to 1.0.
+   Non-sine waveforms are softened with a sine-shaped envelope to
+   round off sharp corners and reduce harsh harmonics. */
+static inline float musicSampleForWaveform(double phase, int waveform) {
+    /* Quiet variants: compute normal then halve */
+    if (waveform >= 4 && waveform <= 7) {
+        return 0.5f * musicSampleForWaveform(phase, waveform - 4);
+    }
+    switch (waveform) {
+        case MUSIC_WAVE_TRIANGLE: {
+            /* Sine-shaped triangle: use sin^3 for a rounded triangle feel */
+            float s = sinf((float)(phase * 2.0 * M_PI));
+            return 0.75f * (s > 0 ? powf(s, 0.6f) : -powf(-s, 0.6f));
+        }
+        case MUSIC_WAVE_SAWTOOTH: {
+            /* Band-limited sawtooth approximation using first 4 harmonics */
+            float p = (float)(phase * 2.0 * M_PI);
+            return 0.5f * (sinf(p) - 0.5f*sinf(2.0f*p) + 0.333f*sinf(3.0f*p) - 0.25f*sinf(4.0f*p));
+        }
+        case MUSIC_WAVE_PULSE: {
+            /* Softened pulse: use tanh to smooth the transition */
+            float s = sinf((float)(phase * 2.0 * M_PI));
+            return 0.7f * tanhf(4.0f * s);
+        }
+        default: /* MUSIC_WAVE_SINE */
+            return sinf((float)(phase * 2.0 * M_PI));
+    }
+}
+
+static void ensureMusicEngine(void) {
+    if (_musicEngine) return;
+
+    _musicEngine = [[AVAudioEngine alloc] init];
+    AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:kMusicSampleRate channels:1];
+
+    _musicSourceNode = [[AVAudioSourceNode alloc] initWithFormat:format renderBlock:
+        ^OSStatus(BOOL *isSilence, const AudioTimeStamp *timestamp,
+                  AVAudioFrameCount frameCount, AudioBufferList *outputData) {
+        int state = _musicState;
+        if (state == 0) {
+            *isSilence = YES;
+            memset(outputData->mBuffers[0].mData, 0,
+                   outputData->mBuffers[0].mDataByteSize);
+            return noErr;
+        }
+
+        float *buffer = (float *)outputData->mBuffers[0].mData;
+        double phase[MUSIC_NUM_VOICES];
+        double phaseInc[MUSIC_NUM_VOICES];
+        int waveform[MUSIC_NUM_VOICES];
+        for (int v = 0; v < MUSIC_NUM_VOICES; v++) {
+            phase[v] = _musicPhase[v];
+            phaseInc[v] = _musicPhaseIncrement[v];
+            waveform[v] = _musicWaveform[v];
+        }
+        float gain = _musicFadeGain;
+
+        for (AVAudioFrameCount i = 0; i < frameCount; i++) {
+            float sample = 0.0f;
+            for (int v = 0; v < MUSIC_NUM_VOICES; v++) {
+                sample += kMusicAmplitude * musicSampleForWaveform(phase[v], waveform[v]);
+                phase[v] += phaseInc[v];
+                if (phase[v] >= 1.0) phase[v] -= 1.0;
+            }
+            buffer[i] = sample * gain;
+            if (state == 2) {
+                gain -= kMusicFadeStep;
+                if (gain <= 0.0f) {
+                    gain = 0.0f;
+                    for (AVAudioFrameCount j = i + 1; j < frameCount; j++) {
+                        buffer[j] = 0.0f;
+                    }
+                    _musicState = 0;
+                    break;
+                }
+            }
+        }
+
+        for (int v = 0; v < MUSIC_NUM_VOICES; v++) {
+            _musicPhase[v] = phase[v];
+        }
+        _musicFadeGain = gain;
+        *isSilence = NO;
+        return noErr;
+    }];
+
+    [_musicEngine attachNode:_musicSourceNode];
+    [_musicEngine connect:_musicSourceNode to:_musicEngine.mainMixerNode format:format];
+
+    NSError *error = nil;
+    if (![_musicEngine startAndReturnError:&error]) {
+        NSLog(@"Music engine failed to start: %@", error);
+        _musicEngine = nil;
+        _musicSourceNode = nil;
+    }
+}
+
+static int _musicGlobalEnabled = 1;  /* set to 0 by menu to disable music */
+void MusicStopImmediate(void);       /* forward declaration */
+
+static void musicStartVoice(int voice, int phaseInc) {
+    if (!_musicGlobalEnabled) return;
+    ensureMusicEngine();
+    double freq = phaseInc * 2000.0 / 65536.0;
+    _musicPhaseIncrement[voice] = freq / kMusicSampleRate;
+    _musicFadeGain = 1.0f;
+    _musicState = 1;
+}
+
+void MusicSetEnabled(int enabled) {
+    _musicGlobalEnabled = enabled;
+    if (!enabled) {
+        MusicStopImmediate();
+    }
+}
+
+int MusicGetEnabled(void) {
+    return _musicGlobalEnabled;
+}
+
+void MusicStart(int phaseInc)  { musicStartVoice(0, phaseInc); }
+void MusicStart1(int phaseInc) { musicStartVoice(1, phaseInc); }
+void MusicStart2(int phaseInc) { musicStartVoice(2, phaseInc); }
+
+void MusicStop(void) {
+    if (_musicState == 1) {
+        _musicState = 2;  /* begin fade-out */
+    }
+}
+
+void MusicStop1(void) { _musicPhaseIncrement[1] = 0; }
+void MusicStop2(void) { _musicPhaseIncrement[2] = 0; }
+
+void MusicStopImmediate(void) {
+    _musicState = 0;
+    for (int v = 0; v < MUSIC_NUM_VOICES; v++) {
+        _musicPhaseIncrement[v] = 0;
+    }
+}
+
+void MusicSetWaveformForVoice(int voice, int waveform) {
+    if (voice >= 0 && voice < MUSIC_NUM_VOICES) {
+        _musicWaveform[voice] = waveform;
+    }
 }
 
 static DSSoundManager *_sharedInstance = nil;

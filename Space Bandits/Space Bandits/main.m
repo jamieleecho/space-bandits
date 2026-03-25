@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "DSAppDelegate.h"
 
-int main(int argc, const char **argv)
+int main(int argc, char * _Nullable * _Nonnull argv)
 {
     NSString * appDelegateClassName;
     @autoreleasepool {

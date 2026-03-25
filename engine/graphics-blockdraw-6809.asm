@@ -2,17 +2,17 @@
 * DynoSprite - graphics-blockdraw-6809.asm
 * Copyright (c) 2013-2014, Richard Goedeken
 * All rights reserved.
-* 
+*
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are met:
-* 
+*
 * * Redistributions of source code must retain the above copyright notice, this
 *   list of conditions and the following disclaimer.
-* 
+*
 * * Redistributions in binary form must reproduce the above copyright notice,
 *   this list of conditions and the following disclaimer in the documentation
 *   and/or other materials provided with the distribution.
-* 
+*
 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -26,8 +26,9 @@
 *********************************************************************************
 
 
+ IFDEF FAST_BACKGROUND
 ***********************************************************
-* Gfx_DrawBlockRows:
+* Gfx_DrawBlockRows:  (FAST version — uses CC register for 8-byte pulu/pshu)
 *   Note that the algorithm used for moving data in these block drawing routines
 *   uses the CC register to store pixel values.  Due to the way that interrupts are
 *   handled on the 6809 with the E bit, this can cause pixel data corruption in the
@@ -684,4 +685,66 @@ Draw16Rows                                      * 1176 (73.5/row)
             leas        4,s                     * 5
             rts
 
+
+ ELSE
+***********************************************************
+* Gfx_DrawBlockRows:  (SAFE version — does not use CC register)
+*   This version uses ldd/std pairs to copy 8 bytes per row to both
+*   even and odd screen buffers.  It is interrupt-safe (no CC corruption)
+*   but approximately 35% slower than the FAST_BACKGROUND version.
+*
+* - IN:      A = Rows to draw, X = pointer to 128 bytes of texture data for block
+* - OUT:     Y = pointer to destination image data (256-byte rows)
+* - Trashed: A,B,X,Y,U
+***********************************************************
+*
+RowCount@   rmb         1
+*
+Gfx_DrawBlockRows
+            sta         RowCount@
+            leau        $3FFF,y                 * U = odd buffer dest (offset -1 from even)
+DrawSafeLoop@
+            ldd         ,x                      * load 2 bytes, write to both buffers
+            std         ,y
+            std         ,u
+            ldd         2,x
+            std         2,y
+            std         2,u
+            ldd         4,x
+            std         4,y
+            std         4,u
+            ldd         6,x
+            std         6,y
+            std         6,u
+            leax        8,x                     * advance source by 8 bytes
+            leay        $100,y                  * advance even dest by 256 (next screen row)
+            leau        $100,u                  * advance odd dest by 256
+            dec         RowCount@
+            bne         DrawSafeLoop@
+            rts
+
+* Entry points referenced by graphics-bkgrnd.asm dispatch table
+Draw1Row    lda         #1
+            bra         Gfx_DrawBlockRows
+Draw2Rows   lda         #2
+            bra         Gfx_DrawBlockRows
+Draw3Rows   lda         #3
+            bra         Gfx_DrawBlockRows
+Draw4Rows   lda         #4
+            bra         Gfx_DrawBlockRows
+Draw5Rows   lda         #5
+            bra         Gfx_DrawBlockRows
+Draw6Rows   lda         #6
+            bra         Gfx_DrawBlockRows
+Draw7Rows   lda         #7
+            bra         Gfx_DrawBlockRows
+Draw8Rows   lda         #8
+            bra         Gfx_DrawBlockRows
+Draw4PlusRows
+            lsra
+            bra         Gfx_DrawBlockRows
+Draw16Rows  lda         #16
+            bra         Gfx_DrawBlockRows
+
+ ENDC
 

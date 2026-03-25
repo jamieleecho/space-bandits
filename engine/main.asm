@@ -47,6 +47,7 @@
             include     loader.asm
             include     input.asm
             include     sound.asm
+            include     music.asm
             include     menu.asm
             include     graphics-sprite.asm
 
@@ -331,9 +332,28 @@ HeapStartAddress        EQU     *
             include     graphics-text.asm
             include     disk.asm
             include     decompress.asm
+            include     music-stubs.asm
 
  IFGT *-$FE00
     Error "In main.asm: Secondary code page ($E000-FDFF) is too big!"
+ ENDC
+
+***********************************************************
+*           The tertiary code page is used for music and disk commands ($4000-$5FFF)
+
+*           This section is assembled directly at $4000 (physical page $3A), so no
+*           relocation is needed.  The game data directories are relocated to $4E00
+*           in the same page.  After MemMgr_MoveCode copies the game directories to
+*           $0E00, the physical page ($3A) is repurposed as the tertiary code page
+*           and swapped into $4000-$5FFF on demand via $FFA2 from stubs in the
+*           secondary code page.
+
+            org         $4000
+            include     music-commands.asm
+            include     disk-commands.asm
+
+ IFGT *-$4E00
+    Error "In main.asm: Tertiary code page ($4000-$4DFF) is too big (would collide with game directories at $4E00)!"
  ENDC
 
 ***********************************************************

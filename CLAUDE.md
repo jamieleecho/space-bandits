@@ -26,7 +26,7 @@ game/
   tiles/         # 3 tilesets (JSON + PNG)
   sounds/        # 5 WAV sound effects
   images/        # 3 splash screen PNGs
-  shared/        # Utility code (FixedPoint math, sprite state machine)
+  shared/        # Utility code (FixedPoint math, sprite state machine, music sequencer)
   hires/         # High-resolution asset variants
 scripts/         # Python build tools (sprite compiler, graphics processing, compression)
 tools/           # External tools (CMOC, MAME, lwasm, etc.)
@@ -57,6 +57,11 @@ make test               # Run in MAME emulator (needs tools/mame64 symlink)
 - `VISUALTIME=1` — Frame timing via border color (forces 256x200)
 - `MAMEDBG=1` — Launch with MAME debugger
 - `OBJPAGES=N` — Object memory pages (default 2)
+- `MUSIC_VOICES=N` — Number of music voices, 0-3 (default 3). 0 disables music entirely.
+- `FAST_BACKGROUND=1` — Use fast CC-register tile drawing (risk of pixel corruption from interrupts)
+- `VERBOSE_ERRORS=0` — Reduce error display to PC+S only (saves ~150 bytes in primary page)
+- `INCLUDE_RANDOM=1` — Include `Util_Random` and `Util_RandomRange16` (default off)
+- `DISK_DEBUG=1` — Enable debug checks in disk I/O routines (default off)
 
 ### macOS Build
 ```bash
@@ -195,6 +200,120 @@ Call `PlaySound(SOUND_ID)` from any object's C code. On CoCo 3 this invokes `Sou
 1. Add WAV file to `game/sounds/` with `XX-name.wav` naming (XX = next number)
 2. Add `#define SOUND_NAME XX` to `game/objects/object_info.h`
 3. Add file reference, build file, copy phase entry, and group entry to the Xcode pbxproj (see "Adding Files to the Xcode Project" below)
+
+## Music System
+
+The music engine provides 3-voice wavetable synthesis using a 128-byte half-sine lookup table with 16-bit phase accumulators. Music plays simultaneously with sound effects by mixing into the audio buffer.
+
+### Architecture (CoCo 3)
+The music code is split across three code pages:
+- **Primary page** (`engine/music.asm`): Empty — all code moved to secondary/tertiary pages to save space.
+- **Secondary page** (`engine/music-stubs.asm`): Page-swapping stubs for all music APIs, `Music_WaveTable` (128-byte half-sine, ±10 amplitude), and stubs for `Music_RefillBuffer`/`Music_MixIntoBuffer`.
+- **Tertiary page** (`engine/music-commands.asm` at `$4000`): `Music_Start/Stop` implementations, `Music_RefillBuffer_Impl` (3-voice sample generation), `Music_MixIntoBuffer_Impl` (3-voice SFX mixing). Swapped in via `$FFA2` on demand.
+
+### Architecture (macOS)
+`DSSoundManager.m` uses `AVAudioEngine` with `AVAudioSourceNode`. Three independent sine oscillators are mixed in the render callback.
+
+### Playing Music from C Code
+```c
+#include "dynosprite.h"
+
+/* Start a tone on a voice. phaseInc = freq * 65536 / AudioSamplingRate */
+MusicStart(phaseInc);    /* voice 0 */
+MusicStart1(phaseInc);   /* voice 1 */
+MusicStart2(phaseInc);   /* voice 2 */
+
+/* Stop voices */
+MusicStop();    /* fade-out all voices */
+MusicStop1();   /* silence voice 1 only */
+MusicStop2();   /* silence voice 2 only */
+
+/* Passing phaseInc=0 silences a voice without stopping music */
+MusicStart1(0); /* equivalent to MusicStop1() */
+```
+
+### Phase Increment Formula
+`phaseInc = frequency_Hz * 65536 / AudioSamplingRate`
+
+`AudioSamplingRate` is 2000 (defined in `engine/globals.asm`). Examples:
+| Note | Freq (Hz) | Phase Increment |
+|------|-----------|-----------------|
+| C3   | 130.81    | 4286            |
+| A3   | 220.00    | 7209            |
+| C4   | 261.63    | 8573            |
+| A4   | 440.00    | 14418           |
+
+### Waveform Selection
+Each voice can use a different wavetable waveform. Available waveforms (normal ±10 amplitude and quiet ±5 amplitude):
+
+| Normal | Quiet | Sound |
+|--------|-------|-------|
+| `MusicSetWaveSine0()` | `MusicSetWaveSineQuiet0()` | Smooth, pure tone (default) |
+| `MusicSetWaveTriangle0()` | `MusicSetWaveTriangleQuiet0()` | Softer, mellower |
+| `MusicSetWaveSawtooth0()` | `MusicSetWaveSawtoothQuiet0()` | Bright, buzzy (good for bass) |
+| `MusicSetWavePulse0()` | `MusicSetWavePulseQuiet0()` | Hollow, reedy (square wave) |
+
+Replace `0` with `1` or `2` for voices 1 and 2. Set waveforms before calling `SequencerPlay` or `MusicStart`. On CoCo these are `static asm` functions that set wavetable pointers; on macOS they call `MusicSetWaveformForVoice()` which switches the render math.
+
+### Music Enable/Disable
+Music can be toggled on/off from the title menu (M[u]sic: Yes/No). The `EnableMusic` field in `game/defaults-config.json` sets the initial state (default `true`). When sound is set to "No sound", music is automatically disabled.
+
+On CoCo, `Menu_MusicEnabled` is checked by all `Music_Start` stubs — if zero, they return immediately. On macOS, `MusicSetEnabled()`/`MusicGetEnabled()` control a global flag checked by all voice start functions.
+
+### Music Sequencer
+A reusable header-only sequencer is available in `game/shared/sequencer.h`. Include it in any level's C code to get automatic song playback with looping.
+
+#### Song Data Format
+Songs are defined as parallel arrays — one for phase increments, one for durations (in ticks):
+```c
+static word melody_notes[] = {PHASE_C3, PHASE_E3, PHASE_G3, 0 /* rest */};
+static byte melody_durs[]  = {2, 2, 2, 1, 0 /* end=loop */};
+```
+- Duration 0 marks end of track (loops to start)
+- Phase increment 0 is a rest (silence that voice)
+
+#### Sequencer API
+```c
+#include "../shared/sequencer.h"
+
+/* Start a 3-voice song. NULL for unused voices. */
+SequencerPlay(v0_notes, v0_durs,    /* voice 0: melody */
+              v1_notes, v1_durs,    /* voice 1: harmony */
+              v2_notes, v2_durs,    /* voice 2: harmony */
+              tempo);               /* frames per tick */
+
+/* Call once per frame from CalculateBkgrndNewXY */
+SequencerTick();
+
+/* Stop with fade-out */
+SequencerStop();
+```
+
+Each level that includes `sequencer.h` gets its own static copy of the sequencer code and state (no cross-page memory issues). Song data arrays are defined in the level's own `.c` file.
+
+#### Example (level 3 — Moonlight Sonata)
+```c
+/* Arpeggiated triplets on voice 0, sustained chord tones on voices 1+2 */
+SequencerPlay(moon_v0_notes, moon_v0_durs,
+              moon_v1_notes, moon_v1_durs,
+              moon_v2_notes, moon_v2_durs, 20);
+```
+
+### Voice Count Configuration
+Set `MUSIC_VOICES=N` (0-3) in the Makefile to control how many voices are compiled:
+- `MUSIC_VOICES=0` — All music APIs become no-ops. No music code or wavetable emitted.
+- `MUSIC_VOICES=1` — Voice 0 only. `MusicStart1/2` and `MusicStop1/2` are no-ops.
+- `MUSIC_VOICES=2` — Voices 0+1.
+- `MUSIC_VOICES=3` — All 3 voices (default).
+
+### Performance
+- **1 voice**: ~6% CPU at 2000 Hz sample rate
+- **3 voices**: ~18% CPU at 2000 Hz sample rate
+- Buffer refill: 256 samples every 128ms
+- Music mixes with SFX by adding signed offsets to the existing audio buffer
+
+### SFX Coexistence
+When sound effects are playing, the FIRQ audio handler fills the buffer with SFX first, then `Music_MixIntoBuffer` adds music on top by converting each voice's wavetable sample to a signed offset from center ($80) and adding it to the existing buffer. When no SFX is playing, `Music_RefillBuffer` writes directly to the buffer.
 
 ## Object Visibility and Off-Screen Hiding
 

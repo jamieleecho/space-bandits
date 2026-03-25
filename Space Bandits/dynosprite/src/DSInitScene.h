@@ -31,10 +31,12 @@ typedef enum DSInitSceneSound {
     SKLabelNode *_resolutionLabelNode;
     SKLabelNode *_controlLabelNode;
     SKLabelNode *_soundLabelNode;
-    
+    SKLabelNode *_musicLabelNode;
+
     DSInitSceneDisplay _resolution;
     DSInitSceneControl _control;
     DSInitSceneSound _sound;
+    bool _musicEnabled;
     
     bool _alwaysPressed;
     bool _isTransitioning;
@@ -60,6 +62,9 @@ typedef enum DSInitSceneSound {
 
 - (void)toggleSound;
 - (DSInitSceneSound)sound;
+
+- (void)toggleMusic;
+- (bool)musicEnabled;
 
 - (void)poll;
 

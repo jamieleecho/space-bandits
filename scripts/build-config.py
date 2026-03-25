@@ -61,6 +61,11 @@ def build_config(input_filename, output_filename):
             if ("SoundOutputMode" not in config_json)
             else config_json["SoundOutputMode"]
         ),
+        "EnableMusic": str(
+            255
+            if ("EnableMusic" not in config_json or config_json["EnableMusic"])
+            else 0
+        ),
     }
 
     with open(output_filename, "w") as asm_file:

@@ -53,9 +53,10 @@ Ldr_CurProgressPct      zmb     1
 *
 Ldr_Jump_To_New_Level
             pshs        a
-            * shut off sound, just in case it was playing
+            * shut off sound and music, just in case they were playing
             jsr         System_DisableAudioInterrupt
             clr         <Sound_ChannelsPlaying
+            clr         Music_Playing
             * if we have a rendered but not yet displayed frame, wait until it gets displayed
             lda         <Gfx_LastRenderedFrame
             cmpa        <Gfx_DisplayedFrame

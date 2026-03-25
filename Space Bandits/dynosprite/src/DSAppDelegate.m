@@ -8,6 +8,7 @@
 
 #import "DSAppDelegate.h"
 #import "DSConfigFileParser.h"
+#import "dynosprite.h"
 
 @implementation DSAppDelegate
 
@@ -18,6 +19,7 @@
 
     [self.defaultsConfigLoader loadDefaultsConfig];
     _soundManager.enabled = self.defaultsConfigLoader.defaultsConfig.enableSound;
+    MusicSetEnabled(self.defaultsConfigLoader.defaultsConfig.enableMusic ? 1 : 0);
     self.resourceController.hifiMode = self.defaultsConfigLoader.defaultsConfig.hifiMode;
     self.resourceController.hiresMode = self.defaultsConfigLoader.defaultsConfig.hiresMode;
     self.sceneController.firstLevel = self.defaultsConfigLoader.defaultsConfig.firstLevel;

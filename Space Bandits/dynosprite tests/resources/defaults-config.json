@@ -3,5 +3,6 @@
     "UseKeyboard": false,
     "HiresMode": true,
     "HifiMode": true,
-    "EnableSound": false
+    "EnableSound": false,
+    "EnableMusic": false
 }

@@ -23,6 +23,8 @@ enum DSInitSceneLabelIndices : short {
     DSInitSceneLabelIndicesControlValue,
     DSInitSceneLabelIndicesSound,
     DSInitSceneLabelIndicesSoundValue,
+    DSInitSceneLabelIndicesMusic,
+    DSInitSceneLabelIndicesMusicValue,
     DSInitSceneLabelIndicesStart
 };
 
@@ -86,20 +88,23 @@ enum DSInitSceneLabelIndices : short {
 }
 
 - (void)testDidMoveToView {
-    XCTAssertEqual(self.target.labels.count, 7);
+    XCTAssertEqual(self.target.labels.count, 9);
     XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesDisplay].text, @"[D]isplay:");
     XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesDisplayValue].text, @"High");
     XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesControl].text, @"[C]ontrol:");
     XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesControlValue].text, @"Joystick");
     XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesSound].text, @"[S]ound:");
     XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesSoundValue].text, @"LoFi");
+    XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesMusic].text, @"M[u]sic:");
+    XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesMusicValue].text, @"Yes");
     XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesStart].text, @"[Space] or joystick button to start");
-    
+
     XCTAssertEqual(self.target.display, DSInitSceneDisplayHigh);
     XCTAssertEqual(self.target.control, DSInitSceneControlJoystick);
     XCTAssertEqual(self.target.sound, DSInitSceneSoundLow);
+    XCTAssertTrue(self.target.musicEnabled);
     XCTAssertFalse(self.target.isDone);
-    
+
     OCMVerify([_joystickController setUseHardwareJoystick:YES]);
     OCMVerify([_resourceController setHiresMode:YES]);
 }
@@ -116,7 +121,7 @@ enum DSInitSceneLabelIndices : short {
         hifiModeCount++;
     });
     [self.target didMoveToView:_view];
-    XCTAssertEqual(self.target.labels.count, 7);
+    XCTAssertEqual(self.target.labels.count, 9);
     XCTAssertEqual(hiresModeCount, 1);
     XCTAssertEqual(useHardwareJoystickCount, 1);
     XCTAssertEqual(hifiModeCount, 1);
@@ -273,6 +278,35 @@ enum DSInitSceneLabelIndices : short {
     XCTAssertEqual(self.target.control, DSInitSceneControlJoystick);
     OCMVerify([_joystickController setUseHardwareJoystick:YES]);
     XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesControlValue].text, @"Joystick");
+}
+
+- (void)testToggleMusic {
+    XCTAssertTrue(self.target.musicEnabled);
+    XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesMusicValue].text, @"Yes");
+    [self.target toggleMusic];
+    XCTAssertFalse(self.target.musicEnabled);
+    XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesMusicValue].text, @"No");
+    [self.target toggleMusic];
+    XCTAssertTrue(self.target.musicEnabled);
+    XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesMusicValue].text, @"Yes");
+}
+
+- (void)testToggleMusicDisabledWhenSoundOff {
+    /* Toggle sound off */
+    [self.target toggleSound];  /* HiFi */
+    [self.target toggleSound];  /* No Sound */
+    XCTAssertEqual(self.target.sound, DSInitSceneSoundNone);
+    XCTAssertFalse(self.target.musicEnabled);
+    XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesMusicValue].text, @"No");
+    /* Toggling music should have no effect when sound is off */
+    [self.target toggleMusic];
+    XCTAssertFalse(self.target.musicEnabled);
+}
+
+- (void)testKeyUpToggleMusic {
+    [self unpressKey:@"u" modifiedChars:@""];
+    XCTAssertFalse(self.target.musicEnabled);
+    XCTAssertEqualObjects(self.target.labels[DSInitSceneLabelIndicesMusicValue].text, @"No");
 }
 
 - (void)testToggleSound {

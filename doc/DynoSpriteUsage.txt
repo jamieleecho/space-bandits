@@ -42,8 +42,9 @@ Here is a list of the key features supported by DynoSprite:
  - Sprite engine with draw routines that are dynamically compiled into 6809 assembly code, for
    maximum performance. Sprites can be positioned anywhere on the screen with single-pixel
    precision.
- - 2-voice audio output for sound effects or music, using either the Coco's internal 6-bit DAC
-   our Orchestra-90 digital audio outputs.
+ - 2-voice audio output for sound effects, plus 3-voice wavetable music synthesis with
+   sequencer. Music plays simultaneously with sound effects. Uses the Coco's internal
+   6-bit DAC or Orchestra-90 digital audio outputs.
  - Support for keyboard and joystick control.
  - Support for both RGB and Composite monitor types.
  - Variable frame rate system so game can maintain sense of speed when the frame-rate drops.
@@ -258,6 +259,20 @@ object.asm                  - Functions used by the level loading code for initi
                               destroying the Current Object Table.
 
 sound.asm                   - Functions for handling audio waveform playback.
+
+music.asm                   - Music engine placeholder (code has moved to secondary/tertiary pages).
+
+music-stubs.asm             - Music API stubs (secondary code page). Swaps in the tertiary page
+                              via $FFA2 to call music implementations. Also contains the 128-byte
+                              half-sine wavetable and Music_RefillBuffer/MixIntoBuffer stubs.
+
+music-commands.asm          - Music command implementations (tertiary code page at $4000).
+                              Music_Start/Stop for all 3 voices, Music_RefillBuffer_Impl (3-voice
+                              sample generation), and Music_MixIntoBuffer_Impl (SFX mixing).
+
+disk-commands.asm           - Disk command implementations (tertiary code page at $4000).
+                              Disk_DirInit, Disk_FileOpen, Disk_FileSeekForward, Disk_FileClose,
+                              and Disk_SetProgressCallback. Called via stubs in disk.asm.
 
 system.asm                  - Miscellaneous low-level functions for initializing the Coco hardware,
                               calling the DSKCON routine for disk I/O, setting the graphics mode
@@ -500,6 +515,131 @@ number that you want to play in register B.  There is no descriptive file necess
 waveforms. The build system will process all WAV files that it finds in "game/sounds/" which start
 with two digits.  The number given in the filename is the same waveform number that you should
 supply to the Sound_Play function.
+
+Creating Music
+--------------
+
+DynoSprite includes a 3-voice wavetable music synthesis engine that runs alongside
+sound effects. Music is generated in software using a 128-byte half-sine wavetable
+with 16-bit phase accumulators, producing audio at the AudioSamplingRate (default
+2000 Hz). The number of voices can be configured at build time with the
+MUSIC_VOICES option (0-3, default 3).
+
+Playing Music from C Code:
+
+  To play a tone on a voice, call MusicStart(), MusicStart1(), or MusicStart2()
+  with a phase increment value. The phase increment determines the pitch:
+
+    phaseInc = frequency_in_Hz * 65536 / AudioSamplingRate
+
+  For example, at 2000 Hz sampling rate:
+    A3 (220 Hz):  phaseInc = 220 * 65536 / 2000 = 7209
+    A4 (440 Hz):  phaseInc = 440 * 65536 / 2000 = 14418
+
+  To stop music, call MusicStop() which fades out all voices. Individual voices
+  can be silenced with MusicStop1() / MusicStop2(), or by calling MusicStart1(0)
+  or MusicStart2(0) with a phase increment of 0.
+
+  From assembly code, the labels Music_Start, Music_Start1, Music_Start2,
+  Music_Stop, Music_Stop1, and Music_Stop2 are available. Music_Start expects
+  the phase increment in register D.
+
+Using the Sequencer:
+
+  For automatic song playback, include the shared sequencer header in your level
+  code:
+
+    #include "../shared/sequencer.h"
+
+  Define song data as parallel arrays of phase increments and durations:
+
+    static word melody_notes[] = {4286, 4286, 6423, 6423, 7209, 7209, 6423, 0};
+    static byte melody_durs[]  = {1, 1, 1, 1, 1, 1, 1, 1, 0};
+
+  Each entry in the notes array is a phase increment (0 = rest/silence). Each
+  entry in the durations array is the length in ticks. A duration of 0 marks the
+  end of the track and causes it to loop back to the beginning.
+
+  Start playback by calling SequencerPlay() with up to 3 voice tracks and a
+  tempo value (frames per tick):
+
+    SequencerPlay(melody_notes, melody_durs,    /* voice 0 */
+                  chord3_notes, chord3_durs,    /* voice 1 */
+                  chord5_notes, chord5_durs,    /* voice 2 */
+                  18);                          /* 18 frames per tick */
+
+  Pass NULL for unused voices. Call SequencerTick() once per frame from your
+  level's CalculateBkgrndNewXY function:
+
+    byte MyLevelCalculateBkgrndNewXY() {
+        /* ... scrolling code ... */
+        SequencerTick();
+        return 0;
+    }
+
+  Call SequencerStop() to stop playback with a fade-out.
+
+  The sequencer is a header-only file with static functions, so each level that
+  includes it gets its own independent copy of the sequencer code and state.
+  This avoids memory mapping issues since the sequencer and song data both live
+  in the level's own code page.
+
+Waveform Selection:
+
+  Each voice can use a different wavetable waveform. Set waveforms before starting
+  music. Available waveforms (each has a normal and quiet variant):
+
+    MusicSetWaveSine0();          MusicSetWaveSineQuiet0();
+    MusicSetWaveTriangle0();      MusicSetWaveTriangleQuiet0();
+    MusicSetWaveSawtooth0();      MusicSetWaveSawtoothQuiet0();
+    MusicSetWavePulse0();         MusicSetWavePulseQuiet0();
+
+  Replace the trailing 0 with 1 or 2 for voices 1 and 2. Normal waveforms have
+  ±10 amplitude; quiet waveforms have ±5 (half amplitude). On the CoCo's 6-bit DAC,
+  normal waveforms produce ±2-3 DAC levels and quiet waveforms ±1 DAC level.
+
+  On CoCo, these are static asm functions that set wavetable pointers in
+  Music_WavePtr0/1/2. On macOS, they call MusicSetWaveformForVoice() which
+  switches the render math in the Core Audio callback.
+
+Music Enable/Disable:
+
+  The title menu includes a M[u]sic: Yes/No toggle. When set to No, all
+  Music_Start stubs return immediately without starting music. When the sound
+  option is set to "No sound", music is automatically disabled.
+
+  The initial music state is controlled by the "EnableMusic" field in
+  game/defaults-config.json (default true). On macOS, MusicSetEnabled() and
+  MusicGetEnabled() control a global flag that persists across level transitions.
+
+Music Architecture:
+
+  The music engine code is split across multiple memory pages:
+
+  - Secondary code page ($E000): Page-swapping stubs for all music APIs,
+    and stubs for Music_RefillBuffer and Music_MixIntoBuffer.
+
+  - Tertiary code page ($4000): Wavetables (sine, triangle, sawtooth, pulse
+    in normal and quiet variants — 8 tables, 128 bytes each), Music_Start/Stop
+    implementations, Music_RefillBuffer_Impl (generates 256 mixed samples from
+    all active voices), and Music_MixIntoBuffer_Impl (adds music to an existing
+    SFX buffer). This page is swapped into $4000-$5FFF via $FFA2 when needed.
+
+  When sound effects are playing, the audio FIRQ handler fills the buffer with
+  SFX data first, then Music_MixIntoBuffer adds music on top by converting each
+  voice sample to a signed offset from center and adding it to the buffer. When
+  no SFX is playing, Music_RefillBuffer writes directly to the buffer.
+
+  The wavetable uses half-wave symmetry: only 128 bytes are stored, and the
+  second half of the waveform is generated by two's complement negation. The
+  amplitude is ±10 per voice, so 3 voices peak at ±30, leaving headroom for
+  SFX mixing without clipping.
+
+Performance:
+
+  At 2000 Hz with 3 voices, the music engine uses approximately 18% of CPU time.
+  With 1 voice it uses approximately 6%. The buffer refill happens once every
+  128ms (256 samples at 2000 Hz).
 
 Creating Sprites
 ----------------

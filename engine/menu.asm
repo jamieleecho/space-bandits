@@ -37,6 +37,10 @@ Menu_Sound              fcn     '[S]ound:'
 Menu_Internal           fcn     'Coco internal'
 Menu_Orc90              fcn     'Orchestra-90'
 Menu_NoSound            fcn     'No sound'
+Menu_Music              fcn     'M[u]sic:'
+Menu_MusicYes           fcn     'Yes'
+Menu_MusicNo            fcn     'No'
+Menu_MusicEnabled       fcb     EnableMusic     * $FF=music on, 0=music off (from defaults-config.json)
 Menu_StartMsg           fcn     '[Space] or joystick button to start'
 
 ***********************************************************
@@ -90,16 +94,21 @@ Menu_RunMain
             pshs        u
             ldx         #Menu_Monitor
             ldb         #3
-            lda         #120
+            lda         #99
             jsr         Gfx_DrawTextLine_Back
             ldx         #Menu_Control
             ldb         #3
-            lda         #136
+            lda         #115
             ldu         ,s
             jsr         Gfx_DrawTextLine_Back
             ldx         #Menu_Sound
             ldb         #3
-            lda         #152
+            lda         #131
+            ldu         ,s
+            jsr         Gfx_DrawTextLine_Back
+            ldx         #Menu_Music
+            ldb         #3
+            lda         #147
             ldu         ,s
             jsr         Gfx_DrawTextLine_Back
             ldx         #Menu_StartMsg
@@ -117,14 +126,14 @@ Menu_RunMain
             beq         >
             ldx         #Menu_RGB
 !           ldb         #5+10*4
-            lda         #120
+            lda         #99
             jsr         Gfx_DrawTextLine_Back
             ldx         #Menu_Joystick
             tst         <Input_UseKeyboard
             beq         >
             ldx         #Menu_Keyboard
 !           ldb         #5+10*4
-            lda         #136
+            lda         #115
             ldu         ,s
             jsr         Gfx_DrawTextLine_Back
             ldx         #Menu_NoSound
@@ -136,7 +145,21 @@ Menu_RunMain
 !           ldx         #Menu_Orc90
 SoundMenuInitTextDone@
             ldb         #5+8*4
-            lda         #152
+            lda         #131
+            ldu         ,s
+            jsr         Gfx_DrawTextLine_Back
+            * Draw music value
+            ldx         #Menu_MusicYes
+            tst         <Sound_OutputMode
+            bmi         MusicMenuInitOff@       * no sound = no music
+            tst         Menu_MusicEnabled
+            bne         MusicMenuInitTextDone@
+MusicMenuInitOff@
+            clr         Menu_MusicEnabled
+            ldx         #Menu_MusicNo
+MusicMenuInitTextDone@
+            ldb         #5+8*4
+            lda         #147
             puls        u
             jsr         Gfx_DrawTextLine_Back
             * clear front buffer and set the new palette
@@ -166,6 +189,11 @@ MenuKeyLoop@
             tstb
             beq         >
             jsr         Menu_Keypress_S
+!           lda         #KEY_U
+            jsr         Input_IsKeyPressed
+            tstb
+            beq         >
+            jsr         Menu_Keypress_U
 !           lda         #KEY_SPACE
             jsr         Input_IsKeyPressed
             tstb
@@ -186,7 +214,7 @@ Menu_Keypress_C
             sync
             * erase box around option text
             ldb         #5+10*4
-            lda         #136
+            lda         #115
             ldu         #8
             jsr         Menu_EraseBox
             * redraw new option value
@@ -199,7 +227,7 @@ Menu_Keypress_C
             andb        #$0f
             tfr         d,u
             ldb         #5+10*4
-            lda         #136
+            lda         #115
             jsr         Gfx_DrawTextLine
             rts
 
@@ -215,7 +243,7 @@ Menu_Keypress_S
             sync
             * erase box around option text
             ldb         #5+8*4
-            lda         #152
+            lda         #131
             ldu         #13
             jsr         Menu_EraseBox
             * redraw new option value
@@ -232,7 +260,7 @@ SoundMenuTextDone@
             andb        #$0f
             tfr         d,u
             ldb         #5+8*4
-            lda         #152
+            lda         #131
             jsr         Gfx_DrawTextLine
             * update audio hardware state if necessary
  IFEQ SOUND_METHOD-1
@@ -247,6 +275,51 @@ SoundMenuTextDone@
             sta         $FF20                   * set DAC to mid-range, serial bit to 1
 AudioSwitchDone@
  ENDC
+            * If sound is off, force music off and redraw music row
+            tst         <Sound_OutputMode
+            bpl         >
+            clr         Menu_MusicEnabled
+            clr         Music_Playing
+            jsr         Menu_RedrawMusic
+!           rts
+
+***********************************************************
+* Menu_Keypress_U — toggle music on/off
+***********************************************************
+Menu_Keypress_U
+            * If sound is off, music stays off
+            tst         <Sound_OutputMode
+            bmi         MusicToggleDone@
+            * Toggle music ($FF <-> $00)
+            com         Menu_MusicEnabled
+            bne         MusicToggleRedraw@
+            * Music just turned off — stop any playing music
+            clr         Music_Playing
+MusicToggleRedraw@
+            jsr         Menu_RedrawMusic
+MusicToggleDone@
+            rts
+
+***********************************************************
+* Menu_RedrawMusic — redraw the music Yes/No value
+***********************************************************
+Menu_RedrawMusic
+            sync
+            ldb         #5+8*4
+            lda         #147
+            ldu         #3
+            jsr         Menu_EraseBox
+            ldx         #Menu_MusicYes
+            tst         Menu_MusicEnabled
+            bne         >
+            ldx         #Menu_MusicNo
+!           clra
+            ldb         Gfx_PalIdx_FGColor
+            andb        #$0f
+            tfr         d,u
+            ldb         #5+8*4
+            lda         #147
+            jsr         Gfx_DrawTextLine
             rts
 
 Menu_Keypress_M
@@ -256,7 +329,7 @@ Menu_Keypress_M
             sync
             * erase box around option text
             ldb         #5+10*4
-            lda         #120
+            lda         #99
             ldu         #9
             jsr         Menu_EraseBox
             * redraw new option value
@@ -269,7 +342,7 @@ Menu_Keypress_M
             andb        #$0f
             tfr         d,u
             ldb         #5+10*4
-            lda         #120
+            lda         #99
             jsr         Gfx_DrawTextLine
             * set new palette
             jsr         System_SetPaletteAuto

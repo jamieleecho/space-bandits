@@ -65,6 +65,7 @@ LOADERSRC = $(addprefix $(SRCDIR)/, constants.asm \
                                     datastruct.asm \
                                     decompress.asm \
                                     disk.asm \
+                                    disk-commands.asm \
                                     globals.asm \
                                     graphics-bkgrnd.asm \
                                     graphics-image.asm \
@@ -77,6 +78,9 @@ LOADERSRC = $(addprefix $(SRCDIR)/, constants.asm \
                                     math.asm \
                                     memory.asm \
                                     menu.asm \
+                                    music.asm \
+                                    music-commands.asm \
+                                    music-stubs.asm \
                                     object.asm \
                                     sound.asm \
                                     system.asm \
@@ -128,6 +132,23 @@ else
   ASMFLAGS += --define=CPU=6809
   LOADERSRC += $(SRCDIR)/graphics-blockdraw-6809.asm
   MAMESYSTEM = coco3
+endif
+ifeq ($(INCLUDE_RANDOM), 1)
+  ASMFLAGS += --define=INCLUDE_RANDOM
+endif
+ifeq ($(DISK_DEBUG), 1)
+  ASMFLAGS += --define=DISK_DEBUG
+endif
+ifeq ($(FAST_BACKGROUND), 1)
+  ASMFLAGS += --define=FAST_BACKGROUND
+endif
+ifeq ($(MUSIC_VOICES),)
+  ASMFLAGS += --define=MUSIC_VOICES=3
+else
+  ASMFLAGS += --define=MUSIC_VOICES=$(MUSIC_VOICES)
+endif
+ifneq ($(VERBOSE_ERRORS), 0)
+  ASMFLAGS += --define=VERBOSE_ERRORS
 endif
 ifeq ($(OBJPAGES),)
   ASMFLAGS += --define=OBJPAGES=2
@@ -258,7 +279,7 @@ $(DATA_TILES) $(ASM_TILES): $(SCRIPTDIR)/build-tiles.py $(TILESRC) $(PALSRC)
 #11. Resample audio files
 $(GENOBJDIR)/sound%.raw: $(SOUNDDIR)/%.wav
 	echo Converting audio waveform: $<
-	ffmpeg -v warning -i $< -acodec pcm_u8 -f u8 -ac 1 -ar $(AUDIORATE) -af aresample=$(AUDIORATE):filter_size=256:cutoff=1.0 $@
+	ffmpeg -v warning -i $< -acodec pcm_u8 -f u8 -ac 1 -ar $(AUDIORATE) -af aresample=$(AUDIORATE):filter_size=256:cutoff=1.0,volume=0.12 $@
 
 #12. Build Sound data file and game directory assembler code
 $(DATA_SOUNDS) $(ASM_SOUNDS): $(SCRIPTDIR)/build-sounds.py $(SOUNDRAW)
@@ -271,7 +292,7 @@ $(DATA_IMAGES) $(ASM_IMAGES): $(SCRIPTDIR)/build-images.py $(IMAGESRC)
 #14. Run final assembly pass of DynoSprite engine and relocate code sections
 $(LOADERBIN): $(LOADERSRC) $(ASM_TILES) $(ASM_OBJECTS) $(ASM_LEVELS) $(ASM_SOUNDS) $(ASM_IMAGES) $(SCRIPTDIR)/binsectionmover.py
 	$(ASSEMBLER) $(ASMFLAGS) --define=PASS=2 -b -I $(GENASMDIR)/ -o $(LOADERBIN) --list=$(PASS2LIST) $(SRCDIR)/main.asm
-	$(SCRIPTDIR)/binsectionmover.py $(LOADERBIN) 0e00-1fff 4000 e000-ffff 6000
+	$(SCRIPTDIR)/binsectionmover.py $(LOADERBIN) 0e00-1fff 4e00 e000-ffff 6000
 
 #15. Generate the README.BAS document
 $(READMEBAS): $(SCRIPTDIR)/build-readme.py $(GAMEDIR)/readme-bas.txt

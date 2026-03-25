@@ -10,6 +10,7 @@
 #define coco_h
 
 #include <string.h>
+#include <CoreFoundation/CoreFoundation.h>
 
 typedef unsigned char byte;
 typedef unsigned short word;
@@ -18,8 +19,5 @@ typedef unsigned int dword;
 typedef signed char sbyte;
 typedef short sword;
 typedef int sdword;
-
-#define FALSE (0)
-#define TRUE (1)
 
 #endif /* coco_h */

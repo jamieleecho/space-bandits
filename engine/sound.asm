@@ -135,6 +135,8 @@ Channel0TestDone@
 Channel1TestDone@
             sta         Sound_ChannelsPlaying
             bne         StillRunning@
+            tst         Music_Playing           * if music is active, generate music samples
+            lbne        Music_RefillBuffer      * instead of disabling audio
  IFEQ SOUND_METHOD-2
             lda         #(PIA1B_Ctrl&$F7)       * clear CB2 output (disable audio on SC77526 chip)
             sta         $FF23
@@ -192,7 +194,7 @@ CopyOneChannelLoop@
             inc         1,x                     * update Chan*Ptr
             lda         <PreMappedPages@,PCR
             sta         $FFA2                   * re-map the page that was previously at $4000
-            rts
+            lbra        SndRefill_CheckMusic@
 *
 PreMappedPages@         zmb     2
 *
@@ -218,199 +220,190 @@ BothChannelsRunning@
             andcc       #$AF                    * enable interrupts, in case we were called from timer FIRQ
             tst         Sound_OutputMode
             beq         TwoChan_DAC6@
+* Two-channel mixing: result = chan0 + (chan1 - $80)
+* Full volume on both channels. Per-byte to avoid 16-bit carry corruption.
 TwoChan_Orc90@
  IFEQ CPU-6309
-            pshsw
-CopyTwoChannelsOrc90_6309@                      * Total: 2544
-            ldq         ,u                      * 8
-            addd        ,y                      * 5
-            rord                                * 2
-            addw        2,y                     * 7
-            rorw                                * 2
-            stq         ,x                      * 8
-            ldq         4,u                     * 9
-            addd        4,y                     * 6
-            rord                                * 2
-            addw        6,y                     * 7
-            rorw                                * 2
-            stq         4,x                     * 9
-            ldq         8,u                     * 9
-            addd        8,y                     * 6
-            rord                                * 2
-            addw        10,y                    * 7
-            rorw                                * 2
-            stq         8,x                     * 9
-            ldq         12,u                    * 9
-            addd        12,y                    * 6
-            rord                                * 2
-            addw        14,y                    * 7
-            rorw                                * 2
-            stq         12,x                    * 9
-            leau        16,u                    * 5
-            leay        16,y                    * 5
-            leax        16,x                    * 5
-            cmpx        #Sound_PageBuffer+256   * 4
-            bne         CopyTwoChannelsOrc90_6309@    * 3
-            pulsw
+CopyTwoChannelsOrc90_6309@
+            ldb         ,y                      * chan1 byte, convert to signed offset, add chan0
+            subb        #$80
+            addb        ,u
+            stb         ,x
+            ldb         1,y
+            subb        #$80
+            addb        1,u
+            stb         1,x
+            ldb         2,y
+            subb        #$80
+            addb        2,u
+            stb         2,x
+            ldb         3,y
+            subb        #$80
+            addb        3,u
+            stb         3,x
+            ldb         4,y
+            subb        #$80
+            addb        4,u
+            stb         4,x
+            ldb         5,y
+            subb        #$80
+            addb        5,u
+            stb         5,x
+            ldb         6,y
+            subb        #$80
+            addb        6,u
+            stb         6,x
+            ldb         7,y
+            subb        #$80
+            addb        7,u
+            stb         7,x
+            leau        8,u
+            leay        8,y
+            leax        8,x
+            cmpx        #Sound_PageBuffer+256
+            bne         CopyTwoChannelsOrc90_6309@
  ELSE
-CopyTwoChannelsOrc90_6809@                      * Total: 3248
-            ldd         ,u                      * 5
-            addd        ,y                      * 6
-            rora                                * 2
-            rorb                                * 2
-            std         ,x                      * 5
-            ldd         2,u                     * 6
-            addd        2,y                     * 7
-            rora                                * 2
-            rorb                                * 2
-            std         2,x                     * 6
-            ldd         4,u                     * 6
-            addd        4,y                     * 7
-            rora                                * 2
-            rorb                                * 2
-            std         4,x                     * 6
-            ldd         6,u                     * 6
-            addd        6,y                     * 7
-            rora                                * 2
-            rorb                                * 2
-            std         6,x                     * 6
-            ldd         8,u                     * 6
-            addd        8,y                     * 7
-            rora                                * 2
-            rorb                                * 2
-            std         8,x                     * 6
-            ldd         10,u                    * 6
-            addd        10,y                    * 7
-            rora                                * 2
-            rorb                                * 2
-            std         10,x                    * 6
-            ldd         12,u                    * 6
-            addd        12,y                    * 7
-            rora                                * 2
-            rorb                                * 2
-            std         12,x                    * 6
-            ldd         14,u                    * 6
-            addd        14,y                    * 7
-            rora                                * 2
-            rorb                                * 2
-            std         14,x                    * 6
-            leau        16,u                    * 5
-            leay        16,y                    * 5
-            leax        16,x                    * 5
-            cmpx        #Sound_PageBuffer+256   * 4
-            bne         CopyTwoChannelsOrc90_6809@    * 3
+CopyTwoChannelsOrc90_6809@
+            ldb         ,y
+            subb        #$80
+            addb        ,u
+            stb         ,x
+            ldb         1,y
+            subb        #$80
+            addb        1,u
+            stb         1,x
+            ldb         2,y
+            subb        #$80
+            addb        2,u
+            stb         2,x
+            ldb         3,y
+            subb        #$80
+            addb        3,u
+            stb         3,x
+            ldb         4,y
+            subb        #$80
+            addb        4,u
+            stb         4,x
+            ldb         5,y
+            subb        #$80
+            addb        5,u
+            stb         5,x
+            ldb         6,y
+            subb        #$80
+            addb        6,u
+            stb         6,x
+            ldb         7,y
+            subb        #$80
+            addb        7,u
+            stb         7,x
+            leau        8,u
+            leay        8,y
+            leax        8,x
+            cmpx        #Sound_PageBuffer+256
+            bne         CopyTwoChannelsOrc90_6809@
  ENDC
             bra         TwoChannelsDone@
 TwoChan_DAC6@
  IFEQ CPU-6309
-            pshsw
-            ldd         #$0202
-            tfr         d,v
-CopyTwoChannelsDAC6_6309@                       * Total: 3056
-            ldq         ,u                      * 8
-            addd        ,y                      * 5
-            rord                                * 2
-            addw        2,y                     * 7
-            rorw                                * 2
-            ord         #$0202                  * 4
-            orr         v,w                     * 4
-            stq         ,x                      * 8
-            ldq         4,u                     * 9
-            addd        4,y                     * 6
-            rord                                * 2
-            addw        6,y                     * 7
-            rorw                                * 2
-            ord         #$0202                  * 4
-            orr         v,w                     * 4
-            stq         4,x                     * 9
-            ldq         8,u                     * 9
-            addd        8,y                     * 6
-            rord                                * 2
-            addw        10,y                    * 7
-            rorw                                * 2
-            ord         #$0202                  * 4
-            orr         v,w                     * 4
-            stq         8,x                     * 9
-            ldq         12,u                    * 9
-            addd        12,y                    * 6
-            rord                                * 2
-            addw        14,y                    * 7
-            rorw                                * 2
-            ord         #$0202                  * 4
-            orr         v,w                     * 4
-            stq         12,x                    * 9
-            leau        16,u                    * 5
-            leay        16,y                    * 5
-            leax        16,x                    * 5
-            cmpx        #Sound_PageBuffer+256   * 4
-            bne         CopyTwoChannelsDAC6_6309@    * 3
-            pulsw
+CopyTwoChannelsDAC6_6309@
+            ldb         ,y
+            subb        #$80
+            addb        ,u
+            orb         #2
+            stb         ,x
+            ldb         1,y
+            subb        #$80
+            addb        1,u
+            orb         #2
+            stb         1,x
+            ldb         2,y
+            subb        #$80
+            addb        2,u
+            orb         #2
+            stb         2,x
+            ldb         3,y
+            subb        #$80
+            addb        3,u
+            orb         #2
+            stb         3,x
+            ldb         4,y
+            subb        #$80
+            addb        4,u
+            orb         #2
+            stb         4,x
+            ldb         5,y
+            subb        #$80
+            addb        5,u
+            orb         #2
+            stb         5,x
+            ldb         6,y
+            subb        #$80
+            addb        6,u
+            orb         #2
+            stb         6,x
+            ldb         7,y
+            subb        #$80
+            addb        7,u
+            orb         #2
+            stb         7,x
+            leau        8,u
+            leay        8,y
+            leax        8,x
+            cmpx        #Sound_PageBuffer+256
+            bne         CopyTwoChannelsDAC6_6309@
  ELSE
-CopyTwoChannelsDAC6_6809@                       * Total: 3760
-            ldd         ,u                      * 5
-            addd        ,y                      * 6
-            rora                                * 2
-            rorb                                * 2
-            ora         #2                      * 2
-            orb         #2                      * 2
-            std         ,x                      * 5
-            ldd         2,u                     * 6
-            addd        2,y                     * 7
-            rora                                * 2
-            rorb                                * 2
-            ora         #2                      * 2
-            orb         #2                      * 2
-            std         2,x                     * 6
-            ldd         4,u                     * 6
-            addd        4,y                     * 7
-            rora                                * 2
-            rorb                                * 2
-            ora         #2                      * 2
-            orb         #2                      * 2
-            std         4,x                     * 6
-            ldd         6,u                     * 6
-            addd        6,y                     * 7
-            rora                                * 2
-            rorb                                * 2
-            ora         #2                      * 2
-            orb         #2                      * 2
-            std         6,x                     * 6
-            ldd         8,u                     * 6
-            addd        8,y                     * 7
-            rora                                * 2
-            rorb                                * 2
-            ora         #2                      * 2
-            orb         #2                      * 2
-            std         8,x                     * 6
-            ldd         10,u                    * 6
-            addd        10,y                    * 7
-            rora                                * 2
-            rorb                                * 2
-            ora         #2                      * 2
-            orb         #2                      * 2
-            std         10,x                    * 6
-            ldd         12,u                    * 6
-            addd        12,y                    * 7
-            rora                                * 2
-            rorb                                * 2
-            ora         #2                      * 2
-            orb         #2                      * 2
-            std         12,x                    * 6
-            ldd         14,u                    * 6
-            addd        14,y                    * 7
-            rora                                * 2
-            rorb                                * 2
-            ora         #2                      * 2
-            orb         #2                      * 2
-            std         14,x                    * 6
-            leau        16,u                    * 5
-            leay        16,y                    * 5
-            leax        16,x                    * 5
-            cmpx        #Sound_PageBuffer+256   * 4
-            bne         CopyTwoChannelsDAC6_6809@    * 3
+CopyTwoChannelsDAC6_6809@
+            ldb         ,y
+            subb        #$80
+            addb        ,u
+            orb         #2
+            stb         ,x
+            ldb         1,y
+            subb        #$80
+            addb        1,u
+            orb         #2
+            stb         1,x
+            ldb         2,y
+            subb        #$80
+            addb        2,u
+            orb         #2
+            stb         2,x
+            ldb         3,y
+            subb        #$80
+            addb        3,u
+            orb         #2
+            stb         3,x
+            ldb         4,y
+            subb        #$80
+            addb        4,u
+            orb         #2
+            stb         4,x
+            ldb         5,y
+            subb        #$80
+            addb        5,u
+            orb         #2
+            stb         5,x
+            ldb         6,y
+            subb        #$80
+            addb        6,u
+            orb         #2
+            stb         6,x
+            ldb         7,y
+            subb        #$80
+            addb        7,u
+            orb         #2
+            stb         7,x
+            leau        8,u
+            leay        8,y
+            leax        8,x
+            cmpx        #Sound_PageBuffer+256
+            bne         CopyTwoChannelsDAC6_6809@
  ENDC
 TwoChannelsDone@
             ldd         PreMappedPages@,PCR
             std         $FFA2                   * re-map the pages that were previously at $4000 and $6000
+SndRefill_CheckMusic@
+            tst         Music_Playing
+            lbne        Music_MixIntoBuffer     * tail call — mix music into SFX buffer
             rts
 

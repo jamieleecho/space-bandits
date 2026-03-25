@@ -76,6 +76,43 @@ extern DynospriteDirectPageGlobals *DynospriteDirectPageGlobalsPtr;
 extern DynospriteGlobals *DynospriteGlobalsPtr;
 
 void PlaySound(int soundIndex);
+void MusicStart(int phaseInc);
+void MusicStart1(int phaseInc);
+void MusicStart2(int phaseInc);
+void MusicStop(void);
+void MusicStop1(void);
+void MusicStop2(void);
+void MusicStopImmediate(void);
+void MusicSetEnabled(int enabled);
+int MusicGetEnabled(void);
+
+/** Set waveform for a voice */
+void MusicSetWaveformForVoice(int voice, int waveform);
+#define MusicSetWaveSine0()      MusicSetWaveformForVoice(0, 0)
+#define MusicSetWaveSine1()      MusicSetWaveformForVoice(1, 0)
+#define MusicSetWaveSine2()      MusicSetWaveformForVoice(2, 0)
+#define MusicSetWaveTriangle0()  MusicSetWaveformForVoice(0, 1)
+#define MusicSetWaveTriangle1()  MusicSetWaveformForVoice(1, 1)
+#define MusicSetWaveTriangle2()  MusicSetWaveformForVoice(2, 1)
+#define MusicSetWaveSawtooth0()  MusicSetWaveformForVoice(0, 2)
+#define MusicSetWaveSawtooth1()  MusicSetWaveformForVoice(1, 2)
+#define MusicSetWaveSawtooth2()  MusicSetWaveformForVoice(2, 2)
+#define MusicSetWavePulse0()     MusicSetWaveformForVoice(0, 3)
+#define MusicSetWavePulse1()     MusicSetWaveformForVoice(1, 3)
+#define MusicSetWavePulse2()     MusicSetWaveformForVoice(2, 3)
+/** Quiet waveforms (half amplitude) */
+#define MusicSetWaveSineQuiet0()      MusicSetWaveformForVoice(0, 4)
+#define MusicSetWaveSineQuiet1()      MusicSetWaveformForVoice(1, 4)
+#define MusicSetWaveSineQuiet2()      MusicSetWaveformForVoice(2, 4)
+#define MusicSetWaveTriangleQuiet0()  MusicSetWaveformForVoice(0, 5)
+#define MusicSetWaveTriangleQuiet1()  MusicSetWaveformForVoice(1, 5)
+#define MusicSetWaveTriangleQuiet2()  MusicSetWaveformForVoice(2, 5)
+#define MusicSetWaveSawtoothQuiet0()  MusicSetWaveformForVoice(0, 6)
+#define MusicSetWaveSawtoothQuiet1()  MusicSetWaveformForVoice(1, 6)
+#define MusicSetWaveSawtoothQuiet2()  MusicSetWaveformForVoice(2, 6)
+#define MusicSetWavePulseQuiet0()     MusicSetWaveformForVoice(0, 7)
+#define MusicSetWavePulseQuiet1()     MusicSetWaveformForVoice(1, 7)
+#define MusicSetWavePulseQuiet2()     MusicSetWaveformForVoice(2, 7)
 
 #ifdef __cplusplus
 }
