@@ -160,6 +160,7 @@ LoadLine@
 !           jsr         Decomp_Close_Stream
             * close the IMAGES.DAT file
             jsr         Disk_FileClose
+            jsr         System_LeaveDiskMode    * clear MPI CTS bits to prevent cartridge ROM bus contention
             rts
 
 

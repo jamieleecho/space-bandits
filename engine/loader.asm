@@ -675,6 +675,7 @@ NullWaveform@
             * close the SOUNDS.DAT file
             jsr         Disk_FileClose
 SkipSound2@
+            jsr         System_LeaveDiskMode    * clear MPI CTS bits to prevent cartridge ROM bus contention
             * disable progress callback
             ldx         #0
             jsr         Disk_SetProgressCallback

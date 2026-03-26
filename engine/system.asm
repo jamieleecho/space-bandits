@@ -111,6 +111,13 @@ System_InitHardware
             ldd         #(System_InterruptSWI+$103)
             std         $FEFB                   * replace SWI vector with "lbra System_InterruptSWI"
             andcc       #$AF                    * re-enable interrupts
+            * Save MPI register and clear CTS bits to prevent cartridge ROM
+            * from causing bus contention at $C000-$FEFF during gameplay.
+            * On systems without MPI, $FF7F reads $FF and writes are ignored.
+            lda         $FF7F                   * read current MPI state (SCS + CTS)
+            sta         System_MPI_SavedState
+            anda        #$0F                    * keep SCS bits (0-3), clear CTS bits (4-5)
+            sta         $FF7F                   * set CTS to slot 0 (least likely to have ROM)
             clr         $FF40                   * turn off drive motor
             clr         $986                    * clear DGRAM also, so Disk BASIC knows that drive motor was shut off
             rts
@@ -144,6 +151,8 @@ System_InitHardware
 * - Trashed: A
 ***********************************************************
 System_EnterDiskMode
+            lda         System_MPI_SavedState
+            sta         $FF7F                   * restore MPI to boot state for disk I/O
             lda         <MemMgr_VirtualTable+VH_BASIC0
             sta         $FFA0                   * map BASIC page 0 to $0000 (variables needed for disk basic rom)
             lda         <MemMgr_VirtualTable+VH_BASICROM
@@ -159,6 +168,9 @@ System_EnterDiskMode
 * - Trashed: A
 ***********************************************************
 System_LeaveDiskMode
+            lda         System_MPI_SavedState
+            anda        #$0F                    * keep SCS bits, clear CTS bits
+            sta         $FF7F                   * prevent cartridge ROM bus contention
             rts
 
 ***********************************************************
@@ -304,6 +316,7 @@ System_DisableAudioInterrupt
 ***********************************************************
 *
 System_SndBufferPtr      zmd     1
+System_MPI_SavedState    zmb     1               * saved Multi-Pak Interface register ($FF7F)
 *
 System_InterruptFIRQ_DAC6
             pshs        a
