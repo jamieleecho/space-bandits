@@ -111,14 +111,17 @@ System_InitHardware
             ldd         #(System_InterruptSWI+$103)
             std         $FEFB                   * replace SWI vector with "lbra System_InterruptSWI"
             andcc       #$AF                    * re-enable interrupts
-            * Save MPI register and clear CTS bits to prevent cartridge ROM
-            * from causing bus contention at $C000-$FEFF during gameplay.
+            * Save MPI register and clear SCS+CTS bits to prevent cartridge ROM
+            * bus contention ($C000-$FEFF) and cartridge I/O interference ($FF40-$FF5F).
+            * SCS must be cleared BEFORE writing $FF40, otherwise the write goes to
+            * whatever device is in the boot slot (e.g., CoCoSDC interprets $FF40
+            * differently than a standard FDC).
             * On systems without MPI, $FF7F reads $FF and writes are ignored.
             lda         $FF7F                   * read current MPI state (SCS + CTS)
             sta         System_MPI_SavedState
-            anda        #$0F                    * keep SCS bits (0-3), clear CTS bits (4-5)
-            sta         $FF7F                   * set CTS to slot 0 (least likely to have ROM)
-            clr         $FF40                   * turn off drive motor
+            clra                                * clear SCS (0-1) and CTS (4-5) bits
+            sta         $FF7F                   * disconnect all cartridge slots
+            clr         $FF40                   * turn off drive motor (now safely goes to slot 0)
             clr         $986                    * clear DGRAM also, so Disk BASIC knows that drive motor was shut off
             rts
 
@@ -168,9 +171,8 @@ System_EnterDiskMode
 * - Trashed: A
 ***********************************************************
 System_LeaveDiskMode
-            lda         System_MPI_SavedState
-            anda        #$0F                    * keep SCS bits, clear CTS bits
-            sta         $FF7F                   * prevent cartridge ROM bus contention
+            clra
+            sta         $FF7F                   * disconnect all cartridge slots (SCS=0, CTS=0)
             rts
 
 ***********************************************************
