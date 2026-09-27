@@ -39,21 +39,13 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    UIWindowScene *windowScene = nil;
-    for (UIScene *scene in application.connectedScenes) {
-        if ([scene isKindOfClass:UIWindowScene.class]) {
-            windowScene = (UIWindowScene *)scene;
-            break;
-        }
-    }
-    
-#if TARGET_OS_MACCATALYST
-    windowScene.sizeRestrictions.minimumSize = CGSizeMake(320, 200);
-    windowScene.titlebar.titleVisibility = UITitlebarTitleVisibilityHidden;
-#endif
-
+    // Window setup happens in DSSceneDelegate once the scene connects.
     return YES;
+}
+
+- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
+    // Resolves to the "Default Configuration" entry in the Info.plist scene manifest.
+    return [UISceneConfiguration configurationWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
 }
 
 

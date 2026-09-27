@@ -132,12 +132,23 @@ static void ensureMusicEngine(void) {
     [_musicEngine attachNode:_musicSourceNode];
     [_musicEngine connect:_musicSourceNode to:_musicEngine.mainMixerNode format:format];
 
-    NSError *error = nil;
-    if (![_musicEngine startAndReturnError:&error]) {
-        NSLog(@"Music engine failed to start: %@", error);
-        _musicEngine = nil;
-        _musicSourceNode = nil;
-    }
+    /* Starting the engine activates the audio session, which can block for a
+       noticeable time. Do it off the main thread so the game loop is not
+       stalled. Voice state is set before the engine runs, so the render block
+       simply begins producing samples once startup completes. */
+    AVAudioEngine *engine = _musicEngine;
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        NSError *error = nil;
+        if (![engine startAndReturnError:&error]) {
+            NSLog(@"Music engine failed to start: %@", error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (_musicEngine == engine) {
+                    _musicEngine = nil;
+                    _musicSourceNode = nil;
+                }
+            });
+        }
+    });
 }
 
 static int _musicGlobalEnabled = 1;  /* set to 0 by menu to disable music */

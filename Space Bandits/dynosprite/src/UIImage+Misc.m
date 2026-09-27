@@ -12,7 +12,8 @@
 
 - (UIImage *)rgbImageWithAlpha {
     CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(Nil, self.size.width, self.size.height, 8, 0, rgb, kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little);
+    CGBitmapInfo bitmapInfo = (CGBitmapInfo)kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little;
+    CGContextRef context = CGBitmapContextCreate(Nil, self.size.width, self.size.height, 8, 0, rgb, bitmapInfo);
     CGContextDrawImage(context, CGRectMake(0, 0, self.size.width, self.size.height), self.CGImage);
     CGImageRef cgimage0 = CGBitmapContextCreateImage(context);
     UIImage *image0 = [UIImage imageWithCGImage:cgimage0];

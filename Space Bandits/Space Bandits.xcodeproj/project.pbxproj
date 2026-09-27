@@ -69,7 +69,6 @@
 		525FE4822C053EC500E03391 /* DSSceneTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4522C053EC500E03391 /* DSSceneTest.m */; };
 		525FE4832C053EC500E03391 /* DSSharedSceneControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4532C053EC500E03391 /* DSSharedSceneControllerTest.m */; };
 		525FE4842C053EC500E03391 /* DSSoundManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4542C053EC500E03391 /* DSSoundManagerTest.m */; };
-		F9EBC11F2EB20001 /* DSMusicEngineTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC11F2EB20000 /* DSMusicEngineTest.m */; };
 		525FE4852C053EC500E03391 /* DSSpriteFileParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4552C053EC500E03391 /* DSSpriteFileParserTest.m */; };
 		525FE4862C053EC500E03391 /* DSSpriteInfoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4562C053EC500E03391 /* DSSpriteInfoTest.m */; };
 		525FE4872C053EC500E03391 /* DSSpriteObjectClassFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FE4572C053EC500E03391 /* DSSpriteObjectClassFactoryTest.m */; };
@@ -223,6 +222,8 @@
 		52E24A952C1809690098F87D /* 02-space.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8D2C18094D0098F87D /* 02-space.json */; };
 		52E24A962C18096C0098F87D /* 01-moon.png in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8C2C18094D0098F87D /* 01-moon.png */; };
 		52E24A972C18096D0098F87D /* 01-moon.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 52E24A8B2C18094D0098F87D /* 01-moon.json */; };
+		52E313C13069356A00D9F743 /* DSSceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E313C03069356A00D9F743 /* DSSceneDelegate.m */; };
+		52E313C23069356A00D9F743 /* DSSceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E313C03069356A00D9F743 /* DSSceneDelegate.m */; };
 		52EE7C9B2DE4E87F00011C11 /* 01-level1.png in Resources */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
 		52EE7C9C2DE4E90D00011C11 /* 01-level1.png in Copy hires/images Files */ = {isa = PBXBuildFile; fileRef = 52EE7C982DE4E87F00011C11 /* 01-level1.png */; };
 		6E2DCD3E71CE9B5CECD6F491 /* 03-chirico.json in Copy tiles Files */ = {isa = PBXBuildFile; fileRef = 10AFC3F723CE9EDB66C2BF31 /* 03-chirico.json */; };
@@ -251,6 +252,7 @@
 		F1NINJA12F80000000000001 /* 14-ninja.c in Sources */ = {isa = PBXBuildFile; fileRef = F1NINJA02F80000000000002 /* 14-ninja.c */; };
 		F1NINJA32F80000000000003 /* 14-ninja.json in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1NINJA42F80000000000004 /* 14-ninja.json */; };
 		F1NINJA52F80000000000005 /* 14-ninja.png in Copy sprites Files */ = {isa = PBXBuildFile; fileRef = F1NINJA62F80000000000006 /* 14-ninja.png */; };
+		F9EBC11F2EB20001 /* DSMusicEngineTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC11F2EB20000 /* DSMusicEngineTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -456,7 +458,6 @@
 		525FE4522C053EC500E03391 /* DSSceneTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSceneTest.m; sourceTree = "<group>"; };
 		525FE4532C053EC500E03391 /* DSSharedSceneControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSharedSceneControllerTest.m; sourceTree = "<group>"; };
 		525FE4542C053EC500E03391 /* DSSoundManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSoundManagerTest.m; sourceTree = "<group>"; };
-		F9EBC11F2EB20000 /* DSMusicEngineTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSMusicEngineTest.m; sourceTree = "<group>"; };
 		525FE4552C053EC500E03391 /* DSSpriteFileParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSpriteFileParserTest.m; sourceTree = "<group>"; };
 		525FE4562C053EC500E03391 /* DSSpriteInfoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSpriteInfoTest.m; sourceTree = "<group>"; };
 		525FE4572C053EC500E03391 /* DSSpriteObjectClassFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSSpriteObjectClassFactoryTest.m; sourceTree = "<group>"; };
@@ -632,6 +633,8 @@
 		52E24A8C2C18094D0098F87D /* 01-moon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-moon.png"; sourceTree = "<group>"; };
 		52E24A8D2C18094D0098F87D /* 02-space.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "02-space.json"; sourceTree = "<group>"; };
 		52E24A8E2C18094D0098F87D /* 02-space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "02-space.png"; sourceTree = "<group>"; };
+		52E313BF3069356700D9F743 /* DSSceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSSceneDelegate.h; sourceTree = "<group>"; };
+		52E313C03069356A00D9F743 /* DSSceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSceneDelegate.m; sourceTree = "<group>"; };
 		52EE7C982DE4E87F00011C11 /* 01-level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-level1.png"; sourceTree = "<group>"; };
 		99B09234ECD1D2B00123BF2E /* 10-littleguy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "10-littleguy.json"; sourceTree = "<group>"; };
 		B9D5B09187D4EE761CA69163 /* 03-level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03-level3.png"; sourceTree = "<group>"; };
@@ -662,6 +665,7 @@
 		F1NINJA42F80000000000004 /* 14-ninja.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "14-ninja.json"; sourceTree = "<group>"; };
 		F1NINJA62F80000000000006 /* 14-ninja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "14-ninja.png"; sourceTree = "<group>"; };
 		F1NINJA72F80000000000007 /* 14-ninja.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "14-ninja.h"; path = "../game/objects/14-ninja.h"; sourceTree = SOURCE_ROOT; };
+		F9EBC11F2EB20000 /* DSMusicEngineTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSMusicEngineTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -935,6 +939,8 @@
 				52CC822F2C02179100CC3E38 /* DynospriteDirectPageGlobals.h */,
 				522A46F82C057C5E0094C68A /* UIImage+Misc.h */,
 				522A46F92C057C5E0094C68A /* UIImage+Misc.m */,
+				52E313BF3069356700D9F743 /* DSSceneDelegate.h */,
+				52E313C03069356A00D9F743 /* DSSceneDelegate.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1182,7 +1188,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					52CC81902C02172200CC3E38 = {
 						CreatedOnToolsVersion = 15.4;
@@ -1290,6 +1296,7 @@
 				52CC823E2C02179100CC3E38 /* DSCoCoJoystick.mm in Sources */,
 				52CC828C2C02179100CC3E38 /* DSSoundManager.m in Sources */,
 				52CC825F2C02179100CC3E38 /* DSLevel.m in Sources */,
+				52E313C23069356A00D9F743 /* DSSceneDelegate.m in Sources */,
 				52E24A132C17E7E00098F87D /* 09-boss1.c in Sources */,
 				52CC82502C02179100CC3E38 /* DSDefaultsConfigLoader.m in Sources */,
 				52E24A292C17E8750098F87D /* universal_object.c in Sources */,
@@ -1393,6 +1400,7 @@
 				525FE46E2C053EC500E03391 /* DSConsTest.m in Sources */,
 				52CC82992C02179100CC3E38 /* DSSpriteObjectClassFactory.m in Sources */,
 				525FE4722C053EC500E03391 /* DSGameSceneTest.m in Sources */,
+				52E313C13069356A00D9F743 /* DSSceneDelegate.m in Sources */,
 				525FE4782C053EC500E03391 /* DSLevelTest.m in Sources */,
 				525FE4922C053EC600E03391 /* DSTransitionSceneInfoTest.m in Sources */,
 				525FE46A2C053EC500E03391 /* DSCoCoJoystickControllerTest.m in Sources */,
@@ -1525,6 +1533,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Debug;
 		};
@@ -1580,6 +1589,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1598,7 +1608,6 @@
 				INFOPLIST_FILE = "Space-Bandits-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1607,7 +1616,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-Bandits";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1634,7 +1643,6 @@
 				INFOPLIST_FILE = "Space-Bandits-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1643,7 +1651,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-Bandits";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1664,8 +1672,8 @@
 				CURRENT_PROJECT_VERSION = 0.16;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1686,8 +1694,8 @@
 				CURRENT_PROJECT_VERSION = 0.16;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jamiecho.Space-BanditsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
